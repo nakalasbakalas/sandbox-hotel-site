@@ -1,0 +1,851 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#0b0f19" />
+
+  <!-- Primary SEO -->
+  <title>The Sandbox Hotel | Nakhon Si Thammarat, Thailand</title>
+  <meta name="description" content="The Sandbox Hotel in Nakhon Si Thammarat. Large rooms, great location, Wi‑Fi, parking, laundry, coffee & snack bar. Book by phone or enquiry form." />
+  <link rel="canonical" href="https://www.sandboxhotel.com/" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="The Sandbox Hotel | Nakhon Si Thammarat" />
+  <meta property="og:description" content="Large rooms, great location, Wi‑Fi, parking, laundry, coffee & snack bar. Book direct by phone." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://www.sandboxhotel.com/" />
+  <!-- Optional if you add /assets/og-cover.jpg -->
+  <!-- <meta property="og:image" content="https://www.sandboxhotel.com/assets/og-cover.jpg" /> -->
+
+  <meta name="twitter:card" content="summary_large_image" />
+
+  <!-- Performance: no external fonts, no frameworks -->
+  <style>
+    :root{
+      --bg:#070a12;
+      --panel:#0b0f19;
+      --text:#e9ecf5;
+      --muted:#b7bfd6;
+      --line: rgba(255,255,255,.10);
+      --accent:#7cf7c3;
+      --accent2:#7aa7ff;
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 20px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      background:
+        radial-gradient(900px 420px at 70% -10%, rgba(122,167,255,.16), transparent 60%),
+        radial-gradient(900px 520px at 15% 10%, rgba(124,247,195,.14), transparent 55%),
+        var(--bg);
+      color:var(--text);
+      line-height:1.45;
+      -webkit-font-smoothing:antialiased;
+      text-rendering:optimizeLegibility;
+    }
+    a{color:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 80px}
+    header{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter:saturate(140%) blur(10px);
+      background: linear-gradient(to bottom, rgba(7,10,18,.82), rgba(7,10,18,.45));
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
+    .nav{
+      max-width:var(--max); margin:0 auto;
+      padding:12px 18px;
+      display:flex; align-items:center; gap:14px; justify-content:space-between;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width: 220px}
+    .logo{
+      width:36px; height:36px; border-radius:12px;
+      background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
+      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+    }
+    .brand h1{font-size:14px; margin:0; letter-spacing:.5px}
+    .brand small{display:block; color:var(--muted); font-size:12px; margin-top:2px}
+    nav ul{list-style:none; margin:0; padding:0; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    nav a{
+      display:inline-block;
+      text-decoration:none;
+      font-size:13px;
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    nav a:hover{background: rgba(255,255,255,.08)}
+    .rightBar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
+    .btn{
+      text-decoration:none;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:10px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      font-weight:600;
+      font-size:13px;
+      white-space:nowrap;
+      cursor:pointer;
+    }
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
+      color:#09101f;
+    }
+    .btn:hover{transform: translateY(-1px)}
+    .btn:active{transform: translateY(0)}
+    .lang{
+      display:flex; gap:6px; align-items:center;
+      padding:6px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+    }
+    .lang button{
+      appearance:none;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--text);
+      border-radius:999px;
+      padding:7px 10px;
+      font-weight:700;
+      font-size:12px;
+      cursor:pointer;
+    }
+    .lang button[aria-pressed="true"]{
+      background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
+      color:#09101f;
+      border-color: transparent;
+    }
+
+    .hero{
+      padding:34px 0 10px;
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:18px;
+      align-items:stretch;
+    }
+    .card{
+      background: rgba(11,15,25,.72);
+      border:1px solid rgba(255,255,255,.10);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+    .heroLeft{padding:28px}
+    .kicker{
+      display:inline-flex; align-items:center; gap:8px;
+      font-size:12px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      color: var(--muted);
+    }
+    .hero h2{
+      margin:14px 0 8px;
+      font-size:44px;
+      line-height:1.06;
+      letter-spacing:-.02em;
+    }
+    .hero p{margin:10px 0 0; color:var(--muted); font-size:16px; max-width:62ch}
+    .heroBullets{margin:16px 0 0; display:flex; gap:10px; flex-wrap:wrap}
+    .pill{
+      padding:8px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      font-size:13px;
+      color: var(--text);
+    }
+    .heroActions{margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+
+    .heroRight{overflow:hidden; display:flex; flex-direction:column}
+    .heroMedia{
+      position:relative;
+      min-height: 320px;
+      border-bottom:1px solid rgba(255,255,255,.08);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)),
+        radial-gradient(900px 360px at 35% 10%, rgba(122,167,255,.18), transparent 55%),
+        radial-gradient(900px 420px at 80% 0%, rgba(124,247,195,.14), transparent 60%),
+        #0b0f19;
+    }
+    .heroMedia .caption{
+      position:absolute; left:18px; bottom:14px; right:18px;
+      display:flex; gap:10px; align-items:flex-end; justify-content:space-between;
+    }
+    .caption strong{display:block; font-size:14px}
+    .caption span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
+    .heroQuick{padding:16px 18px 18px; display:grid; gap:10px}
+    .quickRow{display:flex; gap:10px; flex-wrap:wrap}
+    .mini{
+      flex:1;
+      min-width: 190px;
+      padding:12px;
+      border-radius:16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+    }
+    .mini b{display:block; font-size:13px}
+    .mini small{display:block; color:var(--muted); margin-top:4px}
+
+    section{scroll-margin-top:90px; margin-top:18px}
+    .sectionHead{
+      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
+      margin:22px 0 10px;
+    }
+    .sectionHead h3{margin:0; font-size:18px}
+    .sectionHead p{margin:0; color:var(--muted); font-size:13px}
+    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
+    .grid2{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px}
+    .tile{padding:16px}
+    .icon{
+      width:38px; height:38px; border-radius:14px;
+      background: rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      display:flex; align-items:center; justify-content:center;
+      font-weight:900;
+      color: var(--accent);
+    }
+    .tile h4{margin:10px 0 6px; font-size:14px}
+    .tile p{margin:0; color:var(--muted); font-size:13px}
+
+    .room{overflow:hidden; display:grid; grid-template-columns: .95fr 1.05fr; gap:0}
+    .roomMedia{
+      min-height: 180px;
+      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.55)), #101626;
+      border-right: 1px solid rgba(255,255,255,.08);
+    }
+    .roomBody{padding:16px}
+    .meta{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
+    .tag{
+      font-size:12px;
+      padding:6px 8px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color: var(--muted);
+    }
+
+    .contact{display:grid; grid-template-columns: 1fr 1fr; gap:12px; align-items:stretch}
+    .contactCard{padding:18px}
+    .contactCard h4{margin:0 0 10px}
+    .contactCard p{margin:0 0 12px; color:var(--muted); font-size:13px}
+
+    .policyGrid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:12px;
+    }
+    .policyGrid ul{margin:0; padding-left:18px}
+    .policyGrid li{margin:6px 0; color:var(--muted); font-size:13px}
+
+    footer{
+      margin-top:22px;
+      padding-top:16px;
+      border-top:1px solid rgba(255,255,255,.08);
+      color: var(--muted);
+      font-size:12px;
+      display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap;
+    }
+    .fine{color:var(--muted); font-size:12px}
+
+    @media (max-width: 900px){
+      .hero{grid-template-columns:1fr}
+      .grid3{grid-template-columns:1fr}
+      .grid2{grid-template-columns:1fr}
+      .room{grid-template-columns:1fr}
+      .roomMedia{border-right:none; border-bottom:1px solid rgba(255,255,255,.08)}
+      .contact{grid-template-columns:1fr}
+      .policyGrid{grid-template-columns:1fr}
+      .hero h2{font-size:36px}
+      .brand{min-width:auto}
+      .rightBar .btn{display:none}
+    }
+  </style>
+
+  <!-- Hotel Schema -->
+  <script type="application/ld+json">
+  {
+    "@context":"https://schema.org",
+    "@type":"Hotel",
+    "name":"The Sandbox Hotel",
+    "url":"https://www.sandboxhotel.com/",
+    "telephone":"+66887906345",
+    "sameAs":[
+      "https://www.facebook.com/sandboxhotel"
+    ],
+    "address":{
+      "@type":"PostalAddress",
+      "streetAddress":"642 4016, Tambon Pho Sadet",
+      "addressLocality":"Mueang Nakhon Si Thammarat District",
+      "addressRegion":"Nakhon Si Thammarat",
+      "postalCode":"80000",
+      "addressCountry":"TH"
+    }
+  }
+  </script>
+</head>
+
+<body>
+<header>
+  <div class="nav">
+    <div class="brand">
+      <div class="logo" aria-hidden="true"></div>
+      <div>
+        <h1>The Sandbox Hotel</h1>
+        <small id="navSub">Nakhon Si Thammarat, Thailand</small>
+      </div>
+    </div>
+
+    <nav aria-label="Primary">
+      <ul>
+        <li><a href="#amenities" data-i="navAmenities">Amenities</a></li>
+        <li><a href="#rooms" data-i="navRooms">Rooms</a></li>
+        <li><a href="#location" data-i="navLocation">Location</a></li>
+        <li><a href="#contact" data-i="navContact">Book / Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="rightBar">
+      <a class="btn" href="tel:+66887906345" aria-label="Call The Sandbox Hotel">Call</a>
+      <a class="btn primary" href="#contact" data-i="navBook">Book Now</a>
+
+      <div class="lang" aria-label="Language">
+        <button type="button" id="lang-en" aria-pressed="true">EN</button>
+        <button type="button" id="lang-th" aria-pressed="false">TH</button>
+        <button type="button" id="lang-zh" aria-pressed="false">中文</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- HERO -->
+  <section class="hero" id="top">
+    <div class="card heroLeft">
+      <div class="kicker" data-i="kicker">★ Large rooms • Great location • Direct booking</div>
+
+      <h2 data-i="heroTitle">A premium stay at<br/>The Sandbox Hotel</h2>
+
+      <p data-i="heroBody">
+        Comfortable, modern rooms in Nakhon Si Thammarat with Wi‑Fi, parking, laundry, and a coffee & snack bar.
+        Book instantly by phone or enquiry form.
+      </p>
+
+      <div class="heroBullets" aria-label="Highlights">
+        <span class="pill" data-i="pill1">Large rooms</span>
+        <span class="pill" data-i="pill2">Quiet sleep</span>
+        <span class="pill" data-i="pill3">Wi‑Fi & parking</span>
+        <span class="pill" data-i="pill4">Great location</span>
+      </div>
+
+      <div class="heroActions">
+        <a class="btn primary" href="#contact" data-i="ctaEnquire">Book / Enquire</a>
+        <a class="btn" href="tel:+66887906345" data-i="ctaCall">Call: 088‑790‑6345</a>
+        <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="ctaMaps">Open Map</a>
+        <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="ctaFacebook">Facebook</a>
+      </div>
+
+      <p class="fine" data-i="microNote">
+        Tip: For the fastest booking, call or message us. For enquiries, use the form link below.
+      </p>
+    </div>
+
+    <aside class="card heroRight" aria-label="Preview">
+      <div class="heroMedia" role="img" aria-label="Hotel hero">
+        <div class="caption">
+          <div>
+            <strong data-i="heroLocStrong">Nakhon Si Thammarat</strong>
+            <span data-i="heroLocSub">Pho Sadet • Mueang District • 80000</span>
+          </div>
+          <a class="btn" href="#rooms" data-i="ctaViewRooms">View Rooms →</a>
+        </div>
+      </div>
+
+      <div class="heroQuick">
+        <div class="quickRow">
+          <div class="mini">
+            <b data-i="checkTimesTitle">Check‑in / Check‑out</b>
+            <small data-i="checkTimesVal">Check‑in 14:00 • Check‑out 11:00</small>
+          </div>
+          <div class="mini">
+            <b data-i="directBookingTitle">Direct booking</b>
+            <small data-i="directBookingVal">Phone • Map • Facebook</small>
+          </div>
+        </div>
+        <div class="quickRow">
+          <div class="mini">
+            <b data-i="amenitiesQuickTitle">Key amenities</b>
+            <small data-i="amenitiesQuickVal">Wi‑Fi • Parking • Laundry • AC</small>
+          </div>
+          <div class="mini">
+            <b data-i="languagesTitle">Languages</b>
+            <small data-i="languagesVal">ไทย • English • 中文</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- AMENITIES -->
+  <section id="amenities">
+    <div class="sectionHead">
+      <div>
+        <h3 data-i="amenitiesTitle">Amenities</h3>
+        <p data-i="amenitiesSub">Simple, useful, and focused on comfort.</p>
+      </div>
+    </div>
+
+    <div class="grid3">
+      <div class="card tile">
+        <div class="icon" aria-hidden="true">Wi</div>
+        <h4 data-i="amWiTitle">Wi‑Fi</h4>
+        <p data-i="amWiBody">Reliable internet for work and streaming.</p>
+      </div>
+      <div class="card tile">
+        <div class="icon" aria-hidden="true">Pk</div>
+        <h4 data-i="amPkTitle">Parking</h4>
+        <p data-i="amPkBody">Convenient guest parking (subject to availability).</p>
+      </div>
+      <div class="card tile">
+        <div class="icon" aria-hidden="true">AC</div>
+        <h4 data-i="amAcTitle">Air‑conditioning</h4>
+        <p data-i="amAcBody">Cool, comfortable rooms in all seasons.</p>
+      </div>
+
+      <div class="card tile">
+        <div class="icon" aria-hidden="true">☕</div>
+        <h4 data-i="amCafeTitle">Coffee & Snack Bar</h4>
+        <p data-i="amCafeBody">Quick refreshments and convenience.</p>
+      </div>
+      <div class="card tile">
+        <div class="icon" aria-hidden="true">🧺</div>
+        <h4 data-i="amLaundryTitle">Laundry</h4>
+        <p data-i="amLaundryBody">Laundry service/area available (ask reception).</p>
+      </div>
+      <div class="card tile">
+        <div class="icon" aria-hidden="true">🛎</div>
+        <h4 data-i="amServiceTitle">Helpful service</h4>
+        <p data-i="amServiceBody">Friendly support for a smooth stay.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROOMS -->
+  <section id="rooms">
+    <div class="sectionHead">
+      <div>
+        <h3 data-i="roomsTitle">Rooms</h3>
+        <p data-i="roomsSub">Choose Standard or Premium • Twin or Double.</p>
+      </div>
+    </div>
+
+    <div class="grid2">
+      <article class="card room">
+        <div class="roomMedia" aria-label="Room photo placeholder"></div>
+        <div class="roomBody">
+          <h4 style="margin:0 0 6px" data-i="r1Title">Standard Twin</h4>
+          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r1Body">Comfortable twin setup with strong value.</p>
+          <div class="meta">
+            <span class="tag" data-i="tag2g">2 guests</span>
+            <span class="tag" data-i="tagTwin">Twin beds</span>
+            <span class="tag" data-i="tagLarge">Large room</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card room">
+        <div class="roomMedia" aria-label="Room photo placeholder"></div>
+        <div class="roomBody">
+          <h4 style="margin:0 0 6px" data-i="r2Title">Standard Double</h4>
+          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r2Body">A cosy double room, ideal for couples.</p>
+          <div class="meta">
+            <span class="tag" data-i="tag2g">2 guests</span>
+            <span class="tag" data-i="tagDouble">Double bed</span>
+            <span class="tag" data-i="tagLarge">Large room</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card room">
+        <div class="roomMedia" aria-label="Room photo placeholder"></div>
+        <div class="roomBody">
+          <h4 style="margin:0 0 6px" data-i="r3Title">Premium Twin</h4>
+          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r3Body">Upgraded comfort with a premium feel.</p>
+          <div class="meta">
+            <span class="tag" data-i="tag2g">2 guests</span>
+            <span class="tag" data-i="tagTwin">Twin beds</span>
+            <span class="tag" data-i="tagPremium">Premium</span>
+          </div>
+        </div>
+      </article>
+
+      <article class="card room">
+        <div class="roomMedia" aria-label="Room photo placeholder"></div>
+        <div class="roomBody">
+          <h4 style="margin:0 0 6px" data-i="r4Title">Premium Double</h4>
+          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r4Body">Premium double room for a relaxed stay.</p>
+          <div class="meta">
+            <span class="tag" data-i="tag2g">2 guests</span>
+            <span class="tag" data-i="tagDouble">Double bed</span>
+            <span class="tag" data-i="tagPremium">Premium</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- LOCATION -->
+  <section id="location">
+    <div class="sectionHead">
+      <div>
+        <h3 data-i="locTitle">Location</h3>
+        <p data-i="locSub">Easy to find and convenient for getting around the city.</p>
+      </div>
+    </div>
+
+    <div class="card tile">
+      <h4 style="margin:0 0 6px" data-i="locName">The Sandbox Hotel — Nakhon Si Thammarat</h4>
+      <p style="margin:0;color:var(--muted);font-size:13px">
+        <span data-i="locAddrLabel">Address:</span>
+        642 4016, Tambon Pho Sadet, Mueang Nakhon Si Thammarat District, Nakhon Si Thammarat 80000
+        <br/>
+        <span class="fine">Plus Code: CWMG+QJ</span>
+      </p>
+      <div class="heroActions" style="margin-top:12px">
+        <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="locMapBtn">Open in Google Maps</a>
+        <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="locFbBtn">Facebook</a>
+        <a class="btn" href="#contact" data-i="locBookBtn">Book / Contact</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="sectionHead">
+      <div>
+        <h3 data-i="contactTitle">Book / Contact</h3>
+        <p data-i="contactSub">Call for the fastest booking, or use the enquiry form link.</p>
+      </div>
+    </div>
+
+    <div class="contact">
+      <div class="card contactCard">
+        <h4 data-i="contactFastTitle">Fast booking</h4>
+        <p data-i="contactFastBody">Phone and message options for quick confirmation.</p>
+        <div class="heroActions">
+          <a class="btn primary" href="tel:+66887906345" data-i="contactCallBtn">Call: 088‑790‑6345</a>
+          <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="contactMapBtn">Map</a>
+          <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="contactFbBtn">Facebook</a>
+        </div>
+
+        <div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,.08)">
+          <b style="display:block; font-size:13px" data-i="reviewTitle">Reviews</b>
+          <p style="margin:6px 0 0; color:var(--muted); font-size:13px" data-i="reviewBody">
+            View our reviews via Google Maps and social channels.
+          </p>
+          <div class="heroActions" style="margin-top:10px">
+            <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="reviewMapsBtn">Google Maps</a>
+            <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="reviewFbBtn">Facebook</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="card contactCard">
+        <h4 data-i="enquiryTitle">Enquiry form (Option B)</h4>
+        <p data-i="enquiryBody">
+          Add your booking enquiry form link here (Google Form recommended for simplest setup).
+        </p>
+        <!-- Replace this with your real Google Form link -->
+        <a class="btn primary" href="#" target="_blank" rel="noopener" data-i="enquiryBtn">Open Enquiry Form</a>
+        <div class="fine" style="margin-top:10px" data-i="enquiryNote">
+          Once you paste the real form link, this becomes fully functional (no backend needed).
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- POLICIES -->
+  <section id="policies">
+    <div class="sectionHead">
+      <div>
+        <h3 data-i="polTitle">Standard Policies</h3>
+        <p data-i="polSub">Simple, guest-friendly policies (final terms may be confirmed at check‑in).</p>
+      </div>
+    </div>
+
+    <div class="card tile">
+      <div class="policyGrid">
+        <div>
+          <h4 style="margin:0 0 6px" data-i="polCommonTitle">Key policies</h4>
+          <ul>
+            <li data-i="pol1">Check‑in from 14:00 • Check‑out by 11:00</li>
+            <li data-i="pol2">Government-issued ID or passport required at check‑in</li>
+            <li data-i="pol3">No smoking in rooms (smoking only in designated areas if available)</li>
+            <li data-i="pol4">No illegal substances or disruptive behavior</li>
+            <li data-i="pol5">Quiet hours typically 22:00–07:00 (please respect other guests)</li>
+            <li data-i="pol6">Damage or missing items may be charged</li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 style="margin:0 0 6px" data-i="polBookingTitle">Booking & payment</h4>
+          <ul>
+            <li data-i="pol7">Reservation confirmed once the hotel confirms availability</li>
+            <li data-i="pol8">Cancellation and no-show terms depend on rate/season (confirm when booking)</li>
+            <li data-i="pol9">Extra guests may require an additional charge (confirm when booking)</li>
+            <li data-i="pol10">Children policy depends on room type (confirm when booking)</li>
+            <li data-i="pol11">Parking is subject to availability</li>
+            <li data-i="pol12">Laundry service/area subject to operating hours</li>
+          </ul>
+        </div>
+      </div>
+      <p class="fine" style="margin-top:12px" data-i="polFooter">
+        For the most accurate and current policy details, please call the hotel directly.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <div>© <span id="y"></span> The Sandbox Hotel • sandboxhotel.com</div>
+    <div>
+      <a href="/privacy.html">Privacy</a> • <a href="#top" data-i="backTop">Back to top</a>
+    </div>
+  </footer>
+</main>
+
+<script>
+  document.getElementById('y').textContent = new Date().getFullYear();
+
+  const i18n = {
+    en: {
+      navAmenities: "Amenities", navRooms: "Rooms", navLocation: "Location", navContact: "Book / Contact", navBook: "Book Now",
+      kicker: "★ Large rooms • Great location • Direct booking",
+      heroTitle: "A premium stay at<br/>The Sandbox Hotel",
+      heroBody: "Comfortable, modern rooms in Nakhon Si Thammarat with Wi‑Fi, parking, laundry, and a coffee & snack bar. Book instantly by phone or enquiry form.",
+      pill1: "Large rooms", pill2: "Quiet sleep", pill3: "Wi‑Fi & parking", pill4: "Great location",
+      ctaEnquire: "Book / Enquire", ctaCall: "Call: 088‑790‑6345", ctaMaps: "Open Map", ctaFacebook: "Facebook",
+      microNote: "Tip: For the fastest booking, call or message us. For enquiries, use the form link below.",
+      heroLocStrong: "Nakhon Si Thammarat", heroLocSub: "Pho Sadet • Mueang District • 80000",
+      ctaViewRooms: "View Rooms →",
+      checkTimesTitle: "Check‑in / Check‑out", checkTimesVal: "Check‑in 14:00 • Check‑out 11:00",
+      directBookingTitle: "Direct booking", directBookingVal: "Phone • Map • Facebook",
+      amenitiesQuickTitle: "Key amenities", amenitiesQuickVal: "Wi‑Fi • Parking • Laundry • AC",
+      languagesTitle: "Languages", languagesVal: "ไทย • English • 中文",
+
+      amenitiesTitle: "Amenities", amenitiesSub: "Simple, useful, and focused on comfort.",
+      amWiTitle: "Wi‑Fi", amWiBody: "Reliable internet for work and streaming.",
+      amPkTitle: "Parking", amPkBody: "Convenient guest parking (subject to availability).",
+      amAcTitle: "Air‑conditioning", amAcBody: "Cool, comfortable rooms in all seasons.",
+      amCafeTitle: "Coffee & Snack Bar", amCafeBody: "Quick refreshments and convenience.",
+      amLaundryTitle: "Laundry", amLaundryBody: "Laundry service/area available (ask reception).",
+      amServiceTitle: "Helpful service", amServiceBody: "Friendly support for a smooth stay.",
+
+      roomsTitle: "Rooms", roomsSub: "Choose Standard or Premium • Twin or Double.",
+      r1Title: "Standard Twin", r1Body: "Comfortable twin setup with strong value.",
+      r2Title: "Standard Double", r2Body: "A cosy double room, ideal for couples.",
+      r3Title: "Premium Twin", r3Body: "Upgraded comfort with a premium feel.",
+      r4Title: "Premium Double", r4Body: "Premium double room for a relaxed stay.",
+      tag2g: "2 guests", tagTwin: "Twin beds", tagDouble: "Double bed", tagLarge: "Large room", tagPremium: "Premium",
+
+      locTitle: "Location", locSub: "Easy to find and convenient for getting around the city.",
+      locName: "The Sandbox Hotel — Nakhon Si Thammarat", locAddrLabel: "Address:",
+      locMapBtn: "Open in Google Maps", locFbBtn: "Facebook", locBookBtn: "Book / Contact",
+
+      contactTitle: "Book / Contact", contactSub: "Call for the fastest booking, or use the enquiry form link.",
+      contactFastTitle: "Fast booking", contactFastBody: "Phone and message options for quick confirmation.",
+      contactCallBtn: "Call: 088‑790‑6345", contactMapBtn: "Map", contactFbBtn: "Facebook",
+      reviewTitle: "Reviews", reviewBody: "View our reviews via Google Maps and social channels.",
+      reviewMapsBtn: "Google Maps", reviewFbBtn: "Facebook",
+
+      enquiryTitle: "Enquiry form (Option B)",
+      enquiryBody: "Add your booking enquiry form link here (Google Form recommended for simplest setup).",
+      enquiryBtn: "Open Enquiry Form",
+      enquiryNote: "Once you paste the real form link, this becomes fully functional (no backend needed).",
+
+      polTitle: "Standard Policies", polSub: "Simple, guest-friendly policies (final terms may be confirmed at check‑in).",
+      polCommonTitle: "Key policies",
+      pol1: "Check‑in from 14:00 • Check‑out by 11:00",
+      pol2: "Government-issued ID or passport required at check‑in",
+      pol3: "No smoking in rooms (smoking only in designated areas if available)",
+      pol4: "No illegal substances or disruptive behavior",
+      pol5: "Quiet hours typically 22:00–07:00 (please respect other guests)",
+      pol6: "Damage or missing items may be charged",
+      polBookingTitle: "Booking & payment",
+      pol7: "Reservation confirmed once the hotel confirms availability",
+      pol8: "Cancellation and no-show terms depend on rate/season (confirm when booking)",
+      pol9: "Extra guests may require an additional charge (confirm when booking)",
+      pol10:"Children policy depends on room type (confirm when booking)",
+      pol11:"Parking is subject to availability",
+      pol12:"Laundry service/area subject to operating hours",
+      polFooter: "For the most accurate and current policy details, please call the hotel directly.",
+      backTop: "Back to top"
+    },
+
+    th: {
+      navAmenities: "สิ่งอำนวยความสะดวก", navRooms: "ห้องพัก", navLocation: "ที่ตั้ง", navContact: "จอง / ติดต่อ", navBook: "จองเลย",
+      kicker: "★ ห้องกว้าง • ทำเลดี • จองได้ทันที",
+      heroTitle: "การเข้าพักคุณภาพที่<br/>The Sandbox Hotel",
+      heroBody: "ห้องพักสะอาดทันสมัยในนครศรีธรรมราช พร้อม Wi‑Fi ที่จอดรถ บริการซักรีด และมุมกาแฟ/สแน็กบาร์ จองได้ทันทีทางโทรศัพท์หรือแบบฟอร์มสอบถาม",
+      pill1: "ห้องกว้าง", pill2: "เงียบพักสบาย", pill3: "Wi‑Fi & ที่จอดรถ", pill4: "ทำเลดี",
+      ctaEnquire: "จอง / สอบถาม", ctaCall: "โทร: 088‑790‑6345", ctaMaps: "เปิดแผนที่", ctaFacebook: "เฟซบุ๊ก",
+      microNote: "แนะนำ: หากต้องการจองเร็วที่สุด โทรหรือทักข้อความได้เลย หากต้องการสอบถาม ใช้ลิงก์แบบฟอร์มด้านล่าง",
+      heroLocStrong: "นครศรีธรรมราช", heroLocSub: "โพธิ์เสด็จ • อำเภอเมือง • 80000",
+      ctaViewRooms: "ดูห้องพัก →",
+      checkTimesTitle: "เช็คอิน / เช็คเอาต์", checkTimesVal: "เช็คอิน 14:00 • เช็คเอาต์ 11:00",
+      directBookingTitle: "จองโดยตรง", directBookingVal: "โทร • แผนที่ • เฟซบุ๊ก",
+      amenitiesQuickTitle: "สิ่งอำนวยความสะดวก", amenitiesQuickVal: "Wi‑Fi • ที่จอดรถ • ซักรีด • แอร์",
+      languagesTitle: "ภาษา", languagesVal: "ไทย • English • 中文",
+
+      amenitiesTitle: "สิ่งอำนวยความสะดวก", amenitiesSub: "ครบ ใช้งานจริง เน้นความสบาย",
+      amWiTitle: "Wi‑Fi", amWiBody: "อินเทอร์เน็ตใช้งานได้ดีสำหรับทำงานและสตรีม",
+      amPkTitle: "ที่จอดรถ", amPkBody: "ที่จอดรถสำหรับผู้เข้าพัก (ขึ้นอยู่กับความพร้อม)",
+      amAcTitle: "เครื่องปรับอากาศ", amAcBody: "ห้องเย็นสบายตลอดปี",
+      amCafeTitle: "กาแฟ & สแน็กบาร์", amCafeBody: "เครื่องดื่ม/ของว่าง สะดวก รวดเร็ว",
+      amLaundryTitle: "ซักรีด", amLaundryBody: "มีบริการ/พื้นที่ซักรีด (สอบถามที่เคาน์เตอร์)",
+      amServiceTitle: "การบริการ", amServiceBody: "พนักงานดูแลช่วยเหลืออย่างเป็นกันเอง",
+
+      roomsTitle: "ห้องพัก", roomsSub: "Standard หรือ Premium • Twin หรือ Double",
+      r1Title: "Standard Twin", r1Body: "เตียงคู่แยก คุ้มค่า พักสบาย",
+      r2Title: "Standard Double", r2Body: "เตียงคู่ เหมาะสำหรับคู่รัก",
+      r3Title: "Premium Twin", r3Body: "อัปเกรดความสบาย ฟีลพรีเมียม",
+      r4Title: "Premium Double", r4Body: "ห้องพรีเมียมเตียงคู่ พักผ่อนสบาย",
+      tag2g: "2 ท่าน", tagTwin: "เตียงแยก", tagDouble: "เตียงคู่", tagLarge: "ห้องกว้าง", tagPremium: "พรีเมียม",
+
+      locTitle: "ที่ตั้ง", locSub: "เดินทางสะดวก หาง่าย ใกล้จุดสำคัญในเมือง",
+      locName: "The Sandbox Hotel — นครศรีธรรมราช", locAddrLabel: "ที่อยู่:",
+      locMapBtn: "เปิดใน Google Maps", locFbBtn: "เฟซบุ๊ก", locBookBtn: "จอง / ติดต่อ",
+
+      contactTitle: "จอง / ติดต่อ", contactSub: "จองเร็วที่สุดโทรได้เลย หรือใช้ลิงก์แบบฟอร์มสอบถาม",
+      contactFastTitle: "จองรวดเร็ว", contactFastBody: "ช่องทางติดต่อเพื่อยืนยันห้องพักอย่างรวดเร็ว",
+      contactCallBtn: "โทร: 088‑790‑6345", contactMapBtn: "แผนที่", contactFbBtn: "เฟซบุ๊ก",
+      reviewTitle: "รีวิว", reviewBody: "ดูรีวิวผ่าน Google Maps และช่องทางโซเชียล",
+      reviewMapsBtn: "Google Maps", reviewFbBtn: "เฟซบุ๊ก",
+
+      enquiryTitle: "แบบฟอร์มสอบถาม (ตัวเลือก B)",
+      enquiryBody: "ใส่ลิงก์แบบฟอร์มสอบถามการจองที่นี่ (แนะนำ Google Form ตั้งค่าง่ายที่สุด)",
+      enquiryBtn: "เปิดแบบฟอร์มสอบถาม",
+      enquiryNote: "เมื่อใส่ลิงก์จริง ปุ่มนี้ใช้งานได้ทันที (ไม่ต้องมีระบบหลังบ้าน)",
+
+      polTitle: "นโยบายมาตรฐาน", polSub: "นโยบายเรียบง่าย เป็นมิตรต่อผู้เข้าพัก (รายละเอียดสุดท้ายยืนยันได้ที่เช็คอิน)",
+      polCommonTitle: "นโยบายหลัก",
+      pol1: "เช็คอินตั้งแต่ 14:00 • เช็คเอาต์ภายใน 11:00",
+      pol2: "ต้องแสดงบัตรประชาชน/พาสปอร์ตตอนเช็คอิน",
+      pol3: "ห้ามสูบบุหรี่ในห้องพัก (สูบได้เฉพาะพื้นที่ที่กำหนด หากมี)",
+      pol4: "ห้ามสิ่งผิดกฎหมายและพฤติกรรมรบกวนผู้อื่น",
+      pol5: "โดยทั่วไปขอความร่วมมือช่วงเงียบ 22:00–07:00",
+      pol6: "กรณีทรัพย์สินเสียหาย/สูญหาย อาจมีค่าปรับ",
+      polBookingTitle: "การจอง & การชำระเงิน",
+      pol7: "การจองยืนยันเมื่อโรงแรมยืนยันห้องว่าง",
+      pol8: "เงื่อนไขยกเลิก/ไม่มาเข้าพักขึ้นกับช่วงเวลาและเรท (โปรดยืนยันตอนจอง)",
+      pol9: "ผู้เข้าพักเพิ่มอาจมีค่าใช้จ่ายเพิ่มเติม (โปรดยืนยันตอนจอง)",
+      pol10:"นโยบายเด็กขึ้นกับประเภทห้อง (โปรดยืนยันตอนจอง)",
+      pol11:"ที่จอดรถขึ้นอยู่กับความพร้อม",
+      pol12:"ซักรีดขึ้นอยู่กับเวลาให้บริการ",
+      polFooter: "เพื่อความถูกต้อง โปรดโทรสอบถามนโยบายล่าสุดกับทางโรงแรมโดยตรง",
+      backTop: "กลับไปด้านบน"
+    },
+
+    zh: {
+      navAmenities: "设施", navRooms: "房型", navLocation: "位置", navContact: "预订 / 联系", navBook: "立即预订",
+      kicker: "★ 房间宽敞 • 位置便利 • 直接预订",
+      heroTitle: "入住体验升级<br/>The Sandbox Hotel",
+      heroBody: "位于洛坤府（Nakhon Si Thammarat）的现代舒适酒店，提供 Wi‑Fi、停车、洗衣服务，以及咖啡与小食吧。可电话直接预订或通过询价表单。",
+      pill1: "房间宽敞", pill2: "安静好眠", pill3: "Wi‑Fi 与停车", pill4: "位置便利",
+      ctaEnquire: "预订 / 询价", ctaCall: "电话: 088‑790‑6345", ctaMaps: "打开地图", ctaFacebook: "Facebook",
+      microNote: "建议：想最快确认房间，请直接致电或留言。询价可使用下方表单链接。",
+      heroLocStrong: "Nakhon Si Thammarat", heroLocSub: "Pho Sadet • Mueang District • 80000",
+      ctaViewRooms: "查看房型 →",
+      checkTimesTitle: "入住 / 退房", checkTimesVal: "入住 14:00 • 退房 11:00",
+      directBookingTitle: "直接预订", directBookingVal: "电话 • 地图 • Facebook",
+      amenitiesQuickTitle: "重点设施", amenitiesQuickVal: "Wi‑Fi • 停车 • 洗衣 • 空调",
+      languagesTitle: "语言", languagesVal: "ไทย • English • 中文",
+
+      amenitiesTitle: "设施", amenitiesSub: "实用、舒适、简单到位。",
+      amWiTitle: "Wi‑Fi", amWiBody: "稳定网络，适合办公与娱乐。",
+      amPkTitle: "停车", amPkBody: "住客停车（视车位情况而定）。",
+      amAcTitle: "空调", amAcBody: "全季节舒适凉爽。",
+      amCafeTitle: "咖啡与小食吧", amCafeBody: "便捷补给与休闲。",
+      amLaundryTitle: "洗衣", amLaundryBody: "提供洗衣服务/区域（请咨询前台）。",
+      amServiceTitle: "服务", amServiceBody: "友好支持，让入住更顺畅。",
+
+      roomsTitle: "房型", roomsSub: "Standard 或 Premium • Twin 或 Double",
+      r1Title: "Standard Twin", r1Body: "双床配置，性价比高。",
+      r2Title: "Standard Double", r2Body: "大床房，适合情侣入住。",
+      r3Title: "Premium Twin", r3Body: "升级舒适体验。",
+      r4Title: "Premium Double", r4Body: "高级大床房，放松之选。",
+      tag2g: "2 位", tagTwin: "双床", tagDouble: "大床", tagLarge: "房间宽敞", tagPremium: "高级",
+
+      locTitle: "位置", locSub: "好找、出行便利。",
+      locName: "The Sandbox Hotel — Nakhon Si Thammarat", locAddrLabel: "地址:",
+      locMapBtn: "在 Google Maps 打开", locFbBtn: "Facebook", locBookBtn: "预订 / 联系",
+
+      contactTitle: "预订 / 联系", contactSub: "最快方式：直接电话预订；或使用询价表单链接。",
+      contactFastTitle: "快速预订", contactFastBody: "多种联系方式，快速确认。",
+      contactCallBtn: "电话: 088‑790‑6345", contactMapBtn: "地图", contactFbBtn: "Facebook",
+      reviewTitle: "评价", reviewBody: "通过 Google Maps 与社交渠道查看评价。",
+      reviewMapsBtn: "Google Maps", reviewFbBtn: "Facebook",
+
+      enquiryTitle: "询价表单（选项 B）",
+      enquiryBody: "把你的询价表单链接放在这里（建议使用 Google 表单，最简单）。",
+      enquiryBtn: "打开询价表单",
+      enquiryNote: "填入真实链接后即可使用（无需后台系统）。",
+
+      polTitle: "标准政策", polSub: "清晰友好的住客政策（最终以酒店确认为准）。",
+      polCommonTitle: "主要政策",
+      pol1: "入住时间 14:00 起 • 退房时间 11:00 前",
+      pol2: "入住需出示身份证件或护照",
+      pol3: "房间内禁烟（如有指定吸烟区，请在指定区域吸烟）",
+      pol4: "禁止违法物品与扰民行为",
+      pol5: "通常安静时段为 22:00–07:00（请尊重其他住客）",
+      pol6: "损坏或遗失物品可能产生费用",
+      polBookingTitle: "预订与付款",
+      pol7: "房态以酒店确认后为准",
+      pol8: "取消/未到店政策因季节与房价而异（预订时确认）",
+      pol9: "加人可能产生额外费用（预订时确认）",
+      pol10:"儿童政策因房型而异（预订时确认）",
+      pol11:"停车位视供应情况而定",
+      pol12:"洗衣服务/时间以酒店安排为准",
+      polFooter: "如需最新最准确的政策信息，请直接致电酒店确认。",
+      backTop: "返回顶部"
+    }
+  };
+
+  const langButtons = {
+    en: document.getElementById('lang-en'),
+    th: document.getElementById('lang-th'),
+    zh: document.getElementById('lang-zh')
+  };
+
+  function setPressed(active){
+    Object.entries(langButtons).forEach(([k, btn]) => btn.setAttribute('aria-pressed', String(k === active)));
+  }
+
+  function applyLang(lang){
+    const dict = i18n[lang] || i18n.en;
+    document.documentElement.lang = (lang === 'zh') ? 'zh-Hans' : lang;
+    setPressed(lang);
+
+    document.querySelectorAll('[data-i]').forEach(el => {
+      const key = el.getAttribute('data-i');
+      if (!dict[key]) return;
+      el.innerHTML = dict[key];
+    });
+  }
+
+  langButtons.en.addEventListener('click', () => applyLang('en'));
+  langButtons.th.addEventListener('click', () => applyLang('th'));
+  langButtons.zh.addEventListener('click', () => applyLang('zh'));
+
+  applyLang('en');
+</script>
+</body>
+</html>
