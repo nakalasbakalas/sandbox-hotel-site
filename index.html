@@ -3,106 +3,120 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b0f19" />
+  <meta name="theme-color" content="#0b1220" />
 
-  <!-- Primary SEO -->
   <title>The Sandbox Hotel | Nakhon Si Thammarat, Thailand</title>
-  <meta name="description" content="The Sandbox Hotel in Nakhon Si Thammarat. Large rooms, great location, Wi‑Fi, parking, laundry, coffee & snack bar. Book by phone or enquiry form." />
+  <meta name="description" content="Book direct with The Sandbox Hotel. Large rooms, great location, Wi-Fi, parking, laundry, coffee & snack bar. Call, LINE/WhatsApp, or send an enquiry." />
   <link rel="canonical" href="https://www.sandboxhotel.com/" />
 
   <!-- Open Graph -->
   <meta property="og:title" content="The Sandbox Hotel | Nakhon Si Thammarat" />
-  <meta property="og:description" content="Large rooms, great location, Wi‑Fi, parking, laundry, coffee & snack bar. Book direct by phone." />
+  <meta property="og:description" content="Direct booking: Call, LINE/WhatsApp, or quick enquiry. Large rooms • Wi-Fi • Parking • Laundry." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://www.sandboxhotel.com/" />
-  <!-- Optional if you add /assets/og-cover.jpg -->
-  <!-- <meta property="og:image" content="https://www.sandboxhotel.com/assets/og-cover.jpg" /> -->
-
   <meta name="twitter:card" content="summary_large_image" />
 
-  <!-- Performance: no external fonts, no frameworks -->
   <style>
     :root{
-      --bg:#070a12;
-      --panel:#0b0f19;
-      --text:#e9ecf5;
-      --muted:#b7bfd6;
+      --bg0:#070a12;
+      --bg1:#0b1220;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.085);
       --line: rgba(255,255,255,.10);
-      --accent:#7cf7c3;
-      --accent2:#7aa7ff;
-      --shadow: 0 18px 50px rgba(0,0,0,.45);
-      --radius: 20px;
-      --max: 1120px;
+      --text:#eaf0ff;
+      --muted:#a9b4d1;
+      --muted2:#8590ae;
+
+      --acc:#7cf7c3;
+      --acc2:#7aa7ff;
+      --danger:#ff6b6b;
+      --ok:#6ee7b7;
+
+      --shadow: 0 18px 60px rgba(0,0,0,.52);
+      --shadow2: 0 10px 35px rgba(0,0,0,.45);
+      --radius: 22px;
+      --radius2: 16px;
+
+      --max: 1140px;
+      --tap: 44px;
     }
+
     *{box-sizing:border-box}
     html,body{height:100%}
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
-      background:
-        radial-gradient(900px 420px at 70% -10%, rgba(122,167,255,.16), transparent 60%),
-        radial-gradient(900px 520px at 15% 10%, rgba(124,247,195,.14), transparent 55%),
-        var(--bg);
       color:var(--text);
+      background:
+        radial-gradient(900px 520px at 18% -10%, rgba(124,247,195,.16), transparent 60%),
+        radial-gradient(900px 520px at 85% -10%, rgba(122,167,255,.18), transparent 60%),
+        radial-gradient(900px 520px at 50% 110%, rgba(122,167,255,.12), transparent 60%),
+        linear-gradient(180deg, var(--bg0), var(--bg1) 60%, #070a12);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
       line-height:1.45;
-      -webkit-font-smoothing:antialiased;
-      text-rendering:optimizeLegibility;
     }
-    a{color:inherit}
-    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 80px}
+
+    a{color:inherit; text-decoration:none}
+    button, input, select, textarea{font:inherit}
+    .wrap{max-width:var(--max); margin:0 auto; padding:22px 18px 90px}
+
+    /* ---------- Top Nav ---------- */
     header{
-      position:sticky; top:0; z-index:50;
-      backdrop-filter:saturate(140%) blur(10px);
-      background: linear-gradient(to bottom, rgba(7,10,18,.82), rgba(7,10,18,.45));
-      border-bottom:1px solid rgba(255,255,255,.06);
+      position:sticky; top:0; z-index:60;
+      backdrop-filter: saturate(140%) blur(10px);
+      background: linear-gradient(to bottom, rgba(7,10,18,.88), rgba(7,10,18,.55));
+      border-bottom:1px solid rgba(255,255,255,.07);
     }
     .nav{
       max-width:var(--max); margin:0 auto;
       padding:12px 18px;
-      display:flex; align-items:center; gap:14px; justify-content:space-between;
+      display:flex; align-items:center; justify-content:space-between; gap:12px;
     }
-    .brand{display:flex; align-items:center; gap:12px; min-width: 220px}
+    .brand{
+      display:flex; align-items:center; gap:12px;
+      min-width: 240px;
+    }
     .logo{
-      width:36px; height:36px; border-radius:12px;
+      width:40px; height:40px; border-radius:14px;
       background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
-      box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
+      position:relative;
+      overflow:hidden;
     }
-    .brand h1{font-size:14px; margin:0; letter-spacing:.5px}
-    .brand small{display:block; color:var(--muted); font-size:12px; margin-top:2px}
-    nav ul{list-style:none; margin:0; padding:0; display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
-    nav a{
-      display:inline-block;
-      text-decoration:none;
-      font-size:13px;
+    .logo:after{
+      content:"";
+      position:absolute; inset:-40%;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.45), transparent 55%);
+      transform: rotate(20deg);
+    }
+    .brand h1{margin:0; font-size:14px; letter-spacing:.35px}
+    .brand small{display:block; margin-top:2px; color:var(--muted); font-size:12px}
+
+    .navLinks{display:flex; align-items:center; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .chip{
+      display:inline-flex; align-items:center; justify-content:center;
+      min-height:36px;
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-    }
-    nav a:hover{background: rgba(255,255,255,.08)}
-    .rightBar{display:flex; gap:10px; align-items:center; flex-wrap:wrap; justify-content:flex-end}
-    .btn{
-      text-decoration:none;
-      display:inline-flex; align-items:center; justify-content:center;
-      gap:10px;
-      padding:10px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      font-weight:600;
+      color:var(--text);
       font-size:13px;
-      white-space:nowrap;
-      cursor:pointer;
+      transition: transform .15s ease, background .15s ease;
+      user-select:none;
     }
-    .btn.primary{
+    .chip:hover{background: rgba(255,255,255,.07); transform: translateY(-1px)}
+    .chip:active{transform: translateY(0)}
+    .chip.primary{
       border:none;
       background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
-      color:#09101f;
+      color:#08101f;
+      font-weight:800;
     }
-    .btn:hover{transform: translateY(-1px)}
-    .btn:active{transform: translateY(0)}
+
     .lang{
-      display:flex; gap:6px; align-items:center;
+      display:flex; align-items:center; gap:6px;
       padding:6px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
@@ -112,140 +126,331 @@
       appearance:none;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
-      color: var(--text);
+      color:var(--text);
       border-radius:999px;
       padding:7px 10px;
-      font-weight:700;
+      font-weight:800;
       font-size:12px;
       cursor:pointer;
+      min-height:34px;
     }
     .lang button[aria-pressed="true"]{
       background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
-      color:#09101f;
+      color:#08101f;
       border-color: transparent;
     }
 
-    .hero{
-      padding:34px 0 10px;
-      display:grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap:18px;
-      align-items:stretch;
-    }
+    /* ---------- Utility ---------- */
     .card{
-      background: rgba(11,15,25,.72);
+      background: rgba(255,255,255,.05);
       border:1px solid rgba(255,255,255,.10);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
     }
-    .heroLeft{padding:28px}
-    .kicker{
-      display:inline-flex; align-items:center; gap:8px;
-      font-size:12px;
-      padding:7px 10px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      color: var(--muted);
+    .card.soft{
+      box-shadow: var(--shadow2);
+      border-radius: var(--radius2);
+      background: rgba(255,255,255,.045);
     }
-    .hero h2{
-      margin:14px 0 8px;
-      font-size:44px;
-      line-height:1.06;
-      letter-spacing:-.02em;
-    }
-    .hero p{margin:10px 0 0; color:var(--muted); font-size:16px; max-width:62ch}
-    .heroBullets{margin:16px 0 0; display:flex; gap:10px; flex-wrap:wrap}
+    .muted{color:var(--muted)}
+    .fine{color:var(--muted2); font-size:12px}
+    .sep{height:1px; background: rgba(255,255,255,.08); margin:14px 0}
     .pill{
+      display:inline-flex; gap:8px; align-items:center;
       padding:8px 10px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       font-size:13px;
-      color: var(--text);
+      white-space:nowrap;
     }
-    .heroActions{margin-top:18px; display:flex; gap:10px; flex-wrap:wrap; align-items:center}
+    .kicker{
+      display:inline-flex; align-items:center; gap:10px;
+      padding:7px 10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.04);
+      color:var(--muted);
+      font-size:12px;
+    }
+    .dot{
+      width:8px; height:8px; border-radius:99px;
+      background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
+      display:inline-block;
+    }
 
-    .heroRight{overflow:hidden; display:flex; flex-direction:column}
-    .heroMedia{
-      position:relative;
-      min-height: 320px;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)),
-        radial-gradient(900px 360px at 35% 10%, rgba(122,167,255,.18), transparent 55%),
-        radial-gradient(900px 420px at 80% 0%, rgba(124,247,195,.14), transparent 60%),
-        #0b0f19;
+    /* ---------- Hero ---------- */
+    .hero{
+      margin-top:18px;
+      display:grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap:14px;
+      align-items:stretch;
     }
-    .heroMedia .caption{
-      position:absolute; left:18px; bottom:14px; right:18px;
+    .heroLeft{padding:26px}
+    .hero h2{
+      margin:14px 0 8px;
+      font-size:46px;
+      line-height:1.06;
+      letter-spacing:-.02em;
+    }
+    .hero p{margin:10px 0 0; font-size:16px; color:var(--muted); max-width:68ch}
+
+    .trustRow{
+      margin-top:16px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+    }
+    .trust{
+      display:flex; gap:10px; align-items:center;
+      padding:10px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.035);
+      min-width: 210px;
+      flex: 1;
+    }
+    .trust b{display:block; font-size:13px; margin-bottom:2px}
+    .trust span{display:block; font-size:12px; color:var(--muted2)}
+    .badge{
+      width:40px; height:40px; border-radius:14px;
+      display:flex; align-items:center; justify-content:center;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.045);
+      font-weight:900;
+      color: var(--acc);
+      flex:0 0 auto;
+    }
+
+    .heroActions{
+      margin-top:18px;
+      display:flex; flex-wrap:wrap; gap:10px;
+      align-items:center;
+    }
+    .btn{
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:10px;
+      padding:11px 12px;
+      min-height: var(--tap);
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      font-weight:800;
+      font-size:13px;
+      cursor:pointer;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{background: rgba(255,255,255,.075); transform: translateY(-1px)}
+    .btn:active{transform: translateY(0)}
+    .btn.primary{
+      border:none;
+      background: linear-gradient(135deg, rgba(124,247,195,.95), rgba(122,167,255,.95));
+      color:#07101f;
+    }
+    .btn.ghost{
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    /* ---------- Right: Booking Card ---------- */
+    .heroRight{padding:14px; display:flex; flex-direction:column; gap:12px}
+    .media{
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.12), rgba(0,0,0,.62)),
+        radial-gradient(900px 360px at 30% 10%, rgba(122,167,255,.18), transparent 55%),
+        radial-gradient(900px 420px at 82% 0%, rgba(124,247,195,.14), transparent 60%),
+        #0b1220;
+      min-height: 190px;
+      position:relative;
+      overflow:hidden;
+    }
+    .media .cap{
+      position:absolute; inset:auto 14px 14px 14px;
       display:flex; gap:10px; align-items:flex-end; justify-content:space-between;
     }
-    .caption strong{display:block; font-size:14px}
-    .caption span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
-    .heroQuick{padding:16px 18px 18px; display:grid; gap:10px}
-    .quickRow{display:flex; gap:10px; flex-wrap:wrap}
-    .mini{
-      flex:1;
-      min-width: 190px;
-      padding:12px;
-      border-radius:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background: rgba(255,255,255,.04);
-    }
-    .mini b{display:block; font-size:13px}
-    .mini small{display:block; color:var(--muted); margin-top:4px}
+    .media strong{display:block; font-size:13px}
+    .media span{display:block; font-size:12px; color:var(--muted); margin-top:2px}
 
-    section{scroll-margin-top:90px; margin-top:18px}
+    .bookBox{padding:14px}
+    .bookBox h3{margin:0 0 6px; font-size:15px}
+    .bookGrid{
+      margin-top:10px;
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10px;
+    }
+    .field{
+      display:flex; flex-direction:column; gap:6px;
+    }
+    .field label{font-size:12px; color:var(--muted)}
+    .field input, .field select, .field textarea{
+      width:100%;
+      padding:11px 11px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.20);
+      color: var(--text);
+      outline:none;
+    }
+    .field input:focus, .field select:focus, .field textarea:focus{
+      border-color: rgba(124,247,195,.55);
+      box-shadow: 0 0 0 3px rgba(124,247,195,.12);
+    }
+    .bookGrid .wide{grid-column: 1 / -1}
+    .miniRow{display:flex; gap:10px; flex-wrap:wrap; margin-top:10px}
+    .miniStat{
+      flex:1;
+      min-width: 160px;
+      padding:10px 12px;
+      border-radius: 16px;
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.035);
+    }
+    .miniStat b{display:block; font-size:12px}
+    .miniStat small{display:block; margin-top:4px; color:var(--muted2); font-size:12px}
+
+    /* ---------- Sections ---------- */
+    section{scroll-margin-top:92px}
     .sectionHead{
-      display:flex; align-items:flex-end; justify-content:space-between; gap:12px;
       margin:22px 0 10px;
+      display:flex; align-items:flex-end; justify-content:space-between; gap:14px;
     }
     .sectionHead h3{margin:0; font-size:18px}
     .sectionHead p{margin:0; color:var(--muted); font-size:13px}
+
     .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
     .grid2{display:grid; grid-template-columns: repeat(2, 1fr); gap:12px}
+
     .tile{padding:16px}
     .icon{
-      width:38px; height:38px; border-radius:14px;
-      background: rgba(255,255,255,.06);
+      width:40px; height:40px; border-radius: 14px;
       border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.045);
       display:flex; align-items:center; justify-content:center;
-      font-weight:900;
-      color: var(--accent);
+      font-weight:1000;
+      color: var(--acc);
     }
     .tile h4{margin:10px 0 6px; font-size:14px}
     .tile p{margin:0; color:var(--muted); font-size:13px}
 
-    .room{overflow:hidden; display:grid; grid-template-columns: .95fr 1.05fr; gap:0}
+    /* ---------- Rooms ---------- */
+    .room{
+      overflow:hidden;
+      display:grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap:0;
+    }
     .roomMedia{
-      min-height: 180px;
-      background: linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.55)), #101626;
+      min-height: 170px;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.60)),
+        radial-gradient(800px 240px at 20% 10%, rgba(122,167,255,.18), transparent 55%),
+        #10182a;
       border-right: 1px solid rgba(255,255,255,.08);
     }
     .roomBody{padding:16px}
+    .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:10px}
+    .price{
+      text-align:right;
+      min-width: 90px;
+    }
+    .price b{display:block; font-size:14px}
+    .price small{display:block; font-size:11px; color:var(--muted2); margin-top:2px}
     .meta{display:flex; gap:8px; flex-wrap:wrap; margin-top:10px}
     .tag{
       font-size:12px;
-      padding:6px 8px;
+      padding:6px 9px;
       border-radius:999px;
       border:1px solid rgba(255,255,255,.12);
       background: rgba(255,255,255,.04);
       color: var(--muted);
     }
+    .roomActions{
+      margin-top:12px;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center;
+    }
 
-    .contact{display:grid; grid-template-columns: 1fr 1fr; gap:12px; align-items:stretch}
-    .contactCard{padding:18px}
-    .contactCard h4{margin:0 0 10px}
-    .contactCard p{margin:0 0 12px; color:var(--muted); font-size:13px}
+    /* ---------- Social proof / FAQ ---------- */
+    .proof{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap:12px;
+      align-items:stretch;
+    }
+    .quote{
+      padding:16px;
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.035);
+    }
+    .quote b{display:block; font-size:13px}
+    .quote p{margin:8px 0 0; color:var(--muted); font-size:13px}
+    details{
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.035);
+      padding:12px 14px;
+    }
+    details + details{margin-top:10px}
+    summary{
+      cursor:pointer;
+      font-weight:850;
+      font-size:13px;
+      list-style:none;
+    }
+    summary::-webkit-details-marker{display:none}
+    details p{margin:10px 0 0; color:var(--muted); font-size:13px}
 
-    .policyGrid{
+    /* ---------- Contact ---------- */
+    .contact{
       display:grid;
       grid-template-columns: 1fr 1fr;
       gap:12px;
+      align-items:stretch;
     }
-    .policyGrid ul{margin:0; padding-left:18px}
-    .policyGrid li{margin:6px 0; color:var(--muted); font-size:13px}
+    .contactCard{padding:18px}
+    .contactCard h4{margin:0 0 10px; font-size:15px}
+    .contactCard p{margin:0 0 12px; color:var(--muted); font-size:13px}
+
+    /* ---------- Sticky Booking Bar (Conversion) ---------- */
+    .stickyBar{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      z-index:70;
+      padding:10px 12px;
+      background: linear-gradient(to top, rgba(7,10,18,.96), rgba(7,10,18,.80));
+      border-top:1px solid rgba(255,255,255,.08);
+      backdrop-filter: saturate(140%) blur(10px);
+    }
+    .stickyInner{
+      max-width:var(--max);
+      margin:0 auto;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:10px;
+      padding:0 6px;
+    }
+    .stickyLeft{
+      display:flex; flex-direction:column;
+      gap:2px;
+      min-width: 220px;
+    }
+    .stickyLeft b{font-size:13px}
+    .stickyLeft span{font-size:12px; color:var(--muted)}
+    .stickyActions{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+      justify-content:flex-end;
+    }
+    .stickyActions .btn{min-height:40px; padding:10px 12px}
+    .hideMobile{display:inline-flex}
 
     footer{
       margin-top:22px;
@@ -255,19 +460,22 @@
       font-size:12px;
       display:flex; gap:12px; justify-content:space-between; flex-wrap:wrap;
     }
-    .fine{color:var(--muted); font-size:12px}
 
-    @media (max-width: 900px){
+    /* ---------- Responsive ---------- */
+    @media (max-width: 980px){
       .hero{grid-template-columns:1fr}
       .grid3{grid-template-columns:1fr}
       .grid2{grid-template-columns:1fr}
+      .proof{grid-template-columns:1fr}
+      .contact{grid-template-columns:1fr}
       .room{grid-template-columns:1fr}
       .roomMedia{border-right:none; border-bottom:1px solid rgba(255,255,255,.08)}
-      .contact{grid-template-columns:1fr}
-      .policyGrid{grid-template-columns:1fr}
-      .hero h2{font-size:36px}
+      .hero h2{font-size:38px}
       .brand{min-width:auto}
-      .rightBar .btn{display:none}
+      .hideMobile{display:none}
+    }
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important; transition:none !important}
     }
   </style>
 
@@ -297,26 +505,20 @@
 <body>
 <header>
   <div class="nav">
-    <div class="brand">
+    <a class="brand" href="#top" aria-label="The Sandbox Hotel Home">
       <div class="logo" aria-hidden="true"></div>
       <div>
         <h1>The Sandbox Hotel</h1>
-        <small id="navSub">Nakhon Si Thammarat, Thailand</small>
+        <small id="navSub" data-i="navSub">Nakhon Si Thammarat, Thailand</small>
       </div>
-    </div>
+    </a>
 
-    <nav aria-label="Primary">
-      <ul>
-        <li><a href="#amenities" data-i="navAmenities">Amenities</a></li>
-        <li><a href="#rooms" data-i="navRooms">Rooms</a></li>
-        <li><a href="#location" data-i="navLocation">Location</a></li>
-        <li><a href="#contact" data-i="navContact">Book / Contact</a></li>
-      </ul>
-    </nav>
-
-    <div class="rightBar">
-      <a class="btn" href="tel:+66887906345" aria-label="Call The Sandbox Hotel">Call</a>
-      <a class="btn primary" href="#contact" data-i="navBook">Book Now</a>
+    <div class="navLinks" aria-label="Primary">
+      <a class="chip" href="#rooms" data-i="navRooms">Rooms</a>
+      <a class="chip" href="#amenities" data-i="navAmenities">Amenities</a>
+      <a class="chip hideMobile" href="#location" data-i="navLocation">Location</a>
+      <a class="chip hideMobile" href="#faq" data-i="navFAQ">FAQ</a>
+      <a class="chip primary" href="#book" data-i="navBook">Book Now</a>
 
       <div class="lang" aria-label="Language">
         <button type="button" id="lang-en" aria-pressed="true">EN</button>
@@ -327,68 +529,136 @@
   </div>
 </header>
 
-<main class="wrap">
+<main class="wrap" id="top">
   <!-- HERO -->
-  <section class="hero" id="top">
+  <section class="hero" aria-label="Hero">
     <div class="card heroLeft">
-      <div class="kicker" data-i="kicker">★ Large rooms • Great location • Direct booking</div>
+      <div class="kicker" data-i="kicker"><span class="dot"></span> Large rooms • Great location • Direct booking</div>
 
-      <h2 data-i="heroTitle">A premium stay at<br/>The Sandbox Hotel</h2>
+      <h2 data-i="heroTitle">Book direct — fast confirmation<br/>The Sandbox Hotel</h2>
 
       <p data-i="heroBody">
-        Comfortable, modern rooms in Nakhon Si Thammarat with Wi‑Fi, parking, laundry, and a coffee & snack bar.
-        Book instantly by phone or enquiry form.
+        Modern, comfortable rooms in Nakhon Si Thammarat. Wi-Fi, parking, laundry, and a coffee & snack bar.
+        For the fastest booking: call or message us (LINE / WhatsApp).
       </p>
 
-      <div class="heroBullets" aria-label="Highlights">
-        <span class="pill" data-i="pill1">Large rooms</span>
-        <span class="pill" data-i="pill2">Quiet sleep</span>
-        <span class="pill" data-i="pill3">Wi‑Fi & parking</span>
-        <span class="pill" data-i="pill4">Great location</span>
+      <div class="trustRow" aria-label="Trust signals">
+        <div class="trust">
+          <div class="badge" aria-hidden="true">✓</div>
+          <div>
+            <b data-i="trust1Title">Fast confirmation</b>
+            <span data-i="trust1Body">Call or message to confirm availability quickly</span>
+          </div>
+        </div>
+        <div class="trust">
+          <div class="badge" aria-hidden="true">🅿</div>
+          <div>
+            <b data-i="trust2Title">Convenient essentials</b>
+            <span data-i="trust2Body">Wi-Fi • Parking • AC • Laundry</span>
+          </div>
+        </div>
+        <div class="trust">
+          <div class="badge" aria-hidden="true">🛏</div>
+          <div>
+            <b data-i="trust3Title">Large rooms</b>
+            <span data-i="trust3Body">Standard & Premium • Twin or Double</span>
+          </div>
+        </div>
       </div>
 
-      <div class="heroActions">
-        <a class="btn primary" href="#contact" data-i="ctaEnquire">Book / Enquire</a>
-        <a class="btn" href="tel:+66887906345" data-i="ctaCall">Call: 088‑790‑6345</a>
-        <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="ctaMaps">Open Map</a>
-        <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="ctaFacebook">Facebook</a>
+      <div class="heroActions" aria-label="Primary actions">
+        <a class="btn primary" href="#book" data-i="ctaStart">Start Booking</a>
+        <a class="btn" href="tel:+66887906345" data-i="ctaCall">Call: 088-790-6345</a>
+        <a class="btn" id="ctaWhatsApp" href="#" data-i="ctaWhatsApp">WhatsApp</a>
+        <a class="btn" id="ctaLine" href="#" data-i="ctaLine">LINE</a>
+        <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="ctaMap">Open Map</a>
       </div>
 
-      <p class="fine" data-i="microNote">
-        Tip: For the fastest booking, call or message us. For enquiries, use the form link below.
+      <div class="sep"></div>
+      <div class="muted" style="display:flex; flex-wrap:wrap; gap:10px; align-items:center">
+        <span class="pill" data-i="pill1">Check-in 14:00</span>
+        <span class="pill" data-i="pill2">Check-out 11:00</span>
+        <span class="pill" data-i="pill3">Passport/ID required</span>
+        <span class="pill" data-i="pill4">Quiet rooms</span>
+      </div>
+
+      <p class="fine" style="margin-top:12px" data-i="microNote">
+        Tip: If you share your dates + room type by message, we can confirm quickly.
       </p>
     </div>
 
-    <aside class="card heroRight" aria-label="Preview">
-      <div class="heroMedia" role="img" aria-label="Hotel hero">
-        <div class="caption">
+    <aside class="card heroRight" aria-label="Booking panel" id="book">
+      <div class="media" role="img" aria-label="Hotel preview">
+        <div class="cap">
           <div>
-            <strong data-i="heroLocStrong">Nakhon Si Thammarat</strong>
-            <span data-i="heroLocSub">Pho Sadet • Mueang District • 80000</span>
+            <strong data-i="mediaTitle">Nakhon Si Thammarat</strong>
+            <span data-i="mediaSub">Pho Sadet • Mueang District • 80000</span>
           </div>
           <a class="btn" href="#rooms" data-i="ctaViewRooms">View Rooms →</a>
         </div>
       </div>
 
-      <div class="heroQuick">
-        <div class="quickRow">
-          <div class="mini">
-            <b data-i="checkTimesTitle">Check‑in / Check‑out</b>
-            <small data-i="checkTimesVal">Check‑in 14:00 • Check‑out 11:00</small>
+      <div class="card soft bookBox">
+        <h3 data-i="bookTitle">Quick booking request</h3>
+        <div class="fine" data-i="bookSub">Send via WhatsApp / LINE / Email. No payment required here.</div>
+
+        <form id="bookingForm" class="bookGrid" autocomplete="on">
+          <div class="field">
+            <label for="checkin" data-i="fCheckin">Check-in</label>
+            <input id="checkin" name="checkin" type="date" required />
           </div>
-          <div class="mini">
-            <b data-i="directBookingTitle">Direct booking</b>
-            <small data-i="directBookingVal">Phone • Map • Facebook</small>
+          <div class="field">
+            <label for="checkout" data-i="fCheckout">Check-out</label>
+            <input id="checkout" name="checkout" type="date" required />
           </div>
-        </div>
-        <div class="quickRow">
-          <div class="mini">
-            <b data-i="amenitiesQuickTitle">Key amenities</b>
-            <small data-i="amenitiesQuickVal">Wi‑Fi • Parking • Laundry • AC</small>
+          <div class="field">
+            <label for="guests" data-i="fGuests">Guests</label>
+            <select id="guests" name="guests">
+              <option value="1">1</option>
+              <option value="2" selected>2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
           </div>
-          <div class="mini">
-            <b data-i="languagesTitle">Languages</b>
-            <small data-i="languagesVal">ไทย • English • 中文</small>
+          <div class="field">
+            <label for="room" data-i="fRoom">Room</label>
+            <select id="room" name="room">
+              <option value="Standard Twin" selected data-i="roomST">Standard Twin</option>
+              <option value="Standard Double" data-i="roomSD">Standard Double</option>
+              <option value="Premium Twin" data-i="roomPT">Premium Twin</option>
+              <option value="Premium Double" data-i="roomPD">Premium Double</option>
+            </select>
+          </div>
+
+          <div class="field wide">
+            <label for="name" data-i="fName">Name</label>
+            <input id="name" name="name" type="text" placeholder="Your name" />
+          </div>
+          <div class="field wide">
+            <label for="contact" data-i="fContact">Contact (phone / email)</label>
+            <input id="contact" name="contact" type="text" placeholder="+66 … or email" />
+          </div>
+          <div class="field wide">
+            <label for="notes" data-i="fNotes">Notes</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc."></textarea>
+          </div>
+
+          <div class="wide" style="display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:2px">
+            <button class="btn primary" type="submit" data-i="sendWA">Send via WhatsApp</button>
+            <button class="btn" type="button" id="sendLine" data-i="sendLine">Send via LINE</button>
+            <button class="btn" type="button" id="sendEmail" data-i="sendEmail">Send via Email</button>
+            <span class="fine" id="formHint" data-i="formHint">We’ll reply with availability and total price.</span>
+          </div>
+        </form>
+
+        <div class="miniRow" aria-label="Quick info">
+          <div class="miniStat">
+            <b data-i="mini1Title">Direct booking</b>
+            <small data-i="mini1Body">Call • Message • Map</small>
+          </div>
+          <div class="miniStat">
+            <b data-i="mini2Title">Check-in / out</b>
+            <small data-i="mini2Body">14:00 / 11:00</small>
           </div>
         </div>
       </div>
@@ -400,25 +670,25 @@
     <div class="sectionHead">
       <div>
         <h3 data-i="amenitiesTitle">Amenities</h3>
-        <p data-i="amenitiesSub">Simple, useful, and focused on comfort.</p>
+        <p data-i="amenitiesSub">Only what matters for comfort and convenience.</p>
       </div>
     </div>
 
     <div class="grid3">
       <div class="card tile">
         <div class="icon" aria-hidden="true">Wi</div>
-        <h4 data-i="amWiTitle">Wi‑Fi</h4>
+        <h4 data-i="amWiTitle">Wi-Fi</h4>
         <p data-i="amWiBody">Reliable internet for work and streaming.</p>
       </div>
       <div class="card tile">
-        <div class="icon" aria-hidden="true">Pk</div>
+        <div class="icon" aria-hidden="true">🅿</div>
         <h4 data-i="amPkTitle">Parking</h4>
-        <p data-i="amPkBody">Convenient guest parking (subject to availability).</p>
+        <p data-i="amPkBody">Guest parking (subject to availability).</p>
       </div>
       <div class="card tile">
         <div class="icon" aria-hidden="true">AC</div>
-        <h4 data-i="amAcTitle">Air‑conditioning</h4>
-        <p data-i="amAcBody">Cool, comfortable rooms in all seasons.</p>
+        <h4 data-i="amAcTitle">Air-conditioning</h4>
+        <p data-i="amAcBody">Comfortable rooms year-round.</p>
       </div>
 
       <div class="card tile">
@@ -444,46 +714,58 @@
     <div class="sectionHead">
       <div>
         <h3 data-i="roomsTitle">Rooms</h3>
-        <p data-i="roomsSub">Choose Standard or Premium • Twin or Double.</p>
+        <p data-i="roomsSub">Standard or Premium • Twin or Double. Ask us for today’s rate.</p>
       </div>
+      <a class="btn" href="#book" data-i="roomsCta">Request availability</a>
     </div>
 
     <div class="grid2">
       <article class="card room">
         <div class="roomMedia" aria-label="Room photo placeholder"></div>
         <div class="roomBody">
-          <h4 style="margin:0 0 6px" data-i="r1Title">Standard Twin</h4>
-          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r1Body">Comfortable twin setup with strong value.</p>
+          <div class="roomTop">
+            <div>
+              <h4 style="margin:0 0 6px" data-i="r1Title">Standard Twin</h4>
+              <p style="margin:0;color:var(--muted);font-size:13px" data-i="r1Body">Great value with a comfortable twin setup.</p>
+            </div>
+            <div class="price">
+              <b data-i="from">From</b>
+              <small data-i="askRate">Ask for rate</small>
+            </div>
+          </div>
           <div class="meta">
             <span class="tag" data-i="tag2g">2 guests</span>
             <span class="tag" data-i="tagTwin">Twin beds</span>
             <span class="tag" data-i="tagLarge">Large room</span>
           </div>
+          <div class="roomActions">
+            <a class="btn primary" href="#book" data-room="Standard Twin" data-i="roomBook">Book this room</a>
+            <a class="btn" href="tel:+66887906345" data-i="roomCall">Call</a>
+          </div>
         </div>
       </article>
 
       <article class="card room">
         <div class="roomMedia" aria-label="Room photo placeholder"></div>
         <div class="roomBody">
-          <h4 style="margin:0 0 6px" data-i="r2Title">Standard Double</h4>
-          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r2Body">A cosy double room, ideal for couples.</p>
+          <div class="roomTop">
+            <div>
+              <h4 style="margin:0 0 6px" data-i="r2Title">Standard Double</h4>
+              <p style="margin:0;color:var(--muted);font-size:13px" data-i="r2Body">Cosy double room, ideal for couples.</p>
+            </div>
+            <div class="price">
+              <b data-i="from">From</b>
+              <small data-i="askRate">Ask for rate</small>
+            </div>
+          </div>
           <div class="meta">
             <span class="tag" data-i="tag2g">2 guests</span>
             <span class="tag" data-i="tagDouble">Double bed</span>
             <span class="tag" data-i="tagLarge">Large room</span>
           </div>
-        </div>
-      </article>
-
-      <article class="card room">
-        <div class="roomMedia" aria-label="Room photo placeholder"></div>
-        <div class="roomBody">
-          <h4 style="margin:0 0 6px" data-i="r3Title">Premium Twin</h4>
-          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r3Body">Upgraded comfort with a premium feel.</p>
-          <div class="meta">
-            <span class="tag" data-i="tag2g">2 guests</span>
-            <span class="tag" data-i="tagTwin">Twin beds</span>
-            <span class="tag" data-i="tagPremium">Premium</span>
+          <div class="roomActions">
+            <a class="btn primary" href="#book" data-room="Standard Double" data-i="roomBook">Book this room</a>
+            <a class="btn" href="tel:+66887906345" data-i="roomCall">Call</a>
           </div>
         </div>
       </article>
@@ -491,16 +773,57 @@
       <article class="card room">
         <div class="roomMedia" aria-label="Room photo placeholder"></div>
         <div class="roomBody">
-          <h4 style="margin:0 0 6px" data-i="r4Title">Premium Double</h4>
-          <p style="margin:0;color:var(--muted);font-size:13px" data-i="r4Body">Premium double room for a relaxed stay.</p>
+          <div class="roomTop">
+            <div>
+              <h4 style="margin:0 0 6px" data-i="r3Title">Premium Twin</h4>
+              <p style="margin:0;color:var(--muted);font-size:13px" data-i="r3Body">Upgraded comfort with a premium feel.</p>
+            </div>
+            <div class="price">
+              <b data-i="from">From</b>
+              <small data-i="askRate">Ask for rate</small>
+            </div>
+          </div>
+          <div class="meta">
+            <span class="tag" data-i="tag2g">2 guests</span>
+            <span class="tag" data-i="tagTwin">Twin beds</span>
+            <span class="tag" data-i="tagPremium">Premium</span>
+          </div>
+          <div class="roomActions">
+            <a class="btn primary" href="#book" data-room="Premium Twin" data-i="roomBook">Book this room</a>
+            <a class="btn" href="tel:+66887906345" data-i="roomCall">Call</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card room">
+        <div class="roomMedia" aria-label="Room photo placeholder"></div>
+        <div class="roomBody">
+          <div class="roomTop">
+            <div>
+              <h4 style="margin:0 0 6px" data-i="r4Title">Premium Double</h4>
+              <p style="margin:0;color:var(--muted);font-size:13px" data-i="r4Body">Premium double room for a relaxed stay.</p>
+            </div>
+            <div class="price">
+              <b data-i="from">From</b>
+              <small data-i="askRate">Ask for rate</small>
+            </div>
+          </div>
           <div class="meta">
             <span class="tag" data-i="tag2g">2 guests</span>
             <span class="tag" data-i="tagDouble">Double bed</span>
             <span class="tag" data-i="tagPremium">Premium</span>
+          </div>
+          <div class="roomActions">
+            <a class="btn primary" href="#book" data-room="Premium Double" data-i="roomBook">Book this room</a>
+            <a class="btn" href="tel:+66887906345" data-i="roomCall">Call</a>
           </div>
         </div>
       </article>
     </div>
+
+    <p class="fine" style="margin-top:10px" data-i="roomsNote">
+      Rates can change by date and season. Message your dates for the fastest exact price.
+    </p>
   </section>
 
   <!-- LOCATION -->
@@ -510,6 +833,7 @@
         <h3 data-i="locTitle">Location</h3>
         <p data-i="locSub">Easy to find and convenient for getting around the city.</p>
       </div>
+      <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="locMapBtn">Open in Google Maps</a>
     </div>
 
     <div class="card tile">
@@ -521,9 +845,63 @@
         <span class="fine">Plus Code: CWMG+QJ</span>
       </p>
       <div class="heroActions" style="margin-top:12px">
-        <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="locMapBtn">Open in Google Maps</a>
+        <a class="btn" href="#book" data-i="locBookBtn">Request availability</a>
         <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="locFbBtn">Facebook</a>
-        <a class="btn" href="#contact" data-i="locBookBtn">Book / Contact</a>
+        <a class="btn" href="tel:+66887906345" data-i="locCallBtn">Call</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF + FAQ -->
+  <section id="faq">
+    <div class="sectionHead">
+      <div>
+        <h3 data-i="faqTitle">FAQ & booking info</h3>
+        <p data-i="faqSub">Answers that remove friction and close faster.</p>
+      </div>
+    </div>
+
+    <div class="proof">
+      <div class="card tile">
+        <h4 style="margin:0 0 10px" data-i="proofTitle">Why guests book direct</h4>
+        <div class="quote">
+          <b data-i="q1t">Fast response</b>
+          <p data-i="q1b">Send your dates and room type — we confirm availability quickly.</p>
+        </div>
+        <div class="quote" style="margin-top:10px">
+          <b data-i="q2t">Clear check-in</b>
+          <p data-i="q2b">Check-in from 14:00, check-out by 11:00. Bring passport/ID.</p>
+        </div>
+        <div class="quote" style="margin-top:10px">
+          <b data-i="q3t">Simple communication</b>
+          <p data-i="q3b">Call, WhatsApp, LINE, Map — whatever is easiest.</p>
+        </div>
+      </div>
+
+      <div class="card tile">
+        <h4 style="margin:0 0 10px" data-i="faqListTitle">Common questions</h4>
+
+        <details open>
+          <summary data-i="f1q">How do I book the fastest?</summary>
+          <p data-i="f1a">Call or message (WhatsApp/LINE) with your dates + room type. We’ll confirm availability and total price.</p>
+        </details>
+        <details>
+          <summary data-i="f2q">What time is check-in / check-out?</summary>
+          <p data-i="f2a">Check-in from 14:00 and check-out by 11:00.</p>
+        </details>
+        <details>
+          <summary data-i="f3q">What do I need at check-in?</summary>
+          <p data-i="f3a">A government-issued ID or passport.</p>
+        </details>
+        <details>
+          <summary data-i="f4q">Can rates change by date?</summary>
+          <p data-i="f4a">Yes. Rates depend on dates and season. Message your dates for the exact price.</p>
+        </details>
+
+        <div class="heroActions" style="margin-top:12px">
+          <a class="btn primary" href="#book" data-i="faqCta">Send booking request</a>
+          <a class="btn" href="tel:+66887906345" data-i="faqCall">Call</a>
+        </div>
       </div>
     </div>
   </section>
@@ -532,289 +910,571 @@
   <section id="contact">
     <div class="sectionHead">
       <div>
-        <h3 data-i="contactTitle">Book / Contact</h3>
-        <p data-i="contactSub">Call for the fastest booking, or use the enquiry form link.</p>
+        <h3 data-i="contactTitle">Contact</h3>
+        <p data-i="contactSub">Choose the quickest method for confirmation.</p>
       </div>
     </div>
 
     <div class="contact">
       <div class="card contactCard">
         <h4 data-i="contactFastTitle">Fast booking</h4>
-        <p data-i="contactFastBody">Phone and message options for quick confirmation.</p>
+        <p data-i="contactFastBody">Call or message to confirm availability.</p>
         <div class="heroActions">
-          <a class="btn primary" href="tel:+66887906345" data-i="contactCallBtn">Call: 088‑790‑6345</a>
+          <a class="btn primary" href="tel:+66887906345" data-i="contactCallBtn">Call: 088-790-6345</a>
+          <a class="btn" id="contactWhatsApp" href="#" data-i="contactWABtn">WhatsApp</a>
+          <a class="btn" id="contactLine" href="#" data-i="contactLineBtn">LINE</a>
           <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="contactMapBtn">Map</a>
           <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="contactFbBtn">Facebook</a>
         </div>
 
-        <div style="margin-top:14px; padding-top:14px; border-top:1px solid rgba(255,255,255,.08)">
-          <b style="display:block; font-size:13px" data-i="reviewTitle">Reviews</b>
-          <p style="margin:6px 0 0; color:var(--muted); font-size:13px" data-i="reviewBody">
-            View our reviews via Google Maps and social channels.
-          </p>
-          <div class="heroActions" style="margin-top:10px">
-            <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="reviewMapsBtn">Google Maps</a>
-            <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i="reviewFbBtn">Facebook</a>
-          </div>
+        <div class="sep"></div>
+        <b style="display:block; font-size:13px" data-i="reviewTitle">Reviews</b>
+        <p style="margin:6px 0 0; color:var(--muted); font-size:13px" data-i="reviewBody">
+          View reviews via Google Maps.
+        </p>
+        <div class="heroActions" style="margin-top:10px">
+          <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i="reviewMapsBtn">Google Maps</a>
         </div>
       </div>
 
       <div class="card contactCard">
-        <h4 data-i="enquiryTitle">Enquiry form (Option B)</h4>
-        <p data-i="enquiryBody">
-          Add your booking enquiry form link here (Google Form recommended for simplest setup).
-        </p>
-        <!-- Replace this with your real Google Form link -->
-        <a class="btn primary" href="#" target="_blank" rel="noopener" data-i="enquiryBtn">Open Enquiry Form</a>
-        <div class="fine" style="margin-top:10px" data-i="enquiryNote">
-          Once you paste the real form link, this becomes fully functional (no backend needed).
-        </div>
+        <h4 data-i="policyTitle">Standard policies</h4>
+        <p data-i="policySub">Guest-friendly basics (final terms confirmed at check-in).</p>
+        <ul style="margin:0; padding-left:18px; color:var(--muted); font-size:13px; line-height:1.55">
+          <li data-i="pol1">Check-in from 14:00 • Check-out by 11:00</li>
+          <li data-i="pol2">Passport/ID required</li>
+          <li data-i="pol3">No smoking in rooms</li>
+          <li data-i="pol4">Quiet hours typically 22:00–07:00</li>
+        </ul>
+        <p class="fine" style="margin-top:12px" data-i="policyFoot">For the most accurate details, please contact the hotel directly.</p>
       </div>
-    </div>
-  </section>
-
-  <!-- POLICIES -->
-  <section id="policies">
-    <div class="sectionHead">
-      <div>
-        <h3 data-i="polTitle">Standard Policies</h3>
-        <p data-i="polSub">Simple, guest-friendly policies (final terms may be confirmed at check‑in).</p>
-      </div>
-    </div>
-
-    <div class="card tile">
-      <div class="policyGrid">
-        <div>
-          <h4 style="margin:0 0 6px" data-i="polCommonTitle">Key policies</h4>
-          <ul>
-            <li data-i="pol1">Check‑in from 14:00 • Check‑out by 11:00</li>
-            <li data-i="pol2">Government-issued ID or passport required at check‑in</li>
-            <li data-i="pol3">No smoking in rooms (smoking only in designated areas if available)</li>
-            <li data-i="pol4">No illegal substances or disruptive behavior</li>
-            <li data-i="pol5">Quiet hours typically 22:00–07:00 (please respect other guests)</li>
-            <li data-i="pol6">Damage or missing items may be charged</li>
-          </ul>
-        </div>
-
-        <div>
-          <h4 style="margin:0 0 6px" data-i="polBookingTitle">Booking & payment</h4>
-          <ul>
-            <li data-i="pol7">Reservation confirmed once the hotel confirms availability</li>
-            <li data-i="pol8">Cancellation and no-show terms depend on rate/season (confirm when booking)</li>
-            <li data-i="pol9">Extra guests may require an additional charge (confirm when booking)</li>
-            <li data-i="pol10">Children policy depends on room type (confirm when booking)</li>
-            <li data-i="pol11">Parking is subject to availability</li>
-            <li data-i="pol12">Laundry service/area subject to operating hours</li>
-          </ul>
-        </div>
-      </div>
-      <p class="fine" style="margin-top:12px" data-i="polFooter">
-        For the most accurate and current policy details, please call the hotel directly.
-      </p>
     </div>
   </section>
 
   <footer>
     <div>© <span id="y"></span> The Sandbox Hotel • sandboxhotel.com</div>
     <div>
-      <a href="/privacy.html">Privacy</a> • <a href="#top" data-i="backTop">Back to top</a>
+      <a href="#top" data-i="backTop">Back to top</a>
     </div>
   </footer>
 </main>
 
+<!-- Sticky conversion bar -->
+<div class="stickyBar" role="region" aria-label="Quick booking bar">
+  <div class="stickyInner">
+    <div class="stickyLeft">
+      <b data-i="stickyTitle">Ready to book?</b>
+      <span data-i="stickySub">Call or message your dates for fast confirmation.</span>
+    </div>
+    <div class="stickyActions">
+      <a class="btn primary" href="#book" data-i="stickyCta">Start Booking</a>
+      <a class="btn" href="tel:+66887906345" data-i="stickyCall">Call</a>
+      <a class="btn" id="stickyWA" href="#" data-i="stickyWA">WhatsApp</a>
+      <a class="btn" id="stickyLine" href="#" data-i="stickyLine">LINE</a>
+    </div>
+  </div>
+</div>
+
 <script>
+  // ---------- CONFIG (EDIT THESE) ----------
+  const HOTEL_PHONE_DISPLAY = "088-790-6345";
+  const HOTEL_PHONE_E164 = "+66887906345";          // for tel: and WA
+  const WHATSAPP_NUMBER_E164 = "66887906345";       // without "+"
+  const LINE_ID_OR_LINK = "https://line.me/R/ti/p/@YOUR_LINE_ID"; // <-- replace
+  const EMAIL_TO = "sandboxhotel@example.com";      // <-- replace
+
+  // Optional: default message language could be auto-detected by selected language
+  // ----------------------------------------
+
   document.getElementById('y').textContent = new Date().getFullYear();
 
+  // Prefill check-in/check-out with sensible defaults (tomorrow + 1 night)
+  (function initDates(){
+    const ci = document.getElementById("checkin");
+    const co = document.getElementById("checkout");
+    const now = new Date();
+    const tomorrow = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
+    const nextDay = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 2);
+    const toISO = d => new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())).toISOString().slice(0,10);
+    if(!ci.value) ci.value = toISO(tomorrow);
+    if(!co.value) co.value = toISO(nextDay);
+  })();
+
+  function getFormData(){
+    const f = document.getElementById('bookingForm');
+    const data = {
+      checkin: f.checkin.value || "",
+      checkout: f.checkout.value || "",
+      guests: f.guests.value || "2",
+      room: f.room.value || "",
+      name: f.name.value || "",
+      contact: f.contact.value || "",
+      notes: f.notes.value || ""
+    };
+    return data;
+  }
+
+  function buildMessage(data){
+    const lines = [
+      "Booking request – The Sandbox Hotel",
+      "",
+      `Check-in: ${data.checkin}`,
+      `Check-out: ${data.checkout}`,
+      `Guests: ${data.guests}`,
+      `Room: ${data.room}`,
+      data.name ? `Name: ${data.name}` : null,
+      data.contact ? `Contact: ${data.contact}` : null,
+      data.notes ? `Notes: ${data.notes}` : null,
+      "",
+      "Please confirm availability and total price. धन्यवाद / ขอบคุณ / Thank you."
+    ].filter(Boolean);
+
+    return lines.join("\n");
+  }
+
+  function openWhatsApp(msg){
+    const url = `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank", "noopener");
+  }
+
+  function openLine(msg){
+    // LINE deep links vary; simplest reliable approach is to open your LINE profile/link + user pastes message.
+    // If you have a LINE OA with a share link, replace this with your official share URL.
+    window.open(LINE_ID_OR_LINK, "_blank", "noopener");
+    const hint = document.getElementById("formHint");
+    hint.textContent = "LINE opened. Paste this message: " + msg.replace(/\n/g, " • ");
+    hint.style.color = "var(--acc)";
+    setTimeout(() => { hint.style.color = ""; }, 4500);
+  }
+
+  function openEmail(msg){
+    const subject = "Booking request – The Sandbox Hotel";
+    const url = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+    window.location.href = url;
+  }
+
+  // Bind CTA buttons (top + contact + sticky)
+  function bindQuickButtons(){
+    const waBtns = ["ctaWhatsApp","contactWhatsApp","stickyWA"].map(id => document.getElementById(id)).filter(Boolean);
+    const lineBtns = ["ctaLine","contactLine","stickyLine"].map(id => document.getElementById(id)).filter(Boolean);
+
+    waBtns.forEach(btn => btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const msg = buildMessage(getFormData());
+      openWhatsApp(msg);
+    }));
+
+    lineBtns.forEach(btn => btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const msg = buildMessage(getFormData());
+      openLine(msg);
+    }));
+  }
+  bindQuickButtons();
+
+  // Room quick buttons: set room selector then scroll to booking
+  document.querySelectorAll('[data-room]').forEach(el => {
+    el.addEventListener('click', () => {
+      const room = el.getAttribute('data-room');
+      const select = document.getElementById('room');
+      if(select) select.value = room;
+    });
+  });
+
+  // Booking form actions
+  document.getElementById("bookingForm").addEventListener("submit", (e) => {
+    e.preventDefault();
+    const msg = buildMessage(getFormData());
+    openWhatsApp(msg);
+  });
+
+  document.getElementById("sendLine").addEventListener("click", () => {
+    const msg = buildMessage(getFormData());
+    openLine(msg);
+  });
+
+  document.getElementById("sendEmail").addEventListener("click", () => {
+    const msg = buildMessage(getFormData());
+    openEmail(msg);
+  });
+
+  // ---------- i18n (EN/TH/ZH) ----------
   const i18n = {
     en: {
-      navAmenities: "Amenities", navRooms: "Rooms", navLocation: "Location", navContact: "Book / Contact", navBook: "Book Now",
-      kicker: "★ Large rooms • Great location • Direct booking",
-      heroTitle: "A premium stay at<br/>The Sandbox Hotel",
-      heroBody: "Comfortable, modern rooms in Nakhon Si Thammarat with Wi‑Fi, parking, laundry, and a coffee & snack bar. Book instantly by phone or enquiry form.",
-      pill1: "Large rooms", pill2: "Quiet sleep", pill3: "Wi‑Fi & parking", pill4: "Great location",
-      ctaEnquire: "Book / Enquire", ctaCall: "Call: 088‑790‑6345", ctaMaps: "Open Map", ctaFacebook: "Facebook",
-      microNote: "Tip: For the fastest booking, call or message us. For enquiries, use the form link below.",
-      heroLocStrong: "Nakhon Si Thammarat", heroLocSub: "Pho Sadet • Mueang District • 80000",
+      navSub: "Nakhon Si Thammarat, Thailand",
+      navRooms: "Rooms", navAmenities: "Amenities", navLocation: "Location", navFAQ: "FAQ", navBook: "Book Now",
+      kicker: "Large rooms • Great location • Direct booking",
+      heroTitle: "Book direct — fast confirmation<br/>The Sandbox Hotel",
+      heroBody: "Modern, comfortable rooms in Nakhon Si Thammarat. Wi-Fi, parking, laundry, and a coffee & snack bar. For the fastest booking: call or message us (LINE / WhatsApp).",
+      trust1Title: "Fast confirmation", trust1Body: "Call or message to confirm availability quickly",
+      trust2Title: "Convenient essentials", trust2Body: "Wi-Fi • Parking • AC • Laundry",
+      trust3Title: "Large rooms", trust3Body: "Standard & Premium • Twin or Double",
+      ctaStart: "Start Booking",
+      ctaCall: `Call: ${HOTEL_PHONE_DISPLAY}`,
+      ctaWhatsApp: "WhatsApp",
+      ctaLine: "LINE",
+      ctaMap: "Open Map",
+      pill1: "Check-in 14:00",
+      pill2: "Check-out 11:00",
+      pill3: "Passport/ID required",
+      pill4: "Quiet rooms",
+      microNote: "Tip: If you share your dates + room type by message, we can confirm quickly.",
+      mediaTitle: "Nakhon Si Thammarat",
+      mediaSub: "Pho Sadet • Mueang District • 80000",
       ctaViewRooms: "View Rooms →",
-      checkTimesTitle: "Check‑in / Check‑out", checkTimesVal: "Check‑in 14:00 • Check‑out 11:00",
-      directBookingTitle: "Direct booking", directBookingVal: "Phone • Map • Facebook",
-      amenitiesQuickTitle: "Key amenities", amenitiesQuickVal: "Wi‑Fi • Parking • Laundry • AC",
-      languagesTitle: "Languages", languagesVal: "ไทย • English • 中文",
 
-      amenitiesTitle: "Amenities", amenitiesSub: "Simple, useful, and focused on comfort.",
-      amWiTitle: "Wi‑Fi", amWiBody: "Reliable internet for work and streaming.",
-      amPkTitle: "Parking", amPkBody: "Convenient guest parking (subject to availability).",
-      amAcTitle: "Air‑conditioning", amAcBody: "Cool, comfortable rooms in all seasons.",
+      bookTitle: "Quick booking request",
+      bookSub: "Send via WhatsApp / LINE / Email. No payment required here.",
+      fCheckin: "Check-in",
+      fCheckout: "Check-out",
+      fGuests: "Guests",
+      fRoom: "Room",
+      fName: "Name",
+      fContact: "Contact (phone / email)",
+      fNotes: "Notes",
+      roomST: "Standard Twin",
+      roomSD: "Standard Double",
+      roomPT: "Premium Twin",
+      roomPD: "Premium Double",
+      sendWA: "Send via WhatsApp",
+      sendLine: "Send via LINE",
+      sendEmail: "Send via Email",
+      formHint: "We’ll reply with availability and total price.",
+      mini1Title: "Direct booking", mini1Body: "Call • Message • Map",
+      mini2Title: "Check-in / out", mini2Body: "14:00 / 11:00",
+
+      amenitiesTitle: "Amenities",
+      amenitiesSub: "Only what matters for comfort and convenience.",
+      amWiTitle: "Wi-Fi", amWiBody: "Reliable internet for work and streaming.",
+      amPkTitle: "Parking", amPkBody: "Guest parking (subject to availability).",
+      amAcTitle: "Air-conditioning", amAcBody: "Comfortable rooms year-round.",
       amCafeTitle: "Coffee & Snack Bar", amCafeBody: "Quick refreshments and convenience.",
       amLaundryTitle: "Laundry", amLaundryBody: "Laundry service/area available (ask reception).",
       amServiceTitle: "Helpful service", amServiceBody: "Friendly support for a smooth stay.",
 
-      roomsTitle: "Rooms", roomsSub: "Choose Standard or Premium • Twin or Double.",
-      r1Title: "Standard Twin", r1Body: "Comfortable twin setup with strong value.",
-      r2Title: "Standard Double", r2Body: "A cosy double room, ideal for couples.",
+      roomsTitle: "Rooms",
+      roomsSub: "Standard or Premium • Twin or Double. Ask us for today’s rate.",
+      roomsCta: "Request availability",
+      r1Title: "Standard Twin", r1Body: "Great value with a comfortable twin setup.",
+      r2Title: "Standard Double", r2Body: "Cosy double room, ideal for couples.",
       r3Title: "Premium Twin", r3Body: "Upgraded comfort with a premium feel.",
       r4Title: "Premium Double", r4Body: "Premium double room for a relaxed stay.",
+      from: "From",
+      askRate: "Ask for rate",
       tag2g: "2 guests", tagTwin: "Twin beds", tagDouble: "Double bed", tagLarge: "Large room", tagPremium: "Premium",
+      roomBook: "Book this room",
+      roomCall: "Call",
+      roomsNote: "Rates can change by date and season. Message your dates for the fastest exact price.",
 
-      locTitle: "Location", locSub: "Easy to find and convenient for getting around the city.",
-      locName: "The Sandbox Hotel — Nakhon Si Thammarat", locAddrLabel: "Address:",
-      locMapBtn: "Open in Google Maps", locFbBtn: "Facebook", locBookBtn: "Book / Contact",
+      locTitle: "Location",
+      locSub: "Easy to find and convenient for getting around the city.",
+      locMapBtn: "Open in Google Maps",
+      locName: "The Sandbox Hotel — Nakhon Si Thammarat",
+      locAddrLabel: "Address:",
+      locBookBtn: "Request availability",
+      locFbBtn: "Facebook",
+      locCallBtn: "Call",
 
-      contactTitle: "Book / Contact", contactSub: "Call for the fastest booking, or use the enquiry form link.",
-      contactFastTitle: "Fast booking", contactFastBody: "Phone and message options for quick confirmation.",
-      contactCallBtn: "Call: 088‑790‑6345", contactMapBtn: "Map", contactFbBtn: "Facebook",
-      reviewTitle: "Reviews", reviewBody: "View our reviews via Google Maps and social channels.",
-      reviewMapsBtn: "Google Maps", reviewFbBtn: "Facebook",
+      faqTitle: "FAQ & booking info",
+      faqSub: "Answers that remove friction and close faster.",
+      proofTitle: "Why guests book direct",
+      q1t: "Fast response",
+      q1b: "Send your dates and room type — we confirm availability quickly.",
+      q2t: "Clear check-in",
+      q2b: "Check-in from 14:00, check-out by 11:00. Bring passport/ID.",
+      q3t: "Simple communication",
+      q3b: "Call, WhatsApp, LINE, Map — whatever is easiest.",
+      faqListTitle: "Common questions",
+      f1q: "How do I book the fastest?",
+      f1a: "Call or message (WhatsApp/LINE) with your dates + room type. We’ll confirm availability and total price.",
+      f2q: "What time is check-in / check-out?",
+      f2a: "Check-in from 14:00 and check-out by 11:00.",
+      f3q: "What do I need at check-in?",
+      f3a: "A government-issued ID or passport.",
+      f4q: "Can rates change by date?",
+      f4a: "Yes. Rates depend on dates and season. Message your dates for the exact price.",
+      faqCta: "Send booking request",
+      faqCall: "Call",
 
-      enquiryTitle: "Enquiry form (Option B)",
-      enquiryBody: "Add your booking enquiry form link here (Google Form recommended for simplest setup).",
-      enquiryBtn: "Open Enquiry Form",
-      enquiryNote: "Once you paste the real form link, this becomes fully functional (no backend needed).",
+      contactTitle: "Contact",
+      contactSub: "Choose the quickest method for confirmation.",
+      contactFastTitle: "Fast booking",
+      contactFastBody: "Call or message to confirm availability.",
+      contactCallBtn: `Call: ${HOTEL_PHONE_DISPLAY}`,
+      contactWABtn: "WhatsApp",
+      contactLineBtn: "LINE",
+      contactMapBtn: "Map",
+      contactFbBtn: "Facebook",
+      reviewTitle: "Reviews",
+      reviewBody: "View reviews via Google Maps.",
+      reviewMapsBtn: "Google Maps",
 
-      polTitle: "Standard Policies", polSub: "Simple, guest-friendly policies (final terms may be confirmed at check‑in).",
-      polCommonTitle: "Key policies",
-      pol1: "Check‑in from 14:00 • Check‑out by 11:00",
-      pol2: "Government-issued ID or passport required at check‑in",
-      pol3: "No smoking in rooms (smoking only in designated areas if available)",
-      pol4: "No illegal substances or disruptive behavior",
-      pol5: "Quiet hours typically 22:00–07:00 (please respect other guests)",
-      pol6: "Damage or missing items may be charged",
-      polBookingTitle: "Booking & payment",
-      pol7: "Reservation confirmed once the hotel confirms availability",
-      pol8: "Cancellation and no-show terms depend on rate/season (confirm when booking)",
-      pol9: "Extra guests may require an additional charge (confirm when booking)",
-      pol10:"Children policy depends on room type (confirm when booking)",
-      pol11:"Parking is subject to availability",
-      pol12:"Laundry service/area subject to operating hours",
-      polFooter: "For the most accurate and current policy details, please call the hotel directly.",
+      policyTitle: "Standard policies",
+      policySub: "Guest-friendly basics (final terms confirmed at check-in).",
+      pol1: "Check-in from 14:00 • Check-out by 11:00",
+      pol2: "Passport/ID required",
+      pol3: "No smoking in rooms",
+      pol4: "Quiet hours typically 22:00–07:00",
+      policyFoot: "For the most accurate details, please contact the hotel directly.",
+
+      stickyTitle: "Ready to book?",
+      stickySub: "Call or message your dates for fast confirmation.",
+      stickyCta: "Start Booking",
+      stickyCall: "Call",
+      stickyWA: "WhatsApp",
+      stickyLine: "LINE",
       backTop: "Back to top"
     },
 
     th: {
-      navAmenities: "สิ่งอำนวยความสะดวก", navRooms: "ห้องพัก", navLocation: "ที่ตั้ง", navContact: "จอง / ติดต่อ", navBook: "จองเลย",
-      kicker: "★ ห้องกว้าง • ทำเลดี • จองได้ทันที",
-      heroTitle: "การเข้าพักคุณภาพที่<br/>The Sandbox Hotel",
-      heroBody: "ห้องพักสะอาดทันสมัยในนครศรีธรรมราช พร้อม Wi‑Fi ที่จอดรถ บริการซักรีด และมุมกาแฟ/สแน็กบาร์ จองได้ทันทีทางโทรศัพท์หรือแบบฟอร์มสอบถาม",
-      pill1: "ห้องกว้าง", pill2: "เงียบพักสบาย", pill3: "Wi‑Fi & ที่จอดรถ", pill4: "ทำเลดี",
-      ctaEnquire: "จอง / สอบถาม", ctaCall: "โทร: 088‑790‑6345", ctaMaps: "เปิดแผนที่", ctaFacebook: "เฟซบุ๊ก",
-      microNote: "แนะนำ: หากต้องการจองเร็วที่สุด โทรหรือทักข้อความได้เลย หากต้องการสอบถาม ใช้ลิงก์แบบฟอร์มด้านล่าง",
-      heroLocStrong: "นครศรีธรรมราช", heroLocSub: "โพธิ์เสด็จ • อำเภอเมือง • 80000",
+      navSub: "นครศรีธรรมราช, ประเทศไทย",
+      navRooms: "ห้องพัก", navAmenities: "สิ่งอำนวยความสะดวก", navLocation: "ที่ตั้ง", navFAQ: "คำถามที่พบบ่อย", navBook: "จองเลย",
+      kicker: "ห้องกว้าง • ทำเลดี • จองโดยตรง",
+      heroTitle: "จองตรง — ยืนยันเร็ว<br/>The Sandbox Hotel",
+      heroBody: "ห้องพักสะอาดทันสมัยในนครศรีธรรมราช พร้อม Wi-Fi ที่จอดรถ ซักรีด และมุมกาแฟ/สแน็กบาร์ หากต้องการจองเร็วที่สุด โทรหรือทัก (LINE / WhatsApp) ได้เลย",
+      trust1Title: "ยืนยันเร็ว", trust1Body: "โทรหรือทักเพื่อเช็คห้องว่างได้เร็ว",
+      trust2Title: "ครบและสะดวก", trust2Body: "Wi-Fi • ที่จอดรถ • แอร์ • ซักรีด",
+      trust3Title: "ห้องกว้าง", trust3Body: "Standard & Premium • Twin หรือ Double",
+      ctaStart: "เริ่มจอง",
+      ctaCall: `โทร: ${HOTEL_PHONE_DISPLAY}`,
+      ctaWhatsApp: "WhatsApp",
+      ctaLine: "LINE",
+      ctaMap: "เปิดแผนที่",
+      pill1: "เช็คอิน 14:00",
+      pill2: "เช็คเอาต์ 11:00",
+      pill3: "ต้องมีบัตร/พาสปอร์ต",
+      pill4: "ห้องเงียบพักสบาย",
+      microNote: "แนะนำ: ส่งวันที่เข้าพัก + ประเภทห้อง ทางข้อความ จะยืนยันได้เร็ว",
+      mediaTitle: "นครศรีธรรมราช",
+      mediaSub: "โพธิ์เสด็จ • อำเภอเมือง • 80000",
       ctaViewRooms: "ดูห้องพัก →",
-      checkTimesTitle: "เช็คอิน / เช็คเอาต์", checkTimesVal: "เช็คอิน 14:00 • เช็คเอาต์ 11:00",
-      directBookingTitle: "จองโดยตรง", directBookingVal: "โทร • แผนที่ • เฟซบุ๊ก",
-      amenitiesQuickTitle: "สิ่งอำนวยความสะดวก", amenitiesQuickVal: "Wi‑Fi • ที่จอดรถ • ซักรีด • แอร์",
-      languagesTitle: "ภาษา", languagesVal: "ไทย • English • 中文",
 
-      amenitiesTitle: "สิ่งอำนวยความสะดวก", amenitiesSub: "ครบ ใช้งานจริง เน้นความสบาย",
-      amWiTitle: "Wi‑Fi", amWiBody: "อินเทอร์เน็ตใช้งานได้ดีสำหรับทำงานและสตรีม",
-      amPkTitle: "ที่จอดรถ", amPkBody: "ที่จอดรถสำหรับผู้เข้าพัก (ขึ้นอยู่กับความพร้อม)",
-      amAcTitle: "เครื่องปรับอากาศ", amAcBody: "ห้องเย็นสบายตลอดปี",
-      amCafeTitle: "กาแฟ & สแน็กบาร์", amCafeBody: "เครื่องดื่ม/ของว่าง สะดวก รวดเร็ว",
+      bookTitle: "แบบฟอร์มจองแบบเร็ว",
+      bookSub: "ส่งผ่าน WhatsApp / LINE / อีเมล ได้เลย (ยังไม่ต้องชำระเงินที่นี่)",
+      fCheckin: "วันเช็คอิน",
+      fCheckout: "วันเช็คเอาต์",
+      fGuests: "จำนวนผู้เข้าพัก",
+      fRoom: "ประเภทห้อง",
+      fName: "ชื่อ",
+      fContact: "ติดต่อกลับ (เบอร์/อีเมล)",
+      fNotes: "หมายเหตุ",
+      roomST: "Standard Twin",
+      roomSD: "Standard Double",
+      roomPT: "Premium Twin",
+      roomPD: "Premium Double",
+      sendWA: "ส่งผ่าน WhatsApp",
+      sendLine: "ส่งผ่าน LINE",
+      sendEmail: "ส่งผ่านอีเมล",
+      formHint: "เราจะตอบกลับพร้อมห้องว่างและราคารวม",
+      mini1Title: "จองโดยตรง", mini1Body: "โทร • ทัก • แผนที่",
+      mini2Title: "เช็คอิน/เอาต์", mini2Body: "14:00 / 11:00",
+
+      amenitiesTitle: "สิ่งอำนวยความสะดวก",
+      amenitiesSub: "ครบ ใช้งานจริง เน้นความสบาย",
+      amWiTitle: "Wi-Fi", amWiBody: "อินเทอร์เน็ตใช้งานได้ดี",
+      amPkTitle: "ที่จอดรถ", amPkBody: "ที่จอดรถสำหรับผู้เข้าพัก (ตามความพร้อม)",
+      amAcTitle: "เครื่องปรับอากาศ", amAcBody: "เย็นสบายตลอดปี",
+      amCafeTitle: "กาแฟ & สแน็กบาร์", amCafeBody: "เครื่องดื่ม/ของว่าง สะดวก",
       amLaundryTitle: "ซักรีด", amLaundryBody: "มีบริการ/พื้นที่ซักรีด (สอบถามที่เคาน์เตอร์)",
-      amServiceTitle: "การบริการ", amServiceBody: "พนักงานดูแลช่วยเหลืออย่างเป็นกันเอง",
+      amServiceTitle: "การบริการ", amServiceBody: "พนักงานพร้อมช่วยเหลือ",
 
-      roomsTitle: "ห้องพัก", roomsSub: "Standard หรือ Premium • Twin หรือ Double",
-      r1Title: "Standard Twin", r1Body: "เตียงคู่แยก คุ้มค่า พักสบาย",
+      roomsTitle: "ห้องพัก",
+      roomsSub: "Standard หรือ Premium • Twin หรือ Double (สอบถามราคาตามวันที่เข้าพัก)",
+      roomsCta: "ขอเช็คห้องว่าง",
+      r1Title: "Standard Twin", r1Body: "คุ้มค่า เตียงแยก พักสบาย",
       r2Title: "Standard Double", r2Body: "เตียงคู่ เหมาะสำหรับคู่รัก",
       r3Title: "Premium Twin", r3Body: "อัปเกรดความสบาย ฟีลพรีเมียม",
       r4Title: "Premium Double", r4Body: "ห้องพรีเมียมเตียงคู่ พักผ่อนสบาย",
+      from: "เริ่มต้น",
+      askRate: "สอบถามราคา",
       tag2g: "2 ท่าน", tagTwin: "เตียงแยก", tagDouble: "เตียงคู่", tagLarge: "ห้องกว้าง", tagPremium: "พรีเมียม",
+      roomBook: "จองห้องนี้",
+      roomCall: "โทร",
+      roomsNote: "ราคาอาจเปลี่ยนตามวันที่และฤดูกาล ส่งวันที่เข้าพักเพื่อได้ราคาที่ถูกต้อง",
 
-      locTitle: "ที่ตั้ง", locSub: "เดินทางสะดวก หาง่าย ใกล้จุดสำคัญในเมือง",
-      locName: "The Sandbox Hotel — นครศรีธรรมราช", locAddrLabel: "ที่อยู่:",
-      locMapBtn: "เปิดใน Google Maps", locFbBtn: "เฟซบุ๊ก", locBookBtn: "จอง / ติดต่อ",
+      locTitle: "ที่ตั้ง",
+      locSub: "หาง่าย เดินทางสะดวก",
+      locMapBtn: "เปิดใน Google Maps",
+      locName: "The Sandbox Hotel — นครศรีธรรมราช",
+      locAddrLabel: "ที่อยู่:",
+      locBookBtn: "ขอเช็คห้องว่าง",
+      locFbBtn: "เฟซบุ๊ก",
+      locCallBtn: "โทร",
 
-      contactTitle: "จอง / ติดต่อ", contactSub: "จองเร็วที่สุดโทรได้เลย หรือใช้ลิงก์แบบฟอร์มสอบถาม",
-      contactFastTitle: "จองรวดเร็ว", contactFastBody: "ช่องทางติดต่อเพื่อยืนยันห้องพักอย่างรวดเร็ว",
-      contactCallBtn: "โทร: 088‑790‑6345", contactMapBtn: "แผนที่", contactFbBtn: "เฟซบุ๊ก",
-      reviewTitle: "รีวิว", reviewBody: "ดูรีวิวผ่าน Google Maps และช่องทางโซเชียล",
-      reviewMapsBtn: "Google Maps", reviewFbBtn: "เฟซบุ๊ก",
+      faqTitle: "คำถามที่พบบ่อย & ข้อมูลการจอง",
+      faqSub: "ตอบชัด ลดความลังเล จองง่ายขึ้น",
+      proofTitle: "ทำไมลูกค้าชอบจองตรง",
+      q1t: "ตอบไว",
+      q1b: "ส่งวันที่และประเภทห้อง — เรายืนยันห้องว่างได้เร็ว",
+      q2t: "เช็คอินชัดเจน",
+      q2b: "เช็คอิน 14:00 เช็คเอาต์ 11:00 ต้องมีบัตร/พาสปอร์ต",
+      q3t: "ติดต่อสะดวก",
+      q3b: "โทร, WhatsApp, LINE, แผนที่ เลือกช่องทางที่ง่ายสุด",
+      faqListTitle: "คำถามยอดนิยม",
+      f1q: "จองเร็วที่สุดทำอย่างไร?",
+      f1a: "โทรหรือทัก (WhatsApp/LINE) พร้อมวันที่เข้าพัก + ประเภทห้อง เราจะยืนยันห้องว่างและราคารวม",
+      f2q: "เช็คอิน/เช็คเอาต์กี่โมง?",
+      f2a: "เช็คอินตั้งแต่ 14:00 เช็คเอาต์ภายใน 11:00",
+      f3q: "ต้องใช้อะไรตอนเช็คอิน?",
+      f3a: "บัตรประชาชนหรือพาสปอร์ต",
+      f4q: "ราคาขึ้นกับวันที่ไหม?",
+      f4a: "ใช่ ราคาขึ้นกับวันที่และฤดูกาล ส่งวันที่เพื่อรับราคาที่ถูกต้อง",
+      faqCta: "ส่งคำขอจอง",
+      faqCall: "โทร",
 
-      enquiryTitle: "แบบฟอร์มสอบถาม (ตัวเลือก B)",
-      enquiryBody: "ใส่ลิงก์แบบฟอร์มสอบถามการจองที่นี่ (แนะนำ Google Form ตั้งค่าง่ายที่สุด)",
-      enquiryBtn: "เปิดแบบฟอร์มสอบถาม",
-      enquiryNote: "เมื่อใส่ลิงก์จริง ปุ่มนี้ใช้งานได้ทันที (ไม่ต้องมีระบบหลังบ้าน)",
+      contactTitle: "ติดต่อ",
+      contactSub: "เลือกช่องทางที่สะดวกที่สุดเพื่อยืนยันการจอง",
+      contactFastTitle: "จองรวดเร็ว",
+      contactFastBody: "โทรหรือทักเพื่อเช็คห้องว่าง",
+      contactCallBtn: `โทร: ${HOTEL_PHONE_DISPLAY}`,
+      contactWABtn: "WhatsApp",
+      contactLineBtn: "LINE",
+      contactMapBtn: "แผนที่",
+      contactFbBtn: "เฟซบุ๊ก",
+      reviewTitle: "รีวิว",
+      reviewBody: "ดูรีวิวผ่าน Google Maps",
+      reviewMapsBtn: "Google Maps",
 
-      polTitle: "นโยบายมาตรฐาน", polSub: "นโยบายเรียบง่าย เป็นมิตรต่อผู้เข้าพัก (รายละเอียดสุดท้ายยืนยันได้ที่เช็คอิน)",
-      polCommonTitle: "นโยบายหลัก",
-      pol1: "เช็คอินตั้งแต่ 14:00 • เช็คเอาต์ภายใน 11:00",
-      pol2: "ต้องแสดงบัตรประชาชน/พาสปอร์ตตอนเช็คอิน",
-      pol3: "ห้ามสูบบุหรี่ในห้องพัก (สูบได้เฉพาะพื้นที่ที่กำหนด หากมี)",
-      pol4: "ห้ามสิ่งผิดกฎหมายและพฤติกรรมรบกวนผู้อื่น",
-      pol5: "โดยทั่วไปขอความร่วมมือช่วงเงียบ 22:00–07:00",
-      pol6: "กรณีทรัพย์สินเสียหาย/สูญหาย อาจมีค่าปรับ",
-      polBookingTitle: "การจอง & การชำระเงิน",
-      pol7: "การจองยืนยันเมื่อโรงแรมยืนยันห้องว่าง",
-      pol8: "เงื่อนไขยกเลิก/ไม่มาเข้าพักขึ้นกับช่วงเวลาและเรท (โปรดยืนยันตอนจอง)",
-      pol9: "ผู้เข้าพักเพิ่มอาจมีค่าใช้จ่ายเพิ่มเติม (โปรดยืนยันตอนจอง)",
-      pol10:"นโยบายเด็กขึ้นกับประเภทห้อง (โปรดยืนยันตอนจอง)",
-      pol11:"ที่จอดรถขึ้นอยู่กับความพร้อม",
-      pol12:"ซักรีดขึ้นอยู่กับเวลาให้บริการ",
-      polFooter: "เพื่อความถูกต้อง โปรดโทรสอบถามนโยบายล่าสุดกับทางโรงแรมโดยตรง",
+      policyTitle: "นโยบายมาตรฐาน",
+      policySub: "เรียบง่าย เป็นมิตร (รายละเอียดสุดท้ายยืนยันที่เช็คอิน)",
+      pol1: "เช็คอิน 14:00 • เช็คเอาต์ 11:00",
+      pol2: "ต้องมีบัตร/พาสปอร์ต",
+      pol3: "ห้ามสูบบุหรี่ในห้องพัก",
+      pol4: "โดยทั่วไปช่วงเงียบ 22:00–07:00",
+      policyFoot: "เพื่อความถูกต้อง โปรดติดต่อโรงแรมเพื่อยืนยันข้อมูลล่าสุด",
+
+      stickyTitle: "พร้อมจองแล้วใช่ไหม?",
+      stickySub: "โทรหรือทักวันที่เข้าพักเพื่อยืนยันได้เร็ว",
+      stickyCta: "เริ่มจอง",
+      stickyCall: "โทร",
+      stickyWA: "WhatsApp",
+      stickyLine: "LINE",
       backTop: "กลับไปด้านบน"
     },
 
     zh: {
-      navAmenities: "设施", navRooms: "房型", navLocation: "位置", navContact: "预订 / 联系", navBook: "立即预订",
-      kicker: "★ 房间宽敞 • 位置便利 • 直接预订",
-      heroTitle: "入住体验升级<br/>The Sandbox Hotel",
-      heroBody: "位于洛坤府（Nakhon Si Thammarat）的现代舒适酒店，提供 Wi‑Fi、停车、洗衣服务，以及咖啡与小食吧。可电话直接预订或通过询价表单。",
-      pill1: "房间宽敞", pill2: "安静好眠", pill3: "Wi‑Fi 与停车", pill4: "位置便利",
-      ctaEnquire: "预订 / 询价", ctaCall: "电话: 088‑790‑6345", ctaMaps: "打开地图", ctaFacebook: "Facebook",
-      microNote: "建议：想最快确认房间，请直接致电或留言。询价可使用下方表单链接。",
-      heroLocStrong: "Nakhon Si Thammarat", heroLocSub: "Pho Sadet • Mueang District • 80000",
+      navSub: "Nakhon Si Thammarat, Thailand",
+      navRooms: "房型", navAmenities: "设施", navLocation: "位置", navFAQ: "常见问题", navBook: "立即预订",
+      kicker: "房间宽敞 • 位置便利 • 直接预订",
+      heroTitle: "直接预订 — 快速确认<br/>The Sandbox Hotel",
+      heroBody: "位于洛坤府的现代舒适酒店，提供 Wi-Fi、停车、洗衣服务，以及咖啡与小食吧。最快预订方式：电话或留言（LINE / WhatsApp）。",
+      trust1Title: "快速确认", trust1Body: "电话或留言快速确认房态",
+      trust2Title: "必备设施", trust2Body: "Wi-Fi • 停车 • 空调 • 洗衣",
+      trust3Title: "房间宽敞", trust3Body: "Standard & Premium • Twin 或 Double",
+      ctaStart: "开始预订",
+      ctaCall: `电话: ${HOTEL_PHONE_DISPLAY}`,
+      ctaWhatsApp: "WhatsApp",
+      ctaLine: "LINE",
+      ctaMap: "打开地图",
+      pill1: "入住 14:00",
+      pill2: "退房 11:00",
+      pill3: "需护照/证件",
+      pill4: "安静舒适",
+      microNote: "提示：发送日期 + 房型，我们可更快确认。",
+      mediaTitle: "Nakhon Si Thammarat",
+      mediaSub: "Pho Sadet • Mueang District • 80000",
       ctaViewRooms: "查看房型 →",
-      checkTimesTitle: "入住 / 退房", checkTimesVal: "入住 14:00 • 退房 11:00",
-      directBookingTitle: "直接预订", directBookingVal: "电话 • 地图 • Facebook",
-      amenitiesQuickTitle: "重点设施", amenitiesQuickVal: "Wi‑Fi • 停车 • 洗衣 • 空调",
-      languagesTitle: "语言", languagesVal: "ไทย • English • 中文",
 
-      amenitiesTitle: "设施", amenitiesSub: "实用、舒适、简单到位。",
-      amWiTitle: "Wi‑Fi", amWiBody: "稳定网络，适合办公与娱乐。",
-      amPkTitle: "停车", amPkBody: "住客停车（视车位情况而定）。",
-      amAcTitle: "空调", amAcBody: "全季节舒适凉爽。",
+      bookTitle: "快速预订请求",
+      bookSub: "可通过 WhatsApp / LINE / 邮件发送（此处无需付款）。",
+      fCheckin: "入住日期",
+      fCheckout: "退房日期",
+      fGuests: "人数",
+      fRoom: "房型",
+      fName: "姓名",
+      fContact: "联系方式（电话/邮箱）",
+      fNotes: "备注",
+      roomST: "Standard Twin",
+      roomSD: "Standard Double",
+      roomPT: "Premium Twin",
+      roomPD: "Premium Double",
+      sendWA: "通过 WhatsApp 发送",
+      sendLine: "通过 LINE 发送",
+      sendEmail: "通过邮件发送",
+      formHint: "我们将回复房态与总价。",
+      mini1Title: "直接预订", mini1Body: "电话 • 留言 • 地图",
+      mini2Title: "入住/退房", mini2Body: "14:00 / 11:00",
+
+      amenitiesTitle: "设施",
+      amenitiesSub: "实用、舒适、简单到位。",
+      amWiTitle: "Wi-Fi", amWiBody: "稳定网络，适合办公与娱乐。",
+      amPkTitle: "停车", amPkBody: "住客停车（视车位情况）。",
+      amAcTitle: "空调", amAcBody: "全年舒适凉爽。",
       amCafeTitle: "咖啡与小食吧", amCafeBody: "便捷补给与休闲。",
       amLaundryTitle: "洗衣", amLaundryBody: "提供洗衣服务/区域（请咨询前台）。",
       amServiceTitle: "服务", amServiceBody: "友好支持，让入住更顺畅。",
 
-      roomsTitle: "房型", roomsSub: "Standard 或 Premium • Twin 或 Double",
-      r1Title: "Standard Twin", r1Body: "双床配置，性价比高。",
+      roomsTitle: "房型",
+      roomsSub: "Standard 或 Premium • Twin 或 Double（按日期询价）",
+      roomsCta: "询问房态",
+      r1Title: "Standard Twin", r1Body: "性价比高的双床配置。",
       r2Title: "Standard Double", r2Body: "大床房，适合情侣入住。",
       r3Title: "Premium Twin", r3Body: "升级舒适体验。",
       r4Title: "Premium Double", r4Body: "高级大床房，放松之选。",
+      from: "起",
+      askRate: "询价",
       tag2g: "2 位", tagTwin: "双床", tagDouble: "大床", tagLarge: "房间宽敞", tagPremium: "高级",
+      roomBook: "预订此房型",
+      roomCall: "电话",
+      roomsNote: "房价可能随日期与季节变化。发送日期以获取准确价格。",
 
-      locTitle: "位置", locSub: "好找、出行便利。",
-      locName: "The Sandbox Hotel — Nakhon Si Thammarat", locAddrLabel: "地址:",
-      locMapBtn: "在 Google Maps 打开", locFbBtn: "Facebook", locBookBtn: "预订 / 联系",
+      locTitle: "位置",
+      locSub: "好找、出行便利。",
+      locMapBtn: "在 Google Maps 打开",
+      locName: "The Sandbox Hotel — Nakhon Si Thammarat",
+      locAddrLabel: "地址:",
+      locBookBtn: "询问房态",
+      locFbBtn: "Facebook",
+      locCallBtn: "电话",
 
-      contactTitle: "预订 / 联系", contactSub: "最快方式：直接电话预订；或使用询价表单链接。",
-      contactFastTitle: "快速预订", contactFastBody: "多种联系方式，快速确认。",
-      contactCallBtn: "电话: 088‑790‑6345", contactMapBtn: "地图", contactFbBtn: "Facebook",
-      reviewTitle: "评价", reviewBody: "通过 Google Maps 与社交渠道查看评价。",
-      reviewMapsBtn: "Google Maps", reviewFbBtn: "Facebook",
+      faqTitle: "常见问题与预订信息",
+      faqSub: "降低犹豫，提升转化。",
+      proofTitle: "为何选择直接预订",
+      q1t: "回复快",
+      q1b: "发送日期和房型，我们可快速确认。",
+      q2t: "入住清晰",
+      q2b: "入住 14:00 起，退房 11:00 前，需护照/证件。",
+      q3t: "沟通简单",
+      q3b: "电话、WhatsApp、LINE、地图，任意选择。",
+      faqListTitle: "常见问题",
+      f1q: "如何最快预订？",
+      f1a: "通过电话或留言（WhatsApp/LINE）发送日期 + 房型，我们确认房态与总价。",
+      f2q: "入住/退房时间？",
+      f2a: "入住 14:00 起，退房 11:00 前。",
+      f3q: "入住需要什么？",
+      f3a: "护照或政府签发证件。",
+      f4q: "价格会随日期变化吗？",
+      f4a: "会。按日期与季节变化。发送日期获取准确价格。",
+      faqCta: "发送预订请求",
+      faqCall: "电话",
 
-      enquiryTitle: "询价表单（选项 B）",
-      enquiryBody: "把你的询价表单链接放在这里（建议使用 Google 表单，最简单）。",
-      enquiryBtn: "打开询价表单",
-      enquiryNote: "填入真实链接后即可使用（无需后台系统）。",
+      contactTitle: "联系",
+      contactSub: "选择最快方式确认。",
+      contactFastTitle: "快速预订",
+      contactFastBody: "电话或留言确认房态。",
+      contactCallBtn: `电话: ${HOTEL_PHONE_DISPLAY}`,
+      contactWABtn: "WhatsApp",
+      contactLineBtn: "LINE",
+      contactMapBtn: "地图",
+      contactFbBtn: "Facebook",
+      reviewTitle: "评价",
+      reviewBody: "通过 Google Maps 查看评价。",
+      reviewMapsBtn: "Google Maps",
 
-      polTitle: "标准政策", polSub: "清晰友好的住客政策（最终以酒店确认为准）。",
-      polCommonTitle: "主要政策",
-      pol1: "入住时间 14:00 起 • 退房时间 11:00 前",
-      pol2: "入住需出示身份证件或护照",
-      pol3: "房间内禁烟（如有指定吸烟区，请在指定区域吸烟）",
-      pol4: "禁止违法物品与扰民行为",
-      pol5: "通常安静时段为 22:00–07:00（请尊重其他住客）",
-      pol6: "损坏或遗失物品可能产生费用",
-      polBookingTitle: "预订与付款",
-      pol7: "房态以酒店确认后为准",
-      pol8: "取消/未到店政策因季节与房价而异（预订时确认）",
-      pol9: "加人可能产生额外费用（预订时确认）",
-      pol10:"儿童政策因房型而异（预订时确认）",
-      pol11:"停车位视供应情况而定",
-      pol12:"洗衣服务/时间以酒店安排为准",
-      polFooter: "如需最新最准确的政策信息，请直接致电酒店确认。",
+      policyTitle: "标准政策",
+      policySub: "住客友好（最终以酒店确认为准）。",
+      pol1: "入住 14:00 起 • 退房 11:00 前",
+      pol2: "需护照/证件",
+      pol3: "房间内禁烟",
+      pol4: "通常安静时段 22:00–07:00",
+      policyFoot: "如需最新信息，请直接联系酒店确认。",
+
+      stickyTitle: "准备预订了吗？",
+      stickySub: "发送日期即可快速确认。",
+      stickyCta: "开始预订",
+      stickyCall: "电话",
+      stickyWA: "WhatsApp",
+      stickyLine: "LINE",
       backTop: "返回顶部"
     }
   };
@@ -844,7 +1504,6 @@
   langButtons.en.addEventListener('click', () => applyLang('en'));
   langButtons.th.addEventListener('click', () => applyLang('th'));
   langButtons.zh.addEventListener('click', () => applyLang('zh'));
-
   applyLang('en');
 </script>
 </body>
