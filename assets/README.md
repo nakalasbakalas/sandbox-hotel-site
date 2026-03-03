@@ -4,6 +4,9 @@ Put your website images in these folders so `index.html` can load them directly.
 
 ## Room photos
 - `assets/images/rooms/twin-room-sandbox.jpg`
+- `assets/images/rooms/standard-twin.jpg`
+- `assets/images/rooms/standard-double.jpg`
+- `assets/images/rooms/premium-twin.jpg`
 - `assets/images/rooms/premium-double.jpg`
 
 ## Gallery photos
