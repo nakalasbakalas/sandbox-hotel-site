@@ -27,3 +27,8 @@ Put your website images in these folders so `index.html` can load them directly.
 - `assets/images/logo/` for brand logo files (PNG/SVG/WebP).
 - `assets/images/logo/social/` for social/profile logo variants.
 - Optional suggested filenames: `sandbox-logo.png`, `sandbox-logo-mark.png`, `favicon.png`.
+
+
+## PNG auto-link behavior
+- `index.html` now tries `.png` first for existing room/gallery image tags and falls back to the original `.jpg/.webp` path automatically if the PNG is missing.
+- This lets you drop in new PNG files with the same base filename without editing HTML.

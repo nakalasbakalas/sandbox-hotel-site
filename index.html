@@ -1333,6 +1333,24 @@
       localStorage.setItem(key, JSON.stringify(list).slice(0, 120000));
     } catch(_e) {}
   }
+
+
+  // Auto-link new PNG assets when present (fallback to existing src otherwise)
+  (function preferPngAssets(){
+    const candidates = Array.from(document.querySelectorAll('img[src^="assets/images/"], img[src^="images/"]'));
+    candidates.forEach((img)=>{
+      const src = img.getAttribute('src') || '';
+      if(!/\.(jpe?g|webp)$/i.test(src)) return;
+      const pngSrc = src.replace(/\.(jpe?g|webp)$/i, '.png');
+      img.addEventListener('error', function onImgError(){
+        if(img.getAttribute('src') === pngSrc){
+          img.removeEventListener('error', onImgError);
+          img.setAttribute('src', src);
+        }
+      });
+      img.setAttribute('src', pngSrc);
+    });
+  })();
   ["ctaWhatsApp","ctaLine","ctaWhatsApp","stickyWA","stickyLine"].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
