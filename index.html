@@ -344,10 +344,11 @@
     /* Hero */
     .hero{
       position:relative;
+      min-height: clamp(560px, 80vh, 920px);
       border-radius: var(--radius);
       border:1px solid rgba(255,255,255,.10);
       background:
-        linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.18)),
+        linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.06) 42%, rgba(0,0,0,.78)),
         radial-gradient(900px 420px at 18% 0%, rgba(196,122,58,.30), transparent 60%),
         radial-gradient(900px 420px at 82% 0%, rgba(255,255,255,.08), transparent 60%),
         radial-gradient(700px 420px at 50% 120%, rgba(233,176,122,.18), transparent 60%),
@@ -364,7 +365,7 @@
       transform: rotate(14deg);
       pointer-events:none;
     }
-    .heroInner{position:relative; z-index:2; text-align:center; padding:30px 18px; max-width:920px; margin:0 auto}
+    .heroInner{position:relative; z-index:2; max-width:980px; margin:0 auto; min-height:100%; display:flex; flex-direction:column; justify-content:flex-end; padding: clamp(26px, 5.2vw, 58px) 18px; text-align:center}
     .heroKicker{
       display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px;
@@ -379,6 +380,71 @@
     }
     .heroSub{margin:0 auto; max-width:72ch; color:rgba(255,255,255,.86); font-size:16px}
     .heroCTA{margin-top:16px; display:flex; justify-content:center; flex-wrap:wrap; gap:10px}
+
+    /* Hero panel + carousel controls */
+    .heroPanel{
+      width:min(980px, 100%);
+      margin:0 auto;
+      border-radius: calc(var(--radius) - 2px);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(9,10,13,.58);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      backdrop-filter: blur(12px) saturate(150%);
+      box-shadow: 0 20px 55px rgba(0,0,0,.58);
+      padding: 18px 16px 14px;
+    }
+    .heroCarouselBar{
+      margin-top: 12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+    }
+    .heroNavBtn{
+      width:44px; height:44px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      font-weight:1000;
+      font-size:18px;
+      line-height:1;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+      transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
+    }
+    .heroNavBtn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow3);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+    }
+    .heroNavBtn:active{transform: translateY(0)}
+    .heroDots{display:flex; gap:8px; align-items:center; justify-content:center; flex-wrap:wrap}
+    .heroDot{
+      width:10px; height:10px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.12);
+      cursor:pointer;
+      padding:0;
+    }
+    .heroDot[aria-current="true"]{
+      background: linear-gradient(180deg, rgba(240,195,154,.95), rgba(183,106,43,.85));
+      border-color: rgba(240,195,154,.55);
+      box-shadow: 0 10px 22px rgba(0,0,0,.40);
+      transform: scale(1.08);
+    }
+    .heroPhotoHint{
+      margin-top: 8px;
+      opacity:.92;
+    }
+    @media (max-width:640px){
+      .heroPanel{padding: 16px 14px 12px}
+      .heroCarouselBar{gap:8px}
+      .heroNavBtn{width:42px; height:42px; border-radius: 13px}
+    }
+
     @media (max-width:980px){ :root{ --heroTitleSize: clamp(30px, 8.6vw, 42px);} }
 
     /* Section headers */
@@ -781,10 +847,11 @@
   </div>
 </header>
 <main class="wrap" id="top">
-  <section class="section">
+  <section class="section" id="gallery">
     <div class="hero" aria-label="Hero banner">
       <div class="heroInner">
-        <div class="heroKicker" data-i18n-html="hero_kicker">
+        <div class="heroPanel">
+          <div class="heroKicker" data-i18n-html="hero_kicker">
           <span class="kw a">Direct booking</span>
           <span style="opacity:.9">•</span>
           <span class="kw">Fast confirmation</span>
@@ -808,6 +875,15 @@
         <div class="fine" style="color:rgba(255,255,255,.86)" data-i18n-html="hero_fine">
           Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms
         </div>
+
+        <div class="heroCarouselBar" aria-label="Photo carousel controls">
+          <button class="heroNavBtn" type="button" id="heroPrev" aria-label="Previous photo">‹</button>
+          <div class="heroDots" id="heroDots" aria-label="Photo selector"></div>
+          <button class="heroNavBtn" type="button" id="heroNext" aria-label="Next photo">›</button>
+        </div>
+        <div class="heroPhotoHint fine" data-i18n="hero_photo_hint">Swipe for more photos</div>
+      </div> <!-- /heroPanel -->
+
       </div>
     </div>
   </section>
@@ -1022,6 +1098,8 @@
             </div>
           </div>
         </article>
+        
+        
       </div>
       <p class="fine" style="margin-top:12px">Rates can change by date and season. Message your dates for the fastest exact price.</p>
     </div>
@@ -1099,6 +1177,7 @@
       </div>
     </div>
   </section>
+  
   <section class="section" id="reviews">
     <div class="card altB pad">
       <div class="head">
@@ -1258,6 +1337,7 @@
       hero_kicker: '<span class="kw a">จองตรงกับโรงแรม</span> <span style="opacity:.9">•</span> <span class="kw">ยืนยันรวดเร็ว</span> <span style="opacity:.9">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
       hero_sub: 'ห้องพักสะอาด สบาย <span class="kw a">ห้องกว้าง</span> ใน <span class="kw">นครศรีธรรมราช</span> พร้อม <span class="kw">Wi‑Fi</span>, <span class="kw">ที่จอดรถ</span>, <span class="kw">แอร์</span>, และ <span class="kw">ซักรีด</span>. จองเร็วที่สุด: <span class="kw hot">โทร</span> หรือ <span class="kw hot">แชต</span> แจ้งวันเข้าพัก',
       hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
+      hero_photo_hint: "เลื่อน/ปัดเพื่อดูรูปเพิ่มเติม",
 
       cta_call_to_book: "โทรเพื่อจอง",
       cta_call_number: "โทร: 088-790-6345",
@@ -1459,6 +1539,7 @@
       hero_kicker: '<span class="kw a">Direct booking</span> <span style="opacity:.9">•</span> <span class="kw">Fast confirmation</span> <span style="opacity:.9">•</span> <span class="kw hot">Click to book</span>',
       hero_sub: 'Clean, comfortable <span class="kw a">large rooms</span> in <span class="kw">Nakhon Si Thammarat</span> with <span class="kw">Wi‑Fi</span>, <span class="kw">parking</span>, <span class="kw">AC</span>, and <span class="kw">laundry</span>. For the fastest booking: <span class="kw hot">call</span> or <span class="kw hot">message</span> your dates.',
       hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms',
+      hero_photo_hint: "Swipe for more photos",
 
       cta_call_to_book: "Call to Book",
       cta_call_number: "Call: 088-790-6345",
@@ -1660,6 +1741,7 @@
       hero_kicker: '<span class="kw a">酒店直订</span> <span style="opacity:.9">•</span> <span class="kw">快速确认</span> <span style="opacity:.9">•</span> <span class="kw hot">点击预订</span>',
       hero_sub: '干净舒适的 <span class="kw a">宽敞客房</span> 位于 <span class="kw">泰国洛坤府</span>，提供 <span class="kw">Wi‑Fi</span>、<span class="kw">停车位</span>、<span class="kw">空调</span> 和 <span class="kw">洗衣</span>。最快预订：<span class="kw hot">致电</span> 或 <span class="kw hot">留言</span> 告知日期。',
       hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
+      hero_photo_hint: "滑动查看更多照片",
 
       cta_call_to_book: "电话预订",
       cta_call_number: "致电：088-790-6345",
@@ -1929,6 +2011,127 @@
     });
   })();
 
+
+  // ===== HERO CAROUSEL (Gallery in the hero) =====
+  (function heroCarousel(){
+    const root = document.documentElement;
+    const hero = document.querySelector(".hero");
+    const dotsWrap = document.getElementById("heroDots");
+    const prevBtn = document.getElementById("heroPrev");
+    const nextBtn = document.getElementById("heroNext");
+    if(!hero || !dotsWrap || !prevBtn || !nextBtn) return;
+
+    const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    const slides = [
+      { src: "images/Sandbox-Hotel-Hero-Banner.png" },
+      { src: "assets/images/gallery/entrance.png" },
+      { src: "assets/images/gallery/lobby.png" },
+      { src: "assets/images/rooms/double-room-sandboxhotel.png" },
+      { src: "assets/images/rooms/twin-room-sandbox-1.png" }
+    ];
+
+    // Filter out duplicates
+    const uniq = [];
+    const seen = new Set();
+    slides.forEach(s=>{
+      const k = s.src;
+      if(!k || seen.has(k)) return;
+      seen.add(k);
+      uniq.push(s);
+    });
+
+    let idx = 0;
+    let timer = null;
+    const bad = new Set();
+
+    function preload(i){
+      const s = uniq[i];
+      if(!s || bad.has(s.src)) return Promise.resolve(false);
+      return new Promise((resolve)=>{
+        const im = new Image();
+        im.onload = ()=> resolve(true);
+        im.onerror = ()=> { bad.add(s.src); resolve(false); };
+        im.src = s.src;
+      });
+    }
+
+    function setBg(i){
+      const s = uniq[i];
+      if(!s) return;
+      root.style.setProperty("--heroImg", `url("${s.src}")`);
+      // Dots state
+      dotsWrap.querySelectorAll(".heroDot").forEach((b,bi)=>{
+        b.setAttribute("aria-current", bi === i ? "true" : "false");
+      });
+      // Preload next
+      preload((i+1) % uniq.length);
+    }
+
+    async function go(nextIndex){
+      if(!uniq.length) return;
+      idx = (nextIndex + uniq.length) % uniq.length;
+
+      // If slide image missing, skip forward (max loop once)
+      let attempts = 0;
+      let okFound = false;
+      while(attempts < uniq.length){
+        const ok = await preload(idx);
+        if(ok){ okFound = true; break; }
+        idx = (idx + 1) % uniq.length;
+        attempts++;
+      }
+      if(!okFound) return; // keep existing background
+      setBg(idx);
+    }
+
+    function buildDots(){
+      dotsWrap.innerHTML = "";
+      uniq.forEach((_,i)=>{
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "heroDot";
+        b.setAttribute("aria-label", `Photo ${i+1}`);
+        b.setAttribute("aria-current", i === 0 ? "true" : "false");
+        b.addEventListener("click", ()=> { stop(); go(i); start(); });
+        dotsWrap.appendChild(b);
+      });
+    }
+
+    function start(){
+      if(prefersReduce) return;
+      stop();
+      timer = setInterval(()=> { go(idx+1); }, 6500);
+    }
+    function stop(){
+      if(timer){ clearInterval(timer); timer = null; }
+    }
+
+    prevBtn.addEventListener("click", ()=>{ stop(); go(idx-1); start(); });
+    nextBtn.addEventListener("click", ()=>{ stop(); go(idx+1); start(); });
+
+    hero.addEventListener("pointerenter", stop, {passive:true});
+    hero.addEventListener("pointerleave", start, {passive:true});
+    hero.addEventListener("focusin", stop);
+    hero.addEventListener("focusout", start);
+
+    // Simple swipe
+    let sx = null;
+    hero.addEventListener("pointerdown", (e)=>{ sx = e.clientX; }, {passive:true});
+    hero.addEventListener("pointerup", (e)=>{
+      if(sx === null) return;
+      const dx = e.clientX - sx;
+      sx = null;
+      if(Math.abs(dx) < 40) return;
+      stop();
+      if(dx < 0) go(idx+1); else go(idx-1);
+      start();
+    }, {passive:true});
+
+    buildDots();
+    go(0);
+    start();
+  })();
 
 
   // Device profile → sets CSS variables for best fit per device size
