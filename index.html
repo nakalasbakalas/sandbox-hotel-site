@@ -11,6 +11,10 @@
   <meta name="description" id="metaDescription" content="Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
+  <link rel="icon" type="image/svg+xml" href="assets/images/logo/sandbox-logo-transparent.svg">
+  <link rel="shortcut icon" href="assets/images/logo/sandbox-logo-transparent.svg">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/logo/sandbox-logo-transparent.svg">
+  <link rel="shortcut icon" href="/assets/images/logo/sandbox-logo-transparent.svg">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -276,6 +280,35 @@
     }
     .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
     .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .navGroup{
+      position:relative;
+    }
+    .navGroup summary{
+      list-style:none;
+    }
+    .navGroup summary::-webkit-details-marker{display:none}
+    .navGroup summary .chip{pointer-events:none}
+    .navPanel{
+      position:absolute;
+      top:calc(100% + 8px);
+      right:0;
+      min-width:230px;
+      display:grid;
+      gap:8px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:var(--uiGlass2);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      backdrop-filter: blur(10px) saturate(150%);
+      box-shadow: var(--shadow3);
+      z-index:20;
+    }
+    .navPanel .chip{justify-content:flex-start}
+    .langSwitch{display:grid; gap:8px}
+    @media (max-width:980px){
+      .navPanel{position:static; min-width:0; margin-top:8px}
+    }
     .hideMobile{display:inline-flex}
     @media (max-width:980px){ .hideMobile{display:none} }
 
@@ -862,8 +895,8 @@
       padding-bottom: calc(96px + env(safe-area-inset-bottom));
     }
 
-        /* Mobile/Tablet header: show ONLY brand + Book Now (collapse everything else) */
-    html[data-compact="true"] header .nav > div:last-child{ display:none !important; }
+    /* Mobile/Tablet header: show ONLY brand + Book Now (collapse everything else) */
+    html[data-compact="true"] .navLinks .navGroup{ display:none !important; }
     html[data-device="phone"] .navLinks .chip:not(.primary),
     html[data-device="tablet"] .navLinks .chip:not(.primary){ display:none !important; }
     html[data-compact="true"] .navLinks{ gap:8px; }
@@ -1050,28 +1083,39 @@
 
       <nav class="navLinks" aria-label="Primary">
         <a class="chip primary" href="#book" data-i18n="nav_book">Book Now</a>
-        <a class="chip hideMobile" href="#rooms" data-i18n="nav_rooms">Rooms</a>
-        <a class="chip hideMobile" href="#offers" data-i18n="nav_offers">Offers</a>
-        <a class="chip hideMobile" href="#amenities" data-i18n="nav_amenities">Amenities</a>
-        <a class="chip hideMobile" href="#gallery" data-i18n="nav_gallery">Gallery</a>
-        <a class="chip hideMobile" href="#reviews" data-i18n="nav_reviews">Reviews</a>
-        <a class="chip hideMobile" href="#faq" data-i18n="nav_faq">FAQ</a>
-        <a class="chip hideMobile" href="#location" data-i18n="nav_location">Location</a>
+
+        <details class="navGroup hideMobile">
+          <summary>
+            <span class="chip">🌐 Languages</span>
+          </summary>
+          <div class="navPanel langSwitch" role="group" aria-label="Language">
+            <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
+            <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
+            <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
+          </div>
+        </details>
+
+        <details class="navGroup hideMobile">
+          <summary>
+            <span class="chip">☰ Explore</span>
+          </summary>
+          <div class="navPanel" role="group" aria-label="Site navigation">
+            <a class="chip" href="#rooms" data-i18n="nav_rooms">Rooms</a>
+            <a class="chip" href="#offers" data-i18n="nav_offers">Offers</a>
+            <a class="chip" href="#amenities" data-i18n="nav_amenities">Amenities</a>
+            <a class="chip" href="#gallery" data-i18n="nav_gallery">Gallery</a>
+            <a class="chip" href="#reviews" data-i18n="nav_reviews">Reviews</a>
+            <a class="chip" href="#faq" data-i18n="nav_faq">FAQ</a>
+            <a class="chip" href="#location" data-i18n="nav_location">Location</a>
+
+            <!-- Theme toggle: System → Dark → Light -->
+            <button class="chip" id="themeToggle" type="button" aria-label="Theme" title="Theme">
+              <span id="themeIcon" aria-hidden="true">🖥️</span>
+              <span id="themeLabel">System</span>
+            </button>
+          </div>
+        </details>
       </nav>
-
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
-        <div class="langSwitch" role="group" aria-label="Language" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
-          <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
-          <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
-          <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
-        </div>
-
-        <!-- Theme toggle: System → Dark → Light -->
-        <button class="chip" id="themeToggle" type="button" aria-label="Theme" title="Theme">
-          <span id="themeIcon" aria-hidden="true">🖥️</span>
-          <span class="hideMobile" id="themeLabel">System</span>
-        </button>
-      </div>
     </div>
   </header>
 
@@ -1350,6 +1394,8 @@
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="mediaWrap">
+                  <a class="roomMediaLink" href="/assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                    <img class="mediaImg" src="/assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
                   <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
                     <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
                   </a>
@@ -1365,6 +1411,12 @@
                 <div class="roomSubMedia">
                   <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
                     <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                  <a class="roomMediaLink" href="/assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="/assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
                     <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async">
@@ -1484,6 +1536,8 @@
               <figure class="galSlide">
                 <div class="mediaWrap">
                   <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="/assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
