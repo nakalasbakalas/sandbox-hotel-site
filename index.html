@@ -344,10 +344,11 @@
     /* Hero */
     .hero{
       position:relative;
+      min-height: clamp(560px, 80vh, 920px);
       border-radius: var(--radius);
       border:1px solid rgba(255,255,255,.10);
       background:
-        linear-gradient(180deg, rgba(0,0,0,.72), rgba(0,0,0,.18)),
+        linear-gradient(180deg, rgba(0,0,0,.30), rgba(0,0,0,.06) 42%, rgba(0,0,0,.78)),
         radial-gradient(900px 420px at 18% 0%, rgba(196,122,58,.30), transparent 60%),
         radial-gradient(900px 420px at 82% 0%, rgba(255,255,255,.08), transparent 60%),
         radial-gradient(700px 420px at 50% 120%, rgba(233,176,122,.18), transparent 60%),
@@ -364,7 +365,7 @@
       transform: rotate(14deg);
       pointer-events:none;
     }
-    .heroInner{position:relative; z-index:2; text-align:center; padding:30px 18px; max-width:920px; margin:0 auto}
+    .heroInner{position:relative; z-index:2; max-width:980px; margin:0 auto; min-height:100%; display:flex; flex-direction:column; justify-content:flex-end; padding: clamp(26px, 5.2vw, 58px) 18px; text-align:center}
     .heroKicker{
       display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px;
@@ -379,6 +380,23 @@
     }
     .heroSub{margin:0 auto; max-width:72ch; color:rgba(255,255,255,.86); font-size:16px}
     .heroCTA{margin-top:16px; display:flex; justify-content:center; flex-wrap:wrap; gap:10px}
+
+    /* Hero panel + carousel controls */
+    .heroPanel{
+      width:min(980px, 100%);
+      margin:0 auto;
+      border-radius: calc(var(--radius) - 2px);
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(9,10,13,.58);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      backdrop-filter: blur(12px) saturate(150%);
+      box-shadow: 0 20px 55px rgba(0,0,0,.58);
+      padding: 18px 16px 14px;
+    }
+    @media (max-width:640px){
+      .heroPanel{padding: 16px 14px 12px}
+    }
+
     @media (max-width:980px){ :root{ --heroTitleSize: clamp(30px, 8.6vw, 42px);} }
 
     /* Section headers */
@@ -449,6 +467,9 @@
     .gallery{
       display:flex;
       flex-wrap:nowrap;
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:minmax(260px, 32%);
       gap:12px;
       overflow-x:auto;
       scroll-snap-type:x mandatory;
@@ -458,6 +479,8 @@
     }
     .gallery::-webkit-scrollbar{height:10px}
     .gItem{flex:0 0 min(86vw, 760px); border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1); scroll-snap-align:start}
+    .gItem{flex:0 0 clamp(280px, 32vw, 520px); border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1); scroll-snap-align:start}
+    .gItem{border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1); scroll-snap-align:start}
     .gItem .ph{display:block; width:100%; height:auto}
     .gCap{padding:10px 12px}
     .gCap b{display:block; font-size:13px; color:var(--ink2)}
@@ -465,6 +488,7 @@
     .galleryNav{display:flex; justify-content:flex-end; gap:8px; margin-top:10px}
     .galleryNav .btn{min-height:38px; padding:8px 12px}
     @media (max-width:980px){ .gItem{flex-basis:84%} }
+    @media (max-width:980px){ .gallery{grid-auto-columns:minmax(84%, 84%)} }
 
     /* Reviews */
     .reviews{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px}
@@ -688,6 +712,7 @@
     .mediaWrap .mediaImg{display:block;width:100%;aspect-ratio:800/520;object-fit:cover;background:linear-gradient(135deg, rgba(196,122,58,.16), rgba(224,161,106,.10));opacity:1;transform:none;transition:opacity .25s ease, transform .6s ease}
     .mediaWrap.imgOk .mediaImg{opacity:1;transform:scale(1)}
     .mediaWrap .ph{position:absolute;inset:0;opacity:0;transition:opacity .25s ease;pointer-events:none}
+    .mediaWrap .ph{position:absolute;inset:0;opacity:1;transition:opacity .25s ease;pointer-events:none}
     .mediaWrap.imgOk .ph{opacity:0}
     .mediaWrap.imgFail .mediaImg{display:none}
     .mediaWrap.imgFail .ph{opacity:1}
@@ -751,6 +776,88 @@
     html.langSwitching [data-i18n],
     html.langSwitching [data-i18n-html]{opacity:.55}
 
+
+
+    /* ==========================================================
+       Gallery carousel (replaces bottom gallery grid)
+       ========================================================== */
+    .galCarousel{margin-top:10px}
+    .galViewport{
+      position:relative;
+      overflow:hidden;
+      border-radius: var(--radius2);
+      border:1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.02);
+      box-shadow: var(--shadow3);
+    }
+    .galViewport:focus{outline:none}
+    .galViewport:focus-visible{box-shadow: var(--focus)}
+    .galTrack{
+      display:flex;
+      width:100%;
+      transform: translateX(0%);
+      transition: transform .55s cubic-bezier(.22,1,.36,1);
+      will-change: transform;
+    }
+    .galSlide{flex:0 0 100%; margin:0; min-width:0}
+    .galSlide .mediaImg{aspect-ratio:800 / 520}
+    .galCap{
+      padding:12px 14px;
+      border-top:1px solid rgba(255,255,255,.10);
+      background: rgba(9,10,13,.66);
+      -webkit-backdrop-filter: blur(10px) saturate(140%);
+      backdrop-filter: blur(10px) saturate(140%);
+    }
+    .galCap b{display:block; color:var(--ink2); font-size:14px; font-weight:1000; letter-spacing:.2px}
+    .galCap span{display:block; margin-top:4px; color:var(--muted); font-size:13px}
+
+    .galBar{
+      margin-top:12px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+    .galNavBtn{
+      width:44px; height:44px;
+      border-radius: 14px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.92);
+      font-weight:1000;
+      font-size:18px;
+      line-height:1;
+      display:flex; align-items:center; justify-content:center;
+      cursor:pointer;
+      transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
+    }
+    .galNavBtn:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow3);
+      border-color: rgba(255,255,255,.22);
+      background: rgba(255,255,255,.08);
+    }
+    .galNavBtn:active{transform: translateY(0)}
+    .galDots{display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap}
+    .galDot{
+      width:10px; height:10px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.08);
+      cursor:pointer;
+      padding:0;
+    }
+    .galDot[aria-current="true"]{
+      background: linear-gradient(135deg, rgba(183,106,43,.95), rgba(240,195,154,.85));
+      border-color: rgba(240,195,154,.42);
+      box-shadow: 0 10px 22px rgba(0,0,0,.35);
+    }
+    .galHint{text-align:center; margin-top:6px}
+
+    @media (max-width:640px){
+      .galNavBtn{width:42px; height:42px; border-radius: 13px}
+    }
 </style>
   <script type="application/ld+json">
 {
@@ -806,7 +913,8 @@
   <section class="section">
     <div class="hero" aria-label="Hero banner">
       <div class="heroInner">
-        <div class="heroKicker" data-i18n-html="hero_kicker">
+        <div class="heroPanel">
+          <div class="heroKicker" data-i18n-html="hero_kicker">
           <span class="kw a">Direct booking</span>
           <span style="opacity:.9">•</span>
           <span class="kw">Fast confirmation</span>
@@ -830,6 +938,8 @@
         <div class="fine" style="color:rgba(255,255,255,.86)" data-i18n-html="hero_fine">
           Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms
         </div>
+</div> <!-- /heroPanel -->
+
       </div>
     </div>
   </section>
@@ -975,6 +1085,7 @@
             <div class="mediaWrap">
               <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin photo">
                 <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom with two single beds" loading="lazy" decoding="async">
+                <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin room photo" loading="lazy" decoding="async">
               </a>
               <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Standard Twin placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_standard_twin" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Standard Twin</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
             </div>
@@ -1018,6 +1129,10 @@
             <div class="mediaWrap">
               <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
                 <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async">
+              <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-2.png" alt="Standard Double room photo" loading="lazy" decoding="async">
+              <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room photo" loading="lazy" decoding="async">
               </a>
               <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Standard Double placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_standard_double" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Standard Double</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
             </div>
@@ -1056,16 +1171,20 @@
             </div>
           </div>
         </article>
+        
+        
       </div>
       <p class="fine" style="margin-top:12px">Rates can change by date and season. Message your dates for the fastest exact price.</p>
     </div>
   </section>
+  
+  
   <section class="section" id="gallery">
     <div class="card pad">
       <div class="head">
         <div>
           <h2 data-i18n="gallery_title">Gallery</h2>
-          <p data-i18n="gallery_sub">Swap these with real photos for higher trust and more bookings.</p>
+          <p data-i18n="gallery_sub">Swipe through photos of the hotel and rooms.</p>
         </div>
         <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
       </div>
@@ -1084,6 +1203,7 @@
         <div class="gItem">
           <div class="mediaWrap">
             <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-2.png" alt="Large room layout with beds and workspace" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Large room layout photo" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Large Room Layout placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_large_room_layout" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Large Room Layout</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1094,6 +1214,7 @@
         <div class="gItem">
           <div class="mediaWrap">
             <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Hotel lobby refreshment and seating area" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Coffee and snack bar photo" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Coffee & Snack Bar placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_coffee_and_snack_bar" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Coffee & Snack Bar</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1104,6 +1225,7 @@
         <div class="gItem">
           <div class="mediaWrap">
             <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Hotel entrance and parking access" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Parking area photo" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Parking Area placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_parking_area" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Parking Area</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1114,6 +1236,7 @@
         <div class="gItem">
           <div class="mediaWrap">
             <img class="mediaImg" src="assets/images/rooms/bathroom.png" alt="Clean bathroom with hot shower" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/rooms/bathroom.png" alt="Clean bathrooms photo" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Clean Bathrooms placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_clean_bathrooms" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Clean Bathrooms</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1124,13 +1247,160 @@
         <div class="gItem">
           <div class="mediaWrap">
             <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Quiet room area for rest" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Quiet rest area photo" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Quiet Rest placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_quiet_rest" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Quiet Rest</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
             <b data-i18n="svg_quiet_rest">Quiet Rest</b>
             <span data-i18n="gal_quiet_desc">Ask for quieter-side rooms when available.</span>
           </div>
+
+      <div class="galCarousel" id="galCarousel" aria-label="Photo carousel">
+        <div class="galViewport" id="galViewport" tabindex="0" aria-label="Gallery carousel">
+          <div class="galTrack" id="galTrack">
+            <figure class="galSlide">
+              <div class="mediaWrap">
+                <img class="mediaImg" src="images/Sandbox-Hotel-Hero-Banner.png" alt="Hotel exterior photo" loading="lazy" decoding="async">
+                <div class="ph" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+    <defs>
+      <linearGradient id="gph" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/>
+        <stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/>
+      </linearGradient>
+    </defs>
+    <rect width="800" height="520" rx="28" fill="#0B1220"/>
+    <rect x="24" y="24" width="752" height="472" rx="22" fill="url(#gph)" stroke="rgba(255,255,255,0.16)"/>
+    <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
+    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+  </svg>
+</div>
+              </div>
+              <figcaption class="galCap">
+                <b data-i18n="gal_exterior_title">Hotel Exterior</b>
+                <span data-i18n="gal_exterior_desc">A clear look at the property—easy arrival, calm atmosphere.</span>
+              </figcaption>
+            </figure>
+
+            <figure class="galSlide">
+              <div class="mediaWrap">
+                <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Hotel entrance photo" loading="lazy" decoding="async">
+                <div class="ph" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+    <defs>
+      <linearGradient id="gph" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/>
+        <stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/>
+      </linearGradient>
+    </defs>
+    <rect width="800" height="520" rx="28" fill="#0B1220"/>
+    <rect x="24" y="24" width="752" height="472" rx="22" fill="url(#gph)" stroke="rgba(255,255,255,0.16)"/>
+    <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
+    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+  </svg>
+</div>
+              </div>
+              <figcaption class="galCap">
+                <b data-i18n="gal_entrance_title">Entrance & Arrival</b>
+                <span data-i18n="gal_entrance_desc">Convenient access and a simple arrival flow.</span>
+              </figcaption>
+            </figure>
+
+            <figure class="galSlide">
+              <div class="mediaWrap">
+                <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Lobby and reception photo" loading="lazy" decoding="async">
+                <div class="ph" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+    <defs>
+      <linearGradient id="gph" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/>
+        <stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/>
+      </linearGradient>
+    </defs>
+    <rect width="800" height="520" rx="28" fill="#0B1220"/>
+    <rect x="24" y="24" width="752" height="472" rx="22" fill="url(#gph)" stroke="rgba(255,255,255,0.16)"/>
+    <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
+    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+  </svg>
+</div>
+              </div>
+              <figcaption class="galCap">
+                <b data-i18n="svg_lobby_and_reception">Lobby & Reception</b>
+                <span data-i18n="gal_lobby_desc">First impression matters—clean, friendly, efficient.</span>
+              </figcaption>
+            </figure>
+
+            <figure class="galSlide">
+              <div class="mediaWrap">
+                <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room photo" loading="lazy" decoding="async">
+                <div class="ph" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+    <defs>
+      <linearGradient id="gph" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/>
+        <stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/>
+      </linearGradient>
+    </defs>
+    <rect width="800" height="520" rx="28" fill="#0B1220"/>
+    <rect x="24" y="24" width="752" height="472" rx="22" fill="url(#gph)" stroke="rgba(255,255,255,0.16)"/>
+    <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
+    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+  </svg>
+</div>
+              </div>
+              <figcaption class="galCap">
+                <b data-i18n="gal_std_double_title">Standard Double Room</b>
+                <span data-i18n="gal_std_double_desc">Comfortable double bed with generous space for a smooth stay.</span>
+              </figcaption>
+            </figure>
+
+            <figure class="galSlide">
+              <div class="mediaWrap">
+                <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin room photo" loading="lazy" decoding="async">
+                <div class="ph" aria-hidden="true">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+    <defs>
+      <linearGradient id="gph" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/>
+        <stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/>
+      </linearGradient>
+    </defs>
+    <rect width="800" height="520" rx="28" fill="#0B1220"/>
+    <rect x="24" y="24" width="752" height="472" rx="22" fill="url(#gph)" stroke="rgba(255,255,255,0.16)"/>
+    <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
+    <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+  </svg>
+</div>
+              </div>
+              <figcaption class="galCap">
+                <b data-i18n="gal_std_twin_title">Standard Twin Room</b>
+                <span data-i18n="gal_std_twin_desc">Two single beds—ideal for friends or work trips.</span>
+              </figcaption>
+            </figure>
+          </div>
         </div>
+
+        <div class="galBar" aria-label="Carousel controls">
+          <button class="galNavBtn" type="button" id="galPrev" aria-label="Previous photo">‹</button>
+          <div class="galDots" id="galDots" aria-label="Photo selector"></div>
+          <button class="galNavBtn" type="button" id="galNext" aria-label="Next photo">›</button>
+        </div>
+        <div class="galHint fine" data-i18n="gal_swipe_hint">Swipe for more photos or use the arrows</div>
+      </div>
+      <div class="galleryNav" aria-label="Gallery controls">
+        <button class="btn" type="button" id="galleryPrev" aria-label="Previous gallery images">←</button>
+        <button class="btn" type="button" id="galleryNext" aria-label="Next gallery images">→</button>
+      </div>
+      </div>
+      <div class="galleryNav" aria-label="Gallery controls">
+        <button class="btn" type="button" id="galleryPrev" aria-label="Previous gallery images">←</button>
+        <button class="btn" type="button" id="galleryNext" aria-label="Next gallery images">→</button>
+      </div>
       </div>
       <div class="galleryNav" aria-label="Gallery controls">
         <button class="btn" type="button" id="galleryPrev" aria-label="Previous gallery images">←</button>
@@ -1139,7 +1409,7 @@
       </div>
     </div>
   </section>
-  <section class="section" id="reviews">
+<section class="section" id="reviews">
     <div class="card altB pad">
       <div class="head">
         <div>
@@ -1296,22 +1566,23 @@
       nav_location: "ที่ตั้ง",
 
       hero_kicker: '<span class="kw a">จองตรงกับโรงแรม</span> <span style="opacity:.9">•</span> <span class="kw">ยืนยันรวดเร็ว</span> <span style="opacity:.9">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
-      hero_sub: 'ห้องพักสะอาด สบาย <span class="kw a">ห้องกว้าง</span> ใน <span class="kw">นครศรีธรรมราช</span> พร้อม <span class="kw">Wi‑Fi</span>, <span class="kw">ที่จอดรถ</span>, <span class="kw">แอร์</span>, และ <span class="kw">ซักรีด</span>. จองเร็วที่สุด: <span class="kw hot">โทร</span> หรือ <span class="kw hot">แชต</span> แจ้งวันเข้าพัก',
+      hero_sub: 'ฐานพักที่สงบและสะดวกใน <span class="kw">นครศรีธรรมราช</span>: <span class="kw a">ห้องกว้าง</span>, <span class="kw">แอร์เย็น</span>, <span class="kw">Wi‑Fi เร็ว</span>, <span class="kw">ที่จอดรถ</span>, และ <span class="kw">ซักรีด</span>. จองเร็วที่สุด: <span class="kw hot">ส่งข้อความ</span> แจ้งวันเข้าพัก + ประเภทห้อง หรือ <span class="kw hot">โทร</span> เพื่อยืนยันได้ทันที',
       hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
+      hero_photo_hint: "เลื่อน/ปัดเพื่อดูรูปเพิ่มเติม",
 
       cta_call_to_book: "โทรเพื่อจอง",
       cta_call_number: "โทร: 088-790-6345",
       cta_open_map: "เปิดแผนที่",
 
       offers_title: "ข้อเสนอ & ทิปส์สำหรับจองเร็ว",
-      offers_sub: "สิทธิพิเศษจองตรงและทิปส์สั้น ๆ เพื่อยืนยันได้เร็วขึ้น",
+      offers_sub: "วิธีจองที่เร็วขึ้น พร้อมทิปส์สั้น ๆ เพื่อรับการยืนยันและราคารวมไวขึ้น",
       offers_btn: "เช็คห้องว่าง",
       offer1_title: 'ช่วยจองตรง <span class="badge a">ตอบไว</span>',
-      offer1_desc: "ส่งวันเข้าพัก + ประเภทห้อง แล้วเราจะยืนยันห้องว่างให้เร็วที่สุด",
+      offer1_desc: "ส่งวันเข้าพัก + จำนวนผู้เข้าพัก + ประเภทห้อง แล้วเราจะตอบกลับพร้อมห้องว่างและราคารวม",
       offer2_title: 'รองรับพักระยะยาว <span class="badge b">สอบถาม</span>',
-      offer2_desc: "พัก 7 คืนขึ้นไป? สอบถามตัวเลือกพักยาว (ตามฤดูกาล)",
+      offer2_desc: "พัก 7 คืนขึ้นไป? สอบถามเรทรายสัปดาห์/รายเดือน (ขึ้นอยู่กับช่วงเวลา)",
       offer3_title: 'วางแผนล่วงหน้า <span class="badge hot">ทิป</span>',
-      offer3_desc: "จองล่วงหน้าเพื่อเพิ่มโอกาสได้ห้องในช่วงสุดสัปดาห์/วันหยุด",
+      offer3_desc: "สุดสัปดาห์/วันหยุดมักเต็มเร็ว—จองล่วงหน้าเพื่อได้ห้องที่ต้องการ",
 
       book_title: "ส่งคำขอจองแบบรวดเร็ว",
       book_sub: 'ส่ง <span class="kw a">วันเข้าพัก</span> + <span class="kw">ประเภทห้อง</span> แล้วเราจะตอบกลับเร็วที่สุด',
@@ -1397,6 +1668,16 @@
 
       gallery_title: "แกลเลอรี",
       gallery_sub: "เปลี่ยนเป็นรูปจริงเพื่อเพิ่มความน่าเชื่อถือและยอดจอง",
+      gal_exterior_title: "ภายนอกโรงแรม",
+      gal_exterior_desc: "ภาพรวมโรงแรม—หาง่าย เห็นชัด และเข้าพักได้สบายใจ",
+      gal_entrance_title: "ทางเข้า & การมาถึง",
+      gal_entrance_desc: "เข้าพักสะดวก เดินทางง่าย ทั้งกลางวันและกลางคืน",
+      gal_std_double_title: "ห้อง Standard Double",
+      gal_std_double_desc: "เตียงใหญ่ ห้องกว้าง เหมาะสำหรับคู่รักหรือพักคนเดียว",
+      gal_std_twin_title: "ห้อง Standard Twin",
+      gal_std_twin_desc: "สองเตียงเดี่ยว เหมาะสำหรับเพื่อนร่วมทางหรือทริปทำงาน",
+      gal_swipe_hint: "ปัดเพื่อดูรูปเพิ่มเติม หรือใช้ปุ่มลูกศร",
+
       svg_replace_photos: "เปลี่ยนเป็นรูปจริง",
       svg_lobby_and_reception: "ล็อบบี้ & เคาน์เตอร์",
       svg_large_room_layout: "ห้องกว้าง",
@@ -1410,7 +1691,7 @@
       svg_premium_double: "Premium Double",
 
       reviews_title: "รีวิวจากผู้เข้าพัก",
-      reviews_sub: "เชื่อมต่อรีวิวจริงจาก Google Maps เพื่อความน่าเชื่อถือสูงสุด",
+      reviews_sub: "ดูทำเลและรีวิวล่าสุดบน Google Maps เพื่อความมั่นใจก่อนจอง",
       btn_view_maps: "ดูบน Google Maps",
       review1_title: 'นักธุรกิจ <span class="stars">★★★★★</span>',
       review1_text: "เช็คอินไว Wi‑Fi เสถียร ห้องใหญ่ทำงานได้สบาย คุ้มค่า",
@@ -1497,22 +1778,23 @@
       nav_location: "Location",
 
       hero_kicker: '<span class="kw a">Direct booking</span> <span style="opacity:.9">•</span> <span class="kw">Fast confirmation</span> <span style="opacity:.9">•</span> <span class="kw hot">Click to book</span>',
-      hero_sub: 'Clean, comfortable <span class="kw a">large rooms</span> in <span class="kw">Nakhon Si Thammarat</span> with <span class="kw">Wi‑Fi</span>, <span class="kw">parking</span>, <span class="kw">AC</span>, and <span class="kw">laundry</span>. For the fastest booking: <span class="kw hot">call</span> or <span class="kw hot">message</span> your dates.',
+      hero_sub: 'Your calm base in <span class="kw">Nakhon Si Thammarat</span>: <span class="kw a">spacious rooms</span>, strong <span class="kw">A/C</span>, fast <span class="kw">Wi‑Fi</span>, easy <span class="kw">parking</span>, and convenient <span class="kw">laundry</span>. Fastest booking: <span class="kw hot">message</span> your dates + room type—or <span class="kw hot">call</span> for instant confirmation.',
       hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms',
+      hero_photo_hint: "Swipe for more photos",
 
       cta_call_to_book: "Call to Book",
       cta_call_number: "Call: 088-790-6345",
       cta_open_map: "Open Map",
 
       offers_title: "Click‑to‑Book Offers & Tips",
-      offers_sub: "Direct-booking perks and quick tips to confirm faster.",
+      offers_sub: "Quick ways to lock in your room and get a fast confirmed quote.",
       offers_btn: "Get availability",
       offer1_title: 'Direct Booking Assist <span class="badge a">Fast Reply</span>',
-      offer1_desc: "Message your dates + room type and we’ll confirm availability quickly.",
+      offer1_desc: "Send dates + guests + room type—we’ll reply with availability and total price.",
       offer2_title: 'Long‑Stay Support <span class="badge b">Ask</span>',
-      offer2_desc: "Staying 7+ nights? Ask about long‑stay options (seasonal).",
+      offer2_desc: "Staying 7+ nights? Ask about weekly/monthly options (seasonal).",
       offer3_title: 'Early Plan Advantage <span class="badge hot">Tip</span>',
-      offer3_desc: "Book earlier for best room availability on busy weekends.",
+      offer3_desc: "Weekends/holidays fill quickly—book early for best availability.",
 
       book_title: "Quick Booking Request",
       book_sub: 'Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.',
@@ -1598,6 +1880,16 @@
 
       gallery_title: "Gallery",
       gallery_sub: "Swap these with real photos for higher trust and more bookings.",
+      gal_exterior_title: "Hotel Exterior",
+      gal_exterior_desc: "A clear look at the property—easy arrival, calm atmosphere.",
+      gal_entrance_title: "Entrance & Arrival",
+      gal_entrance_desc: "Convenient access and a simple arrival flow.",
+      gal_std_double_title: "Standard Double Room",
+      gal_std_double_desc: "Comfortable double bed with generous space for a smooth stay.",
+      gal_std_twin_title: "Standard Twin Room",
+      gal_std_twin_desc: "Two single beds—ideal for friends or work trips.",
+      gal_swipe_hint: "Swipe for more photos or use the arrows",
+
       svg_replace_photos: "Replace with real photos",
       svg_lobby_and_reception: "Lobby & Reception",
       svg_large_room_layout: "Large Room Layout",
@@ -1611,7 +1903,7 @@
       svg_premium_double: "Premium Double",
 
       reviews_title: "Guest Reviews",
-      reviews_sub: "Link your live reviews from Google Maps for maximum trust.",
+      reviews_sub: "Check location and the latest guest feedback on Google Maps before you book.",
       btn_view_maps: "View on Google Maps",
       review1_title: 'Business Traveler <span class="stars">★★★★★</span>',
       review1_text: "Fast check‑in, stable Wi‑Fi, and a big room to work in. Great value.",
@@ -1698,22 +1990,23 @@
       nav_location: "位置",
 
       hero_kicker: '<span class="kw a">酒店直订</span> <span style="opacity:.9">•</span> <span class="kw">快速确认</span> <span style="opacity:.9">•</span> <span class="kw hot">点击预订</span>',
-      hero_sub: '干净舒适的 <span class="kw a">宽敞客房</span> 位于 <span class="kw">泰国洛坤府</span>，提供 <span class="kw">Wi‑Fi</span>、<span class="kw">停车位</span>、<span class="kw">空调</span> 和 <span class="kw">洗衣</span>。最快预订：<span class="kw hot">致电</span> 或 <span class="kw hot">留言</span> 告知日期。',
+      hero_sub: '你在 <span class="kw">洛坤府</span> 的安心落脚点：<span class="kw a">宽敞客房</span>、强劲 <span class="kw">空调</span>、高速 <span class="kw">Wi‑Fi</span>、便捷 <span class="kw">停车</span> 与 <span class="kw">洗衣</span>。最快预订：<span class="kw hot">留言</span> 日期 + 房型，或 <span class="kw hot">致电</span> 立即确认。',
       hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
+      hero_photo_hint: "滑动查看更多照片",
 
       cta_call_to_book: "电话预订",
       cta_call_number: "致电：088-790-6345",
       cta_open_map: "打开地图",
 
       offers_title: "一键预订优惠与小贴士",
-      offers_sub: "直订福利与快速小贴士，帮助你更快确认。",
+      offers_sub: "更快锁定房间的小技巧，快速拿到确认与报价。",
       offers_btn: "查询空房",
       offer1_title: '直订协助 <span class="badge a">快速回复</span>',
-      offer1_desc: "发送入住日期 + 房型，我们会尽快确认空房。",
+      offer1_desc: "发送入住/退房日期 + 人数 + 房型，我们会回复空房与总价。",
       offer2_title: '长住支持 <span class="badge b">咨询</span>',
-      offer2_desc: "入住 7 晚以上？可咨询长住方案（按季节）。",
+      offer2_desc: "入住 7 晚以上？可咨询周租/月租方案（季节性）。",
       offer3_title: '提前预订更稳 <span class="badge hot">提示</span>',
-      offer3_desc: "周末/假期较忙，建议提前预订以提高空房概率。",
+      offer3_desc: "周末/假期更紧张，建议提前预订以确保空房。",
 
       book_title: "快速预订请求",
       book_sub: '发送 <span class="kw a">日期</span> + <span class="kw">房型</span>，我们会尽快确认。',
@@ -1799,6 +2092,16 @@
 
       gallery_title: "相册",
       gallery_sub: "替换为真实照片可显著提升信任度与预订率。",
+      gal_exterior_title: "酒店外观",
+      gal_exterior_desc: "先看清酒店整体氛围——到店更安心。",
+      gal_entrance_title: "入口与到店",
+      gal_entrance_desc: "出入方便，到店流程简单顺畅。",
+      gal_std_double_title: "标准大床房",
+      gal_std_double_desc: "舒适大床 + 宽敞空间，适合情侣或独自出行。",
+      gal_std_twin_title: "标准双床房",
+      gal_std_twin_desc: "两张单人床，适合朋友同行或商务出行。",
+      gal_swipe_hint: "左右滑动查看更多照片，或使用箭头按钮",
+
       svg_replace_photos: "替换为真实照片",
       svg_lobby_and_reception: "大堂与前台",
       svg_large_room_layout: "宽敞房型",
@@ -1812,7 +2115,7 @@
       svg_premium_double: "高级大床房",
 
       reviews_title: "住客评价",
-      reviews_sub: "连接 Google Maps 的真实评价，建立更多信任。",
+      reviews_sub: "在 Google Maps 查看位置与最新评价，预订更放心。",
       btn_view_maps: "在Google Maps查看",
       review1_title: '商务出行 <span class="stars">★★★★★</span>',
       review1_text: "办理入住很快，Wi‑Fi稳定，房间大，办公方便，性价比高。",
@@ -1967,6 +2270,101 @@
         applyLang(lang);
       });
     });
+  })();
+
+  // ===== GALLERY CAROUSEL (replaces bottom gallery grid) =====
+  (function galleryCarousel(){
+    const carousel = document.getElementById("galCarousel");
+    const viewport = document.getElementById("galViewport");
+    const track = document.getElementById("galTrack");
+    const dotsWrap = document.getElementById("galDots");
+    const prevBtn = document.getElementById("galPrev");
+    const nextBtn = document.getElementById("galNext");
+    if(!carousel || !viewport || !track || !dotsWrap || !prevBtn || !nextBtn) return;
+
+    const slides = Array.from(track.querySelectorAll(".galSlide"));
+    if(slides.length <= 1){
+      dotsWrap.style.display = "none";
+      prevBtn.style.display = "none";
+      nextBtn.style.display = "none";
+      return;
+    }
+
+    const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    let idx = 0;
+    let timer = null;
+
+    function setIndex(i){
+      idx = (i + slides.length) % slides.length;
+      track.style.transform = `translateX(${-idx * 100}%)`;
+      dotsWrap.querySelectorAll(".galDot").forEach((b,bi)=>{
+        b.setAttribute("aria-current", bi === idx ? "true" : "false");
+      });
+    }
+
+    function buildDots(){
+      dotsWrap.innerHTML = "";
+      slides.forEach((_,i)=>{
+        const b = document.createElement("button");
+        b.type = "button";
+        b.className = "galDot";
+        b.setAttribute("aria-label", `Photo ${i+1}`);
+        b.setAttribute("aria-current", i === 0 ? "true" : "false");
+        b.addEventListener("click", ()=>{ stop(); setIndex(i); start(); });
+        dotsWrap.appendChild(b);
+      });
+    }
+
+    function start(){
+      if(prefersReduce) return;
+      stop();
+      timer = setInterval(()=> setIndex(idx + 1), 7500);
+    }
+    function stop(){
+      if(timer){ clearInterval(timer); timer = null; }
+    }
+
+    prevBtn.addEventListener("click", ()=>{ stop(); setIndex(idx - 1); start(); });
+    nextBtn.addEventListener("click", ()=>{ stop(); setIndex(idx + 1); start(); });
+
+    carousel.addEventListener("pointerenter", stop, {passive:true});
+    carousel.addEventListener("pointerleave", start, {passive:true});
+    carousel.addEventListener("focusin", stop);
+    carousel.addEventListener("focusout", start);
+
+    // Swipe / drag detection
+    let sx = null;
+    viewport.addEventListener("pointerdown", (e)=>{
+      sx = e.clientX;
+      try{ viewport.setPointerCapture(e.pointerId); } catch(_e){}
+    }, {passive:true});
+    viewport.addEventListener("pointerup", (e)=>{
+      if(sx === null) return;
+      const dx = e.clientX - sx;
+      sx = null;
+      if(Math.abs(dx) < 40) return;
+      stop();
+      if(dx < 0) setIndex(idx + 1); else setIndex(idx - 1);
+      start();
+    }, {passive:true});
+
+    // Keyboard support
+    viewport.addEventListener("keydown", (e)=>{
+      if(e.key === "ArrowLeft"){ e.preventDefault(); stop(); setIndex(idx - 1); start(); }
+      else if(e.key === "ArrowRight"){ e.preventDefault(); stop(); setIndex(idx + 1); start(); }
+    });
+
+    // Keep slide aligned on resize
+    let rt;
+    window.addEventListener("resize", ()=>{
+      clearTimeout(rt);
+      rt = setTimeout(()=> setIndex(idx), 120);
+    }, {passive:true});
+
+    buildDots();
+    setIndex(0);
+    start();
   })();
 
 
