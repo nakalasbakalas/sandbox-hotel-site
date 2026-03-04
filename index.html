@@ -684,11 +684,13 @@
 
     /* Media (images with SVG fallback) */
     .mediaWrap{position:relative;overflow:hidden}
-    .mediaWrap .mediaImg{display:block;width:100%;aspect-ratio:800/520;object-fit:cover;background:linear-gradient(135deg, rgba(196,122,58,.16), rgba(224,161,106,.10));opacity:0;transform:scale(1.01);transition:opacity .25s ease, transform .6s ease}
+    .mediaWrap .mediaImg{display:block;width:100%;aspect-ratio:800/520;object-fit:cover;background:linear-gradient(135deg, rgba(196,122,58,.16), rgba(224,161,106,.10));opacity:1;transform:none;transition:opacity .25s ease, transform .6s ease}
     .mediaWrap.imgOk .mediaImg{opacity:1;transform:scale(1)}
+    .mediaWrap .ph{position:absolute;inset:0;opacity:0;transition:opacity .25s ease;pointer-events:none}
     .mediaWrap .ph{position:absolute;inset:0;opacity:1;transition:opacity .25s ease;pointer-events:none}
     .mediaWrap.imgOk .ph{opacity:0}
     .mediaWrap.imgFail .mediaImg{display:none}
+    .mediaWrap.imgFail .ph{opacity:1}
 
     /* Gallery images */
     .gItem .mediaWrap{border-bottom:1px solid rgba(255,255,255,.10)}
