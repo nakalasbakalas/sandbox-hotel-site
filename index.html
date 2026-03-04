@@ -791,6 +791,91 @@
     .stickyLeft span{font-size:12px; color:var(--muted)}
     .stickyActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
 
+
+    /* ==========================================================
+       DEVICE DISPLAY TUNING (PHONE / TABLET)
+       - Auto-detects touch devices and applies compact layout
+       - Minimizes CTA clutter on smaller screens
+       - Sticky bar auto-hides on scroll + hides when keyboard is open
+    ========================================================== */
+
+    /* Smooth hide/show for the sticky booking bar */
+    .sticky{
+      transform: translateY(0);
+      transition: transform .22s ease, opacity .22s ease, filter .22s ease;
+      will-change: transform;
+    }
+    .sticky.stickyHidden{
+      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
+    }
+    html.kbdOpen .sticky{
+      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
+    }
+
+    /* Ensure content isn't hidden behind the sticky bar on touch devices */
+    html[data-compact="true"] body{
+      padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    }
+
+    /* Phone layout (compact + conversion-focused) */
+    html[data-device="phone"] .nav{
+      padding: 8px 12px;
+      padding-top: calc(8px + env(safe-area-inset-top));
+    }
+    html[data-device="phone"] .logo{ width:40px; height:40px; border-radius:14px; }
+    html[data-device="phone"] .brand small{ display:none; }
+
+    html[data-device="phone"] .hero{
+      min-height: clamp(480px, 82vh, 720px);
+      border-radius: 18px;
+    }
+    html[data-device="phone"] .heroInner{
+      padding: clamp(18px, 4.8vw, 36px) 14px;
+    }
+    html[data-device="phone"] .heroPanel{
+      padding: 16px 14px 12px;
+    }
+
+    /* Hero CTAs: keep the highest-intent actions visible; reduce clutter */
+    html[data-device="phone"] .heroCTA{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    html[data-device="phone"] .heroCTA .btn{ width:100%; }
+    html[data-device="phone"] .heroCTA .btn.primary{ grid-column:1 / -1; }
+    html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
+    html[data-device="phone"] #ctaWhatsApp,
+    html[data-device="phone"] .heroCTA .btn.ghost{ display:none !important; }
+
+    /* Language + theme controls: tighten */
+    html[data-device="phone"] .langSwitch .langBtn span:last-child{ display:none; }
+    html[data-device="phone"] .langSwitch{ gap:6px !important; }
+    html[data-device="phone"] .langSwitch .chip{ padding:8px 9px; min-height:36px; }
+    html[data-device="phone"] #themeLabel{ display:none; }
+
+    /* Sticky bar: compact mode on phone */
+    html[data-device="phone"] .stickyInner{ justify-content:center; }
+    html[data-device="phone"] .stickyLeft{ display:none; }
+    html[data-device="phone"] .stickyActions{
+      width:100%;
+      justify-content:center;
+    }
+    html[data-device="phone"] .stickyActions .btn{
+      flex: 1 1 auto;
+      min-height: 42px;
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+    html[data-device="phone"] #stickyWA{ display:none !important; }
+
+    /* Tablet: reduce some noise but keep context */
+    html[data-device="tablet"] .hero{
+      min-height: clamp(520px, 75vh, 820px);
+    }
+    html[data-device="tablet"] .stickyLeft span{ display:none; }
+    html[data-device="tablet"] .heroCTA .btn.ghost{ display:none !important; }
+
     /* ---------- Print ---------- */
     @media print{
       html,body{background:#fff !important; color:#000 !important}
@@ -1125,8 +1210,8 @@
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
-                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
                   </a>
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
@@ -1138,8 +1223,8 @@
                 </div>
 
                 <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/Double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/Double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
                     <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async">
@@ -1258,7 +1343,7 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
@@ -1476,7 +1561,91 @@
     const EMAIL_TO = "reservations@sandboxhotel.com";            // replace with your real email
     // =========================
 
-    // ---------- Theme (System default; user override saved) ----------
+    
+    // ---------- Device display tuning (phone/tablet) ----------
+    (function(){
+      const root = document.documentElement;
+      const sticky = document.querySelector(".sticky");
+      let resizeT;
+
+      function detectDevice(){
+        const w = window.innerWidth || 0;
+        const h = window.innerHeight || 0;
+        const minSide = Math.min(w || 9999, h || 9999);
+        const isTouch = (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+                        ("ontouchstart" in window) ||
+                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+
+        let device = "desktop";
+        if(isTouch){
+          device = (minSide <= 680) ? "phone" : "tablet";
+        }
+        root.setAttribute("data-device", device);
+        root.setAttribute("data-compact", device === "desktop" ? "false" : "true");
+      }
+
+      detectDevice();
+      window.addEventListener("resize", ()=>{
+        clearTimeout(resizeT);
+        resizeT = setTimeout(detectDevice, 150);
+      }, { passive:true });
+
+      if(!sticky) return;
+
+      // Hide sticky while typing (on-screen keyboard)
+      document.addEventListener("focusin", (e)=>{
+        if(root.getAttribute("data-compact") === "true"){
+          const tag = e.target && e.target.tagName;
+          if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT"){
+            root.classList.add("kbdOpen");
+          }
+        }
+      }, true);
+
+      document.addEventListener("focusout", (e)=>{
+        const tag = e.target && e.target.tagName;
+        if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT"){
+          setTimeout(()=>root.classList.remove("kbdOpen"), 120);
+        }
+      }, true);
+
+      // Auto-hide sticky on downward scroll (compact devices only)
+      let lastY = window.scrollY || 0;
+      let ticking = false;
+
+      function updateSticky(){
+        const compact = root.getAttribute("data-compact") === "true";
+        if(!compact){
+          sticky.classList.remove("stickyHidden");
+          lastY = window.scrollY || 0;
+          return;
+        }
+        const y = window.scrollY || 0;
+        const delta = y - lastY;
+
+        if(y < 120){
+          sticky.classList.remove("stickyHidden");
+        } else if(delta > 10){
+          sticky.classList.add("stickyHidden");
+        } else if(delta < -10){
+          sticky.classList.remove("stickyHidden");
+        }
+        lastY = y;
+      }
+
+      window.addEventListener("scroll", ()=>{
+        if(ticking) return;
+        ticking = true;
+        requestAnimationFrame(()=>{
+          ticking = false;
+          updateSticky();
+        });
+      }, { passive:true });
+
+      updateSticky();
+    })();
+
+// ---------- Theme (System default; user override saved) ----------
     const THEME_KEY = "sbx_theme"; // "system" | "dark" | "light"
     const metaTheme = document.getElementById("metaThemeColor");
     const themeToggle = document.getElementById("themeToggle");
