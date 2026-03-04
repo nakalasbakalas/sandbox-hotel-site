@@ -28,21 +28,20 @@
   <meta name="twitter:description" content="Book direct for fast confirmation via phone, LINE, or WhatsApp.">
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
-  <!-- Preload hero image (EDIT PATH if needed) -->
+  <!-- Preload hero -->
   <link rel="preload" as="image" href="images/Sandbox-Hotel-Hero-Banner.png" fetchpriority="high">
 
   <style>
     /* ==========================================================
       Sandbox Hotel — vNext (Fixed + Upgraded)
-      - Valid HTML structure (no nested anchors, no duplicate IDs)
-      - Single gallery carousel (no mixed systems)
-      - Light/Dark theme follows device via prefers-color-scheme
-      - Optional user override toggle (saved in localStorage)
-      - Cross-browser hardening (Chrome/Edge/Opera/Firefox/Safari/iOS)
+      - Gallery is carousel-only (NO grid)
+      - Google Maps embed at bottom (reasonable size)
+      - Light/Dark follows device by default (prefers-color-scheme)
+      - Optional user override: System → Dark → Light (saved)
+      - Valid HTML (no nested anchors, no duplicate IDs)
     ========================================================== */
 
     :root{
-      /* Brand accents */
       --copper:#B76A2B;
       --copper2:#D18B50;
       --champagne:#F0C39A;
@@ -62,24 +61,13 @@
 
       --focus: 0 0 0 4px rgba(183,106,43,.28);
 
-      /* Hero image (EDIT PATH if needed) */
+      /* Edit if needed */
       --heroImg: url("images/Sandbox-Hotel-Hero-Banner.png");
     }
 
-    /* ---------- Theme tokens (system default via media query) ---------- */
+    /* ---------- Theme tokens ---------- */
     html{color-scheme: light dark;}
-    html[data-theme="system"]{ /* follow OS */ }
-    @media (prefers-color-scheme: dark){
-      html[data-theme="system"]{ --__theme: dark; }
-    }
-    @media (prefers-color-scheme: light){
-      html[data-theme="system"]{ --__theme: light; }
-    }
-    html[data-theme="dark"]{ --__theme: dark; }
-    html[data-theme="light"]{ --__theme: light; }
-
-    /* Dark palette */
-    html{
+    html[data-theme="dark"]{
       --bg0:#050507;
       --bg1:#0B0C0F;
       --paper:#090A0D;
@@ -99,30 +87,53 @@
       --shadow:0 22px 70px rgba(0,0,0,.62);
       --shadow2:0 14px 38px rgba(0,0,0,.48);
       --shadow3:0 10px 24px rgba(0,0,0,.38);
-    }
 
-    /* Light palette overrides when theme resolves to light */
-    html[data-theme="light"],
-    html[data-theme="system"][style*="--resolvedTheme:light"]{
+      --uiGlass: rgba(9,10,13,.72);
+      --uiGlass2: rgba(9,10,13,.78);
+    }
+    html[data-theme="light"]{
       --bg0:#F3F4F6;
       --bg1:#FFFFFF;
       --paper:#F8FAFC;
       --card:#FFFFFF;
       --card2:#FFFFFF;
 
-      --ink:#1A1B1F;
+      --ink:#111827;
       --ink2:#0B0C0F;
       --muted:#4B5563;
       --muted2:#6B7280;
-      --line:rgba(0,0,0,.10);
+      --line:rgba(17,24,39,.12);
 
-      --softA:rgba(183,106,43,.16);
+      --softA:rgba(183,106,43,.14);
       --softB:rgba(209,139,80,.12);
-      --softHot:rgba(240,195,154,.18);
+      --softHot:rgba(240,195,154,.16);
 
       --shadow:0 20px 50px rgba(15,23,42,.10);
       --shadow2:0 14px 28px rgba(15,23,42,.10);
       --shadow3:0 10px 18px rgba(15,23,42,.10);
+
+      --uiGlass: rgba(255,255,255,.82);
+      --uiGlass2: rgba(255,255,255,.86);
+    }
+
+    /* System theme uses OS preference */
+    @media (prefers-color-scheme: dark){
+      html[data-theme="system"]{ color-scheme: dark;
+        --bg0:#050507; --bg1:#0B0C0F; --paper:#090A0D; --card:#111218; --card2:#161822;
+        --ink:#F3F1ED; --ink2:#FFFFFF; --muted:#CEC7BC; --muted2:#ADA498; --line:rgba(255,255,255,.10);
+        --softA:rgba(183,106,43,.18); --softB:rgba(209,139,80,.14); --softHot:rgba(240,195,154,.16);
+        --shadow:0 22px 70px rgba(0,0,0,.62); --shadow2:0 14px 38px rgba(0,0,0,.48); --shadow3:0 10px 24px rgba(0,0,0,.38);
+        --uiGlass: rgba(9,10,13,.72); --uiGlass2: rgba(9,10,13,.78);
+      }
+    }
+    @media (prefers-color-scheme: light){
+      html[data-theme="system"]{ color-scheme: light;
+        --bg0:#F3F4F6; --bg1:#FFFFFF; --paper:#F8FAFC; --card:#FFFFFF; --card2:#FFFFFF;
+        --ink:#111827; --ink2:#0B0C0F; --muted:#4B5563; --muted2:#6B7280; --line:rgba(17,24,39,.12);
+        --softA:rgba(183,106,43,.14); --softB:rgba(209,139,80,.12); --softHot:rgba(240,195,154,.16);
+        --shadow:0 20px 50px rgba(15,23,42,.10); --shadow2:0 14px 28px rgba(15,23,42,.10); --shadow3:0 10px 18px rgba(15,23,42,.10);
+        --uiGlass: rgba(255,255,255,.82); --uiGlass2: rgba(255,255,255,.86);
+      }
     }
 
     /* ---------- Base / Reset ---------- */
@@ -142,7 +153,7 @@
       color: var(--ink);
       overflow-x:hidden;
       background:
-        radial-gradient(1400px 720px at 12% -12%, rgba(183,106,43,.20), transparent 62%),
+        radial-gradient(1400px 720px at 12% -12%, rgba(183,106,43,.18), transparent 62%),
         radial-gradient(1200px 680px at 88% -18%, rgba(0,0,0,.06), transparent 60%),
         radial-gradient(900px 560px at 50% 120%, rgba(240,195,154,.12), transparent 62%),
         linear-gradient(180deg, var(--paper) 0%, var(--bg1) 58%, var(--bg0) 100%);
@@ -165,7 +176,7 @@
       *{animation:none !important; transition:none !important; scroll-behavior:auto !important}
     }
 
-    /* Optional scrollbars (non-breaking) */
+    /* Optional scrollbars */
     *{scrollbar-color: rgba(183,106,43,.55) rgba(0,0,0,.08); scrollbar-width: thin}
     *::-webkit-scrollbar{width:10px; height:10px}
     *::-webkit-scrollbar-track{background: rgba(0,0,0,.08)}
@@ -200,42 +211,33 @@
       position:absolute; inset:0;
       border-radius:inherit;
       pointer-events:none;
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.06),
-        inset 0 -1px 0 rgba(0,0,0,.25);
-      opacity:.8;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+      opacity:.7;
     }
-    html[data-theme="light"] .card:before,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .card:before{
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.65);
-      opacity:1;
-    }
-
+    html[data-theme="light"] .card:before{opacity:.35}
     .card.altA{
       background:
-        radial-gradient(900px 320px at 18% 0%, rgba(183,106,43,.18), transparent 62%),
+        radial-gradient(900px 320px at 18% 0%, rgba(183,106,43,.14), transparent 62%),
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,0) 60%),
         var(--card);
-      border-color: rgba(183,106,43,.24);
+      border-color: rgba(183,106,43,.22);
     }
     .card.altB{
       background:
         radial-gradient(900px 320px at 82% 0%, rgba(255,255,255,.06), transparent 62%),
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,0) 60%),
         var(--card);
-      border-color: rgba(0,0,0,.08);
-      border-color: var(--line);
     }
     .card.altHot{
       background:
-        radial-gradient(900px 320px at 50% 0%, rgba(240,195,154,.16), transparent 62%),
+        radial-gradient(900px 320px at 50% 0%, rgba(240,195,154,.14), transparent 62%),
         linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,0) 60%),
         var(--card);
       border-color: rgba(240,195,154,.20);
     }
+
     .pad{padding:18px}
     @media (max-width:640px){ .pad{padding:16px} }
-
     .muted{color:var(--muted)}
     .fine{color:var(--muted2); font-size:12px}
     .sep{height:1px; background:var(--line); margin:14px 0}
@@ -244,17 +246,10 @@
     header{
       position:sticky; top:0; z-index:80;
       border-bottom:1px solid var(--line);
-      background: rgba(9,10,13,.72);
+      background: var(--uiGlass);
       -webkit-backdrop-filter: blur(12px) saturate(150%);
       backdrop-filter: blur(12px) saturate(150%);
     }
-    html[data-theme="light"] header,
-    html[data-theme="system"][style*="--resolvedTheme:light"] header{
-      background: rgba(255,255,255,.78);
-      -webkit-backdrop-filter: blur(12px) saturate(150%);
-      backdrop-filter: blur(12px) saturate(150%);
-    }
-
     .nav{
       max-width:var(--max); margin:0 auto;
       padding:10px 16px;
@@ -266,7 +261,7 @@
       width:44px; height:44px; border-radius: 16px;
       background: rgba(10,11,14,.55);
       border:1px solid rgba(240,195,154,.22);
-      box-shadow: 0 16px 34px rgba(0,0,0,.45), 0 14px 26px rgba(183,106,43,.18);
+      box-shadow: 0 16px 34px rgba(0,0,0,.25), 0 14px 26px rgba(183,106,43,.14);
       padding:7px;
       overflow:hidden;
     }
@@ -280,7 +275,6 @@
       color:var(--ink2);
     }
     .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
-
     .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
     .hideMobile{display:inline-flex}
     @media (max-width:980px){ .hideMobile{display:none} }
@@ -291,8 +285,7 @@
       min-height:36px;
       padding:8px 10px;
       border-radius:999px;
-      border:1px solid rgba(0,0,0,.10);
-      border-color: var(--line);
+      border:1px solid var(--line);
       background: rgba(255,255,255,.05);
       color: var(--ink2);
       font-size:13px;
@@ -300,24 +293,21 @@
       user-select:none;
       text-decoration:none;
       transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
+      cursor:pointer;
     }
     .chip:hover{
       transform: translateY(-1px);
       box-shadow: var(--shadow3);
-      border-color: rgba(255,255,255,.18);
       background: rgba(255,255,255,.08);
     }
-    html[data-theme="light"] .chip:hover,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .chip:hover{
-      border-color: rgba(0,0,0,.14);
-      background: rgba(0,0,0,.03);
-    }
+    html[data-theme="light"] .chip{background: rgba(0,0,0,.02)}
+    html[data-theme="light"] .chip:hover{background: rgba(0,0,0,.04)}
 
     .chip.primary{
       border:none;
       color:white;
       background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92));
-      box-shadow: 0 16px 28px rgba(0,0,0,.35), 0 14px 24px rgba(183,106,43,.14);
+      box-shadow: 0 16px 28px rgba(0,0,0,.22), 0 14px 24px rgba(183,106,43,.12);
     }
 
     .btn{
@@ -350,42 +340,27 @@
       transform: translateY(-1px);
       box-shadow: var(--shadow3);
       background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.18);
     }
-    html[data-theme="light"] .btn:hover,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .btn:hover{
-      background: rgba(0,0,0,.03);
-      border-color: rgba(0,0,0,.14);
-    }
-
+    html[data-theme="light"] .btn{background: rgba(0,0,0,.02); color:var(--ink2)}
+    html[data-theme="light"] .btn:hover{background: rgba(0,0,0,.04)}
     .btn:active{transform: translateY(0)}
     .btn.primary{
       border:none;
       color:white;
       background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92) 55%, rgba(240,195,154,.86) 120%);
-      box-shadow: 0 18px 40px rgba(0,0,0,.45), 0 18px 34px rgba(183,106,43,.18);
+      box-shadow: 0 18px 40px rgba(0,0,0,.22), 0 18px 34px rgba(183,106,43,.14);
       text-shadow: 0 1px 0 rgba(0,0,0,.35);
     }
     .btn.hot{
       border:none;
       color:#140B06;
       background: linear-gradient(135deg, rgba(240,195,154,.98), rgba(209,139,80,.92));
-      box-shadow: 0 18px 40px rgba(0,0,0,.35), 0 18px 34px rgba(240,195,154,.12);
+      box-shadow: 0 18px 40px rgba(0,0,0,.20), 0 18px 34px rgba(240,195,154,.12);
     }
     .btn.ghost{
       background: rgba(255,255,255,.03);
       border:1px solid var(--line);
       color:var(--ink2);
-    }
-    html[data-theme="light"] .btn,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .btn{
-      color: var(--ink2);
-      background: rgba(0,0,0,.02);
-      border-color: rgba(0,0,0,.10);
-    }
-    html[data-theme="light"] .btn.ghost,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .btn.ghost{
-      background: rgba(255,255,255,.7);
     }
     .btn.sm{min-height:40px; padding:10px 12px; border-radius:12px}
 
@@ -401,9 +376,9 @@
       letter-spacing:.2px;
       white-space:nowrap;
     }
-    .badge.a{background: var(--softA); border-color: rgba(183,106,43,.28)}
-    .badge.b{background: var(--softB); border-color: rgba(209,139,80,.26)}
-    .badge.hot{background: var(--softHot); border-color: rgba(240,195,154,.26)}
+    .badge.a{background: var(--softA); border-color: rgba(183,106,43,.24)}
+    .badge.b{background: var(--softB); border-color: rgba(209,139,80,.22)}
+    .badge.hot{background: var(--softHot); border-color: rgba(240,195,154,.22)}
 
     /* ---------- Keyword pills ---------- */
     .kw{
@@ -415,14 +390,12 @@
       border:1px solid rgba(255,255,255,.12);
       white-space:nowrap;
     }
-    .kw.a{background: var(--softA); border-color: rgba(183,106,43,.28)}
-    .kw.hot{background: var(--softHot); border-color: rgba(240,195,154,.28)}
-
-    html[data-theme="light"] .kw,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .kw{
+    html[data-theme="light"] .kw{
       background: rgba(0,0,0,.03);
-      border-color: rgba(0,0,0,.10);
+      border-color: rgba(17,24,39,.12);
     }
+    .kw.a{background: var(--softA); border-color: rgba(183,106,43,.24)}
+    .kw.hot{background: var(--softHot); border-color: rgba(240,195,154,.24)}
 
     /* ---------- Section headers ---------- */
     .head{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin:0 0 10px}
@@ -458,7 +431,6 @@
       background: radial-gradient(circle at 25% 20%, rgba(255,255,255,.18), transparent 45%);
       transform: rotate(14deg);
       pointer-events:none;
-      opacity:.9;
     }
     .heroInner{
       position:relative; z-index:2;
@@ -479,15 +451,9 @@
       background: rgba(9,10,13,.58);
       -webkit-backdrop-filter: blur(12px) saturate(150%);
       backdrop-filter: blur(12px) saturate(150%);
-      box-shadow: 0 20px 55px rgba(0,0,0,.58);
+      box-shadow: 0 20px 55px rgba(0,0,0,.42);
       padding: 18px 16px 14px;
     }
-    html[data-theme="light"] .heroPanel,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .heroPanel{
-      background: rgba(255,255,255,.78);
-      border-color: rgba(0,0,0,.10);
-    }
-
     .heroKicker{
       display:inline-flex; align-items:center; gap:10px;
       padding:8px 12px;
@@ -514,12 +480,7 @@
       color:rgba(255,255,255,.86);
       font-size:16px;
     }
-    html[data-theme="light"] .heroSub,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .heroSub{
-      color: rgba(15,23,42,.82);
-    }
     .heroCTA{margin-top:16px; display:flex; justify-content:center; flex-wrap:wrap; gap:10px}
-
     @media (max-width:980px){
       :root{ --heroTitleSize: clamp(30px, 8.6vw, 42px); }
       .heroSub{font-size:15.5px}
@@ -533,10 +494,7 @@
       border:1px solid var(--line);
       background: rgba(255,255,255,.04);
     }
-    html[data-theme="light"] .offer,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .offer{
-      background: rgba(0,0,0,.02);
-    }
+    html[data-theme="light"] .offer{background: rgba(0,0,0,.02)}
     .offer b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2); font-weight:1000}
     .offer p{margin:8px 0 0; color:var(--muted); font-size:13px}
     @media (max-width:980px){ .offers{grid-template-columns:1fr} }
@@ -556,21 +514,13 @@
     }
     html[data-theme="light"] .field input,
     html[data-theme="light"] .field select,
-    html[data-theme="light"] .field textarea,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .field input,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .field select,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .field textarea{
-      background: rgba(255,255,255,.9);
-      border-color: rgba(0,0,0,.12);
+    html[data-theme="light"] .field textarea{
+      background: rgba(255,255,255,.90);
+      border-color: rgba(17,24,39,.12);
     }
     .field input::placeholder,.field textarea::placeholder{color: rgba(206,199,188,.55)}
     html[data-theme="light"] .field input::placeholder,
-    html[data-theme="light"] .field textarea::placeholder,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .field input::placeholder,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .field textarea::placeholder{
-      color: rgba(75,85,99,.70);
-    }
-
+    html[data-theme="light"] .field textarea::placeholder{color: rgba(75,85,99,.70)}
     .field input:focus,.field select:focus,.field textarea:focus{
       border-color: rgba(183,106,43,.55);
       box-shadow: var(--focus);
@@ -584,7 +534,6 @@
     .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:var(--gridGap)}
     @media (max-width:980px){ .grid3{grid-template-columns: repeat(2, 1fr);} }
     @media (max-width:640px){ .grid3{grid-template-columns: 1fr;} }
-
     .tile{
       padding:16px;
       border-radius: var(--radius2);
@@ -594,14 +543,9 @@
       display:flex; flex-direction:column; align-items:center;
       box-shadow: var(--shadow3);
     }
-    html[data-theme="light"] .tile,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .tile{
-      background: rgba(0,0,0,.02);
-    }
-
+    html[data-theme="light"] .tile{background: rgba(0,0,0,.02)}
     .tile h3{margin:14px 0 6px; font-size:15px; color:var(--ink2)}
     .tile p{margin:0; font-size:13px; color:var(--muted); max-width:34ch}
-
     .icon{
       width:clamp(52px, 6.2vw, 74px);
       height:clamp(52px, 6.2vw, 74px);
@@ -613,10 +557,10 @@
       color:var(--ink2);
       display:flex; align-items:center; justify-content:center;
       font-weight:1000;
-      box-shadow: 0 10px 22px rgba(0,0,0,.25), inset 0 0 0 1px rgba(255,255,255,.10);
+      box-shadow: 0 10px 22px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.10);
     }
-    .icon.a{background: var(--softA); border-color: rgba(183,106,43,.28)}
-    .icon.hot{background: var(--softHot); border-color: rgba(240,195,154,.28); color: var(--ink2)}
+    .icon.a{background: var(--softA); border-color: rgba(183,106,43,.24)}
+    .icon.hot{background: var(--softHot); border-color: rgba(240,195,154,.24)}
 
     /* ---------- Rooms ---------- */
     #rooms .stack{
@@ -633,7 +577,6 @@
 
     .roomMedia{position:relative; overflow:hidden; background: rgba(255,255,255,.02); border-right:1px solid var(--line)}
     @media (max-width:980px){ .roomMedia{border-right:none; border-bottom:1px solid var(--line)} }
-
     .roomMediaLink{display:block; color:inherit; text-decoration:none}
     .roomMediaLink:focus-visible{box-shadow: var(--focus)}
 
@@ -652,7 +595,6 @@
       border-radius:10px;
       border:1px solid var(--line);
     }
-
     .roomBody{padding:16px; min-width:0}
     .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
     .roomTop h4{margin:0; font-size:16px; letter-spacing:.2px; color:var(--ink2)}
@@ -675,7 +617,7 @@
     .bullets li{margin:4px 0}
     .roomActions{margin-top:12px; display:flex; flex-wrap:wrap; gap:10px}
 
-    /* ---------- Media wrappers (placeholder until loaded) ---------- */
+    /* ---------- Media placeholders (show until image loads) ---------- */
     .mediaWrap{position:relative; overflow:hidden}
     .mediaWrap .mediaImg{
       width:100%;
@@ -685,18 +627,15 @@
       transition: opacity .25s ease;
       background: linear-gradient(135deg, rgba(183,106,43,.14), rgba(240,195,154,.10));
     }
-    .mediaWrap .ph{
-      position:absolute; inset:0;
-      opacity:1;
-      transition: opacity .25s ease;
-      pointer-events:none;
-    }
+    .mediaWrap .ph{position:absolute; inset:0; opacity:1; transition:opacity .25s ease; pointer-events:none}
     .mediaWrap.imgOk .mediaImg{opacity:1}
     .mediaWrap.imgOk .ph{opacity:0}
     .mediaWrap.imgFail .mediaImg{display:none}
     .mediaWrap.imgFail .ph{opacity:1}
 
-    /* ---------- Gallery Carousel (single system) ---------- */
+    /* ==========================================================
+       GALLERY — CAROUSEL ONLY (NO GRID)
+       ========================================================== */
     .galCarousel{margin-top:10px}
     .galViewport{
       position:relative;
@@ -706,12 +645,9 @@
       background: rgba(255,255,255,.02);
       box-shadow: var(--shadow3);
     }
-    html[data-theme="light"] .galViewport,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .galViewport{
-      background: rgba(0,0,0,.02);
-    }
-
+    html[data-theme="light"] .galViewport{background: rgba(0,0,0,.02)}
     .galViewport:focus-visible{box-shadow: var(--focus)}
+
     .galTrack{
       display:flex;
       width:100%;
@@ -723,13 +659,9 @@
     .galCap{
       padding:12px 14px;
       border-top:1px solid var(--line);
-      background: rgba(9,10,13,.66);
+      background: var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
-    }
-    html[data-theme="light"] .galCap,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .galCap{
-      background: rgba(255,255,255,.86);
     }
     .galCap b{display:block; color:var(--ink2); font-size:14px; font-weight:1000; letter-spacing:.2px}
     .galCap span{display:block; margin-top:4px; color:var(--muted); font-size:13px}
@@ -755,15 +687,11 @@
       cursor:pointer;
       transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
     }
+    html[data-theme="light"] .galNavBtn{background: rgba(0,0,0,.02); color: var(--ink2)}
     .galNavBtn:hover{
       transform: translateY(-1px);
       box-shadow: var(--shadow3);
       background: rgba(255,255,255,.08);
-    }
-    html[data-theme="light"] .galNavBtn,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .galNavBtn{
-      background: rgba(0,0,0,.02);
-      color: var(--ink2);
     }
 
     .galDots{display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap}
@@ -775,17 +703,13 @@
       cursor:pointer;
       padding:0;
     }
-    html[data-theme="light"] .galDot,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .galDot{
-      background: rgba(0,0,0,.06);
-    }
+    html[data-theme="light"] .galDot{background: rgba(0,0,0,.06)}
     .galDot[aria-current="true"]{
       background: linear-gradient(135deg, rgba(183,106,43,.95), rgba(240,195,154,.85));
       border-color: rgba(240,195,154,.42);
-      box-shadow: 0 10px 22px rgba(0,0,0,.25);
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
     }
     .galHint{text-align:center; margin-top:6px}
-
     @media (max-width:640px){
       .galNavBtn{width:42px; height:42px; border-radius: 13px}
     }
@@ -800,10 +724,7 @@
       border:1px solid var(--line);
       background: rgba(255,255,255,.04);
     }
-    html[data-theme="light"] .review,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .review{
-      background: rgba(0,0,0,.02);
-    }
+    html[data-theme="light"] .review{background: rgba(0,0,0,.02)}
     .review b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2)}
     .review p{margin:8px 0 0; color:var(--muted); font-size:13px}
 
@@ -815,18 +736,27 @@
       padding:10px 12px;
       margin-top:10px
     }
-    summary{
-      cursor:pointer;
-      font-weight:950;
-      color:var(--ink2);
-      list-style:none
-    }
+    html[data-theme="light"] details{background: rgba(0,0,0,.015)}
+    summary{cursor:pointer; font-weight:950; color:var(--ink2); list-style:none}
     summary::-webkit-details-marker{display:none}
     details p{margin:10px 0 0; color:var(--muted); font-size:13px}
     details[open]{background:rgba(255,255,255,.04)}
-    html[data-theme="light"] details,
-    html[data-theme="system"][style*="--resolvedTheme:light"] details{
-      background: rgba(0,0,0,.015);
+
+    /* ---------- Map Embed (reasonable size) ---------- */
+    .mapWrap{
+      margin-top:14px;
+      border-radius: var(--radius2);
+      overflow:hidden;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.02);
+      box-shadow: var(--shadow3);
+    }
+    html[data-theme="light"] .mapWrap{background: rgba(0,0,0,.02)}
+    .mapWrap iframe{
+      width:100%;
+      height: clamp(260px, 32vw, 360px);
+      border:0;
+      display:block;
     }
 
     /* ---------- Footer ---------- */
@@ -845,16 +775,11 @@
       z-index:90;
       padding:10px 12px;
       padding-bottom: calc(10px + env(safe-area-inset-bottom));
-      background: rgba(9,10,13,.78);
+      background: var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
       border-top:1px solid var(--line);
-      box-shadow: 0 -18px 48px rgba(0,0,0,.45);
-    }
-    html[data-theme="light"] .sticky,
-    html[data-theme="system"][style*="--resolvedTheme:light"] .sticky{
-      background: rgba(255,255,255,.82);
-      box-shadow: 0 -18px 48px rgba(15,23,42,.12);
+      box-shadow: 0 -18px 48px rgba(0,0,0,.20);
     }
     .stickyInner{
       max-width:var(--max); margin:0 auto;
@@ -873,6 +798,7 @@
       .card,.hero{box-shadow:none !important; background:#fff !important; border:1px solid rgba(0,0,0,.18) !important}
       .btn,.chip{box-shadow:none !important}
       a{color:#000 !important; text-decoration:none !important}
+      .mapWrap{display:none !important}
     }
   </style>
 
@@ -924,7 +850,6 @@
         <a class="chip hideMobile" href="#location" data-i18n="nav_location">Location</a>
       </nav>
 
-      <!-- Controls -->
       <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
         <div class="langSwitch" role="group" aria-label="Language" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
           <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
@@ -967,7 +892,7 @@
 
             <div class="heroCTA">
               <a class="btn primary" href="#book" data-i18n="cta_request">Request Booking</a>
-              <a class="btn hot" id="ctaCall" href="tel:+66887906345" data-i18n="cta_call_number">Call: 088-790-6345</a>
+              <a class="btn hot" href="tel:+66887906345" data-i18n="cta_call_number">Call: 088-790-6345</a>
               <a class="btn" id="ctaLine" href="#" rel="nofollow">LINE</a>
               <a class="btn" id="ctaWhatsApp" href="#" rel="nofollow">WhatsApp</a>
               <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
@@ -1142,13 +1067,10 @@
                     <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom with two single beds" loading="lazy" decoding="async" width="800" height="520">
                   </a>
                   <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Standard Twin placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
                       <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
-                      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)" data-i18n="svg_standard_twin">Standard Twin</text>
-                      <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
                     </svg>
                   </div>
                 </div>
@@ -1207,13 +1129,10 @@
                     <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
                   </a>
                   <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Standard Double placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
                       <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
-                      <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)" data-i18n="svg_standard_double">Standard Double</text>
-                      <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
                     </svg>
                   </div>
                 </div>
@@ -1271,7 +1190,7 @@
       </div>
     </section>
 
-    <!-- GALLERY (Carousel only) -->
+    <!-- GALLERY (CAROUSEL ONLY — NO GRID) -->
     <section class="section" id="gallery">
       <div class="card pad">
         <div class="head">
@@ -1282,19 +1201,17 @@
           <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
         </div>
 
-        <div class="galCarousel" id="galCarousel" aria-label="Photo carousel">
-          <div class="galViewport" id="galViewport" tabindex="0" aria-label="Gallery carousel">
+        <div class="galCarousel" id="galCarousel" aria-roledescription="carousel" aria-label="Hotel photo carousel">
+          <div class="galViewport" id="galViewport" tabindex="0" aria-label="Carousel viewport">
             <div class="galTrack" id="galTrack">
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="images/Sandbox-Hotel-Hero-Banner.png" alt="Hotel exterior photo" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="images/Sandbox-Hotel-Hero-Banner.png" alt="Sandbox Hotel exterior" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
                       <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
                       <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
                     </svg>
                   </div>
@@ -1307,13 +1224,11 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Hotel entrance photo" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Entrance and arrival" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
                       <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
                       <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
                     </svg>
                   </div>
@@ -1326,13 +1241,11 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Lobby and reception photo" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Lobby and reception" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
                       <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
                       <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
                     </svg>
                   </div>
@@ -1345,13 +1258,11 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room photo" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
                       <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
                       <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
                     </svg>
                   </div>
@@ -1364,13 +1275,11 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin room photo" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin room" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Photo placeholder">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
                       <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/>
-                      <circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/>
                       <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
                     </svg>
                   </div>
@@ -1378,6 +1287,23 @@
                 <figcaption class="galCap">
                   <b data-i18n="gal_std_twin_title">Standard Twin Room</b>
                   <span data-i18n="gal_std_twin_desc">Two single beds—ideal for friends or work trips.</span>
+                </figcaption>
+              </figure>
+
+              <figure class="galSlide">
+                <div class="mediaWrap">
+                  <img class="mediaImg" src="assets/images/rooms/bathroom.png" alt="Clean bathroom with hot shower" loading="lazy" decoding="async" width="800" height="520">
+                  <div class="ph" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
+                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
+                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+                    </svg>
+                  </div>
+                </div>
+                <figcaption class="galCap">
+                  <b data-i18n="svg_clean_bathrooms">Clean Bathrooms</b>
+                  <span data-i18n="gal_bathroom_desc">Hot shower and fresh essentials.</span>
                 </figcaption>
               </figure>
 
@@ -1406,24 +1332,8 @@
           <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="btn_view_maps">View on Google Maps</a>
         </div>
 
-        <div class="card" style="padding:16px;border:1px solid var(--line);background:rgba(255,255,255,.03);margin-bottom:12px">
-          <div class="head" style="margin:0 0 6px">
-            <div>
-              <h2 data-i18n="why_title">Your Basecamp in Nakhon Si Thammarat</h2>
-              <p class="muted" style="margin:0" data-i18n="why_body">Sandbox Hotel is your stylish basecamp for an easy, comfortable stay with a hint of adventure.</p>
-            </div>
-            <a class="btn primary sm" href="#book" data-i18n="rooms_btn">Request Availability</a>
-          </div>
-
-          <ul class="bullets" style="margin:10px 0 0">
-            <li data-i18n="why_b1">Easy access for café-hopping, local food, and temple visits.</li>
-            <li data-i18n="why_b2">Simple day trips: beaches, waterfalls, and nature trails.</li>
-            <li data-i18n="why_b3">Come back to a calm, cozy reset—wake up ready for the next chapter.</li>
-          </ul>
-        </div>
-
         <div class="reviews">
-          <div class="stack" style="display:grid; gap:12px">
+          <div style="display:grid; gap:12px">
             <div class="review">
               <b data-i18n-html="review1_title">Business Traveler <span class="stars">★★★★★</span></b>
               <p data-i18n="review1_text">Fast check-in, stable Wi-Fi, and a big room to work in. Great value.</p>
@@ -1438,7 +1348,7 @@
             </div>
           </div>
 
-          <div class="stack" style="display:grid; gap:12px">
+          <div style="display:grid; gap:12px">
             <div class="review">
               <b data-i18n-html="review4_title">Long Stay Guest <span class="stars">★★★★★</span></b>
               <p data-i18n="review4_text">Quiet, comfortable, and practical amenities. Would stay again.</p>
@@ -1490,7 +1400,7 @@
       </div>
     </section>
 
-    <!-- LOCATION -->
+    <!-- LOCATION + MAP -->
     <section class="section" id="location">
       <div class="card pad">
         <div class="head">
@@ -1515,6 +1425,16 @@
           <a class="btn" id="contactWhatsApp" href="#" rel="nofollow">WhatsApp</a>
           <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
           <a class="btn ghost" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener">Facebook</a>
+        </div>
+
+        <!-- Google Maps embed (reasonable size) -->
+        <div class="mapWrap" aria-label="Google Map">
+          <iframe
+            title="Sandbox Hotel location map"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            src="https://www.google.com/maps?q=CWMG%2BQJ%20Nakhon%20Si%20Thammarat%2C%20Thailand&output=embed">
+          </iframe>
         </div>
 
         <div class="sep"></div>
@@ -1564,31 +1484,25 @@
     const themeLabel = document.getElementById("themeLabel");
 
     function resolvedSystemTheme(){
-      return window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+      return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
     }
-
+    function applyMetaThemeColor(mode){
+      if(!metaTheme) return;
+      const resolved = (mode === "system") ? resolvedSystemTheme() : mode;
+      metaTheme.setAttribute("content", resolved === "dark" ? "#0B0C0F" : "#FFFFFF");
+    }
     function setTheme(mode){
       const html = document.documentElement;
       const safe = (mode === "dark" || mode === "light" || mode === "system") ? mode : "system";
       html.setAttribute("data-theme", safe);
+      applyMetaThemeColor(safe);
 
-      // Store resolved theme for CSS hooks (since CSS can't read matchMedia result reliably via variables)
-      const resolved = safe === "system" ? resolvedSystemTheme() : safe;
-      html.style.setProperty("--resolvedTheme", resolved);
-
-      // theme-color for browser UI
-      if(metaTheme){
-        metaTheme.setAttribute("content", resolved === "dark" ? "#0B0C0F" : "#FFFFFF");
-      }
-
-      // Toggle UI
       if(themeIcon && themeLabel){
         if(safe === "system"){ themeIcon.textContent = "🖥️"; themeLabel.textContent = "System"; }
         else if(safe === "dark"){ themeIcon.textContent = "🌙"; themeLabel.textContent = "Dark"; }
         else { themeIcon.textContent = "☀️"; themeLabel.textContent = "Light"; }
       }
     }
-
     function initTheme(){
       let mode = "system";
       try{
@@ -1597,13 +1511,11 @@
       }catch(_e){}
       setTheme(mode);
 
-      // if system and device changes, refresh resolved
       if(window.matchMedia){
         const mq = window.matchMedia("(prefers-color-scheme: dark)");
         mq.addEventListener?.("change", ()=>{
-          const html = document.documentElement;
-          if(html.getAttribute("data-theme") === "system"){
-            setTheme("system");
+          if(document.documentElement.getAttribute("data-theme") === "system"){
+            applyMetaThemeColor("system");
           }
         });
       }
@@ -1618,7 +1530,7 @@
       }
     }
 
-    // ---------- i18n (Thai primary; EN + 中文) ----------
+    // ---------- i18n ----------
     const I18N_DEFAULT = "th";
     let CURRENT_LANG = I18N_DEFAULT;
 
@@ -1696,6 +1608,7 @@
         rooms_sub: 'แตะ <span class="kw hot">จอง</span> เพื่อเลือกประเภทห้องในแบบฟอร์ม',
         rooms_btn: "ขอเช็คห้องว่าง",
         rooms_fine: "ราคาอาจเปลี่ยนตามวันและฤดูกาล โปรดส่งวันเข้าพักเพื่อรับราคาที่แน่นอน",
+
         price_from: "เริ่มต้น",
         price_ask: "สอบถาม",
         price_today: "ราคาวันนี้",
@@ -1735,12 +1648,12 @@
         gal_std_double_desc: "เตียงใหญ่ ห้องกว้าง เหมาะสำหรับคู่รักหรือพักคนเดียว",
         gal_std_twin_title: "ห้อง Standard Twin",
         gal_std_twin_desc: "สองเตียงเดี่ยว เหมาะสำหรับเพื่อนร่วมทางหรือทริปทำงาน",
+        gal_bathroom_desc: "อาบน้ำอุ่น พร้อมของใช้ที่จำเป็น",
         gal_swipe_hint: "ปัดเพื่อดูรูปเพิ่มเติม หรือใช้ปุ่มลูกศร",
 
         svg_replace_photos: "เปลี่ยนเป็นรูปจริง",
         svg_lobby_and_reception: "ล็อบบี้ & เคาน์เตอร์",
-        svg_standard_twin: "Standard Twin",
-        svg_standard_double: "Standard Double",
+        svg_clean_bathrooms: "ห้องน้ำสะอาด",
 
         reviews_title: "รีวิวจากผู้เข้าพัก",
         reviews_sub: "ดูทำเลและรีวิวล่าสุดบน Google Maps เพื่อความมั่นใจก่อนจอง",
@@ -1755,12 +1668,6 @@
         review4_text: "เงียบ สบาย สิ่งอำนวยความสะดวกครบ จะกลับมาพักอีก",
         review5_title: 'ทำเลดีมาก <span class="stars">★★★★★</span>',
         review5_text: "ห้องใหญ่ สะอาด ทำเลสะดวก เช็คอินง่าย พนักงานเป็นกันเอง",
-
-        why_title: "ฐานพักสุดสบายในนครศรีธรรมราช",
-        why_body: "Sandbox Hotel คือฐานพักสไตล์โมเดิร์นที่สบายและเดินทางง่าย พร้อมความรู้สึกผจญภัยเล็ก ๆ ห้องกว้าง แอร์แรง Wi-Fi เร็ว ที่จอดรถสะดวก และการต้อนรับเป็นกันเอง—มีกาแฟและของว่างเติมพลัง",
-        why_b1: "ออกไปคาเฟ่ ของกินท้องถิ่น และไหว้พระได้ง่าย",
-        why_b2: "ขับรถไปเที่ยวทะเล น้ำตก และเส้นทางธรรมชาติได้สะดวก",
-        why_b3: "กลับมาพักผ่อนเงียบสงบ แล้วตื่นมาพร้อมลุยวันใหม่",
 
         faq_title: "คำถามที่พบบ่อย",
         faq_sub: "คำถามยอดนิยมก่อนจอง",
@@ -1799,7 +1706,6 @@
         msg_closing: "กรุณายืนยันห้องว่างและราคารวม ขอบคุณครับ/ค่ะ",
         line_opened_hint: "เปิด LINE แล้ว คัดลอก/วางข้อความ: "
       },
-
       en: {
         meta_title: "Sandbox Hotel | Nakhon Si Thammarat, Thailand",
         meta_desc: "Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.",
@@ -1828,11 +1734,11 @@
         offers_sub: "Quick ways to lock in your room and get a fast confirmed quote.",
         offers_btn: "Get availability",
         offer1_title: 'Direct Booking Assist <span class="badge a">Fast Reply</span>',
-        offer1_desc: "Send dates + room type—we’ll reply quickly with availability.",
+        offer1_desc: "Message your dates + room type and we’ll confirm availability quickly.",
         offer2_title: 'Long-Stay Support <span class="badge b">Ask</span>',
-        offer2_desc: "Staying 7+ nights? Ask about weekly/monthly options (seasonal).",
+        offer2_desc: "Staying 7+ nights? Ask about long-stay options (seasonal).",
         offer3_title: 'Early Plan Advantage <span class="badge hot">Tip</span>',
-        offer3_desc: "Weekends/holidays fill quickly—book early for best availability.",
+        offer3_desc: "Book earlier for best room availability on busy weekends.",
 
         book_title: "Quick Booking Request",
         book_sub: 'Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.',
@@ -1873,6 +1779,7 @@
         rooms_sub: 'Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.',
         rooms_btn: "Request Availability",
         rooms_fine: "Rates can change by date and season. Message your dates for the fastest exact price.",
+
         price_from: "From",
         price_ask: "Ask",
         price_today: "today’s rate",
@@ -1912,12 +1819,12 @@
         gal_std_double_desc: "Comfortable double bed with generous space for a smooth stay.",
         gal_std_twin_title: "Standard Twin Room",
         gal_std_twin_desc: "Two single beds—ideal for friends or work trips.",
+        gal_bathroom_desc: "Hot shower and fresh essentials.",
         gal_swipe_hint: "Swipe for more photos or use the arrows",
 
         svg_replace_photos: "Replace with real photos",
         svg_lobby_and_reception: "Lobby & Reception",
-        svg_standard_twin: "Standard Twin",
-        svg_standard_double: "Standard Double",
+        svg_clean_bathrooms: "Clean Bathrooms",
 
         reviews_title: "Guest Reviews",
         reviews_sub: "Check location and the latest guest feedback on Google Maps before you book.",
@@ -1932,12 +1839,6 @@
         review4_text: "Quiet, comfortable, and practical amenities. Would stay again.",
         review5_title: 'Great Location <span class="stars">★★★★★</span>',
         review5_text: "Big room, clean, and convenient location. Easy check-in and friendly staff.",
-
-        why_title: "Your Basecamp in Nakhon Si Thammarat",
-        why_body: "Sandbox Hotel is your stylish basecamp for an easy, comfortable stay with a hint of adventure.",
-        why_b1: "Easy access for café-hopping, local food, and temple visits.",
-        why_b2: "Simple day trips: beaches, waterfalls, and nature trails.",
-        why_b3: "Come back to a calm, cozy reset—wake up ready for the next chapter.",
 
         faq_title: "FAQ",
         faq_sub: "Common questions before booking.",
@@ -1976,7 +1877,6 @@
         msg_closing: "Please confirm availability and total price. Thank you.",
         line_opened_hint: "LINE opened. Paste message: "
       },
-
       zh: {
         meta_title: "Sandbox Hotel｜泰国洛坤府",
         meta_desc: "Sandbox Hotel 直订更快确认：电话/LINE/WhatsApp。宽敞客房，Wi-Fi、停车、洗衣等。",
@@ -2050,6 +1950,7 @@
         rooms_sub: '点击 <span class="kw hot">预订</span> 可在表单中预选房型。',
         rooms_btn: "申请查询",
         rooms_fine: "房价会随日期与季节变化。发送日期可获得准确报价。",
+
         price_from: "起价",
         price_ask: "咨询",
         price_today: "今日房价",
@@ -2089,12 +1990,12 @@
         gal_std_double_desc: "舒适大床 + 宽敞空间，适合情侣或独自出行。",
         gal_std_twin_title: "标准双床房",
         gal_std_twin_desc: "两张单人床，适合朋友同行或商务出行。",
+        gal_bathroom_desc: "热水淋浴与干净备品。",
         gal_swipe_hint: "左右滑动查看更多照片，或使用箭头按钮",
 
         svg_replace_photos: "替换为真实照片",
         svg_lobby_and_reception: "大堂与前台",
-        svg_standard_twin: "标准双床房",
-        svg_standard_double: "标准大床房",
+        svg_clean_bathrooms: "干净浴室",
 
         reviews_title: "住客评价",
         reviews_sub: "在 Google Maps 查看位置与最新评价，预订更放心。",
@@ -2109,12 +2010,6 @@
         review4_text: "安静实用，配套齐全，下次还会入住。",
         review5_title: '位置很方便 <span class="stars">★★★★★</span>',
         review5_text: "房间大且干净，位置便利，入住简单，员工友善。",
-
-        why_title: "探索洛坤的理想落脚点",
-        why_body: "Sandbox Hotel 是你在洛坤府（Nakhon Si Thammarat）的时尚据点：住得舒适，也有一点小冒险。",
-        why_b1: "方便去咖啡馆、本地美食、寺庙打卡。",
-        why_b2: "轻松安排一日游：海滩、瀑布、自然步道。",
-        why_b3: "夜晚回到安静舒适的房间，第二天继续出发。",
 
         faq_title: "常见问题",
         faq_sub: "预订前常见问题。",
@@ -2159,47 +2054,39 @@
       if(!l) return I18N_DEFAULT;
       l = String(l).toLowerCase();
       if(l.startsWith("zh")) return "zh";
-      if(l.startsWith("th")) return "th";
       if(l.startsWith("en")) return "en";
+      if(l.startsWith("th")) return "th";
       return I18N_DEFAULT;
     }
     function t(key){
       const pack = I18N[CURRENT_LANG] || I18N[I18N_DEFAULT] || {};
       return pack[key] || (I18N.en && I18N.en[key]) || (I18N.th && I18N.th[key]) || "";
     }
-
     function applyLang(lang){
       CURRENT_LANG = normLang(lang);
       document.documentElement.setAttribute("lang", CURRENT_LANG);
 
-      // toggle pressed state
       document.querySelectorAll(".langBtn").forEach(btn=>{
         const active = btn.getAttribute("data-lang") === CURRENT_LANG;
         btn.setAttribute("aria-pressed", active ? "true" : "false");
       });
 
-      // translate text nodes
       document.querySelectorAll("[data-i18n]").forEach(el=>{
         const key = el.getAttribute("data-i18n");
         const val = t(key);
         if(val) el.textContent = val;
       });
-
-      // translate html nodes (explicit only)
       document.querySelectorAll("[data-i18n-html]").forEach(el=>{
         const key = el.getAttribute("data-i18n-html");
         const val = t(key);
         if(val) el.innerHTML = val;
       });
-
-      // placeholders
       document.querySelectorAll("[data-i18n-ph]").forEach(el=>{
         const key = el.getAttribute("data-i18n-ph");
         const val = t(key);
         if(val) el.setAttribute("placeholder", val);
       });
 
-      // title + meta
       if(t("meta_title")) document.title = t("meta_title");
       const md = document.getElementById("metaDescription");
       if(md && t("meta_desc")) md.setAttribute("content", t("meta_desc"));
@@ -2208,7 +2095,6 @@
       const ogd = document.getElementById("ogDescription");
       if(ogd && t("og_desc")) ogd.setAttribute("content", t("og_desc"));
     }
-
     function initLang(){
       try{
         const stored = localStorage.getItem("sbx_lang");
@@ -2246,7 +2132,6 @@
         notes: f.notes.value || ""
       };
     }
-
     function buildMessage(d){
       const lines = [
         t("msg_title") || "Booking request – Sandbox Hotel",
@@ -2261,10 +2146,8 @@
         "",
         t("msg_closing") || "Please confirm availability and total price. Thank you."
       ].filter(Boolean);
-
       return lines.join("\n");
     }
-
     function openWhatsApp(msg){
       const url = `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank", "noopener");
@@ -2287,12 +2170,9 @@
     }
 
     function wireContactButtons(){
-      // Provide non-JS fallbacks (real links)
+      // Non-JS fallbacks: real links
       const waFallback = `https://wa.me/${WHATSAPP_NUMBER_E164}`;
-      const idsWA = ["ctaWhatsApp","contactWhatsApp","stickyWA"];
-      const idsLINE = ["ctaLine","contactLine","stickyLine"];
-
-      idsWA.forEach(id=>{
+      ["ctaWhatsApp","contactWhatsApp","stickyWA"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
         el.setAttribute("href", waFallback);
@@ -2304,7 +2184,7 @@
         });
       });
 
-      idsLINE.forEach(id=>{
+      ["ctaLine","contactLine","stickyLine"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
         el.setAttribute("href", LINE_LINK);
@@ -2316,17 +2196,14 @@
         });
       });
 
-      // Form actions
       const form = document.getElementById("bookingForm");
       form.addEventListener("submit",(e)=>{
         e.preventDefault();
         openLine(buildMessage(getFormData()));
       });
-
       document.getElementById("sendWA").addEventListener("click", ()=> openWhatsApp(buildMessage(getFormData())));
       document.getElementById("sendEmail").addEventListener("click", ()=> openEmail(buildMessage(getFormData())));
 
-      // Room quick-set
       document.querySelectorAll("[data-room]").forEach(el=>{
         el.addEventListener("click", ()=>{
           const room = el.getAttribute("data-room");
@@ -2336,7 +2213,7 @@
       });
     }
 
-    // ---------- Gallery carousel ----------
+    // ---------- Carousel (gallery only) ----------
     function initGalleryCarousel(){
       const carousel = document.getElementById("galCarousel");
       const viewport = document.getElementById("galViewport");
@@ -2383,7 +2260,7 @@
       function start(){
         if(prefersReduce) return;
         stop();
-        timer = setInterval(()=> setIndex(idx + 1), 7500);
+        timer = setInterval(()=> setIndex(idx + 1), 6500);
       }
       function stop(){
         if(timer){ clearInterval(timer); timer = null; }
@@ -2419,19 +2296,12 @@
         else if(e.key === "ArrowRight"){ e.preventDefault(); stop(); setIndex(idx + 1); start(); }
       });
 
-      // Resize
-      let rt;
-      window.addEventListener("resize", ()=>{
-        clearTimeout(rt);
-        rt = setTimeout(()=> setIndex(idx), 120);
-      }, {passive:true});
-
       buildDots();
       setIndex(0);
       start();
     }
 
-    // ---------- Dates + validation ----------
+    // ---------- Dates ----------
     function initDates(){
       const ci = document.getElementById("checkin");
       const co = document.getElementById("checkout");
@@ -2473,10 +2343,7 @@
         let pending = imgs.length;
         let anyOk = false;
 
-        const finalize = (ok)=>{
-          try{ w.classList.add(ok ? "imgOk" : "imgFail"); }catch(_e){}
-        };
-
+        const finalize = (ok)=>{ try{ w.classList.add(ok ? "imgOk" : "imgFail"); }catch(_e){} };
         const markDone = (ok)=>{
           if(anyOk) return;
           if(ok){ anyOk = true; finalize(true); return; }
