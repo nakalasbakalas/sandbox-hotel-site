@@ -890,15 +890,35 @@
     html[data-device="phone"] .heroPanel{
       padding: 16px 14px 12px;
     }
+    html[data-device="phone"] .heroTitle{
+      font-size: clamp(30px, 9.2vw, 38px);
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    html[data-device="phone"] .heroSub{
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 36ch;
+      text-wrap: pretty;
+    }
+
+    html[data-device="phone"] .btn{
+      min-height: 46px;
+      padding: 11px 14px;
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: normal;
+      text-align: center;
+    }
 
     /* Hero CTAs: keep the highest-intent actions visible; reduce clutter */
     html[data-device="phone"] .heroCTA{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 10px;
     }
     html[data-device="phone"] .heroCTA .btn{ width:100%; }
-    html[data-device="phone"] .heroCTA .btn.primary{ grid-column:1 / -1; }
+    html[data-device="phone"] .heroCTA .btn.primary,
     html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
     html[data-device="phone"] #ctaWhatsApp,
     html[data-device="phone"] .heroCTA .btn.ghost{ display:none !important; }
@@ -1332,8 +1352,6 @@
                 <div class="mediaWrap">
                   <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
                     <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
-                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
                   </a>
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
@@ -1345,8 +1363,8 @@
                 </div>
 
                 <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
                     <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async">
@@ -1465,7 +1483,7 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
