@@ -259,14 +259,21 @@
     }
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
     .logo{
-      width:44px; height:44px; border-radius: 16px;
-      background: rgba(10,11,14,.55);
-      border:1px solid rgba(240,195,154,.22);
-      box-shadow: 0 16px 34px rgba(0,0,0,.25), 0 14px 26px rgba(183,106,43,.14);
-      padding:7px;
+      width:56px; height:56px; border-radius: 18px;
+      background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.14), rgba(10,11,14,.65));
+      border:1px solid rgba(240,195,154,.34);
+      box-shadow: 0 16px 34px rgba(0,0,0,.25), 0 14px 26px rgba(183,106,43,.22);
+      padding:4px;
       overflow:hidden;
+      flex:0 0 auto;
     }
-    .logo img{width:100%; height:100%; object-fit:contain}
+    .logo img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+      transform: scale(1.1);
+      filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
+    }
     .brand h1{
       margin:0;
       font-size:13px;
@@ -907,7 +914,7 @@
       padding: 8px 12px;
       padding-top: calc(8px + env(safe-area-inset-top));
     }
-    html[data-device="phone"] .logo{ width:40px; height:40px; border-radius:14px; }
+    html[data-device="phone"] .logo{ width:48px; height:48px; border-radius:15px; padding:3px; }
     html[data-device="phone"] .brand small{ display:none; }
 
     html[data-device="phone"] .hero{
