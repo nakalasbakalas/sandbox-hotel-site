@@ -890,15 +890,35 @@
     html[data-device="phone"] .heroPanel{
       padding: 16px 14px 12px;
     }
+    html[data-device="phone"] .heroTitle{
+      font-size: clamp(30px, 9.2vw, 38px);
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    html[data-device="phone"] .heroSub{
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 36ch;
+      text-wrap: pretty;
+    }
+
+    html[data-device="phone"] .btn{
+      min-height: 46px;
+      padding: 11px 14px;
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: normal;
+      text-align: center;
+    }
 
     /* Hero CTAs: keep the highest-intent actions visible; reduce clutter */
     html[data-device="phone"] .heroCTA{
       display:grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr;
       gap: 10px;
     }
     html[data-device="phone"] .heroCTA .btn{ width:100%; }
-    html[data-device="phone"] .heroCTA .btn.primary{ grid-column:1 / -1; }
+    html[data-device="phone"] .heroCTA .btn.primary,
     html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
     html[data-device="phone"] #ctaWhatsApp,
     html[data-device="phone"] .heroCTA .btn.ghost{ display:none !important; }
