@@ -55,6 +55,14 @@
       --max:1180px;
 
       --tap:46px;
+      --nav-h:56px;
+      --nav-pad-y:10px;
+      --nav-pad-x:14px;
+      --nav-gap:10px;
+      --btn-h:38px;
+      --btn-px:14px;
+      --btn-radius:999px;
+      --btn-border:1px;
       --gutter: clamp(14px, 2.5vw, 26px);
       --sectionY: clamp(16px, 2.8vw, 26px);
       --gridGap: clamp(10px, 2vw, 16px);
@@ -255,13 +263,14 @@
     }
     .nav{
       max-width:var(--max); margin:0 auto;
-      padding:10px 16px;
-      display:flex; align-items:center; justify-content:space-between; gap:12px;
-      padding-top: calc(10px + env(safe-area-inset-top));
+      min-height:var(--nav-h);
+      padding:var(--nav-pad-y) var(--nav-pad-x);
+      display:flex; align-items:center; justify-content:space-between; gap:var(--nav-gap);
+      padding-top: calc(var(--nav-pad-y) + env(safe-area-inset-top));
     }
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
     .logo{
-      width:56px; height:56px; border-radius: 18px;
+      width:38px; height:38px; border-radius: 12px;
       background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.14), rgba(10,11,14,.65));
       border:1px solid rgba(240,195,154,.34);
       box-shadow: 0 16px 34px rgba(0,0,0,.25), 0 14px 26px rgba(183,106,43,.22);
@@ -279,13 +288,13 @@
     .brand .brandName{
       display:block;
       margin:0;
-      font-size:13px;
-      letter-spacing:.12em;
+      font-size:14px;
+      letter-spacing:.02em;
       text-transform:uppercase;
       font-weight:950;
       color:var(--ink2);
     }
-    .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
+    .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted); opacity:.85}
     .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
     .navGroup{
       position:relative;
@@ -312,7 +321,7 @@
       z-index:20;
     }
     .navPanel .chip{justify-content:flex-start}
-    .langSwitch{display:grid; gap:8px}
+    .langSwitch{position:relative}
     @media (max-width:980px){
       .navPanel{position:static; min-width:0; margin-top:8px}
     }
@@ -322,10 +331,10 @@
     /* ---------- Chips / Buttons ---------- */
     .chip{
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      min-height:36px;
-      padding:8px 10px;
-      border-radius:999px;
-      border:1px solid var(--line);
+      min-height:var(--btn-h);
+      padding:0 var(--btn-px);
+      border-radius:var(--btn-radius);
+      border:var(--btn-border) solid var(--line);
       background: rgba(255,255,255,.05);
       color: var(--ink2);
       font-size:13px;
@@ -352,10 +361,10 @@
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      min-height:var(--tap);
-      padding:12px 16px;
-      border-radius:14px;
-      border:1px solid var(--line);
+      min-height:var(--btn-h);
+      padding:0 var(--btn-px);
+      border-radius:12px;
+      border:var(--btn-border) solid var(--line);
       background: rgba(255,255,255,.045);
       color:var(--ink2);
       font-weight:900;
@@ -404,6 +413,51 @@
     }
     .btn.sm{min-height:40px; padding:10px 12px; border-radius:12px}
 
+
+    .iconBtn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:var(--btn-h);
+      height:var(--btn-h);
+      border-radius:var(--btn-radius);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.05);
+      box-shadow: var(--shadow3);
+      cursor:pointer;
+    }
+    .iconBtn span{font-size:18px; line-height:1}
+    .langMenu{
+      position:absolute;
+      top:calc(100% + 10px);
+      right:0;
+      display:flex;
+      gap:8px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:var(--uiGlass2);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      backdrop-filter: blur(10px) saturate(150%);
+      box-shadow: var(--shadow3);
+      z-index:50;
+    }
+    .langMenu[hidden]{display:none}
+    .flagItem{
+      width:40px;
+      height:40px;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background:transparent;
+      display:grid;
+      place-items:center;
+      cursor:pointer;
+    }
+    .flagItem > span[aria-hidden="true"]{font-size:18px}
+    .sr-only{
+      position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+      overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+    }
     .badge{
       display:inline-flex; align-items:center; justify-content:center;
       padding:6px 10px;
@@ -451,61 +505,43 @@
     /* ---------- Hero ---------- */
     .hero{
       position:relative;
-      min-height: clamp(560px, 80vh, 920px);
+      min-height: min(78vh, 720px);
       border-radius: var(--radius);
       border:1px solid var(--line);
-      background:
-        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.06) 42%, rgba(0,0,0,.78)),
-        radial-gradient(900px 420px at 18% 0%, rgba(183,106,43,.30), transparent 60%),
-        radial-gradient(900px 420px at 82% 0%, rgba(255,255,255,.10), transparent 60%),
-        radial-gradient(700px 420px at 50% 120%, rgba(240,195,154,.16), transparent 60%),
-        var(--heroImg) center / cover no-repeat,
-        var(--bg1);
+      background: var(--heroImg) center / cover no-repeat, var(--bg1);
       color:#fff;
       box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .hero:after{
+    .hero:before{
       content:"";
-      position:absolute; inset:-30%;
-      background: radial-gradient(circle at 25% 20%, rgba(255,255,255,.18), transparent 45%);
-      transform: rotate(14deg);
+      position:absolute; inset:0;
+      background: linear-gradient(to top, rgba(10,11,14,.82) 0%, rgba(10,11,14,.42) 42%, rgba(10,11,14,0) 75%);
       pointer-events:none;
     }
     .heroInner{
       position:relative; z-index:2;
-      max-width:980px;
-      margin:0 auto;
+      max-width:var(--max);
+      margin:0;
       min-height:100%;
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
-      padding: clamp(26px, 5.2vw, 58px) 18px;
-      text-align:center;
+      padding: clamp(20px, 4vw, 36px);
+      text-align:left;
     }
     .heroPanel{
-      width:min(980px, 100%);
-      margin:0 auto;
-      border-radius: calc(var(--radius) - 2px);
+      width:min(560px, 92vw);
+      margin:0 0 26px 26px;
+      border-radius: 18px;
       border:1px solid rgba(255,255,255,.16);
-      background: rgba(9,10,13,.58);
+      background: rgba(9,10,13,.52);
       -webkit-backdrop-filter: blur(12px) saturate(150%);
       backdrop-filter: blur(12px) saturate(150%);
       box-shadow: 0 20px 55px rgba(0,0,0,.42);
-      padding: 18px 16px 14px;
+      padding: 18px 18px 16px;
     }
-    .heroKicker{
-      display:inline-flex; align-items:center; gap:10px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(240,195,154,.24);
-      background: rgba(255,255,255,.10);
-      font-weight:900; font-size:12px;
-      letter-spacing:.18em;
-      text-transform:uppercase;
-      justify-content:center;
-      flex-wrap:wrap;
-    }
+    .heroKicker{display:none}
     .heroTitle{
       margin:14px 0 8px;
       font-size:var(--heroTitleSize);
@@ -515,12 +551,27 @@
       font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
     }
     .heroSub{
-      margin:0 auto;
-      max-width:72ch;
+      margin:0 0 14px;
+      max-width:58ch;
       color:rgba(255,255,255,.86);
       font-size:16px;
     }
-    .heroCTA{margin-top:16px; display:flex; justify-content:center; flex-wrap:wrap; gap:10px}
+    .heroCTA{margin-top:8px; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:10px}
+    .heroCTA .btn.primary{min-width:170px}
+    .heroCTA #ctaLine{min-width:120px}
+    .heroCTA .btn.ghost,
+    .heroCTA .btn:not(.primary):not(#ctaLine){
+      min-height:34px;
+      padding:0 12px;
+      opacity:.92;
+    }
+    .hero .kw{padding:0; border:0; background:transparent}
+
+    .nav :focus-visible{
+      outline:2px solid var(--copper2);
+      outline-offset:2px;
+    }
+
     @media (max-width:980px){
       :root{ --heroTitleSize: clamp(30px, 8.6vw, 42px); }
       .heroSub{font-size:15.5px}
@@ -915,9 +966,10 @@
 /* Phone layout (compact + conversion-focused) */
     html[data-device="phone"] .nav{
       padding: 8px 12px;
+      min-height:56px;
       padding-top: calc(8px + env(safe-area-inset-top));
     }
-    html[data-device="phone"] .logo{ width:48px; height:48px; border-radius:15px; padding:3px; }
+    html[data-device="phone"] .logo{ width:38px; height:38px; border-radius:12px; padding:3px; }
     html[data-device="phone"] .brand small{ display:none; }
 
     html[data-device="phone"] .hero{
@@ -928,6 +980,8 @@
       padding: clamp(18px, 4.8vw, 36px) 14px;
     }
     html[data-device="phone"] .heroPanel{
+      margin:0;
+      width:min(100%, 92vw);
       padding: 16px 14px 12px;
     }
     html[data-device="phone"] .heroTitle{
@@ -943,8 +997,8 @@
     }
 
     html[data-device="phone"] .btn{
-      min-height: 46px;
-      padding: 11px 14px;
+      min-height: 40px;
+      padding: 0 14px;
       font-size: 15px;
       line-height: 1.2;
       white-space: normal;
@@ -964,9 +1018,8 @@
     html[data-device="phone"] .heroCTA .btn.ghost{ display:none !important; }
 
     /* Language + theme controls: tighten */
-    html[data-device="phone"] .langSwitch .langBtn span:last-child{ display:none; }
     html[data-device="phone"] .langSwitch{ gap:6px !important; }
-    html[data-device="phone"] .langSwitch .chip{ padding:8px 9px; min-height:36px; }
+    html[data-device="phone"] .iconBtn{ width:40px; height:40px; }
     html[data-device="phone"] #themeLabel{ display:none; }
 
     /* Sticky bar: compact mode on phone */
@@ -1099,16 +1152,27 @@
       <nav class="navLinks" aria-label="Primary">
         <a class="chip primary" href="#book" data-i18n="nav_book">Book Now</a>
 
-        <details class="navGroup hideMobile">
-          <summary>
-            <span class="chip">🌐 Languages</span>
-          </summary>
-          <div class="navPanel langSwitch" role="group" aria-label="Language">
-            <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
-            <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
-            <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
+        <div class="langSwitch hideMobile">
+          <button id="langBtn" class="iconBtn" type="button"
+                  aria-label="Language"
+                  aria-haspopup="menu"
+                  aria-expanded="false"
+                  aria-controls="langMenu">
+            <span id="currentFlag" aria-hidden="true">🇹🇭</span>
+          </button>
+
+          <div id="langMenu" class="langMenu" role="menu" aria-label="Language menu" hidden>
+            <button type="button" role="menuitem" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
+              <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+            </button>
+            <button type="button" role="menuitem" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
+              <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
+            </button>
+            <button type="button" role="menuitem" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
+              <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
+            </button>
           </div>
-        </details>
+        </div>
 
         <details class="navGroup hideMobile">
           <summary>
@@ -1142,26 +1206,16 @@
       <div class="hero">
         <div class="heroInner">
           <div class="heroPanel">
-            <div class="heroKicker" data-i18n-html="hero_kicker">
-              <span class="kw a">Direct booking</span>
-              <span style="opacity:.9">•</span>
-              <span class="kw">Fast confirmation</span>
-              <span style="opacity:.9">•</span>
-              <span class="kw hot">Click to book</span>
-            </div>
-
             <h1 class="heroTitle">Sandbox Hotel</h1>
 
             <p class="heroSub" data-i18n-html="hero_sub">
-              Clean, comfortable <span class="kw a">large rooms</span> in <span class="kw">Nakhon Si Thammarat</span> with
-              <span class="kw">Wi-Fi</span>, <span class="kw">parking</span>, <span class="kw">AC</span>, and <span class="kw">laundry</span>.
-              For the fastest booking: <span class="kw hot">call</span> or <span class="kw hot">message</span> your dates.
+              ห้องกว้าง • Wi-Fi • ที่จอดรถ • ซักรีด • แอร์<br>
+              ยืนยันเร็วที่สุด: โทรหรือ LINE
             </p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="#book" data-i18n="cta_request">Request Booking</a>
-              <a class="btn hot" href="tel:+66885783478" data-i18n="cta_call_number">Call: 088-578-3478</a>
-              <a class="btn" id="ctaLine" href="#" rel="nofollow">LINE</a>
+              <a class="btn primary" href="tel:+66887906345" data-i18n="cta_call_number">Call: 088-790-6345</a>
+              <a class="btn hot" id="ctaLine" href="#" rel="nofollow">LINE</a>
               <a class="btn" id="ctaWhatsApp" href="https://wa.me/66887906345" target="_blank" rel="noopener nofollow">WhatsApp</a>
               <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
             </div>
@@ -1968,7 +2022,7 @@
         nav_location: "ที่ตั้ง",
 
         hero_kicker: '<span class="kw a">จองตรงกับโรงแรม</span> <span style="opacity:.9">•</span> <span class="kw">ยืนยันรวดเร็ว</span> <span style="opacity:.9">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
-        hero_sub: 'ฐานพักที่สงบและสะดวกใน <span class="kw">นครศรีธรรมราช</span>: <span class="kw a">ห้องกว้าง</span>, <span class="kw">แอร์</span>, <span class="kw">Wi-Fi</span>, <span class="kw">ที่จอดรถ</span>, และ <span class="kw">ซักรีด</span>. จองเร็วที่สุด: <span class="kw hot">ส่งข้อความ</span> แจ้งวันเข้าพัก + ประเภทห้อง หรือ <span class="kw hot">โทร</span> เพื่อยืนยันได้ทันที',
+        hero_sub: 'ห้องกว้าง • Wi-Fi • ที่จอดรถ • ซักรีด • แอร์<br>ยืนยันเร็วที่สุด: โทรหรือ LINE',
         hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
 
         cta_request: "ส่งคำขอจอง",
@@ -2169,7 +2223,7 @@
         nav_location: "Location",
 
         hero_kicker: '<span class="kw a">Direct booking</span> <span style="opacity:.9">•</span> <span class="kw">Fast confirmation</span> <span style="opacity:.9">•</span> <span class="kw hot">Click to book</span>',
-        hero_sub: 'Your calm base in <span class="kw">Nakhon Si Thammarat</span>: <span class="kw a">spacious rooms</span>, strong <span class="kw">A/C</span>, fast <span class="kw">Wi-Fi</span>, easy <span class="kw">parking</span>, and convenient <span class="kw">laundry</span>. Fastest booking: <span class="kw hot">message</span> your dates + room type—or <span class="kw hot">call</span> for instant confirmation.',
+        hero_sub: 'Spacious rooms • Wi‑Fi • Parking • Laundry • A/C<br>Fastest confirmation: call or LINE',
         hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms',
 
         cta_request: "Request Booking",
@@ -2370,7 +2424,7 @@
         nav_location: "位置",
 
         hero_kicker: '<span class="kw a">酒店直订</span> <span style="opacity:.9">•</span> <span class="kw">快速确认</span> <span style="opacity:.9">•</span> <span class="kw hot">点击预订</span>',
-        hero_sub: '你在 <span class="kw">洛坤府</span> 的安心落脚点：<span class="kw a">宽敞客房</span>、强劲 <span class="kw">空调</span>、高速 <span class="kw">Wi-Fi</span>、便捷 <span class="kw">停车</span> 与 <span class="kw">洗衣</span>。最快预订：<span class="kw hot">留言</span> 日期 + 房型，或 <span class="kw hot">致电</span> 立即确认。',
+        hero_sub: '宽敞客房 • Wi‑Fi • 停车 • 洗衣 • 空调<br>最快确认：电话或 LINE',
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
 
         cta_request: "发送预订请求",
@@ -2568,6 +2622,8 @@
       const pack = I18N[CURRENT_LANG] || I18N[I18N_DEFAULT] || {};
       return pack[key] || (I18N.en && I18N.en[key]) || (I18N.th && I18N.th[key]) || "";
     }
+    const FLAG_MAP = { th: "🇹🇭", en: "🇬🇧", zh: "🇨🇳" };
+
     function applyLang(lang){
       CURRENT_LANG = normLang(lang);
       document.documentElement.setAttribute("lang", CURRENT_LANG);
@@ -2576,6 +2632,8 @@
         const active = btn.getAttribute("data-lang") === CURRENT_LANG;
         btn.setAttribute("aria-pressed", active ? "true" : "false");
       });
+      const currentFlag = document.getElementById("currentFlag");
+      if(currentFlag) currentFlag.textContent = FLAG_MAP[CURRENT_LANG] || "🌐";
 
       document.querySelectorAll("[data-i18n]").forEach(el=>{
         const key = el.getAttribute("data-i18n");
@@ -2602,6 +2660,21 @@
       if(ogd && t("og_desc")) ogd.setAttribute("content", t("og_desc"));
     }
     function initLang(){
+      const langBtn = document.getElementById("langBtn");
+      const langMenu = document.getElementById("langMenu");
+
+      function openLangMenu(open){
+        if(!langBtn || !langMenu) return;
+        const shouldOpen = (typeof open === "boolean") ? open : langMenu.hasAttribute("hidden");
+        if(shouldOpen){
+          langMenu.removeAttribute("hidden");
+          langBtn.setAttribute("aria-expanded", "true");
+        } else {
+          langMenu.setAttribute("hidden", "");
+          langBtn.setAttribute("aria-expanded", "false");
+        }
+      }
+
       try{
         const stored = localStorage.getItem("sbx_lang");
         if(stored){
@@ -2616,13 +2689,24 @@
         applyLang("th");
       }
 
+      if(langBtn && langMenu){
+        langBtn.addEventListener("click", (e)=>{
+          e.stopPropagation();
+          openLangMenu(langMenu.hasAttribute("hidden"));
+        });
+      }
+
       document.querySelectorAll(".langBtn").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           const lang = btn.getAttribute("data-lang");
           try{ localStorage.setItem("sbx_lang", lang); } catch(_e){}
           applyLang(lang);
+          openLangMenu(false);
         });
       });
+
+      document.addEventListener("click", ()=> openLangMenu(false));
+      document.addEventListener("keydown", (e)=>{ if(e.key === "Escape") openLangMenu(false); });
     }
 
     // ---------- Booking message / contact ----------
