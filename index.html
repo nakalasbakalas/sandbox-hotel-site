@@ -667,36 +667,146 @@
     html[data-device="phone"] .quickChips .chip{scroll-snap-align:start; white-space:nowrap}
 
     /* ---------- Amenities ---------- */
-    .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:var(--gridGap)}
-    @media (max-width:980px){ .grid3{grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width:640px){ .grid3{grid-template-columns: 1fr;} }
-    .tile{
-      padding:16px;
-      border-radius: var(--radius2);
-      border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      text-align:center;
-      display:flex; flex-direction:column; align-items:center;
-      box-shadow: var(--shadow3);
+    #amenities, .amenities-section{
+      --accent: var(--copper2);
+      --surface: var(--card);
+      --bg: var(--bg0);
+      --border: var(--line);
+      --text: var(--ink2);
+      position: relative;
+      padding: clamp(22px, 3vw, 34px);
+      border-radius: 22px;
+      background:
+        radial-gradient(1200px 500px at 20% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+        linear-gradient(180deg, color-mix(in oklab, var(--surface) 75%, transparent), color-mix(in oklab, var(--bg) 92%, transparent));
+      border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+      box-shadow: 0 14px 40px color-mix(in oklab, black 45%, transparent);
     }
-    html[data-theme="light"] .tile{background: rgba(0,0,0,.02)}
-    .tile h3{margin:14px 0 6px; font-size:15px; color:var(--ink2)}
-    .tile p{margin:0; font-size:13px; color:var(--muted); max-width:34ch}
-    .icon{
-      width:clamp(52px, 6.2vw, 74px);
-      height:clamp(52px, 6.2vw, 74px);
-      border-radius:clamp(16px, 2.2vw, 22px);
-      font-size:clamp(16px, 2.0vw, 20px);
-      letter-spacing:-.02em;
-      background: rgba(255,255,255,.06);
-      border:1px solid var(--line);
-      color:var(--ink2);
-      display:flex; align-items:center; justify-content:center;
-      font-weight:1000;
-      box-shadow: 0 10px 22px rgba(0,0,0,.18), inset 0 0 0 1px rgba(255,255,255,.10);
+    #amenities h2, .amenities-section h2{
+      font-size: clamp(22px, 2.2vw, 30px);
+      letter-spacing: .02em;
+      margin: 0 0 6px;
     }
-    .icon.a{background: var(--softA); border-color: rgba(183,106,43,.24)}
-    .icon.hot{background: var(--softHot); border-color: rgba(240,195,154,.24)}
+    #amenities .sub, .amenities-section .sub, #amenities p.lead{
+      margin: 0 0 18px;
+      max-width: 56ch;
+      opacity: .82;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .amenities-grid{
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+    @media (max-width: 980px){
+      .amenities-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 640px){
+      .amenities-grid{ grid-template-columns: 1fr; gap: 12px; }
+    }
+    .amenity-card{
+      position: relative;
+      overflow: hidden;
+      border-radius: 18px;
+      padding: 18px 18px 16px;
+      background:
+        linear-gradient(180deg,
+          color-mix(in oklab, var(--surface) 72%, transparent),
+          color-mix(in oklab, var(--bg) 88%, transparent));
+      border: 1px solid color-mix(in oklab, var(--border) 78%, transparent);
+      box-shadow:
+        0 10px 26px color-mix(in oklab, black 45%, transparent),
+        inset 0 1px 0 color-mix(in oklab, white 10%, transparent);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
+      text-align: center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:flex-start;
+      height: 100%;
+    }
+    .amenity-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background: linear-gradient(135deg,
+        color-mix(in oklab, var(--accent) 28%, transparent),
+        transparent 40%);
+      opacity: .55;
+      pointer-events:none;
+    }
+    .amenity-card::after{
+      content:"";
+      position:absolute;
+      left: 16px;
+      right: 16px;
+      bottom: 10px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--accent) 55%, transparent), transparent);
+      opacity: .9;
+    }
+    @media (hover:hover){
+      .amenity-card:hover{
+        transform: translateY(-3px);
+        border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+        box-shadow:
+          0 14px 34px color-mix(in oklab, black 55%, transparent),
+          inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+      }
+    }
+    .amenity-card:focus-visible{
+      outline: 2px solid color-mix(in oklab, var(--accent) 80%, white);
+      outline-offset: 3px;
+    }
+    .amenity-icon{
+      position: relative;
+      z-index: 1;
+      width: 54px;
+      height: 54px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      background:
+        radial-gradient(circle at 30% 20%,
+          color-mix(in oklab, var(--accent) 22%, transparent),
+          color-mix(in oklab, var(--surface) 72%, transparent) 55%);
+      border: 1px solid color-mix(in oklab, var(--accent) 22%, var(--border));
+      box-shadow:
+        0 10px 22px color-mix(in oklab, black 45%, transparent),
+        inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+    }
+    .amenity-icon .glyph{
+      font-weight: 700;
+      letter-spacing: .04em;
+      font-size: 14px;
+      color: color-mix(in oklab, var(--text) 92%, white);
+      opacity: .95;
+    }
+    .amenity-card h3{
+      margin: 0 0 6px;
+      font-size: 15px;
+      letter-spacing: .01em;
+      color: var(--ink2);
+      position: relative;
+      z-index: 1;
+    }
+    .amenity-card p{
+      margin: 0;
+      opacity: .82;
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 34ch;
+      margin-inline: auto;
+      color: var(--muted);
+      position: relative;
+      z-index: 1;
+    }
+    @media (prefers-reduced-motion: reduce){
+      .amenity-card{ transition: none !important; }
+    }
 
     /* ---------- Rooms ---------- */
     #rooms .stack{
@@ -1356,42 +1466,40 @@
 
     <!-- AMENITIES -->
     <section class="section" id="amenities">
-      <div class="card altB pad">
-        <div class="head">
-          <div>
-            <h2 data-i18n="amen_title">Amenities</h2>
-            <p data-i18n="amen_sub">Essentials that matter for comfort and convenience.</p>
-          </div>
+      <div class="amenities-inner">
+        <div>
+          <h2 data-i18n="amen_title">Amenities</h2>
+          <p class="sub" data-i18n="amen_sub">Essentials that matter for comfort and convenience.</p>
         </div>
 
-        <div class="grid3" aria-label="Amenities list">
-          <div class="tile">
-            <div class="icon a">Wi</div>
+        <div class="amenities-grid" aria-label="Amenities list">
+          <div class="amenity-card" tabindex="0">
+            <div class="amenity-icon" aria-hidden="true"><span class="glyph">Wi</span></div>
             <h3 data-i18n="amen_wifi_title">Wi-Fi</h3>
             <p data-i18n="amen_wifi_desc">Reliable connection for work, streaming, and video calls.</p>
           </div>
-          <div class="tile">
-            <div class="icon hot">🅿</div>
+          <div class="amenity-card" tabindex="0">
+            <div class="amenity-icon" aria-hidden="true"><span class="glyph">🅿</span></div>
             <h3 data-i18n="amen_parking_title">Parking</h3>
             <p data-i18n="amen_parking_desc">Guest parking available (subject to availability).</p>
           </div>
-          <div class="tile">
-            <div class="icon a">AC</div>
+          <div class="amenity-card" tabindex="0">
+            <div class="amenity-icon" aria-hidden="true"><span class="glyph">AC</span></div>
             <h3 data-i18n="amen_ac_title">Air-conditioning</h3>
             <p data-i18n="amen_ac_desc">Comfortable rooms year-round.</p>
           </div>
-          <div class="tile">
-            <div class="icon">🧺</div>
+          <div class="amenity-card" tabindex="0">
+            <div class="amenity-icon" aria-hidden="true"><span class="glyph">🧺</span></div>
             <h3 data-i18n="amen_laundry_title">Laundry</h3>
             <p data-i18n="amen_laundry_desc">Laundry service/area available—ask reception.</p>
           </div>
-          <div class="tile">
-            <div class="icon">☕</div>
+          <div class="amenity-card" tabindex="0">
+            <div class="amenity-icon" aria-hidden="true"><span class="glyph">☕</span></div>
             <h3 data-i18n="amen_coffee_title">Coffee & Snack Bar</h3>
             <p data-i18n="amen_coffee_desc">Quick refreshments on site.</p>
           </div>
-          <div class="tile">
-            <div class="icon">🛎</div>
+          <div class="amenity-card" tabindex="0">
+            <div class="amenity-icon" aria-hidden="true"><span class="glyph">🛎</span></div>
             <h3 data-i18n="amen_service_title">Helpful Service</h3>
             <p data-i18n="amen_service_desc">Friendly staff for local tips and smooth stays.</p>
           </div>
