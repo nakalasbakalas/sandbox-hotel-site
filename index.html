@@ -461,6 +461,8 @@
     /* Gallery carousel */
     .galleryWrap{position:relative}
     .gallery{
+      display:flex;
+      flex-wrap:nowrap;
       display:grid;
       grid-auto-flow:column;
       grid-auto-columns:minmax(260px, 32%);
@@ -472,6 +474,7 @@
       scrollbar-width:thin;
     }
     .gallery::-webkit-scrollbar{height:10px}
+    .gItem{flex:0 0 clamp(280px, 32vw, 520px); border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1); scroll-snap-align:start}
     .gItem{border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1); scroll-snap-align:start}
     .gItem .ph{display:block; width:100%; height:auto}
     .gCap{padding:10px 12px}
@@ -1363,6 +1366,11 @@
           <button class="galNavBtn" type="button" id="galNext" aria-label="Next photo">›</button>
         </div>
         <div class="galHint fine" data-i18n="gal_swipe_hint">Swipe for more photos or use the arrows</div>
+      </div>
+      <div class="galleryNav" aria-label="Gallery controls">
+        <button class="btn" type="button" id="galleryPrev" aria-label="Previous gallery images">←</button>
+        <button class="btn" type="button" id="galleryNext" aria-label="Next gallery images">→</button>
+      </div>
       </div>
       <div class="galleryNav" aria-label="Gallery controls">
         <button class="btn" type="button" id="galleryPrev" aria-label="Previous gallery images">←</button>
