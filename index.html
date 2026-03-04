@@ -13,6 +13,8 @@
   <link rel="canonical" href="https://www.sandboxhotel.com/">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/sandbox-logo-transparent.svg">
   <link rel="shortcut icon" href="assets/images/logo/sandbox-logo-transparent.svg">
+  <link rel="icon" type="image/svg+xml" href="/assets/images/logo/sandbox-logo-transparent.svg">
+  <link rel="shortcut icon" href="/assets/images/logo/sandbox-logo-transparent.svg">
 
   <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -278,6 +280,35 @@
     }
     .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
     .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .navGroup{
+      position:relative;
+    }
+    .navGroup summary{
+      list-style:none;
+    }
+    .navGroup summary::-webkit-details-marker{display:none}
+    .navGroup summary .chip{pointer-events:none}
+    .navPanel{
+      position:absolute;
+      top:calc(100% + 8px);
+      right:0;
+      min-width:230px;
+      display:grid;
+      gap:8px;
+      padding:10px;
+      border-radius:14px;
+      border:1px solid var(--line);
+      background:var(--uiGlass2);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      backdrop-filter: blur(10px) saturate(150%);
+      box-shadow: var(--shadow3);
+      z-index:20;
+    }
+    .navPanel .chip{justify-content:flex-start}
+    .langSwitch{display:grid; gap:8px}
+    @media (max-width:980px){
+      .navPanel{position:static; min-width:0; margin-top:8px}
+    }
     .hideMobile{display:inline-flex}
     @media (max-width:980px){ .hideMobile{display:none} }
 
@@ -501,7 +532,19 @@
     .offer p{margin:8px 0 0; color:var(--muted); font-size:13px}
     @media (max-width:980px){ .offers{grid-template-columns:1fr} }
 
-    /* ---------- Booking form ---------- */
+        /* ---------- Why choose us ---------- */
+    .whyGrid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:10px}
+    .whyItem{
+      padding:14px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.03);
+    }
+    html[data-theme="light"] .whyItem{background: rgba(0,0,0,.02)}
+    .whyItem b{display:block; color:var(--ink2); font-weight:1000}
+    .whyItem p{margin:8px 0 0; color:var(--muted); font-size:13px}
+    @media (max-width:980px){ .whyGrid{grid-template-columns:1fr} }
+/* ---------- Booking form ---------- */
     .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
     .field{display:flex; flex-direction:column; gap:6px}
     .field label{font-size:12px; color:var(--muted); font-weight:900}
@@ -531,6 +574,39 @@
     .wide{grid-column:1/-1}
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px}
     @media (max-width:980px){ .formGrid{grid-template-columns:1fr} }
+
+        /* ---------- Quick date presets ---------- */
+    .quickDates{margin-top:10px; display:grid; gap:8px}
+    .quickTop{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .quickLabel{
+      font-size:12px; color:var(--muted); font-weight:950;
+      letter-spacing:.14em; text-transform:uppercase;
+    }
+    .quickChips{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
+    .quickChips .chip{min-height:38px; padding:8px 10px}
+    .quickDates .fine{margin:0}
+    #staySummary{
+      display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap:wrap;
+    }
+    .stayPill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:6px 10px; border-radius:999px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      color: var(--ink2);
+      font-weight:900;
+      font-size:12px;
+    }
+    html[data-theme="light"] .stayPill{background: rgba(0,0,0,.02)}
+    .bestRateNote{color: var(--muted); font-size:12px}
+    html[data-device="phone"] .quickChips{
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:4px;
+      scroll-snap-type:x mandatory;
+    }
+    html[data-device="phone"] .quickChips .chip{scroll-snap-align:start; white-space:nowrap}
 
     /* ---------- Amenities ---------- */
     .grid3{display:grid; grid-template-columns: repeat(3, 1fr); gap:var(--gridGap)}
@@ -793,7 +869,130 @@
     .stickyLeft span{font-size:12px; color:var(--muted)}
     .stickyActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
 
-    /* ---------- Print ---------- */
+
+    /* ==========================================================
+       DEVICE DISPLAY TUNING (PHONE / TABLET)
+       - Auto-detects touch devices and applies compact layout
+       - Minimizes CTA clutter on smaller screens
+       - Sticky bar auto-hides on scroll + hides when keyboard is open
+    ========================================================== */
+
+    /* Smooth hide/show for the sticky booking bar */
+    .sticky{
+      transform: translateY(0);
+      transition: transform .22s ease, opacity .22s ease, filter .22s ease;
+      will-change: transform;
+    }
+    .sticky.stickyHidden{
+      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
+    }
+    html.kbdOpen .sticky{
+      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
+    }
+
+    /* Ensure content isn't hidden behind the sticky bar on touch devices */
+    html[data-compact="true"] body{
+      padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    }
+
+    /* Mobile/Tablet header: show ONLY brand + Book Now (collapse everything else) */
+    html[data-compact="true"] .navLinks .navGroup{ display:none !important; }
+    html[data-device="phone"] .navLinks .chip:not(.primary),
+    html[data-device="tablet"] .navLinks .chip:not(.primary){ display:none !important; }
+    html[data-compact="true"] .navLinks{ gap:8px; }
+    html[data-compact="true"] .navLinks .chip.primary{
+      min-height:40px;
+      padding:10px 12px;
+      border-radius: 999px;
+    }
+/* Phone layout (compact + conversion-focused) */
+    html[data-device="phone"] .nav{
+      padding: 8px 12px;
+      padding-top: calc(8px + env(safe-area-inset-top));
+    }
+    html[data-device="phone"] .logo{ width:40px; height:40px; border-radius:14px; }
+    html[data-device="phone"] .brand small{ display:none; }
+
+    html[data-device="phone"] .hero{
+      min-height: clamp(480px, 82vh, 720px);
+      border-radius: 18px;
+    }
+    html[data-device="phone"] .heroInner{
+      padding: clamp(18px, 4.8vw, 36px) 14px;
+    }
+    html[data-device="phone"] .heroPanel{
+      padding: 16px 14px 12px;
+    }
+    html[data-device="phone"] .heroTitle{
+      font-size: clamp(30px, 9.2vw, 38px);
+      line-height: 1.08;
+      text-wrap: balance;
+    }
+    html[data-device="phone"] .heroSub{
+      font-size: 15px;
+      line-height: 1.55;
+      max-width: 36ch;
+      text-wrap: pretty;
+    }
+
+    html[data-device="phone"] .btn{
+      min-height: 46px;
+      padding: 11px 14px;
+      font-size: 15px;
+      line-height: 1.2;
+      white-space: normal;
+      text-align: center;
+    }
+
+    /* Hero CTAs: keep the highest-intent actions visible; reduce clutter */
+    html[data-device="phone"] .heroCTA{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+    html[data-device="phone"] .heroCTA .btn{ width:100%; }
+    html[data-device="phone"] .heroCTA .btn.primary,
+    html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
+    html[data-device="phone"] #ctaWhatsApp,
+    html[data-device="phone"] .heroCTA .btn.ghost{ display:none !important; }
+
+    /* Language + theme controls: tighten */
+    html[data-device="phone"] .langSwitch .langBtn span:last-child{ display:none; }
+    html[data-device="phone"] .langSwitch{ gap:6px !important; }
+    html[data-device="phone"] .langSwitch .chip{ padding:8px 9px; min-height:36px; }
+    html[data-device="phone"] #themeLabel{ display:none; }
+
+    /* Sticky bar: compact mode on phone */
+    html[data-device="phone"] .stickyInner{ justify-content:center; }
+    html[data-device="phone"] .stickyLeft{ display:none; }
+    html[data-device="phone"] .stickyActions{
+      width:100%;
+      justify-content:center;
+    }
+    html[data-device="phone"] .stickyActions .btn{
+      flex: 1 1 auto;
+      min-height: 42px;
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+    html[data-device="phone"] #stickyWA{ display:none !important; }
+
+    /* Tablet: reduce some noise but keep context */
+    html[data-device="tablet"] .hero{
+      min-height: clamp(520px, 75vh, 820px);
+    }
+    html[data-device="tablet"] .stickyLeft span{ display:none; }
+    html[data-device="tablet"] .heroCTA .btn.ghost{ display:none !important; }
+
+        /* ---------- Performance ---------- */
+    @supports (content-visibility: auto){
+      main .section{content-visibility:auto; contain-intrinsic-size: 900px 600px;}
+      main .section:first-of-type{content-visibility:visible;}
+    }
+    /* Footer language strip (mobile/tablet only, since header is minimal) */
+    .footerLang{justify-content:flex-end}
+    html[data-compact="true"] .footerLang{display:flex !important}
+/* ---------- Print ---------- */
     @media print{
       html,body{background:#fff !important; color:#000 !important}
       header,.sticky{display:none !important}
@@ -824,6 +1023,47 @@
     ]
   }
   </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How do I book the fastest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For the fastest confirmation, call or message the hotel on LINE/WhatsApp with your check-in date, check-out date, number of guests, and preferred room type."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What time is check-in and check-out?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Standard check-in is 14:00 and check-out is 11:00."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What do I need for check-in?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Please bring a passport or Thai ID card for check-in. Policies may vary by season."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I arrive late?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. If you expect to arrive late, message your estimated arrival time so the hotel can assist you."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 
 <body>
@@ -843,28 +1083,39 @@
 
       <nav class="navLinks" aria-label="Primary">
         <a class="chip primary" href="#book" data-i18n="nav_book">Book Now</a>
-        <a class="chip hideMobile" href="#rooms" data-i18n="nav_rooms">Rooms</a>
-        <a class="chip hideMobile" href="#offers" data-i18n="nav_offers">Offers</a>
-        <a class="chip hideMobile" href="#amenities" data-i18n="nav_amenities">Amenities</a>
-        <a class="chip hideMobile" href="#gallery" data-i18n="nav_gallery">Gallery</a>
-        <a class="chip hideMobile" href="#reviews" data-i18n="nav_reviews">Reviews</a>
-        <a class="chip hideMobile" href="#faq" data-i18n="nav_faq">FAQ</a>
-        <a class="chip hideMobile" href="#location" data-i18n="nav_location">Location</a>
+
+        <details class="navGroup hideMobile">
+          <summary>
+            <span class="chip">🌐 Languages</span>
+          </summary>
+          <div class="navPanel langSwitch" role="group" aria-label="Language">
+            <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
+            <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
+            <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
+          </div>
+        </details>
+
+        <details class="navGroup hideMobile">
+          <summary>
+            <span class="chip">☰ Explore</span>
+          </summary>
+          <div class="navPanel" role="group" aria-label="Site navigation">
+            <a class="chip" href="#rooms" data-i18n="nav_rooms">Rooms</a>
+            <a class="chip" href="#offers" data-i18n="nav_offers">Offers</a>
+            <a class="chip" href="#amenities" data-i18n="nav_amenities">Amenities</a>
+            <a class="chip" href="#gallery" data-i18n="nav_gallery">Gallery</a>
+            <a class="chip" href="#reviews" data-i18n="nav_reviews">Reviews</a>
+            <a class="chip" href="#faq" data-i18n="nav_faq">FAQ</a>
+            <a class="chip" href="#location" data-i18n="nav_location">Location</a>
+
+            <!-- Theme toggle: System → Dark → Light -->
+            <button class="chip" id="themeToggle" type="button" aria-label="Theme" title="Theme">
+              <span id="themeIcon" aria-hidden="true">🖥️</span>
+              <span id="themeLabel">System</span>
+            </button>
+          </div>
+        </details>
       </nav>
-
-      <div style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
-        <div class="langSwitch" role="group" aria-label="Language" style="display:flex; gap:8px; align-items:center; flex-wrap:wrap">
-          <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
-          <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
-          <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
-        </div>
-
-        <!-- Theme toggle: System → Dark → Light -->
-        <button class="chip" id="themeToggle" type="button" aria-label="Theme" title="Theme">
-          <span id="themeIcon" aria-hidden="true">🖥️</span>
-          <span class="hideMobile" id="themeLabel">System</span>
-        </button>
-      </div>
     </div>
   </header>
 
@@ -934,7 +1185,23 @@
             <p data-i18n="offer3_desc">Book earlier for best room availability on busy weekends.</p>
           </div>
         </div>
-      </div>
+      
+
+        <div class="sep"></div>
+
+        <div>
+          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:10px; flex-wrap:wrap">
+            <b style="color:var(--ink2); font-weight:1000; letter-spacing:.2px" data-i18n="why_title">Why guests choose Sandbox</b>
+            <span class="fine" data-i18n="why_sub">Simple, reliable, and easy to book direct.</span>
+          </div>
+
+          <div class="whyGrid" aria-label="Why choose Sandbox Hotel">
+            <div class="whyItem"><b data-i18n="why_1_t">Large rooms</b><p data-i18n="why_1_d">Comfortable space to rest or work.</p></div>
+            <div class="whyItem"><b data-i18n="why_2_t">Fast confirmation</b><p data-i18n="why_2_d">Call or message your dates and room type.</p></div>
+            <div class="whyItem"><b data-i18n="why_3_t">Essentials covered</b><p data-i18n="why_3_d">Wi‑Fi, AC, parking, laundry, and helpful service.</p></div>
+          </div>
+        </div>
+</div>
     </section>
 
     <!-- BOOK -->
@@ -1127,8 +1394,12 @@
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
-                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
+                  <a class="roomMediaLink" href="/assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                    <img class="mediaImg" src="/assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
                   </a>
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
@@ -1142,6 +1413,10 @@
                 <div class="roomSubMedia">
                   <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
                     <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                  <a class="roomMediaLink" href="/assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="/assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
                     <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async">
@@ -1260,7 +1535,8 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="/assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
@@ -1331,7 +1607,10 @@
             <h2 data-i18n="reviews_title">Guest Reviews</h2>
             <p data-i18n="reviews_sub">Check location and the latest guest feedback on Google Maps before you book.</p>
           </div>
-          <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="btn_view_maps">View on Google Maps</a>
+          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+            <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="btn_view_maps">View on Google Maps</a>
+            <a class="btn" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n="btn_view_facebook">Facebook</a>
+          </div>
         </div>
 
         <div class="reviews">
@@ -1398,6 +1677,15 @@
         <details>
           <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
           <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
+        </details>
+
+        <details>
+          <summary data-i18n="faq_q7">Is smoking allowed?</summary>
+          <p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
+          <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
         </details>
       </div>
     </section>
@@ -1474,11 +1762,96 @@
     // CONFIG (EDIT THESE)
     // =========================
     const WHATSAPP_NUMBER_E164 = "66887906345";                  // no "+"
-    const LINE_LINK = "https://line.me/R/ti/p/@YOUR_LINE_ID";     // replace with your real LINE link
+    const LINE_LINK = "https://line.me/R/oaMessage/@YOUR_LINE_ID/?"; // BEST (prefilled): https://line.me/R/oaMessage/@YOUR_LINE_ID/?  (replace @YOUR_LINE_ID)
+    // Fallback (no prefill): https://line.me/R/ti/p/@YOUR_LINE_ID
     const EMAIL_TO = "reservations@sandboxhotel.com";            // replace with your real email
     // =========================
 
-    // ---------- Theme (System default; user override saved) ----------
+    
+    // ---------- Device display tuning (phone/tablet) ----------
+    (function(){
+      const root = document.documentElement;
+      const sticky = document.querySelector(".sticky");
+      let resizeT;
+
+      function detectDevice(){
+        const w = window.innerWidth || 0;
+        const h = window.innerHeight || 0;
+        const minSide = Math.min(w || 9999, h || 9999);
+        const isTouch = (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
+                        ("ontouchstart" in window) ||
+                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
+
+        let device = "desktop";
+        if(isTouch){
+          device = (minSide <= 680) ? "phone" : "tablet";
+        }
+        root.setAttribute("data-device", device);
+        root.setAttribute("data-compact", device === "desktop" ? "false" : "true");
+      }
+
+      detectDevice();
+      window.addEventListener("resize", ()=>{
+        clearTimeout(resizeT);
+        resizeT = setTimeout(detectDevice, 150);
+      }, { passive:true });
+
+      if(!sticky) return;
+
+      // Hide sticky while typing (on-screen keyboard)
+      document.addEventListener("focusin", (e)=>{
+        if(root.getAttribute("data-compact") === "true"){
+          const tag = e.target && e.target.tagName;
+          if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT"){
+            root.classList.add("kbdOpen");
+          }
+        }
+      }, true);
+
+      document.addEventListener("focusout", (e)=>{
+        const tag = e.target && e.target.tagName;
+        if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT"){
+          setTimeout(()=>root.classList.remove("kbdOpen"), 120);
+        }
+      }, true);
+
+      // Auto-hide sticky on downward scroll (compact devices only)
+      let lastY = window.scrollY || 0;
+      let ticking = false;
+
+      function updateSticky(){
+        const compact = root.getAttribute("data-compact") === "true";
+        if(!compact){
+          sticky.classList.remove("stickyHidden");
+          lastY = window.scrollY || 0;
+          return;
+        }
+        const y = window.scrollY || 0;
+        const delta = y - lastY;
+
+        if(y < 120){
+          sticky.classList.remove("stickyHidden");
+        } else if(delta > 10){
+          sticky.classList.add("stickyHidden");
+        } else if(delta < -10){
+          sticky.classList.remove("stickyHidden");
+        }
+        lastY = y;
+      }
+
+      window.addEventListener("scroll", ()=>{
+        if(ticking) return;
+        ticking = true;
+        requestAnimationFrame(()=>{
+          ticking = false;
+          updateSticky();
+        });
+      }, { passive:true });
+
+      updateSticky();
+    })();
+
+// ---------- Theme (System default; user override saved) ----------
     const THEME_KEY = "sbx_theme"; // "system" | "dark" | "light"
     const metaTheme = document.getElementById("metaThemeColor");
     const themeToggle = document.getElementById("themeToggle");
@@ -1589,6 +1962,35 @@
         btn_send_wa: "ส่งผ่าน WhatsApp",
         btn_send_email: "ส่งทางอีเมล",
         form_hint: "เราจะตอบกลับพร้อมห้องว่างและราคารวม",
+
+        quick_label: "เลือกวันอย่างรวดเร็ว",
+        quick_tonight: "คืนนี้",
+        quick_tomorrow: "พรุ่งนี้",
+        quick_weekend: "สุดสัปดาห์",
+        quick_7n: "7 คืน",
+        quick_clear: "ล้าง",
+        stay_summary_placeholder: "เลือกวันเพื่อดูสรุปการเข้าพัก",
+        stay_nights: "คืน",
+        stay_guests: "ท่าน",
+        stay_room: "ห้อง",
+        best_rate_note: "จองตรง = ยืนยันไวที่สุด • ส่งวันเข้าพักเพื่อรับราคาที่ถูกต้องของวันนี้",
+        msg_nights: "จำนวนคืน",
+        line_opened_hint: "เปิด LINE แล้ว",
+        line_clipboard_hint: "คัดลอกข้อความไว้แล้ว (วางได้ทันที)",
+        line_clipboard_fail: "แนะนำ: คัดลอกข้อความหากต้องการวางในแชต",
+        why_title: "ทำไมแขกถึงเลือก Sandbox",
+        why_sub: "เรียบง่าย น่าเชื่อถือ และจองตรงได้สะดวก",
+        why_1_t: "ห้องกว้าง",
+        why_1_d: "พื้นที่สบายสำหรับพักผ่อนหรือทำงาน",
+        why_2_t: "ยืนยันรวดเร็ว",
+        why_2_d: "โทรหรือส่งข้อความแจ้งวันและประเภทห้อง",
+        why_3_t: "ครบทุกสิ่งจำเป็น",
+        why_3_d: "Wi‑Fi แอร์ ที่จอดรถ ซักรีด และบริการช่วยเหลือ",
+        btn_view_facebook: "Facebook",
+        faq_q7: "สูบบุหรี่ได้ไหม?",
+        faq_a7: "เพื่อความสบายของผู้เข้าพัก โปรดสอบถามนโยบายการสูบบุหรี่และพื้นที่ที่กำหนดกับแผนกต้อนรับ",
+        faq_q8: "นโยบายการยกเลิกคืออะไร?",
+        faq_a8: "เงื่อนไขการยกเลิกอาจเปลี่ยนตามช่วงเวลา/ฤดูกาล กรุณายืนยันกับโรงแรมตามวันเข้าพักของคุณ",
         book_tip: "ทิป: หากมาถึงดึก โปรดระบุเวลาโดยประมาณในหมายเหตุ เพื่อให้เราช่วยเหลือได้รวดเร็ว",
 
         amen_title: "สิ่งอำนวยความสะดวก",
@@ -1693,6 +2095,7 @@
         loc_plus: "Plus Code:",
         loc_notes: "หมายเหตุ: นโยบายอาจเปลี่ยนตามฤดูกาล หากต้องการข้อมูลล่าสุด โปรดติดต่อโรงแรมโดยตรง",
         back_to_top: "กลับขึ้นด้านบน",
+        footer_lang: "ภาษา:",
 
         sticky_title: "พร้อมจองไหม?",
         sticky_sub: "แตะปุ่ม — ยืนยันไวที่สุดด้วยการโทรหรือส่งข้อความ",
@@ -1760,6 +2163,35 @@
         btn_send_wa: "Send via WhatsApp",
         btn_send_email: "Send via Email",
         form_hint: "We’ll reply with availability and total price.",
+
+        quick_label: "Quick dates",
+        quick_tonight: "Tonight",
+        quick_tomorrow: "Tomorrow",
+        quick_weekend: "Weekend",
+        quick_7n: "7 nights",
+        quick_clear: "Clear",
+        stay_summary_placeholder: "Select dates to see a summary.",
+        stay_nights: "nights",
+        stay_guests: "guests",
+        stay_room: "Room",
+        best_rate_note: "Direct booking = fastest confirmation • Message your dates for today’s exact rate.",
+        msg_nights: "Nights",
+        line_opened_hint: "LINE opened.",
+        line_clipboard_hint: "Message copied to clipboard.",
+        line_clipboard_fail: "Tip: copy your message if needed.",
+        why_title: "Why guests choose Sandbox",
+        why_sub: "Simple, reliable, and easy to book direct.",
+        why_1_t: "Large rooms",
+        why_1_d: "Comfortable space to rest or work.",
+        why_2_t: "Fast confirmation",
+        why_2_d: "Call or message your dates and room type.",
+        why_3_t: "Essentials covered",
+        why_3_d: "Wi‑Fi, AC, parking, laundry, and helpful service.",
+        btn_view_facebook: "Facebook",
+        faq_q7: "Is smoking allowed?",
+        faq_a7: "For guest comfort, please ask reception about the current smoking policy and designated areas.",
+        faq_q8: "What is the cancellation policy?",
+        faq_a8: "Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.",
         book_tip: "Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.",
 
         amen_title: "Amenities",
@@ -1864,6 +2296,7 @@
         loc_plus: "Plus Code:",
         loc_notes: "Notes: Policies may vary by season. For the latest info, contact the hotel directly.",
         back_to_top: "Back to top",
+        footer_lang: "Language:",
 
         sticky_title: "Ready to book?",
         sticky_sub: "Tap a button — fastest confirmation by message or call.",
@@ -1931,6 +2364,35 @@
         btn_send_wa: "通过WhatsApp发送",
         btn_send_email: "通过邮箱发送",
         form_hint: "我们会回复空房与总价。",
+
+        quick_label: "快捷日期",
+        quick_tonight: "今晚",
+        quick_tomorrow: "明天",
+        quick_weekend: "周末",
+        quick_7n: "7晚",
+        quick_clear: "清除",
+        stay_summary_placeholder: "选择日期以查看摘要。",
+        stay_nights: "晚",
+        stay_guests: "位",
+        stay_room: "房型",
+        best_rate_note: "直接预订 = 最快确认 • 发送日期以获取今日准确价格。",
+        msg_nights: "晚数",
+        line_opened_hint: "已打开LINE。",
+        line_clipboard_hint: "消息已复制到剪贴板。",
+        line_clipboard_fail: "提示：如需粘贴，可先复制消息。",
+        why_title: "为什么选择Sandbox",
+        why_sub: "简单可靠，直接预订更省心。",
+        why_1_t: "房间宽敞",
+        why_1_d: "舒适空间，休息或办公都方便。",
+        why_2_t: "确认快速",
+        why_2_d: "电话或留言发送日期与房型即可。",
+        why_3_t: "设施齐全",
+        why_3_d: "Wi‑Fi、空调、停车、洗衣与贴心服务。",
+        btn_view_facebook: "Facebook",
+        faq_q7: "可以吸烟吗？",
+        faq_a7: "为保证舒适度，请向前台确认最新吸烟政策及指定区域。",
+        faq_q8: "取消政策是什么？",
+        faq_a8: "取消规则可能因日期/季节而变化。请与酒店确认您的日期以获取最新政策。",
         book_tip: "提示：如晚到，请在备注中写预计到达时间，方便我们协助。",
 
         amen_title: "设施",
@@ -2035,6 +2497,7 @@
         loc_plus: "Plus Code：",
         loc_notes: "提示：政策可能随季节调整，最新信息请直接联系酒店。",
         back_to_top: "返回顶部",
+        footer_lang: "语言:",
 
         sticky_title: "准备预订？",
         sticky_sub: "点击按钮——电话或留言最快确认。",
@@ -2140,6 +2603,7 @@
         "",
         `${t("msg_checkin") || "Check-in"}: ${d.checkin}`,
         `${t("msg_checkout") || "Check-out"}: ${d.checkout}`,
+        (calcNights(d.checkin, d.checkout) ? `${t("msg_nights") || "Nights"}: ${calcNights(d.checkin, d.checkout)}` : null),
         `${t("msg_guests") || "Guests"}: ${d.guests}`,
         `${t("msg_room") || "Room"}: ${d.room}`,
         d.name ? `${t("msg_name") || "Name"}: ${d.name}` : null,
@@ -2150,20 +2614,67 @@
       ].filter(Boolean);
       return lines.join("\n");
     }
+        function calcNights(checkin, checkout){
+      try{
+        const toDate = (v)=>{
+          const [y,m,d]=String(v||"").split("-").map(Number);
+          if(!y||!m||!d) return null;
+          return new Date(y, m-1, d);
+        };
+        const a = toDate(checkin);
+        const b = toDate(checkout);
+        if(!a || !b) return null;
+        const ms = b.getTime() - a.getTime();
+        const n = Math.round(ms / 86400000);
+        return (n > 0) ? n : 1;
+      }catch(_e){ return null; }
+    }
+
+    function lineMessageUrl(msg){
+      const share = "https://line.me/R/msg/text/?";
+      // Best-case: Official Account prefilled message link:
+      //   https://line.me/R/oaMessage/@YOUR_LINE_ID/?<encoded text>
+      if(/line\.me\/R\/oaMessage\//i.test(LINE_LINK)){
+        let base = String(LINE_LINK || "");
+        // Remove any existing query payload, then force the "/?" suffix.
+        if(base.includes("?")) base = base.split("?")[0];
+        if(!base.endsWith("/")) base += "/";
+        base += "?";
+        return base + encodeURIComponent(msg);
+      }
+      // Universal fallback: share-text (user selects the chat)
+      return share + encodeURIComponent(msg);
+    }
+
+    async function copyToClipboard(text){
+      try{
+        if(navigator.clipboard && navigator.clipboard.writeText){
+          await navigator.clipboard.writeText(text);
+          return true;
+        }
+      }catch(_e){}
+      return false;
+    }
+
     function openWhatsApp(msg){
       const url = `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank", "noopener");
     }
-    function openLine(msg){
-      window.open(LINE_LINK, "_blank", "noopener");
+        async function openLine(msg){
+      const url = lineMessageUrl(msg);
+      const copied = await copyToClipboard(msg);
+      window.open(url, "_blank", "noopener");
+
       const hint = document.getElementById("formHint");
       if(hint){
-        hint.textContent = (t("line_opened_hint") || "LINE opened. Paste message: ") + msg.replace(/\n/g, " • ");
+        const base = t("line_opened_hint") || "LINE opened.";
+        const clip = copied ? (t("line_clipboard_hint") || "Message copied to clipboard.") : (t("line_clipboard_fail") || "Tip: copy your message if needed.");
+        hint.textContent = `${base} ${clip}`;
         hint.style.color = "#D18B50";
         setTimeout(()=>{
           hint.style.color = "";
           hint.textContent = t("form_hint") || "We’ll reply with availability and total price.";
-        }, 4500);
+        }, 4200);
       }
     }
     function openEmail(msg){
@@ -2189,7 +2700,7 @@
       ["ctaLine","contactLine","stickyLine"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
-        el.setAttribute("href", LINE_LINK);
+        el.setAttribute("href", lineMessageUrl(t("msg_title") || "Booking request – Sandbox Hotel"));
         el.setAttribute("target", "_blank");
         el.setAttribute("rel", "noopener");
         el.addEventListener("click",(e)=>{
@@ -2307,35 +2818,136 @@
     function initDates(){
       const ci = document.getElementById("checkin");
       const co = document.getElementById("checkout");
+      const guests = document.getElementById("guests");
+      const room = document.getElementById("room");
+      const stayEl = document.getElementById("staySummary");
       if(!ci || !co) return;
 
       const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
       const tmr = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 1);
       const nxt = new Date(now.getFullYear(), now.getMonth(), now.getDate() + 2);
 
       const toISO = d => new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate())).toISOString().slice(0,10);
 
+      // Sensible mins (prevents accidental past dates)
+      ci.min = toISO(today);
+      co.min = toISO(tmr);
+
       if(!ci.value) ci.value = toISO(tmr);
       if(!co.value) co.value = toISO(nxt);
 
       function toDate(v){
-        const [y,m,d]=String(v).split("-").map(Number);
+        const [y,m,d]=String(v||"").split("-").map(Number);
         if(!y||!m||!d) return null;
         return new Date(y, m-1, d);
       }
-      function fix(){
+
+      function ensureValidRange(){
         const a = toDate(ci.value);
         const b = toDate(co.value);
         if(!a || !b) return;
+
+        // Always keep checkout after checkin
         if(b <= a){
           const n = new Date(a.getFullYear(), a.getMonth(), a.getDate()+1);
           co.value = toISO(n);
         }
+
+        // Update mins so the native picker behaves
+        ci.min = toISO(today);
+        const a2 = toDate(ci.value) || tmr;
+        const minCo = new Date(a2.getFullYear(), a2.getMonth(), a2.getDate()+1);
+        co.min = toISO(minCo);
       }
-      ci.addEventListener("change", fix, {passive:true});
-      co.addEventListener("change", fix, {passive:true});
+
+      function updateStaySummary(){
+        if(!stayEl) return;
+        ensureValidRange();
+
+        const nights = calcNights(ci.value, co.value);
+        const g = guests ? guests.value : "";
+        const r = room ? room.value : "";
+
+        const parts = [];
+        if(nights){
+          const nLabel = t("stay_nights") || "nights";
+          parts.push(`<span class="stayPill">${nights} ${nLabel}</span>`);
+        }
+        if(g){
+          const gLabel = t("stay_guests") || "guests";
+          parts.push(`<span class="stayPill">${g} ${gLabel}</span>`);
+        }
+        if(r){
+          const rLabel = t("stay_room") || "Room";
+          parts.push(`<span class="stayPill">${rLabel}: ${r}</span>`);
+        }
+
+        if(parts.length){
+          stayEl.removeAttribute("data-i18n");
+          stayEl.innerHTML = parts.join("");
+        }else{
+          stayEl.setAttribute("data-i18n", "stay_summary_placeholder");
+          stayEl.textContent = t("stay_summary_placeholder") || "Select dates to see a summary.";
+        }
+      }
+
+      ci.addEventListener("change", updateStaySummary, {passive:true});
+      co.addEventListener("change", updateStaySummary, {passive:true});
+      if(guests) guests.addEventListener("change", updateStaySummary, {passive:true});
+      if(room) room.addEventListener("change", updateStaySummary, {passive:true});
+
+      // Quick date presets
+      document.querySelectorAll(".quickBtn").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const mode = btn.getAttribute("data-qd");
+
+          const addDays = (d, n)=> new Date(d.getFullYear(), d.getMonth(), d.getDate()+n);
+
+          const nextDow = (start, dow)=>{
+            const s = new Date(start.getFullYear(), start.getMonth(), start.getDate());
+            const delta = (dow - s.getDay() + 7) % 7;
+            return addDays(s, delta === 0 ? 7 : delta); // next occurrence
+          };
+
+          if(mode === "clear"){
+            ci.value = "";
+            co.value = "";
+            updateStaySummary();
+            return;
+          }
+          if(mode === "tonight"){
+            const a = today;
+            const b = addDays(today, 1);
+            ci.value = toISO(a); co.value = toISO(b);
+          }else if(mode === "tomorrow"){
+            const a = addDays(today, 1);
+            const b = addDays(today, 2);
+            ci.value = toISO(a); co.value = toISO(b);
+          }else if(mode === "weekend"){
+            // Next Friday → Sunday (2 nights)
+            const fri = nextDow(today, 5);
+            const sun = addDays(fri, 2);
+            ci.value = toISO(fri); co.value = toISO(sun);
+          }else if(mode === "7n"){
+            const a = toDate(ci.value) || today;
+            const b = addDays(a, 7);
+            ci.value = toISO(a); co.value = toISO(b);
+          }
+
+          updateStaySummary();
+          try{
+            if(document.documentElement.getAttribute("data-compact") === "true"){
+              document.getElementById("bookingForm")?.scrollIntoView({behavior:"smooth", block:"start"});
+            }
+          }catch(_e){}
+        }, {passive:true});
+      });
+
+      updateStaySummary();
     }
 
+    
     // ---------- Media placeholders ----------
     function initMediaWraps(){
       document.querySelectorAll(".mediaWrap").forEach(w=>{
