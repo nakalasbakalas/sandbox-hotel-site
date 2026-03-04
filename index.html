@@ -14,7 +14,11 @@
   <meta property="og:title" id="ogTitle" content="Sandbox Hotel | Nakhon Si Thammarat">
   <meta property="og:description" id="ogDescription" content="Book direct for fast confirmation. Call, LINE/WhatsApp, or send an enquiry.">
   <meta property="og:url" content="https://www.sandboxhotel.com/">
+  <meta property="og:site_name" content="Sandbox Hotel">
+  <meta property="og:locale" content="th_TH">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Sandbox Hotel | Nakhon Si Thammarat">
+  <meta name="twitter:description" content="Book direct for fast confirmation via phone, LINE, or WhatsApp.">
   <meta property="og:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
   <meta property="og:image:alt" content="Sandbox Hotel exterior">
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
@@ -194,12 +198,8 @@
       box-shadow: 0 12px 28px rgba(196,122,58,.22);
       position:relative; overflow:hidden;
     }
-    .logo:after{
-      content:"";
-      position:absolute; inset:-45%;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.70), transparent 55%);
-      transform: rotate(18deg);
-    }
+    .logo:after{content:none}
+    .logo img{width:100%; height:100%; object-fit:contain; display:block}
     .brand h1{margin:0; font-size:14px; letter-spacing:.3px; color:var(--ink2)}
     .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted)}
     .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
@@ -444,14 +444,27 @@
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px}
     @media (max-width:980px){ .formGrid{grid-template-columns:1fr} }
 
-    /* Gallery */
-    .gallery{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
-    .gItem{border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1)}
+    /* Gallery carousel */
+    .galleryWrap{position:relative}
+    .gallery{
+      display:flex;
+      flex-wrap:nowrap;
+      gap:12px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      padding-bottom:6px;
+      scrollbar-width:thin;
+    }
+    .gallery::-webkit-scrollbar{height:10px}
+    .gItem{flex:0 0 min(86vw, 760px); border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1); scroll-snap-align:start}
     .gItem .ph{display:block; width:100%; height:auto}
     .gCap{padding:10px 12px}
     .gCap b{display:block; font-size:13px; color:var(--ink2)}
     .gCap span{display:block; margin-top:4px; font-size:12px; color:var(--muted)}
-    @media (max-width:980px){ .gallery{grid-template-columns:1fr} }
+    .galleryNav{display:flex; justify-content:flex-end; gap:8px; margin-top:10px}
+    .galleryNav .btn{min-height:38px; padding:8px 12px}
+    @media (max-width:980px){ .gItem{flex-basis:84%} }
 
     /* Reviews */
     .reviews{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px}
@@ -526,8 +539,9 @@
     .brand small{color:rgba(206,199,188,.88)}
     .logo{
       border:1px solid rgba(240,195,154,.22);
-      background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(17,18,24,.92));
+      background: rgba(10,11,14,.65);
       box-shadow: 0 16px 34px rgba(0,0,0,.55), 0 14px 26px rgba(183,106,43,.22);
+      padding:7px;
     }
 
     /* Cards (depth + inner hairline) */
@@ -654,6 +668,10 @@
     /* Rooms layout (was missing in v8) */
     .roomCard{display:grid;grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr);align-items:stretch}
     .roomMedia{position:relative;overflow:hidden;background:rgba(255,255,255,.02);border-right:1px solid rgba(255,255,255,.10)}
+    .roomMediaLink{display:block; color:inherit; text-decoration:none}
+    .roomMediaLink:focus-visible{box-shadow:var(--focus)}
+    .roomSubMedia{display:grid; grid-template-columns:1fr 1fr; gap:8px; padding:8px; background:rgba(255,255,255,.02); border-top:1px solid rgba(255,255,255,.10)}
+    .roomSubMedia img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px; border:1px solid rgba(255,255,255,.12)}
     .roomBody{padding:16px;min-width:0}
     .roomTop{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
     .roomTop h4{margin:0;font-size:16px;letter-spacing:.2px;color:var(--ink2)}
@@ -667,11 +685,12 @@
 
     /* Media (images with SVG fallback) */
     .mediaWrap{position:relative;overflow:hidden}
-    .mediaWrap .mediaImg{display:block;width:100%;aspect-ratio:800/520;object-fit:cover;background:linear-gradient(135deg, rgba(196,122,58,.16), rgba(224,161,106,.10));opacity:0;transform:scale(1.01);transition:opacity .25s ease, transform .6s ease}
+    .mediaWrap .mediaImg{display:block;width:100%;aspect-ratio:800/520;object-fit:cover;background:linear-gradient(135deg, rgba(196,122,58,.16), rgba(224,161,106,.10));opacity:1;transform:none;transition:opacity .25s ease, transform .6s ease}
     .mediaWrap.imgOk .mediaImg{opacity:1;transform:scale(1)}
-    .mediaWrap .ph{position:absolute;inset:0;opacity:1;transition:opacity .25s ease}
-    .mediaWrap.imgOk .ph{opacity:0;pointer-events:none}
+    .mediaWrap .ph{position:absolute;inset:0;opacity:0;transition:opacity .25s ease;pointer-events:none}
+    .mediaWrap.imgOk .ph{opacity:0}
     .mediaWrap.imgFail .mediaImg{display:none}
+    .mediaWrap.imgFail .ph{opacity:1}
 
     /* Gallery images */
     .gItem .mediaWrap{border-bottom:1px solid rgba(255,255,255,.10)}
@@ -740,6 +759,7 @@
   "name": "Sandbox Hotel",
   "url": "https://www.sandboxhotel.com/",
   "telephone": "+66887906345",
+  "image": "https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "642 4016, Tambon Pho Sadet, Mueang Nakhon Si Thammarat District, Nakhon Si Thammarat 80000",
@@ -756,8 +776,10 @@
 <body>
 <header>
   <div class="nav">
-    <a class="brand" href="#top" aria-label="Home">
-      <div class="logo" aria-hidden="true"></div>
+    <a class="brand" href="#top" aria-label="Sandbox Hotel home">
+      <div class="logo" aria-hidden="true">
+        <img src="assets/images/logo/sandbox-logo-transparent.svg" alt="" loading="eager" decoding="async">
+      </div>
       <div>
         <h1>Sandbox Hotel</h1>
         <small data-i18n="brand_location">Nakhon Si Thammarat, Thailand</small>
@@ -869,8 +891,6 @@
           <select id="room" name="room">
             <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
             <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
-            <option value="Premium Twin" data-i18n="opt_premium_twin">Premium Twin</option>
-            <option value="Premium Double" data-i18n="opt_premium_double">Premium Double</option>
           </select>
         </div>
         <div class="field wide">
@@ -953,8 +973,14 @@
         <article class="card roomCard">
           <div class="roomMedia">
             <div class="mediaWrap">
-              <img class="mediaImg" src="assets/images/rooms/standard-twin.jpg" alt="Standard Twin room photo" loading="lazy" decoding="async">
+              <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin photo">
+                <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom with two single beds" loading="lazy" decoding="async">
+              </a>
               <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Standard Twin placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_standard_twin" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Standard Twin</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
+            </div>
+            <div class="roomSubMedia">
+              <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo"><img src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom"></a>
+              <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bathroom photo"><img src="assets/images/rooms/bathroom.png" alt="Standard Twin bathroom with shower"></a>
             </div>
           </div>
           <div class="roomBody">
@@ -990,8 +1016,14 @@
         <article class="card roomCard">
           <div class="roomMedia">
             <div class="mediaWrap">
-              <img class="mediaImg" src="assets/images/rooms/standard-double.jpg" alt="Standard Double room photo" loading="lazy" decoding="async">
+              <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async">
+              </a>
               <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Standard Double placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_standard_double" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Standard Double</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
+            </div>
+            <div class="roomSubMedia">
+              <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo"><img src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double bedroom"></a>
+              <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open Standard Double bathroom photo"><img src="assets/images/rooms/bathroom.png" alt="Standard Double bathroom with shower"></a>
             </div>
           </div>
           <div class="roomBody">
@@ -1024,80 +1056,6 @@
             </div>
           </div>
         </article>
-        <article class="card roomCard">
-          <div class="roomMedia">
-            <div class="mediaWrap">
-              <img class="mediaImg" src="assets/images/rooms/premium-twin.jpg" alt="Premium Twin room photo" loading="lazy" decoding="async">
-              <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Premium Twin placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_premium_twin" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Premium Twin</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
-            </div>
-          </div>
-          <div class="roomBody">
-            <div class="roomTop">
-              <div>
-                <h4 data-i18n="room_premium_twin_title">Premium Twin</h4>
-                <div class="fine" data-i18n="room_premium_twin_meta"><span class="kw a">More Space</span> • 2 Twin Beds • 32–38 m² • Guests 1–3</div>
-              </div>
-              <div class="priceBox">
-                <b data-i18n="price_from">From</b>
-                <strong data-i18n="price_ask">Ask</strong>
-                <small data-i18n="price_today">today’s rate</small>
-              </div>
-            </div>
-            <div class="tags">
-              <span class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</span>
-              <span class="tag" data-i18n="tag_32_38_m">32–38 m²</span>
-              <span class="tag" data-i18n="tag_guests_1_3">Guests 1–3</span>
-            </div>
-            <ul class="bullets">
-              <li data-i18n="bullet_extra_space">Extra space</li>
-              <li data-i18n="bullet_premium_feel">Premium feel</li>
-              <li data-i18n="bullet_better_sound_insulation">Better sound insulation</li>
-              <li data-i18n="bullet_longer_stays">Ideal for longer stays</li>
-            </ul>
-            <div class="roomActions">
-              <a class="btn primary" href="#book" data-room="Premium Twin" data-i18n="room_premium_twin_btn">Book Premium Twin</a>
-              <a class="btn hot" href="tel:+66887906345" data-i18n="btn_call">Call</a>
-              <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
-            </div>
-          </div>
-        </article>
-        <article class="card roomCard">
-          <div class="roomMedia">
-            <div class="mediaWrap">
-              <img class="mediaImg" src="assets/images/rooms/premium-double.jpg" alt="Premium Double room photo" loading="lazy" decoding="async">
-              <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Premium Double placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_premium_double" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Premium Double</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
-            </div>
-          </div>
-          <div class="roomBody">
-            <div class="roomTop">
-              <div>
-                <h4 data-i18n="room_premium_double_title">Premium Double</h4>
-                <div class="fine" data-i18n="room_premium_double_meta"><span class="kw a">Premium Choice</span> • 1 Double Bed • 32–38 m² • Guests 1–3</div>
-              </div>
-              <div class="priceBox">
-                <b data-i18n="price_from">From</b>
-                <strong data-i18n="price_ask">Ask</strong>
-                <small data-i18n="price_today">today’s rate</small>
-              </div>
-            </div>
-            <div class="tags">
-              <span class="tag" data-i18n="tag_1_double_bed">1 Double Bed</span>
-              <span class="tag" data-i18n="tag_32_38_m">32–38 m²</span>
-              <span class="tag" data-i18n="tag_guests_1_3">Guests 1–3</span>
-            </div>
-            <ul class="bullets">
-              <li data-i18n="bullet_premium_comfort">Premium comfort</li>
-              <li data-i18n="bullet_great_lighting">Great lighting</li>
-              <li data-i18n="bullet_relax_zone_seating">Relax zone seating</li>
-              <li data-i18n="bullet_upgraded_linens">Upgraded linens (seasonal)</li>
-            </ul>
-            <div class="roomActions">
-              <a class="btn primary" href="#book" data-room="Premium Double" data-i18n="room_premium_double_btn">Book Premium Double</a>
-              <a class="btn hot" href="tel:+66887906345" data-i18n="btn_call">Call</a>
-              <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
-            </div>
-          </div>
-        </article>
       </div>
       <p class="fine" style="margin-top:12px">Rates can change by date and season. Message your dates for the fastest exact price.</p>
     </div>
@@ -1111,10 +1069,11 @@
         </div>
         <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
       </div>
-      <div class="gallery">
+      <div class="galleryWrap">
+      <div class="gallery" id="galleryTrack">
         <div class="gItem">
           <div class="mediaWrap">
-            <img class="mediaImg" src="assets/images/gallery/lobby-reception.jpg" alt="Lobby and reception photo" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Lobby and reception photo" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Lobby & Reception placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_lobby_and_reception" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Lobby & Reception</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1124,7 +1083,7 @@
         </div>
         <div class="gItem">
           <div class="mediaWrap">
-            <img class="mediaImg" src="assets/images/gallery/large-room-layout.jpg" alt="Large room layout photo" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-2.png" alt="Large room layout with beds and workspace" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Large Room Layout placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_large_room_layout" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Large Room Layout</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1134,7 +1093,7 @@
         </div>
         <div class="gItem">
           <div class="mediaWrap">
-            <img class="mediaImg" src="assets/images/gallery/coffee-snack-bar.jpg" alt="Coffee and snack bar photo" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Hotel lobby refreshment and seating area" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Coffee & Snack Bar placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_coffee_and_snack_bar" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Coffee & Snack Bar</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1144,7 +1103,7 @@
         </div>
         <div class="gItem">
           <div class="mediaWrap">
-            <img class="mediaImg" src="assets/images/gallery/parking-area.jpg" alt="Parking area photo" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Hotel entrance and parking access" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Parking Area placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_parking_area" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Parking Area</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1154,7 +1113,7 @@
         </div>
         <div class="gItem">
           <div class="mediaWrap">
-            <img class="mediaImg" src="assets/images/gallery/clean-bathrooms.jpg" alt="Clean bathrooms photo" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/rooms/bathroom.png" alt="Clean bathroom with hot shower" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Clean Bathrooms placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_clean_bathrooms" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Clean Bathrooms</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1164,7 +1123,7 @@
         </div>
         <div class="gItem">
           <div class="mediaWrap">
-            <img class="mediaImg" src="assets/images/gallery/quiet-rest.jpg" alt="Quiet rest area photo" loading="lazy" decoding="async">
+            <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Quiet room area for rest" loading="lazy" decoding="async">
             <div class="ph"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520" role="img" aria-label="Quiet Rest placeholder"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#C47A3A" stop-opacity="0.25"/><stop offset="1" stop-color="#E0A16A" stop-opacity="0.18"/></linearGradient><filter id="s" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="18" flood-opacity="0.25"/></filter></defs><rect width="800" height="520" rx="28" fill="#0B1220"/><rect x="24" y="24" width="752" height="472" rx="22" fill="url(#g)" stroke="rgba(255,255,255,0.16)"/><path d="M72 380c90-110 160-170 230-80 70 90 120 110 200 10 80-100 140-90 226 70" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="10" stroke-linecap="round"/><circle cx="610" cy="160" r="46" fill="rgba(255,255,255,0.12)"/><text data-i18n="svg_quiet_rest" x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="34" fill="rgba(255,255,255,0.82)">Quiet Rest</text><text data-i18n="svg_replace_photos" x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)">Replace with real photos</text></svg></div>
           </div>
           <div class="gCap">
@@ -1172,6 +1131,11 @@
             <span data-i18n="gal_quiet_desc">Ask for quieter-side rooms when available.</span>
           </div>
         </div>
+      </div>
+      <div class="galleryNav" aria-label="Gallery controls">
+        <button class="btn" type="button" id="galleryPrev" aria-label="Previous gallery images">←</button>
+        <button class="btn" type="button" id="galleryNext" aria-label="Next gallery images">→</button>
+      </div>
       </div>
     </div>
   </section>
@@ -2187,7 +2151,7 @@
       localStorage.setItem(key, JSON.stringify(list).slice(0, 120000));
     } catch(_e) {}
   }
-  ["ctaWhatsApp","ctaLine","ctaWhatsApp","stickyWA","stickyLine"].forEach(id=>{
+  ["ctaWhatsApp","ctaLine","stickyWA","stickyLine"].forEach(id=>{
     const el = document.getElementById(id);
     if(!el) return;
     el.addEventListener("click", ()=> track("cta_click", { id }));
@@ -2205,6 +2169,17 @@
       img.addEventListener("load", ()=> done(true), {once:true});
       img.addEventListener("error", ()=> done(false), {once:true});
     });
+  })();
+
+  // Gallery carousel controls
+  (function initGalleryCarousel(){
+    const track = document.getElementById("galleryTrack");
+    const prev = document.getElementById("galleryPrev");
+    const next = document.getElementById("galleryNext");
+    if(!track || !prev || !next) return;
+    const page = ()=> Math.max(280, Math.floor(track.clientWidth * 0.9));
+    prev.addEventListener("click", ()=> track.scrollBy({left:-page(), behavior:"smooth"}));
+    next.addEventListener("click", ()=> track.scrollBy({left: page(), behavior:"smooth"}));
   })();
 
 
