@@ -458,14 +458,28 @@
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px}
     @media (max-width:980px){ .formGrid{grid-template-columns:1fr} }
 
-    /* Gallery */
-    .gallery{display:grid; grid-template-columns: repeat(3, 1fr); gap:12px}
-    .gItem{border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1)}
+    /* Gallery carousel */
+    .galleryWrap{position:relative}
+    .gallery{
+      display:grid;
+      grid-auto-flow:column;
+      grid-auto-columns:minmax(260px, 32%);
+      gap:12px;
+      overflow-x:auto;
+      scroll-snap-type:x mandatory;
+      scroll-behavior:smooth;
+      padding-bottom:6px;
+      scrollbar-width:thin;
+    }
+    .gallery::-webkit-scrollbar{height:10px}
+    .gItem{border-radius: var(--radius2); overflow:hidden; border:1px solid rgba(255,255,255,.10); background:var(--bg1); scroll-snap-align:start}
     .gItem .ph{display:block; width:100%; height:auto}
     .gCap{padding:10px 12px}
     .gCap b{display:block; font-size:13px; color:var(--ink2)}
     .gCap span{display:block; margin-top:4px; font-size:12px; color:var(--muted)}
-    @media (max-width:980px){ .gallery{grid-template-columns:1fr} }
+    .galleryNav{display:flex; justify-content:flex-end; gap:8px; margin-top:10px}
+    .galleryNav .btn{min-height:38px; padding:8px 12px}
+    @media (max-width:980px){ .gallery{grid-auto-columns:minmax(84%, 84%)} }
 
     /* Reviews */
     .reviews{display:grid; grid-template-columns: 1.2fr .8fr; gap:12px}
@@ -1096,6 +1110,8 @@
         <article class="card roomCard">
           <div class="roomMedia">
             <div class="mediaWrap">
+              <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-2.png" alt="Standard Double room photo" loading="lazy" decoding="async">
               <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
                 <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel.png" alt="Standard Double room photo" loading="lazy" decoding="async">
               </a>
@@ -1149,7 +1165,8 @@
         </div>
         <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
       </div>
-      <div class="gallery">
+      <div class="galleryWrap">
+      <div class="gallery" id="galleryTrack">
         <div class="gItem">
           <div class="mediaWrap">
             <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Lobby and reception photo" loading="lazy" decoding="async">
@@ -1346,6 +1363,11 @@
           <button class="galNavBtn" type="button" id="galNext" aria-label="Next photo">›</button>
         </div>
         <div class="galHint fine" data-i18n="gal_swipe_hint">Swipe for more photos or use the arrows</div>
+      </div>
+      <div class="galleryNav" aria-label="Gallery controls">
+        <button class="btn" type="button" id="galleryPrev" aria-label="Previous gallery images">←</button>
+        <button class="btn" type="button" id="galleryNext" aria-label="Next gallery images">→</button>
+      </div>
       </div>
     </div>
   </section>
@@ -2507,6 +2529,17 @@
       img.addEventListener("load", ()=> done(true), {once:true});
       img.addEventListener("error", ()=> done(false), {once:true});
     });
+  })();
+
+  // Gallery carousel controls
+  (function initGalleryCarousel(){
+    const track = document.getElementById("galleryTrack");
+    const prev = document.getElementById("galleryPrev");
+    const next = document.getElementById("galleryNext");
+    if(!track || !prev || !next) return;
+    const page = ()=> Math.max(280, Math.floor(track.clientWidth * 0.9));
+    prev.addEventListener("click", ()=> track.scrollBy({left:-page(), behavior:"smooth"}));
+    next.addEventListener("click", ()=> track.scrollBy({left: page(), behavior:"smooth"}));
   })();
 
 
