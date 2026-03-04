@@ -18,7 +18,9 @@
   <meta property="og:site_name" content="Sandbox Hotel">
   <meta property="og:url" content="https://www.sandboxhotel.com/">
   <meta property="og:locale" content="th_TH">
-  <meta property="og:title" id="ogTitle" content="Sandbox Hotel | Nakhon Si Thammarat">
+    <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale:alternate" content="zh_CN">
+<meta property="og:title" id="ogTitle" content="Sandbox Hotel | Nakhon Si Thammarat">
   <meta property="og:description" id="ogDescription" content="Book direct for fast confirmation. Call, LINE/WhatsApp, or send an enquiry.">
   <meta property="og:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
   <meta property="og:image:alt" content="Sandbox Hotel exterior">
@@ -274,7 +276,8 @@
       transform: scale(1.1);
       filter: drop-shadow(0 8px 14px rgba(0,0,0,.35));
     }
-    .brand h1{
+    .brand .brandName{
+      display:block;
       margin:0;
       font-size:13px;
       letter-spacing:.12em;
@@ -994,7 +997,15 @@
       main .section:first-of-type{content-visibility:visible;}
     }
     /* Footer language strip (mobile/tablet only, since header is minimal) */
-    .footerLang{justify-content:flex-end}
+    .footerLang{
+      display:none;
+      align-items:center;
+      justify-content:flex-end;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .footerLang .chip{min-height:34px; padding:7px 9px; font-size:12px}
+    .footerLang .fine{margin:0 2px 0 0; white-space:nowrap}
     html[data-compact="true"] .footerLang{display:flex !important}
 /* ---------- Print ---------- */
     @media print{
@@ -1079,8 +1090,8 @@
         <div class="logo" aria-hidden="true">
           <img src="assets/images/logo/sandbox-logo-transparent.svg" alt="" loading="eager" decoding="async">
         </div>
-        <div>
-          <h1>Sandbox Hotel</h1>
+        <div class="brandText">
+          <span class="brandName">Sandbox Hotel</span>
           <small data-i18n="brand_location">Nakhon Si Thammarat, Thailand</small>
         </div>
       </a>
@@ -1139,7 +1150,7 @@
               <span class="kw hot">Click to book</span>
             </div>
 
-            <h2 class="heroTitle">Sandbox Hotel</h2>
+            <h1 class="heroTitle">Sandbox Hotel</h1>
 
             <p class="heroSub" data-i18n-html="hero_sub">
               Clean, comfortable <span class="kw a">large rooms</span> in <span class="kw">Nakhon Si Thammarat</span> with
@@ -1151,7 +1162,7 @@
               <a class="btn primary" href="#book" data-i18n="cta_request">Request Booking</a>
               <a class="btn hot" href="tel:+66887906345" data-i18n="cta_call_number">Call: 088-790-6345</a>
               <a class="btn" id="ctaLine" href="#" rel="nofollow">LINE</a>
-              <a class="btn" id="ctaWhatsApp" href="#" rel="nofollow">WhatsApp</a>
+              <a class="btn" id="ctaWhatsApp" href="https://wa.me/66887906345" target="_blank" rel="noopener nofollow">WhatsApp</a>
               <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
             </div>
 
@@ -1217,6 +1228,22 @@
             <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.</p>
           </div>
           <a class="btn hot" href="tel:+66887906345" data-i18n="book_callnow">Call Now</a>
+        </div>
+
+        <div class="quickDates" aria-label="Quick date presets">
+          <div class="quickTop">
+            <div class="quickLabel" data-i18n="quick_label">Quick dates</div>
+            <div class="quickChips" role="group" aria-label="Quick dates">
+              <button class="chip quickBtn" type="button" data-qd="tonight" data-i18n="quick_tonight">Tonight</button>
+              <button class="chip quickBtn" type="button" data-qd="tomorrow" data-i18n="quick_tomorrow">Tomorrow</button>
+              <button class="chip quickBtn" type="button" data-qd="weekend" data-i18n="quick_weekend">Weekend</button>
+              <button class="chip quickBtn" type="button" data-qd="7n" data-i18n="quick_7n">7 nights</button>
+              <button class="chip quickBtn" type="button" data-qd="clear" data-i18n="quick_clear">Clear</button>
+            </div>
+          </div>
+
+          <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
+          <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
         </div>
 
         <form id="bookingForm" class="formGrid" autocomplete="on">
@@ -1350,10 +1377,10 @@
 
                 <div class="roomSubMedia">
                   <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
-                    <img src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom" loading="lazy" decoding="async">
+                    <img src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom" loading="lazy" decoding="async" width="400" height="300">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async">
+                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
                   </a>
                 </div>
               </div>
@@ -1412,13 +1439,13 @@
 
                 <div class="roomSubMedia">
                   <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async">
+                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
                   </a>
                 </div>
               </div>
@@ -1710,7 +1737,7 @@
           <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
           <a class="btn hot" href="tel:+66887906345" data-i18n="cta_call_number">Call: 088-790-6345</a>
           <a class="btn" id="contactLine" href="#" rel="nofollow">LINE</a>
-          <a class="btn" id="contactWhatsApp" href="#" rel="nofollow">WhatsApp</a>
+          <a class="btn" id="contactWhatsApp" href="https://wa.me/66887906345" target="_blank" rel="noopener nofollow">WhatsApp</a>
           <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
           <a class="btn ghost" href="https://www.facebook.com/sandboxhotel" target="_blank" rel="noopener">Facebook</a>
         </div>
@@ -1733,6 +1760,14 @@
 
         <footer>
           <div>© <span id="y"></span> Sandbox Hotel</div>
+
+          <div class="footerLang" aria-label="Language">
+            <span class="fine" data-i18n="footer_lang">Language:</span>
+            <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
+            <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
+            <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
+          </div>
+
           <div><a href="#top" data-i18n="back_to_top">Back to top</a></div>
         </footer>
       </div>
@@ -1750,7 +1785,7 @@
         <a class="btn primary sm" href="#book" data-i18n="cta_request">Request Booking</a>
         <a class="btn hot sm" href="tel:+66887906345" data-i18n="btn_call">Call</a>
         <a class="btn sm" id="stickyLine" href="#" rel="nofollow">LINE</a>
-        <a class="btn sm" id="stickyWA" href="#" rel="nofollow">WhatsApp</a>
+        <a class="btn sm" id="stickyWA" href="https://wa.me/66887906345" target="_blank" rel="noopener nofollow">WhatsApp</a>
       </div>
     </div>
   </div>
@@ -2634,6 +2669,10 @@
       //   https://line.me/R/oaMessage/@YOUR_LINE_ID/?<encoded text>
       if(/line\.me\/R\/oaMessage\//i.test(LINE_LINK)){
         let base = String(LINE_LINK || "");
+        // If LINE ID is not configured (placeholder), fall back to share-text.
+        if(/YOUR_LINE_ID/i.test(base)){
+          return share + encodeURIComponent(msg);
+        }
         // Remove any existing query payload, then force the "/?" suffix.
         if(base.includes("?")) base = base.split("?")[0];
         if(!base.endsWith("/")) base += "/";
@@ -2643,6 +2682,8 @@
       // Universal fallback: share-text (user selects the chat)
       return share + encodeURIComponent(msg);
     }
+
+    
 
     async function copyToClipboard(text){
       try{
