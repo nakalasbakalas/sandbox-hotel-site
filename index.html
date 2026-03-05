@@ -1201,7 +1201,7 @@
     }
   </style>
 
-  <script type="application/ld+json">
+  <script id="hotelStructuredData" type="application/ld+json">
   {
     "@context": "https://schema.org",
     "@type": "Hotel",
@@ -1344,10 +1344,10 @@
             </p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="tel:+66887906345" data-i18n="cta_call_number">Call: 088-790-6345</a>
+              <a class="btn primary" href="#" data-contact="phone-link" data-i18n="cta_call_number">Call</a>
               <a class="btn hot" id="ctaLine" href="#" rel="nofollow">LINE</a>
-              <a class="btn" id="ctaWhatsApp" href="https://wa.me/66887906345" target="_blank" rel="noopener nofollow">WhatsApp</a>
-              <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
+              <a class="btn" id="ctaWhatsApp" href="#" target="_blank" rel="noopener nofollow">WhatsApp</a>
+              <a class="btn ghost" href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
             </div>
 
             <div class="sep" style="background:rgba(255,255,255,.18)"></div>
@@ -1411,7 +1411,7 @@
             <h2 data-i18n="book_title">Quick Booking Request</h2>
             <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.</p>
           </div>
-          <a class="btn hot" href="tel:+66885783478" data-i18n="book_callnow">Call Now</a>
+          <a class="btn hot" href="#" data-contact="phone-link" data-i18n="book_callnow">Call Now</a>
         </div>
 
         <div class="quickDates" aria-label="Quick date presets">
@@ -1595,7 +1595,7 @@
 
                 <div class="roomActions">
                   <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn">Book Standard Twin</a>
-                  <a class="btn hot" href="tel:+66885783478" data-i18n="btn_call">Call</a>
+                  <a class="btn hot" href="#" data-contact="phone-link" data-i18n="btn_call">Call</a>
                   <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
                 </div>
               </div>
@@ -1660,7 +1660,7 @@
 
                 <div class="roomActions">
                   <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn">Book Standard Double</a>
-                  <a class="btn hot" href="tel:+66885783478" data-i18n="btn_call">Call</a>
+                  <a class="btn hot" href="#" data-contact="phone-link" data-i18n="btn_call">Call</a>
                   <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
                 </div>
               </div>
@@ -1815,8 +1815,8 @@
             <p data-i18n="reviews_sub">Check location and the latest guest feedback on Google Maps before you book.</p>
           </div>
           <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
-            <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="btn_view_maps">View on Google Maps</a>
-            <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n="btn_view_facebook">Facebook</a>
+            <a class="btn" href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="btn_view_maps">View on Google Maps</a>
+            <a class="btn" href="#" data-contact="facebook-link" target="_blank" rel="noopener" data-i18n="btn_view_facebook">Facebook</a>
           </div>
         </div>
 
@@ -1917,20 +1917,20 @@
 
         <div style="display:flex; gap:10px; flex-wrap:wrap">
           <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
-          <a class="btn hot" href="tel:+66885783478" data-i18n="cta_call_number">Call: 088-578-3478</a>
+          <a class="btn hot" href="#" data-contact="phone-link" data-i18n="cta_call_number">Call</a>
           <a class="btn" id="contactLine" href="#" rel="nofollow">LINE</a>
-          <a class="btn" id="contactWhatsApp" href="https://wa.me/66887906345" target="_blank" rel="noopener nofollow">WhatsApp</a>
-          <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
-          <a class="btn ghost" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">Facebook</a>
+          <a class="btn" id="contactWhatsApp" href="#" target="_blank" rel="noopener nofollow">WhatsApp</a>
+          <a class="btn ghost" href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
+          <a class="btn ghost" href="#" data-contact="facebook-link" target="_blank" rel="noopener">Facebook</a>
         </div>
 
         <p class="fine" style="margin-top:10px; line-height:1.8">
           ⏰: เปิดบริการทุกวัน 06:00-22:00<br>
-          ☎️: <a href="tel:+66885783478">088-578-3478</a><br>
+          ☎️: <a href="#" data-contact="phone-link">Call</a><br>
           Line : sandbox.hotel<br>
-          💚คลิกลิงค์แอดไลน์ : <a href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener">https://line.me/ti/p/uc4BCpHCQ4</a><br>
-          <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">https://web.facebook.com/sandboxhotel</a><br>
-          <a href="mailto:booking@sandboxhotel.com">booking@sandboxhotel.com</a>
+          💚คลิกลิงค์แอดไลน์ : <a href="#" data-contact="line-link-text" target="_blank" rel="noopener"></a><br>
+          <a href="#" data-contact="facebook-link-text" target="_blank" rel="noopener"></a><br>
+          <a href="#" data-contact="email-link"></a>
         </p>
 
         <!-- Google Maps embed (reasonable size) -->
@@ -1974,23 +1974,103 @@
       </div>
       <div class="stickyActions">
         <a class="btn primary sm" href="#book" data-i18n="cta_request">Request Booking</a>
-        <a class="btn hot sm" href="tel:+66885783478" data-i18n="btn_call">Call</a>
+        <a class="btn hot sm" href="#" data-contact="phone-link" data-i18n="btn_call">Call</a>
         <a class="btn sm" id="stickyLine" href="#" rel="nofollow">LINE</a>
-        <a class="btn sm" id="stickyWA" href="https://wa.me/66887906345" target="_blank" rel="noopener nofollow">WhatsApp</a>
+        <a class="btn sm" id="stickyWA" href="#" target="_blank" rel="noopener nofollow">WhatsApp</a>
       </div>
     </div>
   </div>
 
   <script>
     // =========================
-    // CONFIG (EDIT THESE)
+    // CONFIG (SOURCE OF TRUTH)
     // =========================
-    const WHATSAPP_NUMBER_E164 = "66885783478";                  // no "+"
-    const LINE_LINK = "https://line.me/ti/p/uc4BCpHCQ4";
-    const EMAIL_TO = "booking@sandboxhotel.com";            // replace with your real email
+    const HOTEL_CONFIG = {
+      HOTEL_NAME: "Sandbox Hotel",
+      PHONE_DISPLAY: "088-578-3478",
+      PHONE_E164: "+66885783478",
+      WHATSAPP_E164: "66885783478",
+      LINE_LINK: "https://line.me/ti/p/uc4BCpHCQ4",
+      EMAIL_TO: "booking@sandboxhotel.com",
+      FACEBOOK_URL: "https://web.facebook.com/sandboxhotel",
+      MAPS_URL: "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7"
+    };
     // =========================
 
     
+
+    const PHONE_LINK = `tel:${HOTEL_CONFIG.PHONE_E164}`;
+    const WHATSAPP_LINK = `https://wa.me/${HOTEL_CONFIG.WHATSAPP_E164}`;
+
+    function applyContactConfig(){
+      document.querySelectorAll('[data-contact="phone-link"]').forEach((el)=>{
+        el.setAttribute("href", PHONE_LINK);
+        if(el.hasAttribute("data-i18n")) return;
+        el.textContent = HOTEL_CONFIG.PHONE_DISPLAY;
+      });
+
+      const linkMap = [
+        ["ctaWhatsApp", WHATSAPP_LINK],
+        ["contactWhatsApp", WHATSAPP_LINK],
+        ["stickyWA", WHATSAPP_LINK],
+        ["ctaLine", HOTEL_CONFIG.LINE_LINK],
+        ["contactLine", HOTEL_CONFIG.LINE_LINK],
+        ["stickyLine", HOTEL_CONFIG.LINE_LINK]
+      ];
+      linkMap.forEach(([id, href])=>{
+        const el = document.getElementById(id);
+        if(!el) return;
+        el.setAttribute("href", href);
+      });
+
+      const mapsButtons = document.querySelectorAll('[data-contact="maps-link"]');
+      mapsButtons.forEach((el)=> el.setAttribute("href", HOTEL_CONFIG.MAPS_URL));
+
+      const facebookButtons = document.querySelectorAll('[data-contact="facebook-link"]');
+      facebookButtons.forEach((el)=> el.setAttribute("href", HOTEL_CONFIG.FACEBOOK_URL));
+
+      const lineTextLink = document.querySelector('[data-contact="line-link-text"]');
+      if(lineTextLink){
+        lineTextLink.setAttribute("href", HOTEL_CONFIG.LINE_LINK);
+        lineTextLink.textContent = HOTEL_CONFIG.LINE_LINK;
+      }
+
+      const facebookTextLink = document.querySelector('[data-contact="facebook-link-text"]');
+      if(facebookTextLink){
+        facebookTextLink.setAttribute("href", HOTEL_CONFIG.FACEBOOK_URL);
+        facebookTextLink.textContent = HOTEL_CONFIG.FACEBOOK_URL;
+      }
+
+      const emailLink = document.querySelector('[data-contact="email-link"]');
+      if(emailLink){
+        emailLink.setAttribute("href", `mailto:${HOTEL_CONFIG.EMAIL_TO}`);
+        emailLink.textContent = HOTEL_CONFIG.EMAIL_TO;
+      }
+
+      const structuredDataEl = document.getElementById("hotelStructuredData");
+      if(structuredDataEl){
+        const data = {
+          "@context": "https://schema.org",
+          "@type": "Hotel",
+          "name": HOTEL_CONFIG.HOTEL_NAME,
+          "url": "https://www.sandboxhotel.com/",
+          "telephone": HOTEL_CONFIG.PHONE_E164,
+          "image": "https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "642 4016, Tambon Pho Sadet, Mueang Nakhon Si Thammarat District, Nakhon Si Thammarat 80000",
+            "addressLocality": "Nakhon Si Thammarat",
+            "addressCountry": "TH"
+          },
+          "sameAs": [
+            HOTEL_CONFIG.FACEBOOK_URL,
+            HOTEL_CONFIG.MAPS_URL
+          ]
+        };
+        structuredDataEl.textContent = JSON.stringify(data, null, 2);
+      }
+    }
+
     // ---------- Device display tuning (phone/tablet) ----------
     (function(){
       const root = document.documentElement;
@@ -2154,7 +2234,7 @@
         hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
 
         cta_request: "ส่งคำขอจอง",
-        cta_call_number: "โทร: 088-578-3478",
+        cta_call_number: `โทร: ${HOTEL_CONFIG.PHONE_DISPLAY}`,
         cta_open_map: "เปิดแผนที่",
 
         offers_title: "ข้อเสนอ & ทิปส์สำหรับจองเร็ว",
@@ -2355,7 +2435,7 @@
         hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms',
 
         cta_request: "Request Booking",
-        cta_call_number: "Call: 088-578-3478",
+        cta_call_number: `Call: ${HOTEL_CONFIG.PHONE_DISPLAY}`,
         cta_open_map: "Open Map",
 
         offers_title: "Click-to-Book Offers & Tips",
@@ -2556,7 +2636,7 @@
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
 
         cta_request: "发送预订请求",
-        cta_call_number: "致电：088-578-3478",
+        cta_call_number: `致电：${HOTEL_CONFIG.PHONE_DISPLAY}`,
         cta_open_map: "打开地图",
 
         offers_title: "一键预订优惠与小贴士",
@@ -2887,8 +2967,8 @@
       const share = "https://line.me/R/msg/text/?";
       // Best-case: Official Account prefilled message link:
       //   https://line.me/R/oaMessage/@YOUR_LINE_ID/?<encoded text>
-      if(/line\.me\/R\/oaMessage\//i.test(LINE_LINK)){
-        let base = String(LINE_LINK || "");
+      if(/line\.me\/R\/oaMessage\//i.test(HOTEL_CONFIG.LINE_LINK)){
+        let base = String(HOTEL_CONFIG.LINE_LINK || "");
         // If LINE ID is not configured (placeholder), fall back to share-text.
         if(/YOUR_LINE_ID/i.test(base)){
           return share + encodeURIComponent(msg);
@@ -2900,7 +2980,7 @@
         return base + encodeURIComponent(msg);
       }
       // Direct Line URL (e.g., add-friend or profile link)
-      if(/line\.me\//i.test(LINE_LINK)) return LINE_LINK;
+      if(/line\.me\//i.test(HOTEL_CONFIG.LINE_LINK)) return HOTEL_CONFIG.LINE_LINK;
       // Universal fallback: share-text (user selects the chat)
       return share + encodeURIComponent(msg);
     }
@@ -2918,7 +2998,7 @@
     }
 
     function openWhatsApp(msg){
-      const url = `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${encodeURIComponent(msg)}`;
+      const url = `https://wa.me/${HOTEL_CONFIG.WHATSAPP_E164}?text=${encodeURIComponent(msg)}`;
       window.open(url, "_blank", "noopener");
     }
         async function openLine(msg){
@@ -2940,12 +3020,12 @@
     }
     function openEmail(msg){
       const subject = t("msg_title") || "Booking request – Sandbox Hotel";
-      window.location.href = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+      window.location.href = `mailto:${encodeURIComponent(HOTEL_CONFIG.EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
     }
 
     function wireContactButtons(){
       // Non-JS fallbacks: real links
-      const waFallback = `https://wa.me/${WHATSAPP_NUMBER_E164}`;
+      const waFallback = `https://wa.me/${HOTEL_CONFIG.WHATSAPP_E164}`;
       ["ctaWhatsApp","contactWhatsApp","stickyWA"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
@@ -3240,6 +3320,7 @@
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
+      applyContactConfig();
       initTheme();
       initLang();
       initDates();
