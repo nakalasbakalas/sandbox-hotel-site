@@ -1,4 +1,5 @@
 <!doctype html>
+<!-- Changelog: fixed mismatched closing tags and container nesting in #rooms and #reviews sections; preserved existing single-file architecture and behavior. -->
 <html lang="th" data-theme="system">
 <head>
   <meta charset="utf-8">
@@ -1717,8 +1718,6 @@
 
         <div id="roomsList" class="stack" aria-label="Room options"></div>
 
-        </div>
-
         <p class="fine" style="margin-top:12px" data-i18n="rooms_fine">
           Rates can change by date and season. Message your dates for the fastest exact price.
         </p>
@@ -1876,7 +1875,6 @@
         </div>
 
         <div id="reviewsList" class="reviews"></div>
-        </div>
       </div>
     </section>
 
