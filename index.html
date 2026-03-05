@@ -2149,7 +2149,8 @@
       LINE_LINK: "https://line.me/ti/p/uc4BCpHCQ4",
       EMAIL_TO: "booking@sandboxhotel.com",
       FACEBOOK_URL: "https://web.facebook.com/sandboxhotel",
-      MAPS_URL: "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7"
+      MAPS_URL: "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7",
+      GA4_MEASUREMENT_ID: "" // e.g. "G-XXXXXXXXXX"; analytics stays off when empty
     };
     // =========================
 
@@ -2157,6 +2158,43 @@
 
     const PHONE_LINK = `tel:${HOTEL_CONFIG.PHONE_E164}`;
     const WHATSAPP_LINK = `https://wa.me/${HOTEL_CONFIG.WHATSAPP_E164}`;
+
+    const analytics = (() => {
+      const measurementId = String(HOTEL_CONFIG.GA4_MEASUREMENT_ID || "").trim();
+      const dntEnabled = (() => {
+        const dnt = String(navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack || "").toLowerCase();
+        return dnt === "1" || dnt === "yes";
+      })();
+      const enabled = !!measurementId && !dntEnabled;
+
+      function init(){
+        if(!enabled || window.gtag) return;
+        const script = document.createElement("script");
+        script.async = true;
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){ window.dataLayer.push(arguments); };
+        window.gtag("js", new Date());
+        window.gtag("config", measurementId, {
+          send_page_view: true,
+          allow_google_signals: false,
+          allow_ad_personalization_signals: false
+        });
+      }
+
+      function sendEvent(name, params = {}){
+        if(!enabled || typeof window.gtag !== "function") return;
+        window.gtag("event", name, params);
+      }
+
+      return { init, sendEvent, enabled, dntEnabled };
+    })();
+
+    function sendEvent(name, params = {}){
+      analytics.sendEvent(name, params);
+    }
 
     function applyContactConfig(){
       document.querySelectorAll('[data-contact="phone-link"]').forEach((el)=>{
@@ -2365,6 +2403,7 @@
         const next = current === "system" ? "dark" : (current === "dark" ? "light" : "system");
         try{ localStorage.setItem(THEME_KEY, next); }catch(_e){}
         setTheme(next);
+        sendEvent("theme_change", { theme_mode: next });
       };
       if(themeToggle) themeToggle.addEventListener("click", cycleTheme);
       if(mobileThemeToggle) mobileThemeToggle.addEventListener("click", cycleTheme);
@@ -3130,6 +3169,7 @@
           try{ localStorage.setItem("sbx_lang", lang); } catch(_e){}
           applyLang(lang);
           openLangMenu(false);
+          sendEvent("language_change", { language: lang });
         });
       });
 
@@ -3267,6 +3307,7 @@
         el.setAttribute("rel", "noopener");
         el.addEventListener("click",(e)=>{
           e.preventDefault();
+          sendEvent("whatsapp_click", { source: id });
           openWhatsApp(buildMessage(getFormData()));
         });
       });
@@ -3279,6 +3320,7 @@
         el.setAttribute("rel", "noopener");
         el.addEventListener("click",(e)=>{
           e.preventDefault();
+          sendEvent("line_click", { source: id });
           openLine(buildMessage(getFormData()));
         });
       });
@@ -3286,9 +3328,13 @@
       const form = document.getElementById("bookingForm");
       form.addEventListener("submit",(e)=>{
         e.preventDefault();
+        sendEvent("booking_form_submit", { submit_channel: "line" });
         openLine(buildMessage(getFormData()));
       });
-      document.getElementById("sendWA").addEventListener("click", ()=> openWhatsApp(buildMessage(getFormData())));
+      document.getElementById("sendWA").addEventListener("click", ()=>{
+        sendEvent("whatsapp_click", { source: "sendWA" });
+        openWhatsApp(buildMessage(getFormData()));
+      });
       document.getElementById("sendEmail").addEventListener("click", ()=> openEmail(buildMessage(getFormData())));
 
       document.querySelectorAll("[data-room]").forEach(el=>{
@@ -3301,7 +3347,14 @@
       document.querySelectorAll('[data-i18n="nav_book"]').forEach(el=>{
         el.addEventListener("click", (e)=>{
           e.preventDefault();
+          sendEvent("book_now_click", { source: (el.id || "nav_book") });
           scrollToBookingForm();
+        });
+      });
+
+      document.querySelectorAll('[data-contact="phone-link"]').forEach(el=>{
+        el.addEventListener("click", ()=>{
+          sendEvent("click_to_call", { phone: HOTEL_CONFIG.PHONE_E164 });
         });
       });
     }
@@ -3579,6 +3632,7 @@
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
       applyContactConfig();
+      analytics.init();
       initTheme();
       initLang();
       initMobileMenu();
