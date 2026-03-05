@@ -60,6 +60,9 @@
       --nav-pad-x:14px;
       --nav-gap:10px;
       --btn-h:38px;
+      --safe-top: 0px;
+      --safe-bottom: 0px;
+      --sticky-offset: 96px;
       --btn-px:14px;
       --btn-radius:999px;
       --btn-border:1px;
@@ -78,6 +81,12 @@
 
     /* ---------- Theme tokens ---------- */
     html{color-scheme: light dark;}
+    @supports (padding: env(safe-area-inset-top)){
+      :root{ --safe-top: env(safe-area-inset-top); --safe-bottom: env(safe-area-inset-bottom); }
+    }
+    @supports (padding: constant(safe-area-inset-top)){
+      :root{ --safe-top: constant(safe-area-inset-top); --safe-bottom: constant(safe-area-inset-bottom); }
+    }
     html[data-theme="dark"]{
       --bg0:#050507;
       --bg1:#0B0C0F;
@@ -266,7 +275,8 @@
       min-height:var(--nav-h);
       padding:var(--nav-pad-y) var(--nav-pad-x);
       display:flex; align-items:center; justify-content:space-between; gap:var(--nav-gap);
-      padding-top: calc(var(--nav-pad-y) + env(safe-area-inset-top));
+      padding-top: calc(var(--nav-pad-y) + constant(safe-area-inset-top));
+      padding-top: calc(var(--nav-pad-y) + var(--safe-top));
     }
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
     .logo{
@@ -331,7 +341,8 @@
     /* ---------- Chips / Buttons ---------- */
     .chip{
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
-      min-height:var(--btn-h);
+      min-height:44px;
+      min-height:max(44px, var(--btn-h));
       padding:0 var(--btn-px);
       border-radius:var(--btn-radius);
       border:var(--btn-border) solid var(--line);
@@ -361,7 +372,8 @@
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
-      min-height:var(--btn-h);
+      min-height:44px;
+      min-height:max(44px, var(--btn-h));
       padding:0 var(--btn-px);
       border-radius:12px;
       border:var(--btn-border) solid var(--line);
@@ -411,15 +423,17 @@
       border:1px solid var(--line);
       color:var(--ink2);
     }
-    .btn.sm{min-height:40px; padding:10px 12px; border-radius:12px}
+    .btn.sm{min-height:44px; padding:10px 12px; border-radius:12px}
 
 
     .iconBtn{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      width:var(--btn-h);
-      height:var(--btn-h);
+      width:44px;
+      height:44px;
+      width:max(44px, var(--btn-h));
+      height:max(44px, var(--btn-h));
       border-radius:var(--btn-radius);
       border:1px solid var(--line);
       background: rgba(255,255,255,.05);
@@ -444,8 +458,8 @@
     }
     .langMenu[hidden]{display:none}
     .flagItem{
-      width:40px;
-      height:40px;
+      width:44px;
+      height:44px;
       border-radius:12px;
       border:1px solid var(--line);
       background:transparent;
@@ -481,6 +495,7 @@
       position:fixed;
       top:0;
       right:0;
+      height:100vh;
       height:100dvh;
       width:min(88vw, 360px);
       transform: translateX(100%);
@@ -491,7 +506,8 @@
       z-index:96;
       display:flex;
       flex-direction:column;
-      padding: calc(20px + env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom));
+      padding: calc(20px + constant(safe-area-inset-top)) 16px calc(16px + constant(safe-area-inset-bottom));
+      padding: calc(20px + var(--safe-top)) 16px calc(16px + var(--safe-bottom));
       gap:16px;
     }
     html[data-theme="light"] .mobileMenu{
@@ -501,7 +517,7 @@
     .mobileMenuHeader{display:flex; align-items:center; justify-content:space-between; gap:10px}
     .mobileMenuTitle{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
     .mobileClose{
-      width:42px; height:42px; border-radius:12px;
+      width:44px; height:44px; border-radius:12px;
       border:1px solid var(--line); background: rgba(255,255,255,.05);
       display:grid; place-items:center; cursor:pointer;
     }
@@ -605,6 +621,12 @@
       backdrop-filter: blur(12px) saturate(150%);
       box-shadow: 0 20px 55px rgba(0,0,0,.42);
       padding: 14px 14px 12px;
+    }
+    @supports not (color: color-mix(in srgb, black 50%, white)){
+      .heroPanel{background: rgba(10,12,16,.78)}
+      html[data-theme="light"] .heroPanel{background: rgba(255,255,255,.9)}
+      .langMenu,
+      .mobileMenu{border-color: var(--line)}
     }
     .heroKicker{display:none}
     .heroTitle{
@@ -1127,7 +1149,8 @@
       left:0; right:0; bottom:0;
       z-index:90;
       padding:10px 12px;
-      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+      padding-bottom: calc(10px + constant(safe-area-inset-bottom));
+      padding-bottom: calc(10px + var(--safe-bottom));
       background: var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
@@ -1159,15 +1182,20 @@
       will-change: transform;
     }
     .sticky.stickyHidden{
-      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
+      transform: translateY(calc(100% + var(--safe-bottom) + 16px));
     }
     html.kbdOpen .sticky{
-      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
+      transform: translateY(calc(100% + var(--safe-bottom) + 16px));
     }
 
     /* Ensure content isn't hidden behind the sticky bar on touch devices */
     html[data-compact="true"] body{
-      padding-bottom: calc(96px + env(safe-area-inset-bottom));
+      padding-bottom: calc(var(--sticky-offset) + var(--safe-bottom));
+    }
+
+    #book,
+    .heroCTA{
+      scroll-margin-bottom: calc(var(--sticky-offset) + 16px);
     }
 
     /* Mobile/Tablet header: show ONLY brand + Book Now (collapse everything else) */
@@ -1177,7 +1205,7 @@
     html[data-device="tablet"] .navLinks .chip:not(.primary){ display:none !important; }
     html[data-compact="true"] .navLinks{ gap:8px; }
     html[data-compact="true"] .navLinks .chip.primary{
-      min-height:40px;
+      min-height:44px;
       padding:10px 12px;
       border-radius: 999px;
     }
@@ -1189,7 +1217,8 @@
       .nav{
         padding:10px 12px;
         gap:10px;
-        padding-top: calc(10px + env(safe-area-inset-top));
+        padding-top: calc(10px + constant(safe-area-inset-top));
+        padding-top: calc(10px + var(--safe-top));
       }
       .logo{
         width:34px;
@@ -1198,7 +1227,7 @@
       .brand .brandName{ font-size:14px; }
       .brand small{ display:none; }
       .navLinks .chip.primary{
-        min-height:36px;
+        min-height:44px;
         padding:0 14px;
         border-radius:999px;
       }
@@ -1235,7 +1264,7 @@
     }
 
     html[data-device="phone"] .btn{
-      min-height: 40px;
+      min-height: 44px;
       padding: 0 14px;
       font-size: 15px;
       line-height: 1.2;
@@ -1256,7 +1285,7 @@
 
     /* Language + theme controls: tighten */
     html[data-device="phone"] .langSwitch{ gap:6px !important; }
-    html[data-device="phone"] .iconBtn{ width:40px; height:40px; }
+    html[data-device="phone"] .iconBtn{ width:44px; height:44px; }
     html[data-device="phone"] #themeLabel{ display:none; }
 
     /* Sticky bar: compact mode on phone */
@@ -1268,7 +1297,7 @@
     }
     html[data-device="phone"] .stickyActions .btn{
       flex: 1 1 auto;
-      min-height: 42px;
+      min-height: 44px;
       padding: 10px 12px;
       border-radius: 12px;
     }
@@ -1294,7 +1323,7 @@
       gap:8px;
       flex-wrap:wrap;
     }
-    .footerLang .chip{min-height:34px; padding:7px 9px; font-size:12px}
+    .footerLang .chip{min-height:44px; padding:7px 9px; font-size:12px}
     .footerLang .fine{margin:0 2px 0 0; white-space:nowrap}
     html[data-compact="true"] .footerLang{display:flex !important}
 /* ---------- Print ---------- */
@@ -2294,6 +2323,16 @@
       }, { passive:true });
 
       if(!sticky) return;
+
+      function syncStickyOffset(){
+        const stickyHeight = Math.max(88, Math.ceil(sticky.getBoundingClientRect().height || 0));
+        root.style.setProperty("--sticky-offset", `${stickyHeight + 10}px`);
+      }
+
+      syncStickyOffset();
+      window.addEventListener("resize", ()=>{
+        requestAnimationFrame(syncStickyOffset);
+      }, { passive:true });
 
       // Hide sticky while typing (on-screen keyboard)
       document.addEventListener("focusin", (e)=>{
