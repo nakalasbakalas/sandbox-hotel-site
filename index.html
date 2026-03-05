@@ -1073,13 +1073,33 @@
       padding:10px 12px;
       border-radius: 999px;
     }
-/* Phone layout (compact + conversion-focused) */
-    html[data-device="phone"] .nav{
-      padding: 8px 12px;
-      min-height:56px;
-      padding-top: calc(8px + env(safe-area-inset-top));
+    @media (max-width:640px){
+      header,
+      .nav{
+        min-height:56px;
+      }
+      .nav{
+        padding:10px 12px;
+        gap:10px;
+        padding-top: calc(10px + env(safe-area-inset-top));
+      }
+      .logo{
+        width:34px;
+        height:34px;
+      }
+      .brand .brandName{ font-size:14px; }
+      .brand small{ display:none; }
+      .navLinks .chip.primary{
+        min-height:36px;
+        padding:0 14px;
+        border-radius:999px;
+      }
+      .navGroup.hideMobile{ display:inline-flex; }
+      .langSwitch.hideMobile{ display:none !important; }
     }
-    html[data-device="phone"] .logo{ width:38px; height:38px; border-radius:12px; padding:3px; }
+
+/* Phone layout (compact + conversion-focused) */
+    html[data-device="phone"] .logo{ width:34px; height:34px; border-radius:12px; padding:3px; }
     html[data-device="phone"] .brand small{ display:none; }
 
     html[data-device="phone"] .hero{
