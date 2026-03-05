@@ -581,7 +581,7 @@
     .hero:before{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(10,11,14,.82) 0%, rgba(10,11,14,.42) 42%, rgba(10,11,14,0) 75%);
+      background: linear-gradient(to top, rgba(10,11,14,.74) 0%, rgba(10,11,14,.34) 40%, rgba(10,11,14,0) 74%);
       pointer-events:none;
     }
     .heroInner{
@@ -596,19 +596,19 @@
       text-align:left;
     }
     .heroPanel{
-      width:min(560px, 92vw);
-      margin:0 0 26px 26px;
-      border-radius: 18px;
+      width:min(500px, 90vw);
+      margin:0 0 20px 20px;
+      border-radius: 16px;
       border:1px solid rgba(255,255,255,.16);
-      background: rgba(9,10,13,.52);
+      background: color-mix(in srgb, var(--uiGlass2) 74%, transparent);
       -webkit-backdrop-filter: blur(12px) saturate(150%);
       backdrop-filter: blur(12px) saturate(150%);
       box-shadow: 0 20px 55px rgba(0,0,0,.42);
-      padding: 18px 18px 16px;
+      padding: 14px 14px 12px;
     }
     .heroKicker{display:none}
     .heroTitle{
-      margin:14px 0 8px;
+      margin:6px 0 8px;
       font-size:var(--heroTitleSize);
       line-height:1.05;
       letter-spacing:-.01em;
@@ -616,20 +616,31 @@
       font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
     }
     .heroSub{
-      margin:0 0 14px;
+      margin:0 0 10px;
       max-width:58ch;
       color:rgba(255,255,255,.86);
       font-size:16px;
     }
-    .heroCTA{margin-top:8px; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:10px}
+    .heroCTA{margin-top:6px; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:8px}
     .heroCTA .btn.primary{min-width:170px}
     .heroCTA #ctaLine{min-width:120px}
-    .heroCTA .btn.ghost,
-    .heroCTA .btn:not(.primary):not(#ctaLine){
-      min-height:34px;
-      padding:0 12px;
-      opacity:.92;
+    .heroSecondary{
+      margin-top:8px;
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:8px;
+      font-size:12.5px;
+      color: color-mix(in srgb, var(--ink2) 74%, transparent);
     }
+    .heroSecondary a{
+      color: inherit;
+      opacity:.96;
+      text-decoration-color: color-mix(in srgb, var(--ink2) 45%, transparent);
+      text-underline-offset: 2px;
+    }
+    .heroSecondary a:hover{opacity:1}
+    .heroSecondary .dot{opacity:.5}
     .hero .kw{padding:0; border:0; background:transparent}
 
     .nav :focus-visible{
@@ -1178,7 +1189,7 @@
     html[data-device="phone"] .heroPanel{
       margin:0;
       width:min(100%, 92vw);
-      padding: 16px 14px 12px;
+      padding: 14px 12px 10px;
     }
     html[data-device="phone"] .heroTitle{
       font-size: clamp(30px, 9.2vw, 38px);
@@ -1205,13 +1216,12 @@
     html[data-device="phone"] .heroCTA{
       display:grid;
       grid-template-columns: 1fr;
-      gap: 10px;
+      gap: 8px;
     }
     html[data-device="phone"] .heroCTA .btn{ width:100%; }
     html[data-device="phone"] .heroCTA .btn.primary,
     html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
-    html[data-device="phone"] #ctaWhatsApp,
-    html[data-device="phone"] .heroCTA .btn.ghost{ display:none !important; }
+    html[data-device="phone"] .heroSecondary{font-size:12px; gap:7px; margin-top:7px}
 
     /* Language + theme controls: tighten */
     html[data-device="phone"] .langSwitch{ gap:6px !important; }
@@ -1450,11 +1460,15 @@
             <div class="heroCTA">
               <a class="btn primary" href="#" data-contact="phone-link" data-i18n="cta_call_number">Call</a>
               <a class="btn hot" id="ctaLine" href="#" rel="nofollow">LINE</a>
-              <a class="btn" id="ctaWhatsApp" href="#" target="_blank" rel="noopener nofollow">WhatsApp</a>
-              <a class="btn ghost" href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
             </div>
 
-            <div class="sep" style="background:rgba(255,255,255,.18)"></div>
+            <div class="heroSecondary">
+              <a id="ctaWhatsApp" href="#" target="_blank" rel="noopener nofollow">WhatsApp</a>
+              <span class="dot" aria-hidden="true">•</span>
+              <a href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
+            </div>
+
+            <div class="sep" style="background:rgba(255,255,255,.16); margin:10px 0"></div>
             <div class="fine" style="color:rgba(255,255,255,.86)" data-i18n-html="hero_fine">
               Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms
             </div>
