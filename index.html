@@ -17,7 +17,7 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sandbox Hotel">
   <meta property="og:url" content="https://www.sandboxhotel.com/">
-  <meta property="og:locale" content="th_TH">
+  <meta property="og:locale" id="ogLocale" content="th_TH">
     <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
 <meta property="og:title" id="ogTitle" content="Sandbox Hotel | Nakhon Si Thammarat">
@@ -27,8 +27,8 @@
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sandbox Hotel | Nakhon Si Thammarat">
-  <meta name="twitter:description" content="Book direct for fast confirmation via phone, LINE, or WhatsApp.">
+  <meta name="twitter:title" id="twitterTitle" content="Sandbox Hotel | Nakhon Si Thammarat">
+  <meta name="twitter:description" id="twitterDescription" content="Book direct for fast confirmation via phone, LINE, or WhatsApp.">
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
   <!-- Preload hero -->
@@ -3071,6 +3071,14 @@
       return pack[key] || (I18N.en && I18N.en[key]) || (I18N.th && I18N.th[key]) || "";
     }
     const FLAG_MAP = { th: "🇹🇭", en: "🇬🇧", zh: "🇨🇳" };
+    const OG_LOCALE_MAP = { th: "th_TH", en: "en_US", zh: "zh_CN" };
+
+    function getLangFromQuery(){
+      const params = new URLSearchParams(window.location.search || "");
+      const queryLang = params.get("lang");
+      if(!queryLang) return "";
+      return normLang(queryLang);
+    }
 
     function applyLang(lang){
       CURRENT_LANG = normLang(lang);
@@ -3106,6 +3114,14 @@
       if(ogt && t("og_title")) ogt.setAttribute("content", t("og_title"));
       const ogd = document.getElementById("ogDescription");
       if(ogd && t("og_desc")) ogd.setAttribute("content", t("og_desc"));
+
+      const ogLocale = document.getElementById("ogLocale");
+      if(ogLocale) ogLocale.setAttribute("content", OG_LOCALE_MAP[CURRENT_LANG] || OG_LOCALE_MAP[I18N_DEFAULT]);
+
+      const tt = document.getElementById("twitterTitle");
+      if(tt && t("meta_title")) tt.setAttribute("content", t("meta_title"));
+      const td = document.getElementById("twitterDescription");
+      if(td && t("meta_desc")) td.setAttribute("content", t("meta_desc"));
     }
     function initMobileMenu(){
       const menu = document.getElementById("mobileMenu");
@@ -3182,17 +3198,23 @@
       }
 
       try{
-        const stored = localStorage.getItem("sbx_lang");
-        if(stored){
-          applyLang(stored);
+        const queryLang = getLangFromQuery();
+        if(queryLang){
+          applyLang(queryLang);
+          localStorage.setItem("sbx_lang", queryLang);
         } else {
-          const nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
-          const navLower = String(nav).toLowerCase();
-          const guessed = navLower.startsWith("zh") ? "zh" : (navLower.startsWith("en") ? "en" : "th");
-          applyLang(guessed);
+          const stored = localStorage.getItem("sbx_lang");
+          if(stored){
+            applyLang(stored);
+          } else {
+            const nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
+            const navLower = String(nav).toLowerCase();
+            const guessed = navLower.startsWith("zh") ? "zh" : (navLower.startsWith("en") ? "en" : "th");
+            applyLang(guessed);
+          }
         }
       } catch(_e){
-        applyLang("th");
+        applyLang(getLangFromQuery() || "th");
       }
 
       if(langBtn && langMenu){
