@@ -454,6 +454,71 @@
       cursor:pointer;
     }
     .flagItem > span[aria-hidden="true"]{font-size:18px}
+    .menuToggle{
+      display:none;
+      width:46px;
+      height:46px;
+      border-radius:14px;
+      border:1px solid rgba(240,195,154,.34);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.02));
+      color:var(--ink2);
+      box-shadow: 0 12px 24px rgba(0,0,0,.3), 0 10px 18px rgba(183,106,43,.18);
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+    }
+    .menuToggle svg{width:22px; height:22px}
+    .mobileMenuOverlay{
+      position:fixed;
+      inset:0;
+      background: rgba(5,6,8,.52);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .22s ease;
+      z-index:95;
+    }
+    .mobileMenu{
+      position:fixed;
+      top:0;
+      right:0;
+      height:100dvh;
+      width:min(88vw, 360px);
+      transform: translateX(100%);
+      transition: transform .26s ease;
+      border-left:1px solid rgba(240,195,154,.24);
+      background: linear-gradient(180deg, rgba(16,18,22,.97), rgba(11,12,15,.98));
+      box-shadow: -18px 0 44px rgba(0,0,0,.45), -8px 0 24px rgba(183,106,43,.15);
+      z-index:96;
+      display:flex;
+      flex-direction:column;
+      padding: calc(20px + env(safe-area-inset-top)) 16px calc(16px + env(safe-area-inset-bottom));
+      gap:16px;
+    }
+    html[data-theme="light"] .mobileMenu{
+      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(246,247,249,.99));
+      box-shadow: -18px 0 44px rgba(15,23,42,.2), -8px 0 24px rgba(183,106,43,.18);
+    }
+    .mobileMenuHeader{display:flex; align-items:center; justify-content:space-between; gap:10px}
+    .mobileMenuTitle{font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:var(--muted)}
+    .mobileClose{
+      width:42px; height:42px; border-radius:12px;
+      border:1px solid var(--line); background: rgba(255,255,255,.05);
+      display:grid; place-items:center; cursor:pointer;
+    }
+    .mobileMenuNav{display:grid; gap:10px}
+    .mobileMenuNav .chip{min-height:48px; justify-content:flex-start; font-size:14px}
+    .mobileMenuGroup{
+      border-top:1px solid var(--line);
+      padding-top:14px;
+      display:grid;
+      gap:10px;
+    }
+    .mobileFlags{display:flex; gap:8px}
+    .mobileFlags .flagItem{width:48px; height:48px}
+    .mobileThemeBtn{min-height:48px; justify-content:flex-start; width:100%}
+    body.menuOpen{overflow:hidden}
+    body.menuOpen .mobileMenuOverlay{opacity:1; pointer-events:auto}
+    body.menuOpen .mobileMenu{transform: translateX(0)}
     .sr-only{
       position:absolute; width:1px; height:1px; padding:0; margin:-1px;
       overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
@@ -1065,6 +1130,7 @@
 
     /* Mobile/Tablet header: show ONLY brand + Book Now (collapse everything else) */
     html[data-compact="true"] .navLinks .navGroup{ display:none !important; }
+    html[data-compact="true"] .menuToggle{ display:inline-flex; }
     html[data-device="phone"] .navLinks .chip:not(.primary),
     html[data-device="tablet"] .navLinks .chip:not(.primary){ display:none !important; }
     html[data-compact="true"] .navLinks{ gap:8px; }
@@ -1304,6 +1370,10 @@
           </div>
         </div>
 
+        <button id="mobileMenuToggle" class="menuToggle" type="button" aria-label="Open navigation menu" aria-haspopup="dialog" aria-controls="mobileMenu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/></svg>
+        </button>
+
         <details class="navGroup hideMobile">
           <summary>
             <span class="chip">☰ Explore</span>
@@ -1327,6 +1397,40 @@
       </nav>
     </div>
   </header>
+
+  <div id="mobileMenuOverlay" class="mobileMenuOverlay" hidden></div>
+  <aside id="mobileMenu" class="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true" hidden>
+    <div class="mobileMenuHeader">
+      <span class="mobileMenuTitle">Explore</span>
+      <button id="mobileMenuClose" class="mobileClose" type="button" aria-label="Close navigation menu">✕</button>
+    </div>
+
+    <nav class="mobileMenuNav" aria-label="Mobile section links">
+      <a class="chip" href="#rooms" data-i18n="nav_rooms">Rooms</a>
+      <a class="chip" href="#offers" data-i18n="nav_offers">Offers</a>
+      <a class="chip" href="#amenities" data-i18n="nav_amenities">Amenities</a>
+      <a class="chip" href="#gallery" data-i18n="nav_gallery">Gallery</a>
+      <a class="chip" href="#reviews" data-i18n="nav_reviews">Reviews</a>
+      <a class="chip" href="#faq" data-i18n="nav_faq">FAQ</a>
+      <a class="chip" href="#location" data-i18n="nav_location">Location</a>
+    </nav>
+
+    <div class="mobileMenuGroup" role="group" aria-label="Language switcher">
+      <div class="fine">Language</div>
+      <div class="mobileFlags" role="group" aria-label="Language flags">
+        <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span></button>
+        <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span></button>
+        <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span></button>
+      </div>
+    </div>
+
+    <div class="mobileMenuGroup" role="group" aria-label="Theme toggle">
+      <button class="chip mobileThemeBtn" id="mobileThemeToggle" type="button" aria-label="Theme" title="Theme">
+        <span id="mobileThemeIcon" aria-hidden="true">🖥️</span>
+        <span id="mobileThemeLabel">System</span>
+      </button>
+    </div>
+  </aside>
 
   <main class="wrap" id="main">
     <div id="top"></div>
@@ -2160,6 +2264,9 @@
     const themeToggle = document.getElementById("themeToggle");
     const themeIcon = document.getElementById("themeIcon");
     const themeLabel = document.getElementById("themeLabel");
+    const mobileThemeToggle = document.getElementById("mobileThemeToggle");
+    const mobileThemeIcon = document.getElementById("mobileThemeIcon");
+    const mobileThemeLabel = document.getElementById("mobileThemeLabel");
 
     function resolvedSystemTheme(){
       return (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) ? "dark" : "light";
@@ -2175,11 +2282,14 @@
       html.setAttribute("data-theme", safe);
       applyMetaThemeColor(safe);
 
-      if(themeIcon && themeLabel){
-        if(safe === "system"){ themeIcon.textContent = "🖥️"; themeLabel.textContent = "System"; }
-        else if(safe === "dark"){ themeIcon.textContent = "🌙"; themeLabel.textContent = "Dark"; }
-        else { themeIcon.textContent = "☀️"; themeLabel.textContent = "Light"; }
-      }
+      const syncThemeUI = (iconEl, labelEl)=>{
+        if(!iconEl || !labelEl) return;
+        if(safe === "system"){ iconEl.textContent = "🖥️"; labelEl.textContent = "System"; }
+        else if(safe === "dark"){ iconEl.textContent = "🌙"; labelEl.textContent = "Dark"; }
+        else { iconEl.textContent = "☀️"; labelEl.textContent = "Light"; }
+      };
+      syncThemeUI(themeIcon, themeLabel);
+      syncThemeUI(mobileThemeIcon, mobileThemeLabel);
     }
     function initTheme(){
       let mode = "system";
@@ -2198,14 +2308,14 @@
         });
       }
 
-      if(themeToggle){
-        themeToggle.addEventListener("click", ()=>{
-          const current = document.documentElement.getAttribute("data-theme") || "system";
-          const next = current === "system" ? "dark" : (current === "dark" ? "light" : "system");
-          try{ localStorage.setItem(THEME_KEY, next); }catch(_e){}
-          setTheme(next);
-        });
-      }
+      const cycleTheme = ()=>{
+        const current = document.documentElement.getAttribute("data-theme") || "system";
+        const next = current === "system" ? "dark" : (current === "dark" ? "light" : "system");
+        try{ localStorage.setItem(THEME_KEY, next); }catch(_e){}
+        setTheme(next);
+      };
+      if(themeToggle) themeToggle.addEventListener("click", cycleTheme);
+      if(mobileThemeToggle) mobileThemeToggle.addEventListener("click", cycleTheme);
     }
 
     // ---------- i18n ----------
@@ -2867,6 +2977,64 @@
       const ogd = document.getElementById("ogDescription");
       if(ogd && t("og_desc")) ogd.setAttribute("content", t("og_desc"));
     }
+    function initMobileMenu(){
+      const menu = document.getElementById("mobileMenu");
+      const overlay = document.getElementById("mobileMenuOverlay");
+      const openBtn = document.getElementById("mobileMenuToggle");
+      const closeBtn = document.getElementById("mobileMenuClose");
+      if(!menu || !overlay || !openBtn || !closeBtn) return;
+
+      const focusSelector = 'a[href], button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+      let previousFocus = null;
+
+      function isCompact(){
+        return document.documentElement.getAttribute("data-compact") === "true";
+      }
+      function closeMenu(){
+        menu.setAttribute("hidden", "");
+        overlay.setAttribute("hidden", "");
+        menu.setAttribute("aria-hidden", "true");
+        openBtn.setAttribute("aria-expanded", "false");
+        document.body.classList.remove("menuOpen");
+        if(previousFocus && typeof previousFocus.focus === "function") previousFocus.focus();
+      }
+      function openMenu(){
+        if(!isCompact()) return;
+        previousFocus = document.activeElement;
+        menu.removeAttribute("hidden");
+        overlay.removeAttribute("hidden");
+        menu.setAttribute("aria-hidden", "false");
+        openBtn.setAttribute("aria-expanded", "true");
+        document.body.classList.add("menuOpen");
+        const focusables = Array.from(menu.querySelectorAll(focusSelector));
+        focusables[0]?.focus();
+      }
+
+      function onKeydown(e){
+        if(menu.hasAttribute("hidden")) return;
+        if(e.key === "Escape"){
+          e.preventDefault();
+          closeMenu();
+          return;
+        }
+        if(e.key !== "Tab") return;
+        const focusables = Array.from(menu.querySelectorAll(focusSelector));
+        if(!focusables.length) return;
+        const first = focusables[0];
+        const last = focusables[focusables.length - 1];
+        const active = document.activeElement;
+        if(e.shiftKey && active === first){ e.preventDefault(); last.focus(); }
+        else if(!e.shiftKey && active === last){ e.preventDefault(); first.focus(); }
+      }
+
+      openBtn.addEventListener("click", ()=> menu.hasAttribute("hidden") ? openMenu() : closeMenu());
+      closeBtn.addEventListener("click", closeMenu);
+      overlay.addEventListener("click", closeMenu);
+      menu.querySelectorAll('a[href]').forEach(link=>link.addEventListener("click", closeMenu));
+      document.addEventListener("keydown", onKeydown);
+      window.addEventListener("resize", ()=>{ if(!isCompact()) closeMenu(); }, { passive:true });
+    }
+
     function initLang(){
       const langBtn = document.getElementById("langBtn");
       const langMenu = document.getElementById("langMenu");
@@ -3323,6 +3491,7 @@
       applyContactConfig();
       initTheme();
       initLang();
+      initMobileMenu();
       initDates();
       wireContactButtons();
       initGalleryCarousel();
