@@ -707,6 +707,9 @@
     }
     .wide{grid-column:1/-1}
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px}
+    .ctaPrimary{flex:1 1 100%; min-height:50px; font-size:16px; font-weight:1000}
+    .ctaSecondaryActions{display:flex; gap:10px; flex-wrap:wrap}
+    .ctaSecondaryActions .btn{opacity:.9}
     @media (max-width:980px){ .formGrid{grid-template-columns:1fr} }
 
         /* ---------- Quick date presets ---------- */
@@ -1588,10 +1591,12 @@
           </div>
 
           <div class="wide ctaRow">
-            <button class="btn primary" type="submit" data-i18n="btn_send_line">Send via LINE</button>
-            <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa">Send via WhatsApp</button>
-            <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Send via Email</button>
-            <span class="fine" id="formHint" data-i18n="form_hint">We’ll reply with availability and total price.</span>
+            <button class="btn primary ctaPrimary" type="submit" data-i18n="btn_send_line">Send via LINE</button>
+            <div class="ctaSecondaryActions" aria-label="Other contact options">
+              <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa">Send via WhatsApp</button>
+              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Send via Email</button>
+            </div>
+            <span class="fine" id="formHint" data-i18n="form_hint">We’ll confirm availability as soon as possible.</span>
           </div>
         </form>
 
@@ -2388,7 +2393,7 @@
         btn_send_line: "ส่งผ่าน LINE",
         btn_send_wa: "ส่งผ่าน WhatsApp",
         btn_send_email: "ส่งทางอีเมล",
-        form_hint: "เราจะตอบกลับพร้อมห้องว่างและราคารวม",
+        form_hint: "เราจะยืนยันห้องว่างให้เร็วที่สุด",
 
         quick_label: "เลือกวันอย่างรวดเร็ว",
         quick_tonight: "คืนนี้",
@@ -2589,7 +2594,7 @@
         btn_send_line: "Send via LINE",
         btn_send_wa: "Send via WhatsApp",
         btn_send_email: "Send via Email",
-        form_hint: "We’ll reply with availability and total price.",
+        form_hint: "We’ll confirm availability as soon as possible.",
 
         quick_label: "Quick dates",
         quick_tonight: "Tonight",
@@ -2790,7 +2795,7 @@
         btn_send_line: "通过LINE发送",
         btn_send_wa: "通过WhatsApp发送",
         btn_send_email: "通过邮箱发送",
-        form_hint: "我们会回复空房与总价。",
+        form_hint: "我们会尽快确认空房情况。",
 
         quick_label: "快捷日期",
         quick_tonight: "今晚",
@@ -3196,13 +3201,26 @@
         hint.style.color = "#D18B50";
         setTimeout(()=>{
           hint.style.color = "";
-          hint.textContent = t("form_hint") || "We’ll reply with availability and total price.";
+          hint.textContent = t("form_hint") || "We’ll confirm availability as soon as possible.";
         }, 4200);
       }
     }
     function openEmail(msg){
       const subject = t("msg_title") || "Booking request – Sandbox Hotel";
       window.location.href = `mailto:${encodeURIComponent(HOTEL_CONFIG.EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+    }
+
+    function scrollToBookingForm(roomType){
+      const bookSection = document.getElementById("book");
+      const firstInput = document.getElementById("checkin");
+      const roomSelect = document.getElementById("room");
+      if(roomType && roomSelect) roomSelect.value = roomType;
+      if(bookSection) bookSection.scrollIntoView({behavior:"smooth", block:"start"});
+      if(firstInput){
+        window.setTimeout(()=>{
+          firstInput.focus({preventScroll:true});
+        }, 420);
+      }
     }
 
     function wireContactButtons(){
@@ -3241,10 +3259,16 @@
       document.getElementById("sendEmail").addEventListener("click", ()=> openEmail(buildMessage(getFormData())));
 
       document.querySelectorAll("[data-room]").forEach(el=>{
-        el.addEventListener("click", ()=>{
-          const room = el.getAttribute("data-room");
-          const select = document.getElementById("room");
-          if(select) select.value = room;
+        el.addEventListener("click", (e)=>{
+          e.preventDefault();
+          scrollToBookingForm(el.getAttribute("data-room"));
+        });
+      });
+
+      document.querySelectorAll('[data-i18n="nav_book"]').forEach(el=>{
+        el.addEventListener("click", (e)=>{
+          e.preventDefault();
+          scrollToBookingForm();
         });
       });
     }
