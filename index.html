@@ -1629,10 +1629,7 @@
           </div>
           <div class="field">
             <label for="room" data-i18n="lbl_room">Room</label>
-            <select id="room" name="room">
-              <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
-              <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
-            </select>
+            <select id="room" name="room"></select>
           </div>
           <div class="field wide">
             <label for="name" data-i18n="lbl_name">Name</label>
@@ -1718,134 +1715,7 @@
           <a class="btn primary" href="#book" data-i18n="rooms_btn">Request Availability</a>
         </div>
 
-        <div class="stack" aria-label="Room options">
-
-          <!-- Standard Twin -->
-          <article class="card roomCard">
-            <div class="roomCardInner">
-              <div class="roomMedia">
-                <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin photo">
-                    <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom with two single beds" loading="lazy" decoding="async" width="800" height="520">
-                  </a>
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
-                    <img src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                </div>
-              </div>
-
-              <div class="roomBody">
-                <div class="roomTop">
-                  <div>
-                    <h4 data-i18n="room_standard_twin_title">Standard Twin</h4>
-                    <div class="fine" data-i18n-html="room_standard_twin_meta"><span class="kw a">Best Value</span> • 2 Twin Beds • 28–32 m² • Guests 1–2</div>
-                  </div>
-                  <div class="priceBox">
-                    <b data-i18n="price_from">From</b>
-                    <strong data-i18n="price_ask">Ask</strong>
-                    <small data-i18n="price_today">today’s rate</small>
-                  </div>
-                </div>
-
-                <div class="tags">
-                  <span class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</span>
-                  <span class="tag" data-i18n="tag_28_32_m">28–32 m²</span>
-                  <span class="tag" data-i18n="tag_guests_1_2">Guests 1–2</span>
-                </div>
-
-                <ul class="bullets">
-                  <li data-i18n="bullet_large_room">Large room layout</li>
-                  <li data-i18n="bullet_desk">Work desk + chair</li>
-                  <li data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
-                </ul>
-
-                <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn">Book Standard Twin</a>
-                  <a class="btn hot" href="#" data-contact="phone-link" data-i18n="btn_call">Call</a>
-                  <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Standard Double -->
-          <article class="card roomCard">
-            <div class="roomCardInner">
-              <div class="roomMedia">
-                <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
-                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
-                  </a>
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                </div>
-              </div>
-
-              <div class="roomBody">
-                <div class="roomTop">
-                  <div>
-                    <h4 data-i18n="room_standard_double_title">Standard Double</h4>
-                    <div class="fine" data-i18n-html="room_standard_double_meta"><span class="kw a">Most Popular</span> • 1 Double Bed • 28–32 m² • Guests 1–2</div>
-                  </div>
-                  <div class="priceBox">
-                    <b data-i18n="price_from">From</b>
-                    <strong data-i18n="price_ask">Ask</strong>
-                    <small data-i18n="price_today">today’s rate</small>
-                  </div>
-                </div>
-
-                <div class="tags">
-                  <span class="tag" data-i18n="tag_1_double_bed">1 Double Bed</span>
-                  <span class="tag" data-i18n="tag_28_32_m">28–32 m²</span>
-                  <span class="tag" data-i18n="tag_guests_1_2">Guests 1–2</span>
-                </div>
-
-                <ul class="bullets">
-                  <li data-i18n="bullet_comfort_double_bed">Comfortable double bed</li>
-                  <li data-i18n="bullet_great_for_couples">Great for couples</li>
-                  <li data-i18n="bullet_fast_wifi">Fast Wi-Fi</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
-                </ul>
-
-                <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn">Book Standard Double</a>
-                  <a class="btn hot" href="#" data-contact="phone-link" data-i18n="btn_call">Call</a>
-                  <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
-                </div>
-              </div>
-            </div>
-          </article>
+        <div id="roomsList" class="stack" aria-label="Room options"></div>
 
         </div>
 
@@ -2005,32 +1875,7 @@
           </div>
         </div>
 
-        <div class="reviews">
-          <div style="display:grid; gap:12px">
-            <div class="review">
-              <b data-i18n-html="review1_title">Business Traveler <span class="stars">★★★★★</span></b>
-              <p data-i18n="review1_text">Fast check-in, stable Wi-Fi, and a big room to work in. Great value.</p>
-            </div>
-            <div class="review">
-              <b data-i18n-html="review2_title">Couple Weekend <span class="stars">★★★★★</span></b>
-              <p data-i18n="review2_text">Clean and comfortable. Easy to message for confirmation. Smooth stay.</p>
-            </div>
-            <div class="review">
-              <b data-i18n-html="review3_title">Family Stopover <span class="stars">★★★★☆</span></b>
-              <p data-i18n="review3_text">Spacious room and helpful staff. Parking was convenient.</p>
-            </div>
-          </div>
-
-          <div style="display:grid; gap:12px">
-            <div class="review">
-              <b data-i18n-html="review4_title">Long Stay Guest <span class="stars">★★★★★</span></b>
-              <p data-i18n="review4_text">Quiet, comfortable, and practical amenities. Would stay again.</p>
-            </div>
-            <div class="review">
-              <b data-i18n-html="review5_title">Great Location <span class="stars">★★★★★</span></b>
-              <p data-i18n="review5_text">Big room, clean, and convenient location. Easy check-in and friendly staff.</p>
-            </div>
-          </div>
+        <div id="reviewsList" class="reviews"></div>
         </div>
       </div>
     </section>
@@ -2046,39 +1891,8 @@
           <a class="btn primary" href="#book" data-i18n="faq_btn">Send Request</a>
         </div>
 
-        <details open>
-          <summary data-i18n="faq_q1">How do I book the fastest?</summary>
-          <p data-i18n="faq_a1">Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q2">What time is check-in and check-out?</summary>
-          <p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q3">What do I need at check-in?</summary>
-          <p data-i18n="faq_a3">A government-issued ID or passport is required for registration.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q4">Can rates change by date?</summary>
-          <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q5">Do you have parking?</summary>
-          <p data-i18n="faq_a5">Yes, guest parking is available (subject to availability).</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
-          <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
-        </details>
-
-        <details>
-          <summary data-i18n="faq_q7">Is smoking allowed?</summary>
-          <p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
-          <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
-        </details>
+        <div id="faqList"></div>
+        
       </div>
     </section>
 
@@ -2181,6 +1995,64 @@
       MAPS_URL: "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7",
       GA4_MEASUREMENT_ID: "" // e.g. "G-XXXXXXXXXX"; analytics stays off when empty
     };
+    const EDITABLE_CONTENT = {
+      contact: HOTEL_CONFIG,
+      rooms: [
+        {
+          roomValue: "Standard Twin",
+          titleKey: "room_standard_twin_title",
+          selectKey: "opt_standard_twin",
+          metaKey: "room_standard_twin_meta",
+          ctaKey: "room_standard_twin_btn",
+          heroImage: { src: "assets/images/rooms/twin-room-sandbox-1.png", alt: "Standard Twin bedroom with two single beds" },
+          galleryImages: [
+            { src: "assets/images/rooms/twin-room-sandbox-1.png", alt: "Standard Twin bedroom", openLabel: "Open Standard Twin bedroom photo" },
+            { src: "assets/images/rooms/bathroom.png", alt: "Bathroom with shower", openLabel: "Open bathroom photo" }
+          ],
+          tags: ["tag_2_twin_beds", "tag_28_32_m", "tag_guests_1_2"],
+          bullets: ["bullet_large_room", "bullet_desk", "bullet_quiet_side", "bullet_ac_hot_shower"]
+        },
+        {
+          roomValue: "Standard Double",
+          titleKey: "room_standard_double_title",
+          selectKey: "opt_standard_double",
+          metaKey: "room_standard_double_meta",
+          ctaKey: "room_standard_double_btn",
+          heroImage: { src: "assets/images/rooms/double-room-sandboxhotel-1.png", alt: "Standard Double bedroom with one large bed" },
+          galleryImages: [
+            { src: "assets/images/rooms/double-room-sandboxhotel-2.png", alt: "Standard Double bedroom", openLabel: "Open Standard Double bedroom photo" },
+            { src: "assets/images/rooms/double-room-sandboxhotel-1.png", alt: "Standard Double bedroom", openLabel: "Open Standard Double bedroom photo" },
+            { src: "assets/images/rooms/bathroom.png", alt: "Bathroom with shower", openLabel: "Open bathroom photo" }
+          ],
+          tags: ["tag_1_double_bed", "tag_28_32_m", "tag_guests_1_2"],
+          bullets: ["bullet_comfort_double_bed", "bullet_great_for_couples", "bullet_fast_wifi", "bullet_ac_hot_shower"]
+        }
+      ],
+      reviewColumns: [
+        [
+          { titleKey: "review1_title", textKey: "review1_text" },
+          { titleKey: "review2_title", textKey: "review2_text" },
+          { titleKey: "review3_title", textKey: "review3_text" }
+        ],
+        [
+          { titleKey: "review4_title", textKey: "review4_text" },
+          { titleKey: "review5_title", textKey: "review5_text" }
+        ]
+      ],
+      faqItems: [
+        { q: "faq_q1", a: "faq_a1", open: true },
+        { q: "faq_q2", a: "faq_a2" },
+        { q: "faq_q3", a: "faq_a3" },
+        { q: "faq_q4", a: "faq_a4" },
+        { q: "faq_q5", a: "faq_a5" },
+        { q: "faq_q6", a: "faq_a6" },
+        { q: "faq_q7", a: "faq_a7" },
+        { q: "faq_q8", a: "faq_a8" }
+      ]
+    };
+    // PMS/CMS integration note:
+    // EDITABLE_CONTENT can later be loaded from fetch('/content.json'), a CMS API,
+    // or a server-side store (Cloudflare KV/D1, Supabase, etc.) without changing UI code.
     // =========================
 
     
@@ -2291,6 +2163,102 @@
           ]
         };
         structuredDataEl.textContent = JSON.stringify(data, null, 2);
+      }
+    }
+
+
+
+    function renderEditableContent(){
+      const roomSelect = document.getElementById("room");
+      if(roomSelect){
+        roomSelect.innerHTML = EDITABLE_CONTENT.rooms.map((room, idx)=>{
+          const selected = idx === 0 ? " selected" : "";
+          return `<option value="${room.roomValue}" data-i18n="${room.selectKey}"${selected}>${room.roomValue}</option>`;
+        }).join("");
+      }
+
+      const roomsList = document.getElementById("roomsList");
+      if(roomsList){
+        roomsList.innerHTML = EDITABLE_CONTENT.rooms.map((room)=> `
+          <article class="card roomCard">
+            <div class="roomCardInner">
+              <div class="roomMedia">
+                <div class="mediaWrap">
+                  <a class="roomMediaLink" href="${room.heroImage.src}" target="_blank" rel="noopener" aria-label="Open ${room.roomValue} photo">
+                    <img class="mediaImg" src="${room.heroImage.src}" alt="${room.heroImage.alt}" loading="lazy" decoding="async" width="800" height="520">
+                  </a>
+                  <div class="ph" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
+                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
+                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="roomSubMedia">
+                  ${room.galleryImages.map((img)=> `
+                    <a class="roomMediaLink" href="${img.src}" target="_blank" rel="noopener" aria-label="${img.openLabel}">
+                      <img src="${img.src}" alt="${img.alt}" loading="lazy" decoding="async" width="400" height="300">
+                    </a>
+                  `).join("")}
+                </div>
+              </div>
+
+              <div class="roomBody">
+                <div class="roomTop">
+                  <div>
+                    <h4 data-i18n="${room.titleKey}"></h4>
+                    <div class="fine" data-i18n-html="${room.metaKey}"></div>
+                  </div>
+                  <div class="priceBox">
+                    <b data-i18n="price_from"></b>
+                    <strong data-i18n="price_ask"></strong>
+                    <small data-i18n="price_today"></small>
+                  </div>
+                </div>
+
+                <div class="tags">
+                  ${room.tags.map((tag)=> `<span class="tag" data-i18n="${tag}"></span>`).join("")}
+                </div>
+
+                <ul class="bullets">
+                  ${room.bullets.map((b)=> `<li data-i18n="${b}"></li>`).join("")}
+                </ul>
+
+                <div class="roomActions">
+                  <a class="btn primary" href="#book" data-room="${room.roomValue}" data-i18n="${room.ctaKey}"></a>
+                  <a class="btn hot" href="#" data-contact="phone-link" data-i18n="btn_call"></a>
+                  <a class="btn" href="#gallery" data-i18n="btn_see_photos"></a>
+                </div>
+              </div>
+            </div>
+          </article>
+        `).join("");
+      }
+
+      const reviewsList = document.getElementById("reviewsList");
+      if(reviewsList){
+        reviewsList.innerHTML = EDITABLE_CONTENT.reviewColumns.map((column)=> `
+          <div style="display:grid; gap:12px">
+            ${column.map((review)=> `
+              <div class="review">
+                <b data-i18n-html="${review.titleKey}"></b>
+                <p data-i18n="${review.textKey}"></p>
+              </div>
+            `).join("")}
+          </div>
+        `).join("");
+      }
+
+      const faqList = document.getElementById("faqList");
+      if(faqList){
+        faqList.innerHTML = EDITABLE_CONTENT.faqItems.map((item)=> `
+          <details${item.open ? " open" : ""}>
+            <summary data-i18n="${item.q}"></summary>
+            <p data-i18n="${item.a}"></p>
+          </details>
+        `).join("");
       }
     }
 
@@ -3057,6 +3025,7 @@
         line_opened_hint: "已打开 LINE。请粘贴信息："
       }
     };
+    EDITABLE_CONTENT.i18n = I18N;
 
     function normLang(l){
       if(!l) return I18N_DEFAULT;
@@ -3692,6 +3661,7 @@
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
+      renderEditableContent();
       applyContactConfig();
       analytics.init();
       initTheme();
