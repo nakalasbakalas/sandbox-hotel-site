@@ -996,37 +996,64 @@
       gap:10px;
       flex-wrap:wrap;
     }
-    .galNavBtn{
-      width:44px; height:44px;
-      border-radius: 14px;
+    .galCounter{
+      min-width:68px;
+      text-align:center;
+      padding:6px 10px;
+      border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.04);
+      color: var(--ink2);
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.03em;
+      font-variant-numeric: tabular-nums;
+    }
+    html[data-theme="light"] .galCounter{background: rgba(0,0,0,.025)}
+    .galNavBtn{
+      min-width:48px;
+      height:44px;
+      padding:0 12px;
+      border-radius: 999px;
+      border:1px solid rgba(240,195,154,.34);
+      background: linear-gradient(180deg, rgba(209,139,80,.2), rgba(183,106,43,.14));
       color: var(--ink2);
       font-weight:1000;
-      font-size:18px;
+      font-size:13px;
       line-height:1;
-      display:flex; align-items:center; justify-content:center;
+      display:inline-flex; align-items:center; justify-content:center;
+      gap:8px;
       cursor:pointer;
       transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
     }
-    html[data-theme="light"] .galNavBtn{background: rgba(0,0,0,.02); color: var(--ink2)}
+    .galNavBtn .arr{font-size:18px; line-height:1}
+    .galNavBtn .txt{font-size:12px; letter-spacing:.02em}
+    html[data-theme="light"] .galNavBtn{
+      background: linear-gradient(180deg, rgba(209,139,80,.18), rgba(183,106,43,.1));
+      color: var(--ink2);
+    }
     .galNavBtn:hover{
       transform: translateY(-1px);
       box-shadow: var(--shadow3);
-      background: rgba(255,255,255,.08);
+      background: linear-gradient(180deg, rgba(209,139,80,.26), rgba(183,106,43,.2));
+      border-color: rgba(240,195,154,.5);
     }
 
-    .galDots{display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap}
+    .galDots{display:flex; align-items:center; justify-content:center; gap:10px; flex-wrap:wrap}
     .galDot{
-      width:10px; height:10px;
+      width:12px; height:12px;
       border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.08);
+      background: rgba(255,255,255,.12);
       cursor:pointer;
       padding:0;
+      transform:scale(1);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
-    html[data-theme="light"] .galDot{background: rgba(0,0,0,.06)}
+    html[data-theme="light"] .galDot{background: rgba(0,0,0,.08)}
+    .galDot:hover{transform: scale(1.12)}
     .galDot[aria-current="true"]{
+      width:24px;
       background: linear-gradient(135deg, rgba(183,106,43,.95), rgba(240,195,154,.85));
       border-color: rgba(240,195,154,.42);
       box-shadow: 0 10px 22px rgba(0,0,0,.18);
@@ -1034,6 +1061,7 @@
     .galHint{text-align:center; margin-top:6px}
     @media (max-width:640px){
       .galNavBtn{width:42px; height:42px; border-radius: 13px}
+      .galNavBtn .txt{display:none}
     }
 
     /* ---------- Reviews ---------- */
@@ -1810,7 +1838,7 @@
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="images/Sandbox-Hotel-Hero-Banner.png" alt="Sandbox Hotel exterior" loading="lazy" decoding="async" width="800" height="520">
+                  <img class="mediaImg" src="images/Sandbox-Hotel-Hero-Banner.png" alt="Sandbox Hotel exterior" loading="eager" fetchpriority="high" decoding="async" width="800" height="520">
                   <div class="ph" aria-hidden="true">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
                       <rect width="800" height="520" rx="28" fill="#0B1220"/>
@@ -1914,9 +1942,14 @@
           </div>
 
           <div class="galBar" aria-label="Carousel controls">
-            <button class="galNavBtn" type="button" id="galPrev" aria-label="Previous photo">‹</button>
+            <button class="galNavBtn" type="button" id="galPrev" aria-label="Previous photo">
+              <span class="arr" aria-hidden="true">‹</span><span class="txt">Prev</span>
+            </button>
+            <div class="galCounter" id="galCounter" aria-live="polite" aria-atomic="true">1 / 1</div>
             <div class="galDots" id="galDots" aria-label="Photo selector"></div>
-            <button class="galNavBtn" type="button" id="galNext" aria-label="Next photo">›</button>
+            <button class="galNavBtn" type="button" id="galNext" aria-label="Next photo">
+              <span class="txt">Next</span><span class="arr" aria-hidden="true">›</span>
+            </button>
           </div>
 
           <div class="galHint fine" data-i18n="gal_swipe_hint">Swipe for more photos or use the arrows</div>
@@ -3257,27 +3290,36 @@
       const dotsWrap = document.getElementById("galDots");
       const prevBtn = document.getElementById("galPrev");
       const nextBtn = document.getElementById("galNext");
-      if(!carousel || !viewport || !track || !dotsWrap || !prevBtn || !nextBtn) return;
+      const counter = document.getElementById("galCounter");
+      if(!carousel || !viewport || !track || !dotsWrap || !prevBtn || !nextBtn || !counter) return;
 
       const slides = Array.from(track.querySelectorAll(".galSlide"));
       if(slides.length <= 1){
         dotsWrap.style.display = "none";
         prevBtn.style.display = "none";
         nextBtn.style.display = "none";
+        counter.textContent = `1 / ${slides.length || 1}`;
         return;
       }
 
-      const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
+      const reducedQuery = window.matchMedia ? window.matchMedia("(prefers-reduced-motion: reduce)") : null;
       let idx = 0;
       let timer = null;
+      let prefersReduce = !!(reducedQuery && reducedQuery.matches);
+
+      function updateUI(){
+        track.style.transform = `translateX(${-idx * 100}%)`;
+        dotsWrap.querySelectorAll(".galDot").forEach((b,bi)=>{
+          const isCurrent = bi === idx;
+          b.setAttribute("aria-current", isCurrent ? "true" : "false");
+          b.setAttribute("aria-label", `Go to photo ${bi+1} of ${slides.length}`);
+        });
+        counter.textContent = `${idx + 1} / ${slides.length}`;
+      }
 
       function setIndex(i){
         idx = (i + slides.length) % slides.length;
-        track.style.transform = `translateX(${-idx * 100}%)`;
-        dotsWrap.querySelectorAll(".galDot").forEach((b,bi)=>{
-          b.setAttribute("aria-current", bi === idx ? "true" : "false");
-        });
+        updateUI();
       }
 
       function buildDots(){
@@ -3286,7 +3328,7 @@
           const b = document.createElement("button");
           b.type = "button";
           b.className = "galDot";
-          b.setAttribute("aria-label", `Photo ${i+1}`);
+          b.setAttribute("aria-label", `Go to photo ${i+1} of ${slides.length}`);
           b.setAttribute("aria-current", i === 0 ? "true" : "false");
           b.addEventListener("click", ()=>{ stop(); setIndex(i); start(); });
           dotsWrap.appendChild(b);
@@ -3331,6 +3373,16 @@
         if(e.key === "ArrowLeft"){ e.preventDefault(); stop(); setIndex(idx - 1); start(); }
         else if(e.key === "ArrowRight"){ e.preventDefault(); stop(); setIndex(idx + 1); start(); }
       });
+
+      if(reducedQuery){
+        const onMotionChange = (e)=>{
+          prefersReduce = !!e.matches;
+          if(prefersReduce) stop();
+          else start();
+        };
+        if(typeof reducedQuery.addEventListener === "function") reducedQuery.addEventListener("change", onMotionChange);
+        else if(typeof reducedQuery.addListener === "function") reducedQuery.addListener(onMotionChange);
+      }
 
       buildDots();
       setIndex(0);
