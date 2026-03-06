@@ -1,6 +1,6 @@
 <!doctype html>
 <!-- Changelog: tightened <=640px header to logo + name + Book Now + hamburger only; prevented desktop Explore details from reappearing on small screens; kept language access via mobile menu flags + compact footer strip. -->
-<html lang="th" data-theme="system">
+<html lang="th" data-theme="dark">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B2SGREN1Z"></script>
@@ -2516,8 +2516,8 @@
       updateSticky();
     })();
 
-// ---------- Theme (System default; user override saved) ----------
-    const THEME_KEY = "sbx_theme"; // "system" | "dark" | "light"
+// ---------- Theme (Dark default; user override saved) ----------
+    const THEME_KEY = "sbx_theme"; // "dark" | "light" | "system"
     const metaTheme = document.getElementById("metaThemeColor");
     const themeToggle = document.getElementById("themeToggle");
     const themeIcon = document.getElementById("themeIcon");
@@ -2550,7 +2550,7 @@
       syncThemeUI(mobileThemeIcon, mobileThemeLabel);
     }
     function initTheme(){
-      let mode = "system";
+      let mode = "dark";
       try{
         const stored = localStorage.getItem(THEME_KEY);
         if(stored) mode = stored;
