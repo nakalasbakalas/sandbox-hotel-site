@@ -787,10 +787,10 @@
       padding: clamp(22px, 3vw, 34px);
       border-radius: 22px;
       background:
-        radial-gradient(1200px 500px at 20% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
-        linear-gradient(180deg, color-mix(in oklab, var(--surface) 75%, transparent), color-mix(in oklab, var(--bg) 92%, transparent));
-      border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
-      box-shadow: 0 14px 40px color-mix(in oklab, black 45%, transparent);
+        radial-gradient(1200px 500px at 20% 0%, rgba(209,139,80,.12), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(0,0,0,.14));
+      border: 1px solid rgba(209,139,80,.24);
+      box-shadow: 0 14px 40px rgba(0,0,0,.34);
     }
     #amenities h2, .amenities-section h2{
       font-size: clamp(22px, 2.2vw, 30px);
@@ -823,12 +823,12 @@
       padding: 18px 18px 16px;
       background:
         linear-gradient(180deg,
-          color-mix(in oklab, var(--surface) 72%, transparent),
-          color-mix(in oklab, var(--bg) 88%, transparent));
-      border: 1px solid color-mix(in oklab, var(--border) 78%, transparent);
+          rgba(255,255,255,.08),
+          rgba(0,0,0,.16));
+      border: 1px solid rgba(209,139,80,.2);
       box-shadow:
-        0 10px 26px color-mix(in oklab, black 45%, transparent),
-        inset 0 1px 0 color-mix(in oklab, white 10%, transparent);
+        0 10px 26px rgba(0,0,0,.32),
+        inset 0 1px 0 rgba(255,255,255,.1);
       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
       text-align: center;
       display:flex;
@@ -842,7 +842,7 @@
       position:absolute;
       inset:0;
       background: linear-gradient(135deg,
-        color-mix(in oklab, var(--accent) 28%, transparent),
+        rgba(209,139,80,.28),
         transparent 40%);
       opacity: .55;
       pointer-events:none;
@@ -854,20 +854,20 @@
       right: 16px;
       bottom: 10px;
       height: 1px;
-      background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--accent) 55%, transparent), transparent);
+      background: linear-gradient(90deg, transparent, rgba(209,139,80,.55), transparent);
       opacity: .9;
     }
     @media (hover:hover){
       .amenity-card:hover{
         transform: translateY(-3px);
-        border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+        border-color: rgba(209,139,80,.4);
         box-shadow:
-          0 14px 34px color-mix(in oklab, black 55%, transparent),
-          inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+          0 14px 34px rgba(0,0,0,.42),
+          inset 0 1px 0 rgba(255,255,255,.12);
       }
     }
     .amenity-card:focus-visible{
-      outline: 2px solid color-mix(in oklab, var(--accent) 80%, white);
+      outline: 2px solid rgba(240,195,154,.85);
       outline-offset: 3px;
     }
     .amenity-icon{
@@ -881,19 +881,70 @@
       margin: 0 auto 12px;
       background:
         radial-gradient(circle at 30% 20%,
-          color-mix(in oklab, var(--accent) 22%, transparent),
-          color-mix(in oklab, var(--surface) 72%, transparent) 55%);
-      border: 1px solid color-mix(in oklab, var(--accent) 22%, var(--border));
+          rgba(209,139,80,.22),
+          rgba(0,0,0,.18) 55%);
+      border: 1px solid rgba(209,139,80,.24);
       box-shadow:
-        0 10px 22px color-mix(in oklab, black 45%, transparent),
-        inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+        0 10px 22px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.12);
     }
     .amenity-icon .glyph{
       font-weight: 700;
       letter-spacing: .04em;
       font-size: 14px;
-      color: color-mix(in oklab, var(--text) 92%, white);
+      color: rgba(255,255,255,.92);
       opacity: .95;
+    }
+    @supports (color: color-mix(in oklab, white 50%, black)) {
+      #amenities, .amenities-section{
+        background:
+          radial-gradient(1200px 500px at 20% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+          linear-gradient(180deg, color-mix(in oklab, var(--surface) 75%, transparent), color-mix(in oklab, var(--bg) 92%, transparent));
+        border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
+        box-shadow: 0 14px 40px color-mix(in oklab, black 45%, transparent);
+      }
+      .amenity-card{
+        background:
+          linear-gradient(180deg,
+            color-mix(in oklab, var(--surface) 72%, transparent),
+            color-mix(in oklab, var(--bg) 88%, transparent));
+        border: 1px solid color-mix(in oklab, var(--border) 78%, transparent);
+        box-shadow:
+          0 10px 26px color-mix(in oklab, black 45%, transparent),
+          inset 0 1px 0 color-mix(in oklab, white 10%, transparent);
+      }
+      .amenity-card::before{
+        background: linear-gradient(135deg,
+          color-mix(in oklab, var(--accent) 28%, transparent),
+          transparent 40%);
+      }
+      .amenity-card::after{
+        background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--accent) 55%, transparent), transparent);
+      }
+      @media (hover:hover){
+        .amenity-card:hover{
+          border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
+          box-shadow:
+            0 14px 34px color-mix(in oklab, black 55%, transparent),
+            inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+        }
+      }
+      .amenity-card:focus-visible{
+        outline: 2px solid color-mix(in oklab, var(--accent) 80%, white);
+      }
+      .amenity-icon{
+        background:
+          radial-gradient(circle at 30% 20%,
+            color-mix(in oklab, var(--accent) 22%, transparent),
+            color-mix(in oklab, var(--surface) 72%, transparent) 55%);
+        border: 1px solid color-mix(in oklab, var(--accent) 22%, var(--border));
+        box-shadow:
+          0 10px 22px color-mix(in oklab, black 45%, transparent),
+          inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+      }
+      .amenity-icon .glyph{
+        color: color-mix(in oklab, var(--text) 92%, white);
+      }
     }
     .amenity-card h3{
       margin: 0 0 6px;
