@@ -2253,9 +2253,9 @@
     const PHONE_LINK = `tel:${HOTEL_CONFIG.PHONE_E164}`;
     const WHATSAPP_LINK = `https://wa.me/${HOTEL_CONFIG.WHATSAPP_E164}`;
 
-    function sendEvent(name, params = {}){
+    function track(eventName, params = {}){
       if(typeof window.gtag !== "function") return;
-      window.gtag("event", name, params);
+      window.gtag("event", eventName, params);
     }
 
     function applyContactConfig(){
@@ -2571,7 +2571,7 @@
         const next = current === "system" ? "dark" : (current === "dark" ? "light" : "system");
         try{ localStorage.setItem(THEME_KEY, next); }catch(_e){}
         setTheme(next);
-        sendEvent("theme_change", { theme_mode: next });
+        track("theme_change", { theme_mode: next });
       };
       if(themeToggle) themeToggle.addEventListener("click", cycleTheme);
       if(mobileThemeToggle) mobileThemeToggle.addEventListener("click", cycleTheme);
@@ -3360,7 +3360,7 @@
           try{ localStorage.setItem("sbx_lang", lang); } catch(_e){}
           applyLang(lang);
           openLangMenu(false);
-          sendEvent("language_change", { language: lang });
+          track("language_change", { language: lang });
         });
       });
 
@@ -3474,6 +3474,26 @@
       window.location.href = `mailto:${encodeURIComponent(HOTEL_CONFIG.EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
     }
 
+    function resolveTrackLocation(el){
+      if(!el) return "nav";
+      if(el.closest(".hero")) return "hero";
+      if(el.closest(".sticky")) return "sticky";
+      if(el.closest("#book")) return "booking";
+      if(el.closest("#rooms")) return "rooms";
+      if(el.closest("footer")) return "footer";
+      if(el.closest("#location")) return "location_section";
+      if(el.closest("header") || el.closest(".mobileMenu")) return "nav";
+      return "nav";
+    }
+
+    function buildTrackParams(el, ctaType, destination){
+      return {
+        cta_type: ctaType,
+        location: resolveTrackLocation(el),
+        destination
+      };
+    }
+
     function scrollToBookingForm(roomType){
       const bookSection = document.getElementById("book");
       const firstInput = document.getElementById("checkin");
@@ -3498,7 +3518,7 @@
         el.setAttribute("rel", "noopener");
         el.addEventListener("click",(e)=>{
           e.preventDefault();
-          sendEvent("whatsapp_click", { source: id });
+          track("whatsapp_click", buildTrackParams(el, "whatsapp", waFallback));
           openWhatsApp(buildMessage(getFormData()));
         });
       });
@@ -3511,7 +3531,7 @@
         el.setAttribute("rel", "noopener");
         el.addEventListener("click",(e)=>{
           e.preventDefault();
-          sendEvent("line_click", { source: id });
+          track("line_click", buildTrackParams(el, "line", HOTEL_CONFIG.LINE_LINK));
           openLine(buildMessage(getFormData()));
         });
       });
@@ -3519,11 +3539,11 @@
       const form = document.getElementById("bookingForm");
       form.addEventListener("submit",(e)=>{
         e.preventDefault();
-        sendEvent("booking_form_submit", { submit_channel: "line" });
+        track("booking_form_submit", buildTrackParams(form, "line", HOTEL_CONFIG.LINE_LINK));
         openLine(buildMessage(getFormData()));
       });
       document.getElementById("sendWA").addEventListener("click", ()=>{
-        sendEvent("whatsapp_click", { source: "sendWA" });
+        track("whatsapp_click", buildTrackParams(document.getElementById("sendWA"), "whatsapp", waFallback));
         openWhatsApp(buildMessage(getFormData()));
       });
       document.getElementById("sendEmail").addEventListener("click", ()=> openEmail(buildMessage(getFormData())));
@@ -3538,14 +3558,14 @@
       document.querySelectorAll('[data-i18n="nav_book"]').forEach(el=>{
         el.addEventListener("click", (e)=>{
           e.preventDefault();
-          sendEvent("book_now_click", { source: (el.id || "nav_book") });
+          track("book_now_click", buildTrackParams(el, "book_now", "#book"));
           scrollToBookingForm();
         });
       });
 
       document.querySelectorAll('[data-contact="phone-link"]').forEach(el=>{
         el.addEventListener("click", ()=>{
-          sendEvent("click_to_call", { phone: HOTEL_CONFIG.PHONE_E164 });
+          track("click_to_call", buildTrackParams(el, "call", PHONE_LINK));
         });
       });
     }
