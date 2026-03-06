@@ -2,6 +2,14 @@
 <!-- Changelog: tightened <=640px header to logo + name + Book Now + hamburger only; prevented desktop Explore details from reappearing on small screens; kept language access via mobile menu flags + compact footer strip. -->
 <html lang="th" data-theme="system">
 <head>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B2SGREN1Z"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-2B2SGREN1Z');
+  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
@@ -2059,41 +2067,9 @@
     const PHONE_LINK = `tel:${HOTEL_CONFIG.PHONE_E164}`;
     const WHATSAPP_LINK = `https://wa.me/${HOTEL_CONFIG.WHATSAPP_E164}`;
 
-    const analytics = (() => {
-      const measurementId = String(HOTEL_CONFIG.GA4_MEASUREMENT_ID || "").trim();
-      const dntEnabled = (() => {
-        const dnt = String(navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack || "").toLowerCase();
-        return dnt === "1" || dnt === "yes";
-      })();
-      const enabled = !!measurementId && !dntEnabled;
-
-      function init(){
-        if(!enabled || window.gtag) return;
-        const script = document.createElement("script");
-        script.async = true;
-        script.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
-        document.head.appendChild(script);
-
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){ window.dataLayer.push(arguments); };
-        window.gtag("js", new Date());
-        window.gtag("config", measurementId, {
-          send_page_view: true,
-          allow_google_signals: false,
-          allow_ad_personalization_signals: false
-        });
-      }
-
-      function sendEvent(name, params = {}){
-        if(!enabled || typeof window.gtag !== "function") return;
-        window.gtag("event", name, params);
-      }
-
-      return { init, sendEvent, enabled, dntEnabled };
-    })();
-
     function sendEvent(name, params = {}){
-      analytics.sendEvent(name, params);
+      if(typeof window.gtag !== "function") return;
+      window.gtag("event", name, params);
     }
 
     function applyContactConfig(){
@@ -3662,7 +3638,6 @@
       document.getElementById("y").textContent = new Date().getFullYear();
       renderEditableContent();
       applyContactConfig();
-      analytics.init();
       initTheme();
       initLang();
       initMobileMenu();
