@@ -1,16 +1,19 @@
 {
-  "name": "sandbox-hotel-site",
+  "name": "sandbox-hotel-monorepo",
   "version": "1.0.0",
-  "description": "Hotel site hosted on Cloudflare Workers",
+  "description": "Hotel site monorepo - Frontend, API, and Shared utilities",
   "type": "module",
+  "private": true,
+  "workspaces": [
+    "packages/web",
+    "packages/api",
+    "packages/shared"
+  ],
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "build": "wrangler build"
-  },
-  "dependencies": {},
-  "devDependencies": {
-    "wrangler": "^3.92.0"
+    "dev": "npm run dev -w packages/web",
+    "deploy": "npm run deploy -w packages/web",
+    "build": "npm run build -w packages/web",
+    "dev:all": "npm run dev --workspaces"
   },
   "engines": {
     "node": ">=18.0.0"

@@ -1,0 +1,17 @@
+{
+  "name": "@sandbox-hotel/api",
+  "version": "1.0.0",
+  "description": "Sandbox Hotel API and worker functions",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "build": "wrangler build"
+  },
+  "dependencies": {
+    "@sandbox-hotel/shared": "*"
+  },
+  "devDependencies": {
+    "wrangler": "^3.92.0"
+  }
+}
