@@ -22,6 +22,10 @@
   <meta name="description" id="metaDescription" content="Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
+  <link rel="alternate" hreflang="th" href="https://www.sandboxhotel.com/?lang=th">
+  <link rel="alternate" hreflang="en" href="https://www.sandboxhotel.com/?lang=en">
+  <link rel="alternate" hreflang="zh" href="https://www.sandboxhotel.com/?lang=zh">
+  <link rel="alternate" hreflang="x-default" href="https://www.sandboxhotel.com/">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/sandbox-logo-transparent.svg">
   <link rel="shortcut icon" href="assets/images/logo/sandbox-logo-transparent.svg">
 <!-- Open Graph -->
@@ -808,6 +812,22 @@
     }
     .heroSecondary a:hover{opacity:1}
     .heroSecondary .dot{opacity:.5}
+    .heroSearch{
+      margin-top:12px;
+      padding:10px;
+      border:1px solid rgba(255,255,255,.24);
+      border-radius:14px;
+      background:rgba(9,10,13,.42);
+      backdrop-filter: blur(2px);
+      display:grid;
+      grid-template-columns: repeat(4, minmax(120px,1fr));
+      gap:8px;
+      align-items:end;
+    }
+    .heroSearch .field{margin:0}
+    .heroSearch label{font-size:12px; color:rgba(255,255,255,.86)}
+    .heroSearch input,.heroSearch select{min-height:42px}
+    .heroSearch .btn{min-height:42px; width:100%}
     .hero .kw{padding:0; border:0; background:transparent}
 
     .nav :focus-visible{
@@ -1478,6 +1498,8 @@
     html[data-device="phone"] .heroCTA .btn{ width:100%; }
     html[data-device="phone"] .heroCTA .btn.primary,
     html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
+    html[data-device="phone"] .heroSearch{grid-template-columns:1fr 1fr;}
+    html[data-device="phone"] .heroSearch .field:last-of-type{grid-column:1 / -1;}
     html[data-device="phone"] .heroSecondary{font-size:12px; gap:7px; margin-top:7px}
 
     /* Language + theme controls: tighten */
@@ -1725,6 +1747,30 @@
               <a href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
             </div>
 
+            <form id="heroSearch" class="heroSearch" aria-label="Quick availability search">
+              <div class="field">
+                <label for="heroCheckin" data-i18n="lbl_checkin">Check-in</label>
+                <input id="heroCheckin" name="heroCheckin" type="date" required>
+              </div>
+              <div class="field">
+                <label for="heroCheckout" data-i18n="lbl_checkout">Check-out</label>
+                <input id="heroCheckout" name="heroCheckout" type="date" required>
+              </div>
+              <div class="field">
+                <label for="heroGuests" data-i18n="lbl_guests">Guests</label>
+                <select id="heroGuests" name="heroGuests">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="field">
+                <button class="btn primary" type="submit" data-i18n="hero_check_btn">Check availability</button>
+              </div>
+            </form>
+
             <div class="sep" style="background:rgba(255,255,255,.16); margin:10px 0"></div>
             <div class="fine" style="color:rgba(255,255,255,.86)" data-i18n-html="hero_fine">
               Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms
@@ -1803,6 +1849,7 @@
 
           <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
           <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
+          <div class="fine" data-i18n="book_confidence_note">No prepayment link on this page. Confirm details directly with hotel staff before payment.</div>
         </div>
 
         <form id="bookingForm" class="formGrid" autocomplete="on">
@@ -2642,11 +2689,13 @@
         quick_weekend: "สุดสัปดาห์",
         quick_7n: "7 คืน",
         quick_clear: "ล้าง",
+        hero_check_btn: "เช็คห้องว่าง",
         stay_summary_placeholder: "เลือกวันเพื่อดูสรุปการเข้าพัก",
         stay_nights: "คืน",
         stay_guests: "ท่าน",
         stay_room: "ห้อง",
         best_rate_note: "จองตรง = ยืนยันไวที่สุด • ส่งวันเข้าพักเพื่อรับราคาที่ถูกต้องของวันนี้",
+        book_confidence_note: "หน้านี้ไม่มีลิงก์ชำระเงินล่วงหน้า กรุณายืนยันรายละเอียดกับพนักงานโรงแรมโดยตรงก่อนชำระเงิน",
         msg_nights: "จำนวนคืน",
         line_opened_hint: "เปิด LINE แล้ว",
         line_clipboard_hint: "คัดลอกข้อความไว้แล้ว (วางได้ทันที)",
@@ -2843,11 +2892,13 @@
         quick_weekend: "Weekend",
         quick_7n: "7 nights",
         quick_clear: "Clear",
+        hero_check_btn: "Check availability",
         stay_summary_placeholder: "Select dates to see a summary.",
         stay_nights: "nights",
         stay_guests: "guests",
         stay_room: "Room",
         best_rate_note: "Direct booking = fastest confirmation • Message your dates for today’s exact rate.",
+        book_confidence_note: "No prepayment link on this page. Confirm details directly with hotel staff before payment.",
         msg_nights: "Nights",
         line_opened_hint: "LINE opened.",
         line_clipboard_hint: "Message copied to clipboard.",
@@ -3044,11 +3095,13 @@
         quick_weekend: "周末",
         quick_7n: "7晚",
         quick_clear: "清除",
+        hero_check_btn: "查看空房",
         stay_summary_placeholder: "选择日期以查看摘要。",
         stay_nights: "晚",
         stay_guests: "位",
         stay_room: "房型",
         best_rate_note: "直接预订 = 最快确认 • 发送日期以获取今日准确价格。",
+        book_confidence_note: "本页面没有预付款链接。付款前请先与酒店工作人员直接确认详情。",
         msg_nights: "晚数",
         line_opened_hint: "已打开LINE。",
         line_clipboard_hint: "消息已复制到剪贴板。",
@@ -3760,6 +3813,29 @@
       co.addEventListener("change", updateStaySummary, {passive:true});
       if(guests) guests.addEventListener("change", updateStaySummary, {passive:true});
       if(room) room.addEventListener("change", updateStaySummary, {passive:true});
+
+      const heroForm = document.getElementById("heroSearch");
+      const heroCi = document.getElementById("heroCheckin");
+      const heroCo = document.getElementById("heroCheckout");
+      const heroGuests = document.getElementById("heroGuests");
+      if(heroCi && heroCo){
+        heroCi.min = ci.min;
+        heroCo.min = co.min;
+        heroCi.value = ci.value;
+        heroCo.value = co.value;
+      }
+      if(heroGuests && guests) heroGuests.value = guests.value;
+      if(heroForm){
+        heroForm.addEventListener("submit", (e)=>{
+          e.preventDefault();
+          if(heroCi && ci) ci.value = heroCi.value || ci.value;
+          if(heroCo && co) co.value = heroCo.value || co.value;
+          if(heroGuests && guests) guests.value = heroGuests.value || guests.value;
+          updateStaySummary();
+          track("hero_availability_check", buildTrackParams(heroForm, "check_availability", "#book"));
+          scrollToBookingForm();
+        });
+      }
 
       // Quick date presets
       document.querySelectorAll(".quickBtn").forEach(btn=>{
