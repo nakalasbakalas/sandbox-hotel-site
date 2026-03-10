@@ -2,16 +2,6 @@
 <!-- Changelog: tightened <=640px header to logo + name + Book Now + hamburger only; prevented desktop Explore details from reappearing on small screens; kept language access via mobile menu flags + compact footer strip. -->
 <html lang="th" data-theme="dark">
 <head>
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B2SGREN1Z"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-2B2SGREN1Z');
-  </script>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
@@ -22,12 +12,16 @@
   <meta name="description" id="metaDescription" content="Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
+  <link rel="alternate" hreflang="th" href="https://www.sandboxhotel.com/th/">
+  <link rel="alternate" hreflang="en" href="https://www.sandboxhotel.com/en/">
+  <link rel="alternate" hreflang="zh" href="https://www.sandboxhotel.com/zh/">
+  <link rel="alternate" hreflang="x-default" href="https://www.sandboxhotel.com/">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/sandbox-logo-transparent.svg">
   <link rel="shortcut icon" href="assets/images/logo/sandbox-logo-transparent.svg">
 <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sandbox Hotel">
-  <meta property="og:url" content="https://www.sandboxhotel.com/">
+  <meta property="og:url" id="ogUrl" content="https://www.sandboxhotel.com/">
   <meta property="og:locale" id="ogLocale" content="th_TH">
     <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
@@ -808,6 +802,22 @@
     }
     .heroSecondary a:hover{opacity:1}
     .heroSecondary .dot{opacity:.5}
+    .heroSearch{
+      margin-top:12px;
+      padding:10px;
+      border:1px solid rgba(255,255,255,.24);
+      border-radius:14px;
+      background:rgba(9,10,13,.42);
+      backdrop-filter: blur(2px);
+      display:grid;
+      grid-template-columns: repeat(4, minmax(120px,1fr));
+      gap:8px;
+      align-items:end;
+    }
+    .heroSearch .field{margin:0}
+    .heroSearch label{font-size:12px; color:rgba(255,255,255,.86)}
+    .heroSearch input,.heroSearch select{min-height:42px}
+    .heroSearch .btn{min-height:42px; width:100%}
     .hero .kw{padding:0; border:0; background:transparent}
 
     .nav :focus-visible{
@@ -1478,6 +1488,8 @@
     html[data-device="phone"] .heroCTA .btn{ width:100%; }
     html[data-device="phone"] .heroCTA .btn.primary,
     html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
+    html[data-device="phone"] .heroSearch{grid-template-columns:1fr 1fr;}
+    html[data-device="phone"] .heroSearch .field:last-of-type{grid-column:1 / -1;}
     html[data-device="phone"] .heroSecondary{font-size:12px; gap:7px; margin-top:7px}
 
     /* Language + theme controls: tighten */
@@ -1666,9 +1678,9 @@
   </header>
 
   <div id="mobileMenuOverlay" class="mobileMenuOverlay" hidden></div>
-  <aside id="mobileMenu" class="mobileMenu" role="dialog" aria-modal="true" aria-label="Mobile navigation" aria-hidden="true" hidden>
+  <aside id="mobileMenu" class="mobileMenu" role="dialog" aria-modal="true" aria-labelledby="mobileMenuTitle" aria-hidden="true" hidden>
     <div class="mobileMenuHeader">
-      <span class="mobileMenuTitle">Explore</span>
+      <span class="mobileMenuTitle" id="mobileMenuTitle">Explore</span>
       <button id="mobileMenuClose" class="mobileClose" type="button" aria-label="Close navigation menu">✕</button>
     </div>
 
@@ -1724,6 +1736,30 @@
               <span class="dot" aria-hidden="true">•</span>
               <a href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
             </div>
+
+            <form id="heroSearch" class="heroSearch" aria-label="Quick availability search">
+              <div class="field">
+                <label for="heroCheckin" data-i18n="lbl_checkin">Check-in</label>
+                <input id="heroCheckin" name="heroCheckin" type="date" required autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="heroCheckout" data-i18n="lbl_checkout">Check-out</label>
+                <input id="heroCheckout" name="heroCheckout" type="date" required autocomplete="off">
+              </div>
+              <div class="field">
+                <label for="heroGuests" data-i18n="lbl_guests">Guests</label>
+                <select id="heroGuests" name="heroGuests" autocomplete="off">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="field">
+                <button class="btn primary" type="submit" data-i18n="hero_check_btn">Check availability</button>
+              </div>
+            </form>
 
             <div class="sep" style="background:rgba(255,255,255,.16); margin:10px 0"></div>
             <div class="fine" style="color:rgba(255,255,255,.86)" data-i18n-html="hero_fine">
@@ -1803,20 +1839,21 @@
 
           <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
           <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
+          <div class="fine" data-i18n="book_confidence_note">No prepayment link on this page. Confirm details directly with hotel staff before payment.</div>
         </div>
 
         <form id="bookingForm" class="formGrid" autocomplete="on">
           <div class="field">
             <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
-            <input id="checkin" name="checkin" type="date" required>
+            <input id="checkin" name="checkin" type="date" required autocomplete="off">
           </div>
           <div class="field">
             <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
-            <input id="checkout" name="checkout" type="date" required>
+            <input id="checkout" name="checkout" type="date" required autocomplete="off">
           </div>
           <div class="field">
             <label for="guests" data-i18n="lbl_guests">Guests</label>
-            <select id="guests" name="guests">
+            <select id="guests" name="guests" autocomplete="off">
               <option value="1">1</option>
               <option value="2" selected>2</option>
               <option value="3">3</option>
@@ -1826,19 +1863,19 @@
           </div>
           <div class="field">
             <label for="room" data-i18n="lbl_room">Room</label>
-            <select id="room" name="room"></select>
+            <select id="room" name="room" autocomplete="off"></select>
           </div>
           <div class="field wide">
             <label for="name" data-i18n="lbl_name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="Your name" data-i18n-ph="ph_name">
           </div>
           <div class="field wide">
             <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
-            <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
+            <input id="contact" name="contact" type="text" inputmode="email" autocomplete="email" minlength="8" maxlength="100" pattern="^\s*(?:[^\s@]+@[^\s@]+\.[^\s@]+|\+?[0-9][0-9\s\-]{7,})\s*$" title="Please enter a valid phone number or email address." placeholder="+66 … or email" data-i18n-ph="ph_contact" required aria-describedby="contactHint">
           </div>
           <div class="field wide">
             <label for="notes" data-i18n="lbl_notes">Notes</label>
-            <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+            <textarea id="notes" name="notes" rows="3" autocomplete="off" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
           </div>
 
           <div class="wide ctaRow">
@@ -1847,6 +1884,7 @@
               <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa">Send via WhatsApp</button>
               <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Send via Email</button>
             </div>
+            <span class="fine" id="contactHint" data-i18n="contact_hint">Phone or email works. We use this only to confirm your booking details.</span>
             <span class="fine" id="formHint" data-i18n="form_hint">We’ll confirm availability as soon as possible.</span>
           </div>
         </form>
@@ -2187,7 +2225,7 @@
       EMAIL_TO: "booking@sandboxhotel.com",
       FACEBOOK_URL: "https://web.facebook.com/sandboxhotel",
       MAPS_URL: "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7",
-      GA4_MEASUREMENT_ID: "" // e.g. "G-XXXXXXXXXX"; analytics stays off when empty
+      GA4_MEASUREMENT_ID: "G-2B2SGREN1Z" // analytics source of truth
     };
     const EDITABLE_CONTENT = {
       contact: HOTEL_CONFIG,
@@ -2253,6 +2291,21 @@
 
     const PHONE_LINK = `tel:${HOTEL_CONFIG.PHONE_E164}`;
     const WHATSAPP_LINK = `https://wa.me/${HOTEL_CONFIG.WHATSAPP_E164}`;
+
+    function initAnalytics(){
+      const id = String(HOTEL_CONFIG.GA4_MEASUREMENT_ID || "").trim();
+      if(!id || document.querySelector(`script[data-ga4="${id}"]`)) return;
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function(){ window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", id);
+      const s = document.createElement("script");
+      s.async = true;
+      s.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(id)}`;
+      s.dataset.ga4 = id;
+      s.referrerPolicy = "strict-origin-when-cross-origin";
+      document.head.appendChild(s);
+    }
 
     function track(eventName, params = {}){
       if(typeof window.gtag !== "function") return;
@@ -2635,6 +2688,7 @@
         btn_send_wa: "ส่งผ่าน WhatsApp",
         btn_send_email: "ส่งทางอีเมล",
         form_hint: "เราจะยืนยันห้องว่างให้เร็วที่สุด",
+        contact_hint: "โทรศัพท์หรืออีเมลใช้ได้ เราใช้ข้อมูลนี้เพื่อยืนยันรายละเอียดการจองเท่านั้น",
 
         quick_label: "เลือกวันอย่างรวดเร็ว",
         quick_tonight: "คืนนี้",
@@ -2642,11 +2696,13 @@
         quick_weekend: "สุดสัปดาห์",
         quick_7n: "7 คืน",
         quick_clear: "ล้าง",
+        hero_check_btn: "เช็คห้องว่าง",
         stay_summary_placeholder: "เลือกวันเพื่อดูสรุปการเข้าพัก",
         stay_nights: "คืน",
         stay_guests: "ท่าน",
         stay_room: "ห้อง",
         best_rate_note: "จองตรง = ยืนยันไวที่สุด • ส่งวันเข้าพักเพื่อรับราคาที่ถูกต้องของวันนี้",
+        book_confidence_note: "หน้านี้ไม่มีลิงก์ชำระเงินล่วงหน้า กรุณายืนยันรายละเอียดกับพนักงานโรงแรมโดยตรงก่อนชำระเงิน",
         msg_nights: "จำนวนคืน",
         line_opened_hint: "เปิด LINE แล้ว",
         line_clipboard_hint: "คัดลอกข้อความไว้แล้ว (วางได้ทันที)",
@@ -2836,6 +2892,7 @@
         btn_send_wa: "Send via WhatsApp",
         btn_send_email: "Send via Email",
         form_hint: "We’ll confirm availability as soon as possible.",
+        contact_hint: "Phone or email works. We use this only to confirm your booking details.",
 
         quick_label: "Quick dates",
         quick_tonight: "Tonight",
@@ -2843,11 +2900,13 @@
         quick_weekend: "Weekend",
         quick_7n: "7 nights",
         quick_clear: "Clear",
+        hero_check_btn: "Check availability",
         stay_summary_placeholder: "Select dates to see a summary.",
         stay_nights: "nights",
         stay_guests: "guests",
         stay_room: "Room",
         best_rate_note: "Direct booking = fastest confirmation • Message your dates for today’s exact rate.",
+        book_confidence_note: "No prepayment link on this page. Confirm details directly with hotel staff before payment.",
         msg_nights: "Nights",
         line_opened_hint: "LINE opened.",
         line_clipboard_hint: "Message copied to clipboard.",
@@ -3037,6 +3096,7 @@
         btn_send_wa: "通过WhatsApp发送",
         btn_send_email: "通过邮箱发送",
         form_hint: "我们会尽快确认空房情况。",
+        contact_hint: "电话或邮箱均可。我们仅用此信息确认您的预订详情。",
 
         quick_label: "快捷日期",
         quick_tonight: "今晚",
@@ -3044,11 +3104,13 @@
         quick_weekend: "周末",
         quick_7n: "7晚",
         quick_clear: "清除",
+        hero_check_btn: "查看空房",
         stay_summary_placeholder: "选择日期以查看摘要。",
         stay_nights: "晚",
         stay_guests: "位",
         stay_room: "房型",
         best_rate_note: "直接预订 = 最快确认 • 发送日期以获取今日准确价格。",
+        book_confidence_note: "本页面没有预付款链接。付款前请先与酒店工作人员直接确认详情。",
         msg_nights: "晚数",
         line_opened_hint: "已打开LINE。",
         line_clipboard_hint: "消息已复制到剪贴板。",
@@ -3203,6 +3265,21 @@
     }
     const FLAG_MAP = { th: "🇹🇭", en: "🇬🇧", zh: "🇨🇳" };
     const OG_LOCALE_MAP = { th: "th_TH", en: "en_US", zh: "zh_CN" };
+    const LANG_PATH_MAP = { th: "/th/", en: "/en/", zh: "/zh/" };
+
+    function getLangFromPath(){
+      const p = String(location.pathname || "/").toLowerCase();
+      if(/^\/(th|en|zh)(?:\/|$)/.test(p)) return p.split("/")[1];
+      return "";
+    }
+    function buildLangUrl(lang){
+      const safe = normLang(lang);
+      const u = new URL(location.href);
+      u.pathname = LANG_PATH_MAP[safe] || "/";
+      u.search = "";
+      u.hash = "";
+      return u.toString();
+    }
 
     function getLangFromQuery(){
       const params = new URLSearchParams(window.location.search || "");
@@ -3248,6 +3325,11 @@
 
       const ogLocale = document.getElementById("ogLocale");
       if(ogLocale) ogLocale.setAttribute("content", OG_LOCALE_MAP[CURRENT_LANG] || OG_LOCALE_MAP[I18N_DEFAULT]);
+
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if(canonical) canonical.setAttribute("href", buildLangUrl(CURRENT_LANG));
+      const ogUrl = document.getElementById("ogUrl");
+      if(ogUrl) ogUrl.setAttribute("content", buildLangUrl(CURRENT_LANG));
 
       const tt = document.getElementById("twitterTitle");
       if(tt && t("meta_title")) tt.setAttribute("content", t("meta_title"));
@@ -3330,9 +3412,12 @@
 
       try{
         const queryLang = getLangFromQuery();
-        if(queryLang){
-          applyLang(queryLang);
-          localStorage.setItem("sbx_lang", queryLang);
+        const pathLang = getLangFromPath();
+        if(queryLang || pathLang){
+          const chosen = queryLang || pathLang;
+          applyLang(chosen);
+          localStorage.setItem("sbx_lang", chosen);
+          history.replaceState({}, "", buildLangUrl(chosen));
         } else {
           const stored = localStorage.getItem("sbx_lang");
           if(stored){
@@ -3352,6 +3437,31 @@
         langBtn.addEventListener("click", (e)=>{
           e.stopPropagation();
           openLangMenu(langMenu.hasAttribute("hidden"));
+          if(!langMenu.hasAttribute("hidden")) langMenu.querySelector('.langBtn')?.focus();
+        });
+        langMenu.addEventListener("keydown", (e)=>{
+          const items = Array.from(langMenu.querySelectorAll('.langBtn'));
+          if(!items.length) return;
+          const idx = items.indexOf(document.activeElement);
+          if(e.key === "Escape"){
+            e.preventDefault();
+            openLangMenu(false);
+            langBtn.focus();
+            return;
+          }
+          if(e.key === "ArrowDown" || e.key === "ArrowRight"){
+            e.preventDefault();
+            items[(idx + 1 + items.length) % items.length].focus();
+          } else if(e.key === "ArrowUp" || e.key === "ArrowLeft"){
+            e.preventDefault();
+            items[(idx - 1 + items.length) % items.length].focus();
+          } else if(e.key === "Home"){
+            e.preventDefault();
+            items[0].focus();
+          } else if(e.key === "End"){
+            e.preventDefault();
+            items[items.length - 1].focus();
+          }
         });
       }
 
@@ -3360,6 +3470,7 @@
           const lang = btn.getAttribute("data-lang");
           try{ localStorage.setItem("sbx_lang", lang); } catch(_e){}
           applyLang(lang);
+          history.replaceState({}, "", buildLangUrl(lang));
           openLangMenu(false);
           track("language_change", { language: lang });
         });
@@ -3761,6 +3872,29 @@
       if(guests) guests.addEventListener("change", updateStaySummary, {passive:true});
       if(room) room.addEventListener("change", updateStaySummary, {passive:true});
 
+      const heroForm = document.getElementById("heroSearch");
+      const heroCi = document.getElementById("heroCheckin");
+      const heroCo = document.getElementById("heroCheckout");
+      const heroGuests = document.getElementById("heroGuests");
+      if(heroCi && heroCo){
+        heroCi.min = ci.min;
+        heroCo.min = co.min;
+        heroCi.value = ci.value;
+        heroCo.value = co.value;
+      }
+      if(heroGuests && guests) heroGuests.value = guests.value;
+      if(heroForm){
+        heroForm.addEventListener("submit", (e)=>{
+          e.preventDefault();
+          if(heroCi && ci) ci.value = heroCi.value || ci.value;
+          if(heroCo && co) co.value = heroCo.value || co.value;
+          if(heroGuests && guests) guests.value = heroGuests.value || guests.value;
+          updateStaySummary();
+          track("hero_availability_check", buildTrackParams(heroForm, "check_availability", "#book"));
+          scrollToBookingForm();
+        });
+      }
+
       // Quick date presets
       document.querySelectorAll(".quickBtn").forEach(btn=>{
         btn.addEventListener("click", ()=>{
@@ -3843,6 +3977,7 @@
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
+      initAnalytics();
       renderEditableContent();
       applyContactConfig();
       initTheme();

@@ -1,3 +1,4 @@
-# Add path redirects here if needed later.
-# Example:
-# /old-page  /  301
+# Language route aliases
+/th   /th/   301
+/en   /en/   301
+/zh   /zh/   301
