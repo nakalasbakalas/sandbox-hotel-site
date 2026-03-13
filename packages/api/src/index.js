@@ -16,7 +16,7 @@ export default {
     }
 
     if (url.pathname === '/api/rooms') {
-      // Return room availability, pricing, etc.
+      // Brochure placeholder only. Live availability belongs in sandbox-pms.
       return new Response(
         JSON.stringify({ rooms: [] }),
         { headers: { 'Content-Type': 'application/json' } }

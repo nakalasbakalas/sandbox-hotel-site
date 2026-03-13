@@ -1,120 +1,76 @@
-# Sandbox Hotel Monorepo
+# Sandbox Hotel Site Workspace
 
-Complete hotel management system with website, API, and property management system.
+This repo is the brochure-site workspace for Sandbox Hotel. It is no longer the home of the operational PMS.
+
+## Authority Boundary
+
+- Canonical PMS + booking engine repo: [`nakalasbakalas/sandbox-pms`](https://github.com/nakalasbakalas/sandbox-pms)
+- Brochure/marketing repo: `nakalasbakalas/sandbox-hotel-site`
+
+The `sandbox-hotel-site` workspace must not contain active PMS business logic. If a feature depends on live inventory, reservations, cashier, housekeeping, staff auth, payments, or admin operations, it belongs in `sandbox-pms`.
+
+Recommended domain split:
+
+- `www.<domain>` for this brochure workspace
+- `book.<domain>` for the public booking engine in `sandbox-pms`
+- `staff.<domain>` for the staff PMS in `sandbox-pms`
+
+The brochure repo may redirect into those origins, but it should not proxy or absorb operational PMS behavior.
 
 ## Workspace Structure
 
-```
-monorepo/
-├── packages/
-│   ├── web/           - Cloudflare Workers static site frontend
-│   ├── api/           - Cloudflare Workers API backend
-│   ├── shared/        - Shared Node.js utilities
-│   └── pms/           - Flask Property Management System
-├── package.json       - Root npm configuration
-└── README.md          - This file
-```
-
-## Workspaces
-
-### 🌐 `packages/web` - Frontend Website
-Static hotel website deployed on Cloudflare Workers.
-- **Tech**: HTML, CSS, JavaScript, Wrangler
-- **Deploy**: `npm run deploy -w packages/web`
-- **Dev**: `npm run dev -w packages/web`
-
-### 🔌 `packages/api` - API Worker
-Backend API endpoints for the website.
-- **Tech**: Node.js, Cloudflare Workers
-- **Deploy**: `npm run deploy -w packages/api`
-- **Dev**: `npm run dev -w packages/api`
-
-### 🔧 `packages/shared` - Shared Utilities
-Shared code and constants for web and api packages.
-- **Tech**: JavaScript/Node.js
-- **Usage**: Import from `@sandbox-hotel/shared`
-
-### 🏨 `packages/pms` - Property Management System
-Full-featured hotel management platform.
-- **Tech**: Flask, Python, PostgreSQL, SQLAlchemy
-- **Setup**: `cd packages/pms && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt`
-- **Run**: `cd packages/pms && python app.py`
-- **Database**: PostgreSQL (production) / SQLite (local dev)
-
-## Quick Start
-
-### Node.js Packages
-
-Install all dependencies:
-```bash
-npm install
+```text
+sandbox-hotel-site/
+  packages/
+    web/                 Cloudflare Workers static site frontend
+    api/                 Brochure-support API worker
+    shared/              Shared frontend utilities
+    pms/                 Docs-only authority stub
+  docs/
+    pms-authority-boundaries.md
+  archive/
+    pms-legacy-frozen/   Archived duplicate snapshot; frozen, not authoritative
+  scripts/
+    guard-pms-authority.mjs
 ```
 
-Start development servers:
-```bash
-npm run dev -w packages/web
-npm run deploy -w packages/web
-```
+## Active Workspaces
 
-### Python PMS
+### `packages/web`
+- Static hotel website
+- Deploys on Cloudflare Workers
 
-Set up Python environment:
-```bash
-cd packages/pms
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-pip install -r requirements.txt
-python app.py
-```
+### `packages/api`
+- Lightweight API worker for brochure support
+- Must not become a second booking engine
 
-Access at: `http://localhost:5000`
+### `packages/shared`
+- Shared utilities for `web` and `api`
 
-## Dependencies Between Packages
+## Non-Workspace PMS Paths
 
-- `web` → imports from `shared`
-- `api` → imports from `shared`
-- `pms` → independent Python application
+### `packages/pms`
+This directory is intentionally docs-only. It exists to redirect contributors to `sandbox-pms` and to make the repo boundary obvious.
 
-## Deployment
+### `archive/pms-legacy-frozen`
+This is a frozen archive of an old duplicate PMS copy. It is intentionally excluded from workspaces, must not be deployed, and must not be used as a source of truth.
 
-- **Frontend**: `npm run deploy -w packages/web` → Cloudflare Workers
-- **API**: `npm run deploy -w packages/api` → Cloudflare Workers
-- **PMS**: Deploy Flask app to your server/platform
+## Guardrails
+
+- `npm run guard:pms-authority`
+  Verifies that `packages/pms` stays docs-only and that the root workspace list does not reintroduce `packages/pms`.
+- Root `dev`, `build`, and `deploy` scripts run the guard first.
 
 ## Development
 
-Each package is independent but shares common utilities. Work on any package:
-
 ```bash
-# Web frontend
-cd packages/web && npm run dev
-
-# PMS
-cd packages/pms && python app.py
-
-# Shared utilities edits reflect in all packages automatically
+npm install
+npm run dev
 ```
 
-## Git Workflow
-
-```bash
-# Make changes across packages
-git add .
-git commit -m "Feature description"
-git push
-```
-
-All changes to any package will be tracked and versioned together.
-
-## Configuration
-
-Create `.env` files in each package as needed:
-- `packages/web/.env` - Frontend config
-- `packages/api/.env` - API config
-- `packages/pms/.env` - PMS database and settings
-
-Refer to `.env.example` files in each package.
+For PMS work, use the separate `sandbox-pms` repo.
 
 ## Support
 
-See README files in each package folder for detailed documentation.
+- Brochure repo boundary note: [docs/pms-authority-boundaries.md](docs/pms-authority-boundaries.md)
+- Canonical PMS implementation: `nakalasbakalas/sandbox-pms`

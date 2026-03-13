@@ -6,12 +6,12 @@
   "scripts": {
     "dev": "wrangler dev",
     "deploy": "wrangler deploy",
-    "build": "wrangler build"
+    "build": "wrangler deploy --dry-run --outdir=dist"
   },
   "dependencies": {
     "@sandbox-hotel/shared": "*"
   },
   "devDependencies": {
-    "wrangler": "^3.92.0"
+    "wrangler": "^4.72.0"
   }
 }

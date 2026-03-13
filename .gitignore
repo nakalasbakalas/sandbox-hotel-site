@@ -3,7 +3,8 @@ node_modules/
 package-lock.json
 yarn.lock
 
-# Python (PMS)
+# Defensive ignores for accidental legacy Python artifacts.
+# The authoritative PMS lives in the separate sandbox-pms repo.
 __pycache__/
 *.py[cod]
 *$py.class

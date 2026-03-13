@@ -4,6 +4,7 @@
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-2B2SGREN1Z"></script>
+  <script src="/site-config.js"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
@@ -21,6 +22,7 @@
   <title>Sandbox Hotel | Nakhon Si Thammarat, Thailand</title>
   <meta name="description" id="metaDescription" content="Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.">
   <meta name="robots" content="index,follow">
+  <!-- Keep production canonical metadata pinned to the live www origin. Non-canonical preview hosts are guarded with X-Robots-Tag in the Worker. -->
   <link rel="canonical" href="https://www.sandboxhotel.com/">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/sandbox-logo-transparent.svg">
   <link rel="shortcut icon" href="assets/images/logo/sandbox-logo-transparent.svg">
@@ -61,9 +63,9 @@
       --champagne:#F0C39A;
       --champagne2:#FFD7B3;
 
-      --radius:22px;
-      --radius2:16px;
-      --max:1180px;
+      --radius:24px;
+      --radius2:18px;
+      --max:1240px;
 
       --tap:46px;
       --nav-h:56px;
@@ -77,12 +79,16 @@
       --btn-px:14px;
       --btn-radius:999px;
       --btn-border:1px;
-      --gutter: clamp(14px, 2.5vw, 26px);
-      --sectionY: clamp(16px, 2.8vw, 26px);
-      --gridGap: clamp(10px, 2vw, 16px);
+      --gutter: clamp(16px, 2.8vw, 34px);
+      --sectionY: clamp(28px, 5.2vw, 62px);
+      --gridGap: clamp(12px, 2.1vw, 22px);
+      --space-1: clamp(8px, 1.2vw, 12px);
+      --space-2: clamp(12px, 1.8vw, 18px);
+      --space-3: clamp(16px, 2.2vw, 24px);
+      --space-4: clamp(20px, 3vw, 32px);
 
       --bodySize: clamp(15px, 1.05vw, 16.5px);
-      --heroTitleSize: clamp(36px, 4.2vw, 56px);
+      --heroTitleSize: clamp(38px, 4.6vw, 68px);
 
       --focus: 0 0 0 4px rgba(183,106,43,.28);
 
@@ -178,9 +184,9 @@
     body{
       margin:0;
       min-height:100%;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      font-family: "Noto Sans Thai", "IBM Plex Sans Thai", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       font-size: var(--bodySize);
-      line-height:1.55;
+      line-height:1.6;
       color: var(--ink);
       overflow-x:hidden;
       background:
@@ -219,7 +225,8 @@
 
     /* ---------- Layout ---------- */
     .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--gutter);}
-    .section{margin: var(--sectionY) 0;}
+    .section{margin:0; padding-block: var(--sectionY);}
+    .section:first-of-type{padding-top: clamp(12px, 2.2vw, 20px);}
     .skipLink{
       position:absolute; left:-9999px; top:10px;
       background:var(--card); color:var(--ink2);
@@ -234,7 +241,7 @@
       border-radius: var(--radius);
       border:1px solid var(--line);
       background: var(--card);
-      box-shadow: var(--shadow2);
+      box-shadow: 0 18px 38px rgba(0,0,0,.28), var(--shadow2);
       overflow:hidden;
     }
     .card:before{
@@ -267,7 +274,7 @@
       border-color: rgba(240,195,154,.20);
     }
 
-    .pad{padding:18px}
+    .pad{padding:clamp(18px, 2.4vw, 28px)}
     @media (max-width:640px){ .pad{padding:16px} }
     .muted{color:var(--muted)}
     .fine{color:var(--muted2); font-size:12px}
@@ -276,10 +283,10 @@
     /* ---------- Header / Nav ---------- */
     header{
       position:sticky; top:0; z-index:80;
-      border-bottom:1px solid var(--line);
-      background: var(--uiGlass);
-      -webkit-backdrop-filter: blur(12px) saturate(150%);
-      backdrop-filter: blur(12px) saturate(150%);
+      border-bottom:1px solid color-mix(in srgb, var(--line) 75%, transparent);
+      background: color-mix(in srgb, var(--uiGlass) 86%, transparent);
+      -webkit-backdrop-filter: blur(14px) saturate(140%);
+      backdrop-filter: blur(14px) saturate(140%);
     }
     html[data-theme="light"] header{
       border-bottom-color: transparent;
@@ -314,12 +321,12 @@
     .nav{
       max-width:var(--max); margin:0 auto;
       min-height:var(--nav-h);
-      padding:var(--nav-pad-y) var(--nav-pad-x);
+      padding:12px var(--nav-pad-x);
       display:flex; align-items:center; justify-content:space-between; gap:var(--nav-gap);
       padding-top: calc(var(--nav-pad-y) + constant(safe-area-inset-top));
       padding-top: calc(var(--nav-pad-y) + var(--safe-top));
     }
-    .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
+    .brand{display:flex; align-items:center; gap:12px; text-decoration:none}
     .logo{
       width:38px; height:38px; border-radius: 12px;
       background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.14), rgba(10,11,14,.65));
@@ -351,13 +358,13 @@
     .brand .brandName{
       display:block;
       margin:0;
-      font-size:14px;
-      letter-spacing:.02em;
+      font-size:15px;
+      letter-spacing:.06em;
       text-transform:uppercase;
-      font-weight:950;
+      font-weight:900;
       color:var(--ink2);
     }
-    .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted); opacity:.85}
+    .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted); opacity:.95}
     .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
     .navGroup{
       position:relative;
@@ -401,8 +408,10 @@
       border:var(--btn-border) solid var(--line);
       background: rgba(255,255,255,.05);
       color: var(--ink2);
-      font-size:13px;
-      font-weight:900;
+      font-size:12px;
+      font-weight:800;
+      letter-spacing:.04em;
+      text-transform:uppercase;
       user-select:none;
       text-decoration:none;
       transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
@@ -502,8 +511,8 @@
       border:var(--btn-border) solid var(--line);
       background: rgba(255,255,255,.045);
       color:var(--ink2);
-      font-weight:900;
-      letter-spacing:.2px;
+      font-weight:800;
+      letter-spacing:.03em;
       text-decoration:none;
       position:relative;
       overflow:hidden;
@@ -604,7 +613,7 @@
     .flagItem{
       width:44px;
       height:44px;
-      border-radius:12px;
+      border-radius:14px;
       border:1px solid var(--line);
       background:transparent;
       display:grid;
@@ -720,17 +729,19 @@
     .head{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin:0 0 10px}
     .head h2{
       margin:0;
-      font-size:18px;
+      font-size:clamp(22px, 2.8vw, 34px);
       color:var(--ink2);
-      letter-spacing:.02em;
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      letter-spacing:.01em;
+      line-height:1.12;
+      font-family: "Noto Serif Thai", "Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
     }
-    .head p{margin:0; font-size:13px; color:var(--muted)}
+    .head p{margin:8px 0 0; max-width:62ch; font-size:14px; color:var(--muted)}
+    .head > div{min-width:0}
 
     /* ---------- Hero ---------- */
     .hero{
       position:relative;
-      min-height: min(78vh, 720px);
+      min-height: min(75vh, 760px);
       border-radius: var(--radius);
       border:1px solid var(--line);
       background: var(--heroImg) center / cover no-repeat, var(--bg1);
@@ -741,7 +752,9 @@
     .hero:before{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(10,11,14,.74) 0%, rgba(10,11,14,.34) 40%, rgba(10,11,14,0) 74%);
+      background:
+        linear-gradient(to top, rgba(8,9,12,.58) 0%, rgba(8,9,12,.2) 44%, rgba(8,9,12,0) 78%),
+        linear-gradient(95deg, rgba(8,9,12,.26) 0%, rgba(8,9,12,0) 52%);
       pointer-events:none;
     }
     .heroInner{
@@ -756,15 +769,15 @@
       text-align:left;
     }
     .heroPanel{
-      width:min(500px, 90vw);
-      margin:0 0 20px 20px;
-      border-radius: 16px;
-      border:1px solid rgba(255,255,255,.16);
-      background: color-mix(in srgb, var(--uiGlass2) 74%, transparent);
-      -webkit-backdrop-filter: blur(12px) saturate(150%);
-      backdrop-filter: blur(12px) saturate(150%);
-      box-shadow: 0 20px 55px rgba(0,0,0,.42);
-      padding: 14px 14px 12px;
+      width:min(560px, 92vw);
+      margin:0 0 var(--space-2) var(--space-2);
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.24);
+      background: color-mix(in srgb, var(--uiGlass2) 70%, transparent);
+      -webkit-backdrop-filter: blur(10px) saturate(130%);
+      backdrop-filter: blur(10px) saturate(130%);
+      box-shadow: 0 18px 46px rgba(0,0,0,.34);
+      padding: 18px 18px 14px;
     }
     @supports not (color: color-mix(in srgb, black 50%, white)){
       .heroPanel{background: rgba(10,12,16,.78)}
@@ -772,32 +785,32 @@
       .langMenu,
       .mobileMenu{border-color: var(--line)}
     }
-    .heroKicker{display:none}
     .heroTitle{
-      margin:6px 0 8px;
+      margin:4px 0 10px;
       font-size:var(--heroTitleSize);
-      line-height:1.05;
+      line-height:1.02;
       letter-spacing:-.01em;
       font-weight:1000;
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      font-family: "Noto Serif Thai", "Playfair Display", ui-serif, Georgia, "Times New Roman", Times, serif;
     }
     .heroSub{
-      margin:0 0 10px;
+      margin:0 0 12px;
       max-width:58ch;
-      color:rgba(255,255,255,.86);
-      font-size:16px;
+      color:rgba(255,255,255,.92);
+      font-size:17px;
+      text-wrap:pretty;
     }
     html[data-theme="light"] .heroSub{color:var(--muted)}
-    .heroCTA{margin-top:6px; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:8px}
+    .heroCTA{margin-top:8px; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:10px}
     .heroCTA .btn.primary{min-width:170px}
     .heroCTA #ctaLine{min-width:120px}
     .heroSecondary{
-      margin-top:8px;
+      margin-top:10px;
       display:flex;
       flex-wrap:wrap;
       align-items:center;
       gap:8px;
-      font-size:12.5px;
+      font-size:13px;
       color: color-mix(in srgb, var(--ink2) 74%, transparent);
     }
     .heroSecondary a{
@@ -807,7 +820,9 @@
       text-underline-offset: 2px;
     }
     .heroSecondary a:hover{opacity:1}
-    .heroSecondary .dot{opacity:.5}
+    .heroSecondary .dot{opacity:.54}
+    .heroDivider{background:rgba(255,255,255,.2); margin:12px 0 10px}
+    .heroFine{color:rgba(255,255,255,.88)}
     .hero .kw{padding:0; border:0; background:transparent}
 
     .nav :focus-visible{
@@ -816,43 +831,45 @@
     }
 
     @media (max-width:980px){
-      :root{ --heroTitleSize: clamp(30px, 8.6vw, 42px); }
+      :root{ --heroTitleSize: clamp(32px, 8.9vw, 48px); }
       .heroSub{font-size:15.5px}
     }
 
     /* ---------- Offers ---------- */
-    .offers{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:10px}
+    .offers{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:var(--space-2)}
     .offer{
-      padding:14px;
+      padding:16px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: rgba(255,255,255,.04);
     }
     html[data-theme="light"] .offer{background: rgba(0,0,0,.02)}
     .offer b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2); font-weight:1000}
-    .offer p{margin:8px 0 0; color:var(--muted); font-size:13px}
+    .offer p{margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
     @media (max-width:980px){ .offers{grid-template-columns:1fr} }
 
         /* ---------- Why choose us ---------- */
-    .whyGrid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:10px}
+    .whyGrid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:var(--space-2)}
     .whyItem{
-      padding:14px;
+      padding:16px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: rgba(255,255,255,.03);
     }
     html[data-theme="light"] .whyItem{background: rgba(0,0,0,.02)}
     .whyItem b{display:block; color:var(--ink2); font-weight:1000}
-    .whyItem p{margin:8px 0 0; color:var(--muted); font-size:13px}
+    .whyItem p{margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
+    .splitHead{display:flex; align-items:flex-end; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .splitHeadTitle{color:var(--ink2); font-weight:900; letter-spacing:.01em}
     @media (max-width:980px){ .whyGrid{grid-template-columns:1fr} }
 /* ---------- Booking form ---------- */
-    .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
-    .field{display:flex; flex-direction:column; gap:6px}
-    .field label{font-size:12px; color:var(--muted); font-weight:900}
+    .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:var(--space-2)}
+    .field{display:flex; flex-direction:column; gap:7px}
+    .field label{font-size:12px; color:var(--muted); font-weight:800; letter-spacing:.05em; text-transform:uppercase}
     .field input,.field select,.field textarea{
       width:100%;
-      padding:12px 12px;
-      border-radius:12px;
+      padding:13px 12px;
+      border-radius:14px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.03);
       color: var(--ink);
@@ -873,21 +890,21 @@
       background: rgba(255,255,255,.04);
     }
     .wide{grid-column:1/-1}
-    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:8px}
     .ctaPrimary{flex:1 1 100%; min-height:50px; font-size:16px; font-weight:1000}
     .ctaSecondaryActions{display:flex; gap:10px; flex-wrap:wrap}
     .ctaSecondaryActions .btn{opacity:.9}
     @media (max-width:980px){ .formGrid{grid-template-columns:1fr} }
 
         /* ---------- Quick date presets ---------- */
-    .quickDates{margin-top:10px; display:grid; gap:8px}
+    .quickDates{margin-top:12px; display:grid; gap:10px}
     .quickTop{display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap}
     .quickLabel{
       font-size:12px; color:var(--muted); font-weight:950;
       letter-spacing:.14em; text-transform:uppercase;
     }
     .quickChips{display:flex; gap:8px; flex-wrap:wrap; align-items:center}
-    .quickChips .chip{min-height:38px; padding:8px 10px}
+    .quickChips .chip{min-height:40px; padding:8px 11px}
     .quickDates .fine{margin:0}
     #staySummary{
       display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap:wrap;
@@ -1115,7 +1132,7 @@
     @media (max-width:980px){ #rooms .stack{grid-template-columns:1fr} }
 
     .roomCard{height:100%; min-width:0}
-    .roomCardInner{display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); align-items:stretch}
+    .roomCardInner{display:grid; grid-template-columns:minmax(0,.98fr) minmax(0,1.02fr); align-items:stretch}
     @media (max-width:980px){ .roomCardInner{grid-template-columns:1fr} }
 
     .roomMedia{position:relative; overflow:hidden; background: rgba(255,255,255,.02); border-right:1px solid var(--line)}
@@ -1138,12 +1155,12 @@
       border-radius:10px;
       border:1px solid var(--line);
     }
-    .roomBody{padding:16px; min-width:0}
+    .roomBody{padding:18px; min-width:0; display:flex; flex-direction:column}
     .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
-    .roomTop h4{margin:0; font-size:16px; letter-spacing:.2px; color:var(--ink2)}
+    .roomTop h4{margin:0; font-size:20px; letter-spacing:0; color:var(--ink2); line-height:1.2}
     .priceBox{min-width:128px; text-align:right}
     .priceBox b{display:block; font-size:12px; color:var(--muted); font-weight:950}
-    .priceBox strong{display:block; font-size:18px; color:var(--ink2); font-weight:1000; line-height:1.1; margin-top:2px}
+    .priceBox strong{display:block; font-size:20px; color:var(--ink2); font-weight:1000; line-height:1.1; margin-top:2px}
     .priceBox small{display:block; font-size:12px; color:var(--muted2); margin-top:2px}
     .tags{display:flex; flex-wrap:wrap; gap:8px; margin-top:10px}
     .tag{
@@ -1156,9 +1173,10 @@
       font-weight:900;
       font-size:12px;
     }
-    .bullets{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px}
+    .bullets{margin:12px 0 0; padding-left:18px; color:var(--muted); font-size:13px; line-height:1.55}
     .bullets li{margin:4px 0}
-    .roomActions{margin-top:12px; display:flex; flex-wrap:wrap; gap:10px}
+    .roomActions{margin-top:auto; padding-top:14px; display:flex; flex-wrap:wrap; gap:10px}
+    .roomsFine{margin-top:14px}
 
     /* ---------- Media placeholders (show until image loads) ---------- */
     .mediaWrap{position:relative; overflow:hidden}
@@ -1179,11 +1197,11 @@
     /* ==========================================================
        GALLERY — CAROUSEL ONLY (NO GRID)
        ========================================================== */
-    .galCarousel{margin-top:10px}
+    .galCarousel{margin-top:12px}
     .galViewport{
       position:relative;
       overflow:hidden;
-      border-radius: var(--radius2);
+      border-radius: 20px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.02);
       box-shadow: var(--shadow3);
@@ -1200,14 +1218,14 @@
     }
     .galSlide{flex:0 0 100%; min-width:0; margin:0}
     .galCap{
-      padding:12px 14px;
+      padding:14px 16px;
       border-top:1px solid var(--line);
       background: var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
     }
-    .galCap b{display:block; color:var(--ink2); font-size:14px; font-weight:1000; letter-spacing:.2px}
-    .galCap span{display:block; margin-top:4px; color:var(--muted); font-size:13px}
+    .galCap b{display:block; color:var(--ink2); font-size:16px; font-weight:900; letter-spacing:.01em}
+    .galCap span{display:block; margin-top:6px; color:var(--muted); font-size:14px}
 
     .galBar{
       margin-top:12px;
@@ -1218,29 +1236,29 @@
       flex-wrap:wrap;
     }
     .galCounter{
-      min-width:68px;
+      min-width:78px;
       text-align:center;
       padding:6px 10px;
       border-radius:999px;
       border:1px solid var(--line);
       background: rgba(255,255,255,.04);
       color: var(--ink2);
-      font-size:12px;
+      font-size:13px;
       font-weight:900;
       letter-spacing:.03em;
       font-variant-numeric: tabular-nums;
     }
     html[data-theme="light"] .galCounter{background: rgba(0,0,0,.025)}
     .galNavBtn{
-      min-width:48px;
-      height:44px;
+      min-width:54px;
+      height:46px;
       padding:0 12px;
       border-radius: 999px;
       border:1px solid rgba(240,195,154,.34);
       background: linear-gradient(180deg, rgba(209,139,80,.2), rgba(183,106,43,.14));
       color: var(--ink2);
       font-weight:1000;
-      font-size:13px;
+      font-size:14px;
       line-height:1;
       display:inline-flex; align-items:center; justify-content:center;
       gap:8px;
@@ -1279,7 +1297,7 @@
       border-color: rgba(240,195,154,.42);
       box-shadow: 0 10px 22px rgba(0,0,0,.18);
     }
-    .galHint{text-align:center; margin-top:6px}
+    .galHint{text-align:center; margin-top:10px}
     @media (max-width:640px){
       .galNavBtn{width:42px; height:42px; border-radius: 13px}
       .galNavBtn .txt{display:none}
@@ -1287,10 +1305,11 @@
 
     /* ---------- Reviews ---------- */
     .stars{letter-spacing:.08em; color: rgba(240,195,154,.95); font-weight:1000}
-    .reviews{display:grid; grid-template-columns: 1.25fr .75fr; gap:12px}
+    .reviews{display:grid; grid-template-columns: 1.25fr .75fr; gap:14px}
+    .reviewCol{display:grid; gap:12px}
     @media (max-width:980px){ .reviews{grid-template-columns:1fr} }
     .review{
-      padding:14px;
+      padding:16px;
       border-radius: var(--radius2);
       border:1px solid var(--line);
       background: rgba(255,255,255,.04);
@@ -1304,13 +1323,13 @@
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: rgba(255,255,255,.03);
-      padding:10px 12px;
+      padding:12px 14px;
       margin-top:10px
     }
     html[data-theme="light"] details{background: rgba(0,0,0,.015)}
     summary{cursor:pointer; font-weight:950; color:var(--ink2); list-style:none}
     summary::-webkit-details-marker{display:none}
-    details p{margin:10px 0 0; color:var(--muted); font-size:13px}
+    details p{margin:10px 0 0; color:var(--muted); font-size:13px; line-height:1.6}
     details[open]{background:rgba(255,255,255,.04)}
 
     /* ---------- Map Embed (reasonable size) ---------- */
@@ -1325,33 +1344,37 @@
     html[data-theme="light"] .mapWrap{background: rgba(0,0,0,.02)}
     .mapWrap iframe{
       width:100%;
-      height: clamp(260px, 32vw, 360px);
+      height: clamp(280px, 34vw, 380px);
       border:0;
       display:block;
     }
 
     /* ---------- Footer ---------- */
     footer{
-      margin-top:18px; padding-top:14px;
+      margin-top:20px; padding-top:16px;
       border-top:1px solid var(--line);
       color:var(--muted);
-      font-size:12px;
+      font-size:13px;
       display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
+    .actionRow{display:flex; gap:10px; flex-wrap:wrap}
+    .actionRow.end{justify-content:flex-end}
+    .locationAddress{margin:0; font-size:13px; line-height:1.7}
+    .contactInfoStack{margin-top:10px; line-height:1.8}
 
     /* ---------- Sticky booking bar ---------- */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
       z-index:90;
-      padding:10px 12px;
+      padding:10px 14px;
       padding-bottom: calc(10px + constant(safe-area-inset-bottom));
       padding-bottom: calc(10px + var(--safe-bottom));
       background: var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
       border-top:1px solid var(--line);
-      box-shadow: 0 -18px 48px rgba(0,0,0,.20);
+      box-shadow: 0 -14px 36px rgba(0,0,0,.22);
     }
     .stickyInner{
       max-width:var(--max); margin:0 auto;
@@ -1426,6 +1449,7 @@
         min-height:44px;
         padding:0 14px;
         border-radius:999px;
+        font-size:11px;
       }
       .navLinks .navGroup,
       .navLinks .langSwitch{ display:none !important; }
@@ -1437,7 +1461,7 @@
     html[data-device="phone"] .brand small{ display:none; }
 
     html[data-device="phone"] .hero{
-      min-height: clamp(480px, 82vh, 720px);
+      min-height: clamp(500px, 80vh, 700px);
       border-radius: 18px;
     }
     html[data-device="phone"] .heroInner{
@@ -1446,7 +1470,7 @@
     html[data-device="phone"] .heroPanel{
       margin:0;
       width:min(100%, 92vw);
-      padding: 14px 12px 10px;
+      padding: 15px 13px 12px;
     }
     html[data-device="phone"] .heroTitle{
       font-size: clamp(30px, 9.2vw, 38px);
@@ -1455,7 +1479,7 @@
     }
     html[data-device="phone"] .heroSub{
       font-size: 15px;
-      line-height: 1.55;
+      line-height: 1.6;
       max-width: 36ch;
       text-wrap: pretty;
     }
@@ -1463,7 +1487,7 @@
     html[data-device="phone"] .btn{
       min-height: 44px;
       padding: 0 14px;
-      font-size: 15px;
+      font-size: 14px;
       line-height: 1.2;
       white-space: normal;
       text-align: center;
@@ -1479,6 +1503,12 @@
     html[data-device="phone"] .heroCTA .btn.primary,
     html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
     html[data-device="phone"] .heroSecondary{font-size:12px; gap:7px; margin-top:7px}
+    html[data-device="phone"] .head h2{font-size:clamp(20px, 6.8vw, 28px)}
+    html[data-device="phone"] .head p{font-size:13px}
+    html[data-device="phone"] .roomTop{flex-direction:column; gap:8px}
+    html[data-device="phone"] .priceBox{text-align:left}
+    html[data-device="phone"] .ctaSecondaryActions{width:100%}
+    html[data-device="phone"] .ctaSecondaryActions .btn{flex:1 1 0}
 
     /* Language + theme controls: tighten */
     html[data-device="phone"] .langSwitch{ gap:6px !important; }
@@ -1502,7 +1532,7 @@
 
     /* Tablet: reduce some noise but keep context */
     html[data-device="tablet"] .hero{
-      min-height: clamp(520px, 75vh, 820px);
+      min-height: clamp(540px, 72vh, 800px);
     }
     html[data-device="tablet"] .stickyLeft span{ display:none; }
     html[data-device="tablet"] .heroCTA .btn.ghost{ display:none !important; }
@@ -1613,7 +1643,7 @@
       </a>
 
       <nav class="navLinks" aria-label="Primary">
-        <a class="chip primary" href="#book" data-i18n="nav_book">Book Now</a>
+        <a class="chip primary" href="#book" data-i18n="nav_book" data-booking-entry="1" data-booking-context="nav_book">Book Now</a>
 
         <div class="langSwitch hideMobile">
           <button id="langBtn" class="iconBtn" type="button"
@@ -1725,8 +1755,8 @@
               <a href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="cta_open_map">Open Map</a>
             </div>
 
-            <div class="sep" style="background:rgba(255,255,255,.16); margin:10px 0"></div>
-            <div class="fine" style="color:rgba(255,255,255,.86)" data-i18n-html="hero_fine">
+            <div class="sep heroDivider"></div>
+            <div class="fine heroFine" data-i18n-html="hero_fine">
               Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms
             </div>
           </div>
@@ -1742,7 +1772,7 @@
             <h2 data-i18n="offers_title">Click-to-Book Offers & Tips</h2>
             <p data-i18n="offers_sub">Direct-booking perks and quick tips to confirm faster.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="offers_btn">Get availability</a>
+          <a class="btn primary" href="#book" data-i18n="offers_btn" data-booking-entry="1" data-booking-context="offers_section">Get availability</a>
         </div>
 
         <div class="offers">
@@ -1764,8 +1794,8 @@
         <div class="sep"></div>
 
         <div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:10px; flex-wrap:wrap">
-            <b style="color:var(--ink2); font-weight:1000; letter-spacing:.2px" data-i18n="why_title">Why guests choose Sandbox</b>
+          <div class="splitHead">
+            <b class="splitHeadTitle" data-i18n="why_title">Why guests choose Sandbox</b>
             <span class="fine" data-i18n="why_sub">Simple, reliable, and easy to book direct.</span>
           </div>
 
@@ -1909,12 +1939,12 @@
             <h2 data-i18n="rooms_title">Rooms</h2>
             <p data-i18n-html="rooms_sub">Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="rooms_btn">Request Availability</a>
+          <a class="btn primary" href="#book" data-i18n="rooms_btn" data-booking-entry="1" data-booking-context="rooms_section">Request Availability</a>
         </div>
 
         <div id="roomsList" class="stack" aria-label="Room options"></div>
 
-        <p class="fine" style="margin-top:12px" data-i18n="rooms_fine">
+        <p class="fine roomsFine" data-i18n="rooms_fine">
           Rates can change by date and season. Message your dates for the fastest exact price.
         </p>
       </div>
@@ -1928,7 +1958,7 @@
             <h2 data-i18n="gallery_title">Gallery</h2>
             <p data-i18n="gallery_sub">Swipe through photos of the hotel and rooms.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
+          <a class="btn primary" href="#book" data-i18n="nav_book" data-booking-entry="1" data-booking-context="gallery_section">Book Now</a>
         </div>
 
         <div class="galCarousel" id="galCarousel" aria-roledescription="carousel" aria-label="Hotel photo carousel">
@@ -2064,7 +2094,7 @@
             <h2 data-i18n="reviews_title">Guest Reviews</h2>
             <p data-i18n="reviews_sub">Check location and the latest guest feedback on Google Maps before you book.</p>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+          <div class="actionRow end">
             <a class="btn" href="#" data-contact="maps-link" target="_blank" rel="noopener" data-i18n="btn_view_maps">View on Google Maps</a>
             <a class="btn" href="#" data-contact="facebook-link" target="_blank" rel="noopener" data-i18n="btn_view_facebook">Facebook</a>
           </div>
@@ -2082,7 +2112,7 @@
             <h2 data-i18n="faq_title">FAQ</h2>
             <p data-i18n="faq_sub">Common questions before booking.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="faq_btn">Send Request</a>
+          <a class="btn primary" href="#book" data-i18n="faq_btn" data-booking-entry="1" data-booking-context="faq_section">Send Request</a>
         </div>
 
         <div id="faqList"></div>
@@ -2100,7 +2130,7 @@
           </div>
         </div>
 
-        <p class="muted" style="margin:0;font-size:13px">
+        <p class="muted locationAddress">
           <b data-i18n="loc_address">Address:</b>
           642 4016, Tambon Pho Sadet, Mueang Nakhon Si Thammarat District, Nakhon Si Thammarat 80000<br>
           <span class="fine"><span data-i18n="loc_plus">Plus Code:</span> CWMG+QJ</span>
@@ -2108,8 +2138,8 @@
 
         <div class="sep"></div>
 
-        <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn primary" href="#book" data-i18n="nav_book">Book Now</a>
+        <div class="actionRow">
+          <a class="btn primary" href="#book" data-i18n="nav_book" data-booking-entry="1" data-booking-context="location_section">Book Now</a>
           <a class="btn hot" href="#" data-contact="phone-link" data-i18n="cta_call_number">Call</a>
           <a class="btn" id="contactLine" href="#" rel="nofollow">LINE</a>
           <a class="btn" id="contactWhatsApp" href="#" target="_blank" rel="noopener nofollow">WhatsApp</a>
@@ -2117,7 +2147,7 @@
           <a class="btn ghost" href="#" data-contact="facebook-link" target="_blank" rel="noopener">Facebook</a>
         </div>
 
-        <p class="fine" style="margin-top:10px; line-height:1.8">
+        <p class="fine contactInfoStack">
           ⏰: เปิดบริการทุกวัน 06:00-22:00<br>
           ☎️: <a href="#" data-contact="phone-link">Call</a><br>
           Line : sandbox.hotel<br>
@@ -2166,7 +2196,7 @@
         <span data-i18n="sticky_sub">Tap a button — fastest confirmation by message or call.</span>
       </div>
       <div class="stickyActions">
-        <a class="btn primary sm" href="#book" data-i18n="cta_request">Request Booking</a>
+        <a class="btn primary sm" href="#book" data-i18n="cta_request" data-booking-entry="1" data-booking-context="sticky_bar">Request Booking</a>
         <a class="btn hot sm" href="#" data-contact="phone-link" data-i18n="btn_call">Call</a>
         <a class="btn sm" id="stickyLine" href="#" rel="nofollow">LINE</a>
         <a class="btn sm" id="stickyWA" href="#" target="_blank" rel="noopener nofollow">WhatsApp</a>
@@ -2194,6 +2224,7 @@
       rooms: [
         {
           roomValue: "Standard Twin",
+          roomTypeCode: "TWN",
           titleKey: "room_standard_twin_title",
           selectKey: "opt_standard_twin",
           metaKey: "room_standard_twin_meta",
@@ -2208,6 +2239,7 @@
         },
         {
           roomValue: "Standard Double",
+          roomTypeCode: "DBL",
           titleKey: "room_standard_double_title",
           selectKey: "opt_standard_double",
           metaKey: "room_standard_double_meta",
@@ -2244,9 +2276,10 @@
         { q: "faq_q8", a: "faq_a8" }
       ]
     };
-    // PMS/CMS integration note:
+    // Brochure content integration note:
     // EDITABLE_CONTENT can later be loaded from fetch('/content.json'), a CMS API,
     // or a server-side store (Cloudflare KV/D1, Supabase, etc.) without changing UI code.
+    // Booking engine, live availability, and PMS workflows are authoritative in sandbox-pms.
     // =========================
 
     
@@ -2335,7 +2368,7 @@
       if(roomSelect){
         roomSelect.innerHTML = EDITABLE_CONTENT.rooms.map((room, idx)=>{
           const selected = idx === 0 ? " selected" : "";
-          return `<option value="${room.roomValue}" data-i18n="${room.selectKey}"${selected}>${room.roomValue}</option>`;
+          return `<option value="${room.roomValue}" data-room-type-code="${room.roomTypeCode}" data-i18n="${room.selectKey}"${selected}>${room.roomValue}</option>`;
         }).join("");
       }
 
@@ -2389,7 +2422,7 @@
                 </ul>
 
                 <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="${room.roomValue}" data-i18n="${room.ctaKey}"></a>
+                  <a class="btn primary" href="#book" data-room="${room.roomValue}" data-room-type-code="${room.roomTypeCode}" data-booking-entry="1" data-booking-context="room_card" data-i18n="${room.ctaKey}"></a>
                   <a class="btn hot" href="#" data-contact="phone-link" data-i18n="btn_call"></a>
                   <a class="btn" href="#gallery" data-i18n="btn_see_photos"></a>
                 </div>
@@ -2402,7 +2435,7 @@
       const reviewsList = document.getElementById("reviewsList");
       if(reviewsList){
         reviewsList.innerHTML = EDITABLE_CONTENT.reviewColumns.map((column)=> `
-          <div style="display:grid; gap:12px">
+          <div class="reviewCol">
             ${column.map((review)=> `
               <div class="review">
                 <b data-i18n-html="${review.titleKey}"></b>
@@ -2599,7 +2632,6 @@
         nav_faq: "คำถาม",
         nav_location: "ที่ตั้ง",
 
-        hero_kicker: '<span class="kw a">จองตรงกับโรงแรม</span> <span style="opacity:.9">•</span> <span class="kw">ยืนยันรวดเร็ว</span> <span style="opacity:.9">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
         hero_sub: 'ห้องกว้าง • Wi-Fi • ที่จอดรถ • ซักรีด • แอร์<br>ยืนยันเร็วที่สุด: โทรหรือ LINE',
         hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
 
@@ -2800,7 +2832,6 @@
         nav_faq: "FAQ",
         nav_location: "Location",
 
-        hero_kicker: '<span class="kw a">Direct booking</span> <span style="opacity:.9">•</span> <span class="kw">Fast confirmation</span> <span style="opacity:.9">•</span> <span class="kw hot">Click to book</span>',
         hero_sub: 'Spacious rooms • Wi‑Fi • Parking • Laundry • A/C<br>Fastest confirmation: call or LINE',
         hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms',
 
@@ -3001,7 +3032,6 @@
         nav_faq: "常见问题",
         nav_location: "位置",
 
-        hero_kicker: '<span class="kw a">酒店直订</span> <span style="opacity:.9">•</span> <span class="kw">快速确认</span> <span style="opacity:.9">•</span> <span class="kw hot">点击预订</span>',
         hero_sub: '宽敞客房 • Wi‑Fi • 停车 • 洗衣 • 空调<br>最快确认：电话或 LINE',
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
 
@@ -3253,6 +3283,7 @@
       if(tt && t("meta_title")) tt.setAttribute("content", t("meta_title"));
       const td = document.getElementById("twitterDescription");
       if(td && t("meta_desc")) td.setAttribute("content", t("meta_desc"));
+      syncBookingEntryPoints();
     }
     function initMobileMenu(){
       const menu = document.getElementById("mobileMenu");
@@ -3495,6 +3526,143 @@
       };
     }
 
+    const PMS_BOOKING_MAX_DIRECT_GUESTS = 3;
+    const PRESERVED_BOOKING_QUERY_KEYS = [
+      "utm_source",
+      "utm_medium",
+      "utm_campaign",
+      "utm_term",
+      "utm_content",
+      "gclid",
+      "fbclid",
+      "msclkid"
+    ];
+
+    function publicSiteConfig(){
+      return window.__SBX_PUBLIC_CONFIG__ || {};
+    }
+
+    function bookingEngineBaseUrl(){
+      const baseUrl = String(publicSiteConfig().BOOKING_ENGINE_URL || "").trim();
+      return baseUrl ? baseUrl.replace(/\/+$/, "") : "";
+    }
+
+    function hasLiveBookingEngine(){
+      return Boolean(bookingEngineBaseUrl());
+    }
+
+    function pmsLanguageCode(){
+      return CURRENT_LANG === "zh" ? "zh-Hans" : (CURRENT_LANG === "en" ? "en" : "th");
+    }
+
+    function currentCampaignParams(){
+      const currentParams = new URLSearchParams(window.location.search || "");
+      const preserved = new URLSearchParams();
+      PRESERVED_BOOKING_QUERY_KEYS.forEach((key)=>{
+        const value = currentParams.get(key);
+        if(value) preserved.set(key, value);
+      });
+      return preserved;
+    }
+
+    function roomConfigByValue(roomValue){
+      return EDITABLE_CONTENT.rooms.find((room)=> room.roomValue === roomValue || room.roomTypeCode === roomValue) || null;
+    }
+
+    function roomConfigFromElement(el){
+      if(!el) return null;
+      const roomTypeCode = String(el.getAttribute("data-room-type-code") || "").trim();
+      if(roomTypeCode){
+        return roomConfigByValue(roomTypeCode);
+      }
+      const roomValue = String(el.getAttribute("data-room") || "").trim();
+      return roomValue ? roomConfigByValue(roomValue) : null;
+    }
+
+    function safeDirectGuestCount(rawGuests){
+      const guests = Number.parseInt(String(rawGuests || ""), 10);
+      if(!Number.isFinite(guests) || guests < 1 || guests > PMS_BOOKING_MAX_DIRECT_GUESTS){
+        return null;
+      }
+      return guests;
+    }
+
+    function buildPmsAvailabilityUrl(options = {}){
+      const baseUrl = bookingEngineBaseUrl();
+      if(!baseUrl) return "";
+
+      const url = new URL("/availability", `${baseUrl}/`);
+      const params = new URLSearchParams();
+      params.set("lang", pmsLanguageCode());
+      params.set("source_page", "hotel_site");
+
+      const sourceContext = String(options.sourceContext || "").trim();
+      if(sourceContext) params.set("source_context", sourceContext);
+
+      const roomTypeCode = String(options.roomTypeCode || "").trim().toUpperCase();
+      if(roomTypeCode) params.set("room_type_code", roomTypeCode);
+
+      const checkin = String(options.checkin || "").trim();
+      const checkout = String(options.checkout || "").trim();
+      if(checkin) params.set("check_in", checkin);
+      if(checkout) params.set("check_out", checkout);
+
+      const guests = safeDirectGuestCount(options.guests);
+      if(guests){
+        params.set("adults", String(guests));
+        params.set("children", "0");
+      }
+
+      currentCampaignParams().forEach((value, key)=> params.set(key, value));
+      url.search = params.toString();
+      return url.toString();
+    }
+
+    function buildGenericBookingUrl(el){
+      const roomConfig = roomConfigFromElement(el);
+      return buildPmsAvailabilityUrl({
+        roomTypeCode: roomConfig ? roomConfig.roomTypeCode : "",
+        sourceContext: el?.getAttribute("data-booking-context") || resolveTrackLocation(el)
+      });
+    }
+
+    function buildBookingFormAvailabilityUrl(){
+      if(!hasLiveBookingEngine()) return "";
+      const formData = getFormData();
+      const guests = safeDirectGuestCount(formData.guests);
+      if(!guests || !formData.checkin || !formData.checkout) return "";
+      const roomConfig = roomConfigByValue(formData.room);
+      return buildPmsAvailabilityUrl({
+        checkin: formData.checkin,
+        checkout: formData.checkout,
+        guests,
+        roomTypeCode: roomConfig ? roomConfig.roomTypeCode : "",
+        sourceContext: "booking_form"
+      });
+    }
+
+    function syncBookingEntryPoints(){
+      const hasPms = hasLiveBookingEngine();
+      document.querySelectorAll("[data-booking-entry]").forEach((el)=>{
+        if(el.tagName !== "A") return;
+        const href = hasPms ? (buildGenericBookingUrl(el) || "#book") : "#book";
+        el.setAttribute("href", href);
+      });
+
+      const primarySubmit = document.querySelector("#bookingForm .ctaPrimary");
+      if(primarySubmit){
+        const pmsUrl = buildBookingFormAvailabilityUrl();
+        primarySubmit.textContent = pmsUrl
+          ? (t("nav_book") || "Book now")
+          : (t("btn_send_line") || "Send via LINE");
+        if(pmsUrl){
+          primarySubmit.setAttribute("formnovalidate", "formnovalidate");
+        } else {
+          primarySubmit.removeAttribute("formnovalidate");
+        }
+      }
+    }
+
     function scrollToBookingForm(roomType){
       const bookSection = document.getElementById("book");
       const firstInput = document.getElementById("checkin");
@@ -3506,6 +3674,7 @@
           firstInput.focus({preventScroll:true});
         }, 420);
       }
+      syncBookingEntryPoints();
     }
 
     function wireContactButtons(){
@@ -3540,6 +3709,13 @@
       const form = document.getElementById("bookingForm");
       form.addEventListener("submit",(e)=>{
         e.preventDefault();
+        const pmsUrl = buildBookingFormAvailabilityUrl();
+        if(pmsUrl){
+          track("booking_form_submit", buildTrackParams(form, "booking_engine", pmsUrl));
+          window.location.assign(pmsUrl);
+          return;
+        }
+        if(typeof form.reportValidity === "function" && !form.reportValidity()) return;
         track("booking_form_submit", buildTrackParams(form, "line", HOTEL_CONFIG.LINE_LINK));
         openLine(buildMessage(getFormData()));
       });
@@ -3549,18 +3725,23 @@
       });
       document.getElementById("sendEmail").addEventListener("click", ()=> openEmail(buildMessage(getFormData())));
 
-      document.querySelectorAll("[data-room]").forEach(el=>{
-        el.addEventListener("click", (e)=>{
-          e.preventDefault();
-          scrollToBookingForm(el.getAttribute("data-room"));
-        });
-      });
+      form.addEventListener("change", ()=> syncBookingEntryPoints());
+      form.addEventListener("input", ()=> syncBookingEntryPoints());
 
-      document.querySelectorAll('[data-i18n="nav_book"]').forEach(el=>{
+      document.querySelectorAll("[data-booking-entry]").forEach(el=>{
         el.addEventListener("click", (e)=>{
-          e.preventDefault();
-          track("book_now_click", buildTrackParams(el, "book_now", "#book"));
-          scrollToBookingForm();
+          const destination = buildGenericBookingUrl(el);
+          if(destination){
+            e.preventDefault();
+            track("book_now_click", buildTrackParams(el, "booking_engine", destination));
+            window.location.assign(destination);
+            return;
+          }
+          if((el.getAttribute("href") || "") === "#book"){
+            e.preventDefault();
+            track("book_now_click", buildTrackParams(el, "book_now", "#book"));
+            scrollToBookingForm(el.getAttribute("data-room"));
+          }
         });
       });
 
@@ -3569,6 +3750,8 @@
           track("click_to_call", buildTrackParams(el, "call", PHONE_LINK));
         });
       });
+
+      syncBookingEntryPoints();
     }
 
     // ---------- Carousel (gallery only) ----------

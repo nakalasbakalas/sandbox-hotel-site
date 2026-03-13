@@ -1,7 +1,7 @@
 {
   "name": "sandbox-hotel-monorepo",
   "version": "1.0.0",
-  "description": "Hotel site monorepo - Frontend, API, and Shared utilities",
+  "description": "Sandbox Hotel brochure repo - web, brochure API, and shared utilities. PMS authority lives in sandbox-pms.",
   "type": "module",
   "private": true,
   "workspaces": [
@@ -10,10 +10,12 @@
     "packages/shared"
   ],
   "scripts": {
-    "dev": "npm run dev -w packages/web",
-    "deploy": "npm run deploy -w packages/web",
-    "build": "npm run build -w packages/web",
-    "dev:all": "npm run dev --workspaces"
+    "guard:pms-authority": "node ./scripts/guard-pms-authority.mjs",
+    "dev": "npm run guard:pms-authority && npm run dev -w packages/web",
+    "deploy": "npm run guard:pms-authority && npm run deploy -w packages/web",
+    "build": "npm run guard:pms-authority && npm run build -w packages/web",
+    "dev:all": "npm run guard:pms-authority && npm run dev --workspaces",
+    "test:booking-links": "npm run guard:pms-authority && npm run test:booking-links -w packages/web"
   },
   "engines": {
     "node": ">=18.0.0"

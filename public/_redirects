@@ -1,3 +1,3 @@
-# Add path redirects here if needed later.
-# Example:
-# /old-page  /  301
+# Marketing-site redirects for booking and staff entry points are handled
+# in the Cloudflare Worker at src/index.js so they can use environment-specific
+# canonical origins. Keep this file for static-only redirects if needed later.
