@@ -12,6 +12,6 @@
     "@sandbox-hotel/shared": "*"
   },
   "devDependencies": {
-    "wrangler": "^3.92.0"
+    "wrangler": "^4.0.0"
   }
 }
