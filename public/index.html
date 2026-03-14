@@ -54,8 +54,8 @@
       --champagne:#F0C39A;
       --champagne2:#FFD7B3;
 
-      --radius:26px;
-      --radius2:18px;
+      --radius:20px;
+      --radius2:14px;
       --max:1200px;
 
       --tap:46px;
@@ -65,7 +65,7 @@
       --nav-gap:10px;
       --btn-h:42px;
       --btn-px:16px;
-      --btn-radius:14px;
+      --btn-radius:10px;
       --btn-border:1px;
       --gutter: clamp(16px, 2.8vw, 32px);
       --sectionY: clamp(22px, 4vw, 44px);
@@ -219,8 +219,8 @@
       position:relative;
       border-radius: var(--radius);
       border:1px solid var(--line);
-      background: color-mix(in oklab, var(--card) 92%, transparent);
-      box-shadow: var(--shadow2);
+      background: var(--card);
+      box-shadow: var(--shadow3);
       overflow:hidden;
     }
     .card:before{
@@ -228,29 +228,20 @@
       position:absolute; inset:0;
       border-radius:inherit;
       pointer-events:none;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
-      opacity:.45;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      opacity:.3;
     }
     html[data-theme="light"] .card:before{opacity:.35}
     .card.altA{
-      background:
-        radial-gradient(900px 320px at 18% 0%, rgba(183,106,43,.10), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,0) 60%),
-        var(--card);
-      border-color: color-mix(in oklab, var(--copper) 18%, var(--line));
+      background: var(--card);
+      border-color: color-mix(in oklab, var(--copper) 12%, var(--line));
     }
     .card.altB{
-      background:
-        radial-gradient(900px 320px at 82% 0%, rgba(255,255,255,.04), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,0) 60%),
-        var(--card);
+      background: var(--card);
     }
     .card.altHot{
-      background:
-        radial-gradient(900px 320px at 50% 0%, rgba(240,195,154,.10), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,0) 60%),
-        var(--card);
-      border-color: color-mix(in oklab, var(--champagne) 18%, var(--line));
+      background: var(--card);
+      border-color: color-mix(in oklab, var(--champagne) 12%, var(--line));
     }
 
     .pad{padding:24px}
@@ -776,13 +767,11 @@
       --border: var(--line);
       --text: var(--ink2);
       position: relative;
-      padding: clamp(24px, 3vw, 38px);
-      border-radius: 22px;
-      background:
-        radial-gradient(1200px 500px at 20% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
-        linear-gradient(180deg, color-mix(in oklab, var(--surface) 75%, transparent), color-mix(in oklab, var(--bg) 92%, transparent));
-      border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
-      box-shadow: 0 14px 34px color-mix(in oklab, black 30%, transparent);
+      padding: clamp(20px, 3vw, 32px);
+      border-radius: var(--radius);
+      background: var(--card);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow3);
     }
     #amenities h2, .amenities-section h2{
       font-size: clamp(22px, 2.2vw, 30px);
@@ -799,61 +788,33 @@
     }
     .amenities-grid{
       display: grid;
-      gap: 14px;
+      gap: 12px;
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
     @media (max-width: 980px){
       .amenities-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
     @media (max-width: 640px){
-      .amenities-grid{ grid-template-columns: 1fr; gap: 12px; }
+      .amenities-grid{ grid-template-columns: 1fr; gap: 10px; }
     }
     .amenity-card{
       position: relative;
       overflow: hidden;
-      border-radius: 18px;
-      padding: 20px 18px 18px;
-      background:
-        linear-gradient(180deg,
-          color-mix(in oklab, var(--surface) 72%, transparent),
-          color-mix(in oklab, var(--bg) 88%, transparent));
-      border: 1px solid color-mix(in oklab, var(--border) 78%, transparent);
-      box-shadow: 0 10px 20px color-mix(in oklab, black 24%, transparent);
-      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
-      text-align: center;
+      border-radius: var(--radius2);
+      padding: 16px;
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--line);
+      transition: transform .18s ease, border-color .18s ease;
       display:flex;
-      flex-direction:column;
-      align-items:center;
-      justify-content:flex-start;
-      height: 100%;
+      flex-direction:row;
+      align-items:flex-start;
+      gap:14px;
     }
-    .amenity-card::before{
-      content:"";
-      position:absolute;
-      inset:0;
-      background: linear-gradient(135deg,
-        color-mix(in oklab, var(--accent) 28%, transparent),
-        transparent 40%);
-      opacity: .55;
-      pointer-events:none;
-    }
-    .amenity-card::after{
-      content:"";
-      position:absolute;
-      left: 16px;
-      right: 16px;
-      bottom: 10px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, color-mix(in oklab, var(--accent) 55%, transparent), transparent);
-      opacity: .9;
-    }
+    .amenity-card::before, .amenity-card::after{display:none}
     @media (hover:hover){
       .amenity-card:hover{
-        transform: translateY(-3px);
-        border-color: color-mix(in oklab, var(--accent) 35%, var(--border));
-        box-shadow:
-          0 14px 34px color-mix(in oklab, black 55%, transparent),
-          inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+        transform: translateY(-2px);
+        border-color: color-mix(in oklab, var(--accent) 25%, var(--border));
       }
     }
     .amenity-card:focus-visible{
@@ -863,31 +824,24 @@
     .amenity-icon{
       position: relative;
       z-index: 1;
-      width: 54px;
-      height: 54px;
-      border-radius: 16px;
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
       display: grid;
       place-items: center;
-      margin: 0 auto 12px;
-      background:
-        radial-gradient(circle at 30% 20%,
-          color-mix(in oklab, var(--accent) 22%, transparent),
-          color-mix(in oklab, var(--surface) 72%, transparent) 55%);
-      border: 1px solid color-mix(in oklab, var(--accent) 22%, var(--border));
-      box-shadow:
-        0 10px 22px color-mix(in oklab, black 45%, transparent),
-        inset 0 1px 0 color-mix(in oklab, white 12%, transparent);
+      flex-shrink:0;
+      background: var(--softA);
+      border: 1px solid rgba(183,106,43,.18);
     }
     .amenity-icon .glyph{
       font-weight: 700;
       letter-spacing: .04em;
-      font-size: 14px;
-      color: color-mix(in oklab, var(--text) 92%, white);
-      opacity: .95;
+      font-size: 13px;
+      color: var(--ink2);
     }
     .amenity-card h3{
-      margin: 0 0 6px;
-      font-size: 15px;
+      margin: 0 0 2px;
+      font-size: 14px;
       letter-spacing: .01em;
       color: var(--ink2);
       position: relative;
@@ -895,11 +849,8 @@
     }
     .amenity-card p{
       margin: 0;
-      opacity: .82;
       font-size: 13px;
-      line-height: 1.55;
-      max-width: 34ch;
-      margin-inline: auto;
+      line-height: 1.45;
       color: var(--muted);
       position: relative;
       z-index: 1;
@@ -1501,48 +1452,158 @@
       </div>
     </section>
 
-    <!-- OFFERS -->
-    <section class="section" id="offers">
-      <div class="card altHot pad">
+    <!-- ROOMS -->
+    <section class="section" id="rooms">
+      <div class="card pad">
         <div class="head">
           <div>
-            <h2 data-i18n="offers_title">Click-to-Book Offers & Tips</h2>
-            <p data-i18n="offers_sub">Direct-booking perks and quick tips to confirm faster.</p>
+            <h2 data-i18n="rooms_title">Rooms</h2>
+            <p data-i18n-html="rooms_sub">Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.</p>
           </div>
-          <a class="textLink" href="#book" data-i18n="offers_btn" data-analytics="book-now">Get availability</a>
+          <a class="btn primary" href="#book" data-i18n="rooms_btn" data-analytics="book-now">Check Availability</a>
+        </div>
+
+        <div class="stack" aria-label="Room options">
+
+          <!-- Standard Twin -->
+          <article class="card roomCard">
+            <div class="roomCardInner">
+              <div class="roomMedia">
+                <div class="mediaWrap">
+                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin photo">
+                    <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom with two single beds" loading="lazy" decoding="async" width="800" height="520">
+                  </a>
+                  <div class="ph" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
+                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
+                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="roomSubMedia">
+                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
+                    <img src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom" loading="lazy" decoding="async" width="400" height="300">
+                  </a>
+                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
+                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
+                  </a>
+                </div>
+              </div>
+
+              <div class="roomBody">
+                <div class="roomTop">
+                  <div>
+                    <h4 data-i18n="room_standard_twin_title">Standard Twin</h4>
+                    <div class="fine" data-i18n-html="room_standard_twin_meta">2 Twin Beds • 28–32 m² • Guests 1–2</div>
+                  </div>
+                  <div class="priceBox">
+                    <span class="fine" data-i18n="price_rates_on_request">Rates on request</span>
+                  </div>
+                </div>
+
+                <ul class="bullets">
+                  <li data-i18n="bullet_large_room">Large room layout with work desk</li>
+                  <li data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</li>
+                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
+                </ul>
+
+                <div class="roomActions">
+                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now">Book Twin</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Standard Double -->
+          <article class="card roomCard">
+            <div class="roomCardInner">
+              <div class="roomMedia">
+                <div class="mediaWrap">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
+                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
+                  </a>
+                  <div class="ph" aria-hidden="true">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
+                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
+                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
+                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
+                    </svg>
+                  </div>
+                </div>
+
+                <div class="roomSubMedia">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
+                  </a>
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
+                  </a>
+                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
+                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
+                  </a>
+                </div>
+              </div>
+
+              <div class="roomBody">
+                <div class="roomTop">
+                  <div>
+                    <h4 data-i18n="room_standard_double_title">Standard Double</h4>
+                    <div class="fine" data-i18n-html="room_standard_double_meta">1 Double Bed • 28–32 m² • Guests 1–2</div>
+                  </div>
+                  <div class="priceBox">
+                    <span class="fine" data-i18n="price_rates_on_request">Rates on request</span>
+                  </div>
+                </div>
+
+                <ul class="bullets">
+                  <li data-i18n="bullet_comfort_double_bed">Comfortable double bed</li>
+                  <li data-i18n="bullet_great_for_couples">Great for couples or solo travelers</li>
+                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
+                </ul>
+
+                <div class="roomActions">
+                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now">Book Double</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+        </div>
+
+        <p class="fine" style="margin-top:12px" data-i18n="rooms_fine">
+          Rates can change by date and season. Message your dates for the fastest exact price.
+        </p>
+      </div>
+    </section>
+
+    <!-- OFFERS -->
+    <section class="section" id="offers">
+      <div class="card pad">
+        <div class="head">
+          <div>
+            <h2 data-i18n="offers_title">Why Book Direct</h2>
+            <p data-i18n="offers_sub">Simple booking with fast confirmation.</p>
+          </div>
+          <a class="textLink" href="#book" data-i18n="offers_btn" data-analytics="book-now">Check availability</a>
         </div>
 
         <div class="offers">
           <div class="offer">
-            <b data-i18n-html="offer1_title">Direct Booking Assist <span class="badge a">Fast Reply</span></b>
-            <p data-i18n="offer1_desc">Message your dates + room type and we’ll confirm availability quickly.</p>
+            <b data-i18n="offer1_title">Fast confirmation</b>
+            <p data-i18n="offer1_desc">Call or message your dates and room type.</p>
           </div>
           <div class="offer">
-            <b data-i18n-html="offer2_title">Long-Stay Support <span class="badge b">Ask</span></b>
-            <p data-i18n="offer2_desc">Staying 7+ nights? Ask about long-stay options (seasonal).</p>
+            <b data-i18n="offer2_title">Long-stay options</b>
+            <p data-i18n="offer2_desc">Ask about weekly or extended stays.</p>
           </div>
           <div class="offer">
-            <b data-i18n-html="offer3_title">Early Plan Advantage <span class="badge hot">Tip</span></b>
-            <p data-i18n="offer3_desc">Book earlier for best room availability on busy weekends.</p>
+            <b data-i18n="offer3_title">Direct support</b>
+            <p data-i18n="offer3_desc">Simple booking and local assistance.</p>
           </div>
         </div>
-      
-
-        <div class="sep"></div>
-
-        <div>
-          <div style="display:flex; align-items:flex-end; justify-content:space-between; gap:10px; flex-wrap:wrap">
-            <b style="color:var(--ink2); font-weight:1000; letter-spacing:.2px" data-i18n="why_title">Why guests choose Sandbox</b>
-            <span class="fine" data-i18n="why_sub">Simple, reliable, and easy to book direct.</span>
-          </div>
-
-          <div class="whyGrid" aria-label="Why choose Sandbox Hotel">
-            <div class="whyItem"><b data-i18n="why_1_t">Large rooms</b><p data-i18n="why_1_d">Comfortable space to rest or work.</p></div>
-            <div class="whyItem"><b data-i18n="why_2_t">Fast confirmation</b><p data-i18n="why_2_d">Call or message your dates and room type.</p></div>
-            <div class="whyItem"><b data-i18n="why_3_t">Essentials covered</b><p data-i18n="why_3_d">Wi‑Fi, AC, parking, laundry, and helpful service.</p></div>
-          </div>
-        </div>
-</div>
+      </div>
     </section>
 
     <!-- AMENITIES -->
@@ -1588,154 +1649,6 @@
       </div>
     </section>
 
-    <!-- ROOMS -->
-    <section class="section" id="rooms">
-      <div class="card altHot pad">
-        <div class="head">
-          <div>
-            <h2 data-i18n="rooms_title">Rooms</h2>
-            <p data-i18n-html="rooms_sub">Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.</p>
-          </div>
-          <a class="btn primary" href="#book" data-i18n="rooms_btn" data-analytics="book-now">Request Availability</a>
-        </div>
-
-        <div class="stack" aria-label="Room options">
-
-          <!-- Standard Twin -->
-          <article class="card roomCard">
-            <div class="roomCardInner">
-              <div class="roomMedia">
-                <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin photo">
-                    <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom with two single beds" loading="lazy" decoding="async" width="800" height="520">
-                  </a>
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
-                    <img src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                </div>
-              </div>
-
-              <div class="roomBody">
-                <div class="roomTop">
-                  <div>
-                    <h4 data-i18n="room_standard_twin_title">Standard Twin</h4>
-                    <div class="fine" data-i18n-html="room_standard_twin_meta"><span class="kw a">Best Value</span> • 2 Twin Beds • 28–32 m² • Guests 1–2</div>
-                  </div>
-                  <div class="priceBox">
-                    <b data-i18n="price_from">From</b>
-                    <strong data-i18n="price_ask">Ask</strong>
-                    <small data-i18n="price_today">today’s rate</small>
-                  </div>
-                </div>
-
-                <div class="tags">
-                  <span class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</span>
-                  <span class="tag" data-i18n="tag_28_32_m">28–32 m²</span>
-                  <span class="tag" data-i18n="tag_guests_1_2">Guests 1–2</span>
-                </div>
-
-                <ul class="bullets">
-                  <li data-i18n="bullet_large_room">Large room layout</li>
-                  <li data-i18n="bullet_desk">Work desk + chair</li>
-                  <li data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
-                </ul>
-
-                <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now">Book Standard Twin</a>
-                  <a class="btn hot" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-                  <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- Standard Double -->
-          <article class="card roomCard">
-            <div class="roomCardInner">
-              <div class="roomMedia">
-                <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
-                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
-                  </a>
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
-                </div>
-
-                <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                </div>
-              </div>
-
-              <div class="roomBody">
-                <div class="roomTop">
-                  <div>
-                    <h4 data-i18n="room_standard_double_title">Standard Double</h4>
-                    <div class="fine" data-i18n-html="room_standard_double_meta"><span class="kw a">Most Popular</span> • 1 Double Bed • 28–32 m² • Guests 1–2</div>
-                  </div>
-                  <div class="priceBox">
-                    <b data-i18n="price_from">From</b>
-                    <strong data-i18n="price_ask">Ask</strong>
-                    <small data-i18n="price_today">today’s rate</small>
-                  </div>
-                </div>
-
-                <div class="tags">
-                  <span class="tag" data-i18n="tag_1_double_bed">1 Double Bed</span>
-                  <span class="tag" data-i18n="tag_28_32_m">28–32 m²</span>
-                  <span class="tag" data-i18n="tag_guests_1_2">Guests 1–2</span>
-                </div>
-
-                <ul class="bullets">
-                  <li data-i18n="bullet_comfort_double_bed">Comfortable double bed</li>
-                  <li data-i18n="bullet_great_for_couples">Great for couples</li>
-                  <li data-i18n="bullet_fast_wifi">Fast Wi-Fi</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
-                </ul>
-
-                <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now">Book Standard Double</a>
-                  <a class="btn hot" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-                  <a class="btn" href="#gallery" data-i18n="btn_see_photos">See photos</a>
-                </div>
-              </div>
-            </div>
-          </article>
-
-        </div>
-
-        <p class="fine" style="margin-top:12px" data-i18n="rooms_fine">
-          Rates can change by date and season. Message your dates for the fastest exact price.
-        </p>
-      </div>
-    </section>
-
     <!-- GALLERY (CAROUSEL ONLY — NO GRID) -->
     <section class="section" id="gallery">
       <div class="card pad">
@@ -1744,7 +1657,6 @@
             <h2 data-i18n="gallery_title">Gallery</h2>
             <p data-i18n="gallery_sub">Swipe through photos of the hotel and rooms.</p>
           </div>
-          <a class="textLink" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
         </div>
 
         <div class="galCarousel" id="galCarousel" aria-roledescription="carousel" aria-label="Hotel photo carousel">
@@ -1986,9 +1898,9 @@
             </div>
 
             <div class="wide ctaRow">
-              <button class="btn primary" type="submit" data-i18n="btn_send_line">Send via LINE</button>
-              <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Send via WhatsApp</button>
-              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Send via Email</button>
+              <button class="btn primary" type="submit" data-i18n="btn_send_line">Book via LINE</button>
+              <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
+              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Book via Email</button>
               <span class="fine" id="formHint" data-i18n="form_hint">We’ll reply with availability and total price.</span>
             </div>
           </form>
@@ -2118,7 +2030,7 @@
         <span data-i18n="sticky_sub">Tap a button — fastest confirmation by message or call.</span>
       </div>
       <div class="stickyActions">
-        <a class="btn primary sm" href="#book" data-i18n="cta_request" data-analytics="book-now">Request Booking</a>
+        <a class="btn primary sm" href="#book" data-i18n="cta_request" data-analytics="book-now">Book Now</a>
         <a class="btn hot sm" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
         <a class="btn sm" id="stickyLine" href="#" rel="nofollow" data-analytics="line">LINE</a>
         <a class="btn sm" id="stickyWA" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
@@ -2298,18 +2210,18 @@
         hero_sub: 'ห้องกว้าง • Wi-Fi • ที่จอดรถ • ซักรีด • แอร์<br>ยืนยันเร็วที่สุด: โทรหรือ LINE',
         hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
 
-        cta_request: "ส่งคำขอจอง",
+        cta_request: "จองเลย",
         cta_call_number: "โทร: 088-578-3478",
         cta_open_map: "เปิดแผนที่",
 
-        offers_title: "ข้อเสนอ & ทิปส์สำหรับจองเร็ว",
-        offers_sub: "วิธีจองที่เร็วขึ้น พร้อมทิปส์สั้น ๆ เพื่อรับการยืนยันและราคารวมไวขึ้น",
+        offers_title: "ทำไมต้องจองตรง",
+        offers_sub: "จองง่าย ยืนยันไว",
         offers_btn: "เช็คห้องว่าง",
-        offer1_title: 'ช่วยจองตรง <span class="badge a">ตอบไว</span>',
+        offer1_title: 'ยืนยันไว',
         offer1_desc: "ส่งวันเข้าพัก + ประเภทห้อง แล้วเราจะตอบกลับพร้อมห้องว่างและราคารวม",
-        offer2_title: 'รองรับพักระยะยาว <span class="badge b">สอบถาม</span>',
+        offer2_title: 'พักระยะยาว',
         offer2_desc: "พัก 7 คืนขึ้นไป? สอบถามเรทรายสัปดาห์/รายเดือน (ขึ้นอยู่กับช่วงเวลา)",
-        offer3_title: 'วางแผนล่วงหน้า <span class="badge hot">ทิป</span>',
+        offer3_title: 'ติดต่อตรง',
         offer3_desc: "สุดสัปดาห์/วันหยุดมักเต็มเร็ว—จองล่วงหน้าเพื่อได้ห้องที่ต้องการ",
 
         book_title: "ส่งคำขอจองแบบรวดเร็ว",
@@ -2326,9 +2238,9 @@
         ph_name: "ชื่อของคุณ",
         ph_contact: "+66 … หรืออีเมล",
         ph_notes: "เวลาเข้าถึง, คำขอพิเศษ ฯลฯ",
-        btn_send_line: "ส่งผ่าน LINE",
-        btn_send_wa: "ส่งผ่าน WhatsApp",
-        btn_send_email: "ส่งทางอีเมล",
+        btn_send_line: "จองผ่าน LINE",
+        btn_send_wa: "จองผ่าน WhatsApp",
+        btn_send_email: "จองทางอีเมล",
         form_hint: "เราจะตอบกลับพร้อมห้องว่างและราคารวม",
 
         quick_label: "เลือกวันอย่างรวดเร็ว",
@@ -2378,7 +2290,7 @@
 
         rooms_title: "ห้องพัก",
         rooms_sub: 'แตะ <span class="kw hot">จอง</span> เพื่อเลือกประเภทห้องในแบบฟอร์ม',
-        rooms_btn: "ขอเช็คห้องว่าง",
+        rooms_btn: "เช็คห้องว่าง",
         rooms_fine: "ราคาอาจเปลี่ยนตามวันและฤดูกาล โปรดส่งวันเข้าพักเพื่อรับราคาที่แน่นอน",
 
         price_from: "เริ่มต้น",
@@ -2389,8 +2301,8 @@
 
         room_standard_twin_title: "Standard Twin (2 เตียงเดี่ยว)",
         room_standard_double_title: "Standard Double (เตียงใหญ่)",
-        room_standard_twin_btn: "จอง Standard Twin",
-        room_standard_double_btn: "จอง Standard Double",
+        room_standard_twin_btn: "จอง Twin",
+        room_standard_double_btn: "จอง Double",
         room_standard_twin_meta: '<span class="kw a">คุ้มสุด</span> • 2 เตียงเดี่ยว • 28–32 ม² • ผู้เข้าพัก 1–2',
         room_standard_double_meta: '<span class="kw a">ยอดนิยม</span> • 1 เตียงใหญ่ • 28–32 ม² • ผู้เข้าพัก 1–2',
 
@@ -2499,19 +2411,19 @@
         hero_sub: 'Spacious rooms • Wi‑Fi • Parking • Laundry • A/C<br>Fastest confirmation: call or LINE',
         hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms',
 
-        cta_request: "Request Booking",
+        cta_request: "Book Now",
         cta_call_number: "Call: 088-578-3478",
         cta_open_map: "Open Map",
 
-        offers_title: "Click-to-Book Offers & Tips",
-        offers_sub: "Quick ways to lock in your room and get a fast confirmed quote.",
-        offers_btn: "Get availability",
-        offer1_title: 'Direct Booking Assist <span class="badge a">Fast Reply</span>',
-        offer1_desc: "Message your dates + room type and we’ll confirm availability quickly.",
-        offer2_title: 'Long-Stay Support <span class="badge b">Ask</span>',
-        offer2_desc: "Staying 7+ nights? Ask about long-stay options (seasonal).",
-        offer3_title: 'Early Plan Advantage <span class="badge hot">Tip</span>',
-        offer3_desc: "Book earlier for best room availability on busy weekends.",
+        offers_title: "Why Book Direct",
+        offers_sub: "Simple booking with fast confirmation.",
+        offers_btn: "Check availability",
+        offer1_title: ‘Fast confirmation’,
+        offer1_desc: "Call or message your dates and room type.",
+        offer2_title: ‘Long-stay options’,
+        offer2_desc: "Ask about weekly or extended stays.",
+        offer3_title: ‘Direct support’,
+        offer3_desc: "Simple booking and local assistance.",
 
         book_title: "Quick Booking Request",
         book_sub: 'Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.',
@@ -2527,9 +2439,9 @@
         ph_name: "Your name",
         ph_contact: "+66 … or email",
         ph_notes: "Arrival time, special requests, etc.",
-        btn_send_line: "Send via LINE",
-        btn_send_wa: "Send via WhatsApp",
-        btn_send_email: "Send via Email",
+        btn_send_line: "Book via LINE",
+        btn_send_wa: "Book via WhatsApp",
+        btn_send_email: "Book via Email",
         form_hint: "We’ll reply with availability and total price.",
 
         quick_label: "Quick dates",
@@ -2579,7 +2491,7 @@
 
         rooms_title: "Rooms",
         rooms_sub: 'Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.',
-        rooms_btn: "Request Availability",
+        rooms_btn: "Check Availability",
         rooms_fine: "Rates can change by date and season. Message your dates for the fastest exact price.",
 
         price_from: "From",
@@ -2590,8 +2502,8 @@
 
         room_standard_twin_title: "Standard Twin",
         room_standard_double_title: "Standard Double",
-        room_standard_twin_btn: "Book Standard Twin",
-        room_standard_double_btn: "Book Standard Double",
+        room_standard_twin_btn: "Book Twin",
+        room_standard_double_btn: "Book Double",
         room_standard_twin_meta: '<span class="kw a">Best Value</span> • 2 Twin Beds • 28–32 m² • Guests 1–2',
         room_standard_double_meta: '<span class="kw a">Most Popular</span> • 1 Double Bed • 28–32 m² • Guests 1–2',
 
@@ -2700,18 +2612,18 @@
         hero_sub: '宽敞客房 • Wi‑Fi • 停车 • 洗衣 • 空调<br>最快确认：电话或 LINE',
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
 
-        cta_request: "发送预订请求",
+        cta_request: "立即预订",
         cta_call_number: "致电：088-578-3478",
         cta_open_map: "打开地图",
 
-        offers_title: "一键预订优惠与小贴士",
-        offers_sub: "更快锁定房间的小技巧，快速拿到确认与报价。",
+        offers_title: "为什么直订",
+        offers_sub: "简单预订，快速确认。",
         offers_btn: "查询空房",
-        offer1_title: '直订协助 <span class="badge a">快速回复</span>',
+        offer1_title: '快速确认',
         offer1_desc: "发送日期 + 房型，我们会尽快回复空房情况。",
-        offer2_title: '长住支持 <span class="badge b">咨询</span>',
+        offer2_title: '长住选项',
         offer2_desc: "入住 7 晚以上？可咨询周租/月租方案（季节性）。",
-        offer3_title: '提前预订更稳 <span class="badge hot">提示</span>',
+        offer3_title: '直接联系',
         offer3_desc: "周末/假期更紧张，建议提前预订以确保空房。",
 
         book_title: "快速预订请求",
@@ -2728,9 +2640,9 @@
         ph_name: "你的姓名",
         ph_contact: "+66… 或邮箱",
         ph_notes: "到达时间、特殊需求等",
-        btn_send_line: "通过LINE发送",
-        btn_send_wa: "通过WhatsApp发送",
-        btn_send_email: "通过邮箱发送",
+        btn_send_line: "通过LINE预订",
+        btn_send_wa: "通过WhatsApp预订",
+        btn_send_email: "通过邮箱预订",
         form_hint: "我们会回复空房与总价。",
 
         quick_label: "快捷日期",
@@ -2780,7 +2692,7 @@
 
         rooms_title: "房型",
         rooms_sub: '点击 <span class="kw hot">预订</span> 可在表单中预选房型。',
-        rooms_btn: "申请查询",
+        rooms_btn: "查看空房",
         rooms_fine: "房价会随日期与季节变化。发送日期可获得准确报价。",
 
         price_from: "起价",
@@ -2791,8 +2703,8 @@
 
         room_standard_twin_title: "标准双床房",
         room_standard_double_title: "标准大床房",
-        room_standard_twin_btn: "预订标准双床房",
-        room_standard_double_btn: "预订标准大床房",
+        room_standard_twin_btn: "预订双床房",
+        room_standard_double_btn: "预订大床房",
         room_standard_twin_meta: '<span class="kw a">超值之选</span> • 2 张单人床 • 28–32 ㎡ • 1–2 人',
         room_standard_double_meta: '<span class="kw a">最受欢迎</span> • 1 张大床 • 28–32 ㎡ • 1–2 人',
 
