@@ -1016,9 +1016,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-color: rgba(240,195,154,.42);
       box-shadow: 0 10px 22px rgba(0,0,0,.18);
     }
+    .galThumbs{
+      margin-top:14px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(84px, 1fr));
+      gap:10px;
+    }
+    .galThumb{
+      padding:0;
+      border-radius:12px;
+      border:1px solid var(--line);
+      background: rgba(255,255,255,.04);
+      overflow:hidden;
+      cursor:pointer;
+      transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
+    }
+    html[data-theme="light"] .galThumb{background: rgba(0,0,0,.02)}
+    .galThumb:hover{
+      transform: translateY(-1px);
+      box-shadow: var(--shadow3);
+    }
+    .galThumb:focus-visible{box-shadow: var(--focus)}
+    .galThumb[aria-current="true"]{
+      border-color: rgba(240,195,154,.42);
+      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+    }
+    .galThumb img{
+      display:block;
+      width:100%;
+      aspect-ratio:4/3;
+      object-fit:cover;
+    }
     .galHint{text-align:center; margin-top:6px}
     @media (max-width:640px){
       .galNavBtn{width:42px; height:42px; border-radius: 13px}
+      .galThumbs{grid-template-columns:repeat(3, minmax(0, 1fr))}
     }
 
     /* ---------- Reviews ---------- */
@@ -1494,8 +1526,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
                 <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
-                    <img src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom" loading="lazy" decoding="async" width="400" height="300">
+                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-2.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
+                    <img src="assets/images/rooms/twin-room-sandbox-2.png" alt="Standard Twin bedroom from another angle" loading="lazy" decoding="async" width="400" height="300">
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
                     <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
@@ -1784,6 +1816,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="galDots" id="galDots" aria-label="Photo selector"></div>
             <button class="galNavBtn" type="button" id="galNext" aria-label="Next photo">›</button>
           </div>
+          <div class="galThumbs" id="galThumbs" aria-label="Gallery thumbnails"></div>
 
           <div class="galHint fine" data-i18n="gal_swipe_hint">Swipe for more photos or use the arrows</div>
         </div>
@@ -2429,11 +2462,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offers_title: "Why Book Direct",
         offers_sub: "Simple booking with fast confirmation.",
         offers_btn: "Check availability",
-        offer1_title: ‘Fast confirmation’,
+        offer1_title: "Fast confirmation",
         offer1_desc: "Call or message your dates and room type.",
-        offer2_title: ‘Long-stay options’,
+        offer2_title: "Long-stay options",
         offer2_desc: "Ask about weekly or extended stays.",
-        offer3_title: ‘Direct support’,
+        offer3_title: "Direct support",
         offer3_desc: "Simple booking and local assistance.",
 
         book_title: "Quick Booking Request",
@@ -3081,6 +3114,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       const viewport = document.getElementById("galViewport");
       const track = document.getElementById("galTrack");
       const dotsWrap = document.getElementById("galDots");
+      const thumbsWrap = document.getElementById("galThumbs");
       const prevBtn = document.getElementById("galPrev");
       const nextBtn = document.getElementById("galNext");
       if(!carousel || !viewport || !track || !dotsWrap || !prevBtn || !nextBtn) return;
@@ -3104,6 +3138,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         dotsWrap.querySelectorAll(".galDot").forEach((b,bi)=>{
           b.setAttribute("aria-current", bi === idx ? "true" : "false");
         });
+        thumbsWrap?.querySelectorAll(".galThumb").forEach((b,bi)=>{
+          b.setAttribute("aria-current", bi === idx ? "true" : "false");
+        });
       }
 
       function buildDots(){
@@ -3116,6 +3153,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           b.setAttribute("aria-current", i === 0 ? "true" : "false");
           b.addEventListener("click", ()=>{ stop(); setIndex(i); start(); });
           dotsWrap.appendChild(b);
+        });
+      }
+
+      function buildThumbs(){
+        if(!thumbsWrap) return;
+        thumbsWrap.innerHTML = "";
+        slides.forEach((slide,i)=>{
+          const img = slide.querySelector(".mediaImg");
+          if(!img) return;
+          const b = document.createElement("button");
+          const thumbImg = document.createElement("img");
+          b.type = "button";
+          b.className = "galThumb";
+          b.setAttribute("aria-label", img.alt || `Photo ${i+1}`);
+          b.setAttribute("aria-current", i === 0 ? "true" : "false");
+          thumbImg.src = img.getAttribute("src") || "";
+          thumbImg.alt = "";
+          thumbImg.loading = "lazy";
+          thumbImg.decoding = "async";
+          thumbImg.width = 160;
+          thumbImg.height = 120;
+          b.appendChild(thumbImg);
+          b.addEventListener("click", ()=>{ stop(); setIndex(i); start(); });
+          thumbsWrap.appendChild(b);
         });
       }
 
@@ -3159,6 +3220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
 
       buildDots();
+      buildThumbs();
       setIndex(0);
       start();
     }
@@ -3342,4 +3404,3 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 </body>
 </html>
-
