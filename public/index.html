@@ -301,15 +301,47 @@
       color:var(--ink2);
     }
     .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted); opacity:.85}
-    .navLinks{display:flex; gap:6px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .navHamburger{
+      display:inline-flex; align-items:center; justify-content:center;
+      width:var(--btn-h); height:var(--btn-h);
+      border-radius:var(--btn-radius);
+      border:1px solid rgba(255,255,255,.12);
+      background:transparent;
+      color:var(--ink2);
+      cursor:pointer;
+      transition: background .14s ease, border-color .14s ease;
+    }
+    .navHamburger:hover{
+      background: rgba(255,255,255,.05);
+      border-color: rgba(255,255,255,.18);
+    }
+    html[data-theme="light"] .navHamburger{
+      border-color: rgba(0,0,0,.12);
+      color:var(--ink2);
+    }
+    html[data-theme="light"] .navHamburger:hover{
+      background: rgba(0,0,0,.04);
+    }
+    .navPanelDivider{
+      height:1px;
+      background:var(--line);
+      margin:4px 0;
+    }
+    .navPanelLang{
+      display:flex;
+      gap:6px;
+      padding:4px 0;
+    }
     .navGroup{
       position:relative;
     }
     .navGroup summary{
       list-style:none;
+      cursor:pointer;
     }
     .navGroup summary::-webkit-details-marker{display:none}
-    .navGroup summary .chip{pointer-events:none}
+    .navGroup summary .navHamburger{pointer-events:none}
     .navPanel{
       position:absolute;
       top:calc(100% + 8px);
@@ -406,6 +438,23 @@
       background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92) 55%, rgba(240,195,154,.86) 120%);
       box-shadow: 0 16px 32px rgba(0,0,0,.18), 0 14px 24px rgba(183,106,43,.10);
       text-shadow: 0 1px 0 rgba(0,0,0,.35);
+    }
+    .btn.secondary{
+      border:1px solid rgba(255,255,255,.18);
+      background: rgba(255,255,255,.05);
+      color:#fff;
+    }
+    .btn.secondary:hover{
+      background: rgba(255,255,255,.10);
+      border-color: rgba(255,255,255,.24);
+    }
+    html[data-theme="light"] .btn.secondary{
+      border-color: rgba(0,0,0,.18);
+      background: rgba(0,0,0,.03);
+      color:var(--ink2);
+    }
+    html[data-theme="light"] .btn.secondary:hover{
+      background: rgba(0,0,0,.06);
     }
     .btn.hot{
       border:none;
@@ -542,8 +591,8 @@
       content:"";
       position:absolute; inset:0;
       background:
-        linear-gradient(90deg, rgba(10,11,14,.72) 0%, rgba(10,11,14,.38) 42%, rgba(10,11,14,.08) 72%),
-        linear-gradient(to top, rgba(10,11,14,.68) 0%, rgba(10,11,14,.24) 42%, rgba(10,11,14,0) 75%);
+        linear-gradient(90deg, rgba(10,11,14,.58) 0%, rgba(10,11,14,.22) 40%, rgba(10,11,14,.04) 70%),
+        linear-gradient(to top, rgba(10,11,14,.52) 0%, rgba(10,11,14,.14) 38%, rgba(10,11,14,0) 70%);
       pointer-events:none;
     }
     .heroInner{
@@ -554,23 +603,23 @@
       display:flex;
       flex-direction:column;
       justify-content:flex-end;
-      padding: clamp(20px, 4vw, 36px);
+      align-items:flex-start;
+      padding: clamp(24px, 4vw, 40px);
       text-align:left;
     }
     .heroPanel{
-      width:min(590px, 92vw);
-      margin:0 0 30px 28px;
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(13,14,18,.68), rgba(13,14,18,.46));
-      -webkit-backdrop-filter: blur(14px) saturate(135%);
-      backdrop-filter: blur(14px) saturate(135%);
-      box-shadow: 0 20px 55px rgba(0,0,0,.30);
-      padding: 24px 24px 18px;
+      width:min(420px, 88vw);
+      margin:0 0 24px 0;
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.08);
+      background: rgba(13,14,18,.72);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      padding: 28px 28px 24px;
     }
     .heroKicker{display:none}
     .heroTitle{
-      margin:0 0 12px;
+      margin:0 0 10px;
       font-size:var(--heroTitleSize);
       line-height:.98;
       letter-spacing:-.04em;
@@ -579,40 +628,32 @@
       text-wrap:balance;
     }
     .heroSub{
-      margin:0 0 18px;
-      max-width:42ch;
-      color:rgba(255,255,255,.84);
-      font-size:17px;
+      margin:0 0 20px;
+      max-width:36ch;
+      color:rgba(255,255,255,.78);
+      font-size:16px;
+      line-height:1.5;
     }
-    .heroCTA{margin-top:8px; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:10px}
-    .heroCTA .btn.primary{min-width:170px}
-    .heroCTA #ctaLine{min-width:120px}
-    .heroCTA .btn.ghost,
-    .heroCTA .btn:not(.primary):not(#ctaLine){
-      min-height:34px;
-      padding:0 12px;
-      opacity:.92;
-    }
-    .heroTrust{
+    .heroCTA{margin-top:0; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:10px}
+    .heroCTA .btn{min-height:44px; font-size:14px}
+
+    /* Trust strip below hero */
+    .trustStrip{
       display:flex;
-      flex-wrap:wrap;
-      gap:8px;
-      margin-top:16px;
-    }
-    .heroTrustItem{
-      display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding:8px 12px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(255,255,255,.06);
-      color:rgba(255,255,255,.88);
-      font-size:12px;
-      font-weight:700;
-      letter-spacing:.01em;
+      justify-content:center;
+      flex-wrap:wrap;
+      gap:6px 12px;
+      padding:16px 0 0;
+      color:var(--muted);
+      font-size:13px;
+      font-weight:600;
+      letter-spacing:.02em;
     }
-    .hero .kw{padding:0; border:0; background:transparent}
+    .trustStrip span[aria-hidden]{
+      color:var(--muted2);
+      opacity:.5;
+    }
 
     .nav :focus-visible{
       outline:2px solid var(--copper2);
@@ -621,7 +662,7 @@
 
     @media (max-width:980px){
       :root{ --heroTitleSize: clamp(30px, 8.6vw, 42px); }
-      .heroSub{font-size:15.5px}
+      .heroSub{font-size:15px}
     }
 
     /* ---------- Offers ---------- */
@@ -1124,7 +1165,7 @@
       display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
     }
 
-    /* ---------- Sticky booking bar ---------- */
+    /* ---------- Sticky booking bar (mobile only) ---------- */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
@@ -1136,7 +1177,9 @@
       backdrop-filter: blur(10px) saturate(140%);
       border-top:1px solid var(--line);
       box-shadow: 0 -18px 48px rgba(0,0,0,.20);
+      display:none;
     }
+    html[data-compact="true"] .sticky{display:block}
     .stickyInner{
       max-width:var(--max); margin:0 auto;
       display:flex; align-items:center; justify-content:space-between; gap:10px;
@@ -1173,10 +1216,7 @@
       padding-bottom: calc(96px + env(safe-area-inset-bottom));
     }
 
-    /* Mobile/Tablet header: show ONLY brand + Book Now (collapse everything else) */
-    html[data-compact="true"] .navLinks .navGroup{ display:none !important; }
-    html[data-device="phone"] .navLinks .chip:not(.primary),
-    html[data-device="tablet"] .navLinks .chip:not(.primary){ display:none !important; }
+    /* Mobile/Tablet header: show ONLY brand + Book Now + hamburger */
     html[data-compact="true"] .navLinks{ gap:8px; }
     html[data-compact="true"] .navLinks .chip.primary{
       min-height:40px;
@@ -1202,7 +1242,7 @@
     html[data-device="phone"] .heroPanel{
       margin:0;
       width:min(100%, 92vw);
-      padding: 16px 14px 12px;
+      padding: 20px 18px 16px;
     }
     html[data-device="phone"] .heroTitle{
       font-size: clamp(30px, 9.2vw, 38px);
@@ -1210,19 +1250,9 @@
       text-wrap: balance;
     }
     html[data-device="phone"] .heroSub{
-      font-size: 15px;
-      line-height: 1.55;
-      max-width: 36ch;
-      text-wrap: pretty;
-    }
-    html[data-device="phone"] .heroTrust{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:8px;
-    }
-    html[data-device="phone"] .heroTrustItem{
-      justify-content:center;
-      text-align:center;
+      font-size: 14.5px;
+      line-height: 1.5;
+      max-width: 32ch;
     }
 
     html[data-device="phone"] .btn{
@@ -1399,31 +1429,11 @@
       <nav class="navLinks" aria-label="Primary">
         <a class="chip primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
 
-        <div class="langSwitch hideMobile">
-          <button id="langBtn" class="iconBtn" type="button"
-                  aria-label="Language"
-                  aria-haspopup="menu"
-                  aria-expanded="false"
-                  aria-controls="langMenu">
-            <span id="currentFlag" aria-hidden="true">🇹🇭</span>
-          </button>
-
-          <div id="langMenu" class="langMenu" role="menu" aria-label="Language menu" hidden>
-            <button type="button" role="menuitem" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
-              <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
-            </button>
-            <button type="button" role="menuitem" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
-              <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
-            </button>
-            <button type="button" role="menuitem" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
-              <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
-            </button>
-          </div>
-        </div>
-
-        <details class="navGroup hideMobile">
+        <details class="navGroup">
           <summary>
-            <span class="chip">☰ Explore</span>
+            <button class="navHamburger" type="button" aria-label="Menu">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+            </button>
           </summary>
           <div class="navPanel" role="group" aria-label="Site navigation">
             <a class="chip" href="#rooms" data-i18n="nav_rooms">Rooms</a>
@@ -1434,7 +1444,21 @@
             <a class="chip" href="#faq" data-i18n="nav_faq">FAQ</a>
             <a class="chip" href="#location" data-i18n="nav_location">Location</a>
 
-            <!-- Theme toggle: System → Dark → Light -->
+            <div class="navPanelDivider"></div>
+
+            <div class="navPanelLang">
+              <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
+                <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+              </button>
+              <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
+                <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
+              </button>
+              <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
+                <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
+              </button>
+            </div>
+
+            <!-- Theme toggle -->
             <button class="chip" id="themeToggle" type="button" aria-label="Theme" title="Theme">
               <span id="themeIcon" aria-hidden="true">🖥️</span>
               <span id="themeLabel">System</span>
@@ -1454,30 +1478,26 @@
         <div class="heroInner">
           <div class="heroPanel">
             <h1 class="heroTitle">Sandbox Hotel</h1>
-
-            <p class="heroSub" data-i18n-html="hero_sub">
-              ห้องกว้าง • Wi-Fi • ที่จอดรถ • ซักรีด • แอร์<br>
-              ยืนยันเร็วที่สุด: โทรหรือ LINE
-            </p>
+            <p class="heroSub" data-i18n="hero_sub_short">Large, quiet rooms in Nakhon Si Thammarat</p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
-              <a class="btn hot" id="ctaLine" href="#" rel="nofollow" data-analytics="line">LINE</a>
-              <a class="btn" id="ctaWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
-              <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Open Map</a>
-            </div>
-
-            <div class="heroTrust" aria-label="Booking highlights">
-              <span class="heroTrustItem">Fast direct reply</span>
-              <span class="heroTrustItem">Check-in 14:00 / Check-out 11:00</span>
-              <span class="heroTrustItem">Quiet rooms available</span>
-            </div>
-
-            <div class="fine" style="margin-top:14px; color:rgba(255,255,255,.80)" data-i18n-html="hero_fine">
-              Passport/ID required for check-in
+              <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Book Now</a>
+              <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="trustStrip" aria-label="Hotel highlights">
+        <span>Large rooms</span>
+        <span aria-hidden="true">·</span>
+        <span>Wi-Fi</span>
+        <span aria-hidden="true">·</span>
+        <span>Parking</span>
+        <span aria-hidden="true">·</span>
+        <span>Laundry</span>
+        <span aria-hidden="true">·</span>
+        <span>Check-in 14:00</span>
       </div>
     </section>
 
