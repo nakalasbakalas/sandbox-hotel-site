@@ -262,10 +262,10 @@
     /* ---------- Header / Nav ---------- */
     header{
       position:sticky; top:0; z-index:80;
-      border-bottom:1px solid var(--line);
-      background: var(--uiGlass);
-      -webkit-backdrop-filter: blur(16px) saturate(140%);
-      backdrop-filter: blur(16px) saturate(140%);
+      border-bottom:1px solid rgba(255,255,255,.1);
+      background: rgba(10,11,14,.92);
+      -webkit-backdrop-filter: blur(8px);
+      backdrop-filter: blur(8px);
     }
     .nav{
       max-width:var(--max); margin:0 auto;
@@ -276,7 +276,7 @@
     }
     .brand{display:flex; align-items:center; gap:10px; text-decoration:none}
     .logo{
-      width:38px; height:38px; border-radius: 12px;
+      width:48px; height:48px; border-radius: 12px;
       background: radial-gradient(circle at 28% 22%, rgba(255,255,255,.14), rgba(10,11,14,.65));
       border:1px solid rgba(240,195,154,.34);
       box-shadow: 0 16px 34px rgba(0,0,0,.25), 0 14px 26px rgba(183,106,43,.22);
@@ -301,7 +301,7 @@
       color:var(--ink2);
     }
     .brand small{display:block; margin-top:2px; font-size:12px; color:var(--muted); opacity:.85}
-    .navLinks{display:flex; gap:8px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .navLinks{display:flex; gap:6px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
     .navGroup{
       position:relative;
     }
@@ -339,9 +339,9 @@
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
       min-height:var(--btn-h);
       padding:0 var(--btn-px);
-      border-radius:999px;
-      border:var(--btn-border) solid var(--line);
-      background: rgba(255,255,255,.035);
+      border-radius:var(--btn-radius);
+      border:1px solid rgba(255,255,255,.15);
+      background: rgba(255,255,255,.03);
       color: var(--ink2);
       font-size:13px;
       font-weight:800;
@@ -352,8 +352,9 @@
     }
     .chip:hover{
       transform: translateY(-1px);
-      box-shadow: var(--shadow3);
-      background: rgba(255,255,255,.08);
+      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.2);
     }
     html[data-theme="light"] .chip{background: rgba(0,0,0,.02)}
     html[data-theme="light"] .chip:hover{background: rgba(0,0,0,.04)}
@@ -1188,7 +1189,7 @@
       min-height:56px;
       padding-top: calc(8px + env(safe-area-inset-top));
     }
-    html[data-device="phone"] .logo{ width:38px; height:38px; border-radius:12px; padding:3px; }
+    html[data-device="phone"] .logo{ width:42px; height:42px; border-radius:12px; padding:3px; }
     html[data-device="phone"] .brand small{ display:none; }
 
     html[data-device="phone"] .hero{
