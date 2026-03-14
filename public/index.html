@@ -33,6 +33,9 @@
 
   <!-- Preload hero -->
   <link rel="preload" as="image" href="images/Sandbox-Hotel-Hero-Banner.png" fetchpriority="high">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
   <script defer src="assets/js/analytics.js"></script>
 
   <style>
@@ -51,25 +54,28 @@
       --champagne:#F0C39A;
       --champagne2:#FFD7B3;
 
-      --radius:22px;
-      --radius2:16px;
-      --max:1180px;
+      --radius:26px;
+      --radius2:18px;
+      --max:1200px;
 
       --tap:46px;
-      --nav-h:56px;
-      --nav-pad-y:10px;
-      --nav-pad-x:14px;
+      --nav-h:60px;
+      --nav-pad-y:12px;
+      --nav-pad-x:18px;
       --nav-gap:10px;
-      --btn-h:38px;
-      --btn-px:14px;
-      --btn-radius:999px;
+      --btn-h:42px;
+      --btn-px:16px;
+      --btn-radius:14px;
       --btn-border:1px;
-      --gutter: clamp(14px, 2.5vw, 26px);
-      --sectionY: clamp(16px, 2.8vw, 26px);
-      --gridGap: clamp(10px, 2vw, 16px);
+      --gutter: clamp(16px, 2.8vw, 32px);
+      --sectionY: clamp(22px, 4vw, 44px);
+      --gridGap: clamp(14px, 2.2vw, 22px);
 
-      --bodySize: clamp(15px, 1.05vw, 16.5px);
-      --heroTitleSize: clamp(36px, 4.2vw, 56px);
+      --bodySize: clamp(15.5px, 1.05vw, 17px);
+      --heroTitleSize: clamp(40px, 5.2vw, 72px);
+
+      --sans:"Manrope", "Segoe UI", sans-serif;
+      --display:"Fraunces", Georgia, serif;
 
       --focus: 0 0 0 4px rgba(183,106,43,.28);
 
@@ -80,71 +86,71 @@
     /* ---------- Theme tokens ---------- */
     html{color-scheme: light dark;}
     html[data-theme="dark"]{
-      --bg0:#050507;
-      --bg1:#0B0C0F;
-      --paper:#090A0D;
-      --card:#111218;
-      --card2:#161822;
+      --bg0:#0A0B0D;
+      --bg1:#111318;
+      --paper:#0E1014;
+      --card:#15181C;
+      --card2:#1B1F25;
 
-      --ink:#F3F1ED;
+      --ink:#F3EFE7;
       --ink2:#FFFFFF;
-      --muted:#CEC7BC;
-      --muted2:#ADA498;
-      --line:rgba(255,255,255,.10);
-
-      --softA:rgba(183,106,43,.18);
-      --softB:rgba(209,139,80,.14);
-      --softHot:rgba(240,195,154,.16);
-
-      --shadow:0 22px 70px rgba(0,0,0,.62);
-      --shadow2:0 14px 38px rgba(0,0,0,.48);
-      --shadow3:0 10px 24px rgba(0,0,0,.38);
-
-      --uiGlass: rgba(9,10,13,.72);
-      --uiGlass2: rgba(9,10,13,.78);
-    }
-    html[data-theme="light"]{
-      --bg0:#F3F4F6;
-      --bg1:#FFFFFF;
-      --paper:#F8FAFC;
-      --card:#FFFFFF;
-      --card2:#FFFFFF;
-
-      --ink:#111827;
-      --ink2:#0B0C0F;
-      --muted:#4B5563;
-      --muted2:#6B7280;
-      --line:rgba(17,24,39,.12);
+      --muted:#CDC4B7;
+      --muted2:#AAA092;
+      --line:rgba(255,255,255,.08);
 
       --softA:rgba(183,106,43,.14);
-      --softB:rgba(209,139,80,.12);
+      --softB:rgba(209,139,80,.10);
+      --softHot:rgba(240,195,154,.12);
+
+      --shadow:0 28px 80px rgba(0,0,0,.46);
+      --shadow2:0 18px 42px rgba(0,0,0,.32);
+      --shadow3:0 10px 24px rgba(0,0,0,.22);
+
+      --uiGlass: rgba(14,16,20,.72);
+      --uiGlass2: rgba(17,19,24,.82);
+    }
+    html[data-theme="light"]{
+      --bg0:#EDE8E1;
+      --bg1:#F6F1EA;
+      --paper:#FCFAF6;
+      --card:#FFFFFF;
+      --card2:#F8F4EE;
+
+      --ink:#1B1B1B;
+      --ink2:#111111;
+      --muted:#615B52;
+      --muted2:#7A7268;
+      --line:rgba(32,25,18,.10);
+
+      --softA:rgba(183,106,43,.11);
+      --softB:rgba(209,139,80,.08);
       --softHot:rgba(240,195,154,.16);
 
-      --shadow:0 20px 50px rgba(15,23,42,.10);
-      --shadow2:0 14px 28px rgba(15,23,42,.10);
-      --shadow3:0 10px 18px rgba(15,23,42,.10);
+      --shadow:0 24px 56px rgba(59,43,22,.10);
+      --shadow2:0 16px 28px rgba(59,43,22,.08);
+      --shadow3:0 8px 18px rgba(59,43,22,.06);
 
-      --uiGlass: rgba(255,255,255,.82);
-      --uiGlass2: rgba(255,255,255,.86);
+      --uiGlass: rgba(252,250,246,.80);
+      --uiGlass2: rgba(255,255,255,.88);
     }
 
     /* System theme uses OS preference */
     @media (prefers-color-scheme: dark){
       html[data-theme="system"]{ color-scheme: dark;
-        --bg0:#050507; --bg1:#0B0C0F; --paper:#090A0D; --card:#111218; --card2:#161822;
-        --ink:#F3F1ED; --ink2:#FFFFFF; --muted:#CEC7BC; --muted2:#ADA498; --line:rgba(255,255,255,.10);
-        --softA:rgba(183,106,43,.18); --softB:rgba(209,139,80,.14); --softHot:rgba(240,195,154,.16);
-        --shadow:0 22px 70px rgba(0,0,0,.62); --shadow2:0 14px 38px rgba(0,0,0,.48); --shadow3:0 10px 24px rgba(0,0,0,.38);
-        --uiGlass: rgba(9,10,13,.72); --uiGlass2: rgba(9,10,13,.78);
+        --bg0:#0A0B0D; --bg1:#111318; --paper:#0E1014; --card:#15181C; --card2:#1B1F25;
+        --ink:#F3EFE7; --ink2:#FFFFFF; --muted:#CDC4B7; --muted2:#AAA092; --line:rgba(255,255,255,.08);
+        --softA:rgba(183,106,43,.14); --softB:rgba(209,139,80,.10); --softHot:rgba(240,195,154,.12);
+        --shadow:0 28px 80px rgba(0,0,0,.46); --shadow2:0 18px 42px rgba(0,0,0,.32); --shadow3:0 10px 24px rgba(0,0,0,.22);
+        --uiGlass: rgba(14,16,20,.72); --uiGlass2: rgba(17,19,24,.82);
       }
     }
     @media (prefers-color-scheme: light){
       html[data-theme="system"]{ color-scheme: light;
-        --bg0:#F3F4F6; --bg1:#FFFFFF; --paper:#F8FAFC; --card:#FFFFFF; --card2:#FFFFFF;
-        --ink:#111827; --ink2:#0B0C0F; --muted:#4B5563; --muted2:#6B7280; --line:rgba(17,24,39,.12);
-        --softA:rgba(183,106,43,.14); --softB:rgba(209,139,80,.12); --softHot:rgba(240,195,154,.16);
-        --shadow:0 20px 50px rgba(15,23,42,.10); --shadow2:0 14px 28px rgba(15,23,42,.10); --shadow3:0 10px 18px rgba(15,23,42,.10);
-        --uiGlass: rgba(255,255,255,.82); --uiGlass2: rgba(255,255,255,.86);
+        --bg0:#EDE8E1; --bg1:#F6F1EA; --paper:#FCFAF6; --card:#FFFFFF; --card2:#F8F4EE;
+        --ink:#1B1B1B; --ink2:#111111; --muted:#615B52; --muted2:#7A7268; --line:rgba(32,25,18,.10);
+        --softA:rgba(183,106,43,.11); --softB:rgba(209,139,80,.08); --softHot:rgba(240,195,154,.16);
+        --shadow:0 24px 56px rgba(59,43,22,.10); --shadow2:0 16px 28px rgba(59,43,22,.08); --shadow3:0 8px 18px rgba(59,43,22,.06);
+        --uiGlass: rgba(252,250,246,.80); --uiGlass2: rgba(255,255,255,.88);
       }
     }
 
@@ -159,16 +165,15 @@
     body{
       margin:0;
       min-height:100%;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Liberation Sans", sans-serif;
+      font-family: var(--sans);
       font-size: var(--bodySize);
-      line-height:1.45;
+      line-height:1.62;
       color: var(--ink);
       overflow-x:hidden;
       background:
-        radial-gradient(1400px 720px at 12% -12%, rgba(183,106,43,.18), transparent 62%),
-        radial-gradient(1200px 680px at 88% -18%, rgba(0,0,0,.06), transparent 60%),
-        radial-gradient(900px 560px at 50% 120%, rgba(240,195,154,.12), transparent 62%),
-        linear-gradient(180deg, var(--paper) 0%, var(--bg1) 58%, var(--bg0) 100%);
+        radial-gradient(1100px 620px at 8% -10%, rgba(183,106,43,.12), transparent 64%),
+        radial-gradient(880px 520px at 88% -8%, rgba(240,195,154,.10), transparent 60%),
+        linear-gradient(180deg, var(--paper) 0%, var(--bg1) 52%, var(--bg0) 100%);
       text-rendering: optimizeLegibility;
     }
 
@@ -214,7 +219,7 @@
       position:relative;
       border-radius: var(--radius);
       border:1px solid var(--line);
-      background: var(--card);
+      background: color-mix(in oklab, var(--card) 92%, transparent);
       box-shadow: var(--shadow2);
       overflow:hidden;
     }
@@ -223,33 +228,33 @@
       position:absolute; inset:0;
       border-radius:inherit;
       pointer-events:none;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
-      opacity:.7;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      opacity:.45;
     }
     html[data-theme="light"] .card:before{opacity:.35}
     .card.altA{
       background:
-        radial-gradient(900px 320px at 18% 0%, rgba(183,106,43,.14), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 320px at 18% 0%, rgba(183,106,43,.10), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,0) 60%),
         var(--card);
-      border-color: rgba(183,106,43,.22);
+      border-color: color-mix(in oklab, var(--copper) 18%, var(--line));
     }
     .card.altB{
       background:
-        radial-gradient(900px 320px at 82% 0%, rgba(255,255,255,.06), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 320px at 82% 0%, rgba(255,255,255,.04), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,0) 60%),
         var(--card);
     }
     .card.altHot{
       background:
-        radial-gradient(900px 320px at 50% 0%, rgba(240,195,154,.14), transparent 62%),
-        linear-gradient(180deg, rgba(255,255,255,.05), rgba(0,0,0,0) 60%),
+        radial-gradient(900px 320px at 50% 0%, rgba(240,195,154,.10), transparent 62%),
+        linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,0) 60%),
         var(--card);
-      border-color: rgba(240,195,154,.20);
+      border-color: color-mix(in oklab, var(--champagne) 18%, var(--line));
     }
 
-    .pad{padding:18px}
-    @media (max-width:640px){ .pad{padding:16px} }
+    .pad{padding:24px}
+    @media (max-width:640px){ .pad{padding:18px} }
     .muted{color:var(--muted)}
     .fine{color:var(--muted2); font-size:12px}
     .sep{height:1px; background:var(--line); margin:14px 0}
@@ -259,8 +264,8 @@
       position:sticky; top:0; z-index:80;
       border-bottom:1px solid var(--line);
       background: var(--uiGlass);
-      -webkit-backdrop-filter: blur(12px) saturate(150%);
-      backdrop-filter: blur(12px) saturate(150%);
+      -webkit-backdrop-filter: blur(16px) saturate(140%);
+      backdrop-filter: blur(16px) saturate(140%);
     }
     .nav{
       max-width:var(--max); margin:0 auto;
@@ -290,7 +295,7 @@
       display:block;
       margin:0;
       font-size:14px;
-      letter-spacing:.02em;
+      letter-spacing:.08em;
       text-transform:uppercase;
       font-weight:950;
       color:var(--ink2);
@@ -334,12 +339,12 @@
       display:inline-flex; align-items:center; justify-content:center; gap:8px;
       min-height:var(--btn-h);
       padding:0 var(--btn-px);
-      border-radius:var(--btn-radius);
+      border-radius:999px;
       border:var(--btn-border) solid var(--line);
-      background: rgba(255,255,255,.05);
+      background: rgba(255,255,255,.035);
       color: var(--ink2);
       font-size:13px;
-      font-weight:900;
+      font-weight:800;
       user-select:none;
       text-decoration:none;
       transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
@@ -357,19 +362,19 @@
       border:none;
       color:white;
       background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92));
-      box-shadow: 0 16px 28px rgba(0,0,0,.22), 0 14px 24px rgba(183,106,43,.12);
+      box-shadow: 0 14px 24px rgba(0,0,0,.18), 0 12px 18px rgba(183,106,43,.10);
     }
 
     .btn{
       display:inline-flex; align-items:center; justify-content:center; gap:10px;
       min-height:var(--btn-h);
       padding:0 var(--btn-px);
-      border-radius:12px;
+      border-radius:var(--btn-radius);
       border:var(--btn-border) solid var(--line);
-      background: rgba(255,255,255,.045);
+      background: rgba(255,255,255,.035);
       color:var(--ink2);
-      font-weight:900;
-      letter-spacing:.2px;
+      font-weight:800;
+      letter-spacing:.01em;
       text-decoration:none;
       position:relative;
       overflow:hidden;
@@ -398,7 +403,7 @@
       border:none;
       color:white;
       background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92) 55%, rgba(240,195,154,.86) 120%);
-      box-shadow: 0 18px 40px rgba(0,0,0,.22), 0 18px 34px rgba(183,106,43,.14);
+      box-shadow: 0 16px 32px rgba(0,0,0,.18), 0 14px 24px rgba(183,106,43,.10);
       text-shadow: 0 1px 0 rgba(0,0,0,.35);
     }
     .btn.hot{
@@ -408,11 +413,28 @@
       box-shadow: 0 18px 40px rgba(0,0,0,.20), 0 18px 34px rgba(240,195,154,.12);
     }
     .btn.ghost{
-      background: rgba(255,255,255,.03);
+      background: transparent;
       border:1px solid var(--line);
       color:var(--ink2);
     }
     .btn.sm{min-height:40px; padding:10px 12px; border-radius:12px}
+    .textLink{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      color:var(--ink2);
+      text-decoration:none;
+      font-weight:800;
+      letter-spacing:.01em;
+      padding:6px 0;
+      border-bottom:1px solid transparent;
+      transition:border-color .14s ease, transform .14s ease, color .14s ease;
+    }
+    .textLink:hover{
+      transform:translateY(-1px);
+      border-color: color-mix(in oklab, var(--copper) 35%, transparent);
+      color: color-mix(in oklab, var(--ink2) 82%, var(--copper));
+    }
 
 
     .iconBtn{
@@ -464,9 +486,9 @@
       padding:6px 10px;
       border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.05);
+      background: rgba(255,255,255,.03);
       color:var(--ink2);
-      font-weight:900;
+      font-weight:800;
       font-size:12px;
       letter-spacing:.2px;
       white-space:nowrap;
@@ -496,17 +518,18 @@
     .head{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin:0 0 10px}
     .head h2{
       margin:0;
-      font-size:18px;
+      font-size:clamp(24px, 2.4vw, 34px);
       color:var(--ink2);
-      letter-spacing:.02em;
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      letter-spacing:-.02em;
+      line-height:1.06;
+      font-family: var(--display);
     }
-    .head p{margin:0; font-size:13px; color:var(--muted)}
+    .head p{margin:8px 0 0; max-width:58ch; font-size:14px; color:var(--muted)}
 
     /* ---------- Hero ---------- */
     .hero{
       position:relative;
-      min-height: min(78vh, 720px);
+      min-height: min(82vh, 780px);
       border-radius: var(--radius);
       border:1px solid var(--line);
       background: var(--heroImg) center / cover no-repeat, var(--bg1);
@@ -517,7 +540,9 @@
     .hero:before{
       content:"";
       position:absolute; inset:0;
-      background: linear-gradient(to top, rgba(10,11,14,.82) 0%, rgba(10,11,14,.42) 42%, rgba(10,11,14,0) 75%);
+      background:
+        linear-gradient(90deg, rgba(10,11,14,.72) 0%, rgba(10,11,14,.38) 42%, rgba(10,11,14,.08) 72%),
+        linear-gradient(to top, rgba(10,11,14,.68) 0%, rgba(10,11,14,.24) 42%, rgba(10,11,14,0) 75%);
       pointer-events:none;
     }
     .heroInner{
@@ -532,30 +557,31 @@
       text-align:left;
     }
     .heroPanel{
-      width:min(560px, 92vw);
-      margin:0 0 26px 26px;
-      border-radius: 18px;
-      border:1px solid rgba(255,255,255,.16);
-      background: rgba(9,10,13,.52);
-      -webkit-backdrop-filter: blur(12px) saturate(150%);
-      backdrop-filter: blur(12px) saturate(150%);
-      box-shadow: 0 20px 55px rgba(0,0,0,.42);
-      padding: 18px 18px 16px;
+      width:min(590px, 92vw);
+      margin:0 0 30px 28px;
+      border-radius: 22px;
+      border:1px solid rgba(255,255,255,.12);
+      background: linear-gradient(180deg, rgba(13,14,18,.68), rgba(13,14,18,.46));
+      -webkit-backdrop-filter: blur(14px) saturate(135%);
+      backdrop-filter: blur(14px) saturate(135%);
+      box-shadow: 0 20px 55px rgba(0,0,0,.30);
+      padding: 24px 24px 18px;
     }
     .heroKicker{display:none}
     .heroTitle{
-      margin:14px 0 8px;
+      margin:0 0 12px;
       font-size:var(--heroTitleSize);
-      line-height:1.05;
-      letter-spacing:-.01em;
-      font-weight:1000;
-      font-family: ui-serif, Georgia, "Times New Roman", Times, serif;
+      line-height:.98;
+      letter-spacing:-.04em;
+      font-weight:700;
+      font-family: var(--display);
+      text-wrap:balance;
     }
     .heroSub{
-      margin:0 0 14px;
-      max-width:58ch;
-      color:rgba(255,255,255,.86);
-      font-size:16px;
+      margin:0 0 18px;
+      max-width:42ch;
+      color:rgba(255,255,255,.84);
+      font-size:17px;
     }
     .heroCTA{margin-top:8px; display:flex; justify-content:flex-start; flex-wrap:wrap; gap:10px}
     .heroCTA .btn.primary{min-width:170px}
@@ -565,6 +591,25 @@
       min-height:34px;
       padding:0 12px;
       opacity:.92;
+    }
+    .heroTrust{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:16px;
+    }
+    .heroTrustItem{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background:rgba(255,255,255,.06);
+      color:rgba(255,255,255,.88);
+      font-size:12px;
+      font-weight:700;
+      letter-spacing:.01em;
     }
     .hero .kw{padding:0; border:0; background:transparent}
 
@@ -581,10 +626,10 @@
     /* ---------- Offers ---------- */
     .offers{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:10px}
     .offer{
-      padding:14px;
+      padding:18px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.025);
     }
     html[data-theme="light"] .offer{background: rgba(0,0,0,.02)}
     .offer b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2); font-weight:1000}
@@ -594,25 +639,39 @@
         /* ---------- Why choose us ---------- */
     .whyGrid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:10px}
     .whyItem{
-      padding:14px;
+      padding:18px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: rgba(255,255,255,.02);
     }
     html[data-theme="light"] .whyItem{background: rgba(0,0,0,.02)}
     .whyItem b{display:block; color:var(--ink2); font-weight:1000}
     .whyItem p{margin:8px 0 0; color:var(--muted); font-size:13px}
     @media (max-width:980px){ .whyGrid{grid-template-columns:1fr} }
 /* ---------- Booking form ---------- */
+    .bookingShell{
+      display:grid;
+      grid-template-columns:minmax(280px, .88fr) minmax(0, 1.12fr);
+      gap:var(--gridGap);
+      align-items:start;
+      margin-top:14px;
+    }
+    .bookingMetaCard{
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:rgba(255,255,255,.025);
+      padding:18px;
+    }
+    html[data-theme="light"] .bookingMetaCard{background:rgba(255,255,255,.65)}
     .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px}
     .field{display:flex; flex-direction:column; gap:6px}
     .field label{font-size:12px; color:var(--muted); font-weight:900}
     .field input,.field select,.field textarea{
       width:100%;
-      padding:12px 12px;
-      border-radius:12px;
+      padding:14px 14px;
+      border-radius:14px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
+      background: rgba(255,255,255,.035);
       color: var(--ink);
       outline:none;
     }
@@ -632,7 +691,7 @@
     }
     .wide{grid-column:1/-1}
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:6px}
-    @media (max-width:980px){ .formGrid{grid-template-columns:1fr} }
+    @media (max-width:980px){ .bookingShell{grid-template-columns:1fr} .formGrid{grid-template-columns:1fr} }
 
         /* ---------- Quick date presets ---------- */
     .quickDates{margin-top:10px; display:grid; gap:8px}
@@ -675,13 +734,13 @@
       --border: var(--line);
       --text: var(--ink2);
       position: relative;
-      padding: clamp(22px, 3vw, 34px);
+      padding: clamp(24px, 3vw, 38px);
       border-radius: 22px;
       background:
-        radial-gradient(1200px 500px at 20% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent 60%),
+        radial-gradient(1200px 500px at 20% 0%, color-mix(in oklab, var(--accent) 8%, transparent), transparent 60%),
         linear-gradient(180deg, color-mix(in oklab, var(--surface) 75%, transparent), color-mix(in oklab, var(--bg) 92%, transparent));
       border: 1px solid color-mix(in oklab, var(--border) 80%, transparent);
-      box-shadow: 0 14px 40px color-mix(in oklab, black 45%, transparent);
+      box-shadow: 0 14px 34px color-mix(in oklab, black 30%, transparent);
     }
     #amenities h2, .amenities-section h2{
       font-size: clamp(22px, 2.2vw, 30px);
@@ -711,15 +770,13 @@
       position: relative;
       overflow: hidden;
       border-radius: 18px;
-      padding: 18px 18px 16px;
+      padding: 20px 18px 18px;
       background:
         linear-gradient(180deg,
           color-mix(in oklab, var(--surface) 72%, transparent),
           color-mix(in oklab, var(--bg) 88%, transparent));
       border: 1px solid color-mix(in oklab, var(--border) 78%, transparent);
-      box-shadow:
-        0 10px 26px color-mix(in oklab, black 45%, transparent),
-        inset 0 1px 0 color-mix(in oklab, white 10%, transparent);
+      box-shadow: 0 10px 20px color-mix(in oklab, black 24%, transparent);
       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
       text-align: center;
       display:flex;
@@ -842,9 +899,11 @@
       border-radius:10px;
       border:1px solid var(--line);
     }
+    .roomMedia .mediaImg{aspect-ratio: 5 / 4}
     .roomBody{padding:16px; min-width:0}
+    .roomBody{padding:22px; min-width:0}
     .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
-    .roomTop h4{margin:0; font-size:16px; letter-spacing:.2px; color:var(--ink2)}
+    .roomTop h4{margin:0; font-size:23px; letter-spacing:-.02em; line-height:1.08; color:var(--ink2); font-family:var(--display)}
     .priceBox{min-width:128px; text-align:right}
     .priceBox b{display:block; font-size:12px; color:var(--muted); font-weight:950}
     .priceBox strong{display:block; font-size:18px; color:var(--ink2); font-weight:1000; line-height:1.1; margin-top:2px}
@@ -855,14 +914,14 @@
       padding:6px 10px;
       border-radius:999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.02);
       color: var(--ink2);
-      font-weight:900;
+      font-weight:800;
       font-size:12px;
     }
     .bullets{margin:10px 0 0; padding-left:18px; color:var(--muted); font-size:13px}
-    .bullets li{margin:4px 0}
-    .roomActions{margin-top:12px; display:flex; flex-wrap:wrap; gap:10px}
+    .bullets li{margin:6px 0}
+    .roomActions{margin-top:16px; display:flex; flex-wrap:wrap; gap:10px}
 
     /* ---------- Media placeholders (show until image loads) ---------- */
     .mediaWrap{position:relative; overflow:hidden}
@@ -904,14 +963,15 @@
     }
     .galSlide{flex:0 0 100%; min-width:0; margin:0}
     .galCap{
-      padding:12px 14px;
+      padding:14px 16px 16px;
       border-top:1px solid var(--line);
-      background: var(--uiGlass2);
+      background: color-mix(in oklab, var(--card) 88%, transparent);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
     }
     .galCap b{display:block; color:var(--ink2); font-size:14px; font-weight:1000; letter-spacing:.2px}
     .galCap span{display:block; margin-top:4px; color:var(--muted); font-size:13px}
+    .galSlide .mediaImg{aspect-ratio: 16 / 10}
 
     .galBar{
       margin-top:12px;
@@ -922,10 +982,10 @@
       flex-wrap:wrap;
     }
     .galNavBtn{
-      width:44px; height:44px;
-      border-radius: 14px;
+      width:42px; height:42px;
+      border-radius: 999px;
       border:1px solid var(--line);
-      background: rgba(255,255,255,.06);
+      background: rgba(255,255,255,.04);
       color: var(--ink2);
       font-weight:1000;
       font-size:18px;
@@ -963,24 +1023,49 @@
 
     /* ---------- Reviews ---------- */
     .stars{letter-spacing:.08em; color: rgba(240,195,154,.95); font-weight:1000}
-    .reviews{display:grid; grid-template-columns: 1.25fr .75fr; gap:12px}
+    .reviewActionRow{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end}
+    .reviews{display:grid; grid-template-columns: 1.15fr .85fr; gap:14px}
     @media (max-width:980px){ .reviews{grid-template-columns:1fr} }
+    .reviewsLead,.reviewsSide{display:grid; gap:12px}
     .review{
-      padding:14px;
+      padding:18px;
       border-radius: var(--radius2);
       border:1px solid var(--line);
-      background: rgba(255,255,255,.04);
+      background: rgba(255,255,255,.025);
     }
     html[data-theme="light"] .review{background: rgba(0,0,0,.02)}
     .review b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2)}
     .review p{margin:8px 0 0; color:var(--muted); font-size:13px}
+    .reviewFeatured{
+      padding:24px;
+      background:
+        radial-gradient(560px 180px at 0% 0%, rgba(183,106,43,.08), transparent 70%),
+        var(--card);
+      box-shadow: var(--shadow3);
+    }
+    .reviewFeatured p{
+      font-size:14px;
+      line-height:1.7;
+      position:relative;
+      padding-left:18px;
+    }
+    .reviewFeatured p::before{
+      content:"\201C";
+      position:absolute;
+      left:0;
+      top:-6px;
+      font-size:24px;
+      color:color-mix(in oklab, var(--copper) 65%, white);
+      line-height:1;
+    }
+    .reviewMini p{font-size:13px}
 
     /* ---------- FAQ ---------- */
     details{
       border-radius:var(--radius2);
       border:1px solid var(--line);
-      background: rgba(255,255,255,.03);
-      padding:10px 12px;
+      background: rgba(255,255,255,.018);
+      padding:14px 16px;
       margin-top:10px
     }
     html[data-theme="light"] details{background: rgba(0,0,0,.015)}
@@ -1001,9 +1086,32 @@
     html[data-theme="light"] .mapWrap{background: rgba(0,0,0,.02)}
     .mapWrap iframe{
       width:100%;
-      height: clamp(260px, 32vw, 360px);
+      height: clamp(280px, 34vw, 400px);
       border:0;
       display:block;
+    }
+    .locationGrid{
+      display:grid;
+      grid-template-columns:minmax(280px, .9fr) minmax(0, 1.1fr);
+      gap:var(--gridGap);
+      align-items:stretch;
+      margin-top:12px;
+    }
+    .contactCard{
+      display:grid;
+      align-content:start;
+      gap:14px;
+      padding:20px;
+      border-radius:var(--radius2);
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.025);
+    }
+    html[data-theme="light"] .contactCard{background:rgba(255,255,255,.6)}
+    .contactAddress{margin:0; font-size:14px}
+    .contactActions{display:flex; gap:10px; flex-wrap:wrap}
+    .contactMeta{margin:0; line-height:1.8}
+    @media (max-width:980px){
+      .locationGrid{grid-template-columns:1fr}
     }
 
     /* ---------- Footer ---------- */
@@ -1106,6 +1214,15 @@
       max-width: 36ch;
       text-wrap: pretty;
     }
+    html[data-device="phone"] .heroTrust{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:8px;
+    }
+    html[data-device="phone"] .heroTrustItem{
+      justify-content:center;
+      text-align:center;
+    }
 
     html[data-device="phone"] .btn{
       min-height: 40px;
@@ -1146,7 +1263,25 @@
       padding: 10px 12px;
       border-radius: 12px;
     }
+    html[data-device="phone"] #stickyLine,
     html[data-device="phone"] #stickyWA{ display:none !important; }
+    html[data-device="phone"] .ctaRow{
+      display:grid;
+      grid-template-columns:1fr;
+    }
+    html[data-device="phone"] .ctaRow .btn,
+    html[data-device="phone"] .contactActions .btn,
+    html[data-device="phone"] .contactActions .textLink{
+      width:100%;
+      justify-content:center;
+    }
+    html[data-device="phone"] .roomCardInner{grid-template-columns:1fr}
+    html[data-device="phone"] .roomBody{padding:18px}
+    html[data-device="phone"] .roomSubMedia{grid-template-columns:1fr 1fr}
+    html[data-device="phone"] .reviews{gap:12px}
+    html[data-device="phone"] .bookingMetaCard,
+    html[data-device="phone"] .contactCard{padding:16px}
+    html[data-device="phone"] .mapWrap{margin-top:0}
 
     /* Tablet: reduce some noise but keep context */
     html[data-device="tablet"] .hero{
@@ -1331,9 +1466,14 @@
               <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Open Map</a>
             </div>
 
-            <div class="sep" style="background:rgba(255,255,255,.18)"></div>
-            <div class="fine" style="color:rgba(255,255,255,.86)" data-i18n-html="hero_fine">
-              Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms
+            <div class="heroTrust" aria-label="Booking highlights">
+              <span class="heroTrustItem">Fast direct reply</span>
+              <span class="heroTrustItem">Check-in 14:00 / Check-out 11:00</span>
+              <span class="heroTrustItem">Quiet rooms available</span>
+            </div>
+
+            <div class="fine" style="margin-top:14px; color:rgba(255,255,255,.80)" data-i18n-html="hero_fine">
+              Passport/ID required for check-in
             </div>
           </div>
         </div>
@@ -1348,7 +1488,7 @@
             <h2 data-i18n="offers_title">Click-to-Book Offers & Tips</h2>
             <p data-i18n="offers_sub">Direct-booking perks and quick tips to confirm faster.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="offers_btn" data-analytics="book-now">Get availability</a>
+          <a class="textLink" href="#book" data-i18n="offers_btn" data-analytics="book-now">Get availability</a>
         </div>
 
         <div class="offers">
@@ -1382,87 +1522,6 @@
           </div>
         </div>
 </div>
-    </section>
-
-    <!-- BOOK -->
-    <section class="section" id="book">
-      <div class="card altA pad">
-        <div class="head">
-          <div>
-            <h2 data-i18n="book_title">Quick Booking Request</h2>
-            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.</p>
-          </div>
-          <a class="btn hot" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
-        </div>
-
-        <div class="quickDates" aria-label="Quick date presets">
-          <div class="quickTop">
-            <div class="quickLabel" data-i18n="quick_label">Quick dates</div>
-            <div class="quickChips" role="group" aria-label="Quick dates">
-              <button class="chip quickBtn" type="button" data-qd="tonight" data-i18n="quick_tonight">Tonight</button>
-              <button class="chip quickBtn" type="button" data-qd="tomorrow" data-i18n="quick_tomorrow">Tomorrow</button>
-              <button class="chip quickBtn" type="button" data-qd="weekend" data-i18n="quick_weekend">Weekend</button>
-              <button class="chip quickBtn" type="button" data-qd="7n" data-i18n="quick_7n">7 nights</button>
-              <button class="chip quickBtn" type="button" data-qd="clear" data-i18n="quick_clear">Clear</button>
-            </div>
-          </div>
-
-          <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
-          <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
-        </div>
-
-        <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
-          <div class="field">
-            <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
-            <input id="checkin" name="checkin" type="date" required>
-          </div>
-          <div class="field">
-            <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
-            <input id="checkout" name="checkout" type="date" required>
-          </div>
-          <div class="field">
-            <label for="guests" data-i18n="lbl_guests">Guests</label>
-            <select id="guests" name="guests">
-              <option value="1">1</option>
-              <option value="2" selected>2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-            </select>
-          </div>
-          <div class="field">
-            <label for="room" data-i18n="lbl_room">Room</label>
-            <select id="room" name="room">
-              <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
-              <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
-            </select>
-          </div>
-          <div class="field wide">
-            <label for="name" data-i18n="lbl_name">Name</label>
-            <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
-          </div>
-          <div class="field wide">
-            <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
-            <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
-          </div>
-          <div class="field wide">
-            <label for="notes" data-i18n="lbl_notes">Notes</label>
-            <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
-          </div>
-
-          <div class="wide ctaRow">
-            <button class="btn primary" type="submit" data-i18n="btn_send_line">Send via LINE</button>
-            <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Send via WhatsApp</button>
-            <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Send via Email</button>
-            <span class="fine" id="formHint" data-i18n="form_hint">We’ll reply with availability and total price.</span>
-          </div>
-        </form>
-
-        <div class="sep"></div>
-        <div class="fine">
-          <span data-i18n="book_tip">Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.</span>
-        </div>
-      </div>
     </section>
 
     <!-- AMENITIES -->
@@ -1664,7 +1723,7 @@
             <h2 data-i18n="gallery_title">Gallery</h2>
             <p data-i18n="gallery_sub">Swipe through photos of the hotel and rooms.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
+          <a class="textLink" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
         </div>
 
         <div class="galCarousel" id="galCarousel" aria-roledescription="carousel" aria-label="Hotel photo carousel">
@@ -1795,38 +1854,123 @@
             <h2 data-i18n="reviews_title">Guest Reviews</h2>
             <p data-i18n="reviews_sub">Check location and the latest guest feedback on Google Maps before you book.</p>
           </div>
-          <div style="display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end">
+          <div class="reviewActionRow">
           <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="btn_view_maps" data-analytics="map">View on Google Maps</a>
             <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n="btn_view_facebook">Facebook</a>
           </div>
         </div>
 
         <div class="reviews">
-          <div style="display:grid; gap:12px">
-            <div class="review">
+          <div class="reviewsLead">
+            <div class="review reviewFeatured">
               <b data-i18n-html="review1_title">Business Traveler <span class="stars">★★★★★</span></b>
               <p data-i18n="review1_text">Fast check-in, stable Wi-Fi, and a big room to work in. Great value.</p>
             </div>
-            <div class="review">
+            <div class="review reviewMini">
               <b data-i18n-html="review2_title">Couple Weekend <span class="stars">★★★★★</span></b>
               <p data-i18n="review2_text">Clean and comfortable. Easy to message for confirmation. Smooth stay.</p>
             </div>
-            <div class="review">
+            <div class="review reviewMini">
               <b data-i18n-html="review3_title">Family Stopover <span class="stars">★★★★☆</span></b>
               <p data-i18n="review3_text">Spacious room and helpful staff. Parking was convenient.</p>
             </div>
           </div>
 
-          <div style="display:grid; gap:12px">
-            <div class="review">
+          <div class="reviewsSide">
+            <div class="review reviewMini">
               <b data-i18n-html="review4_title">Long Stay Guest <span class="stars">★★★★★</span></b>
               <p data-i18n="review4_text">Quiet, comfortable, and practical amenities. Would stay again.</p>
             </div>
-            <div class="review">
+            <div class="review reviewMini">
               <b data-i18n-html="review5_title">Great Location <span class="stars">★★★★★</span></b>
               <p data-i18n="review5_text">Big room, clean, and convenient location. Easy check-in and friendly staff.</p>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOK -->
+    <section class="section" id="book">
+      <div class="card altA pad">
+        <div class="head">
+          <div>
+            <h2 data-i18n="book_title">Quick Booking Request</h2>
+            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.</p>
+          </div>
+          <a class="textLink" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
+        </div>
+
+        <div class="bookingShell">
+          <div class="bookingMetaCard">
+            <div class="quickDates" aria-label="Quick date presets">
+              <div class="quickTop">
+                <div class="quickLabel" data-i18n="quick_label">Quick dates</div>
+                <div class="quickChips" role="group" aria-label="Quick dates">
+                  <button class="chip quickBtn" type="button" data-qd="tonight" data-i18n="quick_tonight">Tonight</button>
+                  <button class="chip quickBtn" type="button" data-qd="tomorrow" data-i18n="quick_tomorrow">Tomorrow</button>
+                  <button class="chip quickBtn" type="button" data-qd="weekend" data-i18n="quick_weekend">Weekend</button>
+                  <button class="chip quickBtn" type="button" data-qd="7n" data-i18n="quick_7n">7 nights</button>
+                  <button class="chip quickBtn" type="button" data-qd="clear" data-i18n="quick_clear">Clear</button>
+                </div>
+              </div>
+
+              <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
+              <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
+            </div>
+
+            <div class="sep"></div>
+            <div class="fine">
+              <span data-i18n="book_tip">Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.</span>
+            </div>
+          </div>
+
+          <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
+            <div class="field">
+              <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
+              <input id="checkin" name="checkin" type="date" required>
+            </div>
+            <div class="field">
+              <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
+              <input id="checkout" name="checkout" type="date" required>
+            </div>
+            <div class="field">
+              <label for="guests" data-i18n="lbl_guests">Guests</label>
+              <select id="guests" name="guests">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="room" data-i18n="lbl_room">Room</label>
+              <select id="room" name="room">
+                <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
+                <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
+              </select>
+            </div>
+            <div class="field wide">
+              <label for="name" data-i18n="lbl_name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
+            </div>
+            <div class="field wide">
+              <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
+              <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
+            </div>
+            <div class="field wide">
+              <label for="notes" data-i18n="lbl_notes">Notes</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+            </div>
+
+            <div class="wide ctaRow">
+              <button class="btn primary" type="submit" data-i18n="btn_send_line">Send via LINE</button>
+              <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Send via WhatsApp</button>
+              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Send via Email</button>
+              <span class="fine" id="formHint" data-i18n="form_hint">We’ll reply with availability and total price.</span>
+            </div>
+          </form>
         </div>
       </div>
     </section>
@@ -1839,7 +1983,7 @@
             <h2 data-i18n="faq_title">FAQ</h2>
             <p data-i18n="faq_sub">Common questions before booking.</p>
           </div>
-        <a class="btn primary" href="#book" data-i18n="faq_btn" data-analytics="book-now">Send Request</a>
+        <a class="textLink" href="#book" data-i18n="faq_btn" data-analytics="book-now">Send Request</a>
         </div>
 
         <details open>
@@ -1888,46 +2032,45 @@
           </div>
         </div>
 
-        <p class="muted" style="margin:0;font-size:13px">
-          <b data-i18n="loc_address">Address:</b>
-          642 4016, Tambon Pho Sadet, Mueang Nakhon Si Thammarat District, Nakhon Si Thammarat 80000<br>
-          <span class="fine"><span data-i18n="loc_plus">Plus Code:</span> CWMG+QJ</span>
-        </p>
+        <div class="locationGrid">
+          <div class="contactCard">
+            <p class="muted contactAddress">
+              <b data-i18n="loc_address">Address:</b>
+              642 4016, Tambon Pho Sadet, Mueang Nakhon Si Thammarat District, Nakhon Si Thammarat 80000<br>
+              <span class="fine"><span data-i18n="loc_plus">Plus Code:</span> CWMG+QJ</span>
+            </p>
 
-        <div class="sep"></div>
+            <div class="contactActions">
+              <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
+              <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+              <a class="btn" id="contactLine" href="#" rel="nofollow" data-analytics="line">LINE</a>
+              <a class="btn ghost" id="contactWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
+              <a class="textLink" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Open Map</a>
+              <a class="textLink" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">Facebook</a>
+            </div>
 
-        <div style="display:flex; gap:10px; flex-wrap:wrap">
-          <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
-          <a class="btn hot" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
-          <a class="btn" id="contactLine" href="#" rel="nofollow" data-analytics="line">LINE</a>
-          <a class="btn" id="contactWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
-          <a class="btn ghost" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Open Map</a>
-          <a class="btn ghost" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">Facebook</a>
-        </div>
+            <p class="fine contactMeta">
+              ⏰: เปิดบริการทุกวัน 06:00-22:00<br>
+              ☎️: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a><br>
+              Line : sandbox.hotel<br>
+              💚คลิกลิงค์แอดไลน์ : <a href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener" data-analytics="line">https://line.me/ti/p/uc4BCpHCQ4</a><br>
+              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">https://web.facebook.com/sandboxhotel</a><br>
+              <a href="mailto:booking@sandboxhotel.com">booking@sandboxhotel.com</a>
+            </p>
 
-        <p class="fine" style="margin-top:10px; line-height:1.8">
-          ⏰: เปิดบริการทุกวัน 06:00-22:00<br>
-          ☎️: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a><br>
-          Line : sandbox.hotel<br>
-          💚คลิกลิงค์แอดไลน์ : <a href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener" data-analytics="line">https://line.me/ti/p/uc4BCpHCQ4</a><br>
-          <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">https://web.facebook.com/sandboxhotel</a><br>
-          <a href="mailto:booking@sandboxhotel.com">booking@sandboxhotel.com</a>
-        </p>
+            <div class="fine">
+              <span data-i18n="loc_notes">Notes: Policies may vary by season. For the latest info, contact the hotel directly.</span>
+            </div>
+          </div>
 
-        <!-- Google Maps embed (reasonable size) -->
-        <div class="mapWrap" aria-label="Google Map">
-          <iframe
-            title="Sandbox Hotel location map"
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            src="https://www.google.com/maps?q=CWMG%2BQJ%20Nakhon%20Si%20Thammarat%2C%20Thailand&output=embed">
-          </iframe>
-        </div>
-
-        <div class="sep"></div>
-
-        <div class="fine">
-          <span data-i18n="loc_notes">Notes: Policies may vary by season. For the latest info, contact the hotel directly.</span>
+          <div class="mapWrap" aria-label="Google Map">
+            <iframe
+              title="Sandbox Hotel location map"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              src="https://www.google.com/maps?q=CWMG%2BQJ%20Nakhon%20Si%20Thammarat%2C%20Thailand&output=embed">
+            </iframe>
+          </div>
         </div>
 
         <footer>
