@@ -1,6 +1,6 @@
 {
   "name": "sandbox-hotel-site",
-  "main": "src/index.js",
+  "main": "src/worker.js",
   "compatibility_date": "2025-09-27",
   "workers_dev": false,
   "routes": [
