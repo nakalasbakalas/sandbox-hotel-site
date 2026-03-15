@@ -6,7 +6,7 @@
   <title>{% block title %}{{ hotel_name }}{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
-<body>
+<body data-density="compact">
   <header class="site-header">
     <div class="container topbar">
       <a class="brand" href="{{ url_for('index', lang=current_language) }}">

@@ -27,7 +27,7 @@
     <a class="pill {% if mode == 'in_house' %}active{% else %}subtle{% endif %}" href="{{ url_for('staff_front_desk', mode='in_house', date=workspace.business_date.isoformat()) }}">In-house</a>
   </div>
 
-  <form class="toolbar subsection" method="get">
+  <form class="toolbar subsection filter-bar" method="get">
     <input type="hidden" name="mode" value="{{ mode }}">
     <label><span>Date</span><input type="date" name="date" value="{{ workspace.business_date.isoformat() }}"></label>
     <label><span>Room type</span><select name="room_type_id"><option value="">All room types</option>{% for room_type in room_types %}<option value="{{ room_type.id }}" {% if filters.room_type_id == room_type.id|string %}selected{% endif %}>{{ room_type.code }} - {{ room_type.name }}</option>{% endfor %}</select></label>
