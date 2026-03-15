@@ -57,6 +57,12 @@ const copy = {
     language: "Language",
   },
 };
+const RESERVATION_STATUS_ACTIONS = [
+  ["tentative", "Confirm", "confirm"],
+  ["inquiry", "Confirm", "confirm"],
+  ["confirmed", "Check in", "check_in"],
+  ["checked_in", "Check out", "check_out"],
+];
 const app = document.getElementById("app");
 boot();
 
@@ -211,7 +217,7 @@ function renderReservations() {
         <article class="card stack">
           <div class="section-head"><h3>${t("leads")}</h3></div>
           <div class="table-wrap"><table><thead><tr><th>Source</th><th>Stay</th><th>Guest</th><th>Status</th><th>Action</th></tr></thead><tbody>
-             ${state.leads.map((lead) => `<tr><td>${lead.source}</td><td>${lead.checkin_date} &rarr; ${lead.checkout_date}<br><span class="muted">${escapeHtml(lead.requested_room_type || "-")}</span></td><td>${escapeHtml(lead.guest_name || "-")}<br><span class="muted">${escapeHtml(lead.guest_contact || "")}</span></td><td><span class="pill ${lead.status === "new" ? "warn" : ""}">${lead.status}</span></td><td><button class="secondary" data-convert="${lead.id}">Convert</button></td></tr>`).join("") || `<tr><td colspan="5" class="muted">No leads</td></tr>`}
+             ${renderLeadRows()}
           </tbody></table></div>
           <h3>${t("createReservation")}</h3>
           <form id="reservationForm" class="grid two dense-form">
@@ -230,12 +236,65 @@ function renderReservations() {
         <article class="card stack">
           <div class="section-head"><h3>Reservations</h3></div>
           <div class="table-wrap"><table><thead><tr><th>Code</th><th>Guest</th><th>Stay</th><th>Room</th><th>Status</th><th>Actions</th></tr></thead><tbody>
-            ${state.reservations.map((reservation) => `<tr><td>${reservation.confirmation_code}</td><td>${escapeHtml(reservation.guest_name)}<br><span class="muted">${escapeHtml(reservation.guest_contact || "")}</span></td><td>${reservation.checkin_date} &rarr; ${reservation.checkout_date}</td><td>${escapeHtml(reservation.room_number || reservation.room_type_name || "-")}</td><td><span class="pill ${pillClass(reservation.status)}">${reservation.status}</span></td><td><div class="table-actions"><button class="secondary" data-folio="${reservation.id}">Folio</button>${reservation.status === "tentative" || reservation.status === "inquiry" ? `<button class="secondary" data-action="confirm" data-id="${reservation.id}">Confirm</button>` : ""}${reservation.status === "confirmed" ? `<button class="secondary" data-action="check_in" data-id="${reservation.id}">Check in</button>` : ""}${reservation.status === "checked_in" ? `<button class="secondary" data-action="check_out" data-id="${reservation.id}">Check out</button>` : ""}${reservation.status !== "cancelled" && reservation.status !== "checked_out" ? `<button class="ghost" data-action="cancel" data-id="${reservation.id}">Cancel</button>` : ""}</div><form class="table-actions assign-form" data-assign="${reservation.id}"><select name="room_id"><option value="">Assign room</option>${state.rooms.map((room) => `<option value="${room.id}">${room.room_number} &middot; ${escapeHtml(room.room_type_name)}</option>`).join("")}</select><button class="secondary" type="submit">Assign</button></form></td></tr>`).join("") || `<tr><td colspan="6" class="muted">No reservations</td></tr>`}
+            ${renderReservationRows()}
           </tbody></table></div>
           ${renderFolio()}
         </article>
       </div>
     </section>`;
+}
+
+function renderLeadRows() {
+  if (!state.leads.length) return `<tr><td colspan="5" class="muted">No leads</td></tr>`;
+  return state.leads.map((lead) => `
+    <tr>
+      <td>${lead.source}</td>
+      <td>${lead.checkin_date} &rarr; ${lead.checkout_date}<br><span class="muted">${escapeHtml(lead.requested_room_type || "-")}</span></td>
+      <td>${escapeHtml(lead.guest_name || "-")}<br><span class="muted">${escapeHtml(lead.guest_contact || "")}</span></td>
+      <td><span class="pill ${lead.status === "new" ? "warn" : ""}">${lead.status}</span></td>
+      <td><button class="secondary" data-convert="${lead.id}">Convert</button></td>
+    </tr>
+  `).join("");
+}
+
+function renderReservationRows() {
+  if (!state.reservations.length) return `<tr><td colspan="6" class="muted">No reservations</td></tr>`;
+  return state.reservations.map((reservation) => `
+    <tr>
+      <td>${reservation.confirmation_code}</td>
+      <td>${escapeHtml(reservation.guest_name)}<br><span class="muted">${escapeHtml(reservation.guest_contact || "")}</span></td>
+      <td>${reservation.checkin_date} &rarr; ${reservation.checkout_date}</td>
+      <td>${escapeHtml(reservation.room_number || reservation.room_type_name || "-")}</td>
+      <td><span class="pill ${pillClass(reservation.status)}">${reservation.status}</span></td>
+      <td>
+        <div class="table-actions">
+          <button class="secondary" data-folio="${reservation.id}">Folio</button>
+          ${renderReservationActionButtons(reservation)}
+        </div>
+        <form class="table-actions assign-form" data-assign="${reservation.id}">
+          <select name="room_id">
+            <option value="">Assign room</option>
+            ${renderRoomOptions()}
+          </select>
+          <button class="secondary" type="submit">Assign</button>
+        </form>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function renderReservationActionButtons(reservation) {
+  return RESERVATION_STATUS_ACTIONS.filter(([status]) => reservation.status === status)
+    .map(([, label, action]) => `<button class="secondary" data-action="${action}" data-id="${reservation.id}">${label}</button>`)
+    .join("") + (
+      reservation.status !== "cancelled" && reservation.status !== "checked_out"
+        ? `<button class="ghost" data-action="cancel" data-id="${reservation.id}">Cancel</button>`
+        : ""
+    );
+}
+
+function renderRoomOptions() {
+  return state.rooms.map((room) => `<option value="${room.id}">${room.room_number} &middot; ${escapeHtml(room.room_type_name)}</option>`).join("");
 }
 
 function renderFolio() {
