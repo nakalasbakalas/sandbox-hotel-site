@@ -57,6 +57,12 @@ const copy = {
     language: "Language",
   },
 };
+const RESERVATION_STATUS_ACTIONS = [
+  ["tentative", "Confirm", "confirm"],
+  ["inquiry", "Confirm", "confirm"],
+  ["confirmed", "Check in", "check_in"],
+  ["checked_in", "Check out", "check_out"],
+];
 const app = document.getElementById("app");
 boot();
 
@@ -153,15 +159,15 @@ async function refreshAll(render = true) {
 
 function renderApp() {
   app.innerHTML = `
-    <div class="stack">
-      <header class="card">
+    <div class="app-shell stack">
+      <header class="card app-header">
         <div class="stack">
           <span class="badge">${t("appTitle")}</span>
           <h1>${escapeHtml(state.settings?.name || "Sandbox Hotel")}</h1>
           <p class="muted">${t("subtitle")}</p>
         </div>
         <div class="stack">
-          <div class="toolbar">
+          <div class="toolbar section-toolbar">
             <button class="secondary" id="toggleLocale">${t("language")}: ${state.locale.toUpperCase()}</button>
             <button class="secondary" id="refreshButton">Refresh</button>
             <button id="logoutButton">${t("signOut")}</button>
@@ -189,8 +195,8 @@ function renderOverview() {
   ];
   return `
     <section class="card stack">
-      <div><span class="badge">${t("dashboard")}</span><h2>${t("dashboard")}</h2></div>
-      <div class="grid three">${metrics.map(([label, value]) => `<article class="card metric"><span class="muted">${label}</span><strong>${value}</strong></article>`).join("")}</div>
+      <div class="section-head"><div><span class="badge">${t("dashboard")}</span><h2>${t("dashboard")}</h2></div></div>
+      <div class="grid three metric-grid">${metrics.map(([label, value]) => `<article class="card metric"><span class="muted">${label}</span><strong>${value}</strong></article>`).join("")}</div>
       <div class="stack"><h3>7-day room calendar</h3>${renderCalendar()}</div>
     </section>`;
 }
@@ -206,15 +212,15 @@ function renderCalendar() {
 function renderReservations() {
   return `
     <section class="card stack">
-      <div><span class="badge">${t("reservations")}</span><h2>${t("reservations")}</h2></div>
+      <div class="section-head"><div><span class="badge">${t("reservations")}</span><h2>${t("reservations")}</h2></div></div>
       <div class="grid two">
         <article class="card stack">
-          <h3>${t("leads")}</h3>
+          <div class="section-head"><h3>${t("leads")}</h3></div>
           <div class="table-wrap"><table><thead><tr><th>Source</th><th>Stay</th><th>Guest</th><th>Status</th><th>Action</th></tr></thead><tbody>
-            ${state.leads.map((lead) => `<tr><td>${lead.source}</td><td>${lead.checkin_date} &rarr; ${lead.checkout_date}<br><span class="muted">${escapeHtml(lead.requested_room_type || "-")}</span></td><td>${escapeHtml(lead.guest_name || "-")}<br><span class="muted">${escapeHtml(lead.guest_contact || "")}</span></td><td><span class="pill ${lead.status === "new" ? "warn" : ""}">${lead.status}</span></td><td><button class="secondary" data-convert="${lead.id}">Convert</button></td></tr>`).join("") || `<tr><td colspan="5" class="muted">No leads</td></tr>`}
+             ${renderLeadRows()}
           </tbody></table></div>
           <h3>${t("createReservation")}</h3>
-          <form id="reservationForm" class="grid two">
+          <form id="reservationForm" class="grid two dense-form">
             <label>Guest name<input name="guest_name" required></label>
             <label>Contact<input name="contact"></label>
             <label>Check-in<input type="date" name="checkin_date" value="${today()}" required></label>
@@ -223,19 +229,72 @@ function renderReservations() {
             <label>Room type<select name="room_type_id"><option value="">Unassigned</option>${state.roomTypes.map((roomType) => `<option value="${roomType.id}">${escapeHtml(roomType.name)}</option>`).join("")}</select></label>
             <label>Status<select name="status"><option value="tentative">tentative</option><option value="confirmed">confirmed</option><option value="inquiry">inquiry</option></select></label>
             <label>Nightly rate<input type="number" step="0.01" name="nightly_rate" value="1200"></label>
-            <label style="grid-column:1 / -1">Notes<textarea name="notes"></textarea></label>
-            <button type="submit">Save reservation</button>
+            <label class="field-span-full">Notes<textarea name="notes"></textarea></label>
+            <button class="field-span-full" type="submit">Save reservation</button>
           </form>
         </article>
         <article class="card stack">
-          <h3>Reservations</h3>
+          <div class="section-head"><h3>Reservations</h3></div>
           <div class="table-wrap"><table><thead><tr><th>Code</th><th>Guest</th><th>Stay</th><th>Room</th><th>Status</th><th>Actions</th></tr></thead><tbody>
-            ${state.reservations.map((reservation) => `<tr><td>${reservation.confirmation_code}</td><td>${escapeHtml(reservation.guest_name)}<br><span class="muted">${escapeHtml(reservation.guest_contact || "")}</span></td><td>${reservation.checkin_date} &rarr; ${reservation.checkout_date}</td><td>${escapeHtml(reservation.room_number || reservation.room_type_name || "-")}</td><td><span class="pill ${pillClass(reservation.status)}">${reservation.status}</span></td><td><div class="toolbar"><button class="secondary" data-folio="${reservation.id}">Folio</button>${reservation.status === "tentative" || reservation.status === "inquiry" ? `<button class="secondary" data-action="confirm" data-id="${reservation.id}">Confirm</button>` : ""}${reservation.status === "confirmed" ? `<button class="secondary" data-action="check_in" data-id="${reservation.id}">Check in</button>` : ""}${reservation.status === "checked_in" ? `<button class="secondary" data-action="check_out" data-id="${reservation.id}">Check out</button>` : ""}${reservation.status !== "cancelled" && reservation.status !== "checked_out" ? `<button class="ghost" data-action="cancel" data-id="${reservation.id}">Cancel</button>` : ""}</div><form class="toolbar" data-assign="${reservation.id}"><select name="room_id"><option value="">Assign room</option>${state.rooms.map((room) => `<option value="${room.id}">${room.room_number} &middot; ${escapeHtml(room.room_type_name)}</option>`).join("")}</select><button class="secondary" type="submit">Assign</button></form></td></tr>`).join("") || `<tr><td colspan="6" class="muted">No reservations</td></tr>`}
+            ${renderReservationRows()}
           </tbody></table></div>
           ${renderFolio()}
         </article>
       </div>
     </section>`;
+}
+
+function renderLeadRows() {
+  if (!state.leads.length) return `<tr><td colspan="5" class="muted">No leads</td></tr>`;
+  return state.leads.map((lead) => `
+    <tr>
+      <td>${lead.source}</td>
+      <td>${lead.checkin_date} &rarr; ${lead.checkout_date}<br><span class="muted">${escapeHtml(lead.requested_room_type || "-")}</span></td>
+      <td>${escapeHtml(lead.guest_name || "-")}<br><span class="muted">${escapeHtml(lead.guest_contact || "")}</span></td>
+      <td><span class="pill ${lead.status === "new" ? "warn" : ""}">${lead.status}</span></td>
+      <td><button class="secondary" data-convert="${lead.id}">Convert</button></td>
+    </tr>
+  `).join("");
+}
+
+function renderReservationRows() {
+  if (!state.reservations.length) return `<tr><td colspan="6" class="muted">No reservations</td></tr>`;
+  return state.reservations.map((reservation) => `
+    <tr>
+      <td>${reservation.confirmation_code}</td>
+      <td>${escapeHtml(reservation.guest_name)}<br><span class="muted">${escapeHtml(reservation.guest_contact || "")}</span></td>
+      <td>${reservation.checkin_date} &rarr; ${reservation.checkout_date}</td>
+      <td>${escapeHtml(reservation.room_number || reservation.room_type_name || "-")}</td>
+      <td><span class="pill ${pillClass(reservation.status)}">${reservation.status}</span></td>
+      <td>
+        <div class="table-actions">
+          <button class="secondary" data-folio="${reservation.id}">Folio</button>
+          ${renderReservationActionButtons(reservation)}
+        </div>
+        <form class="table-actions assign-form" data-assign="${reservation.id}">
+          <select name="room_id">
+            <option value="">Assign room</option>
+            ${renderRoomOptions()}
+          </select>
+          <button class="secondary" type="submit">Assign</button>
+        </form>
+      </td>
+    </tr>
+  `).join("");
+}
+
+function renderReservationActionButtons(reservation) {
+  return RESERVATION_STATUS_ACTIONS.filter(([status]) => reservation.status === status)
+    .map(([, label, action]) => `<button class="secondary" data-action="${action}" data-id="${reservation.id}">${label}</button>`)
+    .join("") + (
+      reservation.status !== "cancelled" && reservation.status !== "checked_out"
+        ? `<button class="ghost" data-action="cancel" data-id="${reservation.id}">Cancel</button>`
+        : ""
+    );
+}
+
+function renderRoomOptions() {
+  return state.rooms.map((room) => `<option value="${room.id}">${room.room_number} &middot; ${escapeHtml(room.room_type_name)}</option>`).join("");
 }
 
 function renderFolio() {
@@ -267,14 +326,14 @@ function renderFolio() {
 function renderHousekeeping() {
   return `
     <section class="card stack">
-      <div><span class="badge">${t("housekeeping")}</span><h2>${t("housekeeping")}</h2></div>
+      <div class="section-head"><div><span class="badge">${t("housekeeping")}</span><h2>${t("housekeeping")}</h2></div></div>
       <div class="grid two">
         <article class="card stack">
-          <h3>Room status board</h3>
+          <div class="section-head"><h3>Room status board</h3></div>
           <div class="table-wrap"><table><thead><tr><th>Room</th><th>Type</th><th>Status</th><th>Update</th></tr></thead><tbody>${state.rooms.map((room) => `<tr><td>${room.room_number}</td><td>${escapeHtml(room.room_type_name)}</td><td><span class="pill ${pillClass(room.status)}">${room.status}</span></td><td><form class="toolbar" data-room-status="${room.id}"><select name="status">${["vacant_clean","vacant_dirty","occupied_clean","occupied_dirty","inspection","out_of_order"].map((status) => `<option value="${status}" ${room.status === status ? "selected" : ""}>${status}</option>`).join("")}</select><button class="secondary" type="submit">Set</button></form></td></tr>`).join("")}</tbody></table></div>
         </article>
         <article class="card stack">
-          <h3>Task board</h3>
+          <div class="section-head"><h3>Task board</h3></div>
           <div class="table-wrap"><table><thead><tr><th>Room</th><th>Task</th><th>Status</th><th>Done</th></tr></thead><tbody>${state.tasks.map((task) => `<tr><td>${task.room_number || "-"}</td><td>${task.task_type}<br><span class="muted">${escapeHtml(task.notes || "")}</span></td><td><span class="pill ${pillClass(task.status)}">${task.status}</span></td><td>${task.status !== "done" ? `<button class="secondary" data-task="${task.id}">Mark done</button>` : ""}</td></tr>`).join("") || `<tr><td colspan="4" class="muted">No tasks</td></tr>`}</tbody></table></div>
         </article>
       </div>
@@ -285,7 +344,7 @@ function renderReports() {
   if (!["admin", "manager"].includes(state.session.role)) return "";
   return `
     <section class="card stack">
-      <div><span class="badge">${t("reports")}</span><h2>${t("reports")}</h2></div>
+      <div class="section-head"><div><span class="badge">${t("reports")}</span><h2>${t("reports")}</h2></div></div>
       <div class="grid two">
         <article class="card stack"><h3>Daily report ${state.report.date}</h3><div class="grid two"><div class="metric"><span class="muted">Occupancy</span><strong>${state.report.occupancy}</strong></div><div class="metric"><span class="muted">Payments</span><strong>${Number(state.report.payments).toFixed(2)}</strong></div></div><div class="table-wrap"><table><thead><tr><th>Status</th><th>Count</th></tr></thead><tbody>${state.report.statusBreakdown.map((row) => `<tr><td>${row.status}</td><td>${row.count}</td></tr>`).join("")}</tbody></table></div></article>
         <article class="card stack"><h3>Audit trail</h3><div class="table-wrap"><table><thead><tr><th>Action</th><th>Entity</th><th>When</th></tr></thead><tbody>${state.audit.map((event) => `<tr><td>${event.action}<br><span class="muted">${escapeHtml(event.description)}</span></td><td>${event.entity_type} #${event.entity_id}</td><td>${event.created_at}</td></tr>`).join("")}</tbody></table></div></article>
@@ -297,8 +356,8 @@ function renderSettings() {
   const disabled = !["admin", "manager"].includes(state.session.role) ? "disabled" : "";
   return `
     <section class="card stack">
-      <div><span class="badge">${t("settings")}</span><h2>${t("settings")}</h2></div>
-      <form id="settingsForm" class="grid three">
+      <div class="section-head"><div><span class="badge">${t("settings")}</span><h2>${t("settings")}</h2></div></div>
+      <form id="settingsForm" class="grid three dense-form">
         <label>Hotel name<input name="name" value="${escapeHtml(state.settings.name || "")}" ${disabled}></label>
         <label>Timezone<input name="timezone" value="${escapeHtml(state.settings.timezone || "")}" ${disabled}></label>
         <label>Currency<input name="currency" value="${escapeHtml(state.settings.currency || "")}" ${disabled}></label>
@@ -310,8 +369,8 @@ function renderSettings() {
         <label>Email<input name="contact_email" value="${escapeHtml(state.settings.contact_email || "")}" ${disabled}></label>
         <label>LINE<input name="line_id" value="${escapeHtml(state.settings.line_id || "")}" ${disabled}></label>
         <label>WhatsApp<input name="whatsapp_number" value="${escapeHtml(state.settings.whatsapp_number || "")}" ${disabled}></label>
-        <label style="grid-column:1 / -1">Notes<textarea name="notes" ${disabled}>${escapeHtml(state.settings.notes || "")}</textarea></label>
-        ${disabled ? "" : `<button type="submit">Save settings</button>`}
+        <label class="field-span-full">Notes<textarea name="notes" ${disabled}>${escapeHtml(state.settings.notes || "")}</textarea></label>
+        ${disabled ? "" : `<button class="field-span-full" type="submit">Save settings</button>`}
       </form>
     </section>`;
 }
@@ -352,4 +411,3 @@ function today() { return new Date().toISOString().slice(0, 10); }
 function shiftDate(date, days) { return new Date(Date.parse(`${date}T00:00:00Z`) + days * 86400000).toISOString().slice(0, 10); }
 function pillClass(status) { if (["checked_in", "vacant_clean", "done", "confirmed"].includes(status)) return "ok"; if (["cancelled", "no_show", "out_of_order"].includes(status)) return "danger"; return "warn"; }
 function escapeHtml(value) { return String(value).replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;"); }
-
