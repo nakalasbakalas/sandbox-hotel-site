@@ -775,48 +775,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border: 1px solid var(--line);
       box-shadow: var(--shadow3);
     }
+    .amenities-inner{
+      display:grid;
+      gap:18px;
+    }
     #amenities h2, .amenities-section h2{
-      font-size: clamp(22px, 2.2vw, 30px);
-      letter-spacing: .02em;
-      margin: 0 0 6px;
+      font-size: clamp(24px, 2.4vw, 32px);
+      line-height: 1.08;
+      letter-spacing: .01em;
+      margin: 0 0 8px;
+      text-wrap: balance;
     }
     #amenities .sub, .amenities-section .sub, #amenities p.lead{
-      margin: 0 0 18px;
-      max-width: 56ch;
-      opacity: .82;
-      font-size: 14px;
-      line-height: 1.55;
+      margin: 0;
+      max-width: 52ch;
+      opacity: .88;
+      font-size: 14.5px;
+      line-height: 1.6;
       color: var(--muted);
     }
     .amenities-grid{
       display: grid;
-      gap: 12px;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      align-items: stretch;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
     }
     @media (max-width: 980px){
-      .amenities-grid{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .amenities-grid{ grid-template-columns: repeat(2, minmax(220px, 1fr)); }
     }
     @media (max-width: 640px){
-      .amenities-grid{ grid-template-columns: 1fr; gap: 10px; }
+      .amenities-grid{ grid-template-columns: 1fr; gap: 12px; }
     }
     .amenity-card{
       position: relative;
       overflow: hidden;
       border-radius: var(--radius2);
-      padding: 16px;
-      background: rgba(255,255,255,.025);
+      padding: 18px;
+      min-height: 100%;
+      background: linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
       border: 1px solid var(--line);
-      transition: transform .18s ease, border-color .18s ease;
-      display:flex;
-      flex-direction:row;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
+      display:grid;
+      grid-template-columns: 46px minmax(0, 1fr);
+      column-gap: 16px;
+      row-gap: 5px;
       align-items:flex-start;
-      gap:14px;
     }
     .amenity-card::before, .amenity-card::after{display:none}
     @media (hover:hover){
       .amenity-card:hover{
         transform: translateY(-2px);
         border-color: color-mix(in oklab, var(--accent) 25%, var(--border));
+        box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 12px 28px rgba(0,0,0,.18);
       }
     }
     .amenity-card:focus-visible{
@@ -826,36 +837,59 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .amenity-icon{
       position: relative;
       z-index: 1;
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
+      grid-row: 1 / span 2;
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
       display: grid;
       place-items: center;
       flex-shrink:0;
-      background: var(--softA);
-      border: 1px solid rgba(183,106,43,.18);
+      background: color-mix(in oklab, var(--softA) 88%, rgba(255,255,255,.04));
+      border: 1px solid rgba(183,106,43,.22);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
     }
     .amenity-icon .glyph{
       font-weight: 700;
       letter-spacing: .04em;
-      font-size: 13px;
+      line-height: 1;
+      font-size: 14px;
       color: var(--ink2);
     }
     .amenity-card h3{
-      margin: 0 0 2px;
-      font-size: 14px;
+      grid-column: 2;
+      margin: 2px 0 0;
+      font-size: 15px;
+      line-height: 1.3;
       letter-spacing: .01em;
+      font-weight: 600;
       color: var(--ink2);
       position: relative;
       z-index: 1;
+      max-width: 20ch;
+      text-wrap: balance;
+      overflow-wrap: normal;
+      hyphens: none;
     }
     .amenity-card p{
+      grid-column: 2;
       margin: 0;
-      font-size: 13px;
-      line-height: 1.45;
+      font-size: 13.5px;
+      line-height: 1.6;
+      max-width: 34ch;
       color: var(--muted);
       position: relative;
       z-index: 1;
+    }
+    @media (max-width: 640px){
+      .amenity-card{
+        padding: 16px;
+        grid-template-columns: 44px minmax(0, 1fr);
+        column-gap: 14px;
+      }
+      .amenity-icon{
+        width: 44px;
+        height: 44px;
+      }
     }
     @media (prefers-reduced-motion: reduce){
       .amenity-card{ transition: none !important; }
@@ -1648,40 +1682,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <section class="section" id="amenities">
       <div class="amenities-inner">
         <div>
-          <h2 data-i18n="amen_title">Amenities</h2>
-          <p class="sub" data-i18n="amen_sub">Essentials that matter for comfort and convenience.</p>
+          <h2 data-i18n="amen_title">Guest Amenities</h2>
+          <p class="sub" data-i18n="amen_sub">Essentials designed for a comfortable and convenient stay.</p>
         </div>
 
         <div class="amenities-grid" aria-label="Amenities list">
           <div class="amenity-card" tabindex="0">
             <div class="amenity-icon" aria-hidden="true"><span class="glyph">Wi</span></div>
-            <h3 data-i18n="amen_wifi_title">Wi-Fi</h3>
-            <p data-i18n="amen_wifi_desc">Reliable connection for work, streaming, and video calls.</p>
+            <h3 data-i18n="amen_wifi_title">Wi‑Fi</h3>
+            <p data-i18n="amen_wifi_desc">Fast, reliable internet for work, streaming, and daily use.</p>
           </div>
           <div class="amenity-card" tabindex="0">
             <div class="amenity-icon" aria-hidden="true"><span class="glyph">🅿</span></div>
             <h3 data-i18n="amen_parking_title">Parking</h3>
-            <p data-i18n="amen_parking_desc">Guest parking available (subject to availability).</p>
+            <p data-i18n="amen_parking_desc">Limited on-site guest parking available.</p>
           </div>
           <div class="amenity-card" tabindex="0">
             <div class="amenity-icon" aria-hidden="true"><span class="glyph">AC</span></div>
-            <h3 data-i18n="amen_ac_title">Air-conditioning</h3>
-            <p data-i18n="amen_ac_desc">Comfortable rooms year-round.</p>
+            <h3 data-i18n="amen_ac_title">Air Conditioning</h3>
+            <p data-i18n="amen_ac_desc">Comfortable climate control throughout the year.</p>
           </div>
           <div class="amenity-card" tabindex="0">
             <div class="amenity-icon" aria-hidden="true"><span class="glyph">🧺</span></div>
-            <h3 data-i18n="amen_laundry_title">Laundry</h3>
-            <p data-i18n="amen_laundry_desc">Laundry service/area available—ask reception.</p>
+            <h3 data-i18n="amen_laundry_title">Laundry Service</h3>
+            <p data-i18n="amen_laundry_desc">Laundry support available on request.</p>
           </div>
           <div class="amenity-card" tabindex="0">
             <div class="amenity-icon" aria-hidden="true"><span class="glyph">☕</span></div>
             <h3 data-i18n="amen_coffee_title">Coffee & Snack Bar</h3>
-            <p data-i18n="amen_coffee_desc">Quick refreshments on site.</p>
+            <p data-i18n="amen_coffee_desc">Light refreshments available on site.</p>
           </div>
           <div class="amenity-card" tabindex="0">
             <div class="amenity-icon" aria-hidden="true"><span class="glyph">🛎</span></div>
-            <h3 data-i18n="amen_service_title">Helpful Service</h3>
-            <p data-i18n="amen_service_desc">Friendly staff for local tips and smooth stays.</p>
+            <h3 data-i18n="amen_service_title">Guest Support</h3>
+            <p data-i18n="amen_service_desc">Friendly staff available to assist during your stay.</p>
           </div>
         </div>
       </div>
@@ -2312,20 +2346,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_a8: "เงื่อนไขการยกเลิกอาจเปลี่ยนตามช่วงเวลา/ฤดูกาล กรุณายืนยันกับโรงแรมตามวันเข้าพักของคุณ",
         book_tip: "ทิป: หากมาถึงดึก โปรดระบุเวลาโดยประมาณในหมายเหตุ เพื่อให้เราช่วยเหลือได้รวดเร็ว",
 
-        amen_title: "สิ่งอำนวยความสะดวก",
-        amen_sub: "สิ่งจำเป็นเพื่อความสบายและความสะดวก",
-        amen_wifi_title: "Wi-Fi",
-        amen_wifi_desc: "อินเทอร์เน็ตเสถียรสำหรับทำงาน ดูหนัง และวิดีโอคอล",
+        amen_title: "สิ่งอำนวยความสะดวกสำหรับผู้เข้าพัก",
+        amen_sub: "สิ่งจำเป็นที่ออกแบบมาเพื่อการเข้าพักที่สบายและสะดวกยิ่งขึ้น",
+        amen_wifi_title: "Wi‑Fi",
+        amen_wifi_desc: "อินเทอร์เน็ตความเร็วดีและเสถียรสำหรับทำงาน ดูสตรีม และใช้งานประจำวัน",
         amen_parking_title: "ที่จอดรถ",
-        amen_parking_desc: "มีที่จอดรถสำหรับผู้เข้าพัก (ขึ้นอยู่กับความพร้อม)",
+        amen_parking_desc: "มีที่จอดรถในที่พักสำหรับผู้เข้าพักจำนวนจำกัด",
         amen_ac_title: "เครื่องปรับอากาศ",
-        amen_ac_desc: "ห้องพักสบายตลอดปี",
+        amen_ac_desc: "ควบคุมอุณหภูมิให้สบายได้ตลอดทั้งปี",
         amen_laundry_title: "บริการซักรีด",
-        amen_laundry_desc: "มีบริการ/พื้นที่ซักรีด—สอบถามที่เคาน์เตอร์",
+        amen_laundry_desc: "มีบริการซักรีดตามคำขอ",
         amen_coffee_title: "กาแฟ & สแน็กบาร์",
-        amen_coffee_desc: "เครื่องดื่มและของว่างแบบรวดเร็วในที่พัก",
-        amen_service_title: "บริการเป็นกันเอง",
-        amen_service_desc: "พนักงานพร้อมแนะนำและช่วยให้เข้าพักราบรื่น",
+        amen_coffee_desc: "มีเครื่องดื่มและของว่างเบา ๆ ภายในที่พัก",
+        amen_service_title: "บริการผู้เข้าพัก",
+        amen_service_desc: "พนักงานยินดีช่วยเหลือตลอดการเข้าพักของคุณ",
 
         rooms_title: "ห้องพัก",
         rooms_sub: 'แตะ <span class="kw hot">จอง</span> เพื่อเลือกประเภทห้องในแบบฟอร์ม',
@@ -2513,20 +2547,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_a8: "Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.",
         book_tip: "Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.",
 
-        amen_title: "Amenities",
-        amen_sub: "Essentials that matter for comfort and convenience.",
-        amen_wifi_title: "Wi-Fi",
-        amen_wifi_desc: "Reliable connection for work, streaming, and video calls.",
+        amen_title: "Guest Amenities",
+        amen_sub: "Essentials designed for a comfortable and convenient stay.",
+        amen_wifi_title: "Wi‑Fi",
+        amen_wifi_desc: "Fast, reliable internet for work, streaming, and daily use.",
         amen_parking_title: "Parking",
-        amen_parking_desc: "Guest parking available (subject to availability).",
-        amen_ac_title: "Air-conditioning",
-        amen_ac_desc: "Comfortable rooms year-round.",
-        amen_laundry_title: "Laundry",
-        amen_laundry_desc: "Laundry service/area available—ask reception.",
+        amen_parking_desc: "Limited on-site guest parking available.",
+        amen_ac_title: "Air Conditioning",
+        amen_ac_desc: "Comfortable climate control throughout the year.",
+        amen_laundry_title: "Laundry Service",
+        amen_laundry_desc: "Laundry support available on request.",
         amen_coffee_title: "Coffee & Snack Bar",
-        amen_coffee_desc: "Quick refreshments on site.",
-        amen_service_title: "Helpful Service",
-        amen_service_desc: "Friendly staff for local tips and smooth stays.",
+        amen_coffee_desc: "Light refreshments available on site.",
+        amen_service_title: "Guest Support",
+        amen_service_desc: "Friendly staff available to assist during your stay.",
 
         rooms_title: "Rooms",
         rooms_sub: 'Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.',
@@ -2714,20 +2748,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_a8: "取消规则可能因日期/季节而变化。请与酒店确认您的日期以获取最新政策。",
         book_tip: "提示：如晚到，请在备注中写预计到达时间，方便我们协助。",
 
-        amen_title: "设施",
-        amen_sub: "舒适与便利所需的基础配套。",
-        amen_wifi_title: "Wi-Fi",
-        amen_wifi_desc: "适合办公、观看视频和视频通话的稳定网络。",
+        amen_title: "住客设施",
+        amen_sub: "为舒适便捷入住而准备的贴心基础配套。",
+        amen_wifi_title: "Wi‑Fi",
+        amen_wifi_desc: "高速稳定网络，满足办公、影音和日常使用。",
         amen_parking_title: "停车",
-        amen_parking_desc: "提供住客停车位（视车位情况）。",
+        amen_parking_desc: "提供数量有限的店内住客停车位。",
         amen_ac_title: "空调",
-        amen_ac_desc: "全年舒适入住。",
-        amen_laundry_title: "洗衣",
-        amen_laundry_desc: "提供洗衣服务/区域—可向前台咨询。",
+        amen_ac_desc: "全年提供舒适的室内温度控制。",
+        amen_laundry_title: "洗衣服务",
+        amen_laundry_desc: "可按需提供洗衣协助。",
         amen_coffee_title: "咖啡与小食吧",
-        amen_coffee_desc: "店内可快速补给饮品与小食。",
-        amen_service_title: "贴心服务",
-        amen_service_desc: "友善员工提供本地建议与入住协助。",
+        amen_coffee_desc: "店内提供轻食与饮品。",
+        amen_service_title: "住客协助",
+        amen_service_desc: "友善员工在您入住期间随时提供帮助。",
 
         rooms_title: "房型",
         rooms_sub: '点击 <span class="kw hot">预订</span> 可在表单中预选房型。',
