@@ -166,7 +166,7 @@ function renderApp() {
             <button class="secondary" id="refreshButton">Refresh</button>
             <button id="logoutButton">${t("signOut")}</button>
           </div>
-          <div class="notice">${escapeHtml(state.session.name)} • ${escapeHtml(state.session.role)}</div>
+          <div class="notice">${escapeHtml(state.session.name)} &middot; ${escapeHtml(state.session.role)}</div>
         </div>
       </header>
       ${renderOverview()}
@@ -211,7 +211,7 @@ function renderReservations() {
         <article class="card stack">
           <h3>${t("leads")}</h3>
           <div class="table-wrap"><table><thead><tr><th>Source</th><th>Stay</th><th>Guest</th><th>Status</th><th>Action</th></tr></thead><tbody>
-            ${state.leads.map((lead) => `<tr><td>${lead.source}</td><td>${lead.checkin_date} ? ${lead.checkout_date}<br><span class="muted">${escapeHtml(lead.requested_room_type || "-")}</span></td><td>${escapeHtml(lead.guest_name || "-")}<br><span class="muted">${escapeHtml(lead.guest_contact || "")}</span></td><td><span class="pill ${lead.status === "new" ? "warn" : ""}">${lead.status}</span></td><td><button class="secondary" data-convert="${lead.id}">Convert</button></td></tr>`).join("") || `<tr><td colspan="5" class="muted">No leads</td></tr>`}
+            ${state.leads.map((lead) => `<tr><td>${lead.source}</td><td>${lead.checkin_date} &rarr; ${lead.checkout_date}<br><span class="muted">${escapeHtml(lead.requested_room_type || "-")}</span></td><td>${escapeHtml(lead.guest_name || "-")}<br><span class="muted">${escapeHtml(lead.guest_contact || "")}</span></td><td><span class="pill ${lead.status === "new" ? "warn" : ""}">${lead.status}</span></td><td><button class="secondary" data-convert="${lead.id}">Convert</button></td></tr>`).join("") || `<tr><td colspan="5" class="muted">No leads</td></tr>`}
           </tbody></table></div>
           <h3>${t("createReservation")}</h3>
           <form id="reservationForm" class="grid two">
@@ -230,7 +230,7 @@ function renderReservations() {
         <article class="card stack">
           <h3>Reservations</h3>
           <div class="table-wrap"><table><thead><tr><th>Code</th><th>Guest</th><th>Stay</th><th>Room</th><th>Status</th><th>Actions</th></tr></thead><tbody>
-            ${state.reservations.map((reservation) => `<tr><td>${reservation.confirmation_code}</td><td>${escapeHtml(reservation.guest_name)}<br><span class="muted">${escapeHtml(reservation.guest_contact || "")}</span></td><td>${reservation.checkin_date} ? ${reservation.checkout_date}</td><td>${escapeHtml(reservation.room_number || reservation.room_type_name || "-")}</td><td><span class="pill ${pillClass(reservation.status)}">${reservation.status}</span></td><td><div class="toolbar"><button class="secondary" data-folio="${reservation.id}">Folio</button>${reservation.status === "tentative" || reservation.status === "inquiry" ? `<button class="secondary" data-action="confirm" data-id="${reservation.id}">Confirm</button>` : ""}${reservation.status === "confirmed" ? `<button class="secondary" data-action="check_in" data-id="${reservation.id}">Check in</button>` : ""}${reservation.status === "checked_in" ? `<button class="secondary" data-action="check_out" data-id="${reservation.id}">Check out</button>` : ""}${reservation.status !== "cancelled" && reservation.status !== "checked_out" ? `<button class="ghost" data-action="cancel" data-id="${reservation.id}">Cancel</button>` : ""}</div><form class="toolbar" data-assign="${reservation.id}"><select name="room_id"><option value="">Assign room</option>${state.rooms.map((room) => `<option value="${room.id}">${room.room_number} · ${escapeHtml(room.room_type_name)}</option>`).join("")}</select><button class="secondary" type="submit">Assign</button></form></td></tr>`).join("") || `<tr><td colspan="6" class="muted">No reservations</td></tr>`}
+            ${state.reservations.map((reservation) => `<tr><td>${reservation.confirmation_code}</td><td>${escapeHtml(reservation.guest_name)}<br><span class="muted">${escapeHtml(reservation.guest_contact || "")}</span></td><td>${reservation.checkin_date} &rarr; ${reservation.checkout_date}</td><td>${escapeHtml(reservation.room_number || reservation.room_type_name || "-")}</td><td><span class="pill ${pillClass(reservation.status)}">${reservation.status}</span></td><td><div class="toolbar"><button class="secondary" data-folio="${reservation.id}">Folio</button>${reservation.status === "tentative" || reservation.status === "inquiry" ? `<button class="secondary" data-action="confirm" data-id="${reservation.id}">Confirm</button>` : ""}${reservation.status === "confirmed" ? `<button class="secondary" data-action="check_in" data-id="${reservation.id}">Check in</button>` : ""}${reservation.status === "checked_in" ? `<button class="secondary" data-action="check_out" data-id="${reservation.id}">Check out</button>` : ""}${reservation.status !== "cancelled" && reservation.status !== "checked_out" ? `<button class="ghost" data-action="cancel" data-id="${reservation.id}">Cancel</button>` : ""}</div><form class="toolbar" data-assign="${reservation.id}"><select name="room_id"><option value="">Assign room</option>${state.rooms.map((room) => `<option value="${room.id}">${room.room_number} &middot; ${escapeHtml(room.room_type_name)}</option>`).join("")}</select><button class="secondary" type="submit">Assign</button></form></td></tr>`).join("") || `<tr><td colspan="6" class="muted">No reservations</td></tr>`}
           </tbody></table></div>
           ${renderFolio()}
         </article>
@@ -242,7 +242,7 @@ function renderFolio() {
   if (!state.folio) return `<div class="notice">Select a reservation to view folio</div>`;
   return `
     <div class="stack">
-      <div class="notice">Reservation #${state.folio.reservation_id} • Balance ${Number(state.folio.balance_amount).toFixed(2)} THB</div>
+      <div class="notice">Reservation #${state.folio.reservation_id} &middot; Balance ${Number(state.folio.balance_amount).toFixed(2)} THB</div>
       <div class="grid two">
         <form id="folioLineForm" class="stack">
           <label>Line type<select name="line_type"><option value="fee">fee</option><option value="discount">discount</option><option value="adjustment">adjustment</option></select></label>
@@ -258,7 +258,7 @@ function renderFolio() {
         </form>
       </div>
       <div class="grid two">
-        <div class="table-wrap"><table><thead><tr><th>Charge</th><th>Amount</th><th>Posted</th></tr></thead><tbody>${state.folio.lines.map((line) => `<tr><td>${escapeHtml(line.description)}<br><span class="muted">${line.line_type}</span></td><td>${Number(line.amount).toFixed(2)} × ${line.quantity}</td><td>${line.posted_at}</td></tr>`).join("")}</tbody></table></div>
+        <div class="table-wrap"><table><thead><tr><th>Charge</th><th>Amount</th><th>Posted</th></tr></thead><tbody>${state.folio.lines.map((line) => `<tr><td>${escapeHtml(line.description)}<br><span class="muted">${line.line_type}</span></td><td>${Number(line.amount).toFixed(2)} &times; ${line.quantity}</td><td>${line.posted_at}</td></tr>`).join("")}</tbody></table></div>
         <div class="table-wrap"><table><thead><tr><th>Payment</th><th>Amount</th><th>When</th></tr></thead><tbody>${state.folio.payments.map((payment) => `<tr><td>${payment.payment_method}<br><span class="muted">${escapeHtml(payment.reference || "")}</span></td><td>${Number(payment.amount).toFixed(2)}</td><td>${payment.payment_date}</td></tr>`).join("")}</tbody></table></div>
       </div>
     </div>`;

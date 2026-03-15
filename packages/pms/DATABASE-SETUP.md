@@ -106,7 +106,7 @@ CREATE USER sandbox WITH PASSWORD 'sandbox_password';
 ALTER ROLE sandbox SET client_encoding TO 'utf8';
 ALTER ROLE sandbox SET default_transaction_isolation TO 'read committed';
 ALTER ROLE sandbox SET default_transaction_deferrable TO on;
-ALTER ROLE sandbox SET default_tzoneTO 'UTC';
+ALTER ROLE sandbox SET timezone TO 'UTC';
 GRANT ALL PRIVILEGES ON DATABASE sandbox_hotel_pms TO sandbox;
 ```
 
