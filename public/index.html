@@ -18,8 +18,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="description" id="metaDescription" content="Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
+  <link rel="icon" href="assets/images/logo/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/sandbox-logo-transparent.svg">
-  <link rel="shortcut icon" href="assets/images/logo/sandbox-logo-transparent.svg">
+  <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo/logo-16.png">
+  <link rel="apple-touch-icon" sizes="256x256" href="assets/images/logo/logo-256.png">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
 <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sandbox Hotel">
@@ -273,9 +278,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:flex; align-items:center; justify-content:space-between; gap:var(--nav-gap);
       padding-top: calc(var(--nav-pad-y) + env(safe-area-inset-top));
     }
-    .brand{display:flex; align-items:center; gap:14px; text-decoration:none}
+    .brand{display:flex; align-items:center; gap:14px; text-decoration:none; min-width:0}
     .logo{
-      width:52px; height:52px;
+      width:56px; height:56px;
       flex:0 0 auto;
     }
     .logo img{
@@ -285,9 +290,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:block;
       filter: drop-shadow(0 10px 18px rgba(0,0,0,.3));
     }
+    .logo.footerLogo{
+      width:44px;
+      height:44px;
+    }
     .brandText{
       display:grid;
       gap:3px;
+      min-width:0;
     }
     .brand .brandName{
       display:block;
@@ -365,6 +375,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: var(--shadow2);
       z-index:20;
     }
+    .navPanelBrand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      padding-bottom:4px;
+    }
+    .navPanelBrand .logo{
+      width:40px;
+      height:40px;
+    }
+    .navPanelBrandTitle{
+      display:block;
+      margin:0;
+      font-size:13px;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      font-weight:950;
+      color:var(--ink2);
+    }
+    .navPanelBrandCopy{
+      display:block;
+      margin-top:3px;
+      font-size:12px;
+      color:color-mix(in oklab, var(--muted) 88%, white);
+      line-height:1.45;
+    }
     .navPanel .chip{justify-content:flex-start}
     .langSwitch{position:relative}
     @media (max-width:980px){
@@ -372,6 +408,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .hideMobile{display:inline-flex}
     @media (max-width:980px){ .hideMobile{display:none} }
+    @media (max-width:640px){
+      .logo{
+        width:48px;
+        height:48px;
+      }
+      .brand{
+        gap:12px;
+      }
+      .brand small{
+        font-size:11px;
+      }
+    }
 
     /* ---------- Chips / Buttons ---------- */
     .chip{
@@ -1218,7 +1266,42 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-top:1px solid var(--line);
       color:var(--muted);
       font-size:12px;
-      display:flex; justify-content:space-between; gap:12px; flex-wrap:wrap;
+      display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;
+    }
+    .footerBrand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width:0;
+    }
+    .footerBrandText{
+      display:grid;
+      gap:2px;
+    }
+    .footerBrandName{
+      display:block;
+      color:var(--ink2);
+      font-size:13px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+    }
+    .footerBrandCopy{
+      color:var(--muted);
+      font-size:12px;
+    }
+    .footerMeta{
+      display:grid;
+      justify-items:end;
+      gap:10px;
+      margin-left:auto;
+    }
+    @media (max-width:640px){
+      .footerMeta{
+        width:100%;
+        justify-items:start;
+        margin-left:0;
+      }
     }
 
     /* ---------- Sticky booking bar (mobile only) ---------- */
@@ -1489,8 +1572,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <header>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Sandbox Hotel home">
-        <div class="logo" aria-hidden="true">
-          <img src="assets/images/logo/sandbox-logo-transparent.svg" alt="" loading="eager" decoding="async">
+        <div class="logo">
+          <img src="assets/images/logo/sandbox-logo-transparent.svg" alt="Sandbox Hotel logo" width="800" height="800" loading="eager" decoding="async">
         </div>
         <div class="brandText">
           <span class="brandName">Sandbox Hotel</span>
@@ -1509,6 +1592,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </button>
           </summary>
           <div class="navPanel" role="group" aria-label="Site navigation">
+            <div class="navPanelBrand">
+              <div class="logo">
+                <img src="assets/images/logo/sandbox-logo-transparent.svg" alt="Sandbox Hotel logo" width="800" height="800" loading="lazy" decoding="async">
+              </div>
+              <div class="brandText">
+                <span class="navPanelBrandTitle">Sandbox Hotel</span>
+                <span class="navPanelBrandCopy" data-i18n="nav_support">Best Rate Direct</span>
+              </div>
+            </div>
+            <div class="navPanelDivider"></div>
             <a class="chip" href="#rooms" data-i18n="nav_rooms">Rooms</a>
             <a class="chip" href="#offers" data-i18n="nav_offers">Offers</a>
             <a class="chip" href="#amenities" data-i18n="nav_amenities">Amenities</a>
@@ -2132,16 +2225,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <footer>
-          <div>© <span id="y"></span> Sandbox Hotel</div>
-
-          <div class="footerLang" aria-label="Language">
-            <span class="fine" data-i18n="footer_lang">Language:</span>
-            <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
-            <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
-            <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
+          <div class="footerBrand">
+            <div class="logo footerLogo">
+              <img src="assets/images/logo/sandbox-logo-transparent.svg" alt="Sandbox Hotel logo" width="800" height="800" loading="lazy" decoding="async">
+            </div>
+            <div class="footerBrandText">
+              <span class="footerBrandName">Sandbox Hotel</span>
+              <span class="footerBrandCopy">© <span id="y"></span> Nakhon Si Thammarat, Thailand</span>
+            </div>
           </div>
 
-          <div><a href="#top" data-i18n="back_to_top">Back to top</a></div>
+          <div class="footerMeta">
+            <div class="footerLang" aria-label="Language">
+              <span class="fine" data-i18n="footer_lang">Language:</span>
+              <button class="chip langBtn" type="button" data-lang="th" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span>ไทย</span></button>
+              <button class="chip langBtn" type="button" data-lang="en" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span>EN</span></button>
+              <button class="chip langBtn" type="button" data-lang="zh" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span>中文</span></button>
+            </div>
+
+            <div><a href="#top" data-i18n="back_to_top">Back to top</a></div>
+          </div>
         </footer>
       </div>
     </section>
