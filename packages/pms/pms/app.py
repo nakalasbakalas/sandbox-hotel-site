@@ -6,7 +6,6 @@ from datetime import date, datetime, timedelta
 from decimal import Decimal
 from uuid import UUID
 
-import sqlalchemy as sa
 from flask import Flask, abort, flash, g, jsonify, redirect, render_template, request, session, url_for
 from markupsafe import Markup
 
@@ -2378,4 +2377,3 @@ def available_admin_sections() -> list[dict[str, str]]:
             {"key": "audit", "label": "Audit", "endpoint": "staff_admin_audit", "description": "Configuration and system history"}
         )
     return sections
-

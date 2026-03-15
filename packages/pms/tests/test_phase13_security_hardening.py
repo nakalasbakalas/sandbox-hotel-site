@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import os
+import shutil
 import subprocess
 from datetime import date, timedelta
 from pathlib import Path
@@ -305,9 +306,12 @@ def test_backup_and_restore_scripts_create_manifest_checksum_and_verify(tmp_path
 
     backup_script = PROJECT_ROOT / "scripts" / "backup_db.ps1"
     restore_script = PROJECT_ROOT / "scripts" / "restore_db.ps1"
+    powershell = shutil.which("powershell") or shutil.which("pwsh")
+    if not powershell:
+        pytest.skip("PowerShell is required for backup/restore script validation")
 
     subprocess.run(
-        ["powershell", "-ExecutionPolicy", "Bypass", "-File", str(backup_script), "-BackupDir", str(backup_dir)],
+        [powershell, "-ExecutionPolicy", "Bypass", "-File", str(backup_script), "-BackupDir", str(backup_dir)],
         check=True,
         capture_output=True,
         text=True,
@@ -328,7 +332,7 @@ def test_backup_and_restore_scripts_create_manifest_checksum_and_verify(tmp_path
 
     subprocess.run(
         [
-            "powershell",
+            powershell,
             "-ExecutionPolicy",
             "Bypass",
             "-File",

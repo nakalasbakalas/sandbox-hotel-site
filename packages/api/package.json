@@ -4,9 +4,9 @@
   "description": "Sandbox Hotel API and worker functions",
   "type": "module",
   "scripts": {
-    "dev": "wrangler dev",
-    "deploy": "wrangler deploy",
-    "build": "wrangler build"
+    "dev": "node ../../node_modules/wrangler/bin/wrangler.js dev",
+    "deploy": "node ../../node_modules/wrangler/bin/wrangler.js deploy",
+    "build": "node ../../node_modules/wrangler/bin/wrangler.js build"
   },
   "dependencies": {
     "@sandbox-hotel/shared": "*"
