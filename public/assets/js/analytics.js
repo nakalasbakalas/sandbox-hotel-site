@@ -1,67 +1,45 @@
-/*
- * Sandbox Hotel GA4 setup
- *
- * Measurement ID:
- * - Default production Measurement ID is set below for the existing
- *   "Sandbox Hotel" GA4 property.
- * - You can still override it by defining window.SBX_GA_MEASUREMENT_ID before
- *   this file loads.
- *
- * Events tracked:
- * - book_now_click
- * - contact_call_click
- * - contact_line_click
- * - contact_whatsapp_click
- * - map_directions_click
- *
- * Selectors used:
- * - Explicit [data-analytics] hooks on booking/contact/map CTAs
- * - form[data-analytics-submit] for the booking form LINE submit path
- * - href fallbacks for tel:, line.me, wa.me, and Google Maps links
- *
- * Verification:
- * - Replace the Measurement ID, open the live site, then use GA4 Realtime or
- *   DebugView while clicking each CTA once.
- *
- * Consent:
- * - If a consent banner is added later, set
- *   window.SBX_ANALYTICS_CONSENT_GRANTED before this file loads, or call
- *   window.SandboxAnalytics.updateConsent(true/false) when consent changes.
- */
 (function () {
   if (window.__SBX_ANALYTICS_INITIALIZED__) {
     return;
   }
   window.__SBX_ANALYTICS_INITIALIZED__ = true;
 
-  const PLACEHOLDER_MEASUREMENT_ID = "G-2B2SGREN1Z";
-  const MEASUREMENT_ID = String(
-    window.SBX_GA_MEASUREMENT_ID || PLACEHOLDER_MEASUREMENT_ID
-  ).trim();
-
-  const EVENT_NAMES = {
-    "book-now": "book_now_click",
-    call: "contact_call_click",
-    line: "contact_line_click",
-    whatsapp: "contact_whatsapp_click",
-    map: "map_directions_click",
-  };
-
+  const GA4_MEASUREMENT_ID = "G-2B2SGREN1Z";
+  const MEASUREMENT_ID = String(window.SBX_GA_MEASUREMENT_ID ?? GA4_MEASUREMENT_ID).trim();
   const CLICK_SELECTOR = [
     "[data-analytics]",
     "a[href^='tel:']",
     "a[href*='line.me']",
     "a[href*='wa.me']",
     "a[href*='whatsapp']",
+    "a[href^='mailto:']",
     "a[href*='maps.app.goo.gl']",
     "a[href*='google.com/maps']",
-    "a[href='#book']",
+    "a[href*='facebook.com']",
+    "a[href*='fb.com']",
+    "a[href='#book']"
   ].join(",");
-
+  const EVENT_NAMES = {
+    "book-now": "book_cta_click",
+    call: "contact_call_click",
+    line: "contact_line_click",
+    whatsapp: "contact_whatsapp_click",
+    email: "contact_email_click",
+    map: "map_directions_click",
+    social: "social_outbound_click"
+  };
+  const EVENT_CATEGORIES = {
+    book_cta_click: "booking",
+    booking_submit_attempt: "booking",
+    booking_send_success: "booking",
+    contact_call_click: "contact",
+    contact_line_click: "contact",
+    contact_whatsapp_click: "contact",
+    contact_email_click: "contact",
+    map_directions_click: "location",
+    social_outbound_click: "social"
+  };
   const recentInteractions = new WeakMap();
-  const consentDefined = typeof window.SBX_ANALYTICS_CONSENT_GRANTED === "boolean";
-  let consentGranted = consentDefined ? window.SBX_ANALYTICS_CONSENT_GRANTED : true;
-  let consentModeInitialized = consentDefined;
   let analyticsConfigured = false;
   let googleTagInjected = false;
 
@@ -72,14 +50,15 @@
       window.dataLayer.push(arguments);
     };
 
-  if (consentDefined) {
-    window.gtag("consent", "default", {
-      analytics_storage: consentGranted ? "granted" : "denied",
-    });
+  function hasMeasurementId(id) {
+    return /^G-[A-Z0-9]+$/i.test(id);
   }
 
-  function hasRealMeasurementId(id) {
-    return /^G-[A-Z0-9]+$/i.test(id) && id.toUpperCase() !== PLACEHOLDER_MEASUREMENT_ID;
+  function hasGtmContainer() {
+    return Boolean(
+      document.querySelector("script[src*='googletagmanager.com/gtm.js']") ||
+        document.querySelector("iframe[src*='googletagmanager.com/ns.html']")
+    );
   }
 
   function getGoogleTagUrl() {
@@ -87,7 +66,7 @@
   }
 
   function injectGoogleTag() {
-    if (googleTagInjected) {
+    if (googleTagInjected || !hasMeasurementId(MEASUREMENT_ID)) {
       return;
     }
 
@@ -112,7 +91,7 @@
     if (analyticsConfigured) {
       return true;
     }
-    if (!hasRealMeasurementId(MEASUREMENT_ID) || !consentGranted) {
+    if (!hasMeasurementId(MEASUREMENT_ID) || hasGtmContainer()) {
       return false;
     }
 
@@ -120,13 +99,26 @@
     window.gtag("js", new Date());
     window.gtag("config", MEASUREMENT_ID, {
       send_page_view: true,
+      page_path: getPagePath(),
+      page_title: document.title
     });
     analyticsConfigured = true;
     return true;
   }
 
+  function collapseWhitespace(value) {
+    return String(value || "").replace(/\s+/g, " ").trim();
+  }
+
   function normalizeKey(value) {
-    return String(value || "").trim().toLowerCase();
+    return collapseWhitespace(value).toLowerCase();
+  }
+
+  function slugify(value) {
+    return collapseWhitespace(value)
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
   }
 
   function toAbsoluteUrl(value) {
@@ -137,19 +129,105 @@
     try {
       return new URL(value, window.location.href).href;
     } catch (_error) {
-      return String(value);
+      return String(value || "");
     }
   }
 
-  function collapseWhitespace(value) {
-    return String(value || "").replace(/\s+/g, " ").trim();
+  function getCanonicalUrl() {
+    const canonical = document.querySelector("link[rel='canonical']");
+    return canonical ? canonical.href : window.location.href;
   }
 
-  function slugify(value) {
-    return collapseWhitespace(value)
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, "-")
-      .replace(/^-+|-+$/g, "");
+  function getPagePath() {
+    return window.location.pathname + window.location.search;
+  }
+
+  function getLanguage() {
+    return document.documentElement.lang || navigator.language || "und";
+  }
+
+  function getBookingForm() {
+    return document.getElementById("bookingForm");
+  }
+
+  function getFieldValue(id) {
+    const field = document.getElementById(id);
+    if (!field || typeof field.value !== "string") {
+      return "";
+    }
+    return collapseWhitespace(field.value);
+  }
+
+  function getBookingContext(actionElement) {
+    return {
+      room_type: collapseWhitespace(
+        (actionElement && actionElement.getAttribute && actionElement.getAttribute("data-room")) || getFieldValue("room")
+      ),
+      guests: getFieldValue("guests"),
+      checkin: getFieldValue("checkin"),
+      checkout: getFieldValue("checkout")
+    };
+  }
+
+  function getSectionName(element) {
+    if (!element || !(element instanceof Element)) {
+      return "page";
+    }
+
+    const explicit = collapseWhitespace(element.getAttribute("data-cta-location"));
+    if (explicit) {
+      return explicit;
+    }
+
+    const trackedSection = element.closest("[data-analytics-section]");
+    if (trackedSection) {
+      return collapseWhitespace(trackedSection.getAttribute("data-analytics-section"));
+    }
+
+    const section = element.closest("section[id], header, footer, .sticky, main, body");
+    if (!section) {
+      return "page";
+    }
+    if (section.classList && section.classList.contains("sticky")) {
+      return "sticky_bar";
+    }
+    if (section.id) {
+      return slugify(section.id);
+    }
+    return slugify(section.tagName.toLowerCase()) || "page";
+  }
+
+  function getLinkText(element) {
+    if (!element || !(element instanceof Element)) {
+      return "";
+    }
+
+    const ariaLabel = collapseWhitespace(element.getAttribute("aria-label"));
+    if (ariaLabel) {
+      return ariaLabel;
+    }
+    if (typeof element.value === "string") {
+      const value = collapseWhitespace(element.value);
+      if (value) {
+        return value;
+      }
+    }
+    return collapseWhitespace(element.textContent);
+  }
+
+  function getLinkUrl(element) {
+    if (!element || !(element instanceof Element)) {
+      return "";
+    }
+
+    const explicitUrl = collapseWhitespace(element.getAttribute("data-analytics-url"));
+    if (explicitUrl) {
+      return toAbsoluteUrl(explicitUrl);
+    }
+    if (typeof element.href === "string" && element.href) {
+      return element.href;
+    }
+    return toAbsoluteUrl(element.getAttribute("href"));
   }
 
   function getTrackingKey(element) {
@@ -175,84 +253,21 @@
     if (href.indexOf("wa.me") !== -1 || href.indexOf("whatsapp") !== -1) {
       return "whatsapp";
     }
+    if (href.indexOf("mailto:") === 0) {
+      return "email";
+    }
     if (href.indexOf("maps.app.goo.gl") !== -1 || href.indexOf("google.com/maps") !== -1) {
       return "map";
     }
-
-    return "";
-  }
-
-  function getSectionName(element) {
-    if (!element || !(element instanceof Element)) {
-      return "";
-    }
-
-    const explicit = element.closest("[data-analytics-section]");
-    if (explicit) {
-      return explicit.getAttribute("data-analytics-section") || "";
-    }
-
-    const section = element.closest("section[id], section[aria-label], header, footer, .sticky, main, body");
-    if (!section) {
-      return "";
-    }
-    if (section.classList && section.classList.contains("sticky")) {
-      return "sticky";
-    }
-    if (section.id) {
-      return section.id;
-    }
-    if (section.getAttribute("aria-label")) {
-      return slugify(section.getAttribute("aria-label"));
-    }
-
-    return section.tagName.toLowerCase();
-  }
-
-  function getLinkText(element) {
-    if (!element || !(element instanceof Element)) {
-      return "";
-    }
-
-    const ariaLabel = collapseWhitespace(element.getAttribute("aria-label"));
-    if (ariaLabel) {
-      return ariaLabel;
-    }
-
-    if ("value" in element && typeof element.value === "string") {
-      const value = collapseWhitespace(element.value);
-      if (value) {
-        return value;
-      }
-    }
-
-    return collapseWhitespace(element.textContent);
-  }
-
-  function getLinkUrl(element) {
-    if (!element || !(element instanceof Element)) {
-      return "";
-    }
-
-    const explicitUrl = collapseWhitespace(element.getAttribute("data-analytics-url"));
-    if (explicitUrl) {
-      return toAbsoluteUrl(explicitUrl);
-    }
-
-    if (typeof element.href === "string" && element.href) {
-      return element.href;
-    }
-
-    const href = collapseWhitespace(element.getAttribute("href"));
-    if (href) {
-      return toAbsoluteUrl(href);
+    if (href.indexOf("facebook.com") !== -1 || href.indexOf("fb.com") !== -1) {
+      return "social";
     }
 
     return "";
   }
 
   function shouldTrack(sourceElement, eventName) {
-    if (!sourceElement || typeof eventName !== "string") {
+    if (!sourceElement || !eventName) {
       return false;
     }
 
@@ -264,45 +279,58 @@
 
     recentInteractions.set(sourceElement, {
       name: eventName,
-      time: now,
+      time: now
     });
     return true;
   }
 
-  function buildEventParams(contextElement, actionElement) {
-    const params = {
-      page_location: window.location.href,
-      page_title: document.title,
-      language: document.documentElement.lang || navigator.language || "und",
-    };
+  function buildEventParams(eventName, contextElement, actionElement, extraParams) {
+    const action = actionElement || contextElement;
+    const params = Object.assign(
+      {
+        event_category: EVENT_CATEGORIES[eventName] || "engagement",
+        event_label: getLinkText(action),
+        cta_location: getSectionName(contextElement || action),
+        language: getLanguage(),
+        page_path: getPagePath(),
+        page_title: document.title
+      },
+      getBookingContext(action),
+      extraParams || {}
+    );
 
-    const linkUrl = getLinkUrl(actionElement);
+    const linkUrl = getLinkUrl(action);
     if (linkUrl) {
       params.link_url = linkUrl;
     }
 
-    const linkText = getLinkText(actionElement);
-    if (linkText) {
-      params.link_text = linkText;
-    }
-
-    const section = getSectionName(contextElement || actionElement);
-    if (section) {
-      params.section = section;
-    }
+    Object.keys(params).forEach(function (key) {
+      if (params[key] === "" || params[key] == null) {
+        delete params[key];
+      }
+    });
 
     return params;
   }
 
-  function trackInteraction(eventName, contextElement, actionElement) {
-    if (!eventName || !shouldTrack(contextElement, eventName)) {
-      return false;
-    }
-    if (!ensureAnalyticsConfigured()) {
+  function pushToDataLayer(eventName, params) {
+    const payload = Object.assign({ event: eventName }, params || {});
+    window.dataLayer.push(payload);
+    return payload;
+  }
+
+  function trackStructuredEvent(eventName, contextElement, actionElement, extraParams) {
+    if (!eventName) {
       return false;
     }
 
-    window.gtag("event", eventName, buildEventParams(contextElement, actionElement || contextElement));
+    const params = buildEventParams(eventName, contextElement, actionElement, extraParams);
+    pushToDataLayer(eventName, params);
+
+    if (!hasGtmContainer() && ensureAnalyticsConfigured()) {
+      window.gtag("event", eventName, params);
+    }
+
     return true;
   }
 
@@ -318,59 +346,66 @@
 
     const trackingKey = getTrackingKey(element);
     const eventName = EVENT_NAMES[trackingKey];
-    if (!eventName) {
+    if (!eventName || !shouldTrack(element, eventName)) {
       return;
     }
 
-    trackInteraction(eventName, element, element);
+    trackStructuredEvent(eventName, element, element);
   }
 
   function handleTrackedSubmit(event) {
     if (
       event.isTrusted === false ||
       !(event.target instanceof HTMLFormElement) ||
-      !event.target.matches("form[data-analytics-submit]")
+      !event.target.matches("form[data-analytics-submit]") ||
+      !shouldTrack(event.target, "booking_submit_attempt")
     ) {
       return;
     }
 
-    const trackingKey = normalizeKey(event.target.getAttribute("data-analytics-submit"));
-    const eventName = EVENT_NAMES[trackingKey];
-    if (!eventName) {
-      return;
-    }
-
     const actionElement = event.submitter instanceof Element ? event.submitter : event.target;
-    trackInteraction(eventName, event.target, actionElement);
+    trackStructuredEvent("booking_submit_attempt", event.target, actionElement, {
+      event_label: getLinkText(actionElement) || "Booking form submit"
+    });
+  }
+
+  function pushPageContext() {
+    pushToDataLayer("page_context", {
+      page_type: "hotel_landing_page",
+      language: getLanguage(),
+      page_title: document.title,
+      page_path: getPagePath(),
+      canonical_url: getCanonicalUrl()
+    });
   }
 
   function updateConsent(granted) {
-    consentGranted = !!granted;
-    window.SBX_ANALYTICS_CONSENT_GRANTED = consentGranted;
-    window.gtag("consent", consentModeInitialized || analyticsConfigured ? "update" : "default", {
-      analytics_storage: consentGranted ? "granted" : "denied",
-    });
-    consentModeInitialized = true;
-
-    if (consentGranted) {
+    window.SBX_ANALYTICS_CONSENT_GRANTED = !!granted;
+    if (!hasGtmContainer() && granted) {
       ensureAnalyticsConfigured();
     }
   }
 
   window.SandboxAnalytics = Object.assign(window.SandboxAnalytics || {}, {
     measurementId: MEASUREMENT_ID,
-    updateConsent: updateConsent,
-    trackEvent: function (eventName, params) {
-      if (!ensureAnalyticsConfigured()) {
-        return false;
-      }
-      window.gtag("event", eventName, params || {});
-      return true;
+    pushEvent: function (eventName, params) {
+      return pushToDataLayer(eventName, params || {});
     },
+    trackEvent: function (eventName, params) {
+      return trackStructuredEvent(eventName, null, null, params || {});
+    },
+    trackBookingSuccess: function (channel, bookingData, contextElement) {
+      const extraParams = Object.assign({}, bookingData || {}, {
+        event_label: String(channel || "booking_send").toLowerCase(),
+        send_channel: String(channel || "").toLowerCase()
+      });
+      return trackStructuredEvent("booking_send_success", contextElement || getBookingForm() || document.body, contextElement || getBookingForm(), extraParams);
+    },
+    updateConsent: updateConsent
   });
 
+  pushPageContext();
   document.addEventListener("click", handleTrackedClick, true);
   document.addEventListener("submit", handleTrackedSubmit, true);
-
   ensureAnalyticsConfigured();
 })();

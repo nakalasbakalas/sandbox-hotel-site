@@ -14,10 +14,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#0B0C0F" id="metaThemeColor">
 
-  <title>Sandbox Hotel | Nakhon Si Thammarat, Thailand</title>
-  <meta name="description" id="metaDescription" content="Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.">
+  <title>Sandbox Hotel | โรงแรมในนครศรีธรรมราช จองตรงเร็ว</title>
+  <meta name="description" id="metaDescription" content="Sandbox Hotel โรงแรมในนครศรีธรรมราชสำหรับการเข้าพักที่สงบ สะดวก และจองตรงได้รวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล">
   <meta name="robots" content="index,follow">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
+  <link rel="alternate" hreflang="th" href="https://www.sandboxhotel.com/?lang=th">
+  <link rel="alternate" hreflang="en" href="https://www.sandboxhotel.com/?lang=en">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.sandboxhotel.com/?lang=zh">
+  <link rel="alternate" hreflang="x-default" href="https://www.sandboxhotel.com/">
   <link rel="icon" href="assets/images/logo/favicon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="assets/images/logo/sandbox-logo-transparent.svg">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo-32.png">
@@ -32,19 +36,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:locale" content="th_TH">
     <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
-<meta property="og:title" id="ogTitle" content="Sandbox Hotel | Nakhon Si Thammarat">
-  <meta property="og:description" id="ogDescription" content="Book direct for fast confirmation. Call, LINE/WhatsApp, or send an enquiry.">
+<meta property="og:title" id="ogTitle" content="Sandbox Hotel | โรงแรมในนครศรีธรรมราช">
+  <meta property="og:description" id="ogDescription" content="จองตรงกับ Sandbox Hotel เพื่อการยืนยันที่รวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล">
   <meta property="og:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
-  <meta property="og:image:alt" content="Sandbox Hotel exterior">
+  <meta property="og:image:alt" content="ด้านหน้า Sandbox Hotel ในจังหวัดนครศรีธรรมราช">
+  <meta property="og:image:width" content="1600">
+  <meta property="og:image:height" content="900">
 
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Sandbox Hotel | Nakhon Si Thammarat">
-  <meta name="twitter:description" content="Book direct for fast confirmation via phone, LINE, or WhatsApp.">
+  <meta name="twitter:title" id="twitterTitle" content="Sandbox Hotel | โรงแรมในนครศรีธรรมราช">
+  <meta name="twitter:description" id="twitterDescription" content="จองตรงกับ Sandbox Hotel เพื่อการยืนยันที่รวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล">
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
   <!-- Preload hero -->
-  <link rel="preload" as="image" href="images/Sandbox-Hotel-Hero-Banner.png" fetchpriority="high">
+  <link rel="preload" as="image" href="images/Sandbox-Hotel-Hero-Banner.webp" type="image/webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -91,8 +97,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
       --focus: 0 0 0 4px rgba(183,106,43,.28);
 
-      /* Edit if needed */
-      --heroImg: url("images/Sandbox-Hotel-Hero-Banner.png");
+      --heroImgFallback: url("images/Sandbox-Hotel-Hero-Banner.png");
+      --heroImg: image-set(
+        url("images/Sandbox-Hotel-Hero-Banner.webp") type("image/webp"),
+        url("images/Sandbox-Hotel-Hero-Banner.png") type("image/png")
+      );
     }
 
     /* ---------- Theme tokens ---------- */
@@ -356,6 +365,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .navGroup summary{
       list-style:none;
       cursor:pointer;
+      border-radius:var(--btn-radius);
     }
     .navGroup summary::-webkit-details-marker{display:none}
     .navGroup summary .navHamburger{pointer-events:none}
@@ -638,7 +648,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       min-height: min(80vh, 760px);
       border-radius: var(--radius);
       border:1px solid var(--line);
-      background: var(--heroImg) center / cover no-repeat, var(--bg1);
+      background-color: var(--bg1);
+      background-image: var(--heroImgFallback);
+      background-image: var(--heroImg);
+      background-position:center;
+      background-size:cover;
+      background-repeat:no-repeat;
       color:#fff;
       box-shadow: var(--shadow);
       overflow:hidden;
@@ -1017,7 +1032,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .roomBody{padding:16px; min-width:0}
     .roomBody{padding:22px; min-width:0}
     .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
-    .roomTop h4{margin:0; font-size:23px; letter-spacing:-.02em; line-height:1.08; color:var(--ink2); font-family:var(--display)}
+    .roomTop h3{margin:0; font-size:23px; letter-spacing:-.02em; line-height:1.08; color:var(--ink2); font-family:var(--display)}
     .priceBox{min-width:128px; text-align:right}
     .priceBox b{display:block; font-size:12px; color:var(--muted); font-weight:950}
     .priceBox strong{display:block; font-size:18px; color:var(--ink2); font-weight:1000; line-height:1.1; margin-top:2px}
@@ -1037,21 +1052,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bullets li{margin:6px 0}
     .roomActions{margin-top:16px; display:flex; flex-wrap:wrap; gap:10px}
 
-    /* ---------- Media placeholders (show until image loads) ---------- */
-    .mediaWrap{position:relative; overflow:hidden}
+    /* ---------- Responsive media ---------- */
+    .mediaWrap{position:relative; overflow:hidden; background: linear-gradient(135deg, rgba(183,106,43,.14), rgba(240,195,154,.10));}
+    .mediaWrap picture{display:block}
     .mediaWrap .mediaImg{
       width:100%;
       aspect-ratio:800/520;
       object-fit:cover;
-      opacity:0;
-      transition: opacity .25s ease;
-      background: linear-gradient(135deg, rgba(183,106,43,.14), rgba(240,195,154,.10));
     }
-    .mediaWrap .ph{position:absolute; inset:0; opacity:1; transition:opacity .25s ease; pointer-events:none}
-    .mediaWrap.imgOk .mediaImg{opacity:1}
-    .mediaWrap.imgOk .ph{opacity:0}
-    .mediaWrap.imgFail .mediaImg{display:none}
-    .mediaWrap.imgFail .ph{opacity:1}
 
     /* ==========================================================
        GALLERY — CAROUSEL ONLY (NO GRID)
@@ -1160,6 +1168,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       width:100%;
       aspect-ratio:4/3;
       object-fit:cover;
+    }
+    @media (max-width:640px){
+      :root{
+        --heroImgFallback: url("images/Sandbox-Hotel-Hero-Banner-720.png");
+        --heroImg: image-set(
+          url("images/Sandbox-Hotel-Hero-Banner-720.webp") type("image/webp"),
+          url("images/Sandbox-Hotel-Hero-Banner-720.png") type("image/png")
+        );
+      }
     }
     .galHint{text-align:center; margin-top:6px}
     @media (max-width:640px){
@@ -1472,11 +1489,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-device="tablet"] .stickyLeft span{ display:none; }
     html[data-device="tablet"] .heroCTA .btn.ghost{ display:none !important; }
 
-        /* ---------- Performance ---------- */
-    @supports (content-visibility: auto){
-      main .section{content-visibility:auto; contain-intrinsic-size: 900px 600px;}
-      main .section:first-of-type{content-visibility:visible;}
-    }
     /* Footer language strip (mobile/tablet only, since header is minimal) */
     .footerLang{
       display:none;
@@ -1506,11 +1518,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "name": "Sandbox Hotel",
     "url": "https://www.sandboxhotel.com/",
     "telephone": "+66885783478",
-    "image": "https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png",
+    "email": "booking@sandboxhotel.com",
+    "image": [
+      "https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png",
+      "https://www.sandboxhotel.com/assets/images/gallery/entrance.png",
+      "https://www.sandboxhotel.com/assets/images/rooms/double-room-sandboxhotel-1.png"
+    ],
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "642 4016, Tambon Pho Sadet, Mueang Nakhon Si Thammarat District, Nakhon Si Thammarat 80000",
       "addressLocality": "Nakhon Si Thammarat",
+      "addressRegion": "Nakhon Si Thammarat",
+      "postalCode": "80000",
       "addressCountry": "TH"
     },
     "sameAs": [
@@ -1530,7 +1549,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "name": "How do I book the fastest?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "For the fastest confirmation, call or message the hotel on LINE/WhatsApp with your check-in date, check-out date, number of guests, and preferred room type."
+          "text": "Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price."
         }
       },
       {
@@ -1538,23 +1557,55 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "name": "What time is check-in and check-out?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Standard check-in is 14:00 and check-out is 11:00."
+          "text": "Check-in from 14:00 and check-out by 11:00."
         }
       },
       {
         "@type": "Question",
-        "name": "What do I need for check-in?",
+        "name": "What do I need at check-in?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Please bring a passport or Thai ID card for check-in. Policies may vary by season."
+          "text": "A government-issued ID or passport is required for registration."
         }
       },
       {
         "@type": "Question",
-        "name": "Can I arrive late?",
+        "name": "Can rates change by date?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Yes. If you expect to arrive late, message your estimated arrival time so the hotel can assist you."
+          "text": "Yes. Rates vary by date and season. Send your dates for an exact quote."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you have parking?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes, guest parking is available (subject to availability)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is the hotel suitable for quiet rest?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We aim for quiet rooms; quiet-side allocation is available upon request when possible."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is smoking allowed?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "For guest comfort, please ask reception about the current smoking policy and designated areas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the cancellation policy?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy."
         }
       }
     ]
@@ -1586,10 +1637,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="chip primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
 
         <details class="navGroup">
-          <summary>
-            <button class="navHamburger" type="button" aria-label="Menu">
+          <summary aria-label="Open site navigation menu" role="button">
+            <span class="navHamburger" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
-            </button>
+            </span>
           </summary>
           <div class="navPanel" role="group" aria-label="Site navigation">
             <div class="navPanelBrand">
@@ -1687,24 +1738,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin photo">
-                    <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin bedroom with two single beds" loading="lazy" decoding="async" width="800" height="520">
+                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="assets/images/rooms/twin-room-sandbox-1-400.webp 400w, assets/images/rooms/twin-room-sandbox-1.webp 800w"
+                        sizes="(max-width: 980px) 100vw, 50vw">
+                      <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w" sizes="(max-width: 980px) 100vw, 50vw" alt="Standard Twin bedroom with two single beds and a work area" loading="lazy" decoding="async" width="800" height="520">
+                    </picture>
                   </a>
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
                 </div>
 
                 <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-2.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
-                    <img src="assets/images/rooms/twin-room-sandbox-2.png" alt="Standard Twin bedroom from another angle" loading="lazy" decoding="async" width="400" height="300">
+                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-2.png" target="_blank" rel="noopener" aria-label="Open Standard Twin room detail photo">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="assets/images/rooms/twin-room-sandbox-2-400.webp 400w, assets/images/rooms/twin-room-sandbox-2.webp 800w"
+                        sizes="(max-width: 980px) 50vw, 25vw">
+                      <img src="assets/images/rooms/twin-room-sandbox-2.png" srcset="assets/images/rooms/twin-room-sandbox-2-400.png 400w, assets/images/rooms/twin-room-sandbox-2.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Standard Twin room from the window side" loading="lazy" decoding="async" width="400" height="300">
+                    </picture>
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w"
+                        sizes="(max-width: 980px) 50vw, 25vw">
+                      <img src="assets/images/rooms/bathroom.png" srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Private bathroom with shower and vanity" loading="lazy" decoding="async" width="400" height="300">
+                    </picture>
                   </a>
                 </div>
               </div>
@@ -1712,7 +1774,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="roomBody">
                 <div class="roomTop">
                   <div>
-                    <h4 data-i18n="room_standard_twin_title">Standard Twin</h4>
+                    <h3 data-i18n="room_standard_twin_title">Standard Twin</h3>
                     <div class="fine" data-i18n-html="room_standard_twin_meta">2 Twin Beds • 28–32 m² • Guests 1–2</div>
                   </div>
                   <div class="priceBox">
@@ -1738,27 +1800,35 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double photo">
-                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom with one large bed" loading="lazy" decoding="async" width="800" height="520">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="assets/images/rooms/double-room-sandboxhotel-1-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-1.webp 800w"
+                        sizes="(max-width: 980px) 100vw, 50vw">
+                      <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" srcset="assets/images/rooms/double-room-sandboxhotel-1-400.png 400w, assets/images/rooms/double-room-sandboxhotel-1.png 800w" sizes="(max-width: 980px) 100vw, 50vw" alt="Standard Double bedroom with a large bed and soft lighting" loading="lazy" decoding="async" width="800" height="520">
+                    </picture>
                   </a>
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
                 </div>
 
                 <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-1.png" alt="Standard Double bedroom" loading="lazy" decoding="async" width="400" height="300">
+                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double room detail photo">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="assets/images/rooms/double-room-sandboxhotel-2-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-2.webp 800w"
+                        sizes="(max-width: 980px) 50vw, 25vw">
+                      <img src="assets/images/rooms/double-room-sandboxhotel-2.png" srcset="assets/images/rooms/double-room-sandboxhotel-2-400.png 400w, assets/images/rooms/double-room-sandboxhotel-2.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Standard Double room viewed from the foot of the bed" loading="lazy" decoding="async" width="400" height="300">
+                    </picture>
                   </a>
                   <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <img src="assets/images/rooms/bathroom.png" alt="Bathroom with shower" loading="lazy" decoding="async" width="400" height="300">
+                    <picture>
+                      <source
+                        type="image/webp"
+                        srcset="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w"
+                        sizes="(max-width: 980px) 50vw, 25vw">
+                      <img src="assets/images/rooms/bathroom.png" srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Bathroom with shower and fresh towels" loading="lazy" decoding="async" width="400" height="300">
+                    </picture>
                   </a>
                 </div>
               </div>
@@ -1766,7 +1836,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="roomBody">
                 <div class="roomTop">
                   <div>
-                    <h4 data-i18n="room_standard_double_title">Standard Double</h4>
+                    <h3 data-i18n="room_standard_double_title">Standard Double</h3>
                     <div class="fine" data-i18n-html="room_standard_double_meta">1 Double Bed • 28–32 m² • Guests 1–2</div>
                   </div>
                   <div class="priceBox">
@@ -1882,14 +1952,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="images/Sandbox-Hotel-Hero-Banner.png" alt="Sandbox Hotel exterior" loading="lazy" decoding="async" width="800" height="520">
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="images/Sandbox-Hotel-Hero-Banner-720.webp 720w, images/Sandbox-Hotel-Hero-Banner.webp 1600w"
+                      sizes="(max-width: 640px) 100vw, 80vw">
+                    <img class="mediaImg" src="images/Sandbox-Hotel-Hero-Banner.png" srcset="images/Sandbox-Hotel-Hero-Banner-720.png 720w, images/Sandbox-Hotel-Hero-Banner.png 1600w" sizes="(max-width: 640px) 100vw, 80vw" alt="Sandbox Hotel exterior and driveway entrance" loading="lazy" decoding="async" width="800" height="520">
+                  </picture>
                 </div>
                 <figcaption class="galCap">
                   <b data-i18n="gal_exterior_title">Hotel Exterior</b>
@@ -1899,14 +1968,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/gallery/entrance.png" alt="Entrance and arrival" loading="lazy" decoding="async" width="800" height="520">
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/images/gallery/entrance-400.webp 400w, assets/images/gallery/entrance.webp 800w"
+                      sizes="(max-width: 640px) 100vw, 80vw">
+                    <img class="mediaImg" src="assets/images/gallery/entrance.png" srcset="assets/images/gallery/entrance-400.png 400w, assets/images/gallery/entrance.png 800w" sizes="(max-width: 640px) 100vw, 80vw" alt="Sandbox Hotel entrance and guest arrival area" loading="lazy" decoding="async" width="800" height="520">
+                  </picture>
                 </div>
                 <figcaption class="galCap">
                   <b data-i18n="gal_entrance_title">Entrance & Arrival</b>
@@ -1916,14 +1984,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/gallery/lobby.png" alt="Lobby and reception" loading="lazy" decoding="async" width="800" height="520">
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/images/gallery/lobby-400.webp 400w, assets/images/gallery/lobby.webp 800w"
+                      sizes="(max-width: 640px) 100vw, 80vw">
+                    <img class="mediaImg" src="assets/images/gallery/lobby.png" srcset="assets/images/gallery/lobby-400.png 400w, assets/images/gallery/lobby.png 800w" sizes="(max-width: 640px) 100vw, 80vw" alt="Lobby seating and reception area inside Sandbox Hotel" loading="lazy" decoding="async" width="800" height="520">
+                  </picture>
                 </div>
                 <figcaption class="galCap">
                   <b data-i18n="svg_lobby_and_reception">Lobby & Reception</b>
@@ -1933,14 +2000,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-2.png" alt="Standard Double room" loading="lazy" decoding="async" width="800" height="520">
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/images/rooms/double-room-sandboxhotel-2-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-2.webp 800w"
+                      sizes="(max-width: 640px) 100vw, 80vw">
+                    <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-2.png" srcset="assets/images/rooms/double-room-sandboxhotel-2-400.png 400w, assets/images/rooms/double-room-sandboxhotel-2.png 800w" sizes="(max-width: 640px) 100vw, 80vw" alt="Standard Double room with a large bed and side seating" loading="lazy" decoding="async" width="800" height="520">
+                  </picture>
                 </div>
                 <figcaption class="galCap">
                   <b data-i18n="gal_std_double_title">Standard Double Room</b>
@@ -1950,14 +2016,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" alt="Standard Twin room" loading="lazy" decoding="async" width="800" height="520">
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/images/rooms/twin-room-sandbox-1-400.webp 400w, assets/images/rooms/twin-room-sandbox-1.webp 800w"
+                      sizes="(max-width: 640px) 100vw, 80vw">
+                    <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w" sizes="(max-width: 640px) 100vw, 80vw" alt="Standard Twin room with two beds and natural light" loading="lazy" decoding="async" width="800" height="520">
+                  </picture>
                 </div>
                 <figcaption class="galCap">
                   <b data-i18n="gal_std_twin_title">Standard Twin Room</b>
@@ -1967,14 +2032,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
               <figure class="galSlide">
                 <div class="mediaWrap">
-                  <img class="mediaImg" src="assets/images/rooms/bathroom.png" alt="Clean bathroom with hot shower" loading="lazy" decoding="async" width="800" height="520">
-                  <div class="ph" aria-hidden="true">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 520">
-                      <rect width="800" height="520" rx="28" fill="#0B1220"/>
-                      <rect x="24" y="24" width="752" height="472" rx="22" fill="rgba(183,106,43,0.18)" stroke="rgba(255,255,255,0.16)"/>
-                      <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-family="system-ui,Segoe UI,Roboto,Arial" font-size="16" fill="rgba(255,255,255,0.62)" data-i18n="svg_replace_photos">Replace with real photos</text>
-                    </svg>
-                  </div>
+                  <picture>
+                    <source
+                      type="image/webp"
+                      srcset="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w"
+                      sizes="(max-width: 640px) 100vw, 80vw">
+                    <img class="mediaImg" src="assets/images/rooms/bathroom.png" srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w" sizes="(max-width: 640px) 100vw, 80vw" alt="Bathroom with hot shower, sink, and fresh essentials" loading="lazy" decoding="async" width="800" height="520">
+                  </picture>
                 </div>
                 <figcaption class="galCap">
                   <b data-i18n="svg_clean_bathrooms">Clean Bathrooms</b>
@@ -2007,7 +2071,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
           <div class="reviewActionRow">
           <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="btn_view_maps" data-analytics="map">View on Google Maps</a>
-            <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n="btn_view_facebook">Facebook</a>
+            <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n="btn_view_facebook" data-analytics="social">Facebook</a>
           </div>
         </div>
 
@@ -2116,9 +2180,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="wide ctaRow">
-              <button class="btn primary" type="submit" data-i18n="btn_send_line">Book via LINE</button>
+              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
               <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
-              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email">Book via Email</button>
+              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
               <span class="fine" id="formHint" data-i18n="form_hint">We’ll reply with availability and total price.</span>
             </div>
           </form>
@@ -2194,10 +2258,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="contactActions">
               <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
               <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
-              <a class="btn" id="contactLine" href="#" rel="nofollow" data-analytics="line">LINE</a>
+              <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE</a>
               <a class="btn ghost" id="contactWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
+              <a class="textLink" href="mailto:booking@sandboxhotel.com" data-i18n="cta_email" data-analytics="email">Email</a>
               <a class="textLink" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Open Map</a>
-              <a class="textLink" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">Facebook</a>
+              <a class="textLink" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook</a>
             </div>
 
             <p class="fine contactMeta">
@@ -2205,8 +2270,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               ☎️: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a><br>
               Line : sandbox.hotel<br>
               💚คลิกลิงค์แอดไลน์ : <a href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener" data-analytics="line">https://line.me/ti/p/uc4BCpHCQ4</a><br>
-              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener">https://web.facebook.com/sandboxhotel</a><br>
-              <a href="mailto:booking@sandboxhotel.com">booking@sandboxhotel.com</a>
+              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">https://web.facebook.com/sandboxhotel</a><br>
+              <a href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
             </p>
 
             <div class="fine">
@@ -2260,7 +2325,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="stickyActions">
         <a class="btn primary sm" href="#book" data-i18n="cta_request" data-analytics="book-now">Book Now</a>
         <a class="btn hot sm" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-        <a class="btn sm" id="stickyLine" href="#" rel="nofollow" data-analytics="line">LINE</a>
+        <a class="btn sm" id="stickyLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE</a>
         <a class="btn sm" id="stickyWA" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
       </div>
     </div>
@@ -2272,7 +2337,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // =========================
     const WHATSAPP_NUMBER_E164 = "66885783478";                  // no "+"
     const LINE_LINK = "https://line.me/ti/p/uc4BCpHCQ4";
-    const EMAIL_TO = "booking@sandboxhotel.com";            // replace with your real email
+    const EMAIL_TO = "booking@sandboxhotel.com";
     // =========================
 
     
@@ -2419,10 +2484,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     const I18N = {
       th: {
-        meta_title: "Sandbox Hotel | นครศรีธรรมราช",
-        meta_desc: "จองตรงกับ Sandbox Hotel — ยืนยันรวดเร็วทางโทร/LINE/WhatsApp ห้องกว้าง Wi-Fi ที่จอดรถ ซักรีด",
-        og_title: "Sandbox Hotel | นครศรีธรรมราช",
-        og_desc: "จองตรงเพื่อยืนยันไว โทรหรือส่งข้อความ พร้อมแจ้งวันเข้าพักและประเภทห้อง",
+        meta_title: "Sandbox Hotel | โรงแรมในนครศรีธรรมราช จองตรงเร็ว",
+        meta_desc: "Sandbox Hotel โรงแรมในนครศรีธรรมราชสำหรับการเข้าพักที่สงบ สะดวก และจองตรงได้รวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล",
+        og_title: "Sandbox Hotel | โรงแรมในนครศรีธรรมราช",
+        og_desc: "จองตรงกับ Sandbox Hotel เพื่อการยืนยันที่รวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล",
         brand_location: "นครศรีธรรมราช ประเทศไทย",
         nav_support: "ราคาดีเมื่อจองตรง",
 
@@ -2445,6 +2510,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_request: "จองเลย",
         cta_call_line: "โทรหรือ LINE",
         cta_call_number: "โทร: 088-578-3478",
+        cta_email: "อีเมล",
         cta_open_map: "เปิดแผนที่",
         hero_view_rooms: "ดูห้องพัก",
         trust_direct: "จองตรงกับโรงแรม",
@@ -2574,7 +2640,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         gal_bathroom_desc: "อาบน้ำอุ่น พร้อมของใช้ที่จำเป็น",
         gal_swipe_hint: "ปัดเพื่อดูรูปเพิ่มเติม หรือใช้ปุ่มลูกศร",
 
-        svg_replace_photos: "เปลี่ยนเป็นรูปจริง",
         svg_lobby_and_reception: "ล็อบบี้ & เคาน์เตอร์",
         svg_clean_bathrooms: "ห้องน้ำสะอาด",
 
@@ -2631,10 +2696,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "เปิด LINE แล้ว คัดลอก/วางข้อความ: "
       },
       en: {
-        meta_title: "Sandbox Hotel | Nakhon Si Thammarat, Thailand",
-        meta_desc: "Direct booking at Sandbox Hotel. Fast confirmation via Call / LINE / WhatsApp. Large rooms, Wi-Fi, parking, laundry.",
-        og_title: "Sandbox Hotel | Nakhon Si Thammarat",
-        og_desc: "Book direct for fast confirmation. Call, LINE/WhatsApp, or send an enquiry.",
+        meta_title: "Sandbox Hotel | Direct Booking in Nakhon Si Thammarat",
+        meta_desc: "Sandbox Hotel offers quiet stays in Nakhon Si Thammarat with direct booking by phone, LINE, WhatsApp, or email.",
+        og_title: "Sandbox Hotel | Quiet stays in Nakhon Si Thammarat",
+        og_desc: "Book direct with Sandbox Hotel for fast confirmation, comfortable rooms, and easy contact by phone, LINE, WhatsApp, or email.",
         brand_location: "Nakhon Si Thammarat, Thailand",
         nav_support: "Best Rate Direct",
 
@@ -2657,6 +2722,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_request: "Book Now",
         cta_call_line: "Call or LINE",
         cta_call_number: "Call: 088-578-3478",
+        cta_email: "Email",
         cta_open_map: "Open Map",
         hero_view_rooms: "View Rooms",
         trust_direct: "Direct Booking",
@@ -2786,7 +2852,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         gal_bathroom_desc: "Hot shower and fresh essentials.",
         gal_swipe_hint: "Swipe for more photos or use the arrows",
 
-        svg_replace_photos: "Replace with real photos",
         svg_lobby_and_reception: "Lobby & Reception",
         svg_clean_bathrooms: "Clean Bathrooms",
 
@@ -2843,10 +2908,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "LINE opened. Paste message: "
       },
       zh: {
-        meta_title: "Sandbox Hotel｜泰国洛坤府",
-        meta_desc: "Sandbox Hotel 直订更快确认：电话/LINE/WhatsApp。宽敞客房，Wi-Fi、停车、洗衣等。",
-        og_title: "Sandbox Hotel｜泰国洛坤府",
-        og_desc: "直订快速确认：致电或留言，告知日期与房型。",
+        meta_title: "Sandbox Hotel｜洛坤府直订酒店",
+        meta_desc: "Sandbox Hotel 位于泰国洛坤府，提供安静舒适的住宿体验，可通过电话、LINE、WhatsApp 或邮箱直接预订。",
+        og_title: "Sandbox Hotel｜洛坤府安静舒适住宿",
+        og_desc: "直接联系 Sandbox Hotel，可通过电话、LINE、WhatsApp 或邮箱快速确认房态与入住信息。",
         brand_location: "泰国 洛坤府（Nakhon Si Thammarat）",
         nav_support: "直订更安心",
 
@@ -2869,6 +2934,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_request: "立即预订",
         cta_call_line: "电话或 LINE",
         cta_call_number: "致电：088-578-3478",
+        cta_email: "邮箱",
         cta_open_map: "打开地图",
         hero_view_rooms: "查看房型",
         trust_direct: "酒店直订",
@@ -2998,7 +3064,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         gal_bathroom_desc: "热水淋浴与干净备品。",
         gal_swipe_hint: "左右滑动查看更多照片，或使用箭头按钮",
 
-        svg_replace_photos: "替换为真实照片",
         svg_lobby_and_reception: "大堂与前台",
         svg_clean_bathrooms: "干净浴室",
 
@@ -3104,6 +3169,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(ogt && t("og_title")) ogt.setAttribute("content", t("og_title"));
       const ogd = document.getElementById("ogDescription");
       if(ogd && t("og_desc")) ogd.setAttribute("content", t("og_desc"));
+      const twt = document.getElementById("twitterTitle");
+      if(twt && t("og_title")) twt.setAttribute("content", t("og_title"));
+      const twd = document.getElementById("twitterDescription");
+      if(twd && t("og_desc")) twd.setAttribute("content", t("og_desc"));
     }
     function initLang(){
       const langBtn = document.getElementById("langBtn");
@@ -3122,14 +3191,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }
 
       try{
-        const stored = localStorage.getItem("sbx_lang");
-        if(stored){
-          applyLang(stored);
+        const params = new URLSearchParams(window.location.search);
+        const requested = params.get("lang");
+        if(requested){
+          applyLang(requested);
         } else {
-          const nav = (navigator.languages && navigator.languages[0]) || navigator.language || "";
-          const navLower = String(nav).toLowerCase();
-          const guessed = navLower.startsWith("zh") ? "zh" : (navLower.startsWith("en") ? "en" : "th");
-          applyLang(guessed);
+          const stored = localStorage.getItem("sbx_lang");
+          if(stored){
+            applyLang(stored);
+          } else {
+            applyLang(I18N_DEFAULT);
+          }
         }
       } catch(_e){
         applyLang("th");
@@ -3147,6 +3219,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           const lang = btn.getAttribute("data-lang");
           try{ localStorage.setItem("sbx_lang", lang); } catch(_e){}
           applyLang(lang);
+          try{
+            const nextUrl = new URL(window.location.href);
+            nextUrl.searchParams.set("lang", lang);
+            window.history.replaceState({}, "", nextUrl.toString());
+          }catch(_e){}
           openLangMenu(false);
         });
       });
@@ -3245,13 +3322,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       }catch(_e){}
     }
 
-    function openWhatsApp(msg){
+    function trackBookingSend(channel, data, contextElement){
+      try{
+        window.SandboxAnalytics?.trackBookingSuccess(channel, {
+          room_type: data.room || "",
+          guests: data.guests || "",
+          checkin: data.checkin || "",
+          checkout: data.checkout || ""
+        }, contextElement || document.getElementById("bookingForm"));
+      }catch(_e){}
+    }
+    function openWhatsApp(msg, data, contextElement){
       const url = `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${encodeURIComponent(msg)}`;
+      trackBookingSend("whatsapp", data || getFormData(), contextElement);
       window.open(url, "_blank", "noopener");
     }
-        async function openLine(msg){
+        async function openLine(msg, data, contextElement){
       const url = lineMessageUrl(msg);
       const copied = await copyToClipboard(msg);
+      trackBookingSend("line", data || getFormData(), contextElement);
       window.open(url, "_blank", "noopener");
 
       const hint = document.getElementById("formHint");
@@ -3266,8 +3355,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }, 4200);
       }
     }
-    function openEmail(msg){
+    function openEmail(msg, data, contextElement){
       const subject = t("msg_title") || "Booking request – Sandbox Hotel";
+      trackBookingSend("email", data || getFormData(), contextElement);
       window.location.href = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
     }
 
@@ -3282,7 +3372,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         el.setAttribute("rel", "noopener");
         el.addEventListener("click",(e)=>{
           e.preventDefault();
-          openWhatsApp(buildMessage(getFormData()));
+          const data = getFormData();
+          openWhatsApp(buildMessage(data), data, el);
         });
       });
 
@@ -3294,7 +3385,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         el.setAttribute("rel", "noopener");
         el.addEventListener("click",(e)=>{
           e.preventDefault();
-          openLine(buildMessage(getFormData()));
+          const data = getFormData();
+          openLine(buildMessage(data), data, el);
         });
       });
 
@@ -3303,17 +3395,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         e.preventDefault();
         const data = getFormData();
         await persistBookingLead(data);
-        openLine(buildMessage(data));
+        openLine(buildMessage(data), data, form);
       });
       document.getElementById("sendWA").addEventListener("click", async ()=>{
         const data = getFormData();
         await persistBookingLead(data);
-        openWhatsApp(buildMessage(data));
+        openWhatsApp(buildMessage(data), data, document.getElementById("sendWA"));
       });
       document.getElementById("sendEmail").addEventListener("click", async ()=>{
         const data = getFormData();
         await persistBookingLead(data);
-        openEmail(buildMessage(data));
+        openEmail(buildMessage(data), data, document.getElementById("sendEmail"));
       });
 
       document.querySelectorAll("[data-room]").forEach(el=>{
@@ -3386,6 +3478,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           b.setAttribute("aria-label", img.alt || `Photo ${i+1}`);
           b.setAttribute("aria-current", i === 0 ? "true" : "false");
           thumbImg.src = img.getAttribute("src") || "";
+          thumbImg.srcset = img.getAttribute("srcset") || "";
+          thumbImg.sizes = "160px";
           thumbImg.alt = "";
           thumbImg.loading = "lazy";
           thumbImg.decoding = "async";
@@ -3575,39 +3669,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       updateStaySummary();
     }
 
-    
-    // ---------- Media placeholders ----------
-    function initMediaWraps(){
-      document.querySelectorAll(".mediaWrap").forEach(w=>{
-        const imgs = Array.from(w.querySelectorAll("img"));
-        if(!imgs.length) return;
-
-        let pending = imgs.length;
-        let anyOk = false;
-
-        const finalize = (ok)=>{ try{ w.classList.add(ok ? "imgOk" : "imgFail"); }catch(_e){} };
-        const markDone = (ok)=>{
-          if(anyOk) return;
-          if(ok){ anyOk = true; finalize(true); return; }
-          pending--;
-          if(pending <= 0 && !anyOk) finalize(false);
-        };
-
-        imgs.forEach(img=>{
-          if(img.complete && img.naturalWidth > 0){
-            markDone(true);
-            return;
-          }
-          if(img.complete && img.naturalWidth === 0 && !img.getAttribute("loading")){
-            markDone(false);
-            return;
-          }
-          img.addEventListener("load", ()=> markDone(true), {once:true});
-          img.addEventListener("error", ()=> markDone(false), {once:true});
-        });
-      });
-    }
-
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
@@ -3616,7 +3677,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       initDates();
       wireContactButtons();
       initGalleryCarousel();
-      initMediaWraps();
     })();
   </script>
 </body>
