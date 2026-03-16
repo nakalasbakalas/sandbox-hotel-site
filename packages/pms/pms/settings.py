@@ -26,7 +26,7 @@ APP_SETTINGS_SEED = [
     ("booking.terms_version", {"value": "2026-03"}, "string", "Published booking terms version", True, 19),
     ("hotel.contact_phone", {"value": "+66 000 000 000"}, "string", "Public reservation contact phone", True, 20),
     ("hotel.contact_email", {"value": "reservations@sandbox-hotel.local"}, "string", "Public reservation contact email", True, 21),
-    ("hotel.address", {"value": "Sandbox Hotel, Thailand"}, "string", "Hotel address", True, 22),
+    ("hotel.address", {"value": "626/1, Karom Road, Pho Sadet, Mueang, Nakhon Si Thammarat, 80000"}, "string", "Hotel address", True, 22),
     ("hotel.logo_url", {"value": ""}, "string", "Hotel logo URL", True, 23),
     ("hotel.tax_id", {"value": "0100000000000"}, "string", "Tax or business display identifier", True, 24),
     ("hotel.brand_mark", {"value": "SBX"}, "string", "Short hotel brand mark", True, 25),
