@@ -40,7 +40,7 @@
     social_outbound_click: "social"
   };
   const recentInteractions = new WeakMap();
-  let analyticsConfigured = Boolean(window.__SBX_GA_CONFIGURED__);
+  let analyticsConfigured = Boolean(window.SBX_GA_CONFIGURED);
   let googleTagInjected = false;
 
   window.dataLayer = window.dataLayer || [];
