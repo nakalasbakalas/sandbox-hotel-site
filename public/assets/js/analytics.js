@@ -40,7 +40,7 @@
     social_outbound_click: "social"
   };
   const recentInteractions = new WeakMap();
-  let analyticsConfigured = false;
+  let analyticsConfigured = Boolean(window.SBX_GA_CONFIGURED);
   let googleTagInjected = false;
 
   window.dataLayer = window.dataLayer || [];
@@ -327,7 +327,7 @@
     const params = buildEventParams(eventName, contextElement, actionElement, extraParams);
     pushToDataLayer(eventName, params);
 
-    if (!hasGtmContainer() && ensureAnalyticsConfigured()) {
+    if (ensureAnalyticsConfigured()) {
       window.gtag("event", eventName, params);
     }
 
@@ -381,7 +381,7 @@
 
   function updateConsent(granted) {
     window.SBX_ANALYTICS_CONSENT_GRANTED = !!granted;
-    if (!hasGtmContainer() && granted) {
+    if (granted) {
       ensureAnalyticsConfigured();
     }
   }
