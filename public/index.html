@@ -25,6 +25,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <title>Sandbox Hotel | โรงแรมในนครศรีธรรมราช จองตรงเร็ว</title>
   <meta name="description" id="metaDescription" content="Sandbox Hotel โรงแรมในนครศรีธรรมราชสำหรับการเข้าพักที่สงบ สะดวก และจองตรงได้รวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล">
   <meta name="robots" content="index,follow">
+  <meta name="keywords" content="hotel nakhon si thammarat, hotels in nakhon si thammarat, hotel in nakhon si thammarat, boutique hotel nakhon si thammarat, accommodation nakhon si thammarat, southern thailand hotel, sandbox hotel, โรงแรมนครศรีธรรมราช, ที่พักนครศรีธรรมราช">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
   <link rel="alternate" hreflang="th" href="https://www.sandboxhotel.com/?lang=th">
   <link rel="alternate" hreflang="en" href="https://www.sandboxhotel.com/?lang=en">
@@ -1682,6 +1683,45 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       a{color:#000 !important; text-decoration:none !important}
       .mapWrap{display:none !important}
     }
+
+    /* ---------- Destination section ---------- */
+    .destGrid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:var(--gutter);
+      margin:var(--gutter) 0;
+    }
+    @media(max-width:760px){
+      .destGrid{grid-template-columns:1fr}
+    }
+    .destBlock h3{
+      font-size:clamp(15px,1.3vw,18px);
+      font-weight:700;
+      color:var(--copper);
+      margin-bottom:8px;
+    }
+    .destBlock p{
+      font-size:clamp(13px,1.1vw,15px);
+      line-height:1.7;
+      color:var(--ink2);
+    }
+    .destList{
+      padding-left:18px;
+      margin:0;
+      font-size:clamp(13px,1.1vw,15px);
+      line-height:1.8;
+      color:var(--ink2);
+    }
+    .destList li{margin-bottom:4px}
+    .destCTA{
+      display:flex;
+      flex-wrap:wrap;
+      align-items:center;
+      gap:10px;
+      padding-top:var(--gutter);
+      border-top:1px solid var(--line);
+      margin-top:var(--gutter);
+    }
   </style>
 
   <script type="application/ld+json">
@@ -1689,9 +1729,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "@context": "https://schema.org",
     "@type": "Hotel",
     "name": "Sandbox Hotel",
+    "description": "Sandbox Hotel is a quiet, comfortable hotel in Nakhon Si Thammarat, Southern Thailand, offering spacious rooms with direct booking by phone, LINE, or WhatsApp. Ideal for business travellers, families, and anyone seeking a relaxed stay in one of Southern Thailand's most historic cities.",
     "url": "https://www.sandboxhotel.com/",
     "telephone": "+66885783478",
     "email": "booking@sandboxhotel.com",
+    "priceRange": "฿฿",
+    "checkInTime": "14:00",
+    "checkOutTime": "11:00",
     "image": [
       "https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png",
       "https://www.sandboxhotel.com/assets/images/gallery/entrance.png",
@@ -1699,11 +1743,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     ],
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "626/1, Karom Road, Pho Sadet, Mueang, Nakhon Si Thammarat 80000",
+      "streetAddress": "626/1, Karom Road, Pho Sadet, Mueang",
       "addressLocality": "Nakhon Si Thammarat",
       "addressRegion": "Nakhon Si Thammarat",
       "postalCode": "80000",
       "addressCountry": "TH"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "8.4300",
+      "longitude": "99.9630"
+    },
+    "hasMap": "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7",
+    "openingHoursSpecification": {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "06:00",
+      "closes": "22:00"
+    },
+    "amenityFeature": [
+      {"@type": "LocationFeatureSpecification", "name": "Free Wi-Fi", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Air Conditioning", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Parking", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Laundry Service", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Hot Shower", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Work Desk", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Coffee & Snack Bar", "value": true}
+    ],
+    "containedInPlace": {
+      "@type": "City",
+      "name": "Nakhon Si Thammarat",
+      "containedInPlace": {
+        "@type": "State",
+        "name": "Nakhon Si Thammarat Province",
+        "containedInPlace": {
+          "@type": "Country",
+          "name": "Thailand"
+        }
+      }
     },
     "sameAs": [
       "https://web.facebook.com/sandboxhotel",
@@ -1780,6 +1857,71 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           "@type": "Answer",
           "text": "Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy."
         }
+      },
+      {
+        "@type": "Question",
+        "name": "Where is Nakhon Si Thammarat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nakhon Si Thammarat is a city in Southern Thailand, situated on the Gulf of Thailand coast in Nakhon Si Thammarat Province. It lies approximately 780 km south of Bangkok and is one of Thailand's oldest and most historically significant cities, with over 1,000 years of history. Sandbox Hotel is located in the city centre at 626/1 Karom Road."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is Nakhon Si Thammarat in Southern Thailand?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Nakhon Si Thammarat is one of the major cities in Southern Thailand, located on the Gulf Coast side of the Malay Peninsula. It is the capital of Nakhon Si Thammarat Province and a cultural hub for the entire southern region."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I get to Nakhon Si Thammarat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "There are three main ways to reach Nakhon Si Thammarat: (1) By air — Nakhon Si Thammarat Airport (NST) has daily flights from Bangkok (Don Mueang and Suvarnabhumi). Flight time is about 1.5 hours. (2) By train — overnight sleeper trains run from Bangkok's Hua Lamphong and Bang Sue stations, approximately 12–14 hours. (3) By bus — long-distance buses depart from Bangkok's Southern Bus Terminal (Sai Tai Mai), approximately 10–12 hours."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What are the main attractions near Sandbox Hotel in Nakhon Si Thammarat?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Key attractions near Sandbox Hotel include: Wat Phra Mahathat Woramahawihan — one of the most important Buddhist temples in Southern Thailand, dating back over 1,000 years; Nakhon Si Thammarat National Museum — showcasing local history, archaeology, and shadow puppet arts; the Bovorn Bazaar night market for local street food; and the historic old city walking street. Nakhon Si Thammarat is also the home of Nang Talung, Thailand's traditional shadow puppet theatre."
+        }
+      }
+    ]
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Hotels in Thailand",
+        "item": "https://www.sandboxhotel.com/hotels/thailand/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Hotels in Southern Thailand",
+        "item": "https://www.sandboxhotel.com/hotels/southern-thailand/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Hotels in Nakhon Si Thammarat",
+        "item": "https://www.sandboxhotel.com/hotels/nakhon-si-thammarat/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Sandbox Hotel",
+        "item": "https://www.sandboxhotel.com/"
       }
     ]
   }
@@ -2411,11 +2553,83 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
           <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
         </details>
+        <details>
+          <summary data-i18n="faq_q9">Where is Nakhon Si Thammarat?</summary>
+          <p data-i18n="faq_a9">Nakhon Si Thammarat is a city in Southern Thailand on the Gulf of Thailand coast, approximately 780 km south of Bangkok. It is one of Thailand's oldest cities with over 1,000 years of history. Sandbox Hotel is in the city centre at 626/1 Karom Road.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq_q10">How do I get to Nakhon Si Thammarat?</summary>
+          <p data-i18n="faq_a10">Three options: (1) By air — Nakhon Si Thammarat Airport (NST) has daily flights from Bangkok, about 1.5 hours. (2) By train — overnight sleeper from Bangkok's Hua Lamphong / Bang Sue stations, 12–14 hours. (3) By bus — from Bangkok's Southern Bus Terminal (Sai Tai Mai), 10–12 hours.</p>
+        </details>
+        <details>
+          <summary data-i18n="faq_q11">What are the main attractions near the hotel?</summary>
+          <p data-i18n="faq_a11">Nearby highlights include Wat Phra Mahathat Woramahawihan (one of Southern Thailand's most revered Buddhist temples), Nakhon Si Thammarat National Museum, the Bovorn Bazaar night market, and the old city walking street. The city is also famous for Nang Talung shadow puppet theatre, traditional nielloware crafts, and authentic Southern Thai cuisine.</p>
+        </details>
 
         <div class="faqCTA">
           <p data-i18n="faq_cta_text">Still have questions? We're happy to help.</p>
           <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
           <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESTINATION: About Nakhon Si Thammarat -->
+    <section class="section" id="destination" aria-label="About Nakhon Si Thammarat">
+      <div class="card pad">
+        <div class="head">
+          <div>
+            <h2 data-i18n="dest_title">About Nakhon Si Thammarat</h2>
+            <p data-i18n="dest_sub">Southern Thailand's historic Gulf Coast city — a less-travelled destination with deep roots.</p>
+          </div>
+          <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
+        </div>
+
+        <article class="destGrid">
+          <div class="destBlock">
+            <h3 data-i18n="dest_where_title">Where is Nakhon Si Thammarat?</h3>
+            <p data-i18n="dest_where_body">Nakhon Si Thammarat is a city in <strong>Southern Thailand</strong>, located on the Gulf of Thailand coast approximately 780 km south of Bangkok. It is the capital of Nakhon Si Thammarat Province and one of the oldest continuously inhabited cities in the country, with a recorded history spanning more than 1,000 years. The city sits on the Gulf Coast side of the Thai-Malay Peninsula, distinct from the Andaman Sea resorts of Phuket and Krabi.</p>
+          </div>
+
+          <div class="destBlock">
+            <h3 data-i18n="dest_why_title">Why Visit Nakhon Si Thammarat?</h3>
+            <p data-i18n="dest_why_body">Unlike the crowded beach resorts of Southern Thailand, Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Travellers come for Wat Phra Mahathat Woramahawihan — one of the most significant temples in all of Thailand — as well as the unique local art forms of Nang Talung shadow puppetry and traditional nielloware silver crafts. The city is also a gateway for exploring the lesser-known national parks and coastlines of Nakhon Si Thammarat Province.</p>
+          </div>
+
+          <div class="destBlock">
+            <h3 data-i18n="dest_attractions_title">Key Attractions Near Sandbox Hotel</h3>
+            <ul class="destList" data-i18n-html="dest_attractions_list">
+              <li><strong>Wat Phra Mahathat Woramahawihan</strong> — one of the most important Buddhist temple complexes in Southern Thailand, dating back over 1,000 years.</li>
+              <li><strong>Nakhon Si Thammarat National Museum</strong> — displays prehistoric artefacts, Buddha images, local crafts, and the history of the southern peninsula.</li>
+              <li><strong>Bovorn Bazaar &amp; Night Market</strong> — the best spot for local street food, Southern Thai dishes, and evening browsing.</li>
+              <li><strong>Old City Walking Street</strong> — heritage shophouses and local artisan stalls every weekend.</li>
+              <li><strong>Nang Talung Shadow Puppet Theatre</strong> — a uniquely Southern Thai performing art and UNESCO-recognised tradition.</li>
+              <li><strong>Khanom &amp; Sichon Beaches</strong> — quiet Gulf Coast beaches about 60–80 km from the city, ideal for a day trip.</li>
+            </ul>
+          </div>
+
+          <div class="destBlock">
+            <h3 data-i18n="dest_howtoget_title">How to Get to Nakhon Si Thammarat</h3>
+            <ul class="destList" data-i18n-html="dest_howtoget_list">
+              <li><strong>By Air</strong> — Nakhon Si Thammarat Airport (NST/VTSN) has multiple daily flights from Bangkok (Don Mueang &amp; Suvarnabhumi). Flight time approximately 1.5 hours.</li>
+              <li><strong>By Train</strong> — overnight sleeper services from Bangkok's Hua Lamphong and Bang Sue Grand stations. Journey time approximately 12–14 hours.</li>
+              <li><strong>By Bus</strong> — long-distance coaches depart from Bangkok's Southern Bus Terminal (Sai Tai Mai). Journey time approximately 10–12 hours.</li>
+            </ul>
+            <p data-i18n="dest_howtoget_note">Sandbox Hotel is a short drive or taxi ride from Nakhon Si Thammarat city centre. Airport transfers can be arranged — ask us when you book.</p>
+          </div>
+
+          <div class="destBlock">
+            <h3 data-i18n="dest_region_title">Nakhon Si Thammarat in Southern Thailand</h3>
+            <p data-i18n="dest_region_body">Southern Thailand stretches from Chumphon in the north to the Malaysian border in the south. The region splits into two coastlines: the Gulf of Thailand coast (including Koh Samui, Koh Phangan, and Nakhon Si Thammarat) and the Andaman Sea coast (Phuket, Krabi, Koh Lanta). Nakhon Si Thammarat is one of the region's most historic inland and coastal cities — larger and more culturally rich than most visitors expect. It serves as an excellent base for exploring lesser-known Gulf Coast beaches, national parks, and authentic Southern Thai food culture.</p>
+          </div>
+        </article>
+
+        <div class="destCTA">
+          <p data-i18n="dest_cta_text">Planning a trip to Nakhon Si Thammarat? Sandbox Hotel offers direct booking, spacious rooms, and a central location.</p>
+          <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
+          <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+          <a class="textLink" href="/hotels/nakhon-si-thammarat/" data-i18n="dest_link_city">Hotels in Nakhon Si Thammarat →</a>
+          <a class="textLink" href="/hotels/southern-thailand/" data-i18n="dest_link_south">Hotels in Southern Thailand →</a>
         </div>
       </div>
     </section>
@@ -2763,6 +2977,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_a7: "เพื่อความสบายของผู้เข้าพัก โปรดสอบถามนโยบายการสูบบุหรี่และพื้นที่ที่กำหนดกับแผนกต้อนรับ",
         faq_q8: "นโยบายการยกเลิกคืออะไร?",
         faq_a8: "เงื่อนไขการยกเลิกอาจเปลี่ยนตามช่วงเวลา/ฤดูกาล กรุณายืนยันกับโรงแรมตามวันเข้าพักของคุณ",
+        faq_q9: "นครศรีธรรมราชอยู่ที่ไหน?",
+        faq_a9: "นครศรีธรรมราชเป็นเมืองในภาคใต้ของประเทศไทย ตั้งอยู่บนชายฝั่งอ่าวไทย ห่างจากกรุงเทพฯ ประมาณ 780 กม. เป็นหนึ่งในเมืองที่เก่าแก่ที่สุดของประเทศ มีประวัติศาสตร์มากกว่า 1,000 ปี โรงแรม Sandbox อยู่ใจกลางเมืองที่ 626/1 ถนนกะรม",
+        faq_q10: "เดินทางมานครศรีธรรมราชได้อย่างไร?",
+        faq_a10: "มี 3 ทางเลือก: (1) ทางอากาศ — มีเที่ยวบินตรงจากกรุงเทพฯ (ดอนเมือง/สุวรรณภูมิ) ใช้เวลาประมาณ 1.5 ชั่วโมง (2) ทางรถไฟ — รถไฟนอนจากหัวลำโพง/บางซื่อ ใช้เวลาประมาณ 12–14 ชั่วโมง (3) ทางรถบัส — จากสถานีขนส่งสายใต้ใหม่ ใช้เวลาประมาณ 10–12 ชั่วโมง",
+        faq_q11: "สถานที่ท่องเที่ยวใกล้โรงแรมมีอะไรบ้าง?",
+        faq_a11: "ไฮไลต์ใกล้เคียง ได้แก่ วัดพระมหาธาตุวรมหาวิหาร (วัดสำคัญอันดับต้นของภาคใต้) พิพิธภัณฑสถานแห่งชาตินครศรีธรรมราช ตลาดบ่อวิน ถนนคนเดินเมืองเก่า และการแสดงหนังตะลุง ศิลปะพื้นบ้านที่มีชื่อเสียงของจังหวัด",
+
+        dest_title: "เกี่ยวกับนครศรีธรรมราช",
+        dest_sub: "เมืองประวัติศาสตร์บนชายฝั่งอ่าวไทย ภาคใต้ของประเทศไทย",
+        dest_where_title: "นครศรีธรรมราชอยู่ที่ไหน?",
+        dest_where_body: "นครศรีธรรมราชเป็นเมืองในภาคใต้ของประเทศไทย ตั้งอยู่บนชายฝั่งอ่าวไทย ห่างจากกรุงเทพฯ ประมาณ 780 กม. เป็นเมืองหลวงของจังหวัดนครศรีธรรมราช และหนึ่งในเมืองที่เก่าแก่ที่สุดในประเทศ มีประวัติศาสตร์มากกว่า 1,000 ปี",
+        dest_why_title: "ทำไมต้องเที่ยวนครศรีธรรมราช?",
+        dest_why_body: "ต่างจากรีสอร์ทชายหาดที่แออัดในภาคใต้ นครศรีธรรมราชมีวัฒนธรรมไทยแท้ มรดกทางพระพุทธศาสนา และบรรยากาศท้องถิ่นที่เป็นธรรมชาติ นักท่องเที่ยวมาเยือนเพื่อชมวัดพระมหาธาตุวรมหาวิหาร หนังตะลุง และเครื่องถมเงินอันเป็นเอกลักษณ์",
+        dest_attractions_title: "สถานที่ท่องเที่ยวใกล้โรงแรม Sandbox",
+        dest_howtoget_title: "การเดินทางมานครศรีธรรมราช",
+        dest_howtoget_note: "โรงแรม Sandbox อยู่ใกล้ใจกลางเมือง สามารถเดินทางด้วยรถแท็กซี่หรือรถรับส่งจากสนามบินได้ สอบถามข้อมูลเพิ่มเติมได้เมื่อจองห้องพัก",
+        dest_region_title: "นครศรีธรรมราชในภาคใต้ของประเทศไทย",
+        dest_region_body: "ภาคใต้ของไทยทอดยาวจากชุมพรไปจนถึงชายแดนมาเลเซีย แบ่งออกเป็นชายฝั่งอ่าวไทย (เกาะสมุย เกาะพะงัน นครศรีธรรมราช) และชายฝั่งทะเลอันดามัน (ภูเก็ต กระบี่ เกาะลันตา) นครศรีธรรมราชเป็นหนึ่งในเมืองที่มีประวัติศาสตร์และวัฒนธรรมที่ลึกซึ้งที่สุดในภาคใต้",
+        dest_cta_text: "วางแผนเที่ยวนครศรีธรรมราช? โรงแรม Sandbox รองรับการจองตรง ห้องกว้าง และทำเลใจกลางเมือง",
+        dest_link_city: "โรงแรมในนครศรีธรรมราช →",
+        dest_link_south: "โรงแรมในภาคใต้ของไทย →",
         book_tip: "ทิป: หากมาถึงดึก โปรดระบุเวลาโดยประมาณในหมายเหตุ เพื่อให้เราช่วยเหลือได้รวดเร็ว",
 
         amen_title: "สิ่งอำนวยความสะดวกสำหรับผู้เข้าพัก",
@@ -2883,10 +3118,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "เปิด LINE แล้ว คัดลอก/วางข้อความ: "
       },
       en: {
-        meta_title: "Sandbox Hotel | Direct Booking in Nakhon Si Thammarat",
-        meta_desc: "Sandbox Hotel offers quiet stays in Nakhon Si Thammarat with direct booking by phone, LINE, WhatsApp, or email.",
-        og_title: "Sandbox Hotel | Quiet stays in Nakhon Si Thammarat",
-        og_desc: "Book direct with Sandbox Hotel for fast confirmation, comfortable rooms, and easy contact by phone, LINE, WhatsApp, or email.",
+        meta_title: "Sandbox Hotel | Hotel in Nakhon Si Thammarat, Southern Thailand",
+        meta_desc: "Sandbox Hotel — a quiet, comfortable hotel in Nakhon Si Thammarat, Southern Thailand. Spacious rooms, free Wi-Fi, parking, and fast direct booking by phone, LINE, or WhatsApp. 626/1 Karom Road.",
+        og_title: "Sandbox Hotel | Hotel in Nakhon Si Thammarat",
+        og_desc: "Book direct with Sandbox Hotel in Nakhon Si Thammarat, Southern Thailand. Spacious rooms, free Wi-Fi, parking, and fast confirmation by LINE, WhatsApp, or call.",
         brand_location: "Nakhon Si Thammarat, Thailand",
         nav_support: "Best Rate Direct",
 
@@ -3074,8 +3309,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_a5: "Yes, guest parking is available (subject to availability).",
         faq_q6: "Is the hotel suitable for quiet rest?",
         faq_a6: "We aim for quiet rooms; quiet-side allocation is available upon request when possible.",
+        faq_q9: "Where is Nakhon Si Thammarat?",
+        faq_a9: "Nakhon Si Thammarat is a city in Southern Thailand on the Gulf of Thailand coast, approximately 780 km south of Bangkok. It is one of Thailand's oldest cities with over 1,000 years of history. Sandbox Hotel is in the city centre at 626/1 Karom Road.",
+        faq_q10: "How do I get to Nakhon Si Thammarat?",
+        faq_a10: "Three options: (1) By air — Nakhon Si Thammarat Airport (NST) has daily flights from Bangkok, about 1.5 hours. (2) By train — overnight sleeper from Bangkok's Hua Lamphong / Bang Sue stations, 12–14 hours. (3) By bus — from Bangkok's Southern Bus Terminal (Sai Tai Mai), 10–12 hours.",
+        faq_q11: "What are the main attractions near the hotel?",
+        faq_a11: "Nearby highlights include Wat Phra Mahathat Woramahawihan (one of Southern Thailand's most revered Buddhist temples), Nakhon Si Thammarat National Museum, the Bovorn Bazaar night market, and the old city walking street. The city is also famous for Nang Talung shadow puppet theatre, traditional nielloware crafts, and authentic Southern Thai cuisine.",
 
-        loc_title: "Location & Contact",
+        dest_title: "About Nakhon Si Thammarat",
+        dest_sub: "Southern Thailand's historic Gulf Coast city — a less-travelled destination with deep roots.",
+        dest_where_title: "Where is Nakhon Si Thammarat?",
+        dest_where_body: "Nakhon Si Thammarat is a city in <strong>Southern Thailand</strong>, located on the Gulf of Thailand coast approximately 780 km south of Bangkok. It is the capital of Nakhon Si Thammarat Province and one of the oldest continuously inhabited cities in the country, with a recorded history spanning more than 1,000 years. The city sits on the Gulf Coast side of the Thai-Malay Peninsula, distinct from the Andaman Sea resorts of Phuket and Krabi.",
+        dest_why_title: "Why Visit Nakhon Si Thammarat?",
+        dest_why_body: "Unlike the crowded beach resorts of Southern Thailand, Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Travellers come for Wat Phra Mahathat Woramahawihan — one of the most significant temples in all of Thailand — as well as the unique local art forms of Nang Talung shadow puppetry and traditional nielloware silver crafts. The city is also a gateway for exploring the lesser-known national parks and coastlines of Nakhon Si Thammarat Province.",
+        dest_attractions_title: "Key Attractions Near Sandbox Hotel",
+        dest_howtoget_title: "How to Get to Nakhon Si Thammarat",
+        dest_howtoget_note: "Sandbox Hotel is a short drive or taxi ride from Nakhon Si Thammarat city centre. Airport transfers can be arranged — ask us when you book.",
+        dest_region_title: "Nakhon Si Thammarat in Southern Thailand",
+        dest_region_body: "Southern Thailand stretches from Chumphon in the north to the Malaysian border in the south. The region splits into two coastlines: the Gulf of Thailand coast (including Koh Samui, Koh Phangan, and Nakhon Si Thammarat) and the Andaman Sea coast (Phuket, Krabi, Koh Lanta). Nakhon Si Thammarat is one of the region's most historic inland and coastal cities — larger and more culturally rich than most visitors expect. It serves as an excellent base for exploring lesser-known Gulf Coast beaches, national parks, and authentic Southern Thai food culture.",
+        dest_cta_text: "Planning a trip to Nakhon Si Thammarat? Sandbox Hotel offers direct booking, spacious rooms, and a central location.",
+        dest_link_city: "Hotels in Nakhon Si Thammarat →",
+        dest_link_south: "Hotels in Southern Thailand →",
         loc_sub: "Choose the fastest contact method to confirm availability.",
         loc_address: "Address:",
         loc_plus: "Plus Code:",
@@ -3289,8 +3543,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_a5: "有（视车位情况）。",
         faq_q6: "适合安静休息吗？",
         faq_a6: "我们尽量安排安静房间，如可行可按需安排安静一侧。",
+        faq_q9: "洛坤府在哪里？",
+        faq_a9: "洛坤府（Nakhon Si Thammarat）是泰国南部的一座城市，位于泰国湾沿岸，距曼谷约780公里。它是泰国最古老的城市之一，有超过1000年的历史。Sandbox Hotel 位于市中心 626/1 Karom 路。",
+        faq_q10: "如何前往洛坤府？",
+        faq_a10: "三种方式：(1) 飞机 — 洛坤府机场（NST）每日有来自曼谷（廊曼/素万那普）的航班，约1.5小时。(2) 火车 — 从曼谷华兰蓬/邦苏夕站乘夜卧火车，约12–14小时。(3) 大巴 — 从曼谷南部汽车站出发，约10–12小时。",
+        faq_q11: "酒店附近有哪些景点？",
+        faq_a11: "附近亮点包括：帕玛哈塔沃拉玛哈维汉寺（泰国南部最重要的佛教寺庙之一）、洛坤府国家博物馆、博问夜市，以及老城步行街。洛坤府也是纳泰隆皮影戏和传统银器工艺的故乡。",
 
-        loc_title: "位置与联系",
+        dest_title: "关于洛坤府（Nakhon Si Thammarat）",
+        dest_sub: "泰国南部历史悠久的泰国湾沿海城市",
+        dest_where_title: "洛坤府在哪里？",
+        dest_where_body: "洛坤府是泰国南部的一座城市，位于泰国湾沿岸，距曼谷约780公里。它是洛坤府府的首府，也是泰国有记录历史超过1000年的最古老城市之一。",
+        dest_why_title: "为何值得前往洛坤府？",
+        dest_why_body: "与泰南拥挤的海滩度假区不同，洛坤府提供地道的泰国文化、佛教遗产和轻松的本地氛围。游客前来观赏帕玛哈塔寺庙、纳泰隆皮影戏，以及传统银器工艺。",
+        dest_attractions_title: "Sandbox Hotel 附近主要景点",
+        dest_howtoget_title: "如何前往洛坤府",
+        dest_howtoget_note: "Sandbox Hotel 距洛坤府市中心仅需短程出租车。如需接送服务，欢迎在预订时告知。",
+        dest_region_title: "洛坤府在泰国南部的位置",
+        dest_region_body: "泰国南部从春蓬延伸至马来西亚边境，分为泰国湾海岸（苏梅岛、帕岸岛、洛坤府）和安达曼海海岸（普吉岛、甲米、兰塔岛）两侧。洛坤府是南部最具历史文化价值的城市之一，也是探索鲜为人知的泰国湾海滩和国家公园的绝佳基地。",
+        dest_cta_text: "计划前往洛坤府？Sandbox Hotel 提供直接预订、宽敞客房与市中心的便利位置。",
+        dest_link_city: "洛坤府酒店 →",
+        dest_link_south: "泰国南部酒店 →",
         loc_sub: "选择最快的联系方式确认空房。",
         loc_address: "地址：",
         loc_plus: "Plus Code：",
