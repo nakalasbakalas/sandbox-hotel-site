@@ -763,7 +763,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .kw.hot{background: var(--softHot); border-color: rgba(240,195,154,.24)}
 
     /* ---------- Section headers ---------- */
-    .head{display:flex; justify-content:space-between; align-items:flex-end; gap:10px 14px; margin:0 0 14px}
+    .head{display:flex; justify-content:space-between; align-items:flex-end; gap:14px; margin:0 0 14px}
     .head h2{
       margin:0;
       font-size:var(--sectionTitleSize, clamp(26px, 2.6vw, 38px));
@@ -1198,7 +1198,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .priceBox b{display:block; font-size:12px; color:var(--muted); font-weight:800}
     .priceBox strong{display:block; font-size:17px; color:var(--copper); font-weight:800; line-height:1.1; margin-top:2px}
     .priceBox small{display:block; font-size:12px; color:var(--muted2); margin-top:2px}
-    .roomMeta{display:flex; flex-wrap:wrap; gap:6px}
+    .roomMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      list-style:none;
+      padding:0;
+      margin:6px 0 0;
+    }
     .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
     .tag{
       display:inline-flex; align-items:center; justify-content:center;
@@ -1377,6 +1384,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       line-height:1.6;
       position:relative;
       padding-left:18px;
+      max-height:6.4em;
       display:-webkit-box;
       -webkit-line-clamp:4;
       -webkit-box-orient:vertical;
@@ -1394,6 +1402,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .reviewMini p{
       font-size:13px;
+      max-height:4.65em;
       display:-webkit-box;
       -webkit-line-clamp:3;
       -webkit-box-orient:vertical;
@@ -2105,11 +2114,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="roomTop">
                   <div>
                     <h3 data-i18n="room_standard_twin_title">Standard Twin</h3>
-                    <div class="roomMeta">
-                      <span class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</span>
-                      <span class="tag" data-i18n="tag_28_32_m">28–32 m²</span>
-                      <span class="tag" data-i18n="tag_guests_1_2">Guests 1–2</span>
-                    </div>
+                    <ul class="roomMeta">
+                      <li class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</li>
+                      <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                      <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
+                    </ul>
                   </div>
                   <div class="priceBox">
                     <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
@@ -2171,11 +2180,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="roomTop">
                   <div>
                     <h3 data-i18n="room_standard_double_title">Standard Double</h3>
-                    <div class="roomMeta">
-                      <span class="tag" data-i18n="tag_1_double_bed">1 Double Bed</span>
-                      <span class="tag" data-i18n="tag_28_32_m">28–32 m²</span>
-                      <span class="tag" data-i18n="tag_guests_1_2">Guests 1–2</span>
-                    </div>
+                    <ul class="roomMeta">
+                      <li class="tag" data-i18n="tag_1_double_bed">1 Double Bed</li>
+                      <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                      <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
+                    </ul>
                   </div>
                   <div class="priceBox">
                     <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
@@ -2522,7 +2531,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
             <div class="field wide">
               <label for="notes" data-i18n="lbl_notes">Notes</label>
-              <textarea id="notes" name="notes" rows="2" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+              <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
             </div>
 
             <div class="wide ctaRow">
@@ -2547,7 +2556,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="textLink" href="#book" data-i18n="faq_btn" data-analytics="book-now">Send Request</a>
         </div>
 
-        <div class="faqGrid" id="faqGrid">
+        <div class="faqGrid" id="faqGrid" aria-live="polite">
           <details open data-faq-item>
             <summary data-i18n="faq_q1">How do I book the fastest?</summary>
             <p data-i18n="faq_a1">Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.</p>
@@ -4040,27 +4049,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       let visibleCount = 0;
       let resizeT;
-      const batchSize = ()=> window.matchMedia("(max-width: 760px)").matches ? 4 : 6;
+      const mobileFaqQuery = window.matchMedia("(max-width: 760px)");
+      const MOBILE_FAQ_BATCH = 4;
+      const DESKTOP_FAQ_BATCH = 6;
+      const batchSize = () => mobileFaqQuery.matches ? MOBILE_FAQ_BATCH : DESKTOP_FAQ_BATCH;
 
       function render(reset = false){
         const batch = batchSize();
         visibleCount = reset ? batch : Math.max(visibleCount, batch);
-        items.forEach((item, index)=>{
-          const isVisible = index < visibleCount;
-          item.hidden = !isVisible;
-          if(!isVisible) item.open = false;
+        items.forEach((item, index) => {
+          item.hidden = index >= visibleCount;
         });
         moreWrap.hidden = visibleCount >= items.length;
       }
 
-      moreBtn.addEventListener("click", ()=>{
+      moreBtn.addEventListener("click", () => {
+        const previousVisibleCount = visibleCount;
         visibleCount = Math.min(items.length, visibleCount + batchSize());
         render();
+        const firstNewItem = items[previousVisibleCount];
+        firstNewItem?.querySelector("summary")?.focus();
       });
 
       window.addEventListener("resize", ()=>{
         clearTimeout(resizeT);
-        resizeT = setTimeout(()=> render(), 120);
+        resizeT = setTimeout(() => render(), 120);
       }, { passive:true });
 
       render(true);
