@@ -775,6 +775,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .head p{margin:6px 0 0; max-width:56ch; font-size:13.5px; color:var(--muted); line-height:1.5}
 
+    /* Primary sections get stronger titles */
+    #rooms .head h2, #book .head h2{
+      font-size:clamp(28px, 2.8vw, 40px);
+      letter-spacing:-.03em;
+    }
+
     /* ---------- Hero ---------- */
     .hero{
       position:relative;
@@ -2085,9 +2091,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="head">
           <div>
             <h2 data-i18n="rooms_title">Rooms</h2>
-            <p data-i18n-html="rooms_sub">Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.</p>
+            <p data-i18n-html="rooms_sub">Compare our room types and select the best fit for your stay.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="rooms_btn" data-analytics="book-now">Check Availability</a>
         </div>
 
         <div class="stack" aria-label="Room options">
@@ -2240,7 +2245,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2 data-i18n="offers_title">Why Stay at Sandbox Hotel</h2>
             <p data-i18n="offers_sub">Everything you need for a comfortable, hassle-free stay.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="offers_btn" data-analytics="book-now">Check Availability</a>
         </div>
 
         <div class="offers">
@@ -3281,7 +3285,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         amen_service_desc: "Friendly staff available to assist during your stay.",
 
         rooms_title: "Rooms",
-        rooms_sub: 'Tap <span class="kw hot">Book</span> to pre-select a room type in the booking form.',
+        rooms_sub: 'Compare our room types and select the best fit for your stay.',
         rooms_btn: "Check Availability",
         rooms_fine: "Rates can change by date and season. Message your dates for the fastest exact price.",
 
