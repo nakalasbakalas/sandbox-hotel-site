@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://www.sandboxhotel.com/</loc>
     <lastmod>2026-03-17</lastmod>
@@ -9,6 +11,21 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://www.sandboxhotel.com/?lang=en" />
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.sandboxhotel.com/?lang=zh" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.sandboxhotel.com/" />
+    <image:image>
+      <image:loc>https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.webp</image:loc>
+      <image:title>Sandbox Hotel – Hotel in Nakhon Si Thammarat, Southern Thailand</image:title>
+      <image:caption>Exterior view of Sandbox Hotel, a quiet boutique hotel in Nakhon Si Thammarat, Southern Thailand</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sandboxhotel.com/assets/images/gallery/entrance.png</image:loc>
+      <image:title>Sandbox Hotel Entrance – Nakhon Si Thammarat</image:title>
+      <image:caption>Hotel entrance and arrival area at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sandboxhotel.com/assets/images/rooms/double-room-sandboxhotel-1.png</image:loc>
+      <image:title>Standard Double Room – Sandbox Hotel Nakhon Si Thammarat</image:title>
+      <image:caption>Spacious standard double room at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
+    </image:image>
   </url>
   <url>
     <loc>https://www.sandboxhotel.com/hotels/nakhon-si-thammarat/</loc>
@@ -42,7 +59,7 @@
   </url>
   <url>
     <loc>https://www.sandboxhotel.com/privacy.html</loc>
-    <lastmod>2026-03-15</lastmod>
+    <lastmod>2026-03-17</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
