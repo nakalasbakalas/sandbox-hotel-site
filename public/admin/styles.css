@@ -92,9 +92,23 @@ button{
   color:#fff9f3;
   cursor:pointer;
   font-weight:700;
+  min-height:42px;
+  box-shadow:0 10px 22px rgba(154,92,40,.18);
+  transition:transform .14s ease,box-shadow .14s ease,background .14s ease,border-color .14s ease,color .14s ease;
 }
-button.secondary{background:#f0e5d4;color:var(--ink);border:1px solid var(--line)}
-button.ghost{background:transparent;color:var(--brand);border:1px solid var(--line)}
+button:hover{transform:translateY(-1px);box-shadow:0 12px 24px rgba(154,92,40,.22)}
+button:active{transform:translateY(0)}
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible{outline:2px solid rgba(154,92,40,.38);outline-offset:2px;box-shadow:0 0 0 3px rgba(154,92,40,.24)}
+input:focus,
+select:focus,
+textarea:focus{border-color:rgba(154,92,40,.42);background:#fff}
+button.secondary{background:#f3e7d6;color:var(--ink);border:1px solid #ccb08e;box-shadow:none}
+button.secondary:hover{background:#ecdbc3;border-color:#b98957;box-shadow:0 8px 18px rgba(79,54,28,.12)}
+button.ghost{background:rgba(154,92,40,.06);color:var(--brand);border:1px solid rgba(154,92,40,.26);box-shadow:none}
+button.ghost:hover{background:rgba(154,92,40,.12);border-color:rgba(154,92,40,.38);box-shadow:0 8px 18px rgba(79,54,28,.10)}
 header{display:flex;justify-content:space-between;gap:var(--stack-gap);align-items:flex-start}
 .app-header{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start}
 .section-head{display:flex;justify-content:space-between;gap:var(--stack-gap);align-items:flex-start;flex-wrap:wrap}
