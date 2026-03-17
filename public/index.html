@@ -74,44 +74,49 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     ========================================================== */
 
     :root{
-      --copper:#B76A2B;
-      --copper2:#D18B50;
-      --champagne:#F0C39A;
-      --champagne2:#FFD7B3;
+      /* Brand palette – warm boutique hospitality */
+      --copper:#A8652A;
+      --copper2:#C4884E;
+      --champagne:#E8C9A0;
+      --champagne2:#F2D9B8;
+      --bronze:#8B6914;
+      --olive:#5C6B55;
+      --slate:#4A5568;
 
-      --radius:20px;
-      --radius2:14px;
+      --radius:16px;
+      --radius2:12px;
       --max:1200px;
 
       --tap:46px;
-      --nav-h:60px;
-      --nav-pad-y:10px;
-      --nav-pad-x:18px;
+      --nav-h:64px;
+      --nav-pad-y:12px;
+      --nav-pad-x:20px;
       --nav-gap:8px;
-      --btn-h:42px;
-      --btn-px:14px;
-      --btn-radius:12px;
+      --btn-h:44px;
+      --btn-px:18px;
+      --btn-radius:10px;
       --btn-border:1px;
-      --gutter: clamp(14px, 2.4vw, 28px);
-      --sectionY: clamp(20px, 3.2vw, 36px);
-      --gridGap: clamp(12px, 1.8vw, 18px);
-      --surfacePad: clamp(18px, 2vw, 22px);
-      --surfacePadSm: clamp(16px, 1.6vw, 18px);
-      --heroMinHeight: min(70vh, 680px);
-      --heroPanelPad: clamp(18px, 2vw, 22px);
-      --heroInnerPad: clamp(20px, 3.2vw, 36px);
-      --contentTightGap: 8px;
-      --contentStackGap: 12px;
-      --fieldPadY: 12px;
-      --fieldPadX: 13px;
+      --gutter: clamp(16px, 2.8vw, 32px);
+      --sectionY: clamp(32px, 4.8vw, 56px);
+      --gridGap: clamp(14px, 2vw, 20px);
+      --surfacePad: clamp(24px, 2.8vw, 32px);
+      --surfacePadSm: clamp(18px, 2vw, 24px);
+      --heroMinHeight: min(80vh, 720px);
+      --heroPanelPad: clamp(22px, 2.4vw, 28px);
+      --heroInnerPad: clamp(28px, 3.6vw, 48px);
+      --contentTightGap: 10px;
+      --contentStackGap: 14px;
+      --fieldPadY: 13px;
+      --fieldPadX: 15px;
 
-      --bodySize: clamp(15.5px, 1.05vw, 17px);
-      --heroTitleSize: clamp(38px, 4.6vw, 60px);
+      --bodySize: clamp(15px, 1.05vw, 16.5px);
+      --heroTitleSize: clamp(36px, 4.8vw, 64px);
+      --sectionTitleSize: clamp(26px, 2.6vw, 38px);
 
       --sans:"Manrope", "Segoe UI", sans-serif;
       --display:"Fraunces", Georgia, serif;
 
-      --focus: 0 0 0 4px rgba(183,106,43,.28);
+      --focus: 0 0 0 3px rgba(168,101,42,.30);
 
       --heroImgFallback: url("images/Sandbox-Hotel-Hero-Banner.png");
       --heroImg: image-set(
@@ -123,41 +128,41 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --nav-h:56px;
       --nav-pad-y:8px;
       --nav-pad-x:14px;
-      --btn-h:40px;
-      --btn-px:13px;
-      --gutter: clamp(12px, 2vw, 22px);
-      --sectionY: clamp(16px, 2.4vw, 28px);
-      --gridGap: clamp(10px, 1.5vw, 14px);
-      --surfacePad: clamp(16px, 1.6vw, 18px);
-      --surfacePadSm: 14px;
-      --heroMinHeight: min(64vh, 620px);
-      --heroPanelPad: clamp(16px, 1.8vw, 18px);
-      --heroInnerPad: clamp(18px, 2.6vw, 28px);
-      --contentTightGap: 6px;
-      --contentStackGap: 10px;
-      --fieldPadY: 10px;
-      --fieldPadX: 12px;
-      --heroTitleSize: clamp(34px, 4.1vw, 52px);
+      --btn-h:42px;
+      --btn-px:14px;
+      --gutter: clamp(14px, 2.2vw, 24px);
+      --sectionY: clamp(24px, 3.2vw, 40px);
+      --gridGap: clamp(12px, 1.6vw, 16px);
+      --surfacePad: clamp(18px, 2vw, 24px);
+      --surfacePadSm: 16px;
+      --heroMinHeight: min(72vh, 640px);
+      --heroPanelPad: clamp(18px, 2vw, 22px);
+      --heroInnerPad: clamp(22px, 3vw, 32px);
+      --contentTightGap: 8px;
+      --contentStackGap: 12px;
+      --fieldPadY: 11px;
+      --fieldPadX: 13px;
+      --heroTitleSize: clamp(32px, 4.2vw, 52px);
     }
     html[data-density="ultra-compact"]{
       --nav-h:52px;
       --nav-pad-y:6px;
       --nav-pad-x:12px;
-      --btn-h:38px;
+      --btn-h:40px;
       --btn-px:12px;
-      --gutter: clamp(12px, 1.8vw, 18px);
-      --sectionY: clamp(14px, 2vw, 22px);
-      --gridGap: 10px;
-      --surfacePad: 14px;
-      --surfacePadSm: 12px;
-      --heroMinHeight: min(58vh, 560px);
-      --heroPanelPad: 14px;
-      --heroInnerPad: clamp(16px, 2vw, 22px);
-      --contentTightGap: 5px;
-      --contentStackGap: 8px;
-      --fieldPadY: 9px;
-      --fieldPadX: 11px;
-      --heroTitleSize: clamp(30px, 3.6vw, 46px);
+      --gutter: clamp(12px, 1.8vw, 20px);
+      --sectionY: clamp(20px, 2.4vw, 32px);
+      --gridGap: 12px;
+      --surfacePad: 16px;
+      --surfacePadSm: 14px;
+      --heroMinHeight: min(64vh, 580px);
+      --heroPanelPad: 16px;
+      --heroInnerPad: clamp(18px, 2.2vw, 26px);
+      --contentTightGap: 6px;
+      --contentStackGap: 10px;
+      --fieldPadY: 10px;
+      --fieldPadX: 12px;
+      --heroTitleSize: clamp(28px, 3.8vw, 46px);
     }
 
     /* ---------- Theme tokens ---------- */
@@ -187,17 +192,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --uiGlass2: rgba(17,19,24,.76);
     }
     html[data-theme="light"]{
-      --bg0:#EDE8E1;
-      --bg1:#F6F1EA;
-      --paper:#FCFAF6;
+      --bg0:#F5F0E8;
+      --bg1:#FAF6EF;
+      --paper:#FFFDF8;
       --card:#FFFFFF;
-      --card2:#F8F4EE;
+      --card2:#FBF7F0;
 
-      --ink:#1B1B1B;
-      --ink2:#111111;
-      --muted:#615B52;
-      --muted2:#7A7268;
-      --line:rgba(32,25,18,.10);
+      --ink:#2D2A26;
+      --ink2:#1A1815;
+      --muted:#6B645A;
+      --muted2:#8A8279;
+      --line:rgba(45,36,24,.09);
 
       --softA:rgba(183,106,43,.11);
       --softB:rgba(209,139,80,.08);
@@ -244,12 +249,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       min-height:100%;
       font-family: var(--sans);
       font-size: var(--bodySize);
-      line-height:1.62;
+      line-height:1.65;
       color: var(--ink);
       overflow-x:hidden;
       background:
-        radial-gradient(1100px 620px at 8% -10%, rgba(183,106,43,.12), transparent 64%),
-        radial-gradient(880px 520px at 88% -8%, rgba(240,195,154,.10), transparent 60%),
+        radial-gradient(1100px 620px at 8% -10%, rgba(168,101,42,.08), transparent 64%),
+        radial-gradient(880px 520px at 88% -8%, rgba(232,201,160,.07), transparent 60%),
         linear-gradient(180deg, var(--paper) 0%, var(--bg1) 52%, var(--bg0) 100%);
       text-rendering: optimizeLegibility;
     }
@@ -329,12 +334,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* ---------- Header / Nav ---------- */
     header{
-      position:sticky; top:0; z-index:80;
+      position:fixed; top:0; left:0; right:0; z-index:80;
+      border-bottom:1px solid transparent;
+      background: transparent;
+      transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+    }
+    header.scrolled{
       border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(10,11,14,.78);
-      box-shadow: 0 10px 28px rgba(0,0,0,.12);
-      -webkit-backdrop-filter: blur(14px) saturate(130%);
-      backdrop-filter: blur(14px) saturate(130%);
+      background: rgba(10,11,14,.82);
+      box-shadow: 0 4px 24px rgba(0,0,0,.12);
+      -webkit-backdrop-filter: blur(16px) saturate(130%);
+      backdrop-filter: blur(16px) saturate(130%);
+    }
+    html[data-theme="light"] header.scrolled{
+      background: rgba(255,253,248,.88);
+      border-bottom-color: rgba(45,36,24,.08);
+      box-shadow: 0 4px 24px rgba(45,36,24,.06);
     }
     .nav{
       max-width:var(--max); margin:0 auto;
@@ -425,6 +440,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .navGroup summary::-webkit-details-marker{display:none}
     .navGroup summary .navHamburger{pointer-events:none}
+    /* Reset details styling for nav */
+    .navGroup{border:none; background:none; padding:0; margin:0; border-radius:0}
     .navPanel{
       position:absolute;
       top:calc(100% + 10px);
@@ -557,9 +574,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .btn.primary{
       border:none;
       color:white;
-      background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92) 55%, rgba(240,195,154,.86) 120%);
-      box-shadow: 0 16px 32px rgba(0,0,0,.18), 0 14px 24px rgba(183,106,43,.10);
-      text-shadow: 0 1px 0 rgba(0,0,0,.35);
+      background: linear-gradient(135deg, rgba(168,101,42,.96), rgba(196,136,78,.90) 55%, rgba(232,201,160,.82) 130%);
+      box-shadow: 0 12px 28px rgba(0,0,0,.14), 0 8px 16px rgba(168,101,42,.12);
+      text-shadow: 0 1px 0 rgba(0,0,0,.25);
     }
     .btn.secondary{
       border:1px solid rgba(255,255,255,.18);
@@ -687,39 +704,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .kw.hot{background: var(--softHot); border-color: rgba(240,195,154,.24)}
 
     /* ---------- Section headers ---------- */
-    .head{display:flex; justify-content:space-between; align-items:flex-end; gap:10px; margin:0 0 8px}
+    .head{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin:0 0 16px}
     .head h2{
       margin:0;
-      font-size:clamp(24px, 2.4vw, 34px);
+      font-size:var(--sectionTitleSize, clamp(26px, 2.6vw, 38px));
       color:var(--ink2);
-      letter-spacing:-.02em;
-      line-height:1.06;
+      letter-spacing:-.025em;
+      line-height:1.1;
       font-family: var(--display);
     }
-    .head p{margin:6px 0 0; max-width:58ch; font-size:13.5px; color:var(--muted)}
+    .head p{margin:6px 0 0; max-width:58ch; font-size:14px; color:var(--muted); line-height:1.6}
 
     /* ---------- Hero ---------- */
     .hero{
       position:relative;
       min-height: var(--heroMinHeight);
       border-radius: var(--radius);
-      border:1px solid var(--line);
+      border:1px solid rgba(255,255,255,.06);
       background-color: var(--bg1);
       background-image: var(--heroImgFallback);
       background-image: var(--heroImg);
-      background-position:center;
+      background-position:center 35%;
       background-size:cover;
       background-repeat:no-repeat;
       color:#fff;
-      box-shadow: var(--shadow);
+      box-shadow: 0 32px 80px rgba(0,0,0,.18);
       overflow:hidden;
+      margin-top: var(--nav-h);
     }
     .hero:before{
       content:"";
       position:absolute; inset:0;
       background:
-        linear-gradient(90deg, rgba(10,11,14,.46) 0%, rgba(10,11,14,.16) 42%, rgba(10,11,14,.02) 72%),
-        linear-gradient(to top, rgba(10,11,14,.42) 0%, rgba(10,11,14,.12) 38%, rgba(10,11,14,0) 72%);
+        linear-gradient(90deg, rgba(10,11,14,.52) 0%, rgba(10,11,14,.20) 45%, rgba(10,11,14,.04) 75%),
+        linear-gradient(to top, rgba(10,11,14,.50) 0%, rgba(10,11,14,.14) 40%, rgba(10,11,14,0) 75%);
       pointer-events:none;
     }
     .heroInner{
@@ -732,17 +750,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content:flex-end;
       align-items:flex-start;
       padding: var(--heroInnerPad);
+      padding-bottom: clamp(32px, 4vw, 56px);
       text-align:left;
     }
     .heroPanel{
-      width:min(450px, 86vw);
+      width:min(480px, 88vw);
       margin:0 0 14px 0;
-      border-radius: 22px;
-      border:1px solid rgba(255,255,255,.09);
-      background: linear-gradient(180deg, rgba(13,14,18,.5), rgba(13,14,18,.34));
-      box-shadow: 0 16px 30px rgba(0,0,0,.14);
-      -webkit-backdrop-filter: blur(12px) saturate(120%);
-      backdrop-filter: blur(12px) saturate(120%);
+      border-radius: 18px;
+      border:1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(13,14,18,.52), rgba(13,14,18,.36));
+      box-shadow: 0 20px 48px rgba(0,0,0,.18);
+      -webkit-backdrop-filter: blur(14px) saturate(120%);
+      backdrop-filter: blur(14px) saturate(120%);
       padding: var(--heroPanelPad);
     }
     .heroKicker{
@@ -761,24 +780,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight:800;
     }
     .heroTitle{
-      margin:0 0 10px;
+      margin:0 0 12px;
       font-size:var(--heroTitleSize);
-      line-height:1.02;
-      letter-spacing:-.045em;
+      line-height:1.04;
+      letter-spacing:-.04em;
       font-weight:700;
       font-family: var(--display);
       text-wrap:balance;
     }
     .heroSub{
-      margin:0 0 18px;
-      max-width:34ch;
-      color:rgba(255,255,255,.86);
+      margin:0 0 20px;
+      max-width:36ch;
+      color:rgba(255,255,255,.88);
       font-size:15.5px;
-      line-height:1.55;
+      line-height:1.6;
     }
-    .heroCTA{margin-top:0; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:10px}
-    .heroCTA .btn{min-height:46px; padding:0 18px; font-size:14px}
-    .heroCTA .btn.primary{min-width:148px}
+    .heroCTA{margin-top:4px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:12px}
+    .heroCTA .btn{min-height:48px; padding:0 22px; font-size:14.5px; font-weight:700; letter-spacing:.01em}
+    .heroCTA .btn.primary{min-width:160px}
     .heroCTA .textLink{
       padding:8px 0;
       color:rgba(255,255,255,.9);
@@ -788,19 +807,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .trustStrip{
       display:flex;
       align-items:center;
-      justify-content:flex-start;
+      justify-content:center;
       flex-wrap:wrap;
-      max-width:min(820px, 100%);
-      gap:8px 12px;
-      padding:14px 4px 0;
-      color:color-mix(in oklab, var(--muted) 88%, white);
+      max-width:100%;
+      gap:6px 16px;
+      padding:20px 8px 8px;
+      color:var(--muted);
       font-size:13px;
-      font-weight:700;
+      font-weight:600;
       letter-spacing:.02em;
+    }
+    .trustStrip .trustItem{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:6px 12px;
+      border-radius:999px;
+      border:1px solid var(--line);
+      background:rgba(255,255,255,.03);
+      white-space:nowrap;
+    }
+    html[data-theme="light"] .trustStrip .trustItem{
+      background:rgba(168,101,42,.04);
+      border-color:rgba(168,101,42,.10);
+    }
+    .trustStrip .trustIcon{
+      font-size:14px;
+      line-height:1;
+      opacity:.8;
     }
     .trustStrip span[aria-hidden]{
       color:var(--muted2);
-      opacity:.5;
+      opacity:.4;
     }
 
     .nav :focus-visible{
@@ -814,18 +852,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .navSupport{display:none}
     }
 
-    /* ---------- Offers ---------- */
-    .offers{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:8px}
+    /* ---------- Why Stay / Offers ---------- */
+    .offers{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:var(--gridGap); margin-top:12px}
     .offer{
-      padding:16px;
+      padding:20px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: rgba(255,255,255,.025);
+      transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease;
     }
-    html[data-theme="light"] .offer{background: rgba(0,0,0,.02)}
-    .offer b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2); font-weight:1000}
-    .offer p{margin:8px 0 0; color:var(--muted); font-size:13px}
-    @media (max-width:980px){ .offers{grid-template-columns:1fr} }
+    @media (hover:hover){
+      .offer:hover{
+        transform:translateY(-2px);
+        border-color:rgba(168,101,42,.18);
+        box-shadow: 0 12px 28px rgba(0,0,0,.10);
+      }
+    }
+    html[data-theme="light"] .offer{background: rgba(168,101,42,.03)}
+    html[data-theme="light"] .offer:hover{background: rgba(168,101,42,.06)}
+    .offer .offerIcon{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      width:42px; height:42px;
+      border-radius:10px;
+      background: rgba(168,101,42,.10);
+      border:1px solid rgba(168,101,42,.16);
+      font-size:18px;
+      margin-bottom:12px;
+    }
+    .offer b{display:flex; align-items:center; gap:10px; color:var(--ink2); font-weight:800; font-size:15px}
+    .offer p{margin:8px 0 0; color:var(--muted); font-size:13.5px; line-height:1.55}
+    @media (max-width:640px){ .offers{grid-template-columns:1fr} }
 
         /* ---------- Why choose us ---------- */
     .whyGrid{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:var(--gridGap); margin-top:8px}
@@ -1086,14 +1144,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .roomMedia .mediaImg{aspect-ratio: 5 / 4}
     .roomBody{
-      padding:18px;
+      padding:22px;
       min-width:0;
     }
     .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
-    .roomTop h3{margin:0; font-size:21px; letter-spacing:-.02em; line-height:1.08; color:var(--ink2); font-family:var(--display)}
+    .roomTop h3{margin:0; font-size:22px; letter-spacing:-.02em; line-height:1.1; color:var(--ink2); font-family:var(--display)}
     .priceBox{min-width:128px; text-align:right}
-    .priceBox b{display:block; font-size:12px; color:var(--muted); font-weight:950}
-    .priceBox strong{display:block; font-size:18px; color:var(--ink2); font-weight:1000; line-height:1.1; margin-top:2px}
+    .priceBox b{display:block; font-size:12px; color:var(--muted); font-weight:800}
+    .priceBox strong{display:block; font-size:18px; color:var(--copper); font-weight:800; line-height:1.1; margin-top:2px}
     .priceBox small{display:block; font-size:12px; color:var(--muted2); margin-top:2px}
     .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
     .tag{
@@ -1243,57 +1301,79 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ---------- Reviews ---------- */
-    .stars{letter-spacing:.08em; color: rgba(240,195,154,.95); font-weight:1000}
+    .stars{letter-spacing:.08em; color: rgba(196,136,78,.95); font-weight:800}
     .reviewActionRow{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
-    .reviews{display:grid; grid-template-columns: 1.15fr .85fr; gap:12px}
+    .reviews{display:grid; grid-template-columns: 1.15fr .85fr; gap:14px}
     @media (max-width:980px){ .reviews{grid-template-columns:1fr} }
-    .reviewsLead,.reviewsSide{display:grid; gap:10px}
+    .reviewsLead,.reviewsSide{display:grid; gap:12px}
     .review{
-      padding:16px;
+      padding:20px;
       border-radius: var(--radius2);
       border:1px solid var(--line);
       background: rgba(255,255,255,.025);
+      transition: transform .18s ease, box-shadow .18s ease;
     }
-    html[data-theme="light"] .review{background: rgba(0,0,0,.02)}
-    .review b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2)}
-    .review p{margin:8px 0 0; color:var(--muted); font-size:13px}
+    @media (hover:hover){
+      .review:hover{
+        transform:translateY(-1px);
+        box-shadow: 0 8px 20px rgba(0,0,0,.08);
+      }
+    }
+    html[data-theme="light"] .review{background: rgba(0,0,0,.015)}
+    .review b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2); font-size:14px}
+    .review p{margin:10px 0 0; color:var(--muted); font-size:13.5px; line-height:1.6}
     .reviewFeatured{
-      padding:20px;
+      padding:24px;
       background:
-        radial-gradient(560px 180px at 0% 0%, rgba(183,106,43,.08), transparent 70%),
+        radial-gradient(560px 180px at 0% 0%, rgba(168,101,42,.08), transparent 70%),
         var(--card);
-      box-shadow: var(--shadow3);
+      box-shadow: 0 8px 24px rgba(0,0,0,.06);
     }
     .reviewFeatured p{
-      font-size:14px;
+      font-size:15px;
       line-height:1.7;
       position:relative;
-      padding-left:18px;
+      padding-left:20px;
     }
     .reviewFeatured p::before{
       content:"\201C";
       position:absolute;
       left:0;
       top:-6px;
-      font-size:24px;
-      color:color-mix(in oklab, var(--copper) 65%, white);
+      font-size:28px;
+      color:var(--copper);
       line-height:1;
+      opacity:.6;
     }
-    .reviewMini p{font-size:13px}
+    .reviewMini p{font-size:13.5px}
 
     /* ---------- FAQ ---------- */
-    details{
+    #faq details{
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: rgba(255,255,255,.018);
-      padding:12px 14px;
-      margin-top:8px
+      padding:14px 18px;
+      margin-top:10px;
+      transition: background .18s ease, border-color .18s ease;
     }
-    html[data-theme="light"] details{background: rgba(0,0,0,.015)}
-    summary{cursor:pointer; font-weight:950; color:var(--ink2); list-style:none}
-    summary::-webkit-details-marker{display:none}
-    details p{margin:10px 0 0; color:var(--muted); font-size:13px}
-    details[open]{background:rgba(255,255,255,.04)}
+    html[data-theme="light"] #faq details{background: rgba(0,0,0,.012)}
+    #faq summary{cursor:pointer; font-weight:700; color:var(--ink2); list-style:none; font-size:15px; line-height:1.4; display:flex; align-items:center; justify-content:space-between; gap:12px}
+    #faq summary::-webkit-details-marker{display:none}
+    #faq summary::after{content:"+"; font-size:18px; font-weight:400; color:var(--muted2); transition:transform .2s ease; flex-shrink:0}
+    #faq details[open] summary::after{content:"−"}
+    #faq details p{margin:12px 0 0; color:var(--muted); font-size:14px; line-height:1.65}
+    #faq details[open]{background:rgba(168,101,42,.03); border-color:rgba(168,101,42,.12)}
+    html[data-theme="dark"] #faq details[open]{background:rgba(255,255,255,.04)}
+    .faqCTA{
+      margin-top:20px;
+      padding:20px;
+      border-radius:var(--radius2);
+      border:1px solid rgba(168,101,42,.15);
+      background:rgba(168,101,42,.04);
+      text-align:center;
+    }
+    .faqCTA p{margin:0 0 12px; font-size:14.5px; color:var(--ink2); font-weight:600}
+    .faqCTA .btn{margin:0 4px}
 
     /* ---------- Map Embed (reasonable size) ---------- */
     .mapWrap{
@@ -1337,11 +1417,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* ---------- Footer ---------- */
     footer{
-      margin-top:18px; padding-top:14px;
+      margin-top:24px; padding-top:20px;
       border-top:1px solid var(--line);
       color:var(--muted);
-      font-size:12px;
-      display:flex; justify-content:space-between; align-items:flex-start; gap:16px; flex-wrap:wrap;
+      font-size:13px;
+      display:flex; justify-content:space-between; align-items:flex-start; gap:20px; flex-wrap:wrap;
     }
     .footerBrand{
       display:flex;
@@ -1752,29 +1832,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="hero">
         <div class="heroInner">
           <div class="heroPanel">
-            <p class="heroKicker" data-i18n="hero_kicker_short">Sandbox Hotel • Best Rate Direct</p>
-            <h1 class="heroTitle" data-i18n-html="hero_title">Modern, quiet stays<br>in Nakhon Si Thammarat</h1>
-            <p class="heroSub" data-i18n="hero_sub_short">Comfortable rooms, convenient access, and friendly service for business trips or short stays.</p>
+            <p class="heroKicker" data-i18n="hero_kicker_short">Sandbox Hotel • Direct Booking</p>
+            <h1 class="heroTitle" data-i18n-html="hero_title">Your quiet retreat<br>in Nakhon Si Thammarat</h1>
+            <p class="heroSub" data-i18n="hero_sub_short">Spacious rooms, fast direct booking, and thoughtful service for every kind of stay.</p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Book Now</a>
+              <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
               <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
-              <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">View Rooms</a>
+              <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">Explore Rooms →</a>
             </div>
           </div>
         </div>
       </div>
 
       <div class="trustStrip" aria-label="Hotel highlights">
-        <span data-i18n="trust_direct">Direct Booking</span>
-        <span aria-hidden="true">·</span>
-        <span data-i18n="trust_quiet">Quiet Rooms</span>
-        <span aria-hidden="true">·</span>
-        <span data-i18n="trust_wifi">Free Wi‑Fi</span>
-        <span aria-hidden="true">·</span>
-        <span data-i18n="trust_parking">Parking</span>
-        <span aria-hidden="true">·</span>
-        <span data-i18n="trust_support">Call / LINE Support</span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">✓</span> <span data-i18n="trust_direct">Direct Booking</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">🤫</span> <span data-i18n="trust_quiet">Quiet Rooms</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">📶</span> <span data-i18n="trust_wifi">Free Wi‑Fi</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">🅿</span> <span data-i18n="trust_parking">Parking</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">📞</span> <span data-i18n="trust_support">Call / LINE Support</span></span>
       </div>
     </section>
 
@@ -1836,18 +1912,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="fine" data-i18n-html="room_standard_twin_meta">2 Twin Beds • 28–32 m² • Guests 1–2</div>
                   </div>
                   <div class="priceBox">
-                    <span class="fine" data-i18n="price_rates_on_request">Rates on request</span>
+                    <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
                   </div>
                 </div>
 
                 <ul class="bullets">
                   <li data-i18n="bullet_large_room">Large room layout with work desk</li>
                   <li data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
+                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower + fast Wi-Fi</li>
                 </ul>
 
                 <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now">Book Twin</a>
+                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now">Book Twin Room</a>
                 </div>
               </div>
             </div>
@@ -1898,18 +1974,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <div class="fine" data-i18n-html="room_standard_double_meta">1 Double Bed • 28–32 m² • Guests 1–2</div>
                   </div>
                   <div class="priceBox">
-                    <span class="fine" data-i18n="price_rates_on_request">Rates on request</span>
+                    <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
                   </div>
                 </div>
 
                 <ul class="bullets">
                   <li data-i18n="bullet_comfort_double_bed">Comfortable double bed</li>
                   <li data-i18n="bullet_great_for_couples">Great for couples or solo travelers</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
+                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower + fast Wi-Fi</li>
                 </ul>
 
                 <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now">Book Double</a>
+                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now">Book Double Room</a>
                 </div>
               </div>
             </div>
@@ -1923,29 +1999,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <!-- OFFERS -->
+    <!-- WHY STAY -->
     <section class="section" id="offers">
       <div class="card pad">
         <div class="head">
           <div>
-            <h2 data-i18n="offers_title">Why Book Direct</h2>
-            <p data-i18n="offers_sub">Simple booking with fast confirmation.</p>
+            <h2 data-i18n="offers_title">Why Stay at Sandbox Hotel</h2>
+            <p data-i18n="offers_sub">Everything you need for a comfortable, hassle-free stay.</p>
           </div>
-          <a class="textLink" href="#book" data-i18n="offers_btn" data-analytics="book-now">Check availability</a>
+          <a class="btn primary" href="#book" data-i18n="offers_btn" data-analytics="book-now">Check Availability</a>
         </div>
 
         <div class="offers">
           <div class="offer">
-            <b data-i18n="offer1_title">Fast confirmation</b>
-            <p data-i18n="offer1_desc">Call or message your dates and room type.</p>
+            <div class="offerIcon" aria-hidden="true">⚡</div>
+            <b data-i18n="offer1_title">Fast Direct Booking</b>
+            <p data-i18n="offer1_desc">Message your dates and room type — get confirmed quickly via LINE, WhatsApp, or call.</p>
           </div>
           <div class="offer">
-            <b data-i18n="offer2_title">Long-stay options</b>
-            <p data-i18n="offer2_desc">Ask about weekly or extended stays.</p>
+            <div class="offerIcon" aria-hidden="true">🛏️</div>
+            <b data-i18n="offer2_title">Spacious Comfortable Rooms</b>
+            <p data-i18n="offer2_desc">28–32 m² rooms with work desk, AC, hot shower, and fast Wi-Fi included.</p>
           </div>
           <div class="offer">
-            <b data-i18n="offer3_title">Direct support</b>
-            <p data-i18n="offer3_desc">Simple booking and local assistance.</p>
+            <div class="offerIcon" aria-hidden="true">🤫</div>
+            <b data-i18n="offer3_title">Quiet Practical Stay</b>
+            <p data-i18n="offer3_desc">Quiet-side rooms on request. Parking, laundry, and friendly local support.</p>
+          </div>
+          <div class="offer">
+            <div class="offerIcon" aria-hidden="true">📅</div>
+            <b data-i18n="offer4_title">Flexible Short &amp; Long Stay</b>
+            <p data-i18n="offer4_desc">From one night to extended stays — ask about weekly or monthly rates.</p>
           </div>
         </div>
       </div>
@@ -2168,10 +2252,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="card altA pad">
         <div class="head">
           <div>
-            <h2 data-i18n="book_title">Quick Booking Request</h2>
-            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.</p>
+            <h2 data-i18n="book_title">Reserve Your Stay</h2>
+            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll confirm with your exact rate.</p>
           </div>
-          <a class="textLink" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
+          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
         </div>
 
         <div class="bookingShell">
@@ -2292,6 +2376,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
           <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
         </details>
+
+        <div class="faqCTA">
+          <p data-i18n="faq_cta_text">Still have questions? We're happy to help.</p>
+          <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
+          <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+        </div>
       </div>
     </section>
 
@@ -2560,35 +2650,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         nav_location: "ที่ตั้ง",
 
         hero_kicker: '<span class="kw a">จองตรงกับโรงแรม</span> <span style="opacity:.9">•</span> <span class="kw">ยืนยันรวดเร็ว</span> <span style="opacity:.9">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
-        hero_kicker_short: "Sandbox Hotel • ราคาดีเมื่อจองตรง",
-        hero_title: "ห้องพักทันสมัย เงียบสบาย<br>ในนครศรีธรรมราช",
+        hero_kicker_short: "Sandbox Hotel • จองตรงกับโรงแรม",
+        hero_title: "พักผ่อน เงียบสบาย<br>ในนครศรีธรรมราช",
         hero_sub: 'ห้องกว้าง • Wi-Fi • ที่จอดรถ • ซักรีด • แอร์<br>ยืนยันเร็วที่สุด: โทรหรือ LINE',
-        hero_sub_short: "ห้องพักสบาย เดินทางสะดวก บริการเป็นกันเอง เหมาะทั้งทริปงานและพักสั้น",
+        hero_sub_short: "ห้องกว้าง จองตรงรวดเร็ว บริการใส่ใจ สำหรับทุกการเข้าพัก",
         hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
 
-        cta_request: "จองเลย",
+        cta_request: "เช็คห้องว่าง",
         cta_call_line: "โทรหรือ LINE",
         cta_call_number: "โทร: 088-578-3478",
         cta_email: "อีเมล",
         cta_open_map: "เปิดแผนที่",
-        hero_view_rooms: "ดูห้องพัก",
+        hero_view_rooms: "ดูห้องพัก →",
         trust_direct: "จองตรงกับโรงแรม",
         trust_quiet: "ห้องพักเงียบ",
         trust_wifi: "ฟรี Wi‑Fi",
         trust_parking: "ที่จอดรถ",
         trust_support: "โทร / LINE ได้",
 
-        offers_title: "ทำไมต้องจองตรง",
-        offers_sub: "จองง่าย ยืนยันไว",
+        offers_title: "ทำไมต้องพักที่ Sandbox Hotel",
+        offers_sub: "ครบทุกอย่างที่คุณต้องการ สะดวกสบาย ไม่ยุ่งยาก",
         offers_btn: "เช็คห้องว่าง",
-        offer1_title: 'ยืนยันไว',
-        offer1_desc: "ส่งวันเข้าพัก + ประเภทห้อง แล้วเราจะตอบกลับพร้อมห้องว่างและราคารวม",
-        offer2_title: 'พักระยะยาว',
-        offer2_desc: "พัก 7 คืนขึ้นไป? สอบถามเรทรายสัปดาห์/รายเดือน (ขึ้นอยู่กับช่วงเวลา)",
-        offer3_title: 'ติดต่อตรง',
-        offer3_desc: "สุดสัปดาห์/วันหยุดมักเต็มเร็ว—จองล่วงหน้าเพื่อได้ห้องที่ต้องการ",
+        offer1_title: 'จองตรงรวดเร็ว',
+        offer1_desc: "ส่งวันเข้าพักและประเภทห้อง — ยืนยันรวดเร็วผ่าน LINE, WhatsApp หรือโทร",
+        offer2_title: 'ห้องกว้างสบาย',
+        offer2_desc: "ห้องพัก 28–32 ตร.ม. พร้อมโต๊ะทำงาน แอร์ น้ำอุ่น และ Wi-Fi เร็ว",
+        offer3_title: 'พักสบาย เงียบสงบ',
+        offer3_desc: "ขอห้องฝั่งเงียบได้ ที่จอดรถ ซักรีด และพนักงานยินดีช่วยเหลือ",
+        offer4_title: 'พักสั้นหรือพักยาว',
+        offer4_desc: "พัก 1 คืนหรือพักยาว — สอบถามเรทรายสัปดาห์/รายเดือน",
+        faq_cta_text: "ยังมีคำถาม? เรายินดีช่วยเหลือค่ะ",
 
-        book_title: "ส่งคำขอจองแบบรวดเร็ว",
+        book_title: "จองห้องพัก",
         book_sub: 'ส่ง <span class="kw a">วันเข้าพัก</span> + <span class="kw">ประเภทห้อง</span> แล้วเราจะตอบกลับเร็วที่สุด',
         book_callnow: "โทรเลย",
 
@@ -2772,36 +2865,39 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         nav_location: "Location",
 
         hero_kicker: '<span class="kw a">Direct booking</span> <span style="opacity:.9">•</span> <span class="kw">Fast confirmation</span> <span style="opacity:.9">•</span> <span class="kw hot">Click to book</span>',
-        hero_kicker_short: "Sandbox Hotel • Best Rate Direct",
-        hero_title: "Modern, quiet stays<br>in Nakhon Si Thammarat",
+        hero_kicker_short: "Sandbox Hotel • Direct Booking",
+        hero_title: "Your quiet retreat<br>in Nakhon Si Thammarat",
         hero_sub: 'Spacious rooms • Wi‑Fi • Parking • Laundry • A/C<br>Fastest confirmation: call or LINE',
-        hero_sub_short: "Comfortable rooms, convenient access, and friendly service for business trips or short stays.",
+        hero_sub_short: "Spacious rooms, fast direct booking, and thoughtful service for every kind of stay.",
         hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Passport/ID required • Quiet rooms',
 
-        cta_request: "Book Now",
+        cta_request: "Check Availability",
         cta_call_line: "Call or LINE",
         cta_call_number: "Call: 088-578-3478",
         cta_email: "Email",
         cta_open_map: "Open Map",
-        hero_view_rooms: "View Rooms",
+        hero_view_rooms: "Explore Rooms →",
         trust_direct: "Direct Booking",
         trust_quiet: "Quiet Rooms",
         trust_wifi: "Free Wi‑Fi",
         trust_parking: "Parking",
         trust_support: "Call / LINE Support",
 
-        offers_title: "Why Book Direct",
-        offers_sub: "Simple booking with fast confirmation.",
-        offers_btn: "Check availability",
-        offer1_title: "Fast confirmation",
-        offer1_desc: "Call or message your dates and room type.",
-        offer2_title: "Long-stay options",
-        offer2_desc: "Ask about weekly or extended stays.",
-        offer3_title: "Direct support",
-        offer3_desc: "Simple booking and local assistance.",
+        offers_title: "Why Stay at Sandbox Hotel",
+        offers_sub: "Everything you need for a comfortable, hassle-free stay.",
+        offers_btn: "Check Availability",
+        offer1_title: "Fast Direct Booking",
+        offer1_desc: "Message your dates and room type — get confirmed quickly via LINE, WhatsApp, or call.",
+        offer2_title: "Spacious Comfortable Rooms",
+        offer2_desc: "28–32 m² rooms with work desk, AC, hot shower, and fast Wi-Fi included.",
+        offer3_title: "Quiet Practical Stay",
+        offer3_desc: "Quiet-side rooms on request. Parking, laundry, and friendly local support.",
+        offer4_title: "Flexible Short & Long Stay",
+        offer4_desc: "From one night to extended stays — ask about weekly or monthly rates.",
+        faq_cta_text: "Still have questions? We’re happy to help.",
 
-        book_title: "Quick Booking Request",
-        book_sub: 'Send your <span class="kw a">dates</span> + <span class="kw">room type</span> and we’ll confirm quickly.',
+        book_title: "Reserve Your Stay",
+        book_sub: "Send your <span class=\"kw a\">dates</span> and <span class=\"kw\">room preference</span> — we’ll confirm with your exact rate.",
         book_callnow: "Call Now",
 
         lbl_checkin: "Check-in",
@@ -2877,8 +2973,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         room_standard_twin_title: "Standard Twin",
         room_standard_double_title: "Standard Double",
-        room_standard_twin_btn: "Book Twin",
-        room_standard_double_btn: "Book Double",
+        room_standard_twin_btn: "Book Twin Room",
+        room_standard_double_btn: "Book Double Room",
         room_standard_twin_meta: '<span class="kw a">Best Value</span> • 2 Twin Beds • 28–32 m² • Guests 1–2',
         room_standard_double_meta: '<span class="kw a">Most Popular</span> • 1 Double Bed • 28–32 m² • Guests 1–2',
 
@@ -2990,7 +3086,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         hero_sub_short: "舒适客房、便利位置与友好服务，适合商务出行或短住。",
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
 
-        cta_request: "立即预订",
+        cta_request: "查看空房",
         cta_call_line: "电话或 LINE",
         cta_call_number: "致电：088-578-3478",
         cta_email: "邮箱",
@@ -3002,17 +3098,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         trust_parking: "停车",
         trust_support: "电话 / LINE 支持",
 
-        offers_title: "为什么直订",
-        offers_sub: "简单预订，快速确认。",
+        offers_title: "为什么选择 Sandbox Hotel",
+        offers_sub: "满足您舒适入住所需的一切，方便省心。",
         offers_btn: "查询空房",
-        offer1_title: '快速确认',
-        offer1_desc: "发送日期 + 房型，我们会尽快回复空房情况。",
-        offer2_title: '长住选项',
-        offer2_desc: "入住 7 晚以上？可咨询周租/月租方案（季节性）。",
-        offer3_title: '直接联系',
-        offer3_desc: "周末/假期更紧张，建议提前预订以确保空房。",
+        offer1_title: '直接预订快速',
+        offer1_desc: "发送日期与房型 — 通过LINE、WhatsApp或电话快速确认。",
+        offer2_title: '宽敞舒适客房',
+        offer2_desc: "28–32㎡客房配办公桌、空调、热水淋浴与高速Wi-Fi。",
+        offer3_title: '安静实用入住',
+        offer3_desc: "安静客房可按需安排。停车、洗衣与贴心本地服务。",
+        offer4_title: "灵活短住或长住",
+        offer4_desc: "一晚起住或长期入住 — 可咨询周租/月租方案。",
+        faq_cta_text: "还有问题？我们乐意为您解答。",
 
-        book_title: "快速预订请求",
+        book_title: "预订您的住宿",
         book_sub: '发送 <span class="kw a">日期</span> + <span class="kw">房型</span>，我们会尽快确认。',
         book_callnow: "立即致电",
 
@@ -3728,6 +3827,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       updateStaySummary();
     }
 
+    // ---------- Header scroll effect ----------
+    function initHeaderScroll(){
+      const header = document.querySelector("header");
+      if(!header) return;
+      function checkScroll(){
+        if(window.scrollY > 60){
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
+      }
+      window.addEventListener("scroll", checkScroll, {passive:true});
+      checkScroll();
+    }
+
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
@@ -3736,6 +3850,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       initDates();
       wireContactButtons();
       initGalleryCarousel();
+      initHeaderScroll();
     })();
   </script>
 </body>

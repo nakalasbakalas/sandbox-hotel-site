@@ -17,5 +17,8 @@
   },
   "engines": {
     "node": ">=18.0.0"
+  },
+  "dependencies": {
+    "@cloudflare/workerd-linux-64": "^1.20260317.1"
   }
 }
