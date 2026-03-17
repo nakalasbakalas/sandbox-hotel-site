@@ -89,26 +89,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --max:1200px;
 
       --tap:46px;
-      --nav-h:64px;
-      --nav-pad-y:12px;
-      --nav-pad-x:20px;
+      --nav-h:60px;
+      --nav-pad-y:10px;
+      --nav-pad-x:18px;
       --nav-gap:8px;
       --btn-h:44px;
-      --btn-px:18px;
+      --btn-px:16px;
       --btn-radius:10px;
       --btn-border:1px;
       --gutter: clamp(16px, 2.8vw, 32px);
-      --sectionY: clamp(32px, 4.8vw, 56px);
-      --gridGap: clamp(14px, 2vw, 20px);
-      --surfacePad: clamp(24px, 2.8vw, 32px);
-      --surfacePadSm: clamp(18px, 2vw, 24px);
-      --heroMinHeight: min(80vh, 720px);
-      --heroPanelPad: clamp(22px, 2.4vw, 28px);
-      --heroInnerPad: clamp(28px, 3.6vw, 48px);
-      --contentTightGap: 10px;
-      --contentStackGap: 14px;
-      --fieldPadY: 13px;
-      --fieldPadX: 15px;
+      --sectionY: clamp(36px, 4vw, 48px);
+      --gridGap: clamp(12px, 1.6vw, 18px);
+      --surfacePad: clamp(18px, 2vw, 22px);
+      --surfacePadSm: clamp(16px, 1.8vw, 18px);
+      --heroMinHeight: min(74vh, 660px);
+      --heroPanelPad: clamp(18px, 2vw, 24px);
+      --heroInnerPad: clamp(22px, 3vw, 36px);
+      --contentTightGap: 8px;
+      --contentStackGap: 12px;
+      --fieldPadY: 12px;
+      --fieldPadX: 14px;
 
       --bodySize: clamp(15px, 1.05vw, 16.5px);
       --heroTitleSize: clamp(36px, 4.8vw, 64px);
@@ -135,23 +135,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       );
     }
     html[data-density="compact"]{
-      --nav-h:56px;
+      --nav-h:54px;
       --nav-pad-y:8px;
       --nav-pad-x:14px;
       --btn-h:42px;
       --btn-px:14px;
       --gutter: clamp(14px, 2.2vw, 24px);
-      --sectionY: clamp(24px, 3.2vw, 40px);
-      --gridGap: clamp(12px, 1.6vw, 16px);
-      --surfacePad: clamp(18px, 2vw, 24px);
+      --sectionY: clamp(26px, 3.2vw, 38px);
+      --gridGap: clamp(10px, 1.5vw, 14px);
+      --surfacePad: clamp(16px, 1.8vw, 20px);
       --surfacePadSm: 16px;
-      --heroMinHeight: min(72vh, 640px);
-      --heroPanelPad: clamp(18px, 2vw, 22px);
-      --heroInnerPad: clamp(22px, 3vw, 32px);
+      --heroMinHeight: min(68vh, 600px);
+      --heroPanelPad: clamp(16px, 1.8vw, 20px);
+      --heroInnerPad: clamp(18px, 2.6vw, 28px);
       --contentTightGap: 8px;
-      --contentStackGap: 12px;
+      --contentStackGap: 10px;
       --fieldPadY: 11px;
-      --fieldPadX: 13px;
+      --fieldPadX: 12px;
       --heroTitleSize: clamp(32px, 4.2vw, 52px);
     }
     html[data-density="ultra-compact"]{
@@ -763,7 +763,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .kw.hot{background: var(--softHot); border-color: rgba(240,195,154,.24)}
 
     /* ---------- Section headers ---------- */
-    .head{display:flex; justify-content:space-between; align-items:flex-end; gap:12px; margin:0 0 16px}
+    .head{display:flex; justify-content:space-between; align-items:flex-end; gap:14px; margin:0 0 14px}
     .head h2{
       margin:0;
       font-size:var(--sectionTitleSize, clamp(26px, 2.6vw, 38px));
@@ -772,7 +772,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       line-height:1.1;
       font-family: var(--display);
     }
-    .head p{margin:6px 0 0; max-width:58ch; font-size:14px; color:var(--muted); line-height:1.6}
+    .head p{margin:6px 0 0; max-width:56ch; font-size:13.5px; color:var(--muted); line-height:1.5}
 
     /* ---------- Hero ---------- */
     .hero{
@@ -787,7 +787,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background-size:cover;
       background-repeat:no-repeat;
       color:#fff;
-      box-shadow: 0 32px 80px rgba(0,0,0,.18);
+      box-shadow: 0 28px 68px rgba(0,0,0,.18);
       overflow:hidden;
       margin-top: var(--nav-h);
     }
@@ -809,16 +809,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content:flex-end;
       align-items:flex-start;
       padding: var(--heroInnerPad);
-      padding-bottom: clamp(32px, 4vw, 56px);
+      padding-bottom: clamp(22px, 3vw, 38px);
       text-align:left;
     }
     .heroPanel{
-      width:min(480px, 88vw);
-      margin:0 0 14px 0;
-      border-radius: 18px;
+      width:min(450px, 86vw);
+      margin:0 0 8px 0;
+      border-radius: 16px;
       border:1px solid rgba(255,255,255,.10);
       background: linear-gradient(180deg, rgba(13,14,18,.52), rgba(13,14,18,.36));
-      box-shadow: 0 20px 48px rgba(0,0,0,.18);
+      box-shadow: 0 16px 38px rgba(0,0,0,.17);
       -webkit-backdrop-filter: blur(14px) saturate(120%);
       backdrop-filter: blur(14px) saturate(120%);
       padding: var(--heroPanelPad);
@@ -826,8 +826,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .heroKicker{
       display:inline-flex;
       align-items:center;
-      margin:0 0 10px;
-      padding:6px 10px;
+      margin:0 0 8px;
+      padding:5px 10px;
       border:1px solid rgba(255,255,255,.12);
       border-radius:999px;
       background: rgba(255,255,255,.05);
@@ -839,26 +839,26 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight:800;
     }
     .heroTitle{
-      margin:0 0 12px;
+      margin:0 0 8px;
       font-size:var(--heroTitleSize);
-      line-height:1.04;
+      line-height:1.01;
       letter-spacing:-.04em;
       font-weight:700;
       font-family: var(--display);
       text-wrap:balance;
     }
     .heroSub{
-      margin:0 0 20px;
-      max-width:36ch;
+      margin:0 0 16px;
+      max-width:34ch;
       color:rgba(255,255,255,.88);
-      font-size:15.5px;
-      line-height:1.6;
+      font-size:15px;
+      line-height:1.52;
     }
-    .heroCTA{margin-top:4px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:12px}
-    .heroCTA .btn{min-height:48px; padding:0 22px; font-size:14.5px; font-weight:700; letter-spacing:.01em}
+    .heroCTA{margin-top:2px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:10px}
+    .heroCTA .btn{min-height:44px; padding:0 18px; font-size:14px; font-weight:700; letter-spacing:.01em}
     .heroCTA .btn.primary{min-width:160px}
     .heroCTA .textLink{
-      padding:8px 0;
+      padding:6px 0;
       color:rgba(255,255,255,.9);
     }
 
@@ -869,10 +869,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content:center;
       flex-wrap:wrap;
       max-width:100%;
-      gap:6px 16px;
-      padding:20px 8px 8px;
+      gap:6px 10px;
+      padding:14px 4px 2px;
       color:var(--muted);
-      font-size:13px;
+      font-size:12.5px;
       font-weight:600;
       letter-spacing:.02em;
     }
@@ -880,7 +880,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:inline-flex;
       align-items:center;
       gap:6px;
-      padding:6px 12px;
+      padding:5px 10px;
       border-radius:999px;
       border:1px solid var(--controlBorder);
       background:var(--surfaceA);
@@ -908,9 +908,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ---------- Why Stay / Offers ---------- */
-    .offers{display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:var(--gridGap); margin-top:12px}
+    .offers{display:grid; grid-template-columns:repeat(auto-fit, minmax(210px, 1fr)); gap:12px; margin-top:10px}
     .offer{
-      padding:20px;
+      padding:18px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: var(--surfaceA);
@@ -928,15 +928,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      width:42px; height:42px;
+      width:38px; height:38px;
       border-radius:10px;
       background: rgba(168,101,42,.10);
       border:1px solid rgba(168,101,42,.16);
-      font-size:18px;
-      margin-bottom:12px;
+      font-size:16px;
+      margin-bottom:10px;
     }
     .offer b{display:flex; align-items:center; gap:10px; color:var(--ink2); font-weight:800; font-size:15px}
-    .offer p{margin:8px 0 0; color:var(--muted); font-size:13.5px; line-height:1.55}
+    .offer p{margin:6px 0 0; color:var(--muted); font-size:13px; line-height:1.5}
     @media (max-width:640px){ .offers{grid-template-columns:1fr} }
 
         /* ---------- Why choose us ---------- */
@@ -953,20 +953,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 /* ---------- Booking form ---------- */
     .bookingShell{
       display:grid;
-      grid-template-columns:minmax(280px, .88fr) minmax(0, 1.12fr);
+      grid-template-columns:minmax(260px, .82fr) minmax(0, 1.18fr);
       gap:var(--gridGap);
       align-items:start;
-      margin-top:10px;
+      margin-top:8px;
     }
     .bookingMetaCard{
       border:1px solid var(--line);
       border-radius:var(--radius2);
       background:var(--surfaceB);
-      padding:16px;
+      padding:14px;
     }
-    .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:8px; margin-top:8px}
-    .field{display:flex; flex-direction:column; gap:5px}
-    .field label{font-size:12px; color:var(--muted); font-weight:900}
+    .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:10px 12px; margin-top:6px}
+    .field{display:flex; flex-direction:column; gap:4px}
+    .field label{font-size:11.5px; color:var(--muted); font-weight:900}
     .field input,.field select,.field textarea{
       width:100%;
       padding:var(--fieldPadY) var(--fieldPadX);
@@ -983,32 +983,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       background: var(--fieldBgFocus);
     }
     .wide{grid-column:1/-1}
-    .ctaRow{display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-top:4px}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:2px}
     @media (max-width:980px){ .bookingShell{grid-template-columns:1fr} .formGrid{grid-template-columns:1fr} }
 
         /* ---------- Quick date presets ---------- */
-    .quickDates{margin-top:8px; display:grid; gap:6px}
+    .quickDates{margin-top:4px; display:grid; gap:8px}
     .quickTop{display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap}
     .quickLabel{
       font-size:12px; color:var(--muted); font-weight:950;
       letter-spacing:.14em; text-transform:uppercase;
     }
     .quickChips{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
-    .quickChips .chip{min-height:36px; padding:7px 9px}
+    .quickChips .chip{min-height:32px; padding:6px 9px; font-size:12px}
     .quickDates .fine{margin:0}
     #staySummary{
-      display:flex; align-items:center; justify-content:flex-start; gap:8px; flex-wrap:wrap;
+      display:flex; align-items:center; justify-content:flex-start; gap:6px; flex-wrap:wrap;
     }
     .stayPill{
       display:inline-flex; align-items:center; gap:8px;
-      padding:6px 10px; border-radius:999px;
+      padding:5px 9px; border-radius:999px;
       border:1px solid var(--controlBorder);
       background: var(--surfaceB);
       color: var(--ink2);
       font-weight:900;
-      font-size:12px;
+      font-size:11.5px;
     }
-    .bestRateNote{color: var(--muted); font-size:12px}
+    .bestRateNote{color: var(--muted); font-size:12px; line-height:1.45}
     html[data-device="phone"] .quickChips{
       flex-wrap:nowrap;
       overflow-x:auto;
@@ -1026,7 +1026,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --border: var(--line);
       --text: var(--ink2);
       position: relative;
-      padding: clamp(16px, 2.2vw, 24px);
+      padding: clamp(14px, 2vw, 20px);
       border-radius: var(--radius);
       background: var(--card);
       border: 1px solid var(--line);
@@ -1034,28 +1034,28 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .amenities-inner{
       display:grid;
-      gap:14px;
+      gap:12px;
     }
     #amenities h2, .amenities-section h2{
       font-size: clamp(24px, 2.4vw, 32px);
       line-height: 1.08;
       letter-spacing: .01em;
-      margin: 0 0 8px;
+      margin: 0 0 6px;
       text-wrap: balance;
     }
     #amenities .sub, .amenities-section .sub, #amenities p.lead{
       margin: 0;
       max-width: 52ch;
       opacity: .88;
-      font-size: 14.5px;
-      line-height: 1.6;
+      font-size: 13.5px;
+      line-height: 1.5;
       color: var(--muted);
     }
     .amenities-grid{
       display: grid;
-      gap: 12px;
+      gap: 10px;
       align-items: stretch;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
+      grid-template-columns: repeat(3, minmax(200px, 1fr));
     }
     @media (max-width: 980px){
       .amenities-grid{ grid-template-columns: repeat(2, minmax(220px, 1fr)); }
@@ -1067,16 +1067,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       position: relative;
       overflow: hidden;
       border-radius: var(--radius2);
-      padding: 16px;
+      padding: 14px;
       min-height: 100%;
       background: linear-gradient(180deg, var(--surfaceB), var(--surfaceA));
       border: 1px solid var(--line);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
       display:grid;
-      grid-template-columns: 46px minmax(0, 1fr);
-      column-gap: 14px;
-      row-gap: 5px;
+      grid-template-columns: 40px minmax(0, 1fr);
+      column-gap: 12px;
+      row-gap: 4px;
       align-items:flex-start;
     }
     .amenity-card::before, .amenity-card::after{display:none}
@@ -1095,8 +1095,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       position: relative;
       z-index: 1;
       grid-row: 1 / span 2;
-      width: 46px;
-      height: 46px;
+      width: 40px;
+      height: 40px;
       border-radius: 12px;
       display: grid;
       place-items: center;
@@ -1114,9 +1114,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .amenity-card h3{
       grid-column: 2;
-      margin: 2px 0 0;
-      font-size: 15px;
-      line-height: 1.3;
+      margin: 1px 0 0;
+      font-size: 14px;
+      line-height: 1.25;
       letter-spacing: .01em;
       font-weight: 600;
       color: var(--ink2);
@@ -1130,22 +1130,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .amenity-card p{
       grid-column: 2;
       margin: 0;
-      font-size: 13.5px;
-      line-height: 1.5;
-      max-width: 34ch;
+      font-size: 12.75px;
+      line-height: 1.45;
+      max-width: 30ch;
       color: var(--muted);
       position: relative;
       z-index: 1;
     }
     @media (max-width: 640px){
       .amenity-card{
-        padding: 14px;
-        grid-template-columns: 44px minmax(0, 1fr);
-        column-gap: 14px;
+        padding: 13px;
+        grid-template-columns: 40px minmax(0, 1fr);
+        column-gap: 12px;
       }
       .amenity-icon{
-        width: 44px;
-        height: 44px;
+        width: 40px;
+        height: 40px;
       }
     }
     @media (prefers-reduced-motion: reduce){
@@ -1162,7 +1162,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (max-width:980px){ #rooms .stack{grid-template-columns:1fr} }
 
     .roomCard{height:100%; min-width:0}
-    .roomCardInner{display:grid; grid-template-columns:minmax(0,.95fr) minmax(0,1.05fr); align-items:stretch}
+    .roomCardInner{display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); align-items:stretch}
     @media (max-width:980px){ .roomCardInner{grid-template-columns:1fr} }
 
     .roomMedia{position:relative; overflow:hidden; background: var(--surfaceA); border-right:1px solid var(--line)}
@@ -1173,8 +1173,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .roomSubMedia{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:6px;
-      padding:6px;
+      gap:5px;
+      padding:5px;
       background: var(--surfaceA);
       border-top:1px solid var(--line);
     }
@@ -1185,21 +1185,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-radius:10px;
       border:1px solid var(--line);
     }
-    .roomMedia .mediaImg{aspect-ratio: 5 / 4}
+    .roomMedia .mediaImg{aspect-ratio: 16 / 11}
     .roomBody{
-      padding:22px;
+      padding:18px;
       min-width:0;
+      display:grid;
+      gap:10px;
     }
-    .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px}
-    .roomTop h3{margin:0; font-size:22px; letter-spacing:-.02em; line-height:1.1; color:var(--ink2); font-family:var(--display)}
-    .priceBox{min-width:128px; text-align:right}
+    .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:10px; flex-wrap:wrap}
+    .roomTop h3{margin:0; font-size:clamp(20px, 2vw, 22px); letter-spacing:-.02em; line-height:1.05; color:var(--ink2); font-family:var(--display)}
+    .priceBox{min-width:108px; text-align:right}
     .priceBox b{display:block; font-size:12px; color:var(--muted); font-weight:800}
-    .priceBox strong{display:block; font-size:18px; color:var(--copper); font-weight:800; line-height:1.1; margin-top:2px}
+    .priceBox strong{display:block; font-size:17px; color:var(--copper); font-weight:800; line-height:1.1; margin-top:2px}
     .priceBox small{display:block; font-size:12px; color:var(--muted2); margin-top:2px}
+    .roomMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      list-style:none;
+      padding:0;
+      margin:6px 0 0;
+    }
     .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
     .tag{
       display:inline-flex; align-items:center; justify-content:center;
-      padding:6px 10px;
+      min-height:30px;
+      padding:5px 9px;
       border-radius:999px;
       border:1px solid var(--controlBorder);
       background: var(--surfaceA);
@@ -1207,9 +1218,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight:800;
       font-size:12px;
     }
-    .bullets{margin:8px 0 0; padding-left:18px; color:var(--muted); font-size:13px}
-    .bullets li{margin:4px 0}
-    .roomActions{margin-top:12px; display:flex; flex-wrap:wrap; gap:8px}
+    .bullets{margin:0; padding-left:18px; color:var(--muted); font-size:13px; display:grid; gap:4px}
+    .bullets li{margin:0}
+    .roomActions{margin-top:2px; display:flex; flex-wrap:wrap; gap:8px}
 
     /* ---------- Responsive media ---------- */
     .mediaWrap{position:relative; overflow:hidden; background: linear-gradient(135deg, rgba(183,106,43,.14), rgba(240,195,154,.10));}
@@ -1243,32 +1254,32 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .galSlide{flex:0 0 100%; min-width:0; margin:0}
     .galCap{
-      padding:12px 14px 14px;
+      padding:10px 12px 12px;
       border-top:1px solid var(--line);
       background: color-mix(in oklab, var(--card) 88%, transparent);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
     }
-    .galCap b{display:block; color:var(--ink2); font-size:14px; font-weight:1000; letter-spacing:.2px}
-    .galCap span{display:block; margin-top:4px; color:var(--muted); font-size:13px}
-    .galSlide .mediaImg{aspect-ratio: 16 / 10}
+    .galCap b{display:block; color:var(--ink2); font-size:13.5px; font-weight:1000; letter-spacing:.2px}
+    .galCap span{display:block; margin-top:3px; color:var(--muted); font-size:12.5px}
+    .galSlide .mediaImg{aspect-ratio: 16 / 9}
 
     .galBar{
-      margin-top:10px;
+      margin-top:8px;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:8px;
+      gap:6px;
       flex-wrap:wrap;
     }
     .galNavBtn{
-      width:42px; height:42px;
+      width:38px; height:38px;
       border-radius: 999px;
       border:1px solid var(--controlBorder);
       background: var(--surfaceB);
       color: var(--ink2);
       font-weight:1000;
-      font-size:18px;
+      font-size:16px;
       line-height:1;
       display:flex; align-items:center; justify-content:center;
       cursor:pointer;
@@ -1281,9 +1292,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-color: var(--controlBorderStrong);
     }
 
-    .galDots{display:flex; align-items:center; justify-content:center; gap:8px; flex-wrap:wrap}
+    .galDots{display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap}
     .galDot{
-      width:10px; height:10px;
+      width:8px; height:8px;
       border-radius:999px;
       border:1px solid var(--controlBorder);
       background: var(--surfaceD);
@@ -1296,10 +1307,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: 0 10px 22px rgba(0,0,0,.18);
     }
     .galThumbs{
-      margin-top:10px;
+      margin-top:8px;
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(84px, 1fr));
-      gap:8px;
+      grid-template-columns:repeat(auto-fit, minmax(72px, 1fr));
+      gap:6px;
     }
     .galThumb{
       padding:0;
@@ -1342,12 +1353,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* ---------- Reviews ---------- */
     .stars{letter-spacing:.08em; color: rgba(196,136,78,.95); font-weight:800}
-    .reviewActionRow{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
-    .reviews{display:grid; grid-template-columns: 1.15fr .85fr; gap:14px}
+    .reviewActionRow{display:flex; gap:6px; flex-wrap:wrap; justify-content:flex-end}
+    .reviews{display:grid; grid-template-columns: 1.1fr .9fr; gap:12px}
     @media (max-width:980px){ .reviews{grid-template-columns:1fr} }
-    .reviewsLead,.reviewsSide{display:grid; gap:12px}
+    .reviewsLead,.reviewsSide{display:grid; gap:10px}
     .review{
-      padding:20px;
+      padding:16px;
       border-radius: var(--radius2);
       border:1px solid var(--line);
       background: var(--surfaceA);
@@ -1359,20 +1370,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         box-shadow: 0 8px 20px rgba(0,0,0,.08);
       }
     }
-    .review b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2); font-size:14px}
-    .review p{margin:10px 0 0; color:var(--muted); font-size:13.5px; line-height:1.6}
+    .review b{display:flex; align-items:center; justify-content:space-between; gap:8px; color:var(--ink2); font-size:13.5px}
+    .review p{margin:8px 0 0; color:var(--muted); font-size:13px; line-height:1.55}
     .reviewFeatured{
-      padding:24px;
+      padding:18px;
       background:
         radial-gradient(560px 180px at 0% 0%, rgba(168,101,42,.08), transparent 70%),
         var(--card);
       box-shadow: 0 8px 24px rgba(0,0,0,.06);
     }
     .reviewFeatured p{
-      font-size:15px;
-      line-height:1.7;
+      font-size:14px;
+      line-height:1.6;
       position:relative;
-      padding-left:20px;
+      padding-left:18px;
+      max-height:6.4em;
+      display:-webkit-box;
+      -webkit-line-clamp:4;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
     }
     .reviewFeatured p::before{
       content:"\201C";
@@ -1384,38 +1400,60 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       line-height:1;
       opacity:.6;
     }
-    .reviewMini p{font-size:13.5px}
+    .reviewMini p{
+      font-size:13px;
+      max-height:4.65em;
+      display:-webkit-box;
+      -webkit-line-clamp:3;
+      -webkit-box-orient:vertical;
+      overflow:hidden;
+    }
 
     /* ---------- FAQ ---------- */
+    .faqGrid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:10px 12px;
+      align-items:start;
+    }
     #faq details{
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: var(--surfaceA);
-      padding:14px 18px;
-      margin-top:10px;
+      padding:12px 16px;
+      margin:0;
       transition: background .18s ease, border-color .18s ease;
     }
-    #faq summary{cursor:pointer; font-weight:700; color:var(--ink2); list-style:none; font-size:15px; line-height:1.4; display:flex; align-items:center; justify-content:space-between; gap:12px}
+    #faq summary{cursor:pointer; font-weight:700; color:var(--ink2); list-style:none; font-size:14px; line-height:1.35; display:flex; align-items:center; justify-content:space-between; gap:12px; min-height:28px}
     #faq summary::-webkit-details-marker{display:none}
     #faq summary::after{content:"+"; font-size:18px; font-weight:400; color:var(--muted2); transition:transform .2s ease; flex-shrink:0}
     #faq details[open] summary::after{content:"−"}
-    #faq details p{margin:12px 0 0; color:var(--muted); font-size:14px; line-height:1.65}
+    #faq details p{margin:10px 0 0; color:var(--muted); font-size:13.5px; line-height:1.55}
     #faq details[open]{background:var(--surfaceB); border-color:var(--controlBorderStrong)}
     html[data-theme="dark"] #faq details[open]{background:rgba(255,255,255,.04)}
+    .faqMoreWrap{
+      display:flex;
+      justify-content:center;
+      margin-top:12px;
+    }
+    .faqMoreWrap[hidden]{display:none}
     .faqCTA{
-      margin-top:20px;
-      padding:20px;
+      margin-top:14px;
+      padding:16px;
       border-radius:var(--radius2);
       border:1px solid rgba(168,101,42,.15);
       background:rgba(168,101,42,.04);
       text-align:center;
     }
-    .faqCTA p{margin:0 0 12px; font-size:14.5px; color:var(--ink2); font-weight:600}
+    .faqCTA p{margin:0 0 10px; font-size:14px; color:var(--ink2); font-weight:600}
     .faqCTA .btn{margin:0 4px}
+    @media (max-width:760px){
+      .faqGrid{grid-template-columns:1fr}
+    }
 
     /* ---------- Map Embed (reasonable size) ---------- */
     .mapWrap{
-      margin-top:12px;
+      margin-top:0;
       border-radius: var(--radius2);
       overflow:hidden;
       border:1px solid var(--line);
@@ -1424,29 +1462,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .mapWrap iframe{
       width:100%;
-      height: clamp(280px, 34vw, 400px);
+      height: clamp(240px, 30vw, 320px);
       border:0;
       display:block;
     }
     .locationGrid{
       display:grid;
-      grid-template-columns:minmax(280px, .9fr) minmax(0, 1.1fr);
+      grid-template-columns:minmax(280px, .88fr) minmax(0, 1.12fr);
       gap:var(--gridGap);
       align-items:stretch;
-      margin-top:12px;
+      margin-top:10px;
     }
     .contactCard{
       display:grid;
       align-content:start;
-      gap:12px;
-      padding:18px;
+      gap:10px;
+      padding:16px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background:var(--surfaceB);
     }
     .contactAddress{margin:0; font-size:14px}
-    .contactActions{display:flex; gap:8px; flex-wrap:wrap}
-    .contactMeta{margin:0; line-height:1.8}
+    .contactActions{display:flex; gap:6px; flex-wrap:wrap}
+    .contactMeta{margin:0; line-height:1.65}
     @media (max-width:980px){
       .locationGrid{grid-template-columns:1fr}
     }
@@ -1563,25 +1601,25 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-device="phone"] .brand small{ display:none; }
 
     html[data-device="phone"] .hero{
-      min-height: clamp(430px, 74vh, 620px);
+      min-height: clamp(400px, 70vh, 560px);
       border-radius: 18px;
     }
     html[data-device="phone"] .heroInner{
-      padding: clamp(16px, 4vw, 28px) 14px;
+      padding: clamp(14px, 4vw, 22px) 14px;
     }
     html[data-device="phone"] .heroPanel{
       margin:0;
       width:min(100%, 92vw);
-      padding: 16px;
+      padding: 15px;
     }
     html[data-device="phone"] .heroTitle{
-      font-size: clamp(28px, 8.6vw, 36px);
-      line-height: 1.08;
+      font-size: clamp(29px, 8vw, 36px);
+      line-height: 1.04;
       text-wrap: balance;
     }
     html[data-device="phone"] .heroSub{
-      font-size: 14.5px;
-      line-height: 1.5;
+      font-size: 14px;
+      line-height: 1.45;
       max-width: 32ch;
     }
     html[data-device="phone"] .heroCTA{
@@ -1649,11 +1687,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content:center;
     }
     html[data-device="phone"] .roomCardInner{grid-template-columns:1fr}
-    html[data-device="phone"] .roomBody{padding:16px}
+    html[data-device="phone"] .roomBody{padding:15px}
     html[data-device="phone"] .roomSubMedia{grid-template-columns:1fr 1fr}
     html[data-device="phone"] .reviews{gap:12px}
     html[data-device="phone"] .bookingMetaCard,
-    html[data-device="phone"] .contactCard{padding:14px}
+    html[data-device="phone"] .contactCard{padding:13px}
     html[data-device="phone"] .mapWrap{margin-top:0}
 
     /* Tablet: reduce some noise but keep context */
@@ -1688,8 +1726,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .destGrid{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:var(--gutter);
-      margin:var(--gutter) 0;
+      gap:var(--gridGap);
+      margin:14px 0 0;
     }
     @media(max-width:760px){
       .destGrid{grid-template-columns:1fr}
@@ -1698,29 +1736,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size:clamp(15px,1.3vw,18px);
       font-weight:700;
       color:var(--copper);
-      margin-bottom:8px;
+      margin:0 0 6px;
     }
     .destBlock p{
       font-size:clamp(13px,1.1vw,15px);
-      line-height:1.7;
+      line-height:1.58;
       color:var(--ink2);
+      margin:0;
     }
     .destList{
       padding-left:18px;
       margin:0;
       font-size:clamp(13px,1.1vw,15px);
-      line-height:1.8;
+      line-height:1.58;
       color:var(--ink2);
     }
-    .destList li{margin-bottom:4px}
+    .destList li{margin-bottom:3px}
     .destCTA{
       display:flex;
       flex-wrap:wrap;
       align-items:center;
-      gap:10px;
-      padding-top:var(--gutter);
+      gap:8px 10px;
+      padding-top:14px;
       border-top:1px solid var(--line);
-      margin-top:var(--gutter);
+      margin-top:14px;
     }
   </style>
 
@@ -2075,7 +2114,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="roomTop">
                   <div>
                     <h3 data-i18n="room_standard_twin_title">Standard Twin</h3>
-                    <div class="fine" data-i18n-html="room_standard_twin_meta">2 Twin Beds • 28–32 m² • Guests 1–2</div>
+                    <ul class="roomMeta">
+                      <li class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</li>
+                      <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                      <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
+                    </ul>
                   </div>
                   <div class="priceBox">
                     <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
@@ -2083,9 +2126,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
                 <ul class="bullets">
-                  <li data-i18n="bullet_large_room">Large room layout with work desk</li>
+                  <li data-i18n="bullet_desk">Work desk + chair</li>
                   <li data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower + fast Wi-Fi</li>
+                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
                 </ul>
 
                 <div class="roomActions">
@@ -2137,7 +2180,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div class="roomTop">
                   <div>
                     <h3 data-i18n="room_standard_double_title">Standard Double</h3>
-                    <div class="fine" data-i18n-html="room_standard_double_meta">1 Double Bed • 28–32 m² • Guests 1–2</div>
+                    <ul class="roomMeta">
+                      <li class="tag" data-i18n="tag_1_double_bed">1 Double Bed</li>
+                      <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                      <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
+                    </ul>
                   </div>
                   <div class="priceBox">
                     <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
@@ -2147,7 +2194,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <ul class="bullets">
                   <li data-i18n="bullet_comfort_double_bed">Comfortable double bed</li>
                   <li data-i18n="bullet_great_for_couples">Great for couples or solo travelers</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower + fast Wi-Fi</li>
+                  <li data-i18n="bullet_fast_wifi">Fast Wi-Fi</li>
                 </ul>
 
                 <div class="roomActions">
@@ -2474,11 +2521,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
               </select>
             </div>
-            <div class="field wide">
+            <div class="field">
               <label for="name" data-i18n="lbl_name">Name</label>
               <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
             </div>
-            <div class="field wide">
+            <div class="field">
               <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
               <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
             </div>
@@ -2509,51 +2556,56 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="textLink" href="#book" data-i18n="faq_btn" data-analytics="book-now">Send Request</a>
         </div>
 
-        <details open>
-          <summary data-i18n="faq_q1">How do I book the fastest?</summary>
-          <p data-i18n="faq_a1">Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q2">What time is check-in and check-out?</summary>
-          <p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q3">What do I need at check-in?</summary>
-          <p data-i18n="faq_a3">A government-issued ID or passport is required for registration.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q4">Can rates change by date?</summary>
-          <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q5">Do you have parking?</summary>
-          <p data-i18n="faq_a5">Yes, guest parking is available (subject to availability).</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
-          <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
-        </details>
+        <div class="faqGrid" id="faqGrid" aria-live="polite">
+          <details open data-faq-item>
+            <summary data-i18n="faq_q1">How do I book the fastest?</summary>
+            <p data-i18n="faq_a1">Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q4">Can rates change by date?</summary>
+            <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
+            <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q2">What time is check-in and check-out?</summary>
+            <p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q3">What do I need at check-in?</summary>
+            <p data-i18n="faq_a3">A government-issued ID or passport is required for registration.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q5">Do you have parking?</summary>
+            <p data-i18n="faq_a5">Yes, guest parking is available (subject to availability).</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
+            <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q7">Is smoking allowed?</summary>
+            <p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q9">Where is Sandbox Hotel located in Nakhon Si Thammarat?</summary>
+            <p data-i18n="faq_a9">Sandbox Hotel is located at 626/1 Karom Road, Pho Sadet, Mueang District, Nakhon Si Thammarat 80000, Thailand. The hotel is centrally situated in Nakhon Si Thammarat city, with easy access to local markets, temples, and the historic old city area.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q10">What attractions are near the hotel in Nakhon Si Thammarat?</summary>
+            <p data-i18n="faq_a10">Sandbox Hotel is close to key Nakhon Si Thammarat landmarks including Wat Phra Mahathat Woramahawihan — one of Southern Thailand's most revered Buddhist temples — as well as the city's walking street markets, the Nakhon Si Thammarat National Museum, and a wide range of local restaurants serving Southern Thai cuisine.</p>
+          </details>
+          <details data-faq-item>
+            <summary data-i18n="faq_q11">Is Sandbox Hotel a good base for exploring Southern Thailand?</summary>
+            <p data-i18n="faq_a11">Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.</p>
+          </details>
+        </div>
 
-        <details>
-          <summary data-i18n="faq_q7">Is smoking allowed?</summary>
-          <p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
-          <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q9">Where is Sandbox Hotel located in Nakhon Si Thammarat?</summary>
-          <p data-i18n="faq_a9">Sandbox Hotel is located at 626/1 Karom Road, Pho Sadet, Mueang District, Nakhon Si Thammarat 80000, Thailand. The hotel is centrally situated in Nakhon Si Thammarat city, with easy access to local markets, temples, and the historic old city area.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q10">What attractions are near the hotel in Nakhon Si Thammarat?</summary>
-          <p data-i18n="faq_a10">Sandbox Hotel is close to key Nakhon Si Thammarat landmarks including Wat Phra Mahathat Woramahawihan — one of Southern Thailand's most revered Buddhist temples — as well as the city's walking street markets, the Nakhon Si Thammarat National Museum, and a wide range of local restaurants serving Southern Thai cuisine.</p>
-        </details>
-        <details>
-          <summary data-i18n="faq_q11">Is Sandbox Hotel a good base for exploring Southern Thailand?</summary>
-          <p data-i18n="faq_a11">Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.</p>
-        </details>
+        <div class="faqMoreWrap" id="faqMoreWrap">
+          <button class="btn" type="button" id="faqMoreBtn" aria-controls="faqGrid" data-i18n="faq_show_more">Show more questions</button>
+        </div>
 
         <div class="faqCTA">
           <p data-i18n="faq_cta_text">Still have questions? We're happy to help.</p>
@@ -2652,12 +2704,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <p class="fine contactMeta">
-              ⏰: เปิดบริการทุกวัน 06:00-22:00<br>
-              ☎️: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a><br>
-              Line : sandbox.hotel<br>
-              💚คลิกลิงค์แอดไลน์ : <a href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener" data-analytics="line">https://line.me/ti/p/uc4BCpHCQ4</a><br>
-              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">https://web.facebook.com/sandboxhotel</a><br>
-              <a href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
+              Daily support: 06:00-22:00<br>
+              Phone: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a> • LINE: sandbox.hotel<br>
+              Email: <a href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
             </p>
 
             <div class="fine">
@@ -3056,6 +3105,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_title: "คำถามที่พบบ่อย",
         faq_sub: "คำถามยอดนิยมก่อนจอง",
         faq_btn: "ส่งคำขอ",
+        faq_show_more: "ดูคำถามเพิ่มเติม",
         faq_q1: "จองให้เร็วที่สุดทำอย่างไร?",
         faq_a1: "โทรหรือแชต (LINE/WhatsApp) แจ้งเช็คอิน เช็คเอาต์ จำนวนผู้เข้าพัก และประเภทห้องที่ต้องการ เราจะยืนยันห้องว่างและราคารวมให้",
         faq_q2: "เวลาเช็คอินและเช็คเอาต์คือกี่โมง?",
@@ -3277,6 +3327,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_title: "FAQ",
         faq_sub: "Common questions before booking.",
         faq_btn: "Send Request",
+        faq_show_more: "Show more questions",
         faq_q1: "How do I book the fastest?",
         faq_a1: "Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.",
         faq_q2: "What time is check-in and check-out?",
@@ -3517,6 +3568,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_title: "常见问题",
         faq_sub: "预订前常见问题。",
         faq_btn: "发送请求",
+        faq_show_more: "查看更多问题",
         faq_q1: "怎样预订最快？",
         faq_a1: "通过电话或留言（LINE/WhatsApp）告知入住/退房日期、人数和房型，我们会确认空房与总价。",
         faq_q2: "入住和退房时间？",
@@ -3988,6 +4040,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       start();
     }
 
+    function initFAQ(){
+      const grid = document.getElementById("faqGrid");
+      const moreWrap = document.getElementById("faqMoreWrap");
+      const moreBtn = document.getElementById("faqMoreBtn");
+      const items = Array.from(grid?.querySelectorAll("[data-faq-item]") || []);
+      if(!grid || !moreWrap || !moreBtn || !items.length) return;
+
+      let visibleCount = 0;
+      let resizeT;
+      const mobileFaqQuery = window.matchMedia("(max-width: 760px)");
+      const MOBILE_FAQ_BATCH = 4;
+      const DESKTOP_FAQ_BATCH = 6;
+      const batchSize = () => mobileFaqQuery.matches ? MOBILE_FAQ_BATCH : DESKTOP_FAQ_BATCH;
+
+      function render(reset = false){
+        const batch = batchSize();
+        visibleCount = reset ? batch : Math.max(visibleCount, batch);
+        items.forEach((item, index) => {
+          item.hidden = index >= visibleCount;
+        });
+        moreWrap.hidden = visibleCount >= items.length;
+      }
+
+      moreBtn.addEventListener("click", () => {
+        const previousVisibleCount = visibleCount;
+        visibleCount = Math.min(items.length, visibleCount + batchSize());
+        render();
+        const firstNewItem = items[previousVisibleCount];
+        firstNewItem?.querySelector("summary")?.focus();
+      });
+
+      window.addEventListener("resize", ()=>{
+        clearTimeout(resizeT);
+        resizeT = setTimeout(() => render(), 120);
+      }, { passive:true });
+
+      render(true);
+    }
+
     // ---------- Dates ----------
     function initDates(){
       const ci = document.getElementById("checkin");
@@ -4141,6 +4232,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       document.getElementById("y").textContent = new Date().getFullYear();
       initTheme();
       initLang();
+      initFAQ();
       initDates();
       wireContactButtons();
       initGalleryCarousel();
