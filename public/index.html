@@ -1178,6 +1178,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ---------- Rooms ---------- */
+    #rooms .head p{max-width:540px}
     #rooms .stack{
       display:grid;
       grid-template-columns:repeat(2, minmax(0,1fr));
@@ -1187,67 +1188,136 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (max-width:980px){ #rooms .stack{grid-template-columns:1fr} }
 
     .roomCard{height:100%; min-width:0; border-width:1.5px}
-    .roomCardInner{display:grid; grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr); align-items:stretch}
-    @media (max-width:980px){ .roomCardInner{grid-template-columns:1fr} }
+    .roomCardInner{display:flex; flex-direction:column}
 
-    .roomMedia{position:relative; overflow:hidden; background: var(--surfaceA); border-right:1px solid var(--line)}
-    @media (max-width:980px){ .roomMedia{border-right:none; border-bottom:1px solid var(--line)} }
+    .roomMedia{position:relative; overflow:hidden; background:var(--surfaceA); border-bottom:1px solid var(--line); border-radius:0}
     .roomMediaLink{display:block; color:inherit; text-decoration:none}
     .roomMediaLink:focus-visible{box-shadow: var(--focus)}
 
-    .roomSubMedia{
+    /* Room hero image */
+    .roomHeroWrap{position:relative; overflow:hidden; background:var(--surfaceA)}
+    .roomCard .roomHeroWrap .mediaImg{aspect-ratio:16/10; object-fit:cover; transition:opacity .4s ease}
+
+    /* Room thumbnail strip */
+    .roomThumbs{
       display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:5px;
-      padding:5px;
-      background: var(--surfaceA);
-      border-top:1px solid var(--line);
+      grid-template-columns:repeat(3,1fr);
+      gap:8px;
+      margin-top:10px;
     }
-    .roomSubMedia img{
+    .roomThumb{
+      position:relative;
+      border-radius:10px;
+      overflow:hidden;
+      border:2px solid transparent;
+      cursor:pointer;
+      transition: border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+      background:var(--surfaceA);
+    }
+    .roomThumb:hover{transform:translateY(-2px); box-shadow:var(--shadow3)}
+    .roomThumb[aria-current="true"]{border-color:var(--copper); box-shadow:0 4px 16px rgba(168,101,42,.22)}
+    .roomThumb img{
+      display:block;
       width:100%;
       aspect-ratio:4/3;
       object-fit:cover;
-      border-radius:10px;
-      border:1px solid var(--line);
     }
-    .roomMedia .mediaImg{aspect-ratio: 16 / 11}
+
     .roomBody{
-      padding:20px;
       min-width:0;
-      display:grid;
+      display:flex;
+      flex-direction:column;
       gap:12px;
+      padding:16px;
     }
-    .roomTop{display:flex; align-items:flex-start; justify-content:space-between; gap:12px; flex-wrap:wrap}
-    .roomTop h3{margin:0; font-size:clamp(21px, 2.1vw, 24px); letter-spacing:-.025em; line-height:1.08; color:var(--ink2); font-family:var(--display); font-weight:700}
-    .priceBox{min-width:120px; text-align:right}
-    .priceBox b{display:block; font-size:11.5px; color:var(--muted); font-weight:800; letter-spacing:.02em; text-transform:uppercase}
-    .priceBox strong{display:block; font-size:18px; color:var(--copper); font-weight:800; line-height:1.1; margin-top:2px}
-    .priceBox small{display:block; font-size:12px; color:var(--muted2); margin-top:2px}
-    .priceBox .fine{font-size:12px; color:var(--copper2); font-weight:700}
+    .roomType{
+      display:inline-block;
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--copper);
+      margin-bottom:2px;
+    }
+    .roomBody h3{
+      margin:0;
+      font-size:clamp(21px, 2.1vw, 24px);
+      letter-spacing:-.025em;
+      line-height:1.1;
+      color:var(--ink2);
+      font-family:var(--display);
+      font-weight:700;
+    }
     .roomMeta{
       display:flex;
       flex-wrap:wrap;
-      gap:6px;
+      gap:8px;
       list-style:none;
       padding:0;
-      margin:6px 0 0;
+      margin:0;
     }
     .tags{display:flex; flex-wrap:wrap; gap:6px; margin-top:8px}
     .tag{
       display:inline-flex; align-items:center; justify-content:center;
-      min-height:30px;
-      padding:5px 10px;
+      min-height:32px;
+      padding:6px 14px;
       border-radius:999px;
-      border:1px solid rgba(168,101,42,.18);
-      background: rgba(168,101,42,.06);
+      border:1px solid rgba(168,101,42,.15);
+      background: rgba(168,101,42,.05);
       color: var(--ink2);
-      font-weight:800;
-      font-size:12px;
+      font-weight:700;
+      font-size:12.5px;
+      letter-spacing:.01em;
     }
+
+    .roomDivider{
+      width:40px; height:2px;
+      background:linear-gradient(90deg, var(--copper), var(--champagne));
+      border:none; border-radius:2px;
+      margin:0;
+    }
+
+    .roomAmenities{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:8px 12px;
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+    .roomAmenity{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      font-size:13px;
+      color:var(--muted);
+      line-height:1.35;
+    }
+    .roomAmenity svg{
+      flex-shrink:0;
+      width:16px; height:16px;
+      color:var(--copper2);
+      opacity:.85;
+    }
+
+    .priceBox{text-align:left; margin-top:4px}
+    .priceBox .fine{font-size:12px; color:var(--copper2); font-weight:600}
+    .roomActions{margin-top:auto; padding-top:8px; display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .roomActions .btn.primary{min-height:46px; font-size:14.5px; padding:0 20px; border-radius:10px; letter-spacing:.01em}
+
+    .roomDividerLine{
+      border:none;
+      border-top:1px solid var(--line);
+      margin:0;
+    }
+
     .bullets{margin:0; padding-left:18px; color:var(--muted); font-size:13.5px; display:grid; gap:5px; line-height:1.45}
     .bullets li{margin:0}
-    .roomActions{margin-top:4px; display:flex; flex-wrap:wrap; gap:8px}
-    .roomActions .btn.primary{min-height:46px; font-size:14.5px}
+
+    @media (max-width:640px){
+      .roomAmenities{grid-template-columns:1fr}
+      .roomActions .btn.primary{width:100%; justify-content:center}
+    }
 
     /* ---------- Responsive media ---------- */
     .mediaWrap{position:relative; overflow:hidden; background: linear-gradient(135deg, rgba(183,106,43,.14), rgba(240,195,154,.10));}
@@ -1333,28 +1403,29 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: 0 10px 22px rgba(0,0,0,.18);
     }
     .galThumbs{
-      margin-top:8px;
+      margin-top:10px;
       display:grid;
-      grid-template-columns:repeat(auto-fit, minmax(72px, 1fr));
-      gap:6px;
+      grid-template-columns:repeat(6, 1fr);
+      gap:8px;
     }
     .galThumb{
       padding:0;
-      border-radius:12px;
-      border:1px solid var(--controlBorder);
+      border-radius:10px;
+      border:2px solid var(--controlBorder);
       background: var(--surfaceA);
       overflow:hidden;
       cursor:pointer;
       transition: transform .14s ease, box-shadow .14s ease, border-color .14s ease;
     }
     .galThumb:hover{
-      transform: translateY(-1px);
+      transform: translateY(-2px);
       box-shadow: var(--shadow3);
+      border-color: var(--copper2);
     }
     .galThumb:focus-visible{box-shadow: var(--focus)}
     .galThumb[aria-current="true"]{
-      border-color: rgba(240,195,154,.42);
-      box-shadow: 0 10px 22px rgba(0,0,0,.18);
+      border-color: var(--copper);
+      box-shadow: 0 4px 16px rgba(168,101,42,.25);
     }
     .galThumb img{
       display:block;
@@ -1375,6 +1446,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (max-width:640px){
       .galNavBtn{width:42px; height:42px; border-radius: 13px}
       .galThumbs{grid-template-columns:repeat(3, minmax(0, 1fr))}
+    }
+    @media (min-width:641px) and (max-width:860px){
+      .galThumbs{grid-template-columns:repeat(3, 1fr)}
     }
 
     /* ---------- Reviews ---------- */
@@ -1799,11 +1873,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     /* Room "Best For" guidance */
     .roomBestFor{
-      font-size:15px;
-      color:var(--champagne);
-      margin:8px 0 12px;
-      line-height:1.5;
+      font-size:14px;
+      color:var(--muted);
+      margin:0;
+      line-height:1.55;
+      font-style:italic;
     }
+    .roomBestFor strong{color:var(--champagne); font-style:normal; font-weight:700}
 
     /* Contact section — secondary links */
     .contactSecondary{
@@ -2217,62 +2293,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <article class="card roomCard">
             <div class="roomCardInner">
               <div class="roomMedia">
-                <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-1.png" target="_blank" rel="noopener" aria-label="Open Standard Twin bedroom photo">
+                <div class="roomHeroWrap">
+                  <div class="mediaWrap">
                     <picture>
-                      <source
-                        type="image/webp"
+                      <source type="image/webp"
                         srcset="assets/images/rooms/twin-room-sandbox-1-400.webp 400w, assets/images/rooms/twin-room-sandbox-1.webp 800w"
-                        sizes="(max-width: 980px) 100vw, 50vw">
-                      <img class="mediaImg" src="assets/images/rooms/twin-room-sandbox-1.png" srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w" sizes="(max-width: 980px) 100vw, 50vw" alt="Standard Twin bedroom with two single beds and a work area" loading="lazy" decoding="async" width="800" height="520">
+                        sizes="(max-width:980px) 100vw, 50vw">
+                      <img class="mediaImg roomHeroImg" id="twinHero" src="assets/images/rooms/twin-room-sandbox-1.png" srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w" sizes="(max-width:980px) 100vw, 50vw" alt="Standard Twin bedroom with two single beds and a work area" loading="lazy" decoding="async" width="800" height="500">
                     </picture>
-                  </a>
+                  </div>
                 </div>
-
-                <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/twin-room-sandbox-2.png" target="_blank" rel="noopener" aria-label="Open Standard Twin room detail photo">
-                    <picture>
-                      <source
-                        type="image/webp"
-                        srcset="assets/images/rooms/twin-room-sandbox-2-400.webp 400w, assets/images/rooms/twin-room-sandbox-2.webp 800w"
-                        sizes="(max-width: 980px) 50vw, 25vw">
-                      <img src="assets/images/rooms/twin-room-sandbox-2.png" srcset="assets/images/rooms/twin-room-sandbox-2-400.png 400w, assets/images/rooms/twin-room-sandbox-2.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Standard Twin room from the window side" loading="lazy" decoding="async" width="400" height="300">
-                    </picture>
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <picture>
-                      <source
-                        type="image/webp"
-                        srcset="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w"
-                        sizes="(max-width: 980px) 50vw, 25vw">
-                      <img src="assets/images/rooms/bathroom.png" srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Private bathroom with shower and vanity" loading="lazy" decoding="async" width="400" height="300">
-                    </picture>
-                  </a>
+                <div class="roomThumbs" data-hero="twinHero">
+                  <button type="button" class="roomThumb" aria-current="true" aria-label="Twin room main view"
+                    data-full="assets/images/rooms/twin-room-sandbox-1.png"
+                    data-srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w"
+                    data-webp="assets/images/rooms/twin-room-sandbox-1-400.webp 400w, assets/images/rooms/twin-room-sandbox-1.webp 800w">
+                    <img src="assets/images/rooms/twin-room-sandbox-1-400.png" alt="Twin room main" loading="lazy" decoding="async" width="160" height="120">
+                  </button>
+                  <button type="button" class="roomThumb" aria-current="false" aria-label="Twin room alternate angle"
+                    data-full="assets/images/rooms/twin-room-sandbox-2.png"
+                    data-srcset="assets/images/rooms/twin-room-sandbox-2-400.png 400w, assets/images/rooms/twin-room-sandbox-2.png 800w"
+                    data-webp="assets/images/rooms/twin-room-sandbox-2-400.webp 400w, assets/images/rooms/twin-room-sandbox-2.webp 800w">
+                    <img src="assets/images/rooms/twin-room-sandbox-2-400.png" alt="Twin room window side" loading="lazy" decoding="async" width="160" height="120">
+                  </button>
+                  <button type="button" class="roomThumb" aria-current="false" aria-label="En-suite bathroom"
+                    data-full="assets/images/rooms/bathroom.png"
+                    data-srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w"
+                    data-webp="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w">
+                    <img src="assets/images/rooms/bathroom-400.png" alt="Private bathroom" loading="lazy" decoding="async" width="160" height="120">
+                  </button>
                 </div>
               </div>
 
               <div class="roomBody">
-                <div class="roomTop">
-                  <div>
-                    <h3 data-i18n="room_standard_twin_title">Standard Twin</h3>
-                    <ul class="roomMeta">
-                      <li class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</li>
-                      <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
-                      <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
-                    </ul>
-                  </div>
-                  <div class="priceBox">
-                    <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
-                  </div>
+                <div>
+                  <span class="roomType" data-i18n="room_type_label">Room Type</span>
+                  <h3 data-i18n="room_standard_twin_title">Standard Twin</h3>
                 </div>
-
-                <p class="roomBestFor" data-i18n="room_twin_best_for"><strong>Best for:</strong> Solo guests, friends, or short business stays</p>
-
-                <ul class="bullets">
-                  <li data-i18n="bullet_desk">Work desk + chair</li>
-                  <li data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</li>
-                  <li data-i18n="bullet_ac_hot_shower">AC + hot shower</li>
+                <ul class="roomMeta">
+                  <li class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</li>
+                  <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                  <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
+
+                <hr class="roomDivider">
+
+                <p class="roomBestFor" data-i18n-html="room_twin_best_for"><strong>Best for:</strong> Solo guests, friends, or short business stays</p>
+
+                <ul class="roomAmenities" role="list">
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg> <span data-i18n="bullet_desk">Work desk + chair</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> <span data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
+                </ul>
+
+                <div class="priceBox">
+                  <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
+                </div>
 
                 <div class="roomActions">
                   <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now">Book Twin Room</a>
@@ -2285,62 +2362,63 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <article class="card roomCard">
             <div class="roomCardInner">
               <div class="roomMedia">
-                <div class="mediaWrap">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-1.png" target="_blank" rel="noopener" aria-label="Open Standard Double bedroom photo">
+                <div class="roomHeroWrap">
+                  <div class="mediaWrap">
                     <picture>
-                      <source
-                        type="image/webp"
+                      <source type="image/webp"
                         srcset="assets/images/rooms/double-room-sandboxhotel-1-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-1.webp 800w"
-                        sizes="(max-width: 980px) 100vw, 50vw">
-                      <img class="mediaImg" src="assets/images/rooms/double-room-sandboxhotel-1.png" srcset="assets/images/rooms/double-room-sandboxhotel-1-400.png 400w, assets/images/rooms/double-room-sandboxhotel-1.png 800w" sizes="(max-width: 980px) 100vw, 50vw" alt="Standard Double bedroom with a large bed and soft lighting" loading="lazy" decoding="async" width="800" height="520">
+                        sizes="(max-width:980px) 100vw, 50vw">
+                      <img class="mediaImg roomHeroImg" id="doubleHero" src="assets/images/rooms/double-room-sandboxhotel-1.png" srcset="assets/images/rooms/double-room-sandboxhotel-1-400.png 400w, assets/images/rooms/double-room-sandboxhotel-1.png 800w" sizes="(max-width:980px) 100vw, 50vw" alt="Standard Double bedroom with a large bed and soft lighting" loading="lazy" decoding="async" width="800" height="500">
                     </picture>
-                  </a>
+                  </div>
                 </div>
-
-                <div class="roomSubMedia">
-                  <a class="roomMediaLink" href="assets/images/rooms/double-room-sandboxhotel-2.png" target="_blank" rel="noopener" aria-label="Open Standard Double room detail photo">
-                    <picture>
-                      <source
-                        type="image/webp"
-                        srcset="assets/images/rooms/double-room-sandboxhotel-2-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-2.webp 800w"
-                        sizes="(max-width: 980px) 50vw, 25vw">
-                      <img src="assets/images/rooms/double-room-sandboxhotel-2.png" srcset="assets/images/rooms/double-room-sandboxhotel-2-400.png 400w, assets/images/rooms/double-room-sandboxhotel-2.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Standard Double room viewed from the foot of the bed" loading="lazy" decoding="async" width="400" height="300">
-                    </picture>
-                  </a>
-                  <a class="roomMediaLink" href="assets/images/rooms/bathroom.png" target="_blank" rel="noopener" aria-label="Open bathroom photo">
-                    <picture>
-                      <source
-                        type="image/webp"
-                        srcset="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w"
-                        sizes="(max-width: 980px) 50vw, 25vw">
-                      <img src="assets/images/rooms/bathroom.png" srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w" sizes="(max-width: 980px) 50vw, 25vw" alt="Bathroom with shower and fresh towels" loading="lazy" decoding="async" width="400" height="300">
-                    </picture>
-                  </a>
+                <div class="roomThumbs" data-hero="doubleHero">
+                  <button type="button" class="roomThumb" aria-current="true" aria-label="Double room main view"
+                    data-full="assets/images/rooms/double-room-sandboxhotel-1.png"
+                    data-srcset="assets/images/rooms/double-room-sandboxhotel-1-400.png 400w, assets/images/rooms/double-room-sandboxhotel-1.png 800w"
+                    data-webp="assets/images/rooms/double-room-sandboxhotel-1-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-1.webp 800w">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-1-400.png" alt="Double room main" loading="lazy" decoding="async" width="160" height="120">
+                  </button>
+                  <button type="button" class="roomThumb" aria-current="false" aria-label="Double room alternate angle"
+                    data-full="assets/images/rooms/double-room-sandboxhotel-2.png"
+                    data-srcset="assets/images/rooms/double-room-sandboxhotel-2-400.png 400w, assets/images/rooms/double-room-sandboxhotel-2.png 800w"
+                    data-webp="assets/images/rooms/double-room-sandboxhotel-2-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-2.webp 800w">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-2-400.png" alt="Double room foot of bed" loading="lazy" decoding="async" width="160" height="120">
+                  </button>
+                  <button type="button" class="roomThumb" aria-current="false" aria-label="En-suite bathroom"
+                    data-full="assets/images/rooms/bathroom.png"
+                    data-srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w"
+                    data-webp="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w">
+                    <img src="assets/images/rooms/bathroom-400.png" alt="Private bathroom" loading="lazy" decoding="async" width="160" height="120">
+                  </button>
                 </div>
               </div>
 
               <div class="roomBody">
-                <div class="roomTop">
-                  <div>
-                    <h3 data-i18n="room_standard_double_title">Standard Double</h3>
-                    <ul class="roomMeta">
-                      <li class="tag" data-i18n="tag_1_double_bed">1 Double Bed</li>
-                      <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
-                      <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
-                    </ul>
-                  </div>
-                  <div class="priceBox">
-                    <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
-                  </div>
+                <div>
+                  <span class="roomType" data-i18n="room_type_label">Room Type</span>
+                  <h3 data-i18n="room_standard_double_title">Standard Double</h3>
                 </div>
-
-                <p class="roomBestFor" data-i18n="room_double_best_for"><strong>Best for:</strong> Couples or comfortable two-person stays</p>
-
-                <ul class="bullets">
-                  <li data-i18n="bullet_comfort_double_bed">Comfortable double bed</li>
-                  <li data-i18n="bullet_great_for_couples">Great for couples or solo travelers</li>
-                  <li data-i18n="bullet_fast_wifi">Fast Wi-Fi</li>
+                <ul class="roomMeta">
+                  <li class="tag" data-i18n="tag_1_double_bed">1 Double Bed</li>
+                  <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                  <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
+
+                <hr class="roomDivider">
+
+                <p class="roomBestFor" data-i18n-html="room_double_best_for"><strong>Best for:</strong> Couples or comfortable two-person stays</p>
+
+                <ul class="roomAmenities" role="list">
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg> <span data-i18n="bullet_comfort_double_bed">Comfortable double bed</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span data-i18n="bullet_great_for_couples">Great for couples</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
+                </ul>
+
+                <div class="priceBox">
+                  <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
+                </div>
 
                 <div class="roomActions">
                   <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now">Book Double Room</a>
@@ -2351,7 +2429,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         </div>
 
-        <p class="fine" style="margin-top:12px" data-i18n="rooms_fine">
+        <p class="fine" style="margin-top:16px" data-i18n="rooms_fine">
           Rates can change by date and season. Message your dates for the fastest exact price.
         </p>
       </div>
@@ -3170,6 +3248,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         bullet_comfort_double_bed: "เตียงใหญ่ นอนสบาย",
         bullet_great_for_couples: "เหมาะสำหรับคู่รัก",
         bullet_fast_wifi: "Wi-Fi เร็ว",
+        room_twin_best_for: "<strong>เหมาะสำหรับ:</strong> พักคนเดียว เดินทางกับเพื่อน หรือทริปธุรกิจสั้น ๆ",
+        room_double_best_for: "<strong>เหมาะสำหรับ:</strong> คู่รักหรือพักผ่อนสบาย ๆ สองคน",
+        room_type_label: "ประเภทห้อง",
 
         gallery_title: "แกลเลอรี",
         gallery_sub: "ปัดเพื่อดูรูปของโรงแรมและห้องพัก",
@@ -3396,6 +3477,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         bullet_comfort_double_bed: "Comfortable double bed",
         bullet_great_for_couples: "Great for couples",
         bullet_fast_wifi: "Fast Wi-Fi",
+        room_twin_best_for: "<strong>Best for:</strong> Solo guests, friends, or short business stays",
+        room_double_best_for: "<strong>Best for:</strong> Couples or comfortable two-person stays",
+        room_type_label: "Room Type",
 
         gallery_title: "Gallery",
         gallery_sub: "Swipe through photos of the hotel and rooms.",
@@ -3641,6 +3725,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         bullet_comfort_double_bed: "舒适大床",
         bullet_great_for_couples: "适合情侣",
         bullet_fast_wifi: "高速 Wi-Fi",
+        room_twin_best_for: "<strong>适合：</strong>独自出行、朋友结伴或短期商务住宿",
+        room_double_best_for: "<strong>适合：</strong>情侣或两人舒适入住",
+        room_type_label: "房型",
 
         gallery_title: "相册",
         gallery_sub: "滑动查看酒店与房间照片。",
@@ -4013,7 +4100,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         await persistBookingLead(data);
         openWhatsApp(buildMessage(data), data, document.getElementById("sendWA"));
       });
-      document.getElementById("sendEmail").addEventListener("click", async ()=>{
+      document.getElementById("sendEmail")?.addEventListener("click", async ()=>{
         const data = getFormData();
         await persistBookingLead(data);
         openEmail(buildMessage(data), data, document.getElementById("sendEmail"));
@@ -4145,6 +4232,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       buildThumbs();
       setIndex(0);
       start();
+    }
+
+    // ---------- Room thumbnail mini-gallery ----------
+    function initRoomThumbs(){
+      document.querySelectorAll(".roomThumbs").forEach(strip=>{
+        const heroId = strip.getAttribute("data-hero");
+        const heroImg = document.getElementById(heroId);
+        if(!heroImg) return;
+        const heroPicture = heroImg.closest("picture");
+        const heroSource = heroPicture?.querySelector("source[type='image/webp']");
+        const thumbs = Array.from(strip.querySelectorAll(".roomThumb"));
+
+        thumbs.forEach((btn, i)=>{
+          btn.addEventListener("click", ()=>{
+            const full = btn.getAttribute("data-full");
+            const srcset = btn.getAttribute("data-srcset");
+            const webp = btn.getAttribute("data-webp");
+            if(full) heroImg.src = full;
+            if(srcset) heroImg.srcset = srcset;
+            if(webp && heroSource) heroSource.srcset = webp;
+            thumbs.forEach((t, ti)=> t.setAttribute("aria-current", ti === i ? "true" : "false"));
+          });
+        });
+      });
     }
 
     function initFAQ(){
@@ -4343,6 +4454,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       initDates();
       wireContactButtons();
       initGalleryCarousel();
+      initRoomThumbs();
       initHeaderScroll();
     })();
   </script>
