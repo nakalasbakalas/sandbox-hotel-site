@@ -22,7 +22,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="canonical" href="https://www.sandboxhotel.com/">
   <link rel="alternate" hreflang="th" href="https://www.sandboxhotel.com/?lang=th">
   <link rel="alternate" hreflang="en" href="https://www.sandboxhotel.com/?lang=en">
-  <link rel="alternate" hreflang="zh-CN" href="https://www.sandboxhotel.com/?lang=zh">
+  <link rel="alternate" hreflang="zh-Hans" href="https://www.sandboxhotel.com/?lang=zh">
   <link rel="alternate" hreflang="x-default" href="https://www.sandboxhotel.com/">
   <link rel="icon" href="assets/images/logo/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo-32.png">
@@ -67,12 +67,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <style>
     /* ==========================================================
-      Sandbox Hotel — vNext (Fixed + Upgraded)
-      - Gallery is carousel-only (NO grid)
-      - Google Maps embed at bottom (reasonable size)
+      Sandbox Hotel — Main Stylesheet
       - Light/Dark follows device by default (prefers-color-scheme)
       - Optional user override: System → Dark → Light (saved)
-      - Valid HTML (no nested anchors, no duplicate IDs)
     ========================================================== */
 
     :root{
@@ -1335,7 +1332,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ==========================================================
-       GALLERY — CAROUSEL ONLY (NO GRID)
+       Gallery Carousel
        ========================================================== */
     .galCarousel{margin-top:8px; max-width:1200px; margin-left:auto; margin-right:auto}
     .galViewport{
@@ -1671,10 +1668,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
 
     /* ==========================================================
-       DEVICE DISPLAY TUNING (PHONE / TABLET)
-       - Auto-detects touch devices and applies compact layout
-       - Minimizes CTA clutter on smaller screens
-       - Sticky bar auto-hides on scroll + hides when keyboard is open
+       Responsive Device Layout
     ========================================================== */
 
     /* Smooth hide/show for the sticky booking bar */
@@ -1874,7 +1868,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ========================================
-       HOMEPAGE REDESIGN — VISUAL HIERARCHY
+       Visual Hierarchy Enhancements
        ======================================== */
 
     /* Room "Best For" guidance */
@@ -1981,6 +1975,44 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .bookGuarantee .checkIcon{ color: var(--copper2); font-style:normal; font-size:16px }
 
+    /* ---------- Inline style replacements ---------- */
+    .roomsFine{margin-top:16px}
+    .sep-dot{opacity:.9}
+
+    /* ---------- Premium polish: subtle refinements ---------- */
+    .head h2{
+      background: linear-gradient(135deg, var(--ink2) 0%, color-mix(in oklab, var(--ink2) 82%, var(--copper)) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    @supports not (-webkit-background-clip: text){
+      .head h2{ color: var(--ink2) }
+    }
+
+    /* Refined card hover for room cards */
+    .roomCard{
+      transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    }
+    @media (hover:hover){
+      .roomCard:hover{
+        transform: translateY(-3px);
+        box-shadow: 0 20px 48px rgba(0,0,0,.14), 0 8px 20px rgba(168,101,42,.06);
+        border-color: color-mix(in oklab, var(--copper) 15%, var(--line));
+      }
+    }
+
+    /* Smoother link underline transitions */
+    a:not(.btn):not(.chip):not(.brand):not(.textLink){
+      transition: color .16s ease;
+    }
+
+    /* Refined focus ring */
+    :focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px color-mix(in oklab, var(--copper) 55%, transparent);
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -2043,7 +2075,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "name": "Sandbox Hotel",
     "url": "https://www.sandboxhotel.com/",
     "description": "Official website of Sandbox Hotel — a quiet hotel in Nakhon Si Thammarat, Southern Thailand. Direct booking available.",
-    "inLanguage": ["th", "en", "zh-CN"],
+    "inLanguage": ["th", "en", "zh-Hans"],
     "publisher": {
       "@type": "Organization",
       "name": "Sandbox Hotel",
@@ -2188,7 +2220,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Sandbox Hotel home">
         <div class="logo">
-          <img src="assets/images/logo/logo_square.png" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" decoding="async">
+          <img src="assets/images/logo/logo-128.png" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" decoding="async">
         </div>
         <div class="brandText">
           <span class="brandName">Sandbox Hotel</span>
@@ -2212,7 +2244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="navPanel" role="group" aria-label="Site navigation">
             <div class="navPanelBrand">
               <div class="logo">
-                <img src="assets/images/logo/logo_square.png" alt="Sandbox Hotel logo" width="40" height="40" loading="lazy" decoding="async">
+                <img src="assets/images/logo/logo-64.png" alt="Sandbox Hotel logo" width="40" height="40" loading="lazy" decoding="async">
               </div>
               <div class="brandText">
                 <span class="navPanelBrandTitle">Sandbox Hotel</span>
@@ -2435,7 +2467,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         </div>
 
-        <p class="fine" style="margin-top:16px" data-i18n="rooms_fine">
+        <p class="fine roomsFine" data-i18n="rooms_fine">
           Rates can change by date and season. Message your dates for the fastest exact price.
         </p>
       </div>
@@ -2562,7 +2594,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
 
 
-<!-- GALLERY (CAROUSEL ONLY — NO GRID) -->
+<!-- GALLERY -->
     <section class="section" id="gallery">
       <div class="card pad">
         <div class="head">
@@ -2906,7 +2938,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <footer>
           <div class="footerBrand">
             <div class="logo footerLogo">
-              <img src="assets/images/logo/logo_light_bg.png" alt="Sandbox Hotel logo" width="44" height="44" loading="lazy" decoding="async">
+              <img src="assets/images/logo/logo-64.png" alt="Sandbox Hotel logo" width="44" height="44" loading="lazy" decoding="async">
             </div>
             <div class="footerBrandText">
               <span class="footerBrandName">Sandbox Hotel</span>
@@ -3116,7 +3148,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         nav_faq: "คำถาม",
         nav_location: "ที่ตั้ง",
 
-        hero_kicker: '<span class="kw a">จองตรงกับโรงแรม</span> <span style="opacity:.9">•</span> <span class="kw">ยืนยันรวดเร็ว</span> <span style="opacity:.9">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
+        hero_kicker: '<span class="kw a">จองตรงกับโรงแรม</span> <span class="sep-dot">•</span> <span class="kw">ยืนยันรวดเร็ว</span> <span class="sep-dot">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
         hero_kicker_short: "Sandbox Hotel • จองตรงกับโรงแรม",
         hero_title: "พักผ่อน เงียบสบาย<br>ในนครศรีธรรมราช",
         hero_sub: 'ห้องกว้าง • Wi-Fi • ที่จอดรถ • ซักรีด • แอร์<br>ยืนยันเร็วที่สุด: โทรหรือ LINE',
@@ -3167,6 +3199,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         btn_send_line: "จองผ่าน LINE",
         btn_send_wa: "จองผ่าน WhatsApp",
         btn_send_email: "จองทางอีเมล",
+        btn_send_line_short: "LINE",
+        btn_send_wa_short: "WhatsApp",
+        book_checkin_info: "เช็คอิน: ตั้งแต่ 14:00 · เช็คเอาท์: ก่อน 11:00",
+        book_id_note: "ต้องแสดงบัตรประชาชนหรือพาสปอร์ตเมื่อเช็คอิน",
         form_hint: "เราจะตอบกลับพร้อมห้องว่างและราคารวม",
 
         quick_label: "เลือกวันอย่างรวดเร็ว",
@@ -3345,7 +3381,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         nav_faq: "FAQ",
         nav_location: "Location",
 
-        hero_kicker: '<span class="kw a">Direct booking</span> <span style="opacity:.9">•</span> <span class="kw">Fast confirmation</span> <span style="opacity:.9">•</span> <span class="kw hot">Click to book</span>',
+        hero_kicker: '<span class="kw a">Direct booking</span> <span class="sep-dot">•</span> <span class="kw">Fast confirmation</span> <span class="sep-dot">•</span> <span class="kw hot">Click to book</span>',
         hero_kicker_short: "Sandbox Hotel • Direct Booking",
         hero_title: "Your quiet retreat<br>in Nakhon Si Thammarat",
         hero_sub: 'Spacious rooms • Wi‑Fi • Parking • Laundry • A/C<br>Fastest confirmation: call or LINE',
@@ -3396,6 +3432,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         btn_send_line: "Book via LINE",
         btn_send_wa: "Book via WhatsApp",
         btn_send_email: "Book via Email",
+        btn_send_line_short: "LINE",
+        btn_send_wa_short: "WhatsApp",
+        book_checkin_info: "Check-in: From 14:00 · Check-out: By 11:00",
+        book_id_note: "Government-issued ID or passport required at check-in.",
         form_hint: "We’ll reply with availability and total price.",
 
         quick_label: "Quick dates",
@@ -3576,10 +3616,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "LINE opened. Paste message: "
       },
       zh: {
-        meta_title: "Sandbox Hotel｜洛坤府直订酒店",
-        meta_desc: "Sandbox Hotel 位于泰国洛坤府，提供安静舒适的住宿体验，可通过电话、LINE、WhatsApp 或邮箱直接预订。",
-        og_title: "Sandbox Hotel｜洛坤府安静舒适住宿",
-        og_desc: "直接联系 Sandbox Hotel，可通过电话、LINE、WhatsApp 或邮箱快速确认房态与入住信息。",
+        meta_title: "洛坤府酒店｜Sandbox Hotel 直订官网",
+        meta_desc: "Sandbox Hotel 位于泰国洛坤府市中心，28-32㎡宽敞客房，免费Wi-Fi与停车，电话、LINE、WhatsApp直接预订，无手续费。",
+        og_title: "洛坤府酒店｜Sandbox Hotel 安静舒适直订",
+        og_desc: "洛坤府市中心宽敞客房，电话/LINE/WhatsApp快速确认，直订无加价。",
         brand_location: "泰国 洛坤府（Nakhon Si Thammarat）",
         nav_support: "直订更安心",
         nav_line_cta: "LINE",
@@ -3593,11 +3633,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         nav_faq: "常见问题",
         nav_location: "位置",
 
-        hero_kicker: '<span class="kw a">酒店直订</span> <span style="opacity:.9">•</span> <span class="kw">快速确认</span> <span style="opacity:.9">•</span> <span class="kw hot">点击预订</span>',
+        hero_kicker: '<span class="kw a">酒店直订</span> <span class="sep-dot">•</span> <span class="kw">快速确认</span> <span class="sep-dot">•</span> <span class="kw hot">点击预订</span>',
         hero_kicker_short: "Sandbox Hotel • 酒店直订",
-        hero_title: "位于洛坤府的<br>现代静谧住宿",
+        hero_title: "洛坤府的<br>安静舒适住宿",
         hero_sub: '宽敞客房 • Wi‑Fi • 停车 • 洗衣 • 空调<br>最快确认：电话或 LINE',
-        hero_sub_short: "舒适客房、便利位置与友好服务，适合商务出行或短住。",
+        hero_sub_short: "宽敞客房 • 便利位置 • 贴心服务，适合商务或休闲入住",
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示护照/身份证 • 安静房间',
 
         cta_request: "查看空房",
@@ -3615,16 +3655,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         trust_support: "电话 / LINE 支持",
 
         offers_title: "为什么选择 Sandbox Hotel",
-        offers_sub: "满足您舒适入住所需的一切，方便省心。",
+        offers_sub: "入住所需一应俱全，方便省心。",
         offers_btn: "查询空房",
         offer1_title: '直接预订快速',
-        offer1_desc: "发送日期与房型 — 通过LINE、WhatsApp或电话快速确认。",
+        offer1_desc: "告知日期与房型，LINE/WhatsApp/电话快速确认。",
         offer2_title: '宽敞舒适客房',
         offer2_desc: "28–32㎡客房配办公桌、空调、热水淋浴与高速Wi-Fi。",
         offer3_title: '安静实用入住',
-        offer3_desc: "安静客房可按需安排。停车、洗衣与贴心本地服务。",
+        offer3_desc: "安静客房可按需安排，停车、洗衣与贴心本地服务一应俱全。",
         offer4_title: "灵活短住或长住",
-        offer4_desc: "一晚起住或长期入住 — 可咨询周租/月租方案。",
+        offer4_desc: "一晚起住或长期入住，可咨询周租/月租优惠。",
         faq_cta_text: "还有问题？我们乐意为您解答。",
 
         book_title: "预订您的住宿",
@@ -3644,6 +3684,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         btn_send_line: "通过LINE预订",
         btn_send_wa: "通过WhatsApp预订",
         btn_send_email: "通过邮箱预订",
+        btn_send_line_short: "LINE",
+        btn_send_wa_short: "WhatsApp",
+        book_checkin_info: "入住：14:00起 · 退房：11:00前",
+        book_id_note: "入住时需出示护照或身份证。",
         form_hint: "我们会回复空房与总价。",
 
         quick_label: "快捷日期",
@@ -3662,7 +3706,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_clipboard_hint: "消息已复制到剪贴板。",
         line_clipboard_fail: "提示：如需粘贴，可先复制消息。",
         why_title: "为什么选择Sandbox",
-        why_sub: "简单可靠，直接预订更省心。",
+        why_sub: "简单、可靠、预订方便。",
         why_1_t: "房间宽敞",
         why_1_d: "舒适空间，休息或办公都方便。",
         why_2_t: "确认快速",
@@ -3671,9 +3715,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         why_3_d: "Wi‑Fi、空调、停车、洗衣与贴心服务。",
         btn_view_facebook: "Facebook",
         faq_q7: "可以吸烟吗？",
-        faq_a7: "为保证舒适度，请向前台确认最新吸烟政策及指定区域。",
+        faq_a7: "室内禁烟。如需吸烟，请向前台咨询指定吸烟区域。",
         faq_q8: "取消政策是什么？",
-        faq_a8: "取消规则可能因日期/季节而变化。请与酒店确认您的日期以获取最新政策。",
+        faq_a8: "取消政策因日期和季节不同可能有所调整，请联系酒店确认您的具体情况。",
         faq_q9: "Sandbox Hotel 位于洛坤府哪里？",
         faq_a9: "Sandbox Hotel 位于泰国洛坤府（Nakhon Si Thammarat）Pho Sadet, Mueang区Karom路626/1号，邮编80000。酒店地处市区中心，交通便利，靠近当地市集、寺庙及历史老城区。",
         faq_q10: "酒店附近有哪些景点？",
@@ -3684,7 +3728,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         book_guarantee: "直订最优惠价格保证 — 无预订费，无加价。",
 
         amen_title: "住客设施",
-        amen_sub: "为舒适便捷入住而准备的贴心基础配套。",
+        amen_sub: "舒适入住所需的贴心基础配套。",
         amen_wifi_title: "Wi‑Fi",
         amen_wifi_desc: "高速稳定网络，满足办公、影音和日常使用。",
         amen_parking_title: "停车",
@@ -3736,7 +3780,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         room_type_label: "房型",
 
         gallery_title: "相册",
-        gallery_sub: "滑动查看酒店与房间照片。",
+        gallery_sub: "滑动查看酒店实景与房间照片。",
         gal_exterior_title: "酒店外观",
         gal_exterior_desc: "先看清酒店整体氛围——到店更安心。",
         gal_entrance_title: "入口与到店",
@@ -3752,7 +3796,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         svg_clean_bathrooms: "干净浴室",
 
         reviews_title: "住客评价",
-        reviews_sub: "在 Google Maps 查看位置与最新评价，预订更放心。",
+        reviews_sub: "查看 Google Maps 上的位置与真实评价，预订更安心。",
         btn_view_maps: "在Google Maps查看",
         review1_title: '商务出行 <span class="stars">★★★★★</span>',
         review1_text: "办理入住很快，Wi-Fi稳定，房间大，办公方便，性价比高。",
@@ -3766,7 +3810,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         review5_text: "房间大且干净，位置便利，入住简单，员工友善。",
 
         faq_title: "常见问题",
-        faq_sub: "预订前常见问题。",
+        faq_sub: "预订前的常见疑问，快速解答。",
         faq_btn: "发送请求",
         faq_show_more: "查看更多问题",
         faq_q1: "怎样预订最快？",
@@ -3778,9 +3822,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_q4: "房价会随日期变化吗？",
         faq_a4: "会。房价随日期与季节变化。发送日期可获得准确报价。",
         faq_q5: "有停车位吗？",
-        faq_a5: "有（视车位情况）。",
+        faq_a5: "有，住客可使用店内停车位（数量有限，先到先得）。",
         faq_q6: "适合安静休息吗？",
-        faq_a6: "我们尽量安排安静房间，如可行可按需安排安静一侧。",
+        faq_a6: "适合。我们尽量安排安静房间，也可按需安排安静一侧。",
         faq_q9: "洛坤府在哪里？",
         faq_a9: "洛坤府（Nakhon Si Thammarat）是泰国南部的一座城市，位于泰国湾沿岸，距曼谷约780公里。它是泰国最古老的城市之一，有超过1000年的历史。Sandbox Hotel 位于市中心 626/1 Karom 路。",
         faq_q10: "如何前往洛坤府？",
@@ -3789,20 +3833,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_a11: "附近亮点包括：帕玛哈塔沃拉玛哈维汉寺（泰国南部最重要的佛教寺庙之一）、洛坤府国家博物馆、博问夜市，以及老城步行街。洛坤府也是纳泰隆皮影戏和传统银器工艺的故乡。",
 
         dest_title: "关于洛坤府（Nakhon Si Thammarat）",
-        dest_sub: "泰国南部历史悠久的泰国湾沿海城市",
+        dest_sub: "泰国湾沿岸的千年古城，体验地道南泰文化",
         dest_where_title: "洛坤府在哪里？",
         dest_where_body: "洛坤府是泰国南部的一座城市，位于泰国湾沿岸，距曼谷约780公里。它是洛坤府府的首府，也是泰国有记录历史超过1000年的最古老城市之一。",
         dest_why_title: "为何值得前往洛坤府？",
-        dest_why_body: "与泰南拥挤的海滩度假区不同，洛坤府提供地道的泰国文化、佛教遗产和轻松的本地氛围。游客前来观赏帕玛哈塔寺庙、纳泰隆皮影戏，以及传统银器工艺。",
+        dest_why_body: "不同于泰南热门海滩度假区，洛坤府拥有地道的泰国文化、千年佛教遗产和轻松的本地生活气息。来这里可以参观帕玛哈塔寺、欣赏纳泰隆皮影戏，还能体验传统银器工艺。",
         dest_attractions_title: "Sandbox Hotel 附近主要景点",
         dest_howtoget_title: "如何前往洛坤府",
         dest_howtoget_note: "Sandbox Hotel 距洛坤府市中心仅需短程出租车。如需接送服务，欢迎在预订时告知。",
         dest_region_title: "洛坤府在泰国南部的位置",
         dest_region_body: "泰国南部从春蓬延伸至马来西亚边境，分为泰国湾海岸（苏梅岛、帕岸岛、洛坤府）和安达曼海海岸（普吉岛、甲米、兰塔岛）两侧。洛坤府是南部最具历史文化价值的城市之一，也是探索鲜为人知的泰国湾海滩和国家公园的绝佳基地。",
-        dest_cta_text: "计划前往洛坤府？Sandbox Hotel 提供直接预订、宽敞客房与市中心的便利位置。",
+        dest_cta_text: "计划来洛坤府？Sandbox Hotel 提供直订、宽敞客房与便利的市中心位置。",
         dest_link_city: "洛坤府酒店 →",
         dest_link_south: "泰国南部酒店 →",
-        loc_sub: "选择最快的联系方式确认空房。",
+        loc_sub: "选择最方便的联系方式查询空房。",
         loc_address: "地址：",
         loc_plus: "Plus Code：",
         loc_notes: "提示：政策可能随季节调整，最新信息请直接联系酒店。",

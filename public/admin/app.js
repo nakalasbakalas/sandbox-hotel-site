@@ -57,6 +57,35 @@ const copy = {
     language: "Language",
   },
 };
+
+function showToast(message, type = "error") {
+  const toast = document.createElement("div");
+  toast.textContent = message;
+  Object.assign(toast.style, {
+    position: "fixed",
+    top: "1rem",
+    right: "1rem",
+    padding: "0.75rem 1.25rem",
+    borderRadius: "6px",
+    color: "#fff",
+    fontSize: "0.875rem",
+    fontFamily: "inherit",
+    lineHeight: "1.4",
+    maxWidth: "360px",
+    boxShadow: "0 4px 12px rgba(0,0,0,.25)",
+    zIndex: "9999",
+    opacity: "0",
+    transition: "opacity .2s ease",
+    background: type === "error" ? "#c0392b" : "#27ae60",
+  });
+  document.body.appendChild(toast);
+  requestAnimationFrame(() => { toast.style.opacity = "1"; });
+  setTimeout(() => {
+    toast.style.opacity = "0";
+    toast.addEventListener("transitionend", () => toast.remove());
+  }, 4000);
+}
+
 const RESERVATION_STATUS_ACTIONS = [
   ["tentative", "Confirm", "confirm"],
   ["inquiry", "Confirm", "confirm"],
@@ -403,7 +432,7 @@ async function loadFolio(reservationId) { const response = await api(`/api/folio
 async function api(url, options = {}) {
   const response = await fetch(url, { method: options.method || "GET", headers: { "content-type": "application/json" }, body: options.body ? JSON.stringify(options.body) : undefined });
   const data = await response.json().catch(() => ({}));
-  if (!response.ok) { window.alert(data.error || "Request failed"); throw new Error(data.error || "Request failed"); }
+  if (!response.ok) { showToast(data.error || "Request failed", "error"); throw new Error(data.error || "Request failed"); }
   return data;
 }
 
