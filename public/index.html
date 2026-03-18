@@ -1817,6 +1817,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .footerLang .chip{min-height:34px; padding:7px 9px; font-size:12px}
     .footerLang .fine{margin:0 2px 0 0; white-space:nowrap}
     html[data-compact="true"] .footerLang{display:flex !important}
+    /* Narrow mobile fallback: stack heroCTA buttons at ≤380px (CSS-only, no JS dependency) */
+    @media (max-width:380px){
+      .heroCTA{display:flex; flex-direction:column; align-items:stretch; gap:10px}
+      .heroCTA .btn{width:100%; text-align:center; min-height:48px}
+      .heroCTA .textLink{width:100%; justify-content:flex-start; padding:6px 0}
+    }
 /* ---------- Print ---------- */
     @media print{
       html,body{background:#fff !important; color:#000 !important}
@@ -2025,7 +2031,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "telephone": "+66885783478",
     "email": "booking@sandboxhotel.com",
     "priceRange": "฿฿",
-    "starRating": { "@type": "Rating", "ratingValue": "4" },
+    "starRating": { "@type": "Rating", "ratingValue": "4.3", "bestRating": "5" },
     "checkinTime": "14:00",
     "checkoutTime": "11:00",
     "currenciesAccepted": "THB",
@@ -3161,7 +3167,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_email: "อีเมล",
         cta_open_map: "เปิดแผนที่",
         hero_view_rooms: "ดูห้องพัก →",
-        hero_review_count: "· 120 รีวิวบน Google",
+        hero_review_count: "· 120 รีวิวบน Google", // TODO: verify review count monthly
         hero_best_rate: "รับประกันราคาดีที่สุด — จองตรงประหยัดกว่า",
         trust_direct: "จองตรงกับโรงแรม",
         trust_quiet: "ห้องพักเงียบ",
@@ -3394,7 +3400,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_email: "Email",
         cta_open_map: "Open Map",
         hero_view_rooms: "Explore Rooms →",
-        hero_review_count: "· 120 reviews on Google",
+        hero_review_count: "· 120 reviews on Google", // TODO: verify review count monthly
         hero_best_rate: "Best Rate Guaranteed — book direct &amp; save",
         trust_direct: "Direct Booking",
         trust_quiet: "Quiet Rooms",
@@ -3646,7 +3652,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_email: "邮箱",
         cta_open_map: "打开地图",
         hero_view_rooms: "查看房型",
-        hero_review_count: "· 120条 Google 评价",
+        hero_review_count: "· 120条 Google 评价", // TODO: verify review count monthly
         hero_best_rate: "直订最优惠 — 无手续费，无加价",
         trust_direct: "酒店直订",
         trust_quiet: "安静客房",
