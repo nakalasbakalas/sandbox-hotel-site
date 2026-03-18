@@ -16,7 +16,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="theme-color" content="#FBF6EE" media="(prefers-color-scheme: light)">
 
   <title>โรงแรมในนครศรีธรรมราช | Sandbox Hotel จองตรงราคาดีที่สุด</title>
-  <meta name="description" id="metaDescription" content="Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักกว้างขวาง สงบ สะดวก จองตรงกับโรงแรมผ่านโทร LINE WhatsApp หรืออีเมล รับประกันราคาดีที่สุด">
+  <meta name="description" id="metaDescription" content="Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักกว้างขวาง สงบ สะดวก จองตรงกับโรงแรมผ่านโทรหรือ LINE รับประกันราคาดีที่สุด">
   <meta name="robots" content="index,follow">
   <meta name="keywords" content="hotel in nakhon si thammarat, hotels in nakhon si thammarat, nakhon si thammarat hotel, accommodation nakhon si thammarat, hotels southern thailand, boutique hotel nakhon si thammarat, where to stay nakhon si thammarat, sandbox hotel, direct booking hotel thailand">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
@@ -37,7 +37,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
 <meta property="og:title" id="ogTitle" content="โรงแรมในนครศรีธรรมราช | Sandbox Hotel">
-  <meta property="og:description" id="ogDescription" content="จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักสงบ Wi-Fi ที่จอดรถ ยืนยันรวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล">
+  <meta property="og:description" id="ogDescription" content="จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักสงบ Wi-Fi ที่จอดรถ ยืนยันรวดเร็วผ่านโทรหรือ LINE">
   <meta property="og:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
   <meta property="og:image:alt" content="ด้านหน้า Sandbox Hotel ในจังหวัดนครศรีธรรมราช">
   <meta property="og:image:width" content="1600">
@@ -46,7 +46,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" id="twitterTitle" content="โรงแรมในนครศรีธรรมราช | Sandbox Hotel">
-  <meta name="twitter:description" id="twitterDescription" content="จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ยืนยันรวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล">
+  <meta name="twitter:description" id="twitterDescription" content="จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ยืนยันรวดเร็วผ่านโทรหรือ LINE">
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
   <!-- Preload hero -->
@@ -1699,13 +1699,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       position:fixed;
       left:0; right:0; bottom:0;
       z-index:90;
-      padding:10px 12px;
-      padding-bottom: calc(10px + env(safe-area-inset-bottom));
+      padding:6px 12px;
+      padding-bottom: calc(6px + env(safe-area-inset-bottom));
       background: var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(140%);
       backdrop-filter: blur(10px) saturate(140%);
       border-top:1px solid var(--line);
-      box-shadow: 0 -18px 48px rgba(0,0,0,.20);
+      box-shadow: 0 -4px 12px rgba(0,0,0,.08);
       display:none;
       opacity:0;
       pointer-events:none;
@@ -1722,102 +1722,52 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       padding:0 6px;
     }
     .stickyInner{
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      display:flex; align-items:center; justify-content:center; gap:10px;
     }
-    .stickyLeft{display:flex; flex-direction:column; gap:2px}
-    .stickyLeft b{font-size:13px; color:var(--ink2)}
-    .stickyLeft span{font-size:12px; color:var(--muted)}
-    .stickyActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .stickyActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
     .stickyActions.compact{
       width:100%;
       display:grid;
-      grid-template-columns:repeat(4, minmax(0, 1fr));
+      grid-template-columns:repeat(2, minmax(0, 1fr));
       gap:8px;
     }
     .stickyActions.compact .btn{
-      min-height:46px;
-      padding:8px 10px;
-      flex-direction:column;
-      gap:4px;
+      min-height:40px;
+      padding:6px 10px;
+      flex-direction:row;
+      gap:6px;
       line-height:1.05;
       border-radius:var(--radius-md);
+      justify-content:center;
     }
     .stickyActionIcon{
-      font-size:16px;
+      font-size:14px;
       line-height:1;
       flex-shrink:0;
     }
     .stickyActionLabel{
-      font-size:11px;
+      font-size:12px;
       letter-spacing:.02em;
       text-wrap:balance;
     }
     .stickyMini{
       display:flex;
       align-items:center;
-      justify-content:flex-end;
+      justify-content:center;
       gap:10px;
       position:relative;
-    }
-    .stickyMiniBook{
-      min-height:46px;
-      padding:0 18px;
-      border-radius:999px;
-    }
-    .stickyMiniMenu{
-      position:relative;
-      margin:0;
-    }
-    .stickyMiniMenu summary{
-      list-style:none;
-    }
-    .stickyMiniMenu summary::-webkit-details-marker{display:none}
-    .stickyMiniToggle{
-      min-width:46px;
-      min-height:46px;
-      padding:0;
-      border-radius:999px;
-    }
-    .stickyMiniToggle span[aria-hidden="true"]{
-      font-size:20px;
-      line-height:1;
-    }
-    .stickyMiniMenu[open] .stickyMiniToggle{
-      border-color:var(--controlBorderStrong);
-      background:var(--surfaceC);
-    }
-    .stickyMiniPanel{
-      position:absolute;
-      right:0;
-      bottom:calc(100% + 10px);
-      display:grid;
-      gap:8px;
-      width:min(232px, calc(100vw - 32px));
-      padding:12px;
-      border:1px solid var(--line);
-      border-radius:var(--radius-lg);
-      background:var(--uiGlass2);
-      -webkit-backdrop-filter: blur(10px) saturate(150%);
-      backdrop-filter: blur(10px) saturate(150%);
-      box-shadow: var(--shadow3);
-    }
-    .stickyMiniMenu:not([open]) .stickyMiniPanel{display:none}
-    .stickyMiniPanel .btn{
-      width:100%;
-      justify-content:flex-start;
-      min-height:44px;
     }
     html[data-sticky-size="mini"] .stickyVariant.mini,
     html[data-sticky-size="compact"] .stickyVariant.compact,
     html[data-sticky-size="full"] .stickyVariant.full{display:flex}
     html[data-sticky-size="mini"]{
-      --sticky-body-pad:88px;
+      --sticky-body-pad:56px;
     }
     html[data-sticky-size="compact"]{
-      --sticky-body-pad:104px;
+      --sticky-body-pad:64px;
     }
     html[data-sticky-size="full"]{
-      --sticky-body-pad:118px;
+      --sticky-body-pad:56px;
     }
 
 
@@ -1910,9 +1860,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       gap: 10px;
     }
     html[data-device="phone"] .heroCTA .btn{ width:100%; }
-    html[data-device="phone"] .heroCTA .btn.primary,
-    html[data-device="phone"] #ctaLine{ grid-column:1 / -1; }
-    html[data-device="phone"] #ctaWhatsApp,
+    html[data-device="phone"] .heroCTA .btn.primary{ grid-column:1 / -1; }
     html[data-device="phone"] .heroCTA .btn.ghost{ display:none !important; }
 
     /* Language + theme controls: tighten */
@@ -1921,10 +1869,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-device="phone"] #themeLabel{ display:none; }
 
     /* Sticky bar size tuning */
-    html[data-sticky-size="compact"] .stickyActionLabel{display:none}
     html[data-sticky-size="full"] .stickyActions{align-items:center}
     html[data-sticky-size="full"] .stickyActions .btn{
-      min-height:42px;
+      min-height:36px;
     }
     html[data-device="phone"] .ctaRow{
       display:grid;
@@ -1951,7 +1898,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-device="tablet"] .heroCTA .btn.ghost{ display:none !important; }
 
     @media (min-width:560px){
-      html[data-sticky-size="compact"] .stickyActionLabel{display:inline}
       .stickyActions.compact .btn{
         flex-direction:row;
         justify-content:center;
@@ -1961,9 +1907,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (max-width:379px){
       .stickyMini{
         padding:0;
-      }
-      .stickyMiniBook{
-        flex:1 1 auto;
       }
     }
 
@@ -2191,7 +2134,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "@context": "https://schema.org",
     "@type": ["Hotel", "LodgingBusiness"],
     "name": "Sandbox Hotel",
-    "description": "Sandbox Hotel is a quiet, comfortable hotel in Nakhon Si Thammarat, Southern Thailand. We offer spacious rooms with direct booking by phone, LINE, WhatsApp, or email. Ideal for business travelers, couples, and families visiting Nakhon Si Thammarat and the surrounding Southern Thailand region.",
+    "description": "Sandbox Hotel is a quiet, comfortable hotel in Nakhon Si Thammarat, Southern Thailand. We offer spacious rooms with direct booking by phone, LINE, or email. Ideal for business travelers, couples, and families visiting Nakhon Si Thammarat and the surrounding Southern Thailand region.",
     "url": "https://www.sandboxhotel.com/",
     "telephone": "+66885783478",
     "email": "booking@sandboxhotel.com",
@@ -2292,7 +2235,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "name": "How do I book the fastest?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price."
+          "text": "Call or message us on LINE with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price."
         }
       },
       {
@@ -2465,12 +2408,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="heroInner">
           <div class="heroPanel">
             <p class="heroKicker" data-i18n="hero_kicker_short">Sandbox Hotel • Direct Booking</p>
-            <h1 class="heroTitle" data-i18n-html="hero_title">Your quiet retreat<br>in Nakhon Si Thammarat</h1>
-            <p class="heroSub" data-i18n="hero_sub_short">Spacious rooms, fast direct booking, and thoughtful service for every kind of stay.</p>
+            <h1 class="heroTitle" data-i18n-html="hero_title">Your comfortable base<br>in Nakhon Si Thammarat</h1>
+            <p class="heroSub" data-i18n="hero_sub_short">Spacious rooms, easy direct booking, and friendly service for every kind of stay.</p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
-              <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
+              <a class="btn primary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
               <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">Explore Rooms →</a>
             </div>
           </div>
@@ -2658,7 +2600,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">⚡</div>
             <b data-i18n="offer1_title">Fast Direct Booking</b>
-            <p data-i18n="offer1_desc">Message your dates — get confirmed quickly via LINE, WhatsApp, or call.</p>
+            <p data-i18n="offer1_desc">Message your dates — get confirmed quickly via LINE or phone call.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">🤫</div>
@@ -2694,8 +2636,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="card altA pad">
         <div class="head">
           <div>
-            <h2 data-i18n="book_title">Reserve Your Stay</h2>
-            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll confirm with your exact rate.</p>
+            <h2 data-i18n="book_title">Reserve Your Room</h2>
+            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll reply with availability and your rate.</p>
           </div>
           <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
         </div>
@@ -2752,7 +2694,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="wide ctaRow">
               <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
-              <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
               <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
               <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible.</span>
             </div>
@@ -2950,7 +2891,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="faqGrid" id="faqGrid" aria-live="polite">
           <details data-faq-item>
             <summary data-i18n="faq_q1">How do I book the fastest?</summary>
-            <p data-i18n="faq_a1">Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p>
+            <p data-i18n="faq_a1">Call or message us on LINE with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p>
           </details>
           <details data-faq-item>
             <summary data-i18n="faq_q4">Can rates change by date?</summary>
@@ -3075,10 +3016,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </p>
 
             <div class="contactActions">
-              <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Check Availability</a>
               <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
               <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-              <a class="btn ghost" id="contactWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp<span class="sr-only"> (opens in new tab)</span></a>
             </div>
 
             <p class="fine contactSecondary">
@@ -3136,26 +3075,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </main>
 
   <!-- Sticky Bar -->
-  <div class="sticky" role="region" aria-label="Quick booking bar">
+  <div class="sticky" role="region" aria-label="Quick contact bar">
     <div class="stickyInner stickyVariant full">
-      <div class="stickyLeft">
-        <b data-i18n="sticky_title">Ready to book?</b>
-        <span data-i18n="sticky_sub">Tap a button — fastest confirmation by message or call.</span>
-      </div>
       <div class="stickyActions">
-        <a class="btn primary sm" href="#book" data-i18n="cta_request" data-analytics="book-now">Book Now</a>
-        <a class="btn hot sm" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-        <a class="btn sm" id="stickyLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-        <a class="btn sm" id="stickyWA" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp<span class="sr-only"> (opens in new tab)</span></a>
+        <a class="btn sm" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">📞 Call</a>
+        <a class="btn sm" id="stickyLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">💬 LINE<span class="sr-only"> (opens in new tab)</span></a>
       </div>
     </div>
     <div class="stickyInner stickyVariant compact">
       <div class="stickyActions compact">
-        <a class="btn primary sm" href="#book" data-analytics="book-now" aria-label="Book now">
-          <span class="stickyActionIcon" aria-hidden="true">📅</span>
-          <span class="stickyActionLabel" data-i18n="nav_book">Book Now</span>
-        </a>
-        <a class="btn hot sm" href="tel:+66885783478" data-analytics="call" aria-label="Call Sandbox Hotel">
+        <a class="btn sm" href="tel:+66885783478" data-analytics="call" aria-label="Call Sandbox Hotel">
           <span class="stickyActionIcon" aria-hidden="true">📞</span>
           <span class="stickyActionLabel" data-i18n="btn_call">Call</span>
         </a>
@@ -3163,25 +3092,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="stickyActionIcon" aria-hidden="true">💬</span>
           <span class="stickyActionLabel">LINE</span>
         </a>
-        <a class="btn sm" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp" aria-label="Open WhatsApp chat">
-          <span class="stickyActionIcon" aria-hidden="true">🟢</span>
-          <span class="stickyActionLabel">WhatsApp</span>
-        </a>
       </div>
     </div>
     <div class="stickyMini stickyVariant mini">
-      <a class="btn primary stickyMiniBook" href="#book" data-analytics="book-now" data-i18n="nav_book">Book Now</a>
-      <details class="stickyMiniMenu">
-        <summary class="btn secondary stickyMiniToggle" aria-label="Open quick contact options">
-          <span aria-hidden="true">+</span>
-          <span class="sr-only">Open quick contact options</span>
-        </summary>
-        <div class="stickyMiniPanel">
-          <a class="btn hot sm" href="tel:+66885783478" data-analytics="call" data-i18n="btn_call">Call</a>
-          <a class="btn sm" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-          <a class="btn sm" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp<span class="sr-only"> (opens in new tab)</span></a>
-        </div>
-      </details>
+      <div class="stickyActions">
+        <a class="btn sm" href="tel:+66885783478" data-analytics="call" data-i18n="btn_call">📞 Call</a>
+        <a class="btn sm" id="stickyLineMini" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">💬 LINE<span class="sr-only"> (opens in new tab)</span></a>
+      </div>
     </div>
   </div>
 
@@ -3356,7 +3273,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     const I18N = {
       th: {
         meta_title: "โรงแรมในนครศรีธรรมราช | Sandbox Hotel จองตรงรับราคาพิเศษ",
-        meta_desc: "Sandbox Hotel โรงแรมบูติกในนครศรีธรรมราช ห้องพักกว้างขวาง ส่วนตัว เงียบสงบ จองตรงกับโรงแรมผ่านโทร LINE WhatsApp หรืออีเมล รับประกันราคาดีที่สุดและบริการส่วนตัว",
+        meta_desc: "Sandbox Hotel โรงแรมบูติกในนครศรีธรรมราช ห้องพักกว้างขวาง ส่วนตัว เงียบสงบ จองตรงกับโรงแรมผ่านโทรหรือ LINE รับประกันราคาดีที่สุดและบริการส่วนตัว",
         og_title: "โรงแรมบูติกในนครศรีธรรมราช | Sandbox Hotel",
         og_desc: "ที่พักส่วนตัวสำหรับผู้เดินทางที่ใส่ใจคุณภาพ ห้องพักเงียบสงบ Wi-Fi เร็ว ที่จอดรถ บริการใส่ใจทุกรายละเอียด จองตรงรับราคาพิเศษ",
         brand_location: "นครศรีธรรมราช ประเทศไทย",
@@ -3397,7 +3314,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offers_sub: "ที่พักที่ออกแบบมาเพื่อความสงบ ส่วนตัว และใส่ใจทุกรายละเอียด",
         offers_btn: "เช็คห้องว่าง",
         offer1_title: 'จองตรง ราคาพิเศษ บริการส่วนตัว',
-        offer1_desc: "ติดต่อโดยตรง ไร้นายหน้า รับราคาพิเศษและบริการส่วนตัวจากทีมงาน — ยืนยันรวดเร็วผ่าน LINE, WhatsApp หรือโทร",
+        offer1_desc: "ติดต่อโดยตรง ไร้นายหน้า รับราคาพิเศษและบริการส่วนตัวจากทีมงาน — ยืนยันรวดเร็วผ่าน LINE หรือโทร",
         offer2_title: 'ห้องพักส่วนตัว กว้างขวาง',
         offer2_desc: "ห้องพัก 28–32 ตร.ม. ออกแบบเพื่อความสงบและความเป็นส่วนตัว พร้อมโต๊ะทำงาน แอร์ ฝักบัวน้ำอุ่น และ Wi-Fi ความเร็วสูง",
         offer3_title: 'บรรยากาศเงียบสงบ เป็นส่วนตัว',
@@ -3553,7 +3470,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_btn: "ส่งคำขอ",
         faq_show_more: "ดูคำถามเพิ่มเติม",
         faq_q1: "จองให้เร็วที่สุดทำอย่างไร?",
-        faq_a1: "โทรหรือแชต (LINE/WhatsApp) แจ้งเช็คอิน เช็คเอาต์ จำนวนผู้เข้าพัก และประเภทห้องที่ต้องการ เราจะยืนยันห้องว่างและราคารวมให้",
+        faq_a1: "โทรหรือ LINE แจ้งเช็คอิน เช็คเอาต์ จำนวนผู้เข้าพัก และประเภทห้องที่ต้องการ เราจะยืนยันห้องว่างและราคารวมให้",
         faq_q2: "เวลาเช็คอินและเช็คเอาต์คือกี่โมง?",
         faq_a2: "เช็คอินได้ตั้งแต่ 14:00 และเช็คเอาต์ภายใน 11:00",
         faq_q3: "ต้องใช้อะไรตอนเช็คอิน?",
@@ -3573,8 +3490,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         back_to_top: "กลับขึ้นด้านบน",
         footer_lang: "ภาษา:",
 
-        sticky_title: "พร้อมจองไหม?",
-        sticky_sub: "แตะปุ่ม — ยืนยันไวที่สุดด้วยการโทรหรือส่งข้อความ",
+        sticky_title: "ต้องการความช่วยเหลือ?",
+        sticky_sub: "โทรหรือ LINE หาเราได้เลย",
 
         msg_title: "คำขอจอง – Sandbox Hotel",
         msg_checkin: "เช็คอิน",
@@ -3588,12 +3505,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "เปิด LINE แล้ว คัดลอก/วางข้อความ: "
       },
       en: {
-        meta_title: "Boutique Hotel in Nakhon Si Thammarat | Sandbox Hotel – Direct Booking",
-        meta_desc: "Sanctuary for discerning travelers in Nakhon Si Thammarat, Southern Thailand. Sandbox Hotel offers refined, spacious rooms with thoughtful service and direct booking by phone, LINE, or WhatsApp. Best rate guaranteed.",
-        og_title: "Private Boutique Retreat in Nakhon Si Thammarat | Sandbox Hotel",
-        og_desc: "Experience tranquil, thoughtfully designed accommodation in the heart of Nakhon Si Thammarat. Direct booking, personalized service, and authentic Southern Thai hospitality.",
+        meta_title: "Hotel in Nakhon Si Thammarat | Sandbox Hotel – Direct Booking",
+        meta_desc: "Sandbox Hotel — a comfortable, well-located hotel in Nakhon Si Thammarat, Southern Thailand. Spacious rooms, free Wi-Fi, parking, and friendly service. Book direct by phone or LINE for the best rate.",
+        og_title: "Sandbox Hotel in Nakhon Si Thammarat | Direct Booking",
+        og_desc: "Comfortable hotel in the heart of Nakhon Si Thammarat. Spacious rooms, friendly service, and easy direct booking by phone or LINE.",
         brand_location: "Nakhon Si Thammarat, Thailand",
-        nav_support: "Exclusive Direct Rates",
+        nav_support: "Best Rate Direct",
         nav_line_cta: "LINE",
 
         nav_book: "Book Now",
@@ -3605,12 +3522,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         nav_faq: "FAQ",
         nav_location: "Location",
 
-        hero_kicker: '<span class="kw a">Direct booking exclusive</span> <span class="sep-dot">•</span> <span class="kw">Personalized service</span> <span class="sep-dot">•</span> <span class="kw hot">Book now</span>',
-        hero_kicker_short: "Sandbox Hotel • Boutique Retreat",
-        hero_title: "Your private sanctuary<br>in Nakhon Si Thammarat",
-        hero_sub: 'Thoughtfully designed spaces • Premium Wi‑Fi • Private parking • Laundry • Climate control<br>Personalized attention: call or LINE us directly',
-        hero_sub_short: "Refined accommodation with thoughtful service for travelers who value tranquility, privacy, and authentic hospitality.",
-        hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Valid ID required • Tranquil environment',
+        hero_kicker: '<span class="kw a">Direct booking</span> <span class="sep-dot">•</span> <span class="kw">Friendly service</span> <span class="sep-dot">•</span> <span class="kw hot">Book now</span>',
+        hero_kicker_short: "Sandbox Hotel • Nakhon Si Thammarat",
+        hero_title: "Your comfortable base<br>in Nakhon Si Thammarat",
+        hero_sub: 'Spacious rooms • Free Wi‑Fi • Parking • Laundry • Air conditioning<br>Friendly service: call or LINE us directly',
+        hero_sub_short: "Spacious rooms with friendly service for every kind of traveller — easy direct booking by phone or LINE.",
+        hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Valid ID required',
 
         cta_request: "Check Availability",
         cta_call_line: "Call or LINE",
@@ -3619,28 +3536,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_open_map: "Open Map",
         hero_view_rooms: "Explore Rooms →",
         hero_review_count: "· 120 reviews on Google", // TODO: verify review count monthly
-        hero_best_rate: "Exclusive Direct Rates — book direct for personalized service &amp; best value",
-        trust_direct: "Direct Booking Exclusive",
-        trust_quiet: "Private Tranquil Rooms",
-        trust_wifi: "Premium Wi‑Fi",
-        trust_parking: "Secure Parking",
-        trust_support: "Personalized Service",
+        hero_best_rate: "Best rate when you book direct — no middleman, no mark-up",
+        trust_direct: "Direct Booking",
+        trust_quiet: "Quiet Rooms",
+        trust_wifi: "Free Wi‑Fi",
+        trust_parking: "Parking",
+        trust_support: "Friendly Service",
 
-        offers_title: "The Sandbox Experience",
-        offers_sub: "Thoughtfully curated accommodation for travelers who value tranquility, authenticity, and personal attention.",
+        offers_title: "Why Book Sandbox",
+        offers_sub: "A well-located, comfortable hotel with everything you need for a good stay.",
         offers_btn: "Check Availability",
-        offer1_title: "Direct Booking, Personalized Service",
-        offer1_desc: "Connect directly with our team — no intermediaries, exclusive rates, and personalized attention. Confirmed quickly via LINE, WhatsApp, or direct call.",
-        offer2_title: "Refined Private Spaces",
-        offer2_desc: "Generously sized 28–32 m² rooms designed for tranquility. Work desk, climate control, rain shower, and premium Wi-Fi in every room.",
-        offer3_title: "Tranquil Boutique Atmosphere",
-        offer3_desc: "Quiet-side room allocation available. Secure parking, laundry service, and attentive local team throughout your stay.",
-        offer4_title: "Flexible Stays, Exclusive Rates",
-        offer4_desc: "From single nights to extended stays — inquire about our preferential weekly and monthly rates for longer visits.",
+        offer1_title: "Book Direct, Save More",
+        offer1_desc: "Contact us directly — no booking fees, best available rate, and fast confirmation via LINE or phone call.",
+        offer2_title: "Spacious, Comfortable Rooms",
+        offer2_desc: "28–32 m² rooms with work desk, air conditioning, hot shower, and free Wi-Fi in every room.",
+        offer3_title: "Quiet & Convenient",
+        offer3_desc: "Quiet room allocation available on request. Parking, laundry service, and a helpful local team.",
+        offer4_title: "Flexible Stays",
+        offer4_desc: "From single nights to longer stays — ask about our weekly and monthly rates.",
         faq_cta_text: "Still have questions? We’re happy to help.",
 
-        book_title: "Reserve Your Sanctuary",
-        book_sub: "Share your <span class=\"kw a\">dates</span> and <span class=\"kw\">room preference</span> — we’ll respond personally with availability and your exclusive rate.",
+        book_title: "Reserve Your Room",
+                book_sub: "Share your <span class=\"kw a\">dates</span> and <span class=\"kw\">room preference</span> — we'll reply with availability and your rate.",
         book_callnow: "Call Now",
 
         lbl_checkin: "Check-in",
@@ -3672,19 +3589,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         stay_nights: "nights",
         stay_guests: "guests",
         stay_room: "Room",
-        best_rate_note: "Direct booking = fastest confirmation • Message your dates for today’s exact rate.",
+        best_rate_note: "Direct booking = fastest confirmation • Send your dates for today’s rate.",
         msg_nights: "Nights",
         line_opened_hint: "LINE opened.",
         line_clipboard_hint: "Message copied to clipboard.",
         line_clipboard_fail: "Tip: copy your message if needed.",
-        why_title: "Why Discerning Travelers Choose Sandbox",
-        why_sub: "Thoughtful design, authentic hospitality, and the ease of direct booking.",
-        why_1_t: "Generous private spaces",
-        why_1_d: "Refined rooms designed for rest, work, and contemplation.",
-        why_2_t: "Personalized attention",
-        why_2_d: "Direct communication with our team for tailored service.",
-        why_3_t: "Curated essentials",
-        why_3_d: "Premium Wi‑Fi, climate control, secure parking, laundry, and attentive care.",
+        why_title: "Why Guests Choose Sandbox",
+        why_sub: "Good rooms, friendly service, and easy direct booking.",
+        why_1_t: "Spacious rooms",
+        why_1_d: "Comfortable rooms with space to relax or work.",
+        why_2_t: "Quick confirmation",
+        why_2_d: "Call or message us with your dates — we reply fast.",
+        why_3_t: "Everything you need",
+        why_3_d: "Free Wi‑Fi, air conditioning, parking, laundry, and helpful staff.",
         btn_view_facebook: "Facebook",
         faq_q7: "Is smoking allowed?",
         faq_a7: "For guest comfort, please ask reception about the current smoking policy and designated areas.",
@@ -3699,25 +3616,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         book_tip: "Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.",
         book_guarantee: "Best Rate Guaranteed when booking direct — no booking fees, no mark-up.",
 
-        amen_title: "Curated Guest Amenities",
-        amen_sub: "Thoughtfully selected essentials for a refined and seamless stay.",
-        amen_wifi_title: "Premium Wi‑Fi",
-        amen_wifi_desc: "High-speed, reliable connectivity for seamless work and leisure.",
-        amen_parking_title: "Secure Parking",
-        amen_parking_desc: "Limited private on-site parking for registered guests.",
+        amen_title: "Guest Amenities",
+        amen_sub: "Everything you need for a comfortable stay.",
+        amen_wifi_title: "Free Wi‑Fi",
+        amen_wifi_desc: "High-speed internet throughout the hotel.",
+        amen_parking_title: "Parking",
+        amen_parking_desc: "On-site parking available for guests (limited spaces).",
         amen_ac_title: "Air Conditioning",
-        amen_ac_desc: "Individually controlled air conditioning for year-round comfort.",
-        amen_laundry_title: "Laundry Care",
-        amen_laundry_desc: "Professional laundry service available upon request.",
-        amen_coffee_title: "Coffee & Light Refreshments",
-        amen_coffee_desc: "Carefully selected beverages and snacks available on-site.",
-        amen_service_title: "Guest Support",
-        amen_service_desc: "Our local team is dedicated to ensuring a seamless experience.",
+        amen_ac_desc: "Individual air conditioning in every room.",
+        amen_laundry_title: "Laundry Service",
+        amen_laundry_desc: "Laundry service available on request.",
+        amen_coffee_title: "Coffee & Refreshments",
+        amen_coffee_desc: "Drinks and snacks available on-site.",
+        amen_service_title: "Helpful Staff",
+        amen_service_desc: "Our local team is happy to help with anything you need.",
 
         rooms_title: "Rooms",
-        rooms_sub: 'Compare our thoughtfully designed room types and select the perfect sanctuary for your stay.',
+        rooms_sub: 'Compare our room types and pick the best fit for your stay.',
         rooms_btn: "Check Availability",
-        rooms_fine: "Rates can change by date and season. Message your dates for the fastest exact price.",
+        rooms_fine: "Rates may vary by date and season. Message your dates for the exact price.",
 
         price_from: "From",
         price_ask: "Ask",
@@ -3729,8 +3646,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         room_standard_double_title: "Standard Double",
         room_standard_twin_btn: "Book Twin Room",
         room_standard_double_btn: "Book Double Room",
-        room_standard_twin_meta: '<span class="kw a">Refined Value</span> • 2 Twin Beds • 28–32 m² • Guests 1–2',
-        room_standard_double_meta: '<span class="kw a">Guest Favorite</span> • 1 Double Bed • 28–32 m² • Guests 1–2',
+        room_standard_twin_meta: '<span class="kw a">Good Value</span> • 2 Twin Beds • 28–32 m² • Guests 1–2',
+        room_standard_double_meta: '<span class="kw a">Popular Choice</span> • 1 Double Bed • 28–32 m² • Guests 1–2',
 
         opt_standard_twin: "Standard Twin",
         opt_standard_double: "Standard Double",
@@ -3740,28 +3657,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         tag_28_32_m: "28–32 m²",
         tag_guests_1_2: "Guests 1–2",
 
-        bullet_large_room: "Generously proportioned layout",
-        bullet_desk: "Dedicated work area with seating",
-        bullet_quiet_side: "Tranquil room placement (upon request)",
-        bullet_ac_hot_shower: "Climate control + rain shower",
-        bullet_comfort_double_bed: "Premium comfort double bed",
-        bullet_great_for_couples: "Ideal for couples seeking privacy",
-        bullet_fast_wifi: "Premium high-speed Wi-Fi",
-        room_twin_best_for: "<strong>Ideal for:</strong> Solo travelers, colleagues, or short business retreats",
-        room_double_best_for: "<strong>Ideal for:</strong> Couples or those seeking a private, comfortable sanctuary",
+        bullet_large_room: "Spacious room layout",
+        bullet_desk: "Work desk with seating",
+        bullet_quiet_side: "Quiet room on request",
+        bullet_ac_hot_shower: "Air conditioning + hot shower",
+        bullet_comfort_double_bed: "Comfortable double bed",
+        bullet_great_for_couples: "Great for couples or solo travellers",
+        bullet_fast_wifi: "Free high-speed Wi-Fi",
+        room_twin_best_for: "<strong>Good for:</strong> Solo travellers, colleagues, or short business trips",
+        room_double_best_for: "<strong>Good for:</strong> Couples or anyone wanting a comfortable double bed",
         room_type_label: "Room Type",
 
         gallery_title: "Gallery",
-        gallery_sub: "Explore our thoughtfully designed spaces through curated imagery.",
+        gallery_sub: "See our rooms and facilities.",
         gal_exterior_title: "Hotel Exterior",
-        gal_exterior_desc: "Your first impression — understated elegance and easy access.",
+        gal_exterior_desc: "Easy to find with convenient access.",
         gal_entrance_title: "Entrance & Arrival",
-        gal_entrance_desc: "A welcoming arrival experience, day or night.",
+        gal_entrance_desc: "A welcoming arrival, day or night.",
         gal_std_double_title: "Standard Double Room",
-        gal_std_double_desc: "Refined comfort with generous space — perfect for rest and contemplation.",
+        gal_std_double_desc: "Comfortable and spacious — a great place to rest.",
         gal_std_twin_title: "Standard Twin Room",
-        gal_std_twin_desc: "Twin accommodations ideal for colleagues or companions.",
-        gal_bathroom_desc: "Rain shower and premium amenities.",
+        gal_std_twin_desc: "Twin beds ideal for colleagues or friends.",
+        gal_bathroom_desc: "Hot shower and clean amenities.",
         gal_swipe_hint: "Swipe for more photos or use the arrows",
 
         svg_lobby_and_reception: "Lobby & Reception",
@@ -3786,7 +3703,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_btn: "Send Request",
         faq_show_more: "Show more questions",
         faq_q1: "How do I book the fastest?",
-        faq_a1: "Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.",
+        faq_a1: "Call or message us on LINE with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.",
         faq_q2: "What time is check-in and check-out?",
         faq_a2: "Check-in from 14:00 and check-out by 11:00.",
         faq_q3: "What do I need at check-in?",
@@ -3825,8 +3742,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         back_to_top: "Back to top",
         footer_lang: "Language:",
 
-        sticky_title: "Ready to book?",
-        sticky_sub: "Tap a button — fastest confirmation by message or call.",
+        sticky_title: "Need help?",
+        sticky_sub: "Call or LINE us for the fastest reply.",
 
         msg_title: "Booking request – Sandbox Hotel",
         msg_checkin: "Check-in",
@@ -3840,12 +3757,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "LINE opened. Paste message: "
       },
       zh: {
-        meta_title: "洛坤府精品酒店｜Sandbox Hotel 直订优享",
-        meta_desc: "Sandbox Hotel 洛坤府市中心精品居停，28-32㎡雅致客房，静谧私密，免费高速Wi-Fi，电话、LINE、WhatsApp直接预订，专享价格与贴心服务。",
-        og_title: "洛坤府精品酒店｜Sandbox Hotel 静谧私享",
-        og_desc: "洛坤市中心雅致居停，为注重品质的旅人打造静谧空间。直订专享优惠与贴心服务。",
+        meta_title: "洛坤府酒店｜Sandbox Hotel 直订",
+        meta_desc: "Sandbox Hotel 洛坤府市中心舒适酒店，28-32㎡宽敞客房，免费高速Wi-Fi，停车位，电话或LINE直接预订。",
+        og_title: "洛坤府酒店｜Sandbox Hotel 直订",
+        og_desc: "洛坤市中心舒适酒店，宽敞客房，便利位置。电话或LINE直订，价格优惠。",
         brand_location: "泰国 洛坤府（Nakhon Si Thammarat）",
-        nav_support: "直订专享优惠",
+        nav_support: "直订优惠",
         nav_line_cta: "LINE",
 
         nav_book: "立即预订",
@@ -3857,11 +3774,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         nav_faq: "常见问题",
         nav_location: "位置",
 
-        hero_kicker: '<span class="kw a">直订专享</span> <span class="sep-dot">•</span> <span class="kw">贴心服务</span> <span class="sep-dot">•</span> <span class="kw hot">立即预订</span>',
-        hero_kicker_short: "Sandbox Hotel • 精品静谧居停",
-        hero_title: "洛坤府的<br>静谧私享居所",
+        hero_kicker: '<span class="kw a">直订</span> <span class="sep-dot">•</span> <span class="kw">友好服务</span> <span class="sep-dot">•</span> <span class="kw hot">立即预订</span>',
+        hero_kicker_short: "Sandbox Hotel • 洛坤府",
+        hero_title: "洛坤府的<br>舒适住处",
         hero_sub: '雅致私密空间 • 高速 Wi‑Fi • 安全停车 • 洗衣服务 • 空调<br>专属服务：电话或 LINE 直接联系',
-        hero_sub_short: "雅致宽敞客房 • 便利位置 • 贴心细致服务，专为注重品质与静谧的旅人打造",
+        hero_sub_short: "宽敞客房 • 便利位置 • 友好服务，适合各类旅客",
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示有效证件 • 静谧环境',
 
         cta_request: "查看空房",
@@ -3878,20 +3795,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         trust_parking: "安全停车位",
         trust_support: "贴心专属服务",
 
-        offers_title: "Sandbox 的精品体验",
-        offers_sub: "为注重静谧、品质与贴心服务的旅人精心打造",
+        offers_title: "为什么选择 Sandbox",
+        offers_sub: "位置便利、舒适实用的酒店，满足您的住宿需求",
         offers_btn: "查询空房",
         offer1_title: '直订专享 贴心服务',
-        offer1_desc: "直接与我们团队联系，无中介，专享优惠价格与贴心服务 — LINE/WhatsApp/电话快速确认。",
-        offer2_title: '雅致私密空间',
+        offer1_desc: "直接与我们团队联系，无中介，专享优惠价格与贴心服务 — LINE或电话快速确认。",
+        offer2_title: '宽敞舒适客房',
         offer2_desc: "28–32㎡雅致客房，专为静谧而设计。配办公区、独立空调、雨淋花洒与高速Wi-Fi。",
-        offer3_title: '静谧精品氛围',
+        offer3_title: '安静便利',
         offer3_desc: "可按需安排安静朝向客房。安全停车、洗衣服务与细致周到的本地团队全程陪伴。",
         offer4_title: "灵活住宿 专享优惠",
         offer4_desc: "一晚起住或长期入住，长住可享周租/月租专属优惠价。",
         faq_cta_text: "还有问题？我们乐意为您解答。",
 
-        book_title: "预订您的静谧居所",
+        book_title: "预订房间",
         book_sub: '告知您的<span class="kw a">日期</span>与<span class="kw">房型需求</span>，我们会贴心回复专享优惠。',
         book_callnow: "立即致电",
 
@@ -3929,14 +3846,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "已打开LINE。",
         line_clipboard_hint: "消息已复制到剪贴板。",
         line_clipboard_fail: "提示：如需粘贴，可先复制消息。",
-        why_title: "懂品质的旅人选择 Sandbox",
-        why_sub: "精心设计，地道待客，直订便捷。",
-        why_1_t: "宽敞私密空间",
-        why_1_d: "雅致客房，适合休憩、办公或静心独处。",
-        why_2_t: "贴心专属服务",
-        why_2_d: "与我们团队直接沟通，专享个性化服务。",
-        why_3_t: "精选品质配套",
-        why_3_d: "高速Wi‑Fi、空调、安全停车、洗衣与细致关怀。",
+        why_title: "客人选择 Sandbox 的原因",
+        why_sub: "舒适客房，友好服务，直订方便。",
+        why_1_t: "宽敞客房",
+        why_1_d: "舒适客房，适合休息或办公。",
+        why_2_t: "快速确认",
+        why_2_d: "电话或LINE联系我们，快速回复。",
+        why_3_t: "设施齐全",
+        why_3_d: "免费Wi‑Fi、空调、停车、洗衣和热心员工。",
         btn_view_facebook: "Facebook",
         faq_q7: "可以吸烟吗？",
         faq_a7: "室内禁烟。如需吸烟，请向前台咨询指定吸烟区域。",
@@ -3951,11 +3868,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         book_tip: "提示：如晚到，请在备注中写预计到达时间，方便我们协助。",
         book_guarantee: "直订专享优惠价格保证 — 无中介费，无加价。",
 
-        amen_title: "精选住客配套",
-        amen_sub: "精心挑选的品质配套，打造雅致无忧的入住体验。",
-        amen_wifi_title: "高速优质Wi‑Fi",
+        amen_title: "住客设施",
+        amen_sub: "舒适住宿所需的一切。",
+        amen_wifi_title: "免费Wi‑Fi",
         amen_wifi_desc: "稳定高速网络，满足办公、娱乐与日常所需。",
-        amen_parking_title: "安全停车",
+        amen_parking_title: "停车位",
         amen_parking_desc: "数量有限的私人专属停车位，仅供住客使用。",
         amen_ac_title: "独立空调",
         amen_ac_desc: "独立控制空调系统，全年舒适温度。",
@@ -3963,11 +3880,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         amen_laundry_desc: "专业洗衣服务，按需提供。",
         amen_coffee_title: "咖啡与轻食",
         amen_coffee_desc: "精选饮品与轻食，店内供应。",
-        amen_service_title: "细致周到服务",
-        amen_service_desc: "本地团队全程用心，确保无忧体验。",
+        amen_service_title: "热心员工",
+        amen_service_desc: "本地团队乐意为您提供帮助。",
 
         rooms_title: "房型",
-        rooms_sub: '点击 <span class="kw hot">预订</span> 可在表单中预选雅致房型。',
+        rooms_sub: '点击 <span class="kw hot">预订</span> 选择房型。',
         rooms_btn: "查看空房",
         rooms_fine: "房价会随日期与季节变化。发送日期可获得准确报价。",
 
@@ -3981,8 +3898,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         room_standard_double_title: "标准大床房",
         room_standard_twin_btn: "预订双床房",
         room_standard_double_btn: "预订大床房",
-        room_standard_twin_meta: '<span class="kw a">雅致之选</span> • 2 张单人床 • 28–32 ㎡ • 1–2 人',
-        room_standard_double_meta: '<span class="kw a">宾客首选</span> • 1 张大床 • 28–32 ㎡ • 1–2 人',
+        room_standard_twin_meta: '<span class="kw a">实惠之选</span> • 2 张单人床 • 28–32 ㎡ • 1–2 人',
+        room_standard_double_meta: '<span class="kw a">热门之选</span> • 1 张大床 • 28–32 ㎡ • 1–2 人',
 
         opt_standard_twin: "标准双床房",
         opt_standard_double: "标准大床房",
@@ -3992,25 +3909,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         tag_28_32_m: "28–32 ㎡",
         tag_guests_1_2: "1–2 人",
 
-        bullet_large_room: "宽敞雅致布局",
+        bullet_large_room: "宽敞房间布局",
         bullet_desk: "专属办公区与座椅",
         bullet_quiet_side: "可按需安排静谧朝向",
         bullet_ac_hot_shower: "独立空调 + 雨淋花洒",
-        bullet_comfort_double_bed: "高品质舒适大床",
-        bullet_great_for_couples: "情侣私密首选",
+        bullet_comfort_double_bed: "舒适大床",
+        bullet_great_for_couples: "适合情侣或独自旅客",
         bullet_fast_wifi: "高速优质 Wi-Fi",
         room_twin_best_for: "<strong>适合：</strong>独自出行、同事结伴或短期商务住宿",
-        room_double_best_for: "<strong>适合：</strong>情侣或注重私密舒适的双人入住",
+        room_double_best_for: "<strong>适合：</strong>情侣或想要舒适大床的旅客",
         room_type_label: "房型",
 
         gallery_title: "相册",
-        gallery_sub: "滑动浏览精心拍摄的空间影像。",
+        gallery_sub: "查看我们的客房和设施。",
         gal_exterior_title: "酒店外观",
-        gal_exterior_desc: "第一印象——低调雅致，交通便利。",
+        gal_exterior_desc: "交通便利，容易找到。",
         gal_entrance_title: "入口与到店",
         gal_entrance_desc: "友好迎宾，日夜皆宜。",
         gal_std_double_title: "标准大床房",
-        gal_std_double_desc: "雅致舒适 + 宽敞空间，适合静心休憩。",
+        gal_std_double_desc: "舒适宽敞，适合休息。",
         gal_std_twin_title: "标准双床房",
         gal_std_twin_desc: "双床配置，适合同事或朋友同行。",
         gal_bathroom_desc: "雨淋花洒与高品质备品。",
@@ -4038,7 +3955,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_btn: "发送请求",
         faq_show_more: "查看更多问题",
         faq_q1: "怎样预订最快？",
-        faq_a1: "通过电话或留言（LINE/WhatsApp）告知入住/退房日期、人数和房型，我们会确认空房与总价。",
+        faq_a1: "通过电话或LINE告知入住/退房日期、人数和房型，我们会确认空房与总价。",
         faq_q2: "入住和退房时间？",
         faq_a2: "入住 14:00 起，退房 11:00 前。",
         faq_q3: "入住需要什么证件？",
@@ -4077,8 +3994,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         back_to_top: "返回顶部",
         footer_lang: "语言:",
 
-        sticky_title: "准备预订？",
-        sticky_sub: "点击按钮——电话或留言最快确认。",
+        sticky_title: "需要帮助？",
+        sticky_sub: "电话或LINE联系我们。",
 
         msg_title: "预订请求 – Sandbox Hotel",
         msg_checkin: "入住",
@@ -4335,21 +4252,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function wireContactButtons(){
       // Non-JS fallbacks: real links
-      const waFallback = `https://wa.me/${WHATSAPP_NUMBER_E164}`;
-      ["ctaWhatsApp","contactWhatsApp","stickyWA"].forEach(id=>{
-        const el = document.getElementById(id);
-        if(!el) return;
-        el.setAttribute("href", waFallback);
-        el.setAttribute("target", "_blank");
-        el.setAttribute("rel", "noopener");
-        el.addEventListener("click",(e)=>{
-          e.preventDefault();
-          const data = getFormData();
-          openWhatsApp(buildMessage(data), data, el);
-        });
-      });
-
-      ["ctaLine","contactLine","stickyLine"].forEach(id=>{
+      ["contactLine","stickyLine","stickyLineMini"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
         el.setAttribute("href", lineMessageUrl(t("msg_title") || "Booking request – Sandbox Hotel"));
@@ -4368,11 +4271,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         const data = getFormData();
         await persistBookingLead(data);
         openLine(buildMessage(data), data, form);
-      });
-      document.getElementById("sendWA").addEventListener("click", async ()=>{
-        const data = getFormData();
-        await persistBookingLead(data);
-        openWhatsApp(buildMessage(data), data, document.getElementById("sendWA"));
       });
       document.getElementById("sendEmail")?.addEventListener("click", async ()=>{
         const data = getFormData();
