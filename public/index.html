@@ -1,6 +1,8 @@
 <!doctype html>
 <html lang="th" data-theme="system" data-density="comfortable">
 <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Google Tag Manager (GTM fires GA4 tags — standalone gtag.js snippet removed to avoid duplicate tracking) -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -8,8 +10,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
 })(window,document,'script','dataLayer','GTM-MPNHZC8S');</script>
 <!-- End Google Tag Manager -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
   <meta name="color-scheme" content="dark light">
   <meta name="theme-color" content="#0B0C0F" media="(prefers-color-scheme: dark)" id="metaThemeColor">
@@ -29,7 +29,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" type="image/png" sizes="64x64" href="assets/images/logo/logo-64.png">
   <link rel="apple-touch-icon" sizes="256x256" href="assets/images/logo/logo-256.png">
   <link rel="manifest" href="site.webmanifest">
-  <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
 <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sandbox Hotel">
@@ -51,12 +50,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
   <!-- Preload hero -->
-  <link rel="preload" as="image" href="images/Sandbox-Hotel-Hero-Banner.webp" type="image/webp" fetchpriority="high">
+  <link rel="preload" as="image"
+        href="images/Sandbox-Hotel-Hero-Banner.webp"
+        imagesrcset="images/Sandbox-Hotel-Hero-Banner-720.webp 720w, images/Sandbox-Hotel-Hero-Banner.webp 1600w"
+        imagesizes="100vw"
+        type="image/webp"
+        fetchpriority="high">
   <!-- DNS prefetch for third-party origins -->
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
   <link rel="dns-prefetch" href="https://fonts.googleapis.com">
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
+  <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <!-- Google Fonts: non-blocking load to avoid render-blocking -->
@@ -342,12 +347,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .wrap{max-width:var(--max); margin:0 auto; padding:0 var(--gutter);}
     .section{margin: var(--sectionY) 0;}
     .skipLink{
-      position:absolute; left:-9999px; top:10px;
+      position:absolute; top:10px; left:10px;
       background:var(--card); color:var(--ink2);
       border:1px solid var(--line); border-radius:var(--radius-md);
       padding:10px 12px; z-index:999;
+      clip-path:inset(50%); width:1px; height:1px; overflow:hidden;
     }
-    .skipLink:focus{left:10px}
+    .skipLink:focus{clip-path:none}
 
     /* ---------- Cards ---------- */
     .card{
@@ -2105,7 +2111,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         "@type": "ListItem",
         "position": 1,
         "name": "Hotels in Nakhon Si Thammarat",
-        "item": "https://www.sandboxhotel.com/"
+        "item": "https://www.sandboxhotel.com/hotels/nakhon-si-thammarat/"
       },
       {
         "@type": "ListItem",
@@ -2236,13 +2242,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <nav class="navLinks" aria-label="Primary">
         <span class="navSupport hideMobile" data-i18n="nav_support">Best Rate Direct</span>
-        <a class="navLineBtn" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Contact us on LINE" data-analytics="line">
+        <a class="navLineBtn" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Contact us on LINE (opens in new tab)" data-analytics="line">
           <span class="navLineIcon" aria-hidden="true">💬</span><span data-i18n="nav_line_cta">LINE</span>
         </a>
         <a class="chip primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
 
         <details class="navGroup">
-          <summary aria-label="Open site navigation menu" role="button">
+          <summary aria-label="Open site navigation menu">
             <span class="navHamburger" aria-hidden="true">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M3 5h14M3 10h14M3 15h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
             </span>
@@ -2281,7 +2287,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <!-- Theme toggle -->
-            <button class="chip" id="themeToggle" type="button" aria-label="Theme" title="Theme">
+            <button class="chip" id="themeToggle" type="button" aria-label="Switch colour theme" title="Switch colour theme">
               <span id="themeIcon" aria-hidden="true">🖥️</span>
               <span id="themeLabel">System</span>
             </button>
@@ -2295,7 +2301,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div id="top"></div>
 
     <!-- HERO -->
-    <section class="section" aria-label="Hero">
+    <section class="section" aria-label="Welcome — Sandbox Hotel in Nakhon Si Thammarat">
       <div class="hero">
         <div class="heroInner">
           <div class="heroPanel">
@@ -2611,10 +2617,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="galCarousel" id="galCarousel" aria-roledescription="carousel" aria-label="Hotel photo carousel">
-          <div class="galViewport" id="galViewport" tabindex="0" aria-label="Carousel viewport">
+          <div class="galViewport" id="galViewport" tabindex="0" aria-label="Carousel viewport" aria-live="polite">
+            <span id="galStatus" class="sr-only"></span>
             <div class="galTrack" id="galTrack">
 
-              <figure class="galSlide">
+              <figure class="galSlide" role="group" aria-roledescription="slide" aria-label="Slide 1 of 6">
                 <div class="mediaWrap">
                   <picture>
                     <source
@@ -2630,7 +2637,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </figcaption>
               </figure>
 
-              <figure class="galSlide">
+              <figure class="galSlide" role="group" aria-roledescription="slide" aria-label="Slide 2 of 6">
                 <div class="mediaWrap">
                   <picture>
                     <source
@@ -2646,7 +2653,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </figcaption>
               </figure>
 
-              <figure class="galSlide">
+              <figure class="galSlide" role="group" aria-roledescription="slide" aria-label="Slide 3 of 6">
                 <div class="mediaWrap">
                   <picture>
                     <source
@@ -2662,7 +2669,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </figcaption>
               </figure>
 
-              <figure class="galSlide">
+              <figure class="galSlide" role="group" aria-roledescription="slide" aria-label="Slide 4 of 6">
                 <div class="mediaWrap">
                   <picture>
                     <source
@@ -2678,7 +2685,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </figcaption>
               </figure>
 
-              <figure class="galSlide">
+              <figure class="galSlide" role="group" aria-roledescription="slide" aria-label="Slide 5 of 6">
                 <div class="mediaWrap">
                   <picture>
                     <source
@@ -2694,7 +2701,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </figcaption>
               </figure>
 
-              <figure class="galSlide">
+              <figure class="galSlide" role="group" aria-roledescription="slide" aria-label="Slide 6 of 6">
                 <div class="mediaWrap">
                   <picture>
                     <source
@@ -2910,14 +2917,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="contactActions">
               <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Check Availability</a>
               <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-              <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE</a>
-              <a class="btn ghost" id="contactWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
+              <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn ghost" id="contactWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp<span class="sr-only"> (opens in new tab)</span></a>
             </div>
 
             <p class="fine contactSecondary">
               <a href="mailto:booking@sandboxhotel.com" data-i18n="cta_email" data-analytics="email">Email</a> •
               <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Map</a> •
-              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook</a>
+              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
             </p>
 
             <p class="fine contactMeta">
@@ -2935,7 +2942,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <iframe
               title="Sandbox Hotel location map"
               loading="lazy"
-              referrerpolicy="no-referrer-when-downgrade"
+              referrerpolicy="strict-origin"
+              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
               src="https://www.google.com/maps?q=CWMG%2BQJ%20Nakhon%20Si%20Thammarat%2C%20Thailand&output=embed">
             </iframe>
           </div>
@@ -2977,8 +2985,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="stickyActions">
         <a class="btn primary sm" href="#book" data-i18n="cta_request" data-analytics="book-now">Book Now</a>
         <a class="btn hot sm" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-        <a class="btn sm" id="stickyLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE</a>
-        <a class="btn sm" id="stickyWA" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
+        <a class="btn sm" id="stickyLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+        <a class="btn sm" id="stickyWA" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp<span class="sr-only"> (opens in new tab)</span></a>
       </div>
     </div>
   </div>
@@ -4204,6 +4212,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         thumbsWrap?.querySelectorAll(".galThumb").forEach((b,bi)=>{
           b.setAttribute("aria-current", bi === idx ? "true" : "false");
         });
+        const statusEl = document.getElementById("galStatus");
+        if (statusEl) statusEl.textContent = `Slide ${idx + 1} of ${slides.length}`;
       }
 
       function buildDots(){
@@ -4513,6 +4523,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       initRoomThumbs();
       initHeaderScroll();
     })();
+  </script>
+
+  <!-- Service Worker registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js').catch(function () {});
+      });
+    }
   </script>
 </body>
 </html>
