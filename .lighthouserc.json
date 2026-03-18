@@ -1,0 +1,24 @@
+{
+  "ci": {
+    "collect": {
+      "url": ["https://www.sandboxhotel.com/"],
+      "numberOfRuns": 1,
+      "settings": {
+        "chromeFlags": "--no-sandbox"
+      }
+    },
+    "assert": {
+      "preset": "lighthouse:no-pwa",
+      "assertions": {
+        "categories:performance":   ["warn",  { "minScore": 0.80 }],
+        "categories:accessibility": ["error", { "minScore": 0.90 }],
+        "largest-contentful-paint": ["warn",  { "maxNumericValue": 2500 }],
+        "cumulative-layout-shift":  ["warn",  { "maxNumericValue": 0.1  }],
+        "total-blocking-time":      ["warn",  { "maxNumericValue": 600  }]
+      }
+    },
+    "upload": {
+      "target": "temporary-public-storage"
+    }
+  }
+}

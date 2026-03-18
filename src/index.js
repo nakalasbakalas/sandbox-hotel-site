@@ -8,10 +8,13 @@ const JSON_HEADERS = {
   "cache-control": "no-store",
 };
 
-const CORS_HEADERS = {
-  "access-control-allow-origin": "*",
-  "access-control-allow-methods": "GET,POST,PUT,OPTIONS",
-  "access-control-allow-headers": "content-type",
+const ALLOWED_ORIGINS = new Set(["https://www.sandboxhotel.com", "https://sandboxhotel.com"]);
+
+const SECURITY_HEADERS = {
+  "x-content-type-options": "nosniff",
+  "x-frame-options": "SAMEORIGIN",
+  "referrer-policy": "strict-origin-when-cross-origin",
+  "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
 };
 
 export default {
@@ -24,7 +27,17 @@ export default {
       }
 
       if (request.method === "OPTIONS") {
-        return new Response(null, { status: 204, headers: CORS_HEADERS });
+        const origin = request.headers.get("origin") || "";
+        const allowedOrigin = ALLOWED_ORIGINS.has(origin) ? origin : "https://www.sandboxhotel.com";
+        return new Response(null, {
+          status: 204,
+          headers: {
+            "access-control-allow-origin": allowedOrigin,
+            "access-control-allow-methods": "GET,POST,PUT,OPTIONS",
+            "access-control-allow-headers": "content-type",
+            ...SECURITY_HEADERS,
+          },
+        });
       }
 
       if (url.pathname === "/admin") {
@@ -35,11 +48,11 @@ export default {
       }
 
       const response = await routeRequest(request, env);
-      return withCors(response);
+      return withCors(response, request.headers.get("origin") || "");
     } catch (error) {
       const status = error instanceof HttpError ? error.status : 500;
       const message = error instanceof HttpError ? error.message : "Internal server error";
-      return withCors(json({ ok: false, error: message }, status));
+      return withCors(json({ ok: false, error: message }, status), request.headers.get("origin") || "");
     }
   },
 };
@@ -53,15 +66,16 @@ class HttpError extends Error {
 
 async function fetchAsset(request, env, baseUrl) {
   try {
-    return await env.ASSETS.fetch(request);
+    const assetResponse = await env.ASSETS.fetch(request);
+    return addSecurityHeaders(assetResponse);
   } catch {
     const notFoundUrl = new URL("/404", baseUrl);
     try {
       const notFoundResponse = await env.ASSETS.fetch(new Request(notFoundUrl, request));
-      return new Response(notFoundResponse.body, {
+      return addSecurityHeaders(new Response(notFoundResponse.body, {
         status: 404,
         headers: notFoundResponse.headers,
-      });
+      }));
     } catch {
       return new Response("Not found", { status: 404 });
     }
@@ -87,7 +101,7 @@ async function routeRequest(request, env) {
 
   if (pathname === "/api/logout" && request.method === "POST") {
     return json({ ok: true }, 200, {
-      "set-cookie": `${COOKIE_NAME}=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0`,
+      "set-cookie": `${COOKIE_NAME}=; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age=0`,
     });
   }
 
@@ -213,9 +227,19 @@ function json(payload, status = 200, extraHeaders = {}) {
   });
 }
 
-function withCors(response) {
+function withCors(response, requestOrigin = "") {
   const headers = new Headers(response.headers);
-  Object.entries(CORS_HEADERS).forEach(([key, value]) => headers.set(key, value));
+  const allowedOrigin = ALLOWED_ORIGINS.has(requestOrigin) ? requestOrigin : "https://www.sandboxhotel.com";
+  headers.set("access-control-allow-origin", allowedOrigin);
+  headers.set("access-control-allow-methods", "GET,POST,PUT,OPTIONS");
+  headers.set("access-control-allow-headers", "content-type");
+  Object.entries(SECURITY_HEADERS).forEach(([key, value]) => headers.set(key, value));
+  return new Response(response.body, { status: response.status, headers });
+}
+
+function addSecurityHeaders(response) {
+  const headers = new Headers(response.headers);
+  Object.entries(SECURITY_HEADERS).forEach(([key, value]) => headers.set(key, value));
   return new Response(response.body, { status: response.status, headers });
 }
 
@@ -615,7 +639,7 @@ function createToken() {
 }
 
 function buildSessionCookie(token, expiresAt) {
-  return `${COOKIE_NAME}=${token}; Path=/; HttpOnly; SameSite=Lax; Expires=${new Date(expiresAt).toUTCString()}`;
+  return `${COOKIE_NAME}=${token}; Path=/; HttpOnly; Secure; SameSite=Lax; Expires=${new Date(expiresAt).toUTCString()}`;
 }
 
 function readCookie(cookieHeader, name) {
