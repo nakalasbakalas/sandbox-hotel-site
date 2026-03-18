@@ -27,7 +27,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="icon" href="assets/images/logo/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo-32.png">
   <link rel="icon" type="image/png" sizes="64x64" href="assets/images/logo/logo-64.png">
-  <link rel="apple-touch-icon" sizes="256x256" href="assets/images/logo/logo-256.png">
+  <link rel="apple-touch-icon" sizes="192x192" href="assets/images/logo/logo-icon-192.png">
   <link rel="manifest" href="site.webmanifest">
 <!-- Open Graph -->
   <meta property="og:type" content="website">
@@ -50,6 +50,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
   <!-- Preload hero -->
+    <link rel="preload" as="image"
+      href="assets/images/logo/logo-128.png"
+      imagesrcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w"
+      imagesizes="56px"
+      fetchpriority="high">
   <link rel="preload" as="image"
         href="images/Sandbox-Hotel-Hero-Banner.webp"
         imagesrcset="images/Sandbox-Hotel-Hero-Banner-720.webp 720w, images/Sandbox-Hotel-Hero-Banner.webp 1600w"
@@ -64,6 +69,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="preconnect" href="https://www.googletagmanager.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="assets/css/design-tokens.css">
   <!-- Google Fonts: non-blocking load to avoid render-blocking -->
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap">
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -72,13 +78,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <style>
     /* ==========================================================
-      Sandbox Hotel — Main Stylesheet
+      Sandbox Hotel � Main Stylesheet
       - Light/Dark follows device by default (prefers-color-scheme)
-      - Optional user override: System → Dark → Light (saved)
+      - Optional user override: System ? Dark ? Light (saved)
     ========================================================== */
 
     :root{
-      /* Brand palette – warm boutique hospitality */
+      /* Brand palette � warm boutique hospitality */
       --copper:#A8652A;
       --copper2:#C4884E;
       --champagne:#E8C9A0;
@@ -126,6 +132,18 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --display:"Fraunces", Georgia, serif;
 
       --focus: 0 0 0 3px rgba(168,101,42,.30);
+      --shadow-inner: inset 0 1px 0 rgba(255,255,255,.03);
+      --shadow-inner-strong: inset 0 1px 0 rgba(255,255,255,.04);
+      --shadow-inner-accent: inset 0 1px 0 rgba(255,255,255,.05);
+      --shadow-text: 0 1px 0 rgba(0,0,0,.16);
+      --shadow-xs: 0 2px 6px rgba(0,0,0,.08);
+      --shadow-card-light: 0 16px 34px rgba(59,43,22,.08), 0 6px 16px rgba(59,43,22,.04);
+      --shadow-card-hover: 0 12px 28px rgba(0,0,0,.18);
+      --shadow-header-scrolled: 0 4px 24px rgba(0,0,0,.12);
+      --shadow-header-scrolled-light: 0 4px 24px rgba(45,36,24,.06);
+      --shadow-accent-xs: 0 2px 8px rgba(168,101,42,.08);
+      --surface-hover-light: color-mix(in oklab, var(--card) 100%, var(--copper) 4%);
+      --surface-hover-light-soft: color-mix(in oklab, var(--card) 100%, var(--copper) 3%);
       --surfaceA: rgba(255,255,255,.025);
       --surfaceB: rgba(255,255,255,.04);
       --surfaceC: rgba(255,255,255,.06);
@@ -141,6 +159,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
         url("images/Sandbox-Hotel-Hero-Banner.webp") type("image/webp"),
         url("images/Sandbox-Hotel-Hero-Banner.png") type("image/png")
       );
+      --shadow-sm: var(--shadow3);
+      --shadow-md: var(--shadow2);
+      --shadow-lg: var(--shadow);
+      --shadow-brand-sm: 0 12px 22px rgba(168,101,42,.18);
+      --shadow-brand-md: 0 14px 24px rgba(0,0,0,.18), 0 12px 18px rgba(183,106,43,.10);
+      --shadow-brand-lg: 0 12px 28px rgba(0,0,0,.14), 0 8px 16px rgba(168,101,42,.12);
+      --shadow-brand-xl: 0 14px 32px rgba(0,0,0,.18), 0 10px 18px rgba(168,101,42,.16);
+      --shadow-hot-lg: 0 18px 40px rgba(0,0,0,.20), 0 18px 34px rgba(240,195,154,.12);
     }
     html[data-density="compact"]{
       --nav-h:54px;
@@ -186,54 +212,57 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* ---------- Theme tokens ---------- */
     html{color-scheme: light dark;}
     html[data-theme="dark"]{
-      --bg0:#0A0B0D;
+        box-shadow: var(--shadow-card-light);
       --bg1:#111318;
       --paper:#0E1014;
       --card:#15181C;
       --card2:#1B1F25;
-
+        box-shadow: var(--shadow-header-scrolled);
       --ink:#F3EFE7;
       --ink2:#FFFFFF;
       --muted:#CDC4B7;
       --muted2:#AAA092;
-      --line:rgba(255,255,255,.08);
+        box-shadow: var(--shadow-header-scrolled-light);
       --surfaceA: rgba(255,255,255,.025);
       --surfaceB: rgba(255,255,255,.04);
-      --surfaceC: rgba(255,255,255,.06);
+        background: var(--surface-hover-light);
       --surfaceD: rgba(255,255,255,.10);
       --controlBorder: rgba(255,255,255,.15);
       --controlBorderStrong: rgba(255,255,255,.22);
       --fieldBg: rgba(255,255,255,.035);
       --fieldBgFocus: rgba(255,255,255,.05);
-      --placeholderInk: rgba(206,199,188,.55);
+        box-shadow: var(--shadow-accent-xs);
 
       --softA:rgba(183,106,43,.14);
       --softB:rgba(209,139,80,.10);
-      --softHot:rgba(240,195,154,.12);
+        box-shadow: var(--shadow-inner);
 
       --shadow:0 28px 80px rgba(0,0,0,.42);
       --shadow2:0 18px 42px rgba(0,0,0,.28);
       --shadow3:0 10px 24px rgba(0,0,0,.18);
 
-      --uiGlass: rgba(14,16,20,.64);
+          box-shadow: var(--shadow-inner-strong), var(--shadow-card-hover);
       --uiGlass2: rgba(17,19,24,.76);
     }
+      html[data-theme="light"] .amenity-card:hover{
+        background: linear-gradient(180deg, var(--surface-hover-light), color-mix(in oklab, var(--surface-hover-light-soft) 82%, white));
+      }
     html[data-theme="light"]{
       --bg0:#ECE3D7;
       --bg1:#F5EEE4;
       --paper:#FBF6EE;
-      --card:#FFFDF9;
+        box-shadow: var(--shadow-inner-accent);
       --card2:#F7F1E8;
 
-      --ink:#28241F;
+        background: var(--surface-hover-light);
       --ink2:#171410;
       --muted:#5F564B;
-      --muted2:#756B60;
+          background: var(--surface-hover-light-soft);
       --line:rgba(45,36,24,.12);
       --surfaceA: rgba(168,101,42,.048);
       --surfaceB: rgba(168,101,42,.078);
       --surfaceC: rgba(168,101,42,.115);
-      --surfaceD: rgba(168,101,42,.18);
+        background: var(--surface-hover-light-soft);
       --controlBorder: rgba(45,36,24,.15);
       --controlBorderStrong: rgba(168,101,42,.28);
       --fieldBg: rgba(255,252,247,.96);
@@ -366,14 +395,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     html[data-theme="light"] .card{
       border-color: color-mix(in oklab, var(--line) 88%, rgba(168,101,42,.18));
-      box-shadow: 0 16px 34px rgba(59,43,22,.08), 0 6px 16px rgba(59,43,22,.04);
+      box-shadow: var(--shadow-card-light);
     }
     .card:before{
       content:"";
       position:absolute; inset:0;
       border-radius:inherit;
       pointer-events:none;
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      box-shadow: var(--shadow-inner);
       opacity:.3;
     }
     html[data-theme="light"] .card:before{opacity:.35}
@@ -405,14 +434,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     header.scrolled{
       border-bottom:1px solid rgba(255,255,255,.08);
       background: rgba(10,11,14,.82);
-      box-shadow: 0 4px 24px rgba(0,0,0,.12);
+      box-shadow: var(--shadow-header-scrolled);
       -webkit-backdrop-filter: blur(16px) saturate(130%);
       backdrop-filter: blur(16px) saturate(130%);
     }
     html[data-theme="light"] header.scrolled{
       background: rgba(255,253,248,.88);
       border-bottom-color: rgba(45,36,24,.08);
-      box-shadow: 0 4px 24px rgba(45,36,24,.06);
+      box-shadow: var(--shadow-header-scrolled-light);
     }
     .nav{
       max-width:var(--max); margin:0 auto;
@@ -592,7 +621,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .chip:hover{
       transform: translateY(-1px);
-      box-shadow: 0 4px 12px rgba(0,0,0,.15);
+      box-shadow: var(--shadow-xs);
       background: var(--surfaceC);
       border-color: var(--controlBorderStrong);
     }
@@ -600,7 +629,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-color: transparent;
       color:#fff;
       background: linear-gradient(135deg, rgba(168,101,42,.98), rgba(209,139,80,.92));
-      box-shadow: 0 12px 22px rgba(168,101,42,.18);
+      box-shadow: var(--shadow-brand-sm);
     }
 
     .chip.primary{
@@ -608,7 +637,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:white;
       border-radius:999px;
       background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92));
-      box-shadow: 0 14px 24px rgba(0,0,0,.18), 0 12px 18px rgba(183,106,43,.10);
+      box-shadow: var(--shadow-brand-md);
     }
 
     .btn{
@@ -648,8 +677,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border:none;
       color:white;
       background: linear-gradient(135deg, rgba(168,101,42,.96), rgba(196,136,78,.90) 55%, rgba(232,201,160,.82) 130%);
-      box-shadow: 0 12px 28px rgba(0,0,0,.14), 0 8px 16px rgba(168,101,42,.12);
-      text-shadow: 0 1px 0 rgba(0,0,0,.25);
+      box-shadow: var(--shadow-brand-lg);
+      text-shadow: var(--shadow-text);
     }
     .btn.secondary{
       border:1px solid var(--controlBorderStrong);
@@ -663,7 +692,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border:none;
       color:#140B06;
       background: linear-gradient(135deg, rgba(240,195,154,.98), rgba(209,139,80,.92));
-      box-shadow: 0 18px 40px rgba(0,0,0,.20), 0 18px 34px rgba(240,195,154,.12);
+      box-shadow: var(--shadow-hot-lg);
     }
     .btn.ghost{
       background: transparent;
@@ -737,7 +766,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .flagItem[aria-pressed="true"]{
       border-color:transparent;
       background: linear-gradient(135deg, rgba(168,101,42,.98), rgba(209,139,80,.92));
-      box-shadow: 0 12px 22px rgba(168,101,42,.18);
+      box-shadow: var(--shadow-brand-sm);
     }
     .flagItem > span[aria-hidden="true"]{font-size:18px}
     .sr-only{
@@ -874,7 +903,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .heroCTA{margin-top:2px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:10px}
     .heroCTA .btn{min-height:48px; padding:0 20px; font-size:14.5px; font-weight:800; letter-spacing:.01em}
-    .heroCTA .btn.primary{min-width:170px; box-shadow: 0 14px 32px rgba(0,0,0,.18), 0 10px 18px rgba(168,101,42,.16)}
+    .heroCTA .btn.primary{min-width:170px; box-shadow: var(--shadow-brand-xl)}
     .heroCTA .btn.secondary{
       background: rgba(255,255,255,.10);
       border-color: rgba(255,255,255,.20);
@@ -948,11 +977,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .offer:hover{
         transform:translateY(-2px);
         border-color:rgba(168,101,42,.24);
-        box-shadow: 0 12px 28px rgba(0,0,0,.12);
+        box-shadow: var(--shadow-sm);
         background: var(--surfaceB);
       }
     }
-    html[data-theme="light"] .offer:hover{background: var(--surfaceC)}
+    html[data-theme="light"] .offer:hover{
+      background: var(--surface-hover-light);
+      box-shadow: var(--shadow-sm);
+    }
     .offer .offerIcon{
       display:inline-flex;
       align-items:center;
@@ -963,7 +995,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border:1px solid rgba(168,101,42,.20);
       font-size:22px;
       margin-bottom:14px;
-      box-shadow: 0 2px 8px rgba(168,101,42,.08);
+      box-shadow: var(--shadow-accent-xs);
     }
     .offer b{display:block; color:var(--ink2); font-weight:800; font-size:16px; line-height:1.3; margin-bottom:8px}
     .offer p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.58}
@@ -1018,6 +1050,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .wide{grid-column:1/-1}
     .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:4px}
     .ctaRow .btn.primary{min-height:48px; font-size:15px; font-weight:800}
+    .ctaRow .fine{flex:1 1 100%}
     @media (max-width:980px){ .bookingShell{grid-template-columns:1fr} .formGrid{grid-template-columns:1fr} }
 
         /* ---------- Quick date presets ---------- */
@@ -1105,7 +1138,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       min-height: 100%;
       background: linear-gradient(180deg, var(--surfaceB), var(--surfaceA));
       border: 1px solid var(--line);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.03);
+      box-shadow: var(--shadow-inner);
       transition: transform .18s ease, border-color .18s ease, box-shadow .18s ease, background-color .18s ease;
       display:grid;
       grid-template-columns: 40px minmax(0, 1fr);
@@ -1118,13 +1151,16 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       .amenity-card:hover{
         transform: translateY(-2px);
         border-color: color-mix(in oklab, var(--accent) 25%, var(--border));
-        box-shadow: inset 0 1px 0 rgba(255,255,255,.04), 0 12px 28px rgba(0,0,0,.18);
+        box-shadow: var(--shadow-inner-strong), var(--shadow-card-hover);
       }
     }
-    .amenity-card:focus-visible{
-      outline: 2px solid color-mix(in oklab, var(--accent) 80%, white);
-      outline-offset: 3px;
-    }
+      html[data-theme="light"] .amenity-card:hover{
+        background: linear-gradient(180deg, var(--surface-hover-light), color-mix(in oklab, var(--surface-hover-light-soft) 82%, white));
+      }
+      .amenity-card:focus-visible{
+        outline: 2px solid color-mix(in oklab, var(--accent) 80%, white);
+        outline-offset: 3px;
+      }
     .amenity-icon{
       position: relative;
       z-index: 1;
@@ -1137,7 +1173,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       flex-shrink:0;
       background: color-mix(in oklab, var(--softA) 88%, rgba(255,255,255,.04));
       border: 1px solid rgba(183,106,43,.22);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.05);
+      box-shadow: var(--shadow-inner-accent);
     }
     .amenity-icon .glyph{
       font-weight: 700;
@@ -1476,9 +1512,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (hover:hover){
       .review:hover{
         transform:translateY(-2px);
-        box-shadow: 0 4px 16px rgba(0,0,0,.12);
+        box-shadow: var(--shadow-sm);
         border-color: rgba(168,101,42,.14);
       }
+    }
+    html[data-theme="light"] .review:hover{
+      background: var(--surface-hover-light);
+      box-shadow: var(--shadow-sm);
     }
     .review b{display:flex; align-items:center; justify-content:space-between; gap:10px; color:var(--ink2); font-size:14px; font-weight:800; line-height:1.3}
     .review p{margin:9px 0 0; color:var(--muted); font-size:13.5px; line-height:1.58}
@@ -1542,8 +1582,15 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     #faq summary::after{content:"+"; font-size:20px; font-weight:400; color:var(--muted2); transition:transform .2s ease; flex-shrink:0}
     #faq details[open] summary::after{content:"−"}
     #faq details p{margin:11px 0 0; color:var(--muted); font-size:13.5px; line-height:1.58}
-    #faq details[open]{background:var(--surfaceB); border-color:var(--controlBorderStrong); box-shadow: 0 4px 12px rgba(0,0,0,.06)}
+    #faq details[open]{background:var(--surfaceB); border-color:var(--controlBorderStrong); box-shadow: var(--shadow-xs)}
     html[data-theme="dark"] #faq details[open]{background:rgba(255,255,255,.05)}
+    @media (hover:hover){
+      html[data-theme="light"] #faq details:hover:not([open]){
+        background: var(--surface-hover-light-soft);
+        border-color: color-mix(in oklab, var(--line) 78%, var(--copper) 22%);
+        box-shadow: var(--shadow-xs);
+      }
+    }
     .faqMoreWrap{
       display:flex;
       justify-content:center;
@@ -1647,7 +1694,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
 
-    /* ---------- Sticky booking bar (mobile only) ---------- */
+    /* ---------- Sticky booking bar ---------- */
     .sticky{
       position:fixed;
       left:0; right:0; bottom:0;
@@ -1660,17 +1707,118 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-top:1px solid var(--line);
       box-shadow: 0 -18px 48px rgba(0,0,0,.20);
       display:none;
+      opacity:0;
+      pointer-events:none;
     }
-    html[data-compact="true"] .sticky{display:block}
-    .stickyInner{
+    html[data-sticky-visible="true"] .sticky{
+      display:block;
+      opacity:1;
+      pointer-events:auto;
+    }
+    .stickyVariant{display:none}
+    .stickyInner,
+    .stickyMini{
       max-width:var(--max); margin:0 auto;
-      display:flex; align-items:center; justify-content:space-between; gap:10px;
       padding:0 6px;
+    }
+    .stickyInner{
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
     }
     .stickyLeft{display:flex; flex-direction:column; gap:2px}
     .stickyLeft b{font-size:13px; color:var(--ink2)}
     .stickyLeft span{font-size:12px; color:var(--muted)}
     .stickyActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:flex-end}
+    .stickyActions.compact{
+      width:100%;
+      display:grid;
+      grid-template-columns:repeat(4, minmax(0, 1fr));
+      gap:8px;
+    }
+    .stickyActions.compact .btn{
+      min-height:46px;
+      padding:8px 10px;
+      flex-direction:column;
+      gap:4px;
+      line-height:1.05;
+      border-radius:var(--radius-md);
+    }
+    .stickyActionIcon{
+      font-size:16px;
+      line-height:1;
+      flex-shrink:0;
+    }
+    .stickyActionLabel{
+      font-size:11px;
+      letter-spacing:.02em;
+      text-wrap:balance;
+    }
+    .stickyMini{
+      display:flex;
+      align-items:center;
+      justify-content:flex-end;
+      gap:10px;
+      position:relative;
+    }
+    .stickyMiniBook{
+      min-height:46px;
+      padding:0 18px;
+      border-radius:999px;
+    }
+    .stickyMiniMenu{
+      position:relative;
+      margin:0;
+    }
+    .stickyMiniMenu summary{
+      list-style:none;
+    }
+    .stickyMiniMenu summary::-webkit-details-marker{display:none}
+    .stickyMiniToggle{
+      min-width:46px;
+      min-height:46px;
+      padding:0;
+      border-radius:999px;
+    }
+    .stickyMiniToggle span[aria-hidden="true"]{
+      font-size:20px;
+      line-height:1;
+    }
+    .stickyMiniMenu[open] .stickyMiniToggle{
+      border-color:var(--controlBorderStrong);
+      background:var(--surfaceC);
+    }
+    .stickyMiniPanel{
+      position:absolute;
+      right:0;
+      bottom:calc(100% + 10px);
+      display:grid;
+      gap:8px;
+      width:min(232px, calc(100vw - 32px));
+      padding:12px;
+      border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      background:var(--uiGlass2);
+      -webkit-backdrop-filter: blur(10px) saturate(150%);
+      backdrop-filter: blur(10px) saturate(150%);
+      box-shadow: var(--shadow3);
+    }
+    .stickyMiniMenu:not([open]) .stickyMiniPanel{display:none}
+    .stickyMiniPanel .btn{
+      width:100%;
+      justify-content:flex-start;
+      min-height:44px;
+    }
+    html[data-sticky-size="mini"] .stickyVariant.mini,
+    html[data-sticky-size="compact"] .stickyVariant.compact,
+    html[data-sticky-size="full"] .stickyVariant.full{display:flex}
+    html[data-sticky-size="mini"]{
+      --sticky-body-pad:88px;
+    }
+    html[data-sticky-size="compact"]{
+      --sticky-body-pad:104px;
+    }
+    html[data-sticky-size="full"]{
+      --sticky-body-pad:118px;
+    }
 
 
     /* ==========================================================
@@ -1690,9 +1838,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
     }
 
-    /* Ensure content isn't hidden behind the sticky bar on touch devices */
-    html[data-compact="true"] body{
-      padding-bottom: calc(96px + env(safe-area-inset-bottom));
+    /* Ensure content isn't hidden behind the sticky bar */
+    html[data-sticky-visible="true"] body{
+      padding-bottom: calc(var(--sticky-body-pad, 96px) + env(safe-area-inset-bottom));
     }
 
     /* Mobile/Tablet header: show ONLY brand + Book Now + hamburger */
@@ -1772,21 +1920,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-device="phone"] .iconBtn{ width:40px; height:40px; }
     html[data-device="phone"] #themeLabel{ display:none; }
 
-    /* Sticky bar: compact mode on phone */
-    html[data-device="phone"] .stickyInner{ justify-content:center; }
-    html[data-device="phone"] .stickyLeft{ display:none; }
-    html[data-device="phone"] .stickyActions{
-      width:100%;
-      justify-content:center;
+    /* Sticky bar size tuning */
+    html[data-sticky-size="compact"] .stickyActionLabel{display:none}
+    html[data-sticky-size="full"] .stickyActions{align-items:center}
+    html[data-sticky-size="full"] .stickyActions .btn{
+      min-height:42px;
     }
-    html[data-device="phone"] .stickyActions .btn{
-      flex: 1 1 auto;
-      min-height: 40px;
-      padding: 9px 10px;
-      border-radius: var(--radius-sm);
-    }
-    html[data-device="phone"] #stickyLine,
-    html[data-device="phone"] #stickyWA{ display:none !important; }
     html[data-device="phone"] .ctaRow{
       display:grid;
       grid-template-columns:1fr;
@@ -1809,8 +1948,24 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-device="tablet"] .hero{
       min-height: clamp(520px, 75vh, 820px);
     }
-    html[data-device="tablet"] .stickyLeft span{ display:none; }
     html[data-device="tablet"] .heroCTA .btn.ghost{ display:none !important; }
+
+    @media (min-width:560px){
+      html[data-sticky-size="compact"] .stickyActionLabel{display:inline}
+      .stickyActions.compact .btn{
+        flex-direction:row;
+        justify-content:center;
+        gap:8px;
+      }
+    }
+    @media (max-width:379px){
+      .stickyMini{
+        padding:0;
+      }
+      .stickyMiniBook{
+        flex:1 1 auto;
+      }
+    }
 
     /* Footer language strip (mobile/tablet only, since header is minimal) */
     .footerLang{
@@ -2009,9 +2164,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     @media (hover:hover){
       .roomCard:hover{
         transform: translateY(-3px);
-        box-shadow: 0 20px 48px rgba(0,0,0,.14), 0 8px 20px rgba(168,101,42,.06);
+        box-shadow: var(--shadow-md);
         border-color: color-mix(in oklab, var(--copper) 15%, var(--line));
       }
+    }
+    html[data-theme="light"] .roomCard:hover{
+      background: var(--surface-hover-light-soft);
+      box-shadow: var(--shadow-md);
     }
 
     /* Smoother link underline transitions */
@@ -2232,7 +2391,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Sandbox Hotel home">
         <div class="logo">
-          <img src="assets/images/logo/logo-128.png" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" decoding="async">
+          <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="56px" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" fetchpriority="high" decoding="async">
         </div>
         <div class="brandText">
           <span class="brandName">Sandbox Hotel</span>
@@ -2256,7 +2415,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="navPanel" role="group" aria-label="Site navigation">
             <div class="navPanelBrand">
               <div class="logo">
-                <img src="assets/images/logo/logo-64.png" alt="Sandbox Hotel logo" width="40" height="40" loading="lazy" decoding="async">
+                <img src="assets/images/logo/logo-64.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w" sizes="40px" alt="Sandbox Hotel logo" width="40" height="40" loading="lazy" decoding="async">
               </div>
               <div class="brandText">
                 <span class="navPanelBrandTitle">Sandbox Hotel</span>
@@ -2594,6 +2753,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="wide ctaRow">
               <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
               <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
+              <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
               <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible.</span>
             </div>
             <div class="wide bookGuarantee">
@@ -2952,7 +3112,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <footer>
           <div class="footerBrand">
             <div class="logo footerLogo">
-              <img src="assets/images/logo/logo-64.png" alt="Sandbox Hotel logo" width="44" height="44" loading="lazy" decoding="async">
+              <img src="assets/images/logo/logo-64.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w" sizes="44px" alt="Sandbox Hotel logo" width="44" height="44" loading="lazy" decoding="async">
             </div>
             <div class="footerBrandText">
               <span class="footerBrandName">Sandbox Hotel</span>
@@ -2977,7 +3137,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
   <!-- Sticky Bar -->
   <div class="sticky" role="region" aria-label="Quick booking bar">
-    <div class="stickyInner">
+    <div class="stickyInner stickyVariant full">
       <div class="stickyLeft">
         <b data-i18n="sticky_title">Ready to book?</b>
         <span data-i18n="sticky_sub">Tap a button — fastest confirmation by message or call.</span>
@@ -2988,6 +3148,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <a class="btn sm" id="stickyLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
         <a class="btn sm" id="stickyWA" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp<span class="sr-only"> (opens in new tab)</span></a>
       </div>
+    </div>
+    <div class="stickyInner stickyVariant compact">
+      <div class="stickyActions compact">
+        <a class="btn primary sm" href="#book" data-analytics="book-now" aria-label="Book now">
+          <span class="stickyActionIcon" aria-hidden="true">📅</span>
+          <span class="stickyActionLabel" data-i18n="nav_book">Book Now</span>
+        </a>
+        <a class="btn hot sm" href="tel:+66885783478" data-analytics="call" aria-label="Call Sandbox Hotel">
+          <span class="stickyActionIcon" aria-hidden="true">📞</span>
+          <span class="stickyActionLabel" data-i18n="btn_call">Call</span>
+        </a>
+        <a class="btn sm" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" aria-label="Open LINE chat">
+          <span class="stickyActionIcon" aria-hidden="true">💬</span>
+          <span class="stickyActionLabel">LINE</span>
+        </a>
+        <a class="btn sm" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp" aria-label="Open WhatsApp chat">
+          <span class="stickyActionIcon" aria-hidden="true">🟢</span>
+          <span class="stickyActionLabel">WhatsApp</span>
+        </a>
+      </div>
+    </div>
+    <div class="stickyMini stickyVariant mini">
+      <a class="btn primary stickyMiniBook" href="#book" data-analytics="book-now" data-i18n="nav_book">Book Now</a>
+      <details class="stickyMiniMenu">
+        <summary class="btn secondary stickyMiniToggle" aria-label="Open quick contact options">
+          <span aria-hidden="true">+</span>
+          <span class="sr-only">Open quick contact options</span>
+        </summary>
+        <div class="stickyMiniPanel">
+          <a class="btn hot sm" href="tel:+66885783478" data-analytics="call" data-i18n="btn_call">Call</a>
+          <a class="btn sm" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+          <a class="btn sm" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp<span class="sr-only"> (opens in new tab)</span></a>
+        </div>
+      </details>
     </div>
   </div>
 
@@ -3001,10 +3195,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // =========================
 
     
-    // ---------- Device display tuning (phone/tablet) ----------
+    // ---------- Device display tuning (phone/tablet + sticky sizing) ----------
     (function(){
       const root = document.documentElement;
       const sticky = document.querySelector(".sticky");
+      const stickyMiniMenu = document.querySelector(".stickyMiniMenu");
       let resizeT;
 
       function detectDevice(){
@@ -3016,12 +3211,27 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
 
         let device = "desktop";
+        let stickySize = "hidden";
         if(isTouch){
           device = (minSide <= 680) ? "phone" : "tablet";
+          if(w < 480){
+            stickySize = "mini";
+          } else if(w < 750){
+            stickySize = "compact";
+          } else {
+            stickySize = "full";
+          }
+        } else if(w >= 750){
+          stickySize = "full";
         }
         root.setAttribute("data-device", device);
         root.setAttribute("data-compact", device === "desktop" ? "false" : "true");
-        root.setAttribute("data-density", device === "desktop" ? "comfortable" : "compact");
+        root.setAttribute("data-density", stickySize === "mini" ? "ultra-compact" : (device === "desktop" ? "comfortable" : "compact"));
+        root.setAttribute("data-sticky-size", stickySize);
+        root.setAttribute("data-sticky-visible", stickySize === "hidden" ? "false" : "true");
+        if(stickyMiniMenu && stickySize !== "mini"){
+          stickyMiniMenu.removeAttribute("open");
+        }
       }
 
       detectDevice();
@@ -3034,7 +3244,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       // Hide sticky while typing (on-screen keyboard)
       document.addEventListener("focusin", (e)=>{
-        if(root.getAttribute("data-compact") === "true"){
+        if(root.getAttribute("data-sticky-visible") === "true"){
           const tag = e.target && e.target.tagName;
           if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT"){
             root.classList.add("kbdOpen");
@@ -3049,13 +3259,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
       }, true);
 
-      // Auto-hide sticky on downward scroll (compact devices only)
+      // Auto-hide sticky on downward scroll whenever the sticky bar is active.
       let lastY = window.scrollY || 0;
       let ticking = false;
 
       function updateSticky(){
-        const compact = root.getAttribute("data-compact") === "true";
-        if(!compact){
+        const stickyVisible = root.getAttribute("data-sticky-visible") === "true";
+        if(!stickyVisible){
           sticky.classList.remove("stickyHidden");
           lastY = window.scrollY || 0;
           return;

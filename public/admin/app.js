@@ -112,12 +112,26 @@ function t(key) {
   return copy[state.locale]?.[key] || copy.en[key] || key;
 }
 
+function renderBrandLockup(className = "") {
+  const extra = className ? ` ${className}` : "";
+  return `
+    <div class="brandLockup${extra}">
+      <div class="brandMark">
+        <img src="/assets/images/logo/logo-64.png" srcset="/assets/images/logo/logo-64.png 64w, /assets/images/logo/logo-128.png 128w" sizes="56px" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" decoding="async">
+      </div>
+      <div class="brandMeta">
+        <span class="brandEyebrow">Sandbox Hotel</span>
+        <span class="brandTitle">${t("appTitle")}</span>
+      </div>
+    </div>`;
+}
+
 function renderBootstrap() {
   app.innerHTML = `
     <div class="auth">
       <form class="card stack" id="bootstrapForm" style="width:min(460px,100%)">
+        ${renderBrandLockup("brandLockup--center")}
         <span class="badge">${t("bootstrap")}</span>
-        <h1>${t("appTitle")}</h1>
         <p class="muted">${t("subtitle")}</p>
         <label>${t("fullName")}<input name="name" required></label>
         <label>${t("email")}<input type="email" name="email" required></label>
@@ -137,8 +151,8 @@ function renderLogin() {
   app.innerHTML = `
     <div class="auth">
       <form class="card stack" id="loginForm" style="width:min(460px,100%)">
+        ${renderBrandLockup("brandLockup--center")}
         <span class="badge">${t("login")}</span>
-        <h1>${t("appTitle")}</h1>
         <p class="muted">${t("subtitle")}</p>
         <label>${t("email")}<input type="email" name="email" required></label>
         <label>${t("password")}<input type="password" name="password" required></label>
@@ -190,7 +204,8 @@ function renderApp() {
   app.innerHTML = `
     <div class="app-shell stack">
       <header class="card app-header">
-        <div class="stack">
+        <div class="appHeaderIdentity">
+          ${renderBrandLockup()}
           <span class="badge">${t("appTitle")}</span>
           <h1>${escapeHtml(state.settings?.name || "Sandbox Hotel")}</h1>
           <p class="muted">${t("subtitle")}</p>

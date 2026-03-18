@@ -1,0 +1,148 @@
+:root{
+  --copper:#A8652A;
+  --copper2:#C4884E;
+  --champagne:#E8C9A0;
+  --champagne2:#F2D9B8;
+  --bronze:#8B6914;
+  --olive:#5C6B55;
+  --slate:#4A5568;
+
+  --radius-xs:4px;
+  --radius-sm:6px;
+  --radius-md:10px;
+  --radius-lg:14px;
+  --radius-xl:18px;
+
+  --sans:"Manrope", "Segoe UI", sans-serif;
+  --display:"Fraunces", Georgia, serif;
+
+  --brand-shadow-sm:0 10px 24px rgba(0,0,0,.18);
+  --brand-shadow-md:0 18px 42px rgba(0,0,0,.28);
+  --brand-shadow-lg:0 28px 80px rgba(0,0,0,.42);
+}
+
+html{color-scheme: light dark;}
+
+html[data-theme="dark"]{
+  --bg0:#0A0B0D;
+  --bg1:#111318;
+  --paper:#0E1014;
+  --card:#15181C;
+  --card2:#1B1F25;
+  --ink:#F3EFE7;
+  --ink2:#FFFFFF;
+  --muted:#CDC4B7;
+  --muted2:#AAA092;
+  --line:rgba(255,255,255,.08);
+  --surfaceA:rgba(255,255,255,.025);
+  --surfaceB:rgba(255,255,255,.04);
+  --surfaceC:rgba(255,255,255,.06);
+  --surfaceD:rgba(255,255,255,.10);
+  --controlBorder:rgba(255,255,255,.15);
+  --controlBorderStrong:rgba(255,255,255,.22);
+  --fieldBg:rgba(255,255,255,.035);
+  --fieldBgFocus:rgba(255,255,255,.05);
+  --placeholderInk:rgba(206,199,188,.55);
+  --softA:rgba(183,106,43,.14);
+  --softB:rgba(209,139,80,.10);
+  --softHot:rgba(240,195,154,.12);
+  --shadow:var(--brand-shadow-lg);
+  --shadow2:var(--brand-shadow-md);
+  --shadow3:var(--brand-shadow-sm);
+  --uiGlass:rgba(14,16,20,.64);
+  --uiGlass2:rgba(17,19,24,.76);
+}
+
+html[data-theme="light"]{
+  --bg0:#FBF6EE;
+  --bg1:#F3ECE2;
+  --paper:#FFFDF8;
+  --card:#FFFCF7;
+  --card2:#F8F1E7;
+  --ink:#211C17;
+  --ink2:#17120D;
+  --muted:#645747;
+  --muted2:#7A6C5D;
+  --line:rgba(64,45,24,.12);
+  --surfaceA:rgba(168,101,42,.045);
+  --surfaceB:rgba(168,101,42,.06);
+  --surfaceC:rgba(168,101,42,.10);
+  --surfaceD:rgba(168,101,42,.14);
+  --controlBorder:rgba(70,50,27,.14);
+  --controlBorderStrong:rgba(70,50,27,.24);
+  --fieldBg:rgba(255,255,255,.86);
+  --fieldBgFocus:#FFFFFF;
+  --placeholderInk:rgba(88,66,40,.45);
+  --softA:rgba(168,101,42,.10);
+  --softB:rgba(196,136,78,.08);
+  --softHot:rgba(232,201,160,.22);
+  --shadow:0 28px 70px rgba(78,55,27,.14);
+  --shadow2:0 18px 38px rgba(78,55,27,.11);
+  --shadow3:0 10px 22px rgba(78,55,27,.09);
+  --uiGlass:rgba(255,250,243,.78);
+  --uiGlass2:rgba(255,251,246,.88);
+}
+
+@media (prefers-color-scheme: dark){
+  html[data-theme="system"]{
+    --bg0:#0A0B0D;
+    --bg1:#111318;
+    --paper:#0E1014;
+    --card:#15181C;
+    --card2:#1B1F25;
+    --ink:#F3EFE7;
+    --ink2:#FFFFFF;
+    --muted:#CDC4B7;
+    --muted2:#AAA092;
+    --line:rgba(255,255,255,.08);
+    --surfaceA:rgba(255,255,255,.025);
+    --surfaceB:rgba(255,255,255,.04);
+    --surfaceC:rgba(255,255,255,.06);
+    --surfaceD:rgba(255,255,255,.10);
+    --controlBorder:rgba(255,255,255,.15);
+    --controlBorderStrong:rgba(255,255,255,.22);
+    --fieldBg:rgba(255,255,255,.035);
+    --fieldBgFocus:rgba(255,255,255,.05);
+    --placeholderInk:rgba(206,199,188,.55);
+    --softA:rgba(183,106,43,.14);
+    --softB:rgba(209,139,80,.10);
+    --softHot:rgba(240,195,154,.12);
+    --shadow:var(--brand-shadow-lg);
+    --shadow2:var(--brand-shadow-md);
+    --shadow3:var(--brand-shadow-sm);
+    --uiGlass:rgba(14,16,20,.64);
+    --uiGlass2:rgba(17,19,24,.76);
+  }
+}
+
+@media (prefers-color-scheme: light){
+  html[data-theme="system"]{
+    --bg0:#FBF6EE;
+    --bg1:#F3ECE2;
+    --paper:#FFFDF8;
+    --card:#FFFCF7;
+    --card2:#F8F1E7;
+    --ink:#211C17;
+    --ink2:#17120D;
+    --muted:#645747;
+    --muted2:#7A6C5D;
+    --line:rgba(64,45,24,.12);
+    --surfaceA:rgba(168,101,42,.045);
+    --surfaceB:rgba(168,101,42,.06);
+    --surfaceC:rgba(168,101,42,.10);
+    --surfaceD:rgba(168,101,42,.14);
+    --controlBorder:rgba(70,50,27,.14);
+    --controlBorderStrong:rgba(70,50,27,.24);
+    --fieldBg:rgba(255,255,255,.86);
+    --fieldBgFocus:#FFFFFF;
+    --placeholderInk:rgba(88,66,40,.45);
+    --softA:rgba(168,101,42,.10);
+    --softB:rgba(196,136,78,.08);
+    --softHot:rgba(232,201,160,.22);
+    --shadow:0 28px 70px rgba(78,55,27,.14);
+    --shadow2:0 18px 38px rgba(78,55,27,.11);
+    --shadow3:0 10px 22px rgba(78,55,27,.09);
+    --uiGlass:rgba(255,250,243,.78);
+    --uiGlass2:rgba(255,251,246,.88);
+  }
+}

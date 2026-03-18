@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="th">
+<html lang="th" data-theme="system">
 <head>
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
@@ -10,8 +10,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <!-- End Google Tag Manager -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark light">
   <meta name="robots" content="noindex, nofollow">
   <title>Sandbox PMS</title>
+  <script>
+    (function(){
+      try{
+        var mode = localStorage.getItem("sbx_theme") || "system";
+        document.documentElement.setAttribute("data-theme", mode);
+      }catch(_e){
+        document.documentElement.setAttribute("data-theme", "system");
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="/assets/css/design-tokens.css">
   <link rel="stylesheet" href="/admin/styles.css">
 </head>
 <body data-density="compact">
