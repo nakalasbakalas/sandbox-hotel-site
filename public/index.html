@@ -2019,6 +2019,105 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px color-mix(in oklab, var(--copper) 55%, transparent);
     }
 
+    /* ============================================================
+       Cloud Agent Chat Widget
+       ============================================================ */
+    .agentFab{
+      position:fixed; bottom:calc(24px + env(safe-area-inset-bottom)); right:20px;
+      z-index:1100;
+      width:52px; height:52px; border-radius:50%;
+      background:var(--copper); color:#fff;
+      border:none; cursor:pointer;
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 16px rgba(0,0,0,.22);
+      transition:transform .18s ease, box-shadow .18s ease, background .18s ease;
+      -webkit-tap-highlight-color:transparent;
+    }
+    .agentFab:hover{ background:var(--copper2); transform:scale(1.07); box-shadow:0 6px 22px rgba(0,0,0,.30); }
+    .agentFab:active{ transform:scale(.96); }
+    .agentFab svg{ width:26px; height:26px; fill:none; stroke:currentColor; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+    .agentFab .agentFabClose{ display:none; }
+    .agentFab.open .agentFabIcon{ display:none; }
+    .agentFab.open .agentFabClose{ display:block; }
+    @media print{ .agentFab,.agentPanel{ display:none !important; } }
+
+    .agentPanel{
+      position:fixed; bottom:calc(84px + env(safe-area-inset-bottom)); right:20px;
+      z-index:1099;
+      width:clamp(300px,90vw,380px);
+      max-height:min(540px, calc(100dvh - 100px));
+      background:var(--card); border:1px solid var(--line);
+      border-radius:var(--radius-lg);
+      box-shadow:0 8px 32px rgba(0,0,0,.22);
+      display:flex; flex-direction:column;
+      overflow:hidden;
+      transform:translateY(16px) scale(.97); opacity:0; pointer-events:none;
+      transition:transform .22s ease, opacity .22s ease;
+    }
+    .agentPanel.open{ transform:translateY(0) scale(1); opacity:1; pointer-events:auto; }
+
+    .agentHeader{
+      display:flex; align-items:center; gap:10px;
+      padding:12px 14px; border-bottom:1px solid var(--line);
+      background:var(--copper); color:#fff; flex-shrink:0;
+    }
+    .agentHeaderAvatar{
+      width:32px; height:32px; border-radius:50%; background:rgba(255,255,255,.2);
+      display:flex; align-items:center; justify-content:center; flex-shrink:0;
+      font-size:16px;
+    }
+    .agentHeaderTitle{ flex:1; min-width:0; }
+    .agentHeaderTitle b{ font-size:14px; font-weight:700; display:block; }
+    .agentHeaderTitle span{ font-size:11px; opacity:.82; }
+
+    .agentMsgs{
+      flex:1; overflow-y:auto; padding:12px 14px;
+      display:flex; flex-direction:column; gap:10px;
+      scroll-behavior:smooth;
+    }
+    .agentMsgs::-webkit-scrollbar{ width:4px; }
+    .agentMsgs::-webkit-scrollbar-thumb{ background:var(--line); border-radius:4px; }
+
+    .agentMsg{
+      max-width:82%; padding:9px 12px; border-radius:var(--radius-md);
+      font-size:13.5px; line-height:1.55; word-break:break-word;
+    }
+    .agentMsg.bot{
+      background:var(--surfaceA); color:var(--ink);
+      border-bottom-left-radius:3px; align-self:flex-start;
+    }
+    .agentMsg.user{
+      background:var(--copper); color:#fff;
+      border-bottom-right-radius:3px; align-self:flex-end;
+    }
+    .agentMsg.typing{
+      background:var(--surfaceA); color:var(--muted); align-self:flex-start;
+      font-style:italic;
+    }
+
+    .agentFooter{
+      display:flex; gap:6px; padding:10px 12px;
+      border-top:1px solid var(--line); flex-shrink:0;
+      background:var(--card);
+    }
+    .agentInput{
+      flex:1; border:1px solid var(--line); border-radius:var(--radius-sm);
+      background:var(--bg0); color:var(--ink);
+      padding:8px 10px; font-size:13px; font-family:inherit;
+      resize:none; outline:none; min-height:36px; max-height:80px;
+      transition:border-color .15s;
+    }
+    .agentInput:focus{ border-color:var(--copper); }
+    .agentSendBtn{
+      width:36px; height:36px; flex-shrink:0;
+      background:var(--copper); color:#fff; border:none; border-radius:var(--radius-sm);
+      cursor:pointer; display:flex; align-items:center; justify-content:center;
+      transition:background .15s, opacity .15s;
+    }
+    .agentSendBtn:hover{ background:var(--copper2); }
+    .agentSendBtn:disabled{ opacity:.45; cursor:not-allowed; }
+    .agentSendBtn svg{ width:16px; height:16px; fill:none; stroke:currentColor; stroke-width:2.2; stroke-linecap:round; stroke-linejoin:round; }
+
   </style>
 
   <script type="application/ld+json">
@@ -2983,6 +3082,31 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </div>
 
+  <!-- ============================================================
+       Cloud Agent Chat Widget
+       ============================================================ -->
+  <button class="agentFab" id="agentFab" aria-label="Chat with us" aria-expanded="false" aria-controls="agentPanel">
+    <svg class="agentFabIcon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    <svg class="agentFabClose" aria-hidden="true" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+
+  <div class="agentPanel" id="agentPanel" role="dialog" aria-label="Hotel assistant chat" aria-modal="false">
+    <div class="agentHeader">
+      <div class="agentHeaderAvatar" aria-hidden="true">🏨</div>
+      <div class="agentHeaderTitle">
+        <b id="agentHeaderName">Sandbox Hotel</b>
+        <span id="agentHeaderSub">AI Assistant</span>
+      </div>
+    </div>
+    <div class="agentMsgs" id="agentMsgs" aria-live="polite" aria-label="Chat messages"></div>
+    <div class="agentFooter">
+      <textarea class="agentInput" id="agentInput" rows="1" placeholder="Ask us anything…" aria-label="Your message" maxlength="1000"></textarea>
+      <button class="agentSendBtn" id="agentSendBtn" aria-label="Send message">
+        <svg aria-hidden="true" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+      </button>
+    </div>
+  </div>
+
   <script>
     // =========================
     // CONFIG (EDIT THESE)
@@ -3187,6 +3311,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offer4_title: 'พักสั้นหรือพักยาว',
         offer4_desc: "พัก 1 คืนหรือพักยาว — สอบถามเรทรายสัปดาห์/รายเดือน",
         faq_cta_text: "ยังมีคำถาม? เรายินดีช่วยเหลือค่ะ",
+
+        agent_header_sub: "ผู้ช่วยอัจฉริยะ",
+        agent_placeholder: "สอบถามเรื่องห้องพัก ราคา หรือสิ่งอำนวยความสะดวก...",
+        agent_welcome: "สวัสดีครับ/ค่ะ 👋 ยินดีต้อนรับสู่ Sandbox Hotel ฉันเป็นผู้ช่วย AI ของโรงแรม ช่วยตอบคำถามเกี่ยวกับห้องพัก ราคา และการเดินทาง หากต้องการจองหรือสอบถามราคาจริง สามารถติดต่อเราผ่าน LINE หรือ WhatsApp ได้เลยครับ",
+        agent_error: "ขออภัย เกิดข้อผิดพลาด กรุณาติดต่อเราโดยตรงที่ +66 88-578-3478",
 
         book_title: "จองห้องพัก",
         book_sub: 'ส่ง <span class="kw a">วันเข้าพัก</span> + <span class="kw">ประเภทห้อง</span> แล้วเราจะตอบกลับเร็วที่สุด',
@@ -3420,6 +3549,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offer4_title: "Flexible Short & Long Stay",
         offer4_desc: "From one night to extended stays — ask about weekly or monthly rates.",
         faq_cta_text: "Still have questions? We’re happy to help.",
+
+        agent_header_sub: "AI Assistant",
+        agent_placeholder: "Ask about rooms, rates, or amenities…",
+        agent_welcome: "Hi there! 👋 Welcome to Sandbox Hotel. I’m your AI assistant — ask me anything about our rooms, location, amenities, or what to do in Nakhon Si Thammarat. For exact pricing and reservations, our team is ready via LINE or WhatsApp.",
+        agent_error: "Sorry, something went wrong. Please contact us directly at +66 88-578-3478.",
 
         book_title: "Reserve Your Stay",
         book_sub: "Send your <span class=\"kw a\">dates</span> and <span class=\"kw\">room preference</span> — we’ll confirm with your exact rate.",
@@ -3672,6 +3806,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offer4_title: "灵活短住或长住",
         offer4_desc: "一晚起住或长期入住，可咨询周租/月租优惠。",
         faq_cta_text: "还有问题？我们乐意为您解答。",
+
+        agent_header_sub: "AI 智能助手",
+        agent_placeholder: "请输入您关于房间、价格或设施的问题…",
+        agent_welcome: "您好！👋 欢迎来到 Sandbox Hotel！我是酒店的 AI 助手——可以回答您关于房间、位置、设施或当地景点的问题。如需查询具体价格或预订，请通过 LINE 或 WhatsApp 直接联系我们的工作人员。",
+        agent_error: "很抱歉，出现错误。请直接联系我们：+66 88-578-3478。",
 
         book_title: "预订您的住宿",
         book_sub: '发送 <span class="kw a">日期</span> + <span class="kw">房型</span>，我们会尽快确认。',
@@ -3927,6 +4066,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(twt && t("og_title")) twt.setAttribute("content", t("og_title"));
       const twd = document.getElementById("twitterDescription");
       if(twd && t("og_desc")) twd.setAttribute("content", t("og_desc"));
+      document.dispatchEvent(new CustomEvent("langChanged"));
     }
     function initLang(){
       const langBtn = document.getElementById("langBtn");
@@ -4501,6 +4641,117 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       checkScroll();
     }
 
+    // ---------- Cloud Agent Chat Widget ----------
+    function initAgentChat(){
+      const fab = document.getElementById("agentFab");
+      const panel = document.getElementById("agentPanel");
+      const msgs = document.getElementById("agentMsgs");
+      const input = document.getElementById("agentInput");
+      const sendBtn = document.getElementById("agentSendBtn");
+      const headerSub = document.getElementById("agentHeaderSub");
+      if(!fab || !panel || !msgs || !input || !sendBtn) return;
+
+      let isOpen = false;
+      let isLoading = false;
+      const history = [];
+
+      function updateAgentI18n(){
+        if(headerSub) headerSub.textContent = t("agent_header_sub") || "AI Assistant";
+        input.placeholder = t("agent_placeholder") || "Ask us anything…";
+      }
+
+      function appendMsg(role, text){
+        const el = document.createElement("div");
+        el.className = "agentMsg " + role;
+        el.textContent = text;
+        msgs.appendChild(el);
+        msgs.scrollTop = msgs.scrollHeight;
+        return el;
+      }
+
+      function setLoading(loading){
+        isLoading = loading;
+        sendBtn.disabled = loading;
+        input.disabled = loading;
+      }
+
+      async function sendMessage(){
+        const message = input.value.trim();
+        if(!message || isLoading) return;
+        input.value = "";
+        input.style.height = "auto";
+        appendMsg("user", message);
+        history.push({role:"user", content:message});
+
+        const typingEl = document.createElement("div");
+        typingEl.className = "agentMsg typing";
+        typingEl.textContent = "…";
+        msgs.appendChild(typingEl);
+        msgs.scrollTop = msgs.scrollHeight;
+        setLoading(true);
+
+        try{
+          const res = await fetch("/api/agent/chat", {
+            method:"POST",
+            headers:{"content-type":"application/json"},
+            body: JSON.stringify({message, history: history.slice(0,-1), lang: CURRENT_LANG})
+          });
+          typingEl.remove();
+          if(!res.ok) throw new Error("HTTP " + res.status);
+          const data = await res.json();
+          const reply = data.reply || (t("agent_error") || "Sorry, something went wrong.");
+          appendMsg("bot", reply);
+          history.push({role:"assistant", content:reply});
+        }catch(_e){
+          typingEl.remove();
+          appendMsg("bot", t("agent_error") || "Sorry, something went wrong. Please contact us at +66 88-578-3478.");
+          history.length = Math.max(0, history.length - 1);
+        }finally{
+          setLoading(false);
+          input.focus();
+        }
+      }
+
+      function openPanel(){
+        isOpen = true;
+        fab.classList.add("open");
+        fab.setAttribute("aria-expanded","true");
+        panel.classList.add("open");
+        if(msgs.children.length === 0){
+          const welcome = t("agent_welcome") || "Hi! How can I help you today?";
+          appendMsg("bot", welcome);
+        }
+        updateAgentI18n();
+        setTimeout(()=>input.focus(), 220);
+      }
+
+      function closePanel(){
+        isOpen = false;
+        fab.classList.remove("open");
+        fab.setAttribute("aria-expanded","false");
+        panel.classList.remove("open");
+      }
+
+      fab.addEventListener("click",()=>{ if(isOpen) closePanel(); else openPanel(); });
+
+      sendBtn.addEventListener("click", sendMessage);
+
+      input.addEventListener("keydown",(e)=>{
+        if(e.key === "Enter" && !e.shiftKey){ e.preventDefault(); sendMessage(); }
+      });
+
+      input.addEventListener("input",()=>{
+        input.style.height = "auto";
+        input.style.height = Math.min(input.scrollHeight, 80) + "px";
+      });
+
+      document.addEventListener("keydown",(e)=>{
+        if(e.key === "Escape" && isOpen) closePanel();
+      });
+
+      document.addEventListener("langChanged", updateAgentI18n);
+    }
+
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
@@ -4512,6 +4763,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       initGalleryCarousel();
       initRoomThumbs();
       initHeaderScroll();
+      initAgentChat();
     })();
   </script>
 </body>

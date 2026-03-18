@@ -95,6 +95,10 @@ async function routeRequest(request, env) {
     return ingestBookingLead(request, env.DB, null);
   }
 
+  if (pathname === "/api/agent/chat" && request.method === "POST") {
+    return agentChat(request, env);
+  }
+
   const session = await requireSession(request, env);
 
   if (pathname === "/api/session" && request.method === "GET") {
@@ -237,6 +241,84 @@ function requireFields(payload, fields) {
 
 function requireRole(session, roles) {
   if (!roles.includes(session.role)) throw new HttpError(403, "Forbidden");
+}
+
+const AGENT_SYSTEM_PROMPT = `You are a helpful hotel assistant for Sandbox Hotel, a boutique hotel located in Nakhon Si Thammarat, Southern Thailand.
+
+Key facts about the hotel:
+- Name: Sandbox Hotel
+- Location: Nakhon Si Thammarat, Southern Thailand
+- Check-in time: 14:00 | Check-out time: 11:00
+- Room types:
+  * Standard Twin: Two twin beds, 28–32 m², max 2 guests, air conditioning, hot shower, fast Wi-Fi
+  * Standard Double: One double bed, 28–32 m², max 2 guests, air conditioning, hot shower, fast Wi-Fi
+- Amenities: Free Wi-Fi, free parking, laundry service, air conditioning, hot shower, quiet rooms available on request
+- Booking channels: Direct booking via phone, LINE, or WhatsApp (fastest confirmation)
+  * Phone / WhatsApp: +66 88-578-3478
+  * LINE: https://line.me/ti/p/uc4BCpHCQ4
+  * Email: contact@sandboxhotel.com
+- Rates: Starting from 1,200 THB per night. Exact rates depend on dates and season — guests should contact the hotel directly for current pricing.
+- Languages: Thai, English, Simplified Chinese
+- The hotel is ideal for both short city stays and multi-day trips exploring Southern Thailand.
+- Nearby attractions include temples, local markets, and coastal areas. Nakhon Si Thammarat is a well-connected hub with good transport links.
+
+Guidelines:
+- Always respond in the same language the guest uses (Thai, English, or Chinese).
+- Be warm, helpful, and professional — match the style of a boutique hospitality brand.
+- For availability and exact pricing, always direct guests to contact the hotel directly via phone, LINE, or WhatsApp.
+- Do not invent availability, specific room numbers, or precise nightly rates — use the starting-from figures only.
+- Keep answers concise and practical.`;
+
+async function agentChat(request, env) {
+  const payload = await parseJson(request);
+  const message = String(payload.message || "").trim();
+  if (!message) throw new HttpError(400, "Missing field: message");
+  if (message.length > 1000) throw new HttpError(400, "Message too long");
+
+  const history = Array.isArray(payload.history) ? payload.history.slice(-10) : [];
+  const safeHistory = history
+    .filter((m) => m && (m.role === "user" || m.role === "assistant") && typeof m.content === "string")
+    .map((m) => ({ role: m.role, content: String(m.content).slice(0, 2000) }));
+
+  if (!env.OPENAI_API_KEY) {
+    return json({
+      ok: true,
+      reply: "Thank you for your message! Our AI assistant is not yet configured. Please contact us directly:\n\n📞 +66 88-578-3478\n💬 LINE: line.me/ti/p/uc4BCpHCQ4\n💬 WhatsApp: +66 88-578-3478\n\nWe'll be happy to help with bookings and any questions about your stay.",
+    });
+  }
+
+  const messages = [
+    { role: "system", content: AGENT_SYSTEM_PROMPT },
+    ...safeHistory,
+    { role: "user", content: message },
+  ];
+
+  const response = await fetch("https://api.openai.com/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+      authorization: `Bearer ${env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: "gpt-4o-mini",
+      messages,
+      max_tokens: 512,
+      temperature: 0.7,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorText = await response.text().catch(() => "unknown error");
+    console.error("OpenAI API error:", response.status, errorText);
+    return json({
+      ok: true,
+      reply: "I'm having trouble connecting right now. Please contact us directly:\n\n📞 +66 88-578-3478\n💬 LINE or WhatsApp: +66 88-578-3478",
+    });
+  }
+
+  const data = await response.json();
+  const reply = data?.choices?.[0]?.message?.content?.trim() || "Sorry, I could not generate a response. Please contact us directly at +66 88-578-3478.";
+  return json({ ok: true, reply });
 }
 
 async function bootstrap(request, env) {

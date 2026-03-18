@@ -23,6 +23,7 @@ The Sandbox Hotel codebase contains **two distinct backend systems** that serve 
 - Handles server-side logic via a Cloudflare Worker (booking form submissions, API endpoints, PMS backend API)
 - Connects to **Cloudflare D1** (SQLite-compatible serverless database) for operational data
 - Deployed globally via Cloudflare's edge network
+- Hosts the **Cloud Agent** AI chat endpoint (`/api/agent/chat`) for guest-facing AI assistance
 
 ### Key configuration (`wrangler.jsonc`)
 
@@ -71,7 +72,51 @@ public/
 
 ---
 
-## 2. Python PMS — Separate System (Not the Deployed Backend)
+## 2. Cloud Agent — AI Guest Assistant
+
+**Endpoint**: `POST /api/agent/chat` (public, no authentication required)
+**Powered by**: OpenAI GPT-4o-mini (configured via `OPENAI_API_KEY` Worker secret)
+**Frontend**: Floating chat widget embedded in `public/index.html`
+
+### What it does
+
+- Provides an AI-powered chat interface for hotel guests on the main website
+- Answers questions about rooms, amenities, location, pricing, and local attractions
+- Responds in the guest's language (Thai, English, or Simplified Chinese)
+- Directs guests to direct booking channels (LINE, WhatsApp, phone) for availability and reservations
+- Falls back gracefully when the API key is not configured
+
+### API contract
+
+**Request**:
+```json
+{
+  "message": "What rooms do you have?",
+  "history": [{"role": "user", "content": "..."}, {"role": "assistant", "content": "..."}],
+  "lang": "en"
+}
+```
+
+**Response**:
+```json
+{
+  "ok": true,
+  "reply": "We offer two room types: Standard Twin and Standard Double..."
+}
+```
+
+### Configuration
+
+Add your OpenAI API key as a Cloudflare Worker secret:
+```bash
+npx wrangler secret put OPENAI_API_KEY
+```
+
+If `OPENAI_API_KEY` is not set, the agent returns a helpful fallback message with direct contact information.
+
+---
+
+## 3. Python PMS — Separate System (Not the Deployed Backend)
 
 **Location**: `packages/pms/`
 **Stack**: Python + Flask + SQLAlchemy + PostgreSQL
@@ -102,12 +147,12 @@ The actual active integration depends on runtime configuration (environment vari
 
 ---
 
-## 3. Repository Structure
+## 4. Repository Structure
 
 ```
 sandbox-hotel-site/
 ├── src/
-│   └── index.js           ← DEPLOYED: Cloudflare Worker (production backend)
+│   └── index.js           ← DEPLOYED: Cloudflare Worker (production backend + cloud agent)
 ├── public/                ← DEPLOYED: Static site served via Cloudflare Pages
 ├── packages/
 │   └── pms/               ← SEPARATE: Python/Flask PMS (Render deployment)
@@ -119,7 +164,7 @@ sandbox-hotel-site/
 
 ---
 
-## 4. Environment Variables
+## 5. Environment Variables
 
 ### Cloudflare Workers (production)
 
@@ -129,7 +174,8 @@ npx wrangler secret put SECRET_NAME
 ```
 
 Key secrets expected by `src/index.js`:
-- Review `src/index.js` for all `env.VARNAME` references to get the full list
+- `OPENAI_API_KEY` — Required for the cloud agent AI chat feature
+- Review `src/index.js` for all other `env.VARNAME` references
 
 ### Python PMS (Render)
 
@@ -142,7 +188,7 @@ Key variables include: `DATABASE_URL`, `SECRET_KEY`, `FLASK_ENV`, notification s
 
 ---
 
-## 5. Data Stores
+## 6. Data Stores
 
 | Store | Used By | Purpose |
 |-------|---------|---------|
@@ -151,19 +197,19 @@ Key variables include: `DATABASE_URL`, `SECRET_KEY`, `FLASK_ENV`, notification s
 
 ---
 
-## 6. Deployment Summary
+## 7. Deployment Summary
 
 | Component | Platform | Deploy Command |
 |-----------|----------|----------------|
-| Website + Worker | Cloudflare | `npx wrangler deploy` |
+| Website + Worker + Cloud Agent | Cloudflare | `npx wrangler deploy` |
 | Python PMS | Render | Git push to Render-connected branch |
 
 ---
 
-## 7. Development
+## 8. Development
 
 ```bash
-# Start Cloudflare dev server (Worker + static site)
+# Start Cloudflare dev server (Worker + static site + cloud agent)
 npx wrangler dev
 
 # Start Python PMS locally
