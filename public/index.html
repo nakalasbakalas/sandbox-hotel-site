@@ -1181,22 +1181,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     #rooms .head p{max-width:540px}
     #rooms .stack{
       display:grid;
-      grid-template-columns:1fr;
-      gap:clamp(28px, 3.2vw, 40px);
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:14px;
       align-items:stretch;
     }
+    @media (max-width:980px){ #rooms .stack{grid-template-columns:1fr} }
 
-    .roomCard{height:100%; min-width:0; border-width:0; background:transparent; box-shadow:none; overflow:visible}
-    .roomCardInner{display:grid; grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr); gap:clamp(24px, 2.8vw, 36px); align-items:start}
-    @media (max-width:980px){ .roomCardInner{grid-template-columns:1fr; gap:20px} }
+    .roomCard{height:100%; min-width:0; border-width:1.5px}
+    .roomCardInner{display:flex; flex-direction:column}
 
-    .roomMedia{position:relative; overflow:hidden; background:transparent; border:none; border-radius:var(--radius)}
+    .roomMedia{position:relative; overflow:hidden; background:var(--surfaceA); border-bottom:1px solid var(--line); border-radius:0}
     .roomMediaLink{display:block; color:inherit; text-decoration:none}
     .roomMediaLink:focus-visible{box-shadow: var(--focus)}
 
     /* Room hero image */
-    .roomHeroWrap{position:relative; border-radius:var(--radius); overflow:hidden; border:1px solid var(--line); background:var(--surfaceA); box-shadow:var(--shadow3)}
-    .roomHeroWrap .mediaImg{aspect-ratio:16/10; object-fit:cover; transition:opacity .4s ease}
+    .roomHeroWrap{position:relative; overflow:hidden; background:var(--surfaceA)}
+    .roomCard .roomHeroWrap .mediaImg{aspect-ratio:16/10; object-fit:cover; transition:opacity .4s ease}
 
     /* Room thumbnail strip */
     .roomThumbs{
@@ -1227,7 +1227,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       min-width:0;
       display:flex;
       flex-direction:column;
-      gap:16px;
+      gap:12px;
+      padding:16px;
     }
     .roomType{
       display:inline-block;
@@ -1238,10 +1239,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:var(--copper);
       margin-bottom:2px;
     }
-    .roomTop h3{
+    .roomBody h3{
       margin:0;
-      font-size:clamp(26px, 2.8vw, 34px);
-      letter-spacing:-.03em;
+      font-size:clamp(21px, 2.1vw, 24px);
+      letter-spacing:-.025em;
       line-height:1.1;
       color:var(--ink2);
       font-family:var(--display);
@@ -1279,27 +1280,30 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .roomAmenities{
       display:grid;
       grid-template-columns:1fr 1fr;
-      gap:10px 16px;
+      gap:8px 12px;
+      list-style:none;
+      padding:0;
+      margin:0;
     }
     .roomAmenity{
       display:flex;
       align-items:center;
-      gap:10px;
-      font-size:13.5px;
+      gap:8px;
+      font-size:13px;
       color:var(--muted);
       line-height:1.35;
     }
     .roomAmenity svg{
       flex-shrink:0;
-      width:18px; height:18px;
+      width:16px; height:16px;
       color:var(--copper2);
       opacity:.85;
     }
 
     .priceBox{text-align:left; margin-top:4px}
-    .priceBox .fine{font-size:13px; color:var(--copper2); font-weight:600}
-    .roomActions{margin-top:4px; display:flex; flex-wrap:wrap; gap:10px; align-items:center}
-    .roomActions .btn.primary{min-height:50px; font-size:15px; padding:0 28px; border-radius:12px; letter-spacing:.01em}
+    .priceBox .fine{font-size:12px; color:var(--copper2); font-weight:600}
+    .roomActions{margin-top:auto; padding-top:8px; display:flex; flex-wrap:wrap; gap:10px; align-items:center}
+    .roomActions .btn.primary{min-height:46px; font-size:14.5px; padding:0 20px; border-radius:10px; letter-spacing:.01em}
 
     .roomDividerLine{
       border:none;
@@ -2286,7 +2290,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="stack" aria-label="Room options">
 
           <!-- Standard Twin -->
-          <article class="roomCard">
+          <article class="card roomCard">
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="roomHeroWrap">
@@ -2294,8 +2298,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <picture>
                       <source type="image/webp"
                         srcset="assets/images/rooms/twin-room-sandbox-1-400.webp 400w, assets/images/rooms/twin-room-sandbox-1.webp 800w"
-                        sizes="(max-width:980px) 100vw, 55vw">
-                      <img class="mediaImg roomHeroImg" id="twinHero" src="assets/images/rooms/twin-room-sandbox-1.png" srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w" sizes="(max-width:980px) 100vw, 55vw" alt="Standard Twin bedroom with two single beds and a work area" loading="lazy" decoding="async" width="800" height="500">
+                        sizes="(max-width:980px) 100vw, 50vw">
+                      <img class="mediaImg roomHeroImg" id="twinHero" src="assets/images/rooms/twin-room-sandbox-1.png" srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w" sizes="(max-width:980px) 100vw, 50vw" alt="Standard Twin bedroom with two single beds and a work area" loading="lazy" decoding="async" width="800" height="500">
                     </picture>
                   </div>
                 </div>
@@ -2304,19 +2308,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data-full="assets/images/rooms/twin-room-sandbox-1.png"
                     data-srcset="assets/images/rooms/twin-room-sandbox-1-400.png 400w, assets/images/rooms/twin-room-sandbox-1.png 800w"
                     data-webp="assets/images/rooms/twin-room-sandbox-1-400.webp 400w, assets/images/rooms/twin-room-sandbox-1.webp 800w">
-                    <img src="assets/images/rooms/twin-room-sandbox-1-400.webp" alt="Twin room main" loading="lazy" decoding="async" width="160" height="120">
+                    <img src="assets/images/rooms/twin-room-sandbox-1-400.png" alt="Twin room main" loading="lazy" decoding="async" width="160" height="120">
                   </button>
                   <button type="button" class="roomThumb" aria-current="false" aria-label="Twin room alternate angle"
                     data-full="assets/images/rooms/twin-room-sandbox-2.png"
                     data-srcset="assets/images/rooms/twin-room-sandbox-2-400.png 400w, assets/images/rooms/twin-room-sandbox-2.png 800w"
                     data-webp="assets/images/rooms/twin-room-sandbox-2-400.webp 400w, assets/images/rooms/twin-room-sandbox-2.webp 800w">
-                    <img src="assets/images/rooms/twin-room-sandbox-2-400.webp" alt="Twin room window side" loading="lazy" decoding="async" width="160" height="120">
+                    <img src="assets/images/rooms/twin-room-sandbox-2-400.png" alt="Twin room window side" loading="lazy" decoding="async" width="160" height="120">
                   </button>
                   <button type="button" class="roomThumb" aria-current="false" aria-label="En-suite bathroom"
                     data-full="assets/images/rooms/bathroom.png"
                     data-srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w"
                     data-webp="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w">
-                    <img src="assets/images/rooms/bathroom-400.webp" alt="Private bathroom" loading="lazy" decoding="async" width="160" height="120">
+                    <img src="assets/images/rooms/bathroom-400.png" alt="Private bathroom" loading="lazy" decoding="async" width="160" height="120">
                   </button>
                 </div>
               </div>
@@ -2336,12 +2340,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <p class="roomBestFor" data-i18n-html="room_twin_best_for"><strong>Best for:</strong> Solo guests, friends, or short business stays</p>
 
-                <div class="roomAmenities">
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg> <span data-i18n="bullet_desk">Work desk + chair</span></span>
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> <span data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</span></span>
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></span>
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></span>
-                </div>
+                <ul class="roomAmenities" role="list">
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg> <span data-i18n="bullet_desk">Work desk + chair</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> <span data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
+                </ul>
 
                 <div class="priceBox">
                   <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
@@ -2354,10 +2358,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
           </article>
 
-          <hr class="roomDividerLine">
-
           <!-- Standard Double -->
-          <article class="roomCard">
+          <article class="card roomCard">
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="roomHeroWrap">
@@ -2365,8 +2367,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     <picture>
                       <source type="image/webp"
                         srcset="assets/images/rooms/double-room-sandboxhotel-1-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-1.webp 800w"
-                        sizes="(max-width:980px) 100vw, 55vw">
-                      <img class="mediaImg roomHeroImg" id="doubleHero" src="assets/images/rooms/double-room-sandboxhotel-1.png" srcset="assets/images/rooms/double-room-sandboxhotel-1-400.png 400w, assets/images/rooms/double-room-sandboxhotel-1.png 800w" sizes="(max-width:980px) 100vw, 55vw" alt="Standard Double bedroom with a large bed and soft lighting" loading="lazy" decoding="async" width="800" height="500">
+                        sizes="(max-width:980px) 100vw, 50vw">
+                      <img class="mediaImg roomHeroImg" id="doubleHero" src="assets/images/rooms/double-room-sandboxhotel-1.png" srcset="assets/images/rooms/double-room-sandboxhotel-1-400.png 400w, assets/images/rooms/double-room-sandboxhotel-1.png 800w" sizes="(max-width:980px) 100vw, 50vw" alt="Standard Double bedroom with a large bed and soft lighting" loading="lazy" decoding="async" width="800" height="500">
                     </picture>
                   </div>
                 </div>
@@ -2375,19 +2377,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                     data-full="assets/images/rooms/double-room-sandboxhotel-1.png"
                     data-srcset="assets/images/rooms/double-room-sandboxhotel-1-400.png 400w, assets/images/rooms/double-room-sandboxhotel-1.png 800w"
                     data-webp="assets/images/rooms/double-room-sandboxhotel-1-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-1.webp 800w">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-1-400.webp" alt="Double room main" loading="lazy" decoding="async" width="160" height="120">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-1-400.png" alt="Double room main" loading="lazy" decoding="async" width="160" height="120">
                   </button>
                   <button type="button" class="roomThumb" aria-current="false" aria-label="Double room alternate angle"
                     data-full="assets/images/rooms/double-room-sandboxhotel-2.png"
                     data-srcset="assets/images/rooms/double-room-sandboxhotel-2-400.png 400w, assets/images/rooms/double-room-sandboxhotel-2.png 800w"
                     data-webp="assets/images/rooms/double-room-sandboxhotel-2-400.webp 400w, assets/images/rooms/double-room-sandboxhotel-2.webp 800w">
-                    <img src="assets/images/rooms/double-room-sandboxhotel-2-400.webp" alt="Double room foot of bed" loading="lazy" decoding="async" width="160" height="120">
+                    <img src="assets/images/rooms/double-room-sandboxhotel-2-400.png" alt="Double room foot of bed" loading="lazy" decoding="async" width="160" height="120">
                   </button>
                   <button type="button" class="roomThumb" aria-current="false" aria-label="En-suite bathroom"
                     data-full="assets/images/rooms/bathroom.png"
                     data-srcset="assets/images/rooms/bathroom-400.png 400w, assets/images/rooms/bathroom.png 800w"
                     data-webp="assets/images/rooms/bathroom-400.webp 400w, assets/images/rooms/bathroom.webp 800w">
-                    <img src="assets/images/rooms/bathroom-400.webp" alt="Private bathroom" loading="lazy" decoding="async" width="160" height="120">
+                    <img src="assets/images/rooms/bathroom-400.png" alt="Private bathroom" loading="lazy" decoding="async" width="160" height="120">
                   </button>
                 </div>
               </div>
@@ -2407,12 +2409,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
                 <p class="roomBestFor" data-i18n-html="room_double_best_for"><strong>Best for:</strong> Couples or comfortable two-person stays</p>
 
-                <div class="roomAmenities">
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg> <span data-i18n="bullet_comfort_double_bed">Comfortable double bed</span></span>
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span data-i18n="bullet_great_for_couples">Great for couples</span></span>
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></span>
-                  <span class="roomAmenity"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></span>
-                </div>
+                <ul class="roomAmenities" role="list">
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg> <span data-i18n="bullet_comfort_double_bed">Comfortable double bed</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span data-i18n="bullet_great_for_couples">Great for couples</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
+                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
+                </ul>
 
                 <div class="priceBox">
                   <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
