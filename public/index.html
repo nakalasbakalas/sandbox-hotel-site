@@ -1787,6 +1787,46 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       border-top:1px solid var(--line);
       margin-top:14px;
     }
+
+    /* ========================================
+       HOMEPAGE REDESIGN — VISUAL HIERARCHY
+       ======================================== */
+
+    /* Room "Best For" guidance */
+    .roomBestFor{
+      font-size:15px;
+      color:var(--champagne);
+      margin:8px 0 12px;
+      line-height:1.5;
+    }
+
+    /* Contact section — secondary links */
+    .contactSecondary{
+      margin-top:12px;
+      opacity:0.8;
+    }
+    .contactSecondary a{
+      text-decoration:underline;
+      text-decoration-color:rgba(168,101,42,0.4);
+      transition:text-decoration-color 0.2s;
+    }
+    .contactSecondary a:hover{
+      text-decoration-color:var(--copper);
+    }
+
+    /* Booking section trust info */
+    #book .fine p{
+      margin:6px 0;
+    }
+    #book .fine p:first-child{
+      margin-top:0;
+    }
+
+    /* Booking section emphasis */
+    #book .card{
+      box-shadow:0 2px 12px rgba(168,101,42,0.08);
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -2150,6 +2190,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   </div>
                 </div>
 
+                <p class="roomBestFor" data-i18n="room_twin_best_for"><strong>Best for:</strong> Solo guests, friends, or short business stays</p>
+
                 <ul class="bullets">
                   <li data-i18n="bullet_desk">Work desk + chair</li>
                   <li data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</li>
@@ -2216,6 +2258,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   </div>
                 </div>
 
+                <p class="roomBestFor" data-i18n="room_double_best_for"><strong>Best for:</strong> Couples or comfortable two-person stays</p>
+
                 <ul class="bullets">
                   <li data-i18n="bullet_comfort_double_bed">Comfortable double bed</li>
                   <li data-i18n="bullet_great_for_couples">Great for couples or solo travelers</li>
@@ -2251,71 +2295,126 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">⚡</div>
             <b data-i18n="offer1_title">Fast Direct Booking</b>
-            <p data-i18n="offer1_desc">Message your dates and room type — get confirmed quickly via LINE, WhatsApp, or call.</p>
-          </div>
-          <div class="offer">
-            <div class="offerIcon" aria-hidden="true">🛏️</div>
-            <b data-i18n="offer2_title">Spacious Comfortable Rooms</b>
-            <p data-i18n="offer2_desc">28–32 m² rooms with work desk, AC, hot shower, and fast Wi-Fi included.</p>
+            <p data-i18n="offer1_desc">Message your dates — get confirmed quickly via LINE, WhatsApp, or call.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">🤫</div>
-            <b data-i18n="offer3_title">Quiet Practical Stay</b>
-            <p data-i18n="offer3_desc">Quiet-side rooms on request. Parking, laundry, and friendly local support.</p>
+            <b data-i18n="offer2_title">Quiet Comfortable Rooms</b>
+            <p data-i18n="offer2_desc">Spacious 28–32 m² rooms. Quiet-side allocation on request.</p>
+          </div>
+          <div class="offer">
+            <div class="offerIcon" aria-hidden="true">📶</div>
+            <b data-i18n="offer3_title">Fast Wi-Fi</b>
+            <p data-i18n="offer3_desc">Reliable internet for work, streaming, and daily use.</p>
+          </div>
+          <div class="offer">
+            <div class="offerIcon" aria-hidden="true">🅿</div>
+            <b data-i18n="offer4_title">Parking Available</b>
+            <p data-i18n="offer4_desc">On-site guest parking (subject to availability).</p>
+          </div>
+          <div class="offer">
+            <div class="offerIcon" aria-hidden="true">🛎</div>
+            <b data-i18n="offer5_title">Friendly Service</b>
+            <p data-i18n="offer5_desc">Local staff available to assist during your stay.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">📅</div>
-            <b data-i18n="offer4_title">Flexible Short &amp; Long Stay</b>
-            <p data-i18n="offer4_desc">From one night to extended stays — ask about weekly or monthly rates.</p>
+            <b data-i18n="offer6_title">Flexible Stays</b>
+            <p data-i18n="offer6_desc">From one night to extended stays — ask about special rates.</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- AMENITIES -->
-    <section class="section" id="amenities">
-      <div class="amenities-inner">
-        <div>
-          <h2 data-i18n="amen_title">Guest Amenities</h2>
-          <p class="sub" data-i18n="amen_sub">Essentials designed for a comfortable and convenient stay.</p>
+    <!-- BOOK -->
+    <section class="section" id="book">
+      <div class="card altA pad">
+        <div class="head">
+          <div>
+            <h2 data-i18n="book_title">Reserve Your Stay</h2>
+            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll confirm with your exact rate.</p>
+          </div>
+          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
         </div>
 
-        <div class="amenities-grid" aria-label="Amenities list">
-          <div class="amenity-card" tabindex="0">
-            <div class="amenity-icon" aria-hidden="true"><span class="glyph">Wi</span></div>
-            <h3 data-i18n="amen_wifi_title">Wi‑Fi</h3>
-            <p data-i18n="amen_wifi_desc">Fast, reliable internet for work, streaming, and daily use.</p>
+        <div class="bookingShell">
+          <div class="bookingMetaCard">
+            <div class="quickDates" aria-label="Quick date presets">
+              <div class="quickTop">
+                <div class="quickLabel" data-i18n="quick_label">Quick dates</div>
+                <div class="quickChips" role="group" aria-label="Quick dates">
+                  <button class="chip quickBtn" type="button" data-qd="tonight" data-i18n="quick_tonight">Tonight</button>
+                  <button class="chip quickBtn" type="button" data-qd="tomorrow" data-i18n="quick_tomorrow">Tomorrow</button>
+                  <button class="chip quickBtn" type="button" data-qd="weekend" data-i18n="quick_weekend">Weekend</button>
+                  <button class="chip quickBtn" type="button" data-qd="7n" data-i18n="quick_7n">7 nights</button>
+                  <button class="chip quickBtn" type="button" data-qd="clear" data-i18n="quick_clear">Clear</button>
+                </div>
+              </div>
+
+              <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
+              <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
+            </div>
+
+            <div class="sep"></div>
+            <div class="fine">
+              <p data-i18n="book_tip"><strong>Tip:</strong> Add your estimated arrival time in Notes if arriving late.</p>
+              <p data-i18n="book_checkin_info"><strong>Check-in:</strong> From 14:00 • <strong>Check-out:</strong> By 11:00</p>
+              <p data-i18n="book_id_note"><strong>ID required:</strong> Government-issued ID or passport needed at check-in.</p>
+            </div>
           </div>
-          <div class="amenity-card" tabindex="0">
-            <div class="amenity-icon" aria-hidden="true"><span class="glyph">🅿</span></div>
-            <h3 data-i18n="amen_parking_title">Parking</h3>
-            <p data-i18n="amen_parking_desc">Limited on-site guest parking available.</p>
-          </div>
-          <div class="amenity-card" tabindex="0">
-            <div class="amenity-icon" aria-hidden="true"><span class="glyph">AC</span></div>
-            <h3 data-i18n="amen_ac_title">Air Conditioning</h3>
-            <p data-i18n="amen_ac_desc">Comfortable climate control throughout the year.</p>
-          </div>
-          <div class="amenity-card" tabindex="0">
-            <div class="amenity-icon" aria-hidden="true"><span class="glyph">🧺</span></div>
-            <h3 data-i18n="amen_laundry_title">Laundry Service</h3>
-            <p data-i18n="amen_laundry_desc">Laundry support available on request.</p>
-          </div>
-          <div class="amenity-card" tabindex="0">
-            <div class="amenity-icon" aria-hidden="true"><span class="glyph">☕</span></div>
-            <h3 data-i18n="amen_coffee_title">Coffee & Snack Bar</h3>
-            <p data-i18n="amen_coffee_desc">Light refreshments available on site.</p>
-          </div>
-          <div class="amenity-card" tabindex="0">
-            <div class="amenity-icon" aria-hidden="true"><span class="glyph">🛎</span></div>
-            <h3 data-i18n="amen_service_title">Guest Support</h3>
-            <p data-i18n="amen_service_desc">Friendly staff available to assist during your stay.</p>
-          </div>
+
+          <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
+            <div class="field">
+              <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
+              <input id="checkin" name="checkin" type="date" required>
+            </div>
+            <div class="field">
+              <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
+              <input id="checkout" name="checkout" type="date" required>
+            </div>
+            <div class="field">
+              <label for="guests" data-i18n="lbl_guests">Guests</label>
+              <select id="guests" name="guests">
+                <option value="1">1</option>
+                <option value="2" selected>2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="room" data-i18n="lbl_room">Room</label>
+              <select id="room" name="room">
+                <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
+                <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="name" data-i18n="lbl_name">Name</label>
+              <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
+            </div>
+            <div class="field">
+              <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
+              <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
+            </div>
+            <div class="field wide">
+              <label for="notes" data-i18n="lbl_notes">Notes</label>
+              <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+            </div>
+
+            <div class="wide ctaRow">
+              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
+              <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
+              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
+              <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible. Exact rates depend on your stay dates.</span>
+            </div>
+          </form>
         </div>
       </div>
     </section>
 
-    <!-- GALLERY (CAROUSEL ONLY — NO GRID) -->
+
+<!-- GALLERY (CAROUSEL ONLY — NO GRID) -->
     <section class="section" id="gallery">
       <div class="card pad">
         <div class="head">
@@ -2484,92 +2583,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
-    <!-- BOOK -->
-    <section class="section" id="book">
-      <div class="card altA pad">
-        <div class="head">
-          <div>
-            <h2 data-i18n="book_title">Reserve Your Stay</h2>
-            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll confirm with your exact rate.</p>
-          </div>
-          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
-        </div>
-
-        <div class="bookingShell">
-          <div class="bookingMetaCard">
-            <div class="quickDates" aria-label="Quick date presets">
-              <div class="quickTop">
-                <div class="quickLabel" data-i18n="quick_label">Quick dates</div>
-                <div class="quickChips" role="group" aria-label="Quick dates">
-                  <button class="chip quickBtn" type="button" data-qd="tonight" data-i18n="quick_tonight">Tonight</button>
-                  <button class="chip quickBtn" type="button" data-qd="tomorrow" data-i18n="quick_tomorrow">Tomorrow</button>
-                  <button class="chip quickBtn" type="button" data-qd="weekend" data-i18n="quick_weekend">Weekend</button>
-                  <button class="chip quickBtn" type="button" data-qd="7n" data-i18n="quick_7n">7 nights</button>
-                  <button class="chip quickBtn" type="button" data-qd="clear" data-i18n="quick_clear">Clear</button>
-                </div>
-              </div>
-
-              <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
-              <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
-            </div>
-
-            <div class="sep"></div>
-            <div class="fine">
-              <span data-i18n="book_tip">Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.</span>
-            </div>
-          </div>
-
-          <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
-            <div class="field">
-              <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
-              <input id="checkin" name="checkin" type="date" required>
-            </div>
-            <div class="field">
-              <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
-              <input id="checkout" name="checkout" type="date" required>
-            </div>
-            <div class="field">
-              <label for="guests" data-i18n="lbl_guests">Guests</label>
-              <select id="guests" name="guests">
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="room" data-i18n="lbl_room">Room</label>
-              <select id="room" name="room">
-                <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
-                <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="name" data-i18n="lbl_name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
-            </div>
-            <div class="field">
-              <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
-              <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
-            </div>
-            <div class="field wide">
-              <label for="notes" data-i18n="lbl_notes">Notes</label>
-              <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
-            </div>
-
-            <div class="wide ctaRow">
-              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
-              <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
-              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
-              <span class="fine" id="formHint" data-i18n="form_hint">We’ll reply with availability and total price.</span>
-            </div>
-          </form>
-        </div>
-      </div>
-    </section>
-
-    <!-- FAQ -->
+        <!-- FAQ -->
     <section class="section" id="faq">
       <div class="card altHot pad">
         <div class="head">
@@ -2581,9 +2595,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
 
         <div class="faqGrid" id="faqGrid" aria-live="polite">
-          <details open data-faq-item>
+          <details data-faq-item>
             <summary data-i18n="faq_q1">How do I book the fastest?</summary>
-            <p data-i18n="faq_a1">Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.</p>
+            <p data-i18n="faq_a1">Call or message us (LINE/WhatsApp) with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p>
           </details>
           <details data-faq-item>
             <summary data-i18n="faq_q4">Can rates change by date?</summary>
@@ -2644,55 +2658,45 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="card pad">
         <div class="head">
           <div>
-            <h2 data-i18n="dest_title">About Nakhon Si Thammarat</h2>
-            <p data-i18n="dest_sub">Southern Thailand's historic Gulf Coast city — a less-travelled destination with deep roots.</p>
+            <h2 data-i18n="dest_title">Staying in Nakhon Si Thammarat</h2>
+            <p data-i18n="dest_sub">Southern Thailand's historic Gulf Coast city—a quieter destination with deep cultural roots.</p>
           </div>
-          <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
         </div>
 
         <article class="destGrid">
           <div class="destBlock">
-            <h3 data-i18n="dest_where_title">Where is Nakhon Si Thammarat?</h3>
-            <p data-i18n="dest_where_body">Nakhon Si Thammarat is a city in <strong>Southern Thailand</strong>, located on the Gulf of Thailand coast approximately 780 km south of Bangkok. It is the capital of Nakhon Si Thammarat Province and one of the oldest continuously inhabited cities in the country, with a recorded history spanning more than 1,000 years. The city sits on the Gulf Coast side of the Thai-Malay Peninsula, distinct from the Andaman Sea resorts of Phuket and Krabi.</p>
+            <h3 data-i18n="dest_where_title">Where We Are</h3>
+            <p data-i18n="dest_where_body_short">Nakhon Si Thammarat is a historic city in <strong>Southern Thailand</strong> on the Gulf coast, 780 km south of Bangkok. One of the oldest cities in the country, it sits distinct from crowded Andaman beach resorts.</p>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_why_title">Why Visit Nakhon Si Thammarat?</h3>
-            <p data-i18n="dest_why_body">Unlike the crowded beach resorts of Southern Thailand, Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Travellers come for Wat Phra Mahathat Woramahawihan — one of the most significant temples in all of Thailand — as well as the unique local art forms of Nang Talung shadow puppetry and traditional nielloware silver crafts. The city is also a gateway for exploring the lesser-known national parks and coastlines of Nakhon Si Thammarat Province.</p>
+            <h3 data-i18n="dest_why_title">Why Visit</h3>
+            <p data-i18n="dest_why_body_short">Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan—one of Thailand's most significant temples.</p>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_attractions_title">Key Attractions Near Sandbox Hotel</h3>
+            <h3 data-i18n="dest_attractions_title">Nearby Attractions</h3>
             <ul class="destList">
-              <li><strong>Wat Phra Mahathat Woramahawihan</strong> — one of the most important Buddhist temple complexes in Southern Thailand, dating back over 1,000 years.</li>
-              <li><strong>Nakhon Si Thammarat National Museum</strong> — displays prehistoric artefacts, Buddha images, local crafts, and the history of the southern peninsula.</li>
-              <li><strong>Bovorn Bazaar &amp; Night Market</strong> — the best spot for local street food, Southern Thai dishes, and evening browsing.</li>
-              <li><strong>Old City Walking Street</strong> — heritage shophouses and local artisan stalls every weekend.</li>
-              <li><strong>Nang Talung Shadow Puppet Theatre</strong> — a uniquely Southern Thai performing art and UNESCO-recognised tradition.</li>
-              <li><strong>Khanom &amp; Sichon Beaches</strong> — quiet Gulf Coast beaches about 60–80 km from the city, ideal for a day trip.</li>
+              <li><strong>Wat Phra Mahathat</strong> — 1,000-year-old temple complex</li>
+              <li><strong>Bovorn Bazaar &amp; Night Market</strong> — local food and evening browsing</li>
+              <li><strong>Old City Walking Street</strong> — heritage shops and artisan stalls</li>
+              <li><strong>Khanom &amp; Sichon Beaches</strong> — quiet Gulf beaches 60–80 km away</li>
             </ul>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_howtoget_title">How to Get to Nakhon Si Thammarat</h3>
+            <h3 data-i18n="dest_howtoget_title">Getting Here</h3>
             <ul class="destList">
-              <li><strong>By Air</strong> — Nakhon Si Thammarat Airport (NST/VTSN) has multiple daily flights from Bangkok (Don Mueang &amp; Suvarnabhumi). Flight time approximately 1.5 hours.</li>
-              <li><strong>By Train</strong> — overnight sleeper services from Bangkok's Hua Lamphong and Bang Sue Grand stations. Journey time approximately 12–14 hours.</li>
-              <li><strong>By Bus</strong> — long-distance coaches depart from Bangkok's Southern Bus Terminal (Sai Tai Mai). Journey time approximately 10–12 hours.</li>
+              <li><strong>By Air</strong> — NST Airport, ~1.5 hours from Bangkok</li>
+              <li><strong>By Train</strong> — Overnight sleeper, ~12–14 hours</li>
+              <li><strong>By Bus</strong> — Southern Bus Terminal, ~10–12 hours</li>
             </ul>
-            <p data-i18n="dest_howtoget_note">Sandbox Hotel is a short drive or taxi ride from Nakhon Si Thammarat city centre. Airport transfers can be arranged — ask us when you book.</p>
-          </div>
-
-          <div class="destBlock">
-            <h3 data-i18n="dest_region_title">Nakhon Si Thammarat in Southern Thailand</h3>
-            <p data-i18n="dest_region_body">Southern Thailand stretches from Chumphon in the north to the Malaysian border in the south. The region splits into two coastlines: the Gulf of Thailand coast (including Koh Samui, Koh Phangan, and Nakhon Si Thammarat) and the Andaman Sea coast (Phuket, Krabi, Koh Lanta). Nakhon Si Thammarat is one of the region's most historic inland and coastal cities — larger and more culturally rich than most visitors expect. It serves as an excellent base for exploring lesser-known Gulf Coast beaches, national parks, and authentic Southern Thai food culture.</p>
+            <p class="fine" data-i18n="dest_howtoget_note">Sandbox Hotel is a short drive from city centre. Airport transfers available—ask when you book.</p>
           </div>
         </article>
 
         <div class="destCTA">
-          <p data-i18n="dest_cta_text">Planning a trip to Nakhon Si Thammarat? Sandbox Hotel offers direct booking, spacious rooms, and a central location.</p>
-          <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
-          <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+          <p class="fine" data-i18n="dest_cta_text">Learn more about hotels and stays in the region:</p>
           <a class="textLink" href="/hotels/nakhon-si-thammarat/" data-i18n="dest_link_city">Hotels in Nakhon Si Thammarat →</a>
           <a class="textLink" href="/hotels/southern-thailand/" data-i18n="dest_link_south">Hotels in Southern Thailand →</a>
         </div>
@@ -2718,14 +2722,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </p>
 
             <div class="contactActions">
-              <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
-              <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+              <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Check Availability</a>
+              <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
               <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE</a>
               <a class="btn ghost" id="contactWhatsApp" href="https://wa.me/66885783478" target="_blank" rel="noopener nofollow" data-analytics="whatsapp">WhatsApp</a>
-              <a class="textLink" href="mailto:booking@sandboxhotel.com" data-i18n="cta_email" data-analytics="email">Email</a>
-              <a class="textLink" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Open Map</a>
-              <a class="textLink" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook</a>
             </div>
+
+            <p class="fine contactSecondary">
+              <a href="mailto:booking@sandboxhotel.com" data-i18n="cta_email" data-analytics="email">Email</a> •
+              <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Map</a> •
+              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook</a>
+            </p>
 
             <p class="fine contactMeta">
               Daily support: 06:00-22:00<br>
