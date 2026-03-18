@@ -1,15 +1,7 @@
 <!doctype html>
 <html lang="th" data-theme="system" data-density="comfortable">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-2B2SGREN1Z"></script>
-<script>
-window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', 'G-2B2SGREN1Z');
-window.SBX_GA_CONFIGURED = true;
-</script>
-<!-- Google Tag Manager -->
+<!-- Google Tag Manager (GTM fires GA4 tags — standalone gtag.js snippet removed to avoid duplicate tracking) -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
@@ -20,7 +12,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="format-detection" content="telephone=no">
   <meta name="color-scheme" content="dark light">
-  <meta name="theme-color" content="#0B0C0F" id="metaThemeColor">
+  <meta name="theme-color" content="#0B0C0F" media="(prefers-color-scheme: dark)" id="metaThemeColor">
+  <meta name="theme-color" content="#FBF6EE" media="(prefers-color-scheme: light)">
 
   <title>โรงแรมในนครศรีธรรมราช | Sandbox Hotel จองตรงราคาดีที่สุด</title>
   <meta name="description" id="metaDescription" content="Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักกว้างขวาง สงบ สะดวก จองตรงกับโรงแรมผ่านโทร LINE WhatsApp หรืออีเมล รับประกันราคาดีที่สุด">
@@ -59,9 +52,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   <!-- Preload hero -->
   <link rel="preload" as="image" href="images/Sandbox-Hotel-Hero-Banner.webp" type="image/webp" fetchpriority="high">
+  <!-- DNS prefetch for third-party origins -->
+  <link rel="dns-prefetch" href="https://www.google-analytics.com">
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com">
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <!-- Google Fonts: non-blocking load to avoid render-blocking -->
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
+  <noscript><link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Manrope:wght@400;500;700;800&display=swap" rel="stylesheet"></noscript>
   <script defer src="assets/js/analytics.js"></script>
 
   <style>
@@ -315,7 +316,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     button,input,select,textarea{font:inherit; color:inherit}
     ::selection{background: rgba(183,106,43,.30); color: var(--ink2)}
 
-    :focus{outline:none}
+    :focus:not(:focus-visible){outline:none}
     :focus-visible{outline:none; box-shadow: var(--focus)}
     @supports not selector(:focus-visible){
       :focus{box-shadow: var(--focus)}
@@ -439,7 +440,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size:13px;
       letter-spacing:.12em;
       text-transform:uppercase;
-      font-weight:950;
+      font-weight:900;
       color:var(--ink2);
     }
     .brand small{display:block; margin-top:0; font-size:12px; color:color-mix(in oklab, var(--muted) 88%, white); opacity:.9}
@@ -534,7 +535,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-size:13px;
       letter-spacing:.12em;
       text-transform:uppercase;
-      font-weight:950;
+      font-weight:900;
       color:var(--ink2);
     }
     .navPanelBrandCopy{
@@ -863,7 +864,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       font-weight:500;
     }
     .heroCTA{margin-top:2px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:10px}
-    .heroCTA .btn{min-height:46px; padding:0 20px; font-size:14.5px; font-weight:800; letter-spacing:.01em}
+    .heroCTA .btn{min-height:48px; padding:0 20px; font-size:14.5px; font-weight:800; letter-spacing:.01em}
     .heroCTA .btn.primary{min-width:170px; box-shadow: 0 14px 32px rgba(0,0,0,.18), 0 10px 18px rgba(168,101,42,.16)}
     .heroCTA .btn.secondary{
       background: rgba(255,255,255,.10);
@@ -1011,7 +1012,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .quickDates{margin-top:4px; display:grid; gap:8px}
     .quickTop{display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap}
     .quickLabel{
-      font-size:12px; color:var(--muted); font-weight:950;
+      font-size:12px; color:var(--muted); font-weight:900;
       letter-spacing:.14em; text-transform:uppercase;
     }
     .quickChips{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
@@ -1518,6 +1519,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     /* ---------- Footer ---------- */
     footer{
       margin-top:24px; padding-top:20px;
+      padding-bottom: env(safe-area-inset-bottom);
       border-top:1px solid var(--line);
       color:var(--muted);
       font-size:13px;
@@ -1652,7 +1654,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       gap:8px 10px;
     }
     html[data-device="phone"] .heroCTA .btn{
-      min-height:44px;
+      min-height:48px;
       padding:0 16px;
     }
     html[data-device="phone"] .heroCTA .textLink{
@@ -1827,18 +1829,86 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow:0 2px 12px rgba(168,101,42,0.08);
     }
 
+    /* ---------- LINE nav button (header) ---------- */
+    .navLineBtn{
+      display:inline-flex; align-items:center; gap:6px;
+      padding:6px 12px;
+      border-radius:var(--btn-radius);
+      border:1px solid rgba(0,195,91,.35);
+      background: rgba(0,195,91,.10);
+      color:var(--ink2);
+      font-size:13px;
+      font-weight:700;
+      text-decoration:none;
+      transition: background .14s ease, border-color .14s ease;
+      white-space:nowrap;
+    }
+    .navLineBtn:hover{
+      background: rgba(0,195,91,.18);
+      border-color: rgba(0,195,91,.55);
+    }
+    .navLineIcon{font-size:16px; line-height:1}
+
+    /* ---------- Hero social proof / review badge ---------- */
+    .heroReviewBadge{
+      display:inline-flex; align-items:center; gap:8px;
+      margin-top:14px;
+      padding:8px 14px;
+      border-radius:10px;
+      background: rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.18);
+      color:rgba(255,255,255,.92);
+      font-size:13px;
+      font-weight:600;
+      text-decoration:none;
+      transition: background .14s ease;
+    }
+    .heroReviewBadge:hover{ background: rgba(255,255,255,.16) }
+    .heroReviewStars{ color:#F6C644; letter-spacing:.05em; font-size:14px }
+    .heroReviewCount{ opacity:.78; font-weight:500 }
+
+    /* ---------- Hero urgency / best rate badge ---------- */
+    .heroUrgency{
+      margin-top:10px;
+      font-size:12.5px;
+      color: color-mix(in oklab, var(--champagne2) 90%, white);
+      font-weight:600;
+      letter-spacing:.01em;
+    }
+    .heroGuarantee{
+      display:inline-flex; align-items:center; gap:5px;
+      font-size:12.5px;
+      color: color-mix(in oklab, var(--champagne2) 90%, white);
+      font-weight:600;
+    }
+    .heroGuarantee .checkIcon{ color: #7ed87e; font-style:normal }
+
+    /* ---------- Booking form guarantee note ---------- */
+    .bookGuarantee{
+      display:flex; align-items:center; gap:6px;
+      padding:10px 14px;
+      border-radius:10px;
+      border:1px solid color-mix(in oklab, var(--copper) 20%, var(--line));
+      background: color-mix(in oklab, var(--copper) 4%, var(--surfaceA));
+      font-size:13px;
+      font-weight:600;
+      color: var(--ink2);
+    }
+    .bookGuarantee .checkIcon{ color: var(--copper2); font-style:normal; font-size:16px }
+
   </style>
 
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Hotel",
+    "@type": ["Hotel", "LodgingBusiness"],
     "name": "Sandbox Hotel",
     "description": "Sandbox Hotel is a quiet, comfortable hotel in Nakhon Si Thammarat, Southern Thailand. We offer spacious rooms with direct booking by phone, LINE, WhatsApp, or email. Ideal for business travelers, couples, and families visiting Nakhon Si Thammarat and the surrounding Southern Thailand region.",
     "url": "https://www.sandboxhotel.com/",
     "telephone": "+66885783478",
     "email": "booking@sandboxhotel.com",
     "priceRange": "฿฿",
+    "starRating": { "@type": "Rating", "ratingValue": "4" },
     "checkinTime": "14:00",
     "checkoutTime": "11:00",
     "currenciesAccepted": "THB",
@@ -2027,7 +2097,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MPNHZC8S"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-  <a class="skipLink" href="#main">Skip to content</a>
+  <a class="skipLink" href="#main-content">Skip to content</a>
 
   <header>
     <div class="nav">
@@ -2043,6 +2113,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <nav class="navLinks" aria-label="Primary">
         <span class="navSupport hideMobile" data-i18n="nav_support">Best Rate Direct</span>
+        <a class="navLineBtn" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Contact us on LINE" data-analytics="line">
+          <span class="navLineIcon" aria-hidden="true">💬</span><span data-i18n="nav_line_cta">LINE</span>
+        </a>
         <a class="chip primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
 
         <details class="navGroup">
@@ -2095,7 +2168,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </header>
 
-  <main class="wrap" id="main">
+  <main class="wrap" id="main-content">
     <div id="top"></div>
 
     <!-- HERO -->
@@ -2112,6 +2185,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
               <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">Explore Rooms →</a>
             </div>
+            <a class="heroReviewBadge" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener nofollow" aria-label="4.3 out of 5 stars · 120 reviews on Google">
+              <span class="heroReviewStars" aria-hidden="true">★★★★☆</span>
+              <span><strong>4.3</strong> <span class="heroReviewCount" data-i18n="hero_review_count">· 120 reviews on Google</span></span>
+            </a>
+            <p class="heroUrgency"><em class="heroGuarantee"><i class="checkIcon" aria-hidden="true">✓</i> <span data-i18n="hero_best_rate">Best Rate Guaranteed — book direct &amp; save</span></em></p>
           </div>
         </div>
       </div>
@@ -2407,6 +2485,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
               <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
               <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible. Exact rates depend on your stay dates.</span>
+            </div>
+            <div class="wide bookGuarantee">
+              <i class="checkIcon" aria-hidden="true">✓</i>
+              <span data-i18n="book_guarantee">Best Rate Guaranteed when booking direct — no booking fees, no mark-up.</span>
             </div>
           </form>
         </div>
@@ -2957,6 +3039,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         og_desc: "จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักสงบ Wi-Fi ที่จอดรถ ยืนยันรวดเร็วผ่านโทร LINE WhatsApp หรืออีเมล",
         brand_location: "นครศรีธรรมราช ประเทศไทย",
         nav_support: "ราคาดีเมื่อจองตรง",
+        nav_line_cta: "LINE",
 
         nav_book: "จองเลย",
         nav_rooms: "ห้องพัก",
@@ -2980,6 +3063,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_email: "อีเมล",
         cta_open_map: "เปิดแผนที่",
         hero_view_rooms: "ดูห้องพัก →",
+        hero_review_count: "· 120 รีวิวบน Google",
+        hero_best_rate: "รับประกันราคาดีที่สุด — จองตรงประหยัดกว่า",
         trust_direct: "จองตรงกับโรงแรม",
         trust_quiet: "ห้องพักเงียบ",
         trust_wifi: "ฟรี Wi‑Fi",
@@ -3053,6 +3138,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_q11: "Sandbox Hotel เหมาะสำหรับการสำรวจภาคใต้ของไทยไหม?",
         faq_a11: "เหมาะมาก นครศรีธรรมราชเป็นศูนย์กลางของภาคใต้ที่มีเส้นทางคมนาคมสะดวก เชื่อมต่อจังหวัดใกล้เคียง ชายหาด และแหล่งวัฒนธรรม Sandbox Hotel เป็นที่พักที่เหมาะสำหรับทั้งการพักสั้นในเมืองและการเดินทางสำรวจภูมิภาคภาคใต้ของไทย",
         book_tip: "ทิป: หากมาถึงดึก โปรดระบุเวลาโดยประมาณในหมายเหตุ เพื่อให้เราช่วยเหลือได้รวดเร็ว",
+        book_guarantee: "รับประกันราคาดีที่สุดเมื่อจองตรง — ไม่มีค่าธรรมเนียม ไม่บวกราคา",
 
         amen_title: "สิ่งอำนวยความสะดวกสำหรับผู้เข้าพัก",
         amen_sub: "สิ่งจำเป็นที่ออกแบบมาเพื่อการเข้าพักที่สบายและสะดวกยิ่งขึ้น",
@@ -3179,6 +3265,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         og_desc: "Book direct with Sandbox Hotel — quiet rooms, free Wi-Fi, parking, and fast confirmation for your stay in Nakhon Si Thammarat, Southern Thailand.",
         brand_location: "Nakhon Si Thammarat, Thailand",
         nav_support: "Best Rate Direct",
+        nav_line_cta: "LINE",
 
         nav_book: "Book Now",
         nav_rooms: "Rooms",
@@ -3202,6 +3289,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_email: "Email",
         cta_open_map: "Open Map",
         hero_view_rooms: "Explore Rooms →",
+        hero_review_count: "· 120 reviews on Google",
+        hero_best_rate: "Best Rate Guaranteed — book direct &amp; save",
         trust_direct: "Direct Booking",
         trust_quiet: "Quiet Rooms",
         trust_wifi: "Free Wi‑Fi",
@@ -3275,6 +3364,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_q11: "Is Sandbox Hotel a good base for exploring Southern Thailand?",
         faq_a11: "Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.",
         book_tip: "Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.",
+        book_guarantee: "Best Rate Guaranteed when booking direct — no booking fees, no mark-up.",
 
         amen_title: "Guest Amenities",
         amen_sub: "Essentials designed for a comfortable and convenient stay.",
@@ -3420,6 +3510,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         og_desc: "直接联系 Sandbox Hotel，可通过电话、LINE、WhatsApp 或邮箱快速确认房态与入住信息。",
         brand_location: "泰国 洛坤府（Nakhon Si Thammarat）",
         nav_support: "直订更安心",
+        nav_line_cta: "LINE",
 
         nav_book: "立即预订",
         nav_rooms: "房型",
@@ -3443,6 +3534,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_email: "邮箱",
         cta_open_map: "打开地图",
         hero_view_rooms: "查看房型",
+        hero_review_count: "· 120条 Google 评价",
+        hero_best_rate: "直订最优惠 — 无手续费，无加价",
         trust_direct: "酒店直订",
         trust_quiet: "安静客房",
         trust_wifi: "免费 Wi‑Fi",
@@ -3516,6 +3609,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_q11: "Sandbox Hotel 适合探索泰国南部吗？",
         faq_a11: "非常适合。洛坤府是泰国南部的重要交通枢纽，可便捷前往周边省份、海滩和文化景点。Sandbox Hotel 非常适合短期城市停留或多日游览泰国南部地区。",
         book_tip: "提示：如晚到，请在备注中写预计到达时间，方便我们协助。",
+        book_guarantee: "直订最优惠价格保证 — 无预订费，无加价。",
 
         amen_title: "住客设施",
         amen_sub: "为舒适便捷入住而准备的贴心基础配套。",
