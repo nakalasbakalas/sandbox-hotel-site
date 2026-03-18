@@ -103,9 +103,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --gridGap: clamp(12px, 1.6vw, 18px);
       --surfacePad: clamp(18px, 2vw, 22px);
       --surfacePadSm: clamp(16px, 1.8vw, 18px);
-      --heroMinHeight: min(74vh, 660px);
-      --heroPanelPad: clamp(18px, 2vw, 24px);
-      --heroInnerPad: clamp(22px, 3vw, 36px);
+      --heroMinHeight: min(62vh, 520px);
+      --heroPanelPad: clamp(16px, 1.8vw, 20px);
+      --heroInnerPad: clamp(18px, 2.4vw, 28px);
       --contentTightGap: 8px;
       --contentStackGap: 12px;
       --fieldPadY: 12px;
@@ -146,9 +146,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --gridGap: clamp(10px, 1.5vw, 14px);
       --surfacePad: clamp(16px, 1.8vw, 20px);
       --surfacePadSm: 16px;
-      --heroMinHeight: min(68vh, 600px);
-      --heroPanelPad: clamp(16px, 1.8vw, 20px);
-      --heroInnerPad: clamp(18px, 2.6vw, 28px);
+      --heroMinHeight: min(58vh, 500px);
+      --heroPanelPad: clamp(14px, 1.6vw, 18px);
+      --heroInnerPad: clamp(16px, 2.2vw, 24px);
       --contentTightGap: 8px;
       --contentStackGap: 10px;
       --fieldPadY: 11px;
@@ -166,9 +166,9 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --gridGap: 12px;
       --surfacePad: 16px;
       --surfacePadSm: 14px;
-      --heroMinHeight: min(64vh, 580px);
-      --heroPanelPad: 16px;
-      --heroInnerPad: clamp(18px, 2.2vw, 26px);
+      --heroMinHeight: min(54vh, 480px);
+      --heroPanelPad: 14px;
+      --heroInnerPad: clamp(16px, 2vw, 22px);
       --contentTightGap: 6px;
       --contentStackGap: 10px;
       --fieldPadY: 10px;
@@ -817,12 +817,12 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       justify-content:flex-end;
       align-items:flex-start;
       padding: var(--heroInnerPad);
-      padding-bottom: clamp(22px, 3vw, 38px);
+      padding-bottom: clamp(18px, 2.4vw, 32px);
       text-align:left;
     }
     .heroPanel{
       width:min(460px, 88vw);
-      margin:0 0 10px 0;
+      margin:0 0 6px 0;
       border-radius: 16px;
       border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(13,14,18,.58), rgba(13,14,18,.40));
@@ -856,7 +856,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       text-wrap:balance;
     }
     .heroSub{
-      margin:0 0 18px;
+      margin:0 0 14px;
       max-width:36ch;
       color:rgba(255,255,255,.90);
       font-size:15px;
@@ -927,35 +927,38 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     /* ---------- Why Stay / Offers ---------- */
-    .offers{display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:10px; margin-top:8px}
+    .offers{display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; margin-top:12px}
     .offer{
-      padding:14px 16px;
+      padding:20px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
       background: var(--surfaceA);
-      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease;
+      transition: transform .16s ease, border-color .16s ease, box-shadow .16s ease, background .16s ease;
     }
     @media (hover:hover){
       .offer:hover{
-        transform:translateY(-1px);
-        border-color:rgba(168,101,42,.16);
-        box-shadow: 0 8px 20px rgba(0,0,0,.08);
+        transform:translateY(-2px);
+        border-color:rgba(168,101,42,.24);
+        box-shadow: 0 12px 28px rgba(0,0,0,.12);
+        background: var(--surfaceB);
       }
     }
-    html[data-theme="light"] .offer:hover{background: var(--surfaceB)}
+    html[data-theme="light"] .offer:hover{background: var(--surfaceC)}
     .offer .offerIcon{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      width:34px; height:34px;
-      border-radius:8px;
-      background: rgba(168,101,42,.08);
-      border:1px solid rgba(168,101,42,.14);
-      font-size:15px;
-      margin-bottom:8px;
+      width:48px; height:48px;
+      border-radius:12px;
+      background: rgba(168,101,42,.12);
+      border:1px solid rgba(168,101,42,.20);
+      font-size:22px;
+      margin-bottom:14px;
+      box-shadow: 0 2px 8px rgba(168,101,42,.08);
     }
-    .offer b{display:flex; align-items:center; gap:8px; color:var(--ink2); font-weight:800; font-size:14px; line-height:1.3}
-    .offer p{margin:5px 0 0; color:var(--muted); font-size:12.5px; line-height:1.48}
+    .offer b{display:block; color:var(--ink2); font-weight:800; font-size:16px; line-height:1.3; margin-bottom:8px}
+    .offer p{margin:0; color:var(--muted); font-size:13.5px; line-height:1.58}
+    @media (max-width:980px){ .offers{grid-template-columns:repeat(2, 1fr)} }
     @media (max-width:640px){ .offers{grid-template-columns:1fr} }
 
         /* ---------- Why choose us ---------- */
@@ -972,20 +975,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 /* ---------- Booking form ---------- */
     .bookingShell{
       display:grid;
-      grid-template-columns:minmax(260px, .78fr) minmax(0, 1.22fr);
+      grid-template-columns:minmax(240px, .7fr) minmax(0, 1.3fr);
       gap:var(--gridGap);
       align-items:start;
-      margin-top:10px;
+      margin-top:12px;
     }
     .bookingMetaCard{
       border:1px solid var(--line);
       border-radius:var(--radius2);
       background:var(--surfaceB);
-      padding:16px;
+      padding:18px;
     }
-    .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:12px 14px; margin-top:8px}
-    .field{display:flex; flex-direction:column; gap:5px}
-    .field label{font-size:12px; color:var(--muted); font-weight:900; letter-spacing:.02em}
+    .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; margin-top:0}
+    .field{display:flex; flex-direction:column; gap:6px}
+    .field label{font-size:12.5px; color:var(--muted); font-weight:800; letter-spacing:.01em}
     .field input,.field select,.field textarea{
       width:100%;
       padding:var(--fieldPadY) var(--fieldPadX);
@@ -2185,11 +2188,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
               <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">Explore Rooms →</a>
             </div>
-            <a class="heroReviewBadge" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener nofollow" aria-label="4.3 out of 5 stars · 120 reviews on Google">
-              <span class="heroReviewStars" aria-hidden="true">★★★★☆</span>
-              <span><strong>4.3</strong> <span class="heroReviewCount" data-i18n="hero_review_count">· 120 reviews on Google</span></span>
-            </a>
-            <p class="heroUrgency"><em class="heroGuarantee"><i class="checkIcon" aria-hidden="true">✓</i> <span data-i18n="hero_best_rate">Best Rate Guaranteed — book direct &amp; save</span></em></p>
           </div>
         </div>
       </div>
@@ -2417,28 +2415,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="bookingShell">
           <div class="bookingMetaCard">
-            <div class="quickDates" aria-label="Quick date presets">
-              <div class="quickTop">
-                <div class="quickLabel" data-i18n="quick_label">Quick dates</div>
-                <div class="quickChips" role="group" aria-label="Quick dates">
-                  <button class="chip quickBtn" type="button" data-qd="tonight" data-i18n="quick_tonight">Tonight</button>
-                  <button class="chip quickBtn" type="button" data-qd="tomorrow" data-i18n="quick_tomorrow">Tomorrow</button>
-                  <button class="chip quickBtn" type="button" data-qd="weekend" data-i18n="quick_weekend">Weekend</button>
-                  <button class="chip quickBtn" type="button" data-qd="7n" data-i18n="quick_7n">7 nights</button>
-                  <button class="chip quickBtn" type="button" data-qd="clear" data-i18n="quick_clear">Clear</button>
-                </div>
-              </div>
-
-              <div id="staySummary" class="fine" data-i18n="stay_summary_placeholder" aria-live="polite">Select dates to see a summary.</div>
-              <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today’s exact rate.</div>
-            </div>
-
-            <div class="sep"></div>
             <div class="fine">
               <p data-i18n="book_tip"><strong>Tip:</strong> Add your estimated arrival time in Notes if arriving late.</p>
               <p data-i18n="book_checkin_info"><strong>Check-in:</strong> From 14:00 • <strong>Check-out:</strong> By 11:00</p>
               <p data-i18n="book_id_note"><strong>ID required:</strong> Government-issued ID or passport needed at check-in.</p>
             </div>
+            <div class="sep"></div>
+            <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today's exact rate.</div>
           </div>
 
           <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
@@ -2483,8 +2466,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="wide ctaRow">
               <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
               <button class="btn" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
-              <button class="btn ghost" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
-              <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible. Exact rates depend on your stay dates.</span>
+              <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible.</span>
             </div>
             <div class="wide bookGuarantee">
               <i class="checkIcon" aria-hidden="true">✓</i>
