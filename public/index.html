@@ -1694,104 +1694,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       }
     }
 
-    /* ---------- Sticky booking bar ---------- */
-    .sticky{
-      position:fixed;
-      left:0; right:0; bottom:0;
-      z-index:90;
-      padding:6px 12px;
-      padding-bottom: calc(6px + env(safe-area-inset-bottom));
-      background: var(--uiGlass2);
-      -webkit-backdrop-filter: blur(10px) saturate(140%);
-      backdrop-filter: blur(10px) saturate(140%);
-      border-top:1px solid var(--line);
-      box-shadow: 0 -4px 12px rgba(0,0,0,.08);
-      display:none;
-      opacity:0;
-      pointer-events:none;
-    }
-    html[data-sticky-visible="true"] .sticky{
-      display:block;
-      opacity:1;
-      pointer-events:auto;
-    }
-    .stickyVariant{display:none}
-    .stickyInner,
-    .stickyMini{
-      max-width:var(--max); margin:0 auto;
-      padding:0 6px;
-    }
-    .stickyInner{
-      display:flex; align-items:center; justify-content:center; gap:10px;
-    }
-    .stickyActions{display:flex; gap:8px; flex-wrap:wrap; justify-content:center}
-    .stickyActions.compact{
-      width:100%;
-      display:grid;
-      grid-template-columns:repeat(2, minmax(0, 1fr));
-      gap:8px;
-    }
-    .stickyActions.compact .btn{
-      min-height:40px;
-      padding:6px 10px;
-      flex-direction:row;
-      gap:6px;
-      line-height:1.05;
-      border-radius:var(--radius-md);
-      justify-content:center;
-    }
-    .stickyActionIcon{
-      font-size:14px;
-      line-height:1;
-      flex-shrink:0;
-    }
-    .stickyActionLabel{
-      font-size:12px;
-      letter-spacing:.02em;
-      text-wrap:balance;
-    }
-    .stickyMini{
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:10px;
-      position:relative;
-    }
-    html[data-sticky-size="mini"] .stickyVariant.mini,
-    html[data-sticky-size="compact"] .stickyVariant.compact,
-    html[data-sticky-size="full"] .stickyVariant.full{display:flex}
-    html[data-sticky-size="mini"]{
-      --sticky-body-pad:56px;
-    }
-    html[data-sticky-size="compact"]{
-      --sticky-body-pad:64px;
-    }
-    html[data-sticky-size="full"]{
-      --sticky-body-pad:56px;
-    }
-
 
     /* ==========================================================
        Responsive Device Layout
     ========================================================== */
-
-    /* Smooth hide/show for the sticky booking bar */
-    .sticky{
-      transform: translateY(0);
-      transition: transform .22s ease, opacity .22s ease, filter .22s ease;
-      will-change: transform;
-    }
-    .sticky.stickyHidden{
-      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
-    }
-    html.kbdOpen .sticky{
-      transform: translateY(calc(100% + env(safe-area-inset-bottom) + 16px));
-    }
-
-    /* Ensure content isn't hidden behind the sticky bar */
-    html[data-sticky-visible="true"] body{
-      padding-bottom: calc(var(--sticky-body-pad, 96px) + env(safe-area-inset-bottom));
-    }
 
     /* Mobile/Tablet header: show ONLY brand + Book Now + hamburger */
     html[data-compact="true"] .navLinks{ gap:8px; }
@@ -1868,11 +1774,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-device="phone"] .iconBtn{ width:40px; height:40px; }
     html[data-device="phone"] #themeLabel{ display:none; }
 
-    /* Sticky bar size tuning */
-    html[data-sticky-size="full"] .stickyActions{align-items:center}
-    html[data-sticky-size="full"] .stickyActions .btn{
-      min-height:36px;
-    }
     html[data-device="phone"] .ctaRow{
       display:grid;
       grid-template-columns:1fr;
@@ -1897,19 +1798,6 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     html[data-device="tablet"] .heroCTA .btn.ghost{ display:none !important; }
 
-    @media (min-width:560px){
-      .stickyActions.compact .btn{
-        flex-direction:row;
-        justify-content:center;
-        gap:8px;
-      }
-    }
-    @media (max-width:379px){
-      .stickyMini{
-        padding:0;
-      }
-    }
-
     /* Footer language strip (mobile/tablet only, since header is minimal) */
     .footerLang{
       display:none;
@@ -1930,7 +1818,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 /* ---------- Print ---------- */
     @media print{
       html,body{background:#fff !important; color:#000 !important}
-      header,.sticky{display:none !important}
+      header{display:none !important}
       .card,.hero{box-shadow:none !important; background:#fff !important; border:1px solid rgba(0,0,0,.18) !important}
       .btn,.chip{box-shadow:none !important}
       a{color:#000 !important; text-decoration:none !important}
@@ -3074,34 +2962,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </section>
   </main>
 
-  <!-- Sticky Bar -->
-  <div class="sticky" role="region" aria-label="Quick contact bar">
-    <div class="stickyInner stickyVariant full">
-      <div class="stickyActions">
-        <a class="btn sm" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call"><span aria-hidden="true">📞</span> Call</a>
-        <a class="btn sm" id="stickyLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line"><span aria-hidden="true">💬</span> LINE<span class="sr-only"> (opens in new tab)</span></a>
-      </div>
-    </div>
-    <div class="stickyInner stickyVariant compact">
-      <div class="stickyActions compact">
-        <a class="btn sm" href="tel:+66885783478" data-analytics="call" aria-label="Call Sandbox Hotel">
-          <span class="stickyActionIcon" aria-hidden="true">📞</span>
-          <span class="stickyActionLabel" data-i18n="btn_call">Call</span>
-        </a>
-        <a class="btn sm" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" aria-label="Open LINE chat">
-          <span class="stickyActionIcon" aria-hidden="true">💬</span>
-          <span class="stickyActionLabel">LINE</span>
-        </a>
-      </div>
-    </div>
-    <div class="stickyMini stickyVariant mini">
-      <div class="stickyActions">
-        <a class="btn sm" href="tel:+66885783478" data-analytics="call" data-i18n="btn_call"><span aria-hidden="true">📞</span> Call</a>
-        <a class="btn sm" id="stickyLineMini" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line"><span aria-hidden="true">💬</span> LINE<span class="sr-only"> (opens in new tab)</span></a>
-      </div>
-    </div>
-  </div>
-
   <script>
     // =========================
     // CONFIG (EDIT THESE)
@@ -3112,11 +2972,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     // =========================
 
     
-    // ---------- Device display tuning (phone/tablet + sticky sizing) ----------
+    // ---------- Device display tuning (phone/tablet) ----------
     (function(){
       const root = document.documentElement;
-      const sticky = document.querySelector(".sticky");
-      const stickyMiniMenu = document.querySelector(".stickyMiniMenu");
       let resizeT;
 
       function detectDevice(){
@@ -3128,27 +2986,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                         (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
 
         let device = "desktop";
-        let stickySize = "hidden";
         if(isTouch){
           device = (minSide <= 680) ? "phone" : "tablet";
-          if(w < 480){
-            stickySize = "mini";
-          } else if(w < 750){
-            stickySize = "compact";
-          } else {
-            stickySize = "full";
-          }
-        } else if(w >= 750){
-          stickySize = "full";
         }
         root.setAttribute("data-device", device);
         root.setAttribute("data-compact", device === "desktop" ? "false" : "true");
-        root.setAttribute("data-density", stickySize === "mini" ? "ultra-compact" : (device === "desktop" ? "comfortable" : "compact"));
-        root.setAttribute("data-sticky-size", stickySize);
-        root.setAttribute("data-sticky-visible", stickySize === "hidden" ? "false" : "true");
-        if(stickyMiniMenu && stickySize !== "mini"){
-          stickyMiniMenu.removeAttribute("open");
-        }
+        root.setAttribute("data-density", device === "desktop" ? "comfortable" : "compact");
       }
 
       detectDevice();
@@ -3156,60 +2999,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         clearTimeout(resizeT);
         resizeT = setTimeout(detectDevice, 150);
       }, { passive:true });
-
-      if(!sticky) return;
-
-      // Hide sticky while typing (on-screen keyboard)
-      document.addEventListener("focusin", (e)=>{
-        if(root.getAttribute("data-sticky-visible") === "true"){
-          const tag = e.target && e.target.tagName;
-          if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT"){
-            root.classList.add("kbdOpen");
-          }
-        }
-      }, true);
-
-      document.addEventListener("focusout", (e)=>{
-        const tag = e.target && e.target.tagName;
-        if(tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT"){
-          setTimeout(()=>root.classList.remove("kbdOpen"), 120);
-        }
-      }, true);
-
-      // Auto-hide sticky on downward scroll whenever the sticky bar is active.
-      let lastY = window.scrollY || 0;
-      let ticking = false;
-
-      function updateSticky(){
-        const stickyVisible = root.getAttribute("data-sticky-visible") === "true";
-        if(!stickyVisible){
-          sticky.classList.remove("stickyHidden");
-          lastY = window.scrollY || 0;
-          return;
-        }
-        const y = window.scrollY || 0;
-        const delta = y - lastY;
-
-        if(y < 120){
-          sticky.classList.remove("stickyHidden");
-        } else if(delta > 10){
-          sticky.classList.add("stickyHidden");
-        } else if(delta < -10){
-          sticky.classList.remove("stickyHidden");
-        }
-        lastY = y;
-      }
-
-      window.addEventListener("scroll", ()=>{
-        if(ticking) return;
-        ticking = true;
-        requestAnimationFrame(()=>{
-          ticking = false;
-          updateSticky();
-        });
-      }, { passive:true });
-
-      updateSticky();
     })();
 
 // ---------- Theme (System default; user override saved) ----------
@@ -3490,9 +3279,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         back_to_top: "กลับขึ้นด้านบน",
         footer_lang: "ภาษา:",
 
-        sticky_title: "ต้องการความช่วยเหลือ?",
-        sticky_sub: "โทรหรือ LINE หาเราได้เลย",
-
         msg_title: "คำขอจอง – Sandbox Hotel",
         msg_checkin: "เช็คอิน",
         msg_checkout: "เช็คเอาต์",
@@ -3742,9 +3528,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         back_to_top: "Back to top",
         footer_lang: "Language:",
 
-        sticky_title: "Need help?",
-        sticky_sub: "Call or LINE us for the fastest reply.",
-
         msg_title: "Booking request – Sandbox Hotel",
         msg_checkin: "Check-in",
         msg_checkout: "Check-out",
@@ -3993,9 +3776,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         loc_notes: "提示：政策可能随季节调整，最新信息请直接联系酒店。",
         back_to_top: "返回顶部",
         footer_lang: "语言:",
-
-        sticky_title: "需要帮助？",
-        sticky_sub: "电话或LINE联系我们。",
 
         msg_title: "预订请求 – Sandbox Hotel",
         msg_checkin: "入住",
@@ -4252,7 +4032,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function wireContactButtons(){
       // Non-JS fallbacks: real links
-      ["contactLine","stickyLine","stickyLineMini"].forEach(id=>{
+      ["contactLine"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
         el.setAttribute("href", lineMessageUrl(t("msg_title") || "Booking request – Sandbox Hotel"));
