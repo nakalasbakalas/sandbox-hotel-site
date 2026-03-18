@@ -26,7 +26,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <link rel="alternate" hreflang="x-default" href="https://www.sandboxhotel.com/">
   <link rel="icon" href="assets/images/logo/favicon.ico" sizes="any">
   <link rel="icon" type="image/png" sizes="32x32" href="assets/images/logo/logo-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="assets/images/logo/logo-16.png">
+  <link rel="icon" type="image/png" sizes="64x64" href="assets/images/logo/logo-64.png">
   <link rel="apple-touch-icon" sizes="256x256" href="assets/images/logo/logo-256.png">
   <link rel="manifest" href="site.webmanifest">
   <link rel="shortcut icon" href="assets/images/logo/favicon.ico">
@@ -85,8 +85,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --olive:#5C6B55;
       --slate:#4A5568;
 
-      --radius:16px;
-      --radius2:12px;
+      --radius-xs:4px;
+      --radius-sm:6px;
+      --radius-md:10px;
+      --radius-lg:14px;
+      --radius-xl:18px;
+      --radius:var(--radius-md);
+      --radius2:var(--radius-md);
       --max:1200px;
 
       --tap:46px;
@@ -96,7 +101,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       --nav-gap:8px;
       --btn-h:44px;
       --btn-px:16px;
-      --btn-radius:10px;
+      --btn-radius:var(--radius-sm);
       --btn-border:1px;
       --gutter: clamp(16px, 2.8vw, 32px);
       --sectionY: clamp(36px, 4vw, 48px);
@@ -342,7 +347,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .skipLink{
       position:absolute; left:-9999px; top:10px;
       background:var(--card); color:var(--ink2);
-      border:1px solid var(--line); border-radius:12px;
+      border:1px solid var(--line); border-radius:var(--radius-md);
       padding:10px 12px; z-index:999;
     }
     .skipLink:focus{left:10px}
@@ -511,7 +516,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:grid;
       gap:8px;
       padding:12px;
-      border-radius:16px;
+      border-radius:var(--radius-lg);
       border:1px solid var(--line);
       background:var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(150%);
@@ -662,7 +667,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       color:var(--ink2);
     }
     .btn.ghost:hover{background: var(--surfaceA)}
-    .btn.sm{min-height:40px; padding:10px 12px; border-radius:12px}
+    .btn.sm{min-height:40px; padding:10px 12px; border-radius:var(--radius-sm)}
     .textLink{
       display:inline-flex;
       align-items:center;
@@ -702,7 +707,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:flex;
       gap:8px;
       padding:10px;
-      border-radius:14px;
+      border-radius:var(--radius-lg);
       border:1px solid var(--line);
       background:var(--uiGlass2);
       -webkit-backdrop-filter: blur(10px) saturate(150%);
@@ -714,7 +719,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .flagItem{
       width:40px;
       height:40px;
-      border-radius:12px;
+      border-radius:var(--radius-md);
       border:1px solid var(--controlBorder);
       background:var(--surfaceB);
       display:grid;
@@ -823,7 +828,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .heroPanel{
       width:min(460px, 88vw);
       margin:0 0 6px 0;
-      border-radius: 16px;
+      border-radius: var(--radius-lg);
       border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(13,14,18,.58), rgba(13,14,18,.40));
       box-shadow: 0 18px 42px rgba(0,0,0,.22);
@@ -949,7 +954,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       align-items:center;
       justify-content:center;
       width:48px; height:48px;
-      border-radius:12px;
+      border-radius:var(--radius-md);
       background: rgba(168,101,42,.12);
       border:1px solid rgba(168,101,42,.20);
       font-size:22px;
@@ -992,7 +997,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .field input,.field select,.field textarea{
       width:100%;
       padding:var(--fieldPadY) var(--fieldPadX);
-      border-radius:14px;
+      border-radius:var(--radius-sm);
       border:1px solid var(--controlBorder);
       background: var(--fieldBg);
       color: var(--ink);
@@ -1122,7 +1127,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       grid-row: 1 / span 2;
       width: 40px;
       height: 40px;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       display: grid;
       place-items: center;
       flex-shrink:0;
@@ -1207,7 +1212,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .roomThumb{
       position:relative;
-      border-radius:10px;
+      border-radius:var(--radius-sm);
       overflow:hidden;
       border:2px solid transparent;
       cursor:pointer;
@@ -1303,7 +1308,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .priceBox{text-align:left; margin-top:4px}
     .priceBox .fine{font-size:12px; color:var(--copper2); font-weight:600}
     .roomActions{margin-top:auto; padding-top:8px; display:flex; flex-wrap:wrap; gap:10px; align-items:center}
-    .roomActions .btn.primary{min-height:46px; font-size:14.5px; padding:0 20px; border-radius:10px; letter-spacing:.01em}
+    .roomActions .btn.primary{min-height:46px; font-size:14.5px; padding:0 20px; border-radius:var(--radius-sm); letter-spacing:.01em}
 
     .roomDividerLine{
       border:none;
@@ -1410,7 +1415,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .galThumb{
       padding:0;
-      border-radius:10px;
+      border-radius:var(--radius-sm);
       border:2px solid var(--controlBorder);
       background: var(--surfaceA);
       overflow:hidden;
@@ -1444,7 +1449,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     .galHint{text-align:center; margin-top:6px}
     @media (max-width:640px){
-      .galNavBtn{width:42px; height:42px; border-radius: 13px}
+      .galNavBtn{width:42px; height:42px; border-radius: var(--radius-md)}
       .galThumbs{grid-template-columns:repeat(3, minmax(0, 1fr))}
     }
     @media (min-width:641px) and (max-width:860px){
@@ -1466,8 +1471,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
     @media (hover:hover){
       .review:hover{
-        transform:translateY(-1px);
-        box-shadow: 0 10px 24px rgba(0,0,0,.10);
+        transform:translateY(-2px);
+        box-shadow: 0 4px 16px rgba(0,0,0,.12);
         border-color: rgba(168,101,42,.14);
       }
     }
@@ -1707,7 +1712,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     html[data-device="phone"] .hero{
       min-height: clamp(400px, 70vh, 560px);
-      border-radius: 18px;
+      border-radius: var(--radius-xl);
     }
     html[data-device="phone"] .heroInner{
       padding: clamp(14px, 4vw, 22px) 14px;
@@ -1777,7 +1782,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       flex: 1 1 auto;
       min-height: 40px;
       padding: 9px 10px;
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
     }
     html[data-device="phone"] #stickyLine,
     html[data-device="phone"] #stickyWA{ display:none !important; }
@@ -1933,7 +1938,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       display:inline-flex; align-items:center; gap:8px;
       margin-top:14px;
       padding:8px 14px;
-      border-radius:10px;
+      border-radius:var(--radius-sm);
       background: rgba(255,255,255,.10);
       border:1px solid rgba(255,255,255,.18);
       color:rgba(255,255,255,.92);
@@ -1966,7 +1971,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .bookGuarantee{
       display:flex; align-items:center; gap:6px;
       padding:10px 14px;
-      border-radius:10px;
+      border-radius:var(--radius-sm);
       border:1px solid color-mix(in oklab, var(--copper) 20%, var(--line));
       background: color-mix(in oklab, var(--copper) 4%, var(--surfaceA));
       font-size:13px;
@@ -2182,7 +2187,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Sandbox Hotel home">
         <div class="logo">
-          <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="56px" alt="Sandbox Hotel logo" width="128" height="128" loading="eager" decoding="async">
+          <img src="assets/images/logo/logo_square.png" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" decoding="async">
         </div>
         <div class="brandText">
           <span class="brandName">Sandbox Hotel</span>
@@ -2206,7 +2211,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="navPanel" role="group" aria-label="Site navigation">
             <div class="navPanelBrand">
               <div class="logo">
-                <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="40px" alt="Sandbox Hotel logo" width="128" height="128" loading="lazy" decoding="async">
+                <img src="assets/images/logo/logo_square.png" alt="Sandbox Hotel logo" width="40" height="40" loading="lazy" decoding="async">
               </div>
               <div class="brandText">
                 <span class="navPanelBrandTitle">Sandbox Hotel</span>
@@ -2900,7 +2905,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <footer>
           <div class="footerBrand">
             <div class="logo footerLogo">
-              <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="44px" alt="Sandbox Hotel logo" width="128" height="128" loading="lazy" decoding="async">
+              <img src="assets/images/logo/logo_light_bg.png" alt="Sandbox Hotel logo" width="44" height="44" loading="lazy" decoding="async">
             </div>
             <div class="footerBrandText">
               <span class="footerBrandName">Sandbox Hotel</span>

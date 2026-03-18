@@ -124,7 +124,7 @@
       --champagne: #E8C9A0;
       --max: 900px;
       --gutter: clamp(16px, 2.8vw, 32px);
-      --radius: 16px;
+      --radius: 16px; --radius-xs: 4px; --radius-sm: 6px; --radius-md: 10px; --radius-lg: 14px; --radius-xl: 18px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body {
@@ -152,12 +152,12 @@
       font-weight: 800;
       font-size: 17px;
     }
-    .brand-link img { width: 36px; height: 36px; border-radius: 8px; }
+    .brand-link img { width: 36px; height: 36px; border-radius: var(--radius-sm); }
     .nav-book {
       background: var(--copper);
       color: #fff;
       padding: 10px 20px;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       text-decoration: none;
       font-weight: 700;
       font-size: 14px;
@@ -199,7 +199,7 @@
       background: var(--copper);
       color: #fff;
       padding: 13px 24px;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
@@ -208,7 +208,7 @@
       background: #fff;
       color: var(--copper);
       padding: 12px 22px;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       text-decoration: none;
       font-weight: 700;
       font-size: 15px;
@@ -227,7 +227,7 @@
     .trust-item {
       background: #fff;
       border: 1px solid #e8e4de;
-      border-radius: 8px;
+      border-radius: var(--radius-sm);
       padding: 8px 14px;
       font-size: 13px;
       font-weight: 600;
@@ -273,9 +273,11 @@
     .room-card {
       background: #fdfaf6;
       border: 1px solid #e8e4de;
-      border-radius: 12px;
+      border-radius: var(--radius-md);
       padding: 20px;
+      transition: transform .16s ease, box-shadow .16s ease;
     }
+    .room-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,.08); }
     .room-card h3 { margin-top: 0; color: var(--copper); }
     .room-tag {
       display: inline-block;
@@ -292,7 +294,7 @@
     /* FAQ */
     details {
       border: 1px solid #e8e4de;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       padding: 0;
       margin-bottom: 10px;
       background: #fff;
@@ -333,7 +335,7 @@
 <div class="wrap">
   <nav>
     <a class="brand-link" href="/">
-      <img src="/assets/images/logo/logo-128.png" alt="Sandbox Hotel logo" width="36" height="36">
+      <img src="/assets/images/logo/logo_square.png" alt="Sandbox Hotel logo" width="36" height="36">
       Sandbox Hotel
     </a>
     <a class="nav-book" href="/#book">Book Direct</a>
