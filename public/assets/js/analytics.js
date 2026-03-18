@@ -184,12 +184,9 @@
       return collapseWhitespace(trackedSection.getAttribute("data-analytics-section"));
     }
 
-    const section = element.closest("section[id], header, footer, .sticky, main, body");
+    const section = element.closest("section[id], header, footer, main, body");
     if (!section) {
       return "page";
-    }
-    if (section.classList && section.classList.contains("sticky")) {
-      return "sticky_bar";
     }
     if (section.id) {
       return slugify(section.id);
