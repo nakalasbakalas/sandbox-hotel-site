@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 from datetime import date, timedelta, timezone
+from unittest.mock import patch
 
 from werkzeug.security import generate_password_hash
 
@@ -30,6 +31,7 @@ from pms.services.communication_service import (
     send_due_failed_payment_reminders,
     send_due_pre_arrival_reminders,
 )
+from pms.services.notification_service import deliver_email_outbox_entry
 from pms.services.payment_integration_service import (
     create_or_reuse_deposit_request,
     process_payment_webhook,
@@ -134,6 +136,32 @@ def create_staff_reservation(*, first_name: str, room_type_code: str = "DBL", of
     )
 
 
+class FakeSMTPClient:
+    def __init__(self, host: str, port: int, *, timeout: int | None = None, context=None):
+        self.host = host
+        self.port = port
+        self.timeout = timeout
+        self.context = context
+        self.starttls_context = None
+        self.logged_in = None
+        self.message = None
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc, tb):
+        return False
+
+    def starttls(self, *, context=None):
+        self.starttls_context = context
+
+    def login(self, username: str, password: str):
+        self.logged_in = (username, password)
+
+    def send_message(self, message):
+        self.message = message
+
+
 def test_public_booking_creates_guest_confirmation_and_staff_alert_deliveries(app_factory):
     app = app_factory(seed=True)
     with app.app_context():
@@ -215,6 +243,103 @@ def test_deposit_request_email_tracks_payment_link_and_payment_success_waits_for
         ).all()
         assert len(success_deliveries) == 1
         assert success_deliveries[0].rendered_body and "Payment" in success_deliveries[0].rendered_subject
+
+
+def test_email_outbox_delivery_uses_starttls_transport_by_default(app_factory):
+    app = app_factory(
+        config={
+            "SMTP_HOST": "smtp.example.com",
+            "SMTP_PORT": 587,
+            "SMTP_USERNAME": "mailer@example.com",
+            "SMTP_PASSWORD": "top-secret",
+            "SMTP_USE_TLS": True,
+            "SMTP_USE_SSL": False,
+            "MAIL_FROM": "reservations@example.com",
+        }
+    )
+    captured: dict[str, FakeSMTPClient] = {}
+
+    def fake_smtp(host: str, port: int, *, timeout: int | None = None):
+        client = FakeSMTPClient(host, port, timeout=timeout)
+        captured["client"] = client
+        return client
+
+    with app.app_context():
+        entry = EmailOutbox(
+            email_type="guest_confirmation",
+            recipient_email="guest@example.com",
+            subject="Booking confirmation",
+            body_text="Your reservation is confirmed.",
+            language="en",
+            dedupe_key="phase11-starttls",
+        )
+        db.session.add(entry)
+        db.session.commit()
+
+        with patch("pms.services.notification_service.smtplib.SMTP", side_effect=fake_smtp) as smtp_mock, patch(
+            "pms.services.notification_service.smtplib.SMTP_SSL",
+            side_effect=AssertionError("SMTP_SSL should not be used for STARTTLS delivery."),
+        ):
+            delivered = deliver_email_outbox_entry(entry.id)
+
+        assert smtp_mock.call_count == 1
+        assert delivered is not None and delivered.status == "sent"
+        assert captured["client"].host == "smtp.example.com"
+        assert captured["client"].port == 587
+        assert captured["client"].timeout == 15
+        assert captured["client"].starttls_context is not None
+        assert captured["client"].logged_in == ("mailer@example.com", "top-secret")
+        assert captured["client"].message["From"] == "reservations@example.com"
+        assert captured["client"].message["To"] == "guest@example.com"
+
+
+def test_email_outbox_delivery_uses_ssl_transport_when_configured(app_factory):
+    app = app_factory(
+        config={
+            "SMTP_HOST": "smtp.example.com",
+            "SMTP_PORT": 465,
+            "SMTP_USERNAME": "mailer@example.com",
+            "SMTP_PASSWORD": "top-secret",
+            "SMTP_USE_TLS": False,
+            "SMTP_USE_SSL": True,
+            "MAIL_FROM": "reservations@example.com",
+        }
+    )
+    captured: dict[str, FakeSMTPClient] = {}
+
+    def fake_smtp_ssl(host: str, port: int, *, timeout: int | None = None, context=None):
+        client = FakeSMTPClient(host, port, timeout=timeout, context=context)
+        captured["client"] = client
+        return client
+
+    with app.app_context():
+        entry = EmailOutbox(
+            email_type="guest_confirmation",
+            recipient_email="guest@example.com",
+            subject="Booking confirmation",
+            body_text="Your reservation is confirmed.",
+            language="en",
+            dedupe_key="phase11-ssl",
+        )
+        db.session.add(entry)
+        db.session.commit()
+
+        with patch(
+            "pms.services.notification_service.smtplib.SMTP",
+            side_effect=AssertionError("Plain SMTP should not be used for implicit TLS delivery."),
+        ), patch("pms.services.notification_service.smtplib.SMTP_SSL", side_effect=fake_smtp_ssl) as smtp_ssl_mock:
+            delivered = deliver_email_outbox_entry(entry.id)
+
+        assert smtp_ssl_mock.call_count == 1
+        assert delivered is not None and delivered.status == "sent"
+        assert captured["client"].host == "smtp.example.com"
+        assert captured["client"].port == 465
+        assert captured["client"].timeout == 15
+        assert captured["client"].context is not None
+        assert captured["client"].starttls_context is None
+        assert captured["client"].logged_in == ("mailer@example.com", "top-secret")
+        assert captured["client"].message["From"] == "reservations@example.com"
+        assert captured["client"].message["To"] == "guest@example.com"
 
 
 def test_pre_arrival_runner_only_targets_eligible_reservations(app_factory):

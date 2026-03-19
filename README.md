@@ -82,6 +82,28 @@ cp .env.example .env
 # Then edit .env with your actual values
 ```
 
+For the root Cloudflare Worker, local runtime variables live in `.dev.vars`:
+
+```bash
+cp .dev.vars.example .dev.vars
+```
+
+Email-related Worker settings:
+
+- `BOOKING_EMAIL_FORWARD_TO`: verified Cloudflare Email Routing destination for inbound `booking@...` mail
+- `EMAIL_ROUTING_ALLOWED_LOCAL_PARTS`: optional inbound alias allowlist, defaults to `booking,reservations`
+- `POSTMARK_SERVER_TOKEN`: Postmark server token for outbound booking acknowledgements
+- `POSTMARK_MESSAGE_STREAM`: optional Postmark message stream, defaults to `outbound`
+- `BOOKING_FROM_EMAIL`: sender address for acknowledgements, defaults to `booking@sandboxhotel.com`
+- `BOOKING_REPLY_TO_EMAIL`: reply-to address for acknowledgements, defaults to `booking@sandboxhotel.com`
+
+To finish setup in Cloudflare:
+
+1. Verify the destination inbox in Email Routing.
+2. Create or edit the Email Worker route for `booking@sandboxhotel.com` so it points to this Worker.
+3. Set `POSTMARK_SERVER_TOKEN` with `npx wrangler secret put POSTMARK_SERVER_TOKEN`.
+4. Set the non-secret runtime vars from `.dev.vars.example` in your production Worker environment.
+
 ## Deployment
 
 - **Development**: `npm run dev -w packages/web`

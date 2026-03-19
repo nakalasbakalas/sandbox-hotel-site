@@ -17,8 +17,15 @@ const SECURITY_HEADERS = {
   "permissions-policy": "camera=(), microphone=(), geolocation=(), payment=()",
 };
 
+const DEFAULT_BOOKING_FROM_EMAIL = "booking@sandboxhotel.com";
+const DEFAULT_ALLOWED_EMAIL_LOCAL_PARTS = ["booking", "reservations"];
+const DEFAULT_POSTMARK_API_BASE = "https://api.postmarkapp.com";
+const DEFAULT_POSTMARK_MESSAGE_STREAM = "outbound";
+const DEFAULT_BOOKING_ACK_SUBJECT = "Sandbox Hotel booking request received";
+const BOOKING_EMAIL_DEDUPE_WINDOW_MS = 10 * 60 * 1000;
+
 export default {
-  async fetch(request, env) {
+  async fetch(request, env, ctx) {
     try {
       const url = new URL(request.url);
       if (url.hostname.toLowerCase() === "sandboxhotel.com") {
@@ -47,12 +54,22 @@ export default {
         return fetchAsset(request, env, url);
       }
 
-      const response = await routeRequest(request, env);
+      const response = await routeRequest(request, env, ctx);
       return withCors(response, request.headers.get("origin") || "");
     } catch (error) {
       const status = error instanceof HttpError ? error.status : 500;
       const message = error instanceof HttpError ? error.message : "Internal server error";
       return withCors(json({ ok: false, error: message }, status), request.headers.get("origin") || "");
+    }
+  },
+
+  async email(message, env) {
+    try {
+      await handleInboundEmail(message, env);
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error("Inbound email handling failed", error);
+      message.setReject("Temporary email processing failure.");
     }
   },
 };
@@ -82,7 +99,7 @@ async function fetchAsset(request, env, baseUrl) {
   }
 }
 
-async function routeRequest(request, env) {
+async function routeRequest(request, env, ctx) {
   const url = new URL(request.url);
   const { pathname } = url;
 
@@ -106,7 +123,7 @@ async function routeRequest(request, env) {
   }
 
   if (pathname === "/api/booking-ingest" && request.method === "POST") {
-    return ingestBookingLead(request, env.DB, null);
+    return ingestBookingLead(request, env, null, ctx);
   }
 
   const session = await requireSession(request, env);
@@ -352,17 +369,166 @@ async function saveSettings(request, db, session) {
   return json({ ok: true, settings: await getSettings(db) });
 }
 
-async function ingestBookingLead(request, db, session) {
+async function ingestBookingLead(request, env, session, ctx) {
+  const db = env.DB;
   const payload = await parseJson(request);
   requireFields(payload, ["checkin", "checkout", "guests"]);
   const now = isoNow();
   await db.prepare(`INSERT INTO booking_leads (property_id, source, status, guest_name, guest_contact, guest_notes, requested_room_type, guests, checkin_date, checkout_date, raw_payload, created_at, updated_at) VALUES (1, ?, 'new', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
     .bind(payload.source || "website", payload.name || "", payload.contact || "", payload.notes || "", payload.room || "", Number(payload.guests || 1), payload.checkin, payload.checkout, JSON.stringify(payload), now, now).run();
   const leadId = Number((await first(db, "SELECT last_insert_rowid() AS id")).id);
+  const lead = {
+    id: leadId,
+    source: payload.source || "website",
+    guestName: payload.name || "",
+    guestContact: payload.contact || "",
+    guestNotes: payload.notes || "",
+    requestedRoomType: payload.room || "",
+    guests: Number(payload.guests || 1),
+    checkinDate: payload.checkin,
+    checkoutDate: payload.checkout,
+    createdAt: now,
+  };
+  const emailStatus = await maybeQueueBookingLeadAcknowledgement(db, env, lead, ctx);
   if (session) {
     await insertAudit(db, session.propertyId, session.userId, "booking_lead_created", "booking_lead", leadId, "Lead created");
   }
-  return json({ ok: true, leadId }, 201);
+  return json({ ok: true, leadId, emailStatus }, 201);
+}
+
+export async function handleInboundEmail(message, env) {
+  const recipient = normalizeEmailAddress(message.to);
+  const localPart = recipient.split("@")[0]?.split("+")[0] || "";
+  const allowedLocalParts = getAllowedEmailLocalParts(env);
+  if (allowedLocalParts.length > 0 && !allowedLocalParts.includes(localPart)) {
+    message.setReject("Recipient is not configured for this mailbox.");
+    return { ok: false, status: "rejected_recipient" };
+  }
+
+  const forwardTo = normalizeEmailAddress(env.BOOKING_EMAIL_FORWARD_TO || "");
+  if (!forwardTo) {
+    message.setReject("Mailbox forwarding is not configured.");
+    return { ok: false, status: "rejected_not_configured" };
+  }
+
+  await message.forward(forwardTo);
+  return { ok: true, status: "forwarded", forwardTo };
+}
+
+async function maybeQueueBookingLeadAcknowledgement(db, env, lead, ctx) {
+  const guestEmail = extractEmailAddress(lead.guestContact);
+  if (!guestEmail) return "skipped_no_email";
+  if (!String(env.POSTMARK_SERVER_TOKEN || "").trim()) return "skipped_not_configured";
+  if (await hasRecentDuplicateBookingLead(db, lead)) return "skipped_duplicate";
+
+  const task = sendBookingLeadAcknowledgement(env, { ...lead, guestEmail });
+  if (ctx && typeof ctx.waitUntil === "function") {
+    ctx.waitUntil(
+      task.catch((error) => {
+        // eslint-disable-next-line no-console
+        console.error(`Booking acknowledgement failed for lead ${lead.id}`, error);
+      }),
+    );
+    return "queued";
+  }
+
+  try {
+    await task;
+    return "sent";
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.error(`Booking acknowledgement failed for lead ${lead.id}`, error);
+    return "failed";
+  }
+}
+
+async function hasRecentDuplicateBookingLead(db, lead) {
+  const cutoff = new Date(Date.parse(lead.createdAt) - BOOKING_EMAIL_DEDUPE_WINDOW_MS).toISOString();
+  const duplicate = await first(
+    db,
+    `SELECT id FROM booking_leads
+     WHERE id != ?
+       AND created_at >= ?
+       AND LOWER(TRIM(COALESCE(guest_contact, ''))) = ?
+       AND checkin_date = ?
+       AND checkout_date = ?
+       AND guests = ?
+       AND LOWER(TRIM(COALESCE(requested_room_type, ''))) = ?
+       AND LOWER(TRIM(COALESCE(guest_name, ''))) = ?
+     ORDER BY created_at DESC
+     LIMIT 1`,
+    lead.id,
+    cutoff,
+    normalizeComparableText(lead.guestContact),
+    lead.checkinDate,
+    lead.checkoutDate,
+    lead.guests,
+    normalizeComparableText(lead.requestedRoomType),
+    normalizeComparableText(lead.guestName),
+  );
+  return Boolean(duplicate);
+}
+
+export async function sendBookingLeadAcknowledgement(env, lead) {
+  const fromEmail = normalizeEmailAddress(env.BOOKING_FROM_EMAIL || DEFAULT_BOOKING_FROM_EMAIL) || DEFAULT_BOOKING_FROM_EMAIL;
+  const replyToEmail = normalizeEmailAddress(env.BOOKING_REPLY_TO_EMAIL || fromEmail) || fromEmail;
+  const payload = {
+    From: fromEmail,
+    To: lead.guestEmail,
+    Subject: String(env.BOOKING_ACK_SUBJECT || DEFAULT_BOOKING_ACK_SUBJECT).trim() || DEFAULT_BOOKING_ACK_SUBJECT,
+    ReplyTo: replyToEmail,
+    MessageStream: String(env.POSTMARK_MESSAGE_STREAM || DEFAULT_POSTMARK_MESSAGE_STREAM).trim() || DEFAULT_POSTMARK_MESSAGE_STREAM,
+    Tag: "booking-lead-acknowledgement",
+    TextBody: buildBookingLeadAcknowledgementText(lead),
+    Metadata: {
+      lead_id: String(lead.id),
+      source: String(lead.source || "website"),
+    },
+  };
+
+  return sendPostmarkEmail(env, payload);
+}
+
+async function sendPostmarkEmail(env, payload) {
+  const apiBase = String(env.POSTMARK_API_BASE || DEFAULT_POSTMARK_API_BASE).trim().replace(/\/+$/, "");
+  const response = await fetch(`${apiBase}/email`, {
+    method: "POST",
+    headers: {
+      accept: "application/json",
+      "content-type": "application/json",
+      "x-postmark-server-token": String(env.POSTMARK_SERVER_TOKEN || "").trim(),
+    },
+    body: JSON.stringify(payload),
+  });
+  const result = await response.json().catch(() => null);
+  if (!response.ok) {
+    const detail = result && typeof result.Message === "string" ? result.Message : `Postmark request failed with status ${response.status}`;
+    throw new Error(detail);
+  }
+  return result;
+}
+
+export function buildBookingLeadAcknowledgementText(lead) {
+  const greeting = lead.guestName ? `Hello ${lead.guestName},` : "Hello,";
+  const lines = [
+    greeting,
+    "",
+    "We received your booking request at Sandbox Hotel.",
+    "Our team will review it and reply with availability and pricing soon.",
+    "",
+    `Reference: Lead ${lead.id}`,
+    `Check-in: ${lead.checkinDate}`,
+    `Check-out: ${lead.checkoutDate}`,
+    `Guests: ${lead.guests}`,
+    lead.requestedRoomType ? `Room: ${lead.requestedRoomType}` : null,
+    lead.guestContact ? `Contact: ${lead.guestContact}` : null,
+    lead.guestNotes ? `Notes: ${lead.guestNotes}` : null,
+    "",
+    "If you need to add anything, reply to this email and we will pick it up from our booking inbox.",
+    "",
+    "Sandbox Hotel",
+  ].filter(Boolean);
+  return lines.join("\n");
 }
 
 async function listLeads(db) {
@@ -660,7 +826,7 @@ function isoNow() {
 }
 
 function todayIso() {
-  return new Intl.DateTimeFormat("en-CA", { timeZone: HOTEL_TIMEZONE, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+  return new globalThis.Intl.DateTimeFormat("en-CA", { timeZone: HOTEL_TIMEZONE, year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
 }
 
 function addDays(date, days) {
@@ -676,6 +842,28 @@ function inferHousekeepingStatus(status) {
   if (status === "inspection") return "inspection";
   if (status === "out_of_order") return "blocked";
   return "clean";
+}
+
+function getAllowedEmailLocalParts(env) {
+  const configured = String(env.EMAIL_ROUTING_ALLOWED_LOCAL_PARTS || "").trim();
+  const source = configured || DEFAULT_ALLOWED_EMAIL_LOCAL_PARTS.join(",");
+  return source
+    .split(",")
+    .map((part) => part.trim().toLowerCase())
+    .filter(Boolean);
+}
+
+function normalizeComparableText(value) {
+  return String(value || "").trim().toLowerCase();
+}
+
+function normalizeEmailAddress(value) {
+  return extractEmailAddress(value);
+}
+
+export function extractEmailAddress(value) {
+  const match = String(value || "").match(/[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}/i);
+  return match ? match[0].toLowerCase() : "";
 }
 
 function toHex(array) {

@@ -32,8 +32,18 @@ def deliver_email_outbox_entry(email_outbox_id, *, commit: bool = True) -> Email
     message.set_content(entry.body_text)
 
     try:
-        with smtplib.SMTP(smtp_host, current_app.config["SMTP_PORT"], timeout=15) as client:
-            if current_app.config["SMTP_USE_TLS"]:
+        smtp_port = current_app.config["SMTP_PORT"]
+        smtp_use_ssl = current_app.config.get("SMTP_USE_SSL", False)
+        smtp_use_tls = current_app.config.get("SMTP_USE_TLS", False) and not smtp_use_ssl
+        if smtp_use_ssl:
+            smtp_client = smtplib.SMTP_SSL
+            client_kwargs = {"timeout": 15, "context": ssl.create_default_context()}
+        else:
+            smtp_client = smtplib.SMTP
+            client_kwargs = {"timeout": 15}
+
+        with smtp_client(smtp_host, smtp_port, **client_kwargs) as client:
+            if smtp_use_tls:
                 client.starttls(context=ssl.create_default_context())
             if current_app.config["SMTP_USERNAME"]:
                 client.login(
