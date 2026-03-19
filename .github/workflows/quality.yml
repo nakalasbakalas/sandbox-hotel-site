@@ -1,0 +1,60 @@
+name: Quality checks
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install --no-package-lock
+      - run: npm run lint
+
+  test:
+    name: Worker tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+      - run: npm install --no-package-lock
+      - run: npm test
+
+  content-freshness:
+    name: Content freshness
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check for production TODO markers and placeholders
+        run: |
+          echo "=== Checking for production TODO markers ==="
+          found=0
+
+          # Check for YOUR_LINE_ID placeholder in production HTML
+          if grep -rn 'YOUR_LINE_ID' public/index.html; then
+            echo "::warning file=public/index.html::LINE ID placeholder still present"
+          fi
+
+          # Check for TODO comments in i18n strings (review count, etc.)
+          if grep -n '// TODO:' public/index.html; then
+            echo "::warning file=public/index.html::TODO comments found in production HTML"
+          fi
+
+          # Fail the check only if critical placeholders are found in
+          # non-comment code paths (the YOUR_LINE_ID runtime check is
+          # expected — it is the fallback guard).
+          # For now this job warns but does not fail, to avoid blocking
+          # merges before ops provides the real values.
+          echo "Content freshness check complete."

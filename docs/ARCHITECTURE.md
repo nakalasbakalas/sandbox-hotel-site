@@ -160,7 +160,44 @@ Key variables include: `DATABASE_URL`, `SECRET_KEY`, `FLASK_ENV`, notification s
 
 ---
 
-## 7. Development
+## 7. Testing
+
+Worker integration tests run with Vitest and the `@cloudflare/vitest-pool-workers` package, which provides a Miniflare-backed D1 database inside the test process.
+
+```bash
+npm test                # single run
+npm run test:watch      # watch mode
+```
+
+Test files live in `test/` and cover:
+
+- **Auth & sessions** — bootstrap, login, logout, session cookies, unauthorized access
+- **CORS & security headers** — allowed origins, OPTIONS handling, header enforcement
+- **Booking & reservations** — lead ingest, reservation CRUD, status actions, calendar
+- **Operations** — dashboard, settings, rooms, housekeeping tasks, daily report, folio, audit log
+
+### Adding a new test
+
+1. Create a file in `test/` with a `.test.js` suffix.
+2. Import `{ env, createExecutionContext, waitOnExecutionContext }` from `"cloudflare:test"` and `worker` from `"../src/index.js"`.
+3. Call `applySchema(env.DB)` in `beforeEach` to reset the D1 database.
+4. Use `worker.fetch(request, env, ctx)` to exercise API endpoints.
+
+---
+
+## 8. CI / Quality Checks
+
+`.github/workflows/quality.yml` runs on every PR and push to `main`:
+
+| Job | Purpose |
+|-----|---------|
+| Lint | ESLint across `src/`, `public/assets/js/`, `public/admin/app.js` |
+| Worker tests | Full `npm test` run |
+| Content freshness | Warns about TODO markers and placeholder values |
+
+---
+
+## 9. Development
 
 ```bash
 # Start Cloudflare dev server (Worker + static site)

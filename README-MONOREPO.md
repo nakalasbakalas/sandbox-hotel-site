@@ -1,120 +1,95 @@
 # Sandbox Hotel Monorepo
 
-Complete hotel management system with website, API, and property management system.
+Complete hotel management system with website, API worker, and property management system.
+
+## How Workspaces Relate to Production
+
+The **production deployment** is driven by `wrangler.jsonc` at the repo root:
+
+- **Worker entry point**: `src/index.js`
+- **Static assets**: `public/`
+- **Database**: Cloudflare D1
+
+The npm workspaces below provide development tooling and scaffolding. Only `packages/web` is actively used (its `wrangler` dev dependency drives the root `dev`/`build`/`deploy` scripts).
 
 ## Workspace Structure
 
 ```
 monorepo/
+├── src/index.js        ← PRODUCTION Worker entry point
+├── public/             ← PRODUCTION static site
 ├── packages/
-│   ├── web/           - Cloudflare Workers static site frontend
-│   ├── api/           - Cloudflare Workers API backend
-│   ├── shared/        - Shared Node.js utilities
-│   └── pms/           - Flask Property Management System
-├── package.json       - Root npm configuration
-└── README.md          - This file
+│   ├── web/            - Workspace for wrangler dev/build/deploy scripts
+│   ├── api/            - Scaffold (not deployed; reserved for future use)
+│   ├── shared/         - Scaffold (shared utilities; reserved for future use)
+│   └── pms/            - Flask PMS (independent Python app, deploys to Render)
+├── package.json        - Root npm configuration
+└── wrangler.jsonc      - Cloudflare deployment config
 ```
 
 ## Workspaces
 
-### 🌐 `packages/web` - Frontend Website
-Static hotel website deployed on Cloudflare Workers.
-- **Tech**: HTML, CSS, JavaScript, Wrangler
-- **Deploy**: `npm run deploy -w packages/web`
+### 🌐 `packages/web` — Frontend Workspace
+Provides the `wrangler` dev dependency used by root scripts.
+- **Tech**: Wrangler CLI
+- **Deploy**: `npm run deploy -w packages/web` (deploys `src/index.js` + `public/`)
 - **Dev**: `npm run dev -w packages/web`
 
-### 🔌 `packages/api` - API Worker
-Backend API endpoints for the website.
+### 🔌 `packages/api` — API Scaffold
+Placeholder workspace for future API extraction. **Not currently deployed.**
 - **Tech**: Node.js, Cloudflare Workers
-- **Deploy**: `npm run deploy -w packages/api`
-- **Dev**: `npm run dev -w packages/api`
+- **Status**: Scaffold only
 
-### 🔧 `packages/shared` - Shared Utilities
-Shared code and constants for web and api packages.
+### 🔧 `packages/shared` — Shared Utilities Scaffold
+Placeholder for shared code. **Not currently imported by the production Worker.**
 - **Tech**: JavaScript/Node.js
-- **Usage**: Import from `@sandbox-hotel/shared`
+- **Usage**: `import from "@sandbox-hotel/shared"` (when adopted)
 
-### 🏨 `packages/pms` - Property Management System
-Full-featured hotel management platform.
+### 🏨 `packages/pms` — Property Management System
+Full-featured hotel management platform. **Deploys independently to Render.**
 - **Tech**: Flask, Python, PostgreSQL, SQLAlchemy
 - **Setup**: `cd packages/pms && python -m venv venv && source venv/bin/activate && pip install -r requirements.txt`
 - **Run**: `cd packages/pms && python app.py`
-- **Database**: PostgreSQL (production) / SQLite (local dev)
+- **Database**: PostgreSQL (production on Render) / SQLite (local dev)
 
 ## Quick Start
 
-### Node.js Packages
+### Cloudflare Worker + Static Site
 
-Install all dependencies:
 ```bash
 npm install
-```
-
-Start development servers:
-```bash
-npm run dev -w packages/web
-npm run deploy -w packages/web
+npx wrangler dev        # local dev server
+npm test                # run Worker integration tests
+npm run lint            # ESLint
 ```
 
 ### Python PMS
 
-Set up Python environment:
 ```bash
 cd packages/pms
 python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
-python app.py
+python app.py           # http://localhost:5000
 ```
-
-Access at: `http://localhost:5000`
 
 ## Dependencies Between Packages
 
-- `web` → imports from `shared`
-- `api` → imports from `shared`
+- `web` → uses `shared` (declared; shared is scaffold-only for now)
+- `api` → uses `shared` (declared; both are scaffold-only)
 - `pms` → independent Python application
 
 ## Deployment
 
-- **Frontend**: `npm run deploy -w packages/web` → Cloudflare Workers
-- **API**: `npm run deploy -w packages/api` → Cloudflare Workers
-- **PMS**: Deploy Flask app to your server/platform
-
-## Development
-
-Each package is independent but shares common utilities. Work on any package:
-
-```bash
-# Web frontend
-cd packages/web && npm run dev
-
-# PMS
-cd packages/pms && python app.py
-
-# Shared utilities edits reflect in all packages automatically
-```
-
-## Git Workflow
-
-```bash
-# Make changes across packages
-git add .
-git commit -m "Feature description"
-git push
-```
-
-All changes to any package will be tracked and versioned together.
+| Component | Command | Target |
+|-----------|---------|--------|
+| Website + Worker | `npx wrangler deploy` | Cloudflare Workers |
+| Python PMS | Git push to Render-connected branch | Render |
 
 ## Configuration
 
-Create `.env` files in each package as needed:
-- `packages/web/.env` - Frontend config
-- `packages/api/.env` - API config
-- `packages/pms/.env` - PMS database and settings
+- **Cloudflare secrets**: `npx wrangler secret put SECRET_NAME`
+- **Python PMS**: Copy `packages/pms/.env.example` → `packages/pms/.env`
+- **Root**: `.env.example` at repo root for any shared config
 
-Refer to `.env.example` files in each package.
-
-## Support
-
-See README files in each package folder for detailed documentation.
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for the full deployment architecture.
