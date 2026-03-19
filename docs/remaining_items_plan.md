@@ -51,7 +51,7 @@ Status labels: ✅ Done · 🔒 Blocked · ⏳ Deferred · 🔧 Actionable
 | S1 | ✅ Add `<image:image>` entries to SEO landing page `<url>` blocks in sitemap | `public/sitemap.xml` | ✅ Done 2026-03-18 |
 | S2 | Add `<image:image>` entries for room/gallery images on main homepage `<url>` block | `public/sitemap.xml` | ✅ Done 2026-03-18 with twin room + lobby images |
 | S3 | Add `og:image:alt` tags to 404, privacy, and SEO landing pages | `public/**/*.html` | ✅ Done 2026-03-18 |
-| S4 | Expand hreflang tags on landing pages and privacy page; align `og:locale` Chinese variant | `public/index.html`, `public/privacy.html`, `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Done 2026-03-18 |
+| S4 | Expand hreflang tags on landing pages and privacy page | `public/index.html`, `public/privacy.html`, `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Done 2026-03-18 |
 | S5 | Tighten homepage schema to factual fields only and improve entity structure | `public/index.html` | ✅ Done 2026-03-18 by removing unverifiable rating/payment/audience claims and adding IDs, map, images, and contact metadata |
 | S6 | Verify landing-page H1 coverage and align visible breadcrumb labels with schema/page titles | `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Done 2026-03-18; all pages already had H1s, breadcrumb labels normalized |
 | S7 | Normalize landing-page titles and meta descriptions across title, Open Graph, and Twitter cards | `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Done 2026-03-18 with factual, consistent title/description templates |
