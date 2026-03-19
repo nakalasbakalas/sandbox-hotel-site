@@ -86,6 +86,7 @@ class Config:
     SMTP_USERNAME = os.getenv("SMTP_USERNAME", "")
     SMTP_PASSWORD = os.getenv("SMTP_PASSWORD", "")
     SMTP_USE_TLS = os.getenv("SMTP_USE_TLS", "1") == "1"
+    SMTP_USE_SSL = os.getenv("SMTP_USE_SSL", "0") == "1"
     MAIL_FROM = os.getenv("MAIL_FROM", "reservations@sandbox-hotel.local")
     STAFF_ALERT_EMAILS = [item.strip() for item in os.getenv("STAFF_ALERT_EMAILS", "").split(",") if item.strip()]
     LINE_STAFF_ALERT_WEBHOOK_URL = os.getenv("LINE_STAFF_ALERT_WEBHOOK_URL", "")
