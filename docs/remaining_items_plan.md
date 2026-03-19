@@ -37,10 +37,10 @@ Status labels: ✅ Done · 🔒 Blocked · ⏳ Deferred · 🔧 Actionable
 | A1 | ✅ Fix skip link to use `clip-path: inset(50%)` pattern | `public/index.html` CSS | ✅ Done 2026-03-18 |
 | A2 | ✅ navLineBtn aria-label updated to include "(opens in new tab)" | `public/index.html` line 2244 | ✅ Done 2026-03-18 |
 | A3 | ✅ Add `<span class="sr-only">` "(opens in new tab)" to 5 plain-text `target="_blank"` links (contactLine, contactWhatsApp, stickyLine, stickyWA, Facebook) | `public/index.html` lines 2919–2926, 2987–2988 | ✅ Done 2026-03-18 |
-| A4 | Add "(opens in new tab)" to `data-i18n` external links (View on Google Maps, Facebook btn, Map) | `public/index.html` lines 2743, 2744, 2925 | 🔧 Needs `data-i18n-html` upgrade + 3 locale string edits |
-| A5 | Add `<span class="sr-only">(opens in new tab)</span>` to external links on SEO landing pages | `public/hotels/*/index.html`, `public/guides/*/index.html` | 🔧 Low friction; check each page for target="_blank" |
+| A4 | ✅ Add "(opens in new tab)" to localized external links (View on Google Maps, Facebook btn, Map) | `public/index.html` | ✅ Done 2026-03-18 via `data-i18n-html` + locale string updates |
+| A5 | Verify external links on SEO landing pages need sr-only new-tab text | `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Verified 2026-03-18: no `target="_blank"` links present |
 | A6 | ✅ Gallery carousel — `aria-live`, slide role/label, `setIndex()` live announcements | `public/index.html` | ✅ Done 2026-03-18 Pass 2 |
-| A7 | Add `aria-roledescription="carousel"` to the carousel container itself | `public/index.html` | 🔧 1-line addition |
+| A7 | Add `aria-roledescription="carousel"` to the carousel container itself | `public/index.html` | ✅ Already present as of 2026-03-18 |
 
 ---
 
@@ -49,7 +49,12 @@ Status labels: ✅ Done · 🔒 Blocked · ⏳ Deferred · 🔧 Actionable
 | # | Item | Files | Status |
 |---|------|-------|--------|
 | S1 | ✅ Add `<image:image>` entries to SEO landing page `<url>` blocks in sitemap | `public/sitemap.xml` | ✅ Done 2026-03-18 |
-| S2 | Add `<image:image>` entries for room/gallery images on main homepage `<url>` block | `public/sitemap.xml` | 🔧 Already has 2 entries; add twin room + lobby |
+| S2 | Add `<image:image>` entries for room/gallery images on main homepage `<url>` block | `public/sitemap.xml` | ✅ Done 2026-03-18 with twin room + lobby images |
+| S3 | Add `og:image:alt` tags to 404, privacy, and SEO landing pages | `public/**/*.html` | ✅ Done 2026-03-18 |
+| S4 | Expand hreflang tags on landing pages and privacy page; align `og:locale` Chinese variant | `public/index.html`, `public/privacy.html`, `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Done 2026-03-18 |
+| S5 | Tighten homepage schema to factual fields only and improve entity structure | `public/index.html` | ✅ Done 2026-03-18 by removing unverifiable rating/payment/audience claims and adding IDs, map, images, and contact metadata |
+| S6 | Verify landing-page H1 coverage and align visible breadcrumb labels with schema/page titles | `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Done 2026-03-18; all pages already had H1s, breadcrumb labels normalized |
+| S7 | Normalize landing-page titles and meta descriptions across title, Open Graph, and Twitter cards | `public/hotels/*/index.html`, `public/guides/*/index.html` | ✅ Done 2026-03-18 with factual, consistent title/description templates |
 
 ---
 
@@ -58,8 +63,8 @@ Status labels: ✅ Done · 🔒 Blocked · ⏳ Deferred · 🔧 Actionable
 | # | Item | Files | Status |
 |---|------|-------|--------|
 | L1 | ✅ `book_checkin_info` and `book_id_note` i18n keys (TH/EN/ZH) | `public/index.html` | ✅ Already present in all 3 locales |
-| L2 | Add missing i18n key: `book_tip` (currently hardcoded HTML in TH/ZH fallback) | `public/index.html` | 🔧 Verify all locales have this key |
-| L3 | Switch 3 `data-i18n` external link buttons to `data-i18n-html` and append sr-only hint per locale | `public/index.html` | 🔧 Moderate effort — 3 HTML attrs + 9 string edits |
+| L2 | Add missing i18n key: `book_tip` (currently hardcoded HTML in TH/ZH fallback) | `public/index.html` | ✅ Verified present in TH/EN/ZH on 2026-03-18 |
+| L3 | Switch 3 `data-i18n` external link buttons to `data-i18n-html` and append sr-only hint per locale | `public/index.html` | ✅ Done 2026-03-18 |
 | L4 | Add short button label variants for narrow mobile (identified in localization audit) | `public/index.html` | 🔧 Localization team decision |
 
 ---

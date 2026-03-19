@@ -728,6 +728,7 @@ Important variables:
 - `SMTP_USERNAME`
 - `SMTP_PASSWORD`
 - `SMTP_USE_TLS`
+- `SMTP_USE_SSL`
 - `MAIL_FROM`
 - `PAYMENT_PROVIDER`
 - `PAYMENT_LINK_TTL_MINUTES`
@@ -756,6 +757,30 @@ SQLite fallback example:
 
 ```powershell
 $env:DATABASE_URL = "sqlite:///sandbox_pms.db"
+```
+
+SMTP examples:
+
+```powershell
+# STARTTLS on port 587
+$env:SMTP_HOST = "smtp.example.com"
+$env:SMTP_PORT = "587"
+$env:SMTP_USERNAME = "mailer@example.com"
+$env:SMTP_PASSWORD = "replace-me"
+$env:SMTP_USE_TLS = "1"
+$env:SMTP_USE_SSL = "0"
+$env:MAIL_FROM = "reservations@example.com"
+```
+
+```powershell
+# Implicit TLS / SMTPS on port 465
+$env:SMTP_HOST = "smtp.example.com"
+$env:SMTP_PORT = "465"
+$env:SMTP_USERNAME = "mailer@example.com"
+$env:SMTP_PASSWORD = "replace-me"
+$env:SMTP_USE_TLS = "0"
+$env:SMTP_USE_SSL = "1"
+$env:MAIL_FROM = "reservations@example.com"
 ```
 
 ## Setup

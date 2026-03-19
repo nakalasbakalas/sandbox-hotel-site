@@ -2021,21 +2021,23 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   {
     "@context": "https://schema.org",
     "@type": ["Hotel", "LodgingBusiness"],
+    "@id": "https://www.sandboxhotel.com/#hotel",
     "name": "Sandbox Hotel",
     "description": "Sandbox Hotel is a quiet, comfortable hotel in Nakhon Si Thammarat, Southern Thailand. We offer spacious rooms with direct booking by phone, LINE, or email. Ideal for business travelers, couples, and families visiting Nakhon Si Thammarat and the surrounding Southern Thailand region.",
     "url": "https://www.sandboxhotel.com/",
+    "mainEntityOfPage": "https://www.sandboxhotel.com/",
     "telephone": "+66885783478",
     "email": "booking@sandboxhotel.com",
-    "priceRange": "฿฿",
-    "starRating": { "@type": "Rating", "ratingValue": "4.3", "bestRating": "5" },
     "checkinTime": "14:00",
     "checkoutTime": "11:00",
     "currenciesAccepted": "THB",
-    "paymentAccepted": "Cash, Bank Transfer",
+    "hasMap": "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7",
     "image": [
       "https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png",
       "https://www.sandboxhotel.com/assets/images/gallery/entrance.png",
-      "https://www.sandboxhotel.com/assets/images/rooms/double-room-sandboxhotel-1.png"
+      "https://www.sandboxhotel.com/assets/images/gallery/lobby.png",
+      "https://www.sandboxhotel.com/assets/images/rooms/double-room-sandboxhotel-1.png",
+      "https://www.sandboxhotel.com/assets/images/rooms/twin-room-sandbox-1.png"
     ],
     "address": {
       "@type": "PostalAddress",
@@ -2057,12 +2059,19 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       {"@type": "LocationFeatureSpecification", "name": "Laundry Service", "value": true},
       {"@type": "LocationFeatureSpecification", "name": "Coffee & Snack Bar", "value": true}
     ],
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "contactType": "customer service",
+      "telephone": "+66885783478",
+      "email": "booking@sandboxhotel.com",
+      "availableLanguage": ["th", "en", "zh-Hans"],
+      "areaServed": "TH"
+    },
     "containedInPlace": {
       "@type": "City",
       "name": "Nakhon Si Thammarat",
       "addressCountry": "TH"
     },
-    "touristType": ["Business traveler", "Couple", "Family"],
     "sameAs": [
       "https://web.facebook.com/sandboxhotel",
       "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7"
@@ -2074,12 +2083,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
+    "@id": "https://www.sandboxhotel.com/#website",
     "name": "Sandbox Hotel",
     "url": "https://www.sandboxhotel.com/",
     "description": "Official website of Sandbox Hotel — a quiet hotel in Nakhon Si Thammarat, Southern Thailand. Direct booking available.",
     "inLanguage": ["th", "en", "zh-Hans"],
     "publisher": {
       "@type": "Organization",
+      "@id": "https://www.sandboxhotel.com/#organization",
       "name": "Sandbox Hotel",
       "url": "https://www.sandboxhotel.com/",
       "logo": {
@@ -2746,8 +2757,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p data-i18n="reviews_sub">Check location and the latest guest feedback on Google Maps before you book.</p>
           </div>
           <div class="reviewActionRow">
-          <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="btn_view_maps" data-analytics="map">View on Google Maps</a>
-            <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n="btn_view_facebook" data-analytics="social">Facebook</a>
+          <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="btn_view_maps" data-analytics="map">View on Google Maps<span class="sr-only"> (opens in new tab)</span></a>
+            <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n-html="btn_view_facebook" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
           </div>
         </div>
 
@@ -2926,7 +2937,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <p class="fine contactSecondary">
               <a href="mailto:booking@sandboxhotel.com" data-i18n="cta_email" data-analytics="email">Email</a> •
-              <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n="cta_open_map" data-analytics="map">Map</a> •
+              <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map">Map<span class="sr-only"> (opens in new tab)</span></a> •
               <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
             </p>
 
@@ -3174,7 +3185,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         why_2_d: "โทรหรือส่งข้อความแจ้งวันและประเภทห้อง",
         why_3_t: "ครบทุกสิ่งจำเป็น",
         why_3_d: "Wi‑Fi แอร์ ที่จอดรถ ซักรีด และบริการช่วยเหลือ",
-        btn_view_facebook: "Facebook",
+        btn_view_facebook: 'Facebook<span class="sr-only"> (เปิดในแท็บใหม่)</span>',
         faq_q7: "สูบบุหรี่ได้ไหม?",
         faq_a7: "เพื่อความสบายของผู้เข้าพัก โปรดสอบถามนโยบายการสูบบุหรี่และพื้นที่ที่กำหนดกับแผนกต้อนรับ",
         faq_q8: "นโยบายการยกเลิกคืออะไร?",
@@ -3260,7 +3271,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         reviews_title: "รีวิวจากผู้เข้าพัก",
         reviews_sub: "ดูทำเลและรีวิวล่าสุดบน Google Maps เพื่อความมั่นใจก่อนจอง",
-        btn_view_maps: "ดูบน Google Maps",
+        btn_view_maps: 'ดูบน Google Maps<span class="sr-only"> (เปิดในแท็บใหม่)</span>',
         review1_title: 'นักธุรกิจ <span class="stars">★★★★★</span>',
         review1_text: "เช็คอินไว Wi-Fi เสถียร ห้องใหญ่ทำงานได้สบาย คุ้มค่า",
         review2_title: 'คู่รัก <span class="stars">★★★★★</span>',
@@ -3337,7 +3348,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_call_line: "Call or LINE",
         cta_call_number: "Call: 088-578-3478",
         cta_email: "Email",
-        cta_open_map: "Open Map",
+        cta_open_map: 'Open Map<span class="sr-only"> (opens in new tab)</span>',
         hero_view_rooms: "Explore Rooms →",
         hero_review_count: "· 120 reviews on Google", // TODO: verify review count monthly
         hero_best_rate: "Best rate when you book direct — no middleman, no mark-up",
@@ -3398,15 +3409,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "LINE opened.",
         line_clipboard_hint: "Message copied to clipboard.",
         line_clipboard_fail: "Tip: copy your message if needed.",
-        why_title: "Why Guests Choose Sandbox",
-        why_sub: "Good rooms, friendly service, and easy direct booking.",
-        why_1_t: "Spacious rooms",
-        why_1_d: "Comfortable rooms with space to relax or work.",
-        why_2_t: "Quick confirmation",
-        why_2_d: "Call or message us with your dates — we reply fast.",
-        why_3_t: "Everything you need",
-        why_3_d: "Free Wi‑Fi, air conditioning, parking, laundry, and helpful staff.",
-        btn_view_facebook: "Facebook",
+        why_title: "Why Discerning Travelers Choose Sandbox",
+        why_sub: "Thoughtful design, authentic hospitality, and the ease of direct booking.",
+        why_1_t: "Generous private spaces",
+        why_1_d: "Refined rooms designed for rest, work, and contemplation.",
+        why_2_t: "Personalized attention",
+        why_2_d: "Direct communication with our team for tailored service.",
+        why_3_t: "Curated essentials",
+        why_3_d: "Premium Wi‑Fi, climate control, secure parking, laundry, and attentive care.",
+        btn_view_facebook: 'Facebook<span class="sr-only"> (opens in new tab)</span>',
         faq_q7: "Is smoking allowed?",
         faq_a7: "For guest comfort, please ask reception about the current smoking policy and designated areas.",
         faq_q8: "What is the cancellation policy?",
@@ -3492,7 +3503,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         reviews_title: "Guest Reviews",
         reviews_sub: "Check location and the latest guest feedback on Google Maps before you book.",
-        btn_view_maps: "View on Google Maps",
+        btn_view_maps: 'View on Google Maps<span class="sr-only"> (opens in new tab)</span>',
         review1_title: 'Business Traveler <span class="stars">★★★★★</span>',
         review1_text: "Fast check-in, stable Wi-Fi, and a big room to work in. Great value.",
         review2_title: 'Couple Weekend <span class="stars">★★★★★</span>',
@@ -3588,7 +3599,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         cta_call_line: "电话或 LINE",
         cta_call_number: "致电：088-578-3478",
         cta_email: "邮箱",
-        cta_open_map: "打开地图",
+        cta_open_map: '打开地图<span class="sr-only">（在新标签页中打开）</span>',
         hero_view_rooms: "查看房型",
         hero_review_count: "· 120条 Google 评价", // TODO: verify review count monthly
         hero_best_rate: "直订专享优惠价 — 无中介 专属服务",
@@ -3743,7 +3754,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         reviews_title: "住客评价",
         reviews_sub: "查看 Google Maps 上的位置与真实评价，预订更放心。",
-        btn_view_maps: "在Google Maps查看",
+        btn_view_maps: '在Google Maps查看<span class="sr-only">（在新标签页中打开）</span>',
         review1_title: '商务出行 <span class="stars">★★★★★</span>',
         review1_text: "办理入住很快，Wi-Fi稳定，房间大，办公方便，性价比高。",
         review2_title: '周末出行 <span class="stars">★★★★★</span>',
