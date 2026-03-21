@@ -495,17 +495,17 @@
   <div class="shell">
     <aside class="controls panel">
       <div class="head">
-        <span class="eyebrow">Offer Strip Builder</span>
-        <h1>A4 booking offer strips</h1>
-        <p class="sub">Five luxury booking offer strips per A4 page. Edit, preview, then print or save as PDF.</p>
+        <span class="eyebrow">สร้างคูปอง</span>
+        <h1>แถบข้อเสนอ A4</h1>
+        <p class="sub">ห้าแถบข้อเสนอต่อหน้า A4 แก้ไข ดูตัวอย่าง แล้วพิมพ์หรือบันทึกเป็น PDF</p>
       </div>
 
       <div class="form">
         <div class="group">
-          <label>Hotel name
+          <label>ชื่อโรงแรม
             <input id="hotelName" type="text" value="Sandbox Hotel">
           </label>
-          <label>Phone number
+          <label>เบอร์โทรศัพท์
             <input id="phone" type="text" value="066 111 7070">
           </label>
         </div>
@@ -514,49 +514,49 @@
           <div class="uploadRow">
             <label class="uploadBtn" for="qrInput">
               <svg viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm1 0v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm2 1v2h2V3H3zM0 10a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-4zm1 0v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm2 1v2h2v-2H3zM8 2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V2zm1 0v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1zm2 1v2h2V3h-2z"/></svg>
-              Upload LINE QR
+              อัปโหลด LINE QR
             </label>
             <input type="file" id="qrInput" accept="image/*" style="display:none">
             <span class="uploadName" id="qrName"></span>
-            <button class="removeUpload" id="removeQr" type="button" style="display:none">Remove</button>
+            <button class="removeUpload" id="removeQr" type="button" style="display:none">ลบ</button>
           </div>
         </div>
 
         <div class="group">
-          <label>Headline
-            <input id="headline" type="text" value="10% Off Direct Booking">
+          <label>หัวข้อหลัก
+            <input id="headline" type="text" value="ลด 10% เมื่อจองตรง">
           </label>
-          <label>Supporting line
-            <textarea id="subline">Book direct with Sandbox Hotel for better value, fast confirmation, and personal support.</textarea>
+          <label>ข้อความสนับสนุน
+            <textarea id="subline">จองตรงกับแซนด์บ็อกซ์ โฮเทล รับราคาดีที่สุด ยืนยันรวดเร็ว พร้อมบริการส่วนตัว</textarea>
           </label>
         </div>
 
         <div class="grid2">
-          <label>Promo code
+          <label>รหัสโปรโมชั่น
             <input id="code" type="text" value="SANDBOX10">
           </label>
-          <label>CTA label
-            <input id="cta" type="text" value="Book Direct">
+          <label>ข้อความปุ่ม CTA
+            <input id="cta" type="text" value="จองตรง">
           </label>
         </div>
 
         <div class="grid2">
-          <label>Book by
-            <input id="validity" type="text" value="Book by 30 Apr 2026">
+          <label>จองภายใน
+            <input id="validity" type="text" value="จองภายใน 30 เม.ย. 2026">
           </label>
-          <label>Stay until
-            <input id="stay" type="text" value="Stay until 31 May 2026">
-          </label>
-        </div>
-
-        <div class="group">
-          <label>Terms
-            <textarea id="terms">Direct bookings only. Subject to availability. One offer per stay. Cannot be combined with other promotions.</textarea>
+          <label>เข้าพักถึง
+            <input id="stay" type="text" value="เข้าพักถึง 31 พ.ค. 2026">
           </label>
         </div>
 
         <div class="group">
-          <label>Website
+          <label>เงื่อนไข
+            <textarea id="terms">เฉพาะการจองตรงเท่านั้น ขึ้นอยู่กับห้องว่าง ใช้ได้ 1 สิทธิ์ต่อการเข้าพัก ไม่สามารถใช้ร่วมกับโปรโมชั่นอื่นได้</textarea>
+          </label>
+        </div>
+
+        <div class="group">
+          <label>เว็บไซต์
             <input id="url" type="text" value="www.sandboxhotel.com">
           </label>
         </div>
@@ -566,40 +566,40 @@
         <div class="imageGroup">
           <div class="imageToggle">
             <input type="checkbox" id="showImage" checked>
-            <span>Show image in brand panel</span>
+            <span>แสดงรูปภาพในแผงแบรนด์</span>
           </div>
           <div class="imageGrid" id="imageGrid"></div>
           <div class="uploadRow">
             <label class="uploadBtn" for="uploadInput">
               <svg viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 1z"/></svg>
-              Upload image
+              อัปโหลดรูปภาพ
             </label>
             <input type="file" id="uploadInput" accept="image/*" style="display:none">
             <span class="uploadName" id="uploadName"></span>
-            <button class="removeUpload" id="removeUpload" type="button" style="display:none">Remove</button>
+            <button class="removeUpload" id="removeUpload" type="button" style="display:none">ลบ</button>
           </div>
         </div>
 
-        <p class="hint">Five strips per A4. Keep the headline short for the cleanest print result.</p>
+        <p class="hint">5 แถบต่อ A4 หนึ่งแผ่น ควรใช้หัวข้อสั้นกระชับเพื่อผลลัพธ์การพิมพ์ที่ดีที่สุด</p>
       </div>
 
       <div class="actions">
-        <button class="btn primary" id="printBtn" type="button">Print / Save PDF</button>
-        <button class="btn" id="resetBtn" type="button">Reset</button>
-        <button class="btn full" id="saveBtn" type="button">Save current values on this device</button>
+        <button class="btn primary" id="printBtn" type="button">พิมพ์ / บันทึก PDF</button>
+        <button class="btn" id="resetBtn" type="button">รีเซ็ต</button>
+        <button class="btn full" id="saveBtn" type="button">บันทึกค่าปัจจุบันในอุปกรณ์นี้</button>
       </div>
     </aside>
 
     <section class="stage panel">
       <div class="head">
-        <span class="eyebrow">Preview</span>
-        <h2>5-up printable offer sheet</h2>
+        <span class="eyebrow">ตัวอย่าง</span>
+        <h2>แผ่นพิมพ์ 5 แถบ</h2>
       </div>
       <div class="stageBody">
         <div class="paperWrap">
           <div class="page" id="page"></div>
         </div>
-        <p class="footerNote">Layout sized for five horizontal offer strips on a single A4 portrait page with print-safe margins.</p>
+        <p class="footerNote">ขนาดสำหรับแถบข้อเสนอ 5 แถบแนวนอนบนกระดาษ A4 แนวตั้งหนึ่งแผ่น</p>
       </div>
     </section>
   </div>
@@ -628,7 +628,7 @@
         <div class="offerTerms js-terms"></div>
       </div>
       <div class="action">
-        <div class="codeLabel">Promo Code</div>
+        <div class="codeLabel">รหัสส่วนลด</div>
         <div class="code js-code"></div>
         <div class="cta js-cta"></div>
         <div class="actionUrl js-url"></div>
@@ -657,13 +657,13 @@
     const defaults = {
       hotelName: 'Sandbox Hotel',
       phone: '066 111 7070',
-      headline: '10% Off Direct Booking',
-      subline: 'Book direct with Sandbox Hotel for better value, fast confirmation, and personal support.',
+      headline: 'ลด 10% เมื่อจองตรง',
+      subline: 'จองตรงกับแซนด์บ็อกซ์ โฮเทล รับราคาดีที่สุด ยืนยันรวดเร็ว พร้อมบริการส่วนตัว',
       code: 'SANDBOX10',
-      cta: 'Book Direct',
-      validity: 'Book by 30 Apr 2026',
-      stay: 'Stay until 31 May 2026',
-      terms: 'Direct bookings only. Subject to availability. One offer per stay. Cannot be combined with other promotions.',
+      cta: 'จองตรง',
+      validity: 'จองภายใน 30 เม.ย. 2026',
+      stay: 'เข้าพักถึง 31 พ.ค. 2026',
+      terms: 'เฉพาะการจองตรงเท่านั้น ขึ้นอยู่กับห้องว่าง ใช้ได้ 1 สิทธิ์ต่อการเข้าพัก ไม่สามารถใช้ร่วมกับโปรโมชั่นอื่นได้',
       url: 'www.sandboxhotel.com',
       showImage: true,
       selectedImage: 0,
@@ -794,13 +794,13 @@
         const node = template.content.firstElementChild.cloneNode(true);
         node.querySelector('.js-hotel').textContent = v.hotelName || 'Sandbox Hotel';
         node.querySelector('.js-phone').textContent = v.phone || '';
-        node.querySelector('.js-headline').textContent = v.headline || '10% Off Direct Booking';
+        node.querySelector('.js-headline').textContent = v.headline || 'ลด 10% เมื่อจองตรง';
         node.querySelector('.js-subline').textContent = v.subline || '';
-        node.querySelector('.js-validity').textContent = v.validity || 'Limited Time';
-        node.querySelector('.js-stay').textContent = v.stay || 'Terms Apply';
+        node.querySelector('.js-validity').textContent = v.validity || 'จำกัดเวลา';
+        node.querySelector('.js-stay').textContent = v.stay || 'ตามเงื่อนไข';
         node.querySelector('.js-terms').textContent = v.terms || '';
         node.querySelector('.js-code').textContent = (v.code || 'OFFER').toUpperCase();
-        node.querySelector('.js-cta').textContent = v.cta || 'Book Direct';
+        node.querySelector('.js-cta').textContent = v.cta || 'จองตรง';
         node.querySelector('.js-url').textContent = v.url || '';
 
         /* Image handling */
@@ -869,7 +869,7 @@
       save();
       const btn = document.getElementById('saveBtn');
       const original = btn.textContent;
-      btn.textContent = 'Saved';
+      btn.textContent = 'บันทึกแล้ว';
       setTimeout(() => btn.textContent = original, 1200);
     });
 
