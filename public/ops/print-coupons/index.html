@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-  <title>Coupon Builder — Internal</title>
-  <meta name="description" content="Internal coupon strip builder.">
+  <title>Offer Strip Builder — Internal</title>
+  <meta name="description" content="Internal booking offer strip builder.">
   <style>
     :root{
       --bg:#f7f5f2;
@@ -24,15 +24,7 @@
       --stripe-height:51mm;
       --stripe-gap:4mm;
       --page-padding:10mm;
-      --ui-font: "Manrope", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-
-      /* Coupon left panel — light copper theme */
-      --left-bg:linear-gradient(180deg, #faf6f0 0%, #f0e6d8 100%);
-      --left-accent-gradient:radial-gradient(circle at top right, rgba(168,101,42,.12), transparent 42%);
-      --left-text:#3c2f1e;
-      --left-muted:rgba(60,47,30,.72);
-      --left-badge-border:rgba(168,101,42,.28);
-      --left-badge-bg:rgba(168,101,42,.08);
+      --ui-font:"Manrope",Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
     }
 
     *{box-sizing:border-box}
@@ -44,6 +36,8 @@
     }
     button,input,textarea,select{font:inherit}
     a{text-decoration:none;color:inherit}
+
+    /* ── Builder shell ─────────────────────────────────────── */
 
     .shell{
       max-width:1440px;
@@ -67,7 +61,7 @@
     .stage .head{
       padding:18px 20px;
       border-bottom:1px solid var(--border);
-      background:linear-gradient(180deg, rgba(168,101,42,.04), rgba(168,101,42,0));
+      background:linear-gradient(180deg,rgba(168,101,42,.04),rgba(168,101,42,0));
     }
 
     .eyebrow{
@@ -80,7 +74,7 @@
       letter-spacing:.14em;
       padding:8px 10px;
       border-radius:999px;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
       color:#fff;
       font-weight:800;
     }
@@ -107,7 +101,7 @@
       border-color:var(--accent);
       box-shadow:0 0 0 3px rgba(168,101,42,.15);
     }
-    textarea{min-height:82px;resize:vertical}
+    textarea{min-height:72px;resize:vertical}
     .hint{font-size:12px;color:var(--muted);line-height:1.45}
 
     .actions{
@@ -124,11 +118,11 @@
       border-radius:12px;
       font-weight:800;
       cursor:pointer;
-      transition:transform .15s ease, border-color .15s ease, background .15s ease;
+      transition:transform .15s ease,border-color .15s ease,background .15s ease;
     }
     .btn:hover{transform:translateY(-1px);border-color:var(--accent)}
     .btn.primary{
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
+      background:linear-gradient(135deg,var(--accent),var(--accent-2));
       color:#fff;
       border-color:transparent;
     }
@@ -141,247 +135,9 @@
       overflow:auto;
       padding:10px;
       background:
-        linear-gradient(180deg, rgba(168,101,42,.03), rgba(168,101,42,0)),
+        linear-gradient(180deg,rgba(168,101,42,.03),rgba(168,101,42,0)),
         rgba(0,0,0,.02);
       border-top:1px solid var(--border);
-    }
-
-    .page{
-      width:210mm;
-      min-height:297mm;
-      background:var(--paper);
-      color:var(--ink);
-      padding:var(--page-padding);
-      box-shadow:0 18px 60px rgba(0,0,0,.10);
-      display:grid;
-      grid-template-rows:repeat(5, var(--stripe-height));
-      gap:var(--stripe-gap);
-    }
-
-    .coupon{
-      position:relative;
-      display:grid;
-      grid-template-columns:minmax(0,1.15fr) minmax(0,1.8fr) auto;
-      align-items:stretch;
-      border:1px solid var(--paper-border);
-      border-radius:14px;
-      overflow:hidden;
-      background:
-        linear-gradient(90deg, #f5efe6 0 32%, #faf8f4 32% 100%);
-      -webkit-print-color-adjust:exact;
-      print-color-adjust:exact;
-    }
-
-    .coupon::before,
-    .coupon::after{
-      content:"";
-      position:absolute;
-      top:50%;
-      width:12px;
-      height:12px;
-      margin-top:-6px;
-      border-radius:50%;
-      background:var(--paper);
-      border:1px solid var(--paper-border);
-      z-index:2;
-    }
-    .coupon::before{left:-7px}
-    .coupon::after{right:-7px}
-
-    .left{
-      color:var(--left-text);
-      padding:11px 14px;
-      display:grid;
-      align-content:space-between;
-      gap:8px;
-      position:relative;
-      overflow:hidden;
-      background:
-        var(--left-accent-gradient),
-        var(--left-bg);
-    }
-
-    .left .leftContent{
-      position:relative;
-      z-index:1;
-      display:grid;
-      align-content:space-between;
-      gap:8px;
-      height:100%;
-    }
-
-    .left .leftImage{
-      position:absolute;
-      inset:0;
-      z-index:0;
-    }
-
-    .left .leftImage img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
-    }
-
-    .left .leftImage::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg,
-        rgba(247,243,237,.55) 0%,
-        rgba(240,230,216,.7) 40%,
-        rgba(232,201,160,.82) 100%
-      );
-    }
-
-    .left.no-image .leftImage{
-      display:none;
-    }
-
-    .hotelName{
-      font-size:17px;
-      font-weight:900;
-      line-height:1.05;
-      letter-spacing:.02em;
-      text-transform:uppercase;
-      color:var(--left-text);
-    }
-
-    .badge{
-      display:inline-flex;
-      align-items:center;
-      width:max-content;
-      max-width:100%;
-      font-size:9.5px;
-      line-height:1;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-      border:1px solid var(--left-badge-border);
-      color:var(--accent);
-      padding:6px 8px;
-      border-radius:999px;
-      background:var(--left-badge-bg);
-    }
-
-    .contactList{
-      display:grid;
-      gap:4px;
-      font-size:10.5px;
-      line-height:1.2;
-      color:var(--left-muted);
-    }
-
-    .middle{
-      padding:10px 14px;
-      display:grid;
-      align-content:center;
-      gap:5px;
-      border-left:1px dashed #cabfae;
-      border-right:1px dashed #cabfae;
-      background:linear-gradient(180deg, #fffdfa 0%, #f7f3ee 100%);
-    }
-
-    .headline{
-      font-size:22px;
-      line-height:1.02;
-      font-weight:950;
-      letter-spacing:-.03em;
-      color:#1a1a1a;
-      text-transform:uppercase;
-    }
-
-    .subline{
-      font-size:11px;
-      line-height:1.25;
-      color:#574f46;
-      font-weight:700;
-    }
-
-    .meta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:6px;
-      margin-top:2px;
-    }
-
-    .metaItem{
-      display:inline-flex;
-      align-items:center;
-      min-height:22px;
-      padding:4px 8px;
-      border-radius:999px;
-      font-size:9px;
-      line-height:1;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      background:#efe8dd;
-      color:#54473b;
-      border:1px solid #d8ccbc;
-    }
-
-    .terms{
-      font-size:8.7px;
-      line-height:1.2;
-      color:#6c645a;
-    }
-
-    .right{
-      width:50mm;
-      padding:10px 10px 10px 11px;
-      display:grid;
-      align-content:center;
-      justify-items:center;
-      gap:6px;
-      background:
-        linear-gradient(180deg, #fffaf2 0%, #f3e6d7 100%);
-    }
-
-    .codeLabel{
-      font-size:8px;
-      line-height:1;
-      text-transform:uppercase;
-      letter-spacing:.18em;
-      color:#775b45;
-      font-weight:900;
-    }
-
-    .code{
-      width:100%;
-      text-align:center;
-      font-size:16px;
-      line-height:1;
-      font-weight:950;
-      letter-spacing:.08em;
-      border:1px dashed #bd9b7f;
-      border-radius:10px;
-      padding:10px 8px;
-      color:#8d4e20;
-      background:#fff;
-      text-transform:uppercase;
-    }
-
-    .cta{
-      width:100%;
-      text-align:center;
-      font-size:10px;
-      line-height:1.15;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.08em;
-      color:#fff;
-      border-radius:10px;
-      padding:9px 8px;
-      background:linear-gradient(135deg, var(--accent), var(--accent-2));
-    }
-
-    .url{
-      text-align:center;
-      font-size:7.6px;
-      line-height:1.15;
-      color:#6f655b;
-      word-break:break-word;
     }
 
     .footerNote{
@@ -391,7 +147,8 @@
       line-height:1.45;
     }
 
-    /* Image selector group */
+    /* ── Image controls ────────────────────────────────────── */
+
     .imageGroup{display:grid;gap:8px}
     .imageGroup .imageToggle{
       display:flex;
@@ -399,20 +156,17 @@
       gap:10px;
     }
     .imageGroup .imageToggle input[type="checkbox"]{
-      width:18px;
-      height:18px;
+      width:18px;height:18px;
       accent-color:var(--accent);
       min-height:auto;
       cursor:pointer;
     }
     .imageGroup .imageToggle span{
-      font-size:13px;
-      font-weight:700;
-      color:var(--muted);
+      font-size:13px;font-weight:700;color:var(--muted);
     }
     .imageGrid{
       display:grid;
-      grid-template-columns:repeat(3, 1fr);
+      grid-template-columns:repeat(4,1fr);
       gap:6px;
     }
     .imageGrid button{
@@ -423,7 +177,7 @@
       overflow:hidden;
       background:none;
       aspect-ratio:4/3;
-      transition:border-color .15s ease, box-shadow .15s ease;
+      transition:border-color .15s ease,box-shadow .15s ease;
     }
     .imageGrid button:hover{border-color:var(--accent-2)}
     .imageGrid button.selected{
@@ -431,11 +185,49 @@
       box-shadow:0 0 0 2px rgba(168,101,42,.25);
     }
     .imageGrid button img{
-      width:100%;
-      height:100%;
-      object-fit:cover;
-      display:block;
+      width:100%;height:100%;object-fit:cover;display:block;
     }
+
+    .uploadRow{
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+    .uploadBtn{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      font-size:12px;
+      font-weight:700;
+      color:var(--accent);
+      background:rgba(168,101,42,.06);
+      border:1px solid rgba(168,101,42,.22);
+      border-radius:8px;
+      padding:7px 12px;
+      cursor:pointer;
+      transition:background .15s ease;
+    }
+    .uploadBtn:hover{background:rgba(168,101,42,.12)}
+    .uploadBtn svg{width:14px;height:14px;fill:currentColor}
+    .uploadName{
+      font-size:12px;
+      color:var(--muted);
+      white-space:nowrap;
+      overflow:hidden;
+      text-overflow:ellipsis;
+      max-width:140px;
+    }
+    .removeUpload{
+      font-size:11px;
+      color:#a55;
+      background:none;
+      border:none;
+      cursor:pointer;
+      padding:2px 6px;
+      border-radius:4px;
+      font-weight:700;
+    }
+    .removeUpload:hover{background:rgba(170,85,85,.08)}
 
     .sep{
       border:none;
@@ -443,16 +235,222 @@
       margin:4px 0;
     }
 
-    @media (max-width: 1100px){
+    /* ── A4 page ───────────────────────────────────────────── */
+
+    .page{
+      width:210mm;
+      min-height:297mm;
+      background:var(--paper);
+      color:var(--ink);
+      padding:var(--page-padding);
+      box-shadow:0 18px 60px rgba(0,0,0,.10);
+      display:grid;
+      grid-template-rows:repeat(5,var(--stripe-height));
+      gap:var(--stripe-gap);
+    }
+
+    /* ── Offer strip ───────────────────────────────────────── */
+
+    .strip{
+      position:relative;
+      display:grid;
+      grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) 52mm;
+      align-items:stretch;
+      border:1px solid #d1c8bb;
+      border-radius:10px;
+      overflow:hidden;
+      background:#faf8f4;
+      -webkit-print-color-adjust:exact;
+      print-color-adjust:exact;
+    }
+
+    /* ── Left: brand panel ─────────────────────────────────── */
+
+    .brand{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      align-content:end;
+      padding:12px 14px;
+      background:
+        linear-gradient(160deg,#f5ede2 0%,#ede0cf 100%);
+    }
+
+    .brand .brandImage{
+      position:absolute;
+      inset:0;
+      z-index:0;
+    }
+    .brand .brandImage img{
+      width:100%;height:100%;object-fit:cover;display:block;
+    }
+    .brand .brandImage::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(180deg,
+        rgba(250,246,240,.2) 0%,
+        rgba(237,224,207,.55) 35%,
+        rgba(220,197,168,.78) 100%
+      );
+    }
+
+    .brand.no-image .brandImage{display:none}
+
+    .brandInner{
+      position:relative;
+      z-index:1;
+      display:grid;
+      gap:6px;
+    }
+
+    .brandName{
+      font-size:18px;
+      font-weight:900;
+      line-height:1.02;
+      letter-spacing:.03em;
+      text-transform:uppercase;
+      color:#3a2c1c;
+    }
+
+    .brandTagline{
+      font-size:9.5px;
+      font-weight:700;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:#8b6e52;
+      line-height:1.2;
+    }
+
+    /* ── Middle: offer details ─────────────────────────────── */
+
+    .offer{
+      padding:10px 16px;
+      display:grid;
+      align-content:center;
+      gap:4px;
+      border-left:1px solid #d1c8bb;
+      border-right:1px solid #d1c8bb;
+      background:linear-gradient(180deg,#fffdfb 0%,#f9f5ef 100%);
+    }
+
+    .offerHeadline{
+      font-size:21px;
+      line-height:1;
+      font-weight:950;
+      letter-spacing:-.02em;
+      color:#1a1a1a;
+      text-transform:uppercase;
+    }
+
+    .offerBody{
+      font-size:10.5px;
+      line-height:1.3;
+      color:#4a4038;
+      font-weight:600;
+    }
+
+    .offerMeta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:5px;
+      margin-top:3px;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      min-height:20px;
+      padding:3px 8px;
+      border-radius:4px;
+      font-size:8.5px;
+      line-height:1;
+      font-weight:800;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      background:#efe8dd;
+      color:#54473b;
+      border:1px solid #ddd3c5;
+    }
+
+    .offerTerms{
+      font-size:8px;
+      line-height:1.3;
+      color:#7a7068;
+      margin-top:1px;
+    }
+
+    /* ── Right: action panel ───────────────────────────────── */
+
+    .action{
+      padding:10px 12px;
+      display:grid;
+      align-content:center;
+      justify-items:center;
+      gap:7px;
+      background:linear-gradient(180deg,#faf5ed 0%,#f0e3d2 100%);
+    }
+
+    .codeLabel{
+      font-size:7.5px;
+      line-height:1;
+      text-transform:uppercase;
+      letter-spacing:.2em;
+      color:#7a6650;
+      font-weight:800;
+    }
+
+    .code{
+      width:100%;
+      text-align:center;
+      font-size:17px;
+      line-height:1;
+      font-weight:950;
+      letter-spacing:.1em;
+      border:1.5px solid rgba(168,101,42,.35);
+      border-radius:6px;
+      padding:10px 6px;
+      color:#7a4518;
+      background:rgba(255,255,255,.8);
+      text-transform:uppercase;
+    }
+
+    .cta{
+      width:100%;
+      text-align:center;
+      font-size:10.5px;
+      line-height:1;
+      font-weight:900;
+      text-transform:uppercase;
+      letter-spacing:.1em;
+      color:#fff;
+      border-radius:6px;
+      padding:10px 8px;
+      background:linear-gradient(135deg,#A8652A,#C4884E);
+    }
+
+    .actionUrl{
+      text-align:center;
+      font-size:7.5px;
+      line-height:1.2;
+      color:#7a6e5f;
+      word-break:break-word;
+    }
+
+    /* ── Builder responsive ────────────────────────────────── */
+
+    @media (max-width:1100px){
       .shell{grid-template-columns:1fr}
     }
 
-    @media (max-width: 720px){
+    @media (max-width:720px){
       .shell{padding:14px;gap:14px}
       .grid2,.actions{grid-template-columns:1fr}
       .paperWrap{padding:0;background:none;border-top:none}
       .page{transform-origin:top center;transform:scale(.58);margin:-60px auto -60px}
     }
+
+    /* ── Print ─────────────────────────────────────────────── */
 
     @page{
       size:A4 portrait;
@@ -471,15 +469,15 @@
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="shell">
     <aside class="controls panel">
       <div class="head">
-        <span class="eyebrow">Coupon Builder</span>
-        <h1>A4 coupon strips</h1>
-        <p class="sub">Five simple banner-style coupons per page. Edit once, then print the sheet or export to PDF.</p>
+        <span class="eyebrow">Offer Strip Builder</span>
+        <h1>A4 booking offer strips</h1>
+        <p class="sub">Five luxury booking offer strips per A4 page. Edit, preview, then print or save as PDF.</p>
       </div>
 
       <div class="form">
@@ -487,17 +485,17 @@
           <label>Hotel name
             <input id="hotelName" type="text" value="Sandbox Hotel">
           </label>
-          <label>Small badge
-            <input id="badge" type="text" value="Direct Booking Offer">
+          <label>Tagline
+            <input id="badge" type="text" value="Boutique Hotel — Nakhon Si Thammarat">
           </label>
         </div>
 
         <div class="group">
-          <label>Main headline
+          <label>Headline
             <input id="headline" type="text" value="10% Off Direct Booking">
           </label>
-          <label>Subheadline
-            <textarea id="subline">Book direct with Sandbox Hotel and enjoy a better-value stay with fast confirmation and local support.</textarea>
+          <label>Supporting line
+            <textarea id="subline">Book direct with Sandbox Hotel for better value, fast confirmation, and personal support.</textarea>
           </label>
         </div>
 
@@ -505,37 +503,28 @@
           <label>Promo code
             <input id="code" type="text" value="SANDBOX10">
           </label>
-          <label>CTA
-            <input id="cta" type="text" value="Book Now">
+          <label>CTA label
+            <input id="cta" type="text" value="Book Direct">
           </label>
         </div>
 
         <div class="grid2">
-          <label>Validity chip
+          <label>Book by
             <input id="validity" type="text" value="Book by 30 Apr 2026">
           </label>
-          <label>Stay chip
+          <label>Stay until
             <input id="stay" type="text" value="Stay until 31 May 2026">
           </label>
         </div>
 
         <div class="group">
-          <label>Terms line
-            <textarea id="terms">Direct bookings only. Subject to availability. Blackout dates may apply. One coupon per stay. Not combinable with other promotions.</textarea>
-          </label>
-        </div>
-
-        <div class="grid2">
-          <label>Phone
-            <input id="phone" type="text" value="066 111 7070">
-          </label>
-          <label>LINE / WhatsApp
-            <input id="line" type="text" value="LINE / WhatsApp available">
+          <label>Terms
+            <textarea id="terms">Direct bookings only. Subject to availability. One offer per stay. Cannot be combined with other promotions.</textarea>
           </label>
         </div>
 
         <div class="group">
-          <label>Booking URL or website
+          <label>Website
             <input id="url" type="text" value="www.sandboxhotel.com">
           </label>
         </div>
@@ -544,13 +533,22 @@
 
         <div class="imageGroup">
           <div class="imageToggle">
-            <input type="checkbox" id="showImage">
-            <span>Show image in left panel</span>
+            <input type="checkbox" id="showImage" checked>
+            <span>Show image in brand panel</span>
           </div>
           <div class="imageGrid" id="imageGrid"></div>
+          <div class="uploadRow">
+            <label class="uploadBtn" for="uploadInput">
+              <svg viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 1z"/></svg>
+              Upload image
+            </label>
+            <input type="file" id="uploadInput" accept="image/*" style="display:none">
+            <span class="uploadName" id="uploadName"></span>
+            <button class="removeUpload" id="removeUpload" type="button" style="display:none">Remove</button>
+          </div>
         </div>
 
-        <p class="hint">The sheet is fixed to 5 strips on one A4 page. Keep the headline short for the cleanest print result.</p>
+        <p class="hint">Five strips per A4. Keep the headline short for the cleanest print result.</p>
       </div>
 
       <div class="actions">
@@ -563,48 +561,42 @@
     <section class="stage panel">
       <div class="head">
         <span class="eyebrow">Preview</span>
-        <h2>5-up printable banner sheet</h2>
+        <h2>5-up printable offer sheet</h2>
       </div>
       <div class="stageBody">
         <div class="paperWrap">
           <div class="page" id="page"></div>
         </div>
-        <p class="footerNote">This layout is sized to fit five horizontal coupon strips on a single A4 portrait page with print-safe margins.</p>
+        <p class="footerNote">Layout sized for five horizontal offer strips on a single A4 portrait page with print-safe margins.</p>
       </div>
     </section>
   </div>
 
-  <template id="couponTemplate">
-    <article class="coupon">
-      <div class="left no-image">
-        <div class="leftImage">
+  <template id="stripTemplate">
+    <article class="strip">
+      <div class="brand no-image">
+        <div class="brandImage">
           <img src="" alt="">
         </div>
-        <div class="leftContent">
-          <div>
-            <div class="badge js-badge"></div>
-          </div>
-          <div class="hotelName js-hotel"></div>
-          <div class="contactList">
-            <div class="js-phone"></div>
-            <div class="js-line"></div>
-          </div>
+        <div class="brandInner">
+          <div class="brandName js-hotel"></div>
+          <div class="brandTagline js-badge"></div>
         </div>
       </div>
-      <div class="middle">
-        <div class="headline js-headline"></div>
-        <div class="subline js-subline"></div>
-        <div class="meta">
-          <span class="metaItem js-validity"></span>
-          <span class="metaItem js-stay"></span>
+      <div class="offer">
+        <div class="offerHeadline js-headline"></div>
+        <div class="offerBody js-subline"></div>
+        <div class="offerMeta">
+          <span class="chip js-validity"></span>
+          <span class="chip js-stay"></span>
         </div>
-        <div class="terms js-terms"></div>
+        <div class="offerTerms js-terms"></div>
       </div>
-      <div class="right">
+      <div class="action">
         <div class="codeLabel">Promo Code</div>
         <div class="code js-code"></div>
         <div class="cta js-cta"></div>
-        <div class="url js-url"></div>
+        <div class="actionUrl js-url"></div>
       </div>
     </article>
   </template>
@@ -614,8 +606,12 @@
 
     /* Gallery images sourced from the site's existing asset directories */
     const GALLERY_IMAGES = [
+      { src: '/images/Sandbox-Hotel-Hero-Banner-720.webp', label: 'Hero Banner' },
       { src: '/assets/images/gallery/entrance-400.webp', label: 'Entrance' },
       { src: '/assets/images/gallery/lobby-400.webp', label: 'Lobby' },
+      { src: '/assets/images/gallery/evening-view-400.webp', label: 'Evening View' },
+      { src: '/assets/images/gallery/flower-view-400.webp', label: 'Flower View' },
+      { src: '/assets/images/gallery/staircase-400.webp', label: 'Staircase' },
       { src: '/assets/images/rooms/double-room-sandboxhotel-1-400.webp', label: 'Double Room 1' },
       { src: '/assets/images/rooms/double-room-sandboxhotel-2-400.webp', label: 'Double Room 2' },
       { src: '/assets/images/rooms/twin-room-sandbox-1-400.webp', label: 'Twin Room 1' },
@@ -625,28 +621,32 @@
 
     const defaults = {
       hotelName: 'Sandbox Hotel',
-      badge: 'Direct Booking Offer',
+      badge: 'Boutique Hotel \u2014 Nakhon Si Thammarat',
       headline: '10% Off Direct Booking',
-      subline: 'Book direct with Sandbox Hotel and enjoy a better-value stay with fast confirmation and local support.',
+      subline: 'Book direct with Sandbox Hotel for better value, fast confirmation, and personal support.',
       code: 'SANDBOX10',
-      cta: 'Book Now',
+      cta: 'Book Direct',
       validity: 'Book by 30 Apr 2026',
       stay: 'Stay until 31 May 2026',
-      terms: 'Direct bookings only. Subject to availability. Blackout dates may apply. One coupon per stay. Not combinable with other promotions.',
-      phone: '066 111 7070',
-      line: 'LINE / WhatsApp available',
+      terms: 'Direct bookings only. Subject to availability. One offer per stay. Cannot be combined with other promotions.',
       url: 'www.sandboxhotel.com',
-      showImage: false,
-      selectedImage: 0
+      showImage: true,
+      selectedImage: 0,
+      uploadedImage: null
     };
 
-    const ids = ['hotelName','badge','headline','subline','code','cta','validity','stay','terms','phone','line','url'];
+    const ids = ['hotelName','badge','headline','subline','code','cta','validity','stay','terms','url'];
     const page = document.getElementById('page');
-    const template = document.getElementById('couponTemplate');
+    const template = document.getElementById('stripTemplate');
     const showImageCheckbox = document.getElementById('showImage');
     const imageGrid = document.getElementById('imageGrid');
+    const uploadInput = document.getElementById('uploadInput');
+    const uploadNameEl = document.getElementById('uploadName');
+    const removeUploadBtn = document.getElementById('removeUpload');
 
     let selectedImageIndex = defaults.selectedImage;
+    let uploadedDataUrl = null;
+    let useUploadedImage = false;
 
     /* Build image picker grid */
     GALLERY_IMAGES.forEach((img, i) => {
@@ -656,15 +656,54 @@
       btn.innerHTML = '<img src="'+img.src+'" alt="'+img.label+'" loading="lazy">';
       btn.addEventListener('click', () => {
         selectedImageIndex = i;
+        useUploadedImage = false;
         updateImageSelection();
         render();
       });
       imageGrid.appendChild(btn);
     });
 
+    /* Upload handling */
+    uploadInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        uploadedDataUrl = ev.target.result;
+        useUploadedImage = true;
+        uploadNameEl.textContent = file.name;
+        removeUploadBtn.style.display = '';
+        updateImageSelection();
+        render();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    removeUploadBtn.addEventListener('click', () => {
+      uploadedDataUrl = null;
+      useUploadedImage = false;
+      uploadInput.value = '';
+      uploadNameEl.textContent = '';
+      removeUploadBtn.style.display = 'none';
+      updateImageSelection();
+      render();
+    });
+
     function updateImageSelection(){
       const btns = imageGrid.querySelectorAll('button');
-      btns.forEach((b, i) => b.classList.toggle('selected', i === selectedImageIndex));
+      btns.forEach((b, i) => b.classList.toggle('selected', !useUploadedImage && i === selectedImageIndex));
+    }
+
+    function getImageSrc(){
+      if(useUploadedImage && uploadedDataUrl) return uploadedDataUrl;
+      const img = GALLERY_IMAGES[selectedImageIndex];
+      return img ? img.src : null;
+    }
+
+    function getImageAlt(){
+      if(useUploadedImage) return 'Custom upload';
+      const img = GALLERY_IMAGES[selectedImageIndex];
+      return img ? img.label : '';
     }
 
     function getValues(){
@@ -672,6 +711,7 @@
       ids.forEach(id => values[id] = document.getElementById(id).value.trim());
       values.showImage = showImageCheckbox.checked;
       values.selectedImage = selectedImageIndex;
+      values.useUploadedImage = useUploadedImage;
       return values;
     }
 
@@ -686,31 +726,31 @@
 
     function render(){
       const v = getValues();
+      const imgSrc = getImageSrc();
+      const imgAlt = getImageAlt();
       page.innerHTML = '';
       for(let i = 0; i < 5; i += 1){
         const node = template.content.firstElementChild.cloneNode(true);
-        node.querySelector('.js-badge').textContent = v.badge || 'Direct Booking Offer';
         node.querySelector('.js-hotel').textContent = v.hotelName || 'Sandbox Hotel';
-        node.querySelector('.js-phone').textContent = 'Call: '+(v.phone || '\u2014');
-        node.querySelector('.js-line').textContent = v.line || 'LINE / WhatsApp';
-        node.querySelector('.js-headline').textContent = v.headline || 'Hotel Offer';
+        node.querySelector('.js-badge').textContent = v.badge || '';
+        node.querySelector('.js-headline').textContent = v.headline || '10% Off Direct Booking';
         node.querySelector('.js-subline').textContent = v.subline || '';
         node.querySelector('.js-validity').textContent = v.validity || 'Limited Time';
         node.querySelector('.js-stay').textContent = v.stay || 'Terms Apply';
         node.querySelector('.js-terms').textContent = v.terms || '';
         node.querySelector('.js-code').textContent = (v.code || 'OFFER').toUpperCase();
-        node.querySelector('.js-cta').textContent = v.cta || 'Book Now';
+        node.querySelector('.js-cta').textContent = v.cta || 'Book Direct';
         node.querySelector('.js-url').textContent = v.url || '';
 
         /* Image handling */
-        const leftPanel = node.querySelector('.left');
-        if(v.showImage && GALLERY_IMAGES[v.selectedImage]){
-          leftPanel.classList.remove('no-image');
-          const img = leftPanel.querySelector('.leftImage img');
-          img.src = GALLERY_IMAGES[v.selectedImage].src;
-          img.alt = GALLERY_IMAGES[v.selectedImage].label;
+        const brandPanel = node.querySelector('.brand');
+        if(v.showImage && imgSrc){
+          brandPanel.classList.remove('no-image');
+          const img = brandPanel.querySelector('.brandImage img');
+          img.src = imgSrc;
+          img.alt = imgAlt;
         } else {
-          leftPanel.classList.add('no-image');
+          brandPanel.classList.add('no-image');
         }
 
         page.appendChild(node);
@@ -718,7 +758,11 @@
     }
 
     function save(){
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(getValues()));
+      const v = getValues();
+      /* Do not persist the full data URL to localStorage — too large.
+         Instead persist a flag so user knows they had an upload active. */
+      v.uploadedImage = null;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(v));
     }
 
     function load(){
@@ -733,6 +777,11 @@
 
     function reset(){
       localStorage.removeItem(STORAGE_KEY);
+      uploadedDataUrl = null;
+      useUploadedImage = false;
+      uploadInput.value = '';
+      uploadNameEl.textContent = '';
+      removeUploadBtn.style.display = 'none';
       setValues(defaults);
       render();
     }
