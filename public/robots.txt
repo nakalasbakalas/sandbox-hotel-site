@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /ops/
 
 Sitemap: https://www.sandboxhotel.com/sitemap.xml
