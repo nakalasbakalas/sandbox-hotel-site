@@ -305,22 +305,42 @@
     }
 
     .brandName{
-      font-size:18px;
-      font-weight:900;
-      line-height:1.02;
-      letter-spacing:.03em;
+      font-size:20px;
+      font-weight:950;
+      line-height:1;
+      letter-spacing:.05em;
       text-transform:uppercase;
-      color:#3a2c1c;
+      color:#2a1e10;
+      text-shadow:0 0 12px rgba(255,255,255,.5);
     }
 
-    .brandTagline{
-      font-size:9.5px;
-      font-weight:700;
-      text-transform:uppercase;
-      letter-spacing:.16em;
-      color:#8b6e52;
-      line-height:1.2;
+    .brandContact{
+      display:flex;
+      align-items:center;
+      gap:6px;
     }
+
+    .brandPhone{
+      font-size:12px;
+      font-weight:800;
+      color:#3a2c1c;
+      letter-spacing:.03em;
+      line-height:1;
+      white-space:nowrap;
+    }
+
+    .brandQr{
+      width:32px;
+      height:32px;
+      border-radius:3px;
+      overflow:hidden;
+      flex-shrink:0;
+      background:#fff;
+    }
+    .brandQr img{
+      width:100%;height:100%;object-fit:contain;display:block;
+    }
+    .brandQr.hidden{display:none}
 
     /* ── Middle: offer details ─────────────────────────────── */
 
@@ -485,9 +505,21 @@
           <label>Hotel name
             <input id="hotelName" type="text" value="Sandbox Hotel">
           </label>
-          <label>Tagline
-            <input id="badge" type="text" value="Boutique Hotel — Nakhon Si Thammarat">
+          <label>Phone number
+            <input id="phone" type="text" value="066 111 7070">
           </label>
+        </div>
+
+        <div class="group">
+          <div class="uploadRow">
+            <label class="uploadBtn" for="qrInput">
+              <svg viewBox="0 0 16 16"><path d="M0 2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm1 0v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm2 1v2h2V3H3zM0 10a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-4zm1 0v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1v-4a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1zm2 1v2h2v-2H3zM8 2a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v4a2 2 0 0 1-2 2h-4a2 2 0 0 1-2-2V2zm1 0v4a1 1 0 0 0 1 1h4a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1zm2 1v2h2V3h-2z"/></svg>
+              Upload LINE QR
+            </label>
+            <input type="file" id="qrInput" accept="image/*" style="display:none">
+            <span class="uploadName" id="qrName"></span>
+            <button class="removeUpload" id="removeQr" type="button" style="display:none">Remove</button>
+          </div>
         </div>
 
         <div class="group">
@@ -580,7 +612,10 @@
         </div>
         <div class="brandInner">
           <div class="brandName js-hotel"></div>
-          <div class="brandTagline js-badge"></div>
+          <div class="brandContact">
+            <div class="brandPhone js-phone"></div>
+            <div class="brandQr hidden js-qr"><img src="" alt="LINE QR"></div>
+          </div>
         </div>
       </div>
       <div class="offer">
@@ -621,7 +656,7 @@
 
     const defaults = {
       hotelName: 'Sandbox Hotel',
-      badge: 'Boutique Hotel \u2014 Nakhon Si Thammarat',
+      phone: '066 111 7070',
       headline: '10% Off Direct Booking',
       subline: 'Book direct with Sandbox Hotel for better value, fast confirmation, and personal support.',
       code: 'SANDBOX10',
@@ -635,7 +670,7 @@
       uploadedImage: null
     };
 
-    const ids = ['hotelName','badge','headline','subline','code','cta','validity','stay','terms','url'];
+    const ids = ['hotelName','phone','headline','subline','code','cta','validity','stay','terms','url'];
     const page = document.getElementById('page');
     const template = document.getElementById('stripTemplate');
     const showImageCheckbox = document.getElementById('showImage');
@@ -643,10 +678,14 @@
     const uploadInput = document.getElementById('uploadInput');
     const uploadNameEl = document.getElementById('uploadName');
     const removeUploadBtn = document.getElementById('removeUpload');
+    const qrInput = document.getElementById('qrInput');
+    const qrNameEl = document.getElementById('qrName');
+    const removeQrBtn = document.getElementById('removeQr');
 
     let selectedImageIndex = defaults.selectedImage;
     let uploadedDataUrl = null;
     let useUploadedImage = false;
+    let qrDataUrl = null;
 
     /* Build image picker grid */
     GALLERY_IMAGES.forEach((img, i) => {
@@ -686,6 +725,28 @@
       uploadNameEl.textContent = '';
       removeUploadBtn.style.display = 'none';
       updateImageSelection();
+      render();
+    });
+
+    /* QR code upload handling */
+    qrInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if(!file) return;
+      const reader = new FileReader();
+      reader.onload = (ev) => {
+        qrDataUrl = ev.target.result;
+        qrNameEl.textContent = file.name;
+        removeQrBtn.style.display = '';
+        render();
+      };
+      reader.readAsDataURL(file);
+    });
+
+    removeQrBtn.addEventListener('click', () => {
+      qrDataUrl = null;
+      qrInput.value = '';
+      qrNameEl.textContent = '';
+      removeQrBtn.style.display = 'none';
       render();
     });
 
@@ -732,7 +793,7 @@
       for(let i = 0; i < 5; i += 1){
         const node = template.content.firstElementChild.cloneNode(true);
         node.querySelector('.js-hotel').textContent = v.hotelName || 'Sandbox Hotel';
-        node.querySelector('.js-badge').textContent = v.badge || '';
+        node.querySelector('.js-phone').textContent = v.phone || '';
         node.querySelector('.js-headline').textContent = v.headline || '10% Off Direct Booking';
         node.querySelector('.js-subline').textContent = v.subline || '';
         node.querySelector('.js-validity').textContent = v.validity || 'Limited Time';
@@ -751,6 +812,15 @@
           img.alt = imgAlt;
         } else {
           brandPanel.classList.add('no-image');
+        }
+
+        /* QR code handling */
+        const qrEl = node.querySelector('.js-qr');
+        if(qrDataUrl){
+          qrEl.classList.remove('hidden');
+          qrEl.querySelector('img').src = qrDataUrl;
+        } else {
+          qrEl.classList.add('hidden');
         }
 
         page.appendChild(node);
@@ -782,6 +852,10 @@
       uploadInput.value = '';
       uploadNameEl.textContent = '';
       removeUploadBtn.style.display = 'none';
+      qrDataUrl = null;
+      qrInput.value = '';
+      qrNameEl.textContent = '';
+      removeQrBtn.style.display = 'none';
       setValues(defaults);
       render();
     }
