@@ -878,6 +878,8 @@
        COUPON BUILDER v2 — Pure Vanilla JS
        ══════════════════════════════════════════════════════════ */
     const STORAGE_KEY = 'sandbox_coupon_builder_v2';
+    const DEFAULT_CODE = 'CODE';
+    const DRAG_MIME = 'application/x-section-order';
 
     const GALLERY_IMAGES = [
       { src: '/images/Sandbox-Hotel-Hero-Banner-720.webp', label: 'Hero Banner' },
@@ -1200,14 +1202,12 @@
     }
 
     /* ── Build Sections HTML ──────────────────────────────── */
-    const DEFAULT_CODE = 'CODE';
-    const DRAG_MIME = 'application/x-section-order';
 
+    const _escEl = document.createElement('div');
     function escHTML(str) {
       if (str == null) return '';
-      const d = document.createElement('div');
-      d.textContent = str;
-      return d.innerHTML;
+      _escEl.textContent = str;
+      return _escEl.innerHTML;
     }
 
     function buildBrandHTML(v, layout) {
@@ -1331,8 +1331,8 @@
         const raw = localStorage.getItem(STORAGE_KEY);
         if (!raw) return null;
         return JSON.parse(raw);
-      } catch {
-        console.warn('Coupon Builder: failed to parse saved state from localStorage');
+      } catch (err) {
+        console.warn('Coupon Builder: failed to parse saved state from localStorage', err);
         return null;
       }
     }
