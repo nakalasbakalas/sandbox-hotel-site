@@ -203,6 +203,19 @@ test("homepage lower sections stay as standalone premium blocks instead of one s
   assert.ok(document.querySelector("#faq .faqCTAActions"));
 });
 
+test("homepage reviews use the older review-card layout without trust summary widgets", () => {
+  const dom = new JSDOM(homepageHtml);
+  const { document } = dom.window;
+
+  assert.equal(document.querySelector("#reviews .reviewTrust"), null);
+  assert.equal(document.querySelector("#reviews .reviewSource"), null);
+  assert.equal(document.querySelectorAll("#reviews .review").length, 5);
+  assert.equal(document.querySelectorAll("#reviews .reviewsSide .review").length, 2);
+  assert.equal(homepageJs.includes("trust_rating"), false);
+  assert.equal(homepageJs.includes("trust_meta"), false);
+  assert.equal(homepageJs.includes("btn_view_maps_short"), false);
+});
+
 test("homepage gallery uses the patch 1 image set with responsive sources", () => {
   const dom = new JSDOM(homepageHtml);
   const gallerySlides = [...dom.window.document.querySelectorAll("#gallery .galSlide")];
