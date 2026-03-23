@@ -6,6 +6,7 @@ import { JSDOM } from "jsdom";
 import worker, { handleInboundEmail } from "./index.js";
 
 const homepageHtml = fs.readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
+const homepageJs = fs.readFileSync(new URL("../public/assets/js/home.js", import.meta.url), "utf8");
 
 function createFakeDb({ duplicateLead = false } = {}) {
   let lastLeadId = 0;
@@ -167,8 +168,8 @@ test("booking ingest skips the acknowledgement when contact details do not conta
 });
 
 test("homepage locale packs include translated location title and footer language buttons render flags only", () => {
-  assert.match(homepageHtml, /en:\s*\{[\s\S]*?loc_title:\s*"Location & Contact"/);
-  assert.match(homepageHtml, /zh:\s*\{[\s\S]*?loc_title:\s*"位置与联系"/);
+  assert.match(homepageJs, /en:\s*\{[\s\S]*?loc_title:\s*"Location & Contact"/);
+  assert.match(homepageJs, /zh:\s*\{[\s\S]*?loc_title:\s*"位置与联系"/);
 
   const dom = new JSDOM(homepageHtml);
   const footerButtons = [...dom.window.document.querySelectorAll(".footerLang .langBtn")];

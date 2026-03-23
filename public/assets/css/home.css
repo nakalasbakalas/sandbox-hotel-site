@@ -754,7 +754,7 @@
     }
     .hero:before{
       content:"";
-      position:absolute; inset:0;
+      position:absolute; inset:0; z-index:1;
       background:
         linear-gradient(90deg, rgba(10,11,14,.52) 0%, rgba(10,11,14,.20) 45%, rgba(10,11,14,.04) 75%),
         linear-gradient(to top, rgba(10,11,14,.50) 0%, rgba(10,11,14,.14) 40%, rgba(10,11,14,0) 75%);
