@@ -212,19 +212,19 @@
 | Key | Purpose | Current English | Notes |
 |-----|---------|----------------|-------|
 | `gallery_title` | Section H2 | "Gallery" | Section name |
-| `gallery_sub` | Section intro | "Swipe through photos..." | Instruction |
+| `gallery_sub` | Section intro | "Swipe through photos of the hotel and guest spaces." | Instruction |
 | `gal_exterior_title` | Photo caption title | "Hotel Exterior" | Caption |
 | `gal_exterior_desc` | Photo caption text | "A clear look at the property..." | Description |
 | `gal_entrance_title` | Photo caption title | "Entrance & Arrival" | Caption |
 | `gal_entrance_desc` | Photo caption text | "Convenient access..." | Description |
-| `gal_std_double_title` | Photo caption title | "Standard Double Room" | Caption |
-| `gal_std_double_desc` | Photo caption text | "Comfortable double bed..." | Description |
-| `gal_std_twin_title` | Photo caption title | "Standard Twin Room" | Caption |
-| `gal_std_twin_desc` | Photo caption text | "Two single beds..." | Description |
-| `gal_bathroom_desc` | Photo caption text | "Hot shower and fresh essentials." | Description |
+| `gal_evening_view_title` | Photo caption title | "Evening Exterior" | Caption |
+| `gal_evening_view_desc` | Photo caption text | "A calm evening view..." | Description |
+| `gal_flower_view_title` | Photo caption title | "Garden Approach" | Caption |
+| `gal_flower_view_desc` | Photo caption text | "Flower-lined details..." | Description |
+| `gal_staircase_title` | Photo caption title | "Staircase & Mural" | Caption |
+| `gal_staircase_desc` | Photo caption text | "Interior details that give the hotel..." | Description |
 | `gal_swipe_hint` | Instruction | "Swipe for more photos..." | Help text |
 | `svg_lobby_and_reception` | Icon label | "Lobby & Reception" | Feature label |
-| `svg_clean_bathrooms` | Icon label | "Clean Bathrooms" | Feature label |
 
 ---
 
