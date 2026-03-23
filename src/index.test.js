@@ -189,3 +189,28 @@ test("homepage locale packs include translated location title and footer languag
     ],
   );
 });
+
+test("homepage gallery uses the patch 1 image set with responsive sources", () => {
+  const dom = new JSDOM(homepageHtml);
+  const gallerySlides = [...dom.window.document.querySelectorAll("#gallery .galSlide")];
+  const galleryImages = gallerySlides.map((slide) => slide.querySelector("img"));
+
+  assert.equal(gallerySlides.length, 6);
+  assert.deepEqual(
+    galleryImages.map((img) => img?.getAttribute("src")),
+    [
+      "images/Sandbox-Hotel-Hero-Banner.png",
+      "assets/images/gallery/entrance.png",
+      "assets/images/gallery/lobby.png",
+      "assets/images/gallery/evening-view.png",
+      "assets/images/gallery/flower-view.png",
+      "assets/images/gallery/staircase.png",
+    ],
+  );
+
+  assert.match(galleryImages[3]?.getAttribute("srcset") ?? "", /evening-view-400\.png 400w, assets\/images\/gallery\/evening-view\.png 1536w/);
+  assert.match(galleryImages[4]?.getAttribute("srcset") ?? "", /flower-view-400\.png 400w, assets\/images\/gallery\/flower-view\.png 1536w/);
+  assert.match(galleryImages[5]?.getAttribute("srcset") ?? "", /staircase-400\.png 400w, assets\/images\/gallery\/staircase\.png 1536w/);
+  assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_evening_view_title']")?.textContent, "Evening Exterior");
+  assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_staircase_title']")?.textContent, "Staircase & Mural");
+});

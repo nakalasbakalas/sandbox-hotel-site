@@ -10,12 +10,11 @@ Put your website images in these folders so `index.html` can load them directly.
 - `assets/images/rooms/premium-double.jpg`
 
 ## Gallery photos
-- `assets/images/gallery/lobby-reception.jpg`
-- `assets/images/gallery/large-room-layout.jpg`
-- `assets/images/gallery/coffee-snack-bar.jpg`
-- `assets/images/gallery/parking-area.jpg`
-- `assets/images/gallery/clean-bathrooms.jpg`
-- `assets/images/gallery/quiet-rest.jpg`
+- `assets/images/gallery/entrance.png`
+- `assets/images/gallery/lobby.png`
+- `assets/images/gallery/evening-view.png`
+- `assets/images/gallery/flower-view.png`
+- `assets/images/gallery/staircase.png`
 
 ## Tips
 - You can use `.jpg`, `.jpeg`, `.png`, or `.webp` files.
