@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
+import { JSDOM } from "jsdom";
 
 import worker, { handleInboundEmail } from "./index.js";
+
+const homepageHtml = fs.readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
 
 function createFakeDb({ duplicateLead = false } = {}) {
   let lastLeadId = 0;
@@ -160,4 +164,28 @@ test("booking ingest skips the acknowledgement when contact details do not conta
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("homepage locale packs include translated location title and footer language buttons render flags only", () => {
+  assert.match(homepageHtml, /en:\s*\{[\s\S]*?loc_title:\s*"Location & Contact"/);
+  assert.match(homepageHtml, /zh:\s*\{[\s\S]*?loc_title:\s*"位置与联系"/);
+
+  const dom = new JSDOM(homepageHtml);
+  const footerButtons = [...dom.window.document.querySelectorAll(".footerLang .langBtn")];
+
+  assert.equal(footerButtons.length, 3);
+  assert.deepEqual(
+    footerButtons.map((button) => ({
+      lang: button.getAttribute("data-lang"),
+      label: button.getAttribute("aria-label"),
+      flag: button.querySelector('[aria-hidden="true"]')?.textContent,
+      srOnly: button.querySelector(".sr-only")?.textContent,
+      visibleText: button.textContent?.trim(),
+    })),
+    [
+      { lang: "th", label: "ภาษาไทย", flag: "🇹🇭", srOnly: "Thai", visibleText: "🇹🇭Thai" },
+      { lang: "en", label: "English", flag: "🇬🇧", srOnly: "English", visibleText: "🇬🇧English" },
+      { lang: "zh", label: "中文（简体）", flag: "🇨🇳", srOnly: "Chinese (Simplified)", visibleText: "🇨🇳Chinese (Simplified)" },
+    ],
+  );
 });
