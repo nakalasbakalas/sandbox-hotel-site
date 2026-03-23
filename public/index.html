@@ -2316,6 +2316,630 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     html[data-density="compact"] .section{ margin: clamp(36px, 4.5vw, 56px) 0; }
     html[data-density="ultra-compact"] .section{ margin: clamp(28px, 3.5vw, 44px) 0; }
 
+    /* 2026-03 homepage redesign implementation */
+    .section{
+      margin: clamp(56px, 6vw, 84px) 0;
+    }
+    .head{
+      margin: 0 0 18px;
+      align-items: flex-end;
+    }
+    .head p{
+      max-width: 44ch;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    #rooms > .card,
+    #offers > .card{
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+      padding: 0;
+      overflow: visible;
+    }
+    #rooms > .card:before,
+    #offers > .card:before{
+      display: none;
+    }
+    #gallery > .card,
+    #destination > .card,
+    #location > .card{
+      background: color-mix(in oklab, var(--card) 94%, rgba(255,255,255,.34));
+      border-color: color-mix(in oklab, var(--line) 82%, rgba(168,101,42,.18));
+      box-shadow: 0 10px 28px rgba(59,43,22,.05);
+    }
+    #reviews > .card,
+    #faq > .card{
+      border-color: color-mix(in oklab, var(--line) 78%, rgba(168,101,42,.2));
+      box-shadow: 0 14px 34px rgba(59,43,22,.06);
+    }
+
+    .hero{
+      min-height: min(68vh, 580px);
+      border-radius: 22px;
+      box-shadow: 0 34px 78px rgba(17,13,8,.18);
+    }
+    .hero:before{
+      background:
+        linear-gradient(90deg, rgba(10,11,14,.62) 0%, rgba(10,11,14,.28) 40%, rgba(10,11,14,.04) 74%),
+        linear-gradient(to top, rgba(10,11,14,.48) 0%, rgba(10,11,14,.16) 38%, rgba(10,11,14,0) 74%);
+    }
+    .heroInner{
+      justify-content: center;
+      padding: clamp(20px, 3vw, 34px);
+    }
+    .heroPanel{
+      width: min(390px, 76vw);
+      margin: 0;
+      padding: clamp(18px, 2.2vw, 24px);
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(13,14,18,.68), rgba(13,14,18,.46));
+      box-shadow: 0 18px 40px rgba(0,0,0,.24);
+    }
+    .heroTitle{
+      margin-bottom: 12px;
+      max-width: 10ch;
+    }
+    .heroSub{
+      max-width: 30ch;
+      margin-bottom: 18px;
+      color: rgba(255,255,255,.88);
+      line-height: 1.6;
+    }
+    .heroCTA{
+      gap: 12px;
+      align-items: center;
+    }
+    .heroCTA .btn.primary{
+      min-width: 182px;
+    }
+    .heroReviewBadge{
+      margin-top: 16px;
+      gap: 10px;
+      max-width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border-color: rgba(255,255,255,.16);
+      background: rgba(255,255,255,.11);
+    }
+    .heroReviewScore{
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1;
+      color: #fff;
+    }
+    .heroReviewLabel{
+      font-size: 12.5px;
+      color: rgba(255,255,255,.86);
+      white-space: nowrap;
+    }
+    .trustStrip{
+      justify-content: flex-start;
+      gap: 10px;
+      padding: 16px 2px 0;
+    }
+    .trustStrip .trustItem{
+      padding: 8px 12px;
+      background: color-mix(in oklab, var(--surfaceA) 76%, var(--card));
+    }
+
+    #rooms .stack{
+      gap: 18px;
+      align-items: stretch;
+    }
+    .roomCard{
+      border: 1px solid color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.18));
+      border-radius: 20px;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, white) 0%, var(--card) 100%);
+      box-shadow: 0 20px 46px rgba(59,43,22,.1);
+    }
+    .roomCardInner{
+      height: 100%;
+    }
+    .roomMedia{
+      padding: 14px 14px 0;
+      border: 0;
+      background: transparent;
+    }
+    .roomHeroWrap{
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(59,43,22,.12);
+    }
+    .roomCard .roomHeroWrap .mediaImg{
+      aspect-ratio: 16 / 10;
+    }
+    .roomThumbs{
+      gap: 10px;
+      margin-top: 12px;
+      padding: 0 0 14px;
+    }
+    .roomThumb{
+      border-radius: 12px;
+    }
+    .roomBody{
+      padding: 2px 18px 18px;
+      gap: 14px;
+    }
+    .roomMeta{
+      gap: 9px;
+    }
+    .tag{
+      min-height: 30px;
+      padding: 5px 12px;
+      font-size: 12px;
+      background: rgba(168,101,42,.07);
+    }
+    .roomDivider{
+      width: 100%;
+      height: 1px;
+      background: color-mix(in oklab, var(--line) 78%, rgba(168,101,42,.24));
+    }
+    .roomBestFor{
+      padding: 11px 13px;
+      border-radius: 14px;
+      background: color-mix(in oklab, var(--surfaceA) 68%, rgba(168,101,42,.04));
+      border: 1px solid color-mix(in oklab, var(--line) 78%, rgba(168,101,42,.14));
+      font-style: normal;
+    }
+    .roomBestFor strong{
+      color: var(--ink2);
+    }
+    .roomAmenities{
+      gap: 10px 14px;
+    }
+    .roomAmenity{
+      padding: 8px 0;
+      border-bottom: 1px solid color-mix(in oklab, var(--line) 78%, transparent);
+    }
+    .roomAmenity:nth-last-child(-n + 2){
+      border-bottom: 0;
+    }
+    .priceBox{
+      margin-top: 0;
+      opacity: .72;
+    }
+    .priceBox .fine{
+      font-size: 11px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: var(--muted2);
+    }
+    .roomActions{
+      padding-top: 14px;
+      border-top: 1px solid color-mix(in oklab, var(--line) 82%, rgba(168,101,42,.14));
+    }
+    .roomActions .btn.primary{
+      width: 100%;
+      justify-content: center;
+      min-height: 48px;
+    }
+
+    .offers{
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .offer{
+      min-height: 100%;
+      padding: 22px 20px;
+      border-radius: 18px;
+      background: linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, white), color-mix(in oklab, var(--card) 96%, var(--surfaceA)));
+      box-shadow: none;
+    }
+    .offer:first-child{
+      border-color: color-mix(in oklab, var(--copper) 28%, var(--line));
+      background: linear-gradient(180deg, rgba(168,101,42,.08), color-mix(in oklab, var(--card) 96%, rgba(168,101,42,.03)));
+    }
+    .offer .offerIcon{
+      width: 52px;
+      height: 52px;
+      margin-bottom: 16px;
+      border-radius: 14px;
+    }
+    .offer b{
+      font-size: 15.5px;
+      max-width: 17ch;
+    }
+    .offer p{
+      font-size: 13.5px;
+      line-height: 1.6;
+      max-width: 29ch;
+    }
+
+    #book > .card{
+      border-radius: 24px;
+      padding: clamp(20px, 2.4vw, 28px);
+      box-shadow: 0 24px 54px rgba(168,101,42,.12), 0 16px 34px rgba(59,43,22,.08);
+    }
+    #book .head{
+      margin-bottom: 20px;
+    }
+    .bookingShell{
+      grid-template-columns: minmax(280px, .74fr) minmax(0, 1.26fr);
+      gap: 20px;
+      margin-top: 0;
+    }
+    .bookingMetaCard{
+      display: grid;
+      gap: 16px;
+      padding: 22px;
+      border-radius: 18px;
+      border-color: color-mix(in oklab, var(--copper) 18%, var(--line));
+      background: linear-gradient(180deg, rgba(168,101,42,.08), color-mix(in oklab, var(--card) 96%, rgba(168,101,42,.03)));
+    }
+    .bookingMetaIntro{
+      display: grid;
+      gap: 12px;
+    }
+    .bookingMetaLead{
+      margin: 0;
+      color: var(--ink2);
+      font-size: 15px;
+      line-height: 1.6;
+      font-weight: 700;
+    }
+    .bookingSupportRow{
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+    .bookingSupportRow .btn{
+      width: 100%;
+      justify-content: center;
+      min-height: 46px;
+    }
+    .bookingTrustBar{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.46);
+      border: 1px solid color-mix(in oklab, var(--line) 76%, rgba(168,101,42,.16));
+      color: var(--ink2);
+    }
+    .bookingTrustValue{
+      font-family: var(--display);
+      font-size: 24px;
+      line-height: 1;
+      color: var(--ink2);
+    }
+    .bookingTrustMeta{
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.45;
+    }
+    .bookingFacts{
+      display: grid;
+      gap: 10px;
+      margin: 0;
+    }
+    .bookingFacts p{
+      margin: 0;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.12));
+      background: rgba(255,255,255,.34);
+      line-height: 1.55;
+    }
+    .formGrid{
+      gap: 16px;
+      padding: 18px;
+      border-radius: 18px;
+      border: 1px solid color-mix(in oklab, var(--line) 78%, rgba(168,101,42,.16));
+      background: color-mix(in oklab, var(--card) 96%, rgba(255,255,255,.34));
+    }
+    .fieldGroup{
+      display: grid;
+      gap: 12px;
+      padding: 16px;
+      border-radius: 16px;
+      border: 1px solid color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.14));
+      background: color-mix(in oklab, var(--surfaceA) 62%, rgba(255,255,255,.38));
+    }
+    .fieldGroupCols2{
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .field{
+      gap: 8px;
+    }
+    .field input,
+    .field select,
+    .field textarea{
+      min-height: 48px;
+      border-radius: 12px;
+      background: rgba(255,255,255,.7);
+    }
+    .field textarea{
+      min-height: 120px;
+      resize: vertical;
+    }
+    .ctaRow{
+      margin-top: 2px;
+      padding-top: 8px;
+      gap: 12px;
+    }
+    .ctaRow .btn{
+      min-width: 180px;
+    }
+    .bookGuarantee{
+      margin-top: -2px;
+      border-radius: 14px;
+    }
+
+    .galCarousel{
+      margin-top: 14px;
+    }
+    .galViewport{
+      border-radius: 22px;
+      border-color: color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.18));
+      background: color-mix(in oklab, var(--card) 97%, rgba(255,255,255,.32));
+      box-shadow: none;
+    }
+    .galSlide .mediaImg{
+      aspect-ratio: 16 / 9;
+      max-height: 72vh;
+      object-fit: cover;
+    }
+    .galCap{
+      min-height: auto;
+      padding: 14px 16px 16px;
+      background: color-mix(in oklab, var(--surfaceA) 60%, rgba(255,255,255,.44));
+    }
+    .galCap b{
+      font-size: 15px;
+    }
+    .galCap span{
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .galBar{
+      margin-top: 12px;
+      gap: 8px;
+    }
+    .galThumbs{
+      margin-top: 14px;
+      gap: 10px;
+    }
+    .galThumb{
+      border-radius: 12px;
+    }
+
+    .reviewActionRow{
+      gap: 10px;
+    }
+    .reviewActionRow .btn{
+      min-height: 42px;
+    }
+    .reviews{
+      gap: 18px;
+      margin-top: 16px;
+      grid-template-columns: minmax(0, 1.08fr) minmax(290px, .92fr);
+      align-items: start;
+    }
+    .reviewsLead,
+    .reviewsSide{
+      gap: 16px;
+    }
+    .review{
+      border-radius: 18px;
+      background: color-mix(in oklab, var(--card) 95%, rgba(255,255,255,.28));
+      box-shadow: none;
+    }
+    .reviewFeatured{
+      padding: 24px;
+      background:
+        radial-gradient(600px 180px at 0% 0%, rgba(168,101,42,.09), transparent 74%),
+        color-mix(in oklab, var(--card) 97%, rgba(255,255,255,.34));
+    }
+    .reviewFeatured p{
+      max-height: none;
+      -webkit-line-clamp: unset;
+      display: block;
+      overflow: visible;
+    }
+    .reviewTrust{
+      border-radius: 20px;
+      padding: 22px;
+    }
+    .reviewTrust .btn.primary{
+      min-height: 46px;
+    }
+
+    .faqLayout{
+      gap: 20px;
+    }
+    .faqGrid{
+      gap: 14px;
+      margin-top: 0;
+    }
+    #faq details{
+      padding: 16px 18px;
+      border-radius: 16px;
+      background: color-mix(in oklab, var(--card) 95%, rgba(255,255,255,.22));
+    }
+    .faqHelpPanel{
+      border-radius: 18px;
+      top: calc(var(--nav-h) + 18px);
+    }
+    .faqCTA{
+      display: none;
+    }
+
+    .destGrid{
+      gap: 16px;
+      margin-top: 16px;
+    }
+    .destBlock{
+      padding: 20px;
+      border-radius: 18px;
+      background: color-mix(in oklab, var(--card) 95%, rgba(255,255,255,.28));
+    }
+    .destBlock h3{
+      margin-bottom: 10px;
+      color: var(--ink2);
+    }
+    .destBlock p,
+    .destList{
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .destList{
+      padding-left: 20px;
+    }
+    .destList li + li{
+      margin-top: 8px;
+    }
+    .destCTA{
+      margin-top: 18px;
+      padding-top: 16px;
+    }
+
+    .locationGrid{
+      gap: 20px;
+      grid-template-columns: minmax(300px, .82fr) minmax(0, 1.18fr);
+    }
+    .contactCard{
+      gap: 16px;
+      padding: 22px;
+      border-radius: 18px;
+      border-color: color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.16));
+      background: linear-gradient(180deg, rgba(168,101,42,.06), color-mix(in oklab, var(--card) 96%, rgba(255,255,255,.24)));
+    }
+    .contactAddress{
+      margin: 0;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .contactActions{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+    .contactActions .btn{
+      width: 100%;
+      justify-content: center;
+      min-height: 46px;
+    }
+    .contactMeta{
+      display: grid;
+      gap: 10px;
+      margin: 0;
+    }
+    .contactMetaRow{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 12px;
+      border-radius: 12px;
+      border: 1px solid color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.14));
+      background: rgba(255,255,255,.38);
+    }
+    .contactMetaIcon{
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 10px;
+      background: rgba(168,101,42,.1);
+      flex-shrink: 0;
+    }
+    .contactSecondary{
+      margin-top: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 14px;
+    }
+    .mapWrap{
+      border-radius: 20px;
+      border-color: color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.16));
+      box-shadow: none;
+    }
+    .mapWrap iframe{
+      height: clamp(320px, 38vw, 430px);
+    }
+
+    .lineAction{
+      border-color: rgba(0,195,91,.28);
+      background: rgba(0,195,91,.08);
+    }
+    .lineAction:hover{
+      border-color: rgba(0,195,91,.42);
+      background: rgba(0,195,91,.12);
+    }
+    .stickyBottom{
+      background: rgba(255,251,245,.94);
+      border-top-color: color-mix(in oklab, var(--line) 76%, rgba(168,101,42,.14));
+      box-shadow: 0 -10px 28px rgba(59,43,22,.1);
+    }
+
+    @media (max-width: 980px){
+      .bookingShell,
+      .reviews,
+      .locationGrid{
+        grid-template-columns: 1fr;
+      }
+      .reviewTrust{
+        position: static;
+      }
+    }
+    @media (max-width: 860px){
+      .faqCTA{
+        display: block;
+      }
+      .faqHelpPanel{
+        position: static;
+      }
+    }
+    @media (max-width: 760px){
+      .fieldGroupCols2,
+      .bookingSupportRow,
+      .contactActions{
+        grid-template-columns: 1fr;
+      }
+      .roomAmenities{
+        grid-template-columns: 1fr;
+      }
+      .roomAmenity{
+        border-bottom: 1px solid color-mix(in oklab, var(--line) 78%, transparent);
+      }
+      .roomAmenity:last-child{
+        border-bottom: 0;
+      }
+      .heroReviewLabel{
+        white-space: normal;
+      }
+      .reviewActionRow{
+        justify-content: flex-start;
+      }
+    }
+    html[data-device="phone"] .heroPanel{
+      width: min(92vw, 360px);
+    }
+    html[data-device="phone"] .hero{
+      min-height: clamp(420px, 74vh, 580px);
+    }
+    html[data-device="phone"] .trustStrip{
+      gap: 8px;
+    }
+    html[data-device="phone"] .trustStrip .trustItem{
+      width: calc(50% - 4px);
+      justify-content: center;
+    }
+    html[data-device="phone"] .formGrid{
+      padding: 14px;
+    }
+    html[data-device="phone"] .fieldGroup{
+      padding: 14px;
+    }
+    html[data-device="phone"] .contactCard{
+      padding: 18px;
+    }
+
   </style>
 
   <script type="application/ld+json">
@@ -2615,6 +3239,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="btn primary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
               <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">Explore Rooms →</a>
             </div>
+            <a class="heroReviewBadge" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-analytics="map">
+              <span class="heroReviewScore" data-i18n-html="trust_rating">4.8</span>
+              <span class="heroReviewStars" aria-hidden="true">★★★★★</span>
+              <span class="heroReviewLabel" data-i18n="trust_meta">Based on Google Maps reviews</span>
+            </a>
           </div>
         </div>
       </div>
@@ -2624,7 +3253,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <span class="trustItem"><span class="trustIcon" aria-hidden="true">🤫</span> <span data-i18n="trust_quiet">Quiet Rooms</span></span>
         <span class="trustItem"><span class="trustIcon" aria-hidden="true">📶</span> <span data-i18n="trust_wifi">Free Wi‑Fi</span></span>
         <span class="trustItem"><span class="trustIcon" aria-hidden="true">🅿</span> <span data-i18n="trust_parking">Parking</span></span>
-        <span class="trustItem"><span class="trustIcon" aria-hidden="true">📞</span> <span data-i18n="trust_support">Call / LINE Support</span></span>
       </div>
     </section>
 
@@ -2844,52 +3472,71 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="bookingShell">
           <div class="bookingMetaCard">
-            <div class="fine">
+            <div class="bookingMetaIntro">
+              <span class="badge hot" data-i18n="trust_direct">Direct Booking</span>
+              <p class="bookingMetaLead" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today's exact rate.</p>
+            </div>
+            <div class="bookingSupportRow">
+              <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
+              <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+            </div>
+            <div class="bookingTrustBar">
+              <span class="bookingTrustValue" data-i18n-html="trust_rating">4.8</span>
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <span class="bookingTrustMeta" data-i18n="trust_meta">Based on Google Maps reviews</span>
+            </div>
+            <div class="bookingFacts fine">
               <p data-i18n="book_tip"><strong>Tip:</strong> Add your estimated arrival time in Notes if arriving late.</p>
               <p data-i18n="book_checkin_info"><strong>Check-in:</strong> From 14:00 • <strong>Check-out:</strong> By 11:00</p>
               <p data-i18n="book_id_note"><strong>ID required:</strong> Government-issued ID or passport needed at check-in.</p>
             </div>
-            <div class="sep"></div>
-            <div class="bestRateNote" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today's exact rate.</div>
           </div>
 
           <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
-            <div class="field">
-              <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
-              <input id="checkin" name="checkin" type="date" required>
+            <div class="fieldGroup fieldGroupCols2 wide">
+              <div class="field">
+                <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
+                <input id="checkin" name="checkin" type="date" required>
+              </div>
+              <div class="field">
+                <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
+                <input id="checkout" name="checkout" type="date" required>
+              </div>
             </div>
-            <div class="field">
-              <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
-              <input id="checkout" name="checkout" type="date" required>
+            <div class="fieldGroup fieldGroupCols2 wide">
+              <div class="field">
+                <label for="guests" data-i18n="lbl_guests">Guests</label>
+                <select id="guests" name="guests">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="room" data-i18n="lbl_room">Room</label>
+                <select id="room" name="room">
+                  <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
+                  <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
+                </select>
+              </div>
             </div>
-            <div class="field">
-              <label for="guests" data-i18n="lbl_guests">Guests</label>
-              <select id="guests" name="guests">
-                <option value="1">1</option>
-                <option value="2" selected>2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-              </select>
+            <div class="fieldGroup fieldGroupCols2 wide">
+              <div class="field">
+                <label for="name" data-i18n="lbl_name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
+              </div>
+              <div class="field">
+                <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
+                <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
+              </div>
             </div>
-            <div class="field">
-              <label for="room" data-i18n="lbl_room">Room</label>
-              <select id="room" name="room">
-                <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
-                <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="name" data-i18n="lbl_name">Name</label>
-              <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
-            </div>
-            <div class="field">
-              <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
-              <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
-            </div>
-            <div class="field wide">
-              <label for="notes" data-i18n="lbl_notes">Notes</label>
-              <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+            <div class="fieldGroup wide">
+              <div class="field">
+                <label for="notes" data-i18n="lbl_notes">Notes</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+              </div>
             </div>
 
             <div class="wide ctaRow">
@@ -3124,16 +3771,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <p data-i18n="faq_a1">Call or message us on LINE with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p>
               </details>
               <details data-faq-item>
-                <summary data-i18n="faq_q4">Can rates change by date?</summary>
-                <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
-              </details>
-              <details data-faq-item>
-                <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
-                <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
-              </details>
-              <details data-faq-item>
                 <summary data-i18n="faq_q2">What time is check-in and check-out?</summary>
                 <p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q4">Can rates change by date?</summary>
+                <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q3">What do I need at check-in?</summary>
@@ -3146,6 +3789,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <details data-faq-item>
                 <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
                 <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
+                <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q7">Is smoking allowed?</summary>
@@ -3204,17 +3851,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <article class="destGrid">
           <div class="destBlock">
-            <h3 data-i18n="dest_where_title"><span class="destIcon" aria-hidden="true">📍</span> Where We Are</h3>
+            <h3 data-i18n-html="dest_where_title"><span class="destIcon" aria-hidden="true">📍</span> Where We Are</h3>
             <p data-i18n="dest_where_body_short">Nakhon Si Thammarat is a historic city in <strong>Southern Thailand</strong> on the Gulf coast, 780 km south of Bangkok. One of the oldest cities in the country, it sits distinct from crowded Andaman beach resorts.</p>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_why_title"><span class="destIcon" aria-hidden="true">✨</span> Why Visit</h3>
+            <h3 data-i18n-html="dest_why_title"><span class="destIcon" aria-hidden="true">✨</span> Why Visit</h3>
             <p data-i18n="dest_why_body_short">Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan — one of Thailand's most significant temples.</p>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_attractions_title"><span class="destIcon" aria-hidden="true">🛕</span> Nearby Attractions</h3>
+            <h3 data-i18n-html="dest_attractions_title"><span class="destIcon" aria-hidden="true">🛕</span> Nearby Attractions</h3>
             <ul class="destList">
               <li><strong>Wat Phra Mahathat</strong> — 1,000-year-old temple complex</li>
               <li><strong>Bovorn Bazaar &amp; Night Market</strong> — local food and evening browsing</li>
@@ -3224,7 +3871,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_howtoget_title"><span class="destIcon" aria-hidden="true">✈️</span> Getting Here</h3>
+            <h3 data-i18n-html="dest_howtoget_title"><span class="destIcon" aria-hidden="true">✈️</span> Getting Here</h3>
             <ul class="destList">
               <li><strong>By Air</strong> — NST Airport, ~1.5 hours from Bangkok</li>
               <li><strong>By Train</strong> — Overnight sleeper, ~12–14 hours</li>
@@ -3267,14 +3914,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="contactActions">
               <a class="btn primary" href="tel:+66885783478" data-i18n="btn_call_now" data-analytics="call">Call Now</a>
-              <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" style="border-color:rgba(0,195,91,.35); background:rgba(0,195,91,.08)">LINE<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn lineAction" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
               <a class="btn" href="mailto:booking@sandboxhotel.com" data-i18n="btn_email" data-analytics="email">Email</a>
             </div>
 
-            <p class="fine contactMeta">
-              Phone: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a> · LINE: sandbox.hotel<br>
-              Email: <a href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
-            </p>
+            <div class="contactMeta fine">
+              <div class="contactMetaRow">
+                <span class="contactMetaIcon" aria-hidden="true">📞</span>
+                <a href="tel:+66885783478" data-analytics="call">088-578-3478</a>
+              </div>
+              <div class="contactMetaRow">
+                <span class="contactMetaIcon" aria-hidden="true">💬</span>
+                <span>sandbox.hotel</span>
+              </div>
+              <div class="contactMetaRow">
+                <span class="contactMetaIcon" aria-hidden="true">✉️</span>
+                <a href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
+              </div>
+            </div>
 
             <p class="fine contactSecondary">
               <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map">Open in Google Maps<span class="sr-only"> (opens in new tab)</span></a> ·
@@ -4459,7 +5116,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
     function wireContactButtons(){
       // Non-JS fallbacks: real links
-      ["contactLine"].forEach(id=>{
+      ["contactLine", "bookingLineQuick", "stickyLine"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
         el.setAttribute("href", lineMessageUrl(t("msg_title") || "Booking request – Sandbox Hotel"));
@@ -4853,7 +5510,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="stickyBottom" id="stickyBottom" aria-label="Quick booking actions">
     <div class="stickyBottomInner">
       <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-      <a class="btn" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" id="stickyLine" data-analytics="line" style="border-color:rgba(0,195,91,.35); background:rgba(0,195,91,.08)">LINE<span class="sr-only"> (opens in new tab)</span></a>
+      <a class="btn lineAction" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" id="stickyLine" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
       <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
     </div>
   </div>
