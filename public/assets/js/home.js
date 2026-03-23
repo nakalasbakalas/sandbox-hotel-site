@@ -185,6 +185,7 @@
         stay_room: "ห้อง",
         best_rate_note: "จองตรง = ยืนยันไวที่สุด • ส่งวันเข้าพักเพื่อรับราคาที่ถูกต้องของวันนี้",
         msg_nights: "จำนวนคืน",
+        line_opened_hint: "เปิด LINE แล้ว",
         line_clipboard_hint: "คัดลอกข้อความไว้แล้ว (วางได้ทันที)",
         line_clipboard_fail: "แนะนำ: คัดลอกข้อความหากต้องการวางในแชต",
         why_title: "ทำไมแขกถึงเลือก Sandbox",
@@ -422,6 +423,7 @@
         stay_room: "Room",
         best_rate_note: "Direct booking = fastest confirmation • Send your dates for today’s rate.",
         msg_nights: "Nights",
+        line_opened_hint: "LINE opened.",
         line_clipboard_hint: "Message copied to clipboard.",
         line_clipboard_fail: "Tip: copy your message if needed.",
         why_title: "Why Discerning Travelers Choose Sandbox",
@@ -437,6 +439,12 @@
         faq_a7: "For guest comfort, please ask reception about the current smoking policy and designated areas.",
         faq_q8: "What is the cancellation policy?",
         faq_a8: "Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.",
+        faq_q9: "Where is Sandbox Hotel located in Nakhon Si Thammarat?",
+        faq_a9: "Sandbox Hotel is located at 626/1 Karom Road, Pho Sadet, Mueang District, Nakhon Si Thammarat 80000, Thailand. The hotel is centrally situated in Nakhon Si Thammarat city, with easy access to local markets, temples, and the historic old city area.",
+        faq_q10: "What attractions are near the hotel in Nakhon Si Thammarat?",
+        faq_a10: "Sandbox Hotel is close to key Nakhon Si Thammarat landmarks including Wat Phra Mahathat Woramahawihan — one of Southern Thailand's most revered Buddhist temples — as well as the city's walking street markets, the Nakhon Si Thammarat National Museum, and a wide range of local restaurants serving Southern Thai cuisine.",
+        faq_q11: "Is Sandbox Hotel a good base for exploring Southern Thailand?",
+        faq_a11: "Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.",
         book_tip: "Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.",
         book_guarantee: "Best Rate Guaranteed when booking direct — no booking fees, no mark-up.",
 
@@ -673,6 +681,7 @@
         stay_room: "房型",
         best_rate_note: "直接预订 = 最快确认 • 发送日期以获取今日准确价格。",
         msg_nights: "晚数",
+        line_opened_hint: "已打开LINE。",
         line_clipboard_hint: "消息已复制到剪贴板。",
         line_clipboard_fail: "提示：如需粘贴，可先复制消息。",
         why_title: "客人选择 Sandbox 的原因",
@@ -688,6 +697,12 @@
         faq_a7: "室内禁烟。如需吸烟，请向前台咨询指定吸烟区域。",
         faq_q8: "取消政策是什么？",
         faq_a8: "取消政策因日期和季节不同可能有所调整，请联系酒店确认您的具体情况。",
+        faq_q9: "Sandbox Hotel 位于洛坤府哪里？",
+        faq_a9: "Sandbox Hotel 位于泰国洛坤府（Nakhon Si Thammarat）Pho Sadet, Mueang区Karom路626/1号，邮编80000。酒店地处市区中心，交通便利，靠近当地市集、寺庙及历史老城区。",
+        faq_q10: "酒店附近有哪些景点？",
+        faq_a10: "Sandbox Hotel 附近有洛坤府著名的Wat Phra Mahathat Woramahawihan（泰国南部最受尊崇的佛教寺庙之一）、步行街市集、洛坤府国家博物馆及正宗南泰餐厅，是探索城市及周边地区的理想据点。",
+        faq_q11: "Sandbox Hotel 适合探索泰国南部吗？",
+        faq_a11: "非常适合。洛坤府是泰国南部的重要交通枢纽，可便捷前往周边省份、海滩和文化景点。Sandbox Hotel 非常适合短期城市停留或多日游览泰国南部地区。",
         book_tip: "提示：如晚到，请在备注中写预计到达时间，方便我们协助。",
         book_guarantee: "直订专享优惠价格保证 — 无中介费，无加价。",
 
@@ -1105,11 +1120,6 @@
         const data = getFormData();
         await persistBookingLead(data);
         openLine(buildMessage(data), data, form);
-      });
-      document.getElementById("sendWA")?.addEventListener("click", async () => {
-        const data = getFormData();
-        await persistBookingLead(data);
-        openWhatsApp(buildMessage(data), data, document.getElementById("sendWA"));
       });
       document.getElementById("sendEmail")?.addEventListener("click", async ()=>{
         const data = getFormData();
