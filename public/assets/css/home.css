@@ -32,11 +32,7 @@
       --nav-pad-y:10px;
       --nav-pad-x:18px;
       --nav-gap:8px;
-      /* Button size tiers */
-      --btn-h-lg:48px;   /* primary CTAs */
-      --btn-h-md:44px;   /* secondary actions */
-      --btn-h-sm:40px;   /* compact / icon buttons */
-      --btn-h:var(--btn-h-md);
+      --btn-h:44px;
       --btn-px:16px;
       --btn-radius:var(--radius-sm);
       --btn-border:1px;
@@ -600,7 +596,6 @@
     .btn.primary{
       border:none;
       color:white;
-      min-height:var(--btn-h-lg);
       background: linear-gradient(135deg, rgba(168,101,42,.96), rgba(196,136,78,.90) 55%, rgba(232,201,160,.82) 130%);
       box-shadow: var(--shadow-brand-lg);
       text-shadow: var(--shadow-text);
@@ -625,7 +620,7 @@
       color:var(--ink2);
     }
     .btn.ghost:hover{background: var(--surfaceA)}
-    .btn.sm{min-height:var(--btn-h-sm); padding:10px 12px; border-radius:var(--radius-sm)}
+    .btn.sm{min-height:40px; padding:10px 12px; border-radius:var(--radius-sm)}
     .textLink{
       display:inline-flex;
       align-items:center;
@@ -1720,7 +1715,7 @@
     }
 
     html[data-device="phone"] .btn{
-      min-height: var(--btn-h-lg);
+      min-height: 38px;
       padding: 0 12px;
       font-size: 15px;
       line-height: 1.2;
