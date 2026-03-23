@@ -191,6 +191,18 @@ test("homepage locale packs include translated location title and footer languag
   );
 });
 
+test("homepage lower sections stay as standalone premium blocks instead of one shared grid", () => {
+  const dom = new JSDOM(homepageHtml);
+  const { document } = dom.window;
+
+  assert.equal(document.querySelector(".sectionsGrid"), null);
+  assert.ok(document.querySelector("#reviews .reviewSectionCard"));
+  assert.ok(document.querySelector("#faq .faqSectionCard"));
+  assert.ok(document.querySelector("#destination .destinationSectionCard"));
+  assert.ok(document.querySelector("#location .locationSectionCard"));
+  assert.ok(document.querySelector("#faq .faqCTAActions"));
+});
+
 test("homepage gallery uses the patch 1 image set with responsive sources", () => {
   const dom = new JSDOM(homepageHtml);
   const gallerySlides = [...dom.window.document.querySelectorAll("#gallery .galSlide")];
