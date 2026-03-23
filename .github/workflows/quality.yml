@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [main]
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Lint
@@ -19,6 +22,19 @@ jobs:
       - run: npm ci --ignore-scripts
       - name: ESLint
         run: npx eslint src/ public/assets/js/ public/admin/app.js --max-warnings 0
+
+  test:
+    name: Worker Tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - name: Run Worker tests
+        run: npm run test:worker
 
   audit:
     name: Dependency Audit
