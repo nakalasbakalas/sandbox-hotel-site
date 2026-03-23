@@ -137,6 +137,43 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "sameAs": [
       "https://web.facebook.com/sandboxhotel",
       "https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "reviewCount": "48",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "makesOffer": [
+      {
+        "@type": "Offer",
+        "name": "Standard Twin Room",
+        "description": "Spacious twin room with two single beds, free Wi-Fi, air conditioning, and en-suite bathroom. Ideal for business travelers or friends.",
+        "priceCurrency": "THB",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "690",
+          "priceCurrency": "THB",
+          "unitText": "per night"
+        },
+        "url": "https://www.sandboxhotel.com/#rooms",
+        "availability": "https://schema.org/InStock"
+      },
+      {
+        "@type": "Offer",
+        "name": "Standard Double Room",
+        "description": "Comfortable double room with a large double bed, free Wi-Fi, air conditioning, and en-suite bathroom. Ideal for couples or solo travelers.",
+        "priceCurrency": "THB",
+        "priceSpecification": {
+          "@type": "UnitPriceSpecification",
+          "price": "790",
+          "priceCurrency": "THB",
+          "unitText": "per night"
+        },
+        "url": "https://www.sandboxhotel.com/#rooms",
+        "availability": "https://schema.org/InStock"
+      }
     ]
   }
   </script>
@@ -657,6 +694,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="wide ctaRow">
               <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
+              <button class="btn secondary" type="button" id="sendWA" data-i18n="btn_send_wa" data-analytics="whatsapp">Book via WhatsApp</button>
               <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
               <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible.</span>
             </div>
@@ -774,10 +812,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
           <div class="galBar" aria-label="Carousel controls">
             <button class="galNavBtn" type="button" id="galPrev" aria-label="Previous photo">‹</button>
-            <div class="galDots" id="galDots" aria-label="Photo selector"></div>
+            <div class="galDots" id="galDots" role="group" aria-label="Photo selector"></div>
             <button class="galNavBtn" type="button" id="galNext" aria-label="Next photo">›</button>
           </div>
-          <div class="galThumbs" id="galThumbs" aria-label="Gallery thumbnails"></div>
+          <div class="galThumbs" id="galThumbs" role="group" aria-label="Gallery thumbnails"></div>
 
           <div class="galHint fine" data-i18n="gal_swipe_hint">Swipe for more photos or use the arrows</div>
         </div>

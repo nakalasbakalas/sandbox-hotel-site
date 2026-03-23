@@ -17,6 +17,11 @@
     "test:worker": "node --test src/index.test.js",
     "lint": "eslint src/ public/assets/js/ public/admin/app.js --max-warnings 0",
     "audit:deps": "npm audit --audit-level=high",
+    "audit:perf": "node scripts/perf-check.js",
+    "audit:a11y": "node scripts/axe-check.js",
+    "audit:seo": "node scripts/seo-check.js",
+    "audit:images": "node scripts/image-audit.js",
+    "audit:all": "npm run audit:perf && npm run audit:a11y && npm run audit:seo && npm run audit:images",
     "deploy:cf": "npx wrangler deploy"
   },
   "engines": {
@@ -26,8 +31,10 @@
     "@cloudflare/workerd-linux-64": "^1.20260317.1"
   },
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@lhci/cli": "^0.14.0",
     "axe-core": "^4.9.0",
+    "eslint": "^10.1.0",
     "jsdom": "^24.0.0"
   }
 }
