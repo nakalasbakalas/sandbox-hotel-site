@@ -6,6 +6,10 @@ on:
   pull_request:
     branches: [main]
 
+# Restrict GITHUB_TOKEN to read-only access (principle of least privilege)
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: ESLint
@@ -93,10 +97,10 @@ jobs:
       - name: Check for placeholders and TODOs
         run: |
           echo "Checking for placeholder values..."
-          if grep -r "YOUR_LINE_ID" public/index.html; then
+          if grep -q "YOUR_LINE_ID" public/index.html; then
             echo "⚠️  YOUR_LINE_ID placeholder found in index.html"
           fi
-          if grep -c "TODO" public/index.html; then
+          if grep -q "TODO" public/index.html; then
             echo "ℹ️  TODO comments found in index.html (review monthly)"
           fi
           echo "Content freshness check complete."

@@ -17,6 +17,7 @@ import { readFileSync } from "fs";
 import { join } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
+import { JSDOM } from "jsdom";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -101,10 +102,14 @@ const PAGES = [
 
 // ── Helper extractors ────────────────────────────────────────────────────────
 
+// Pre-compiled regex patterns for extractMeta
+const META_PATTERN_A = (property) =>
+  new RegExp(`<meta[^>]+(?:property|name)=["']${property}["'][^>]*content=["']([^"']+)["']`, "i");
+const META_PATTERN_B = (property) =>
+  new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["']${property}["']`, "i");
+
 function extractMeta(html, property) {
-  const re = new RegExp(`<meta[^>]+(?:property|name)=["']${property}["'][^>]*content=["']([^"']+)["']`, "i");
-  const re2 = new RegExp(`<meta[^>]+content=["']([^"']+)["'][^>]*(?:property|name)=["']${property}["']`, "i");
-  return (re.exec(html) || re2.exec(html) || [])[1] || null;
+  return (META_PATTERN_A(property).exec(html) || META_PATTERN_B(property).exec(html) || [])[1] || null;
 }
 
 function extractTitle(html) {
@@ -116,7 +121,9 @@ function extractH1s(html) {
   const results = [];
   let m;
   while ((m = re.exec(html)) !== null) {
-    results.push(m[1].replace(/<[^>]+>/g, "").trim());
+    // Use JSDOM fragment to safely extract plain text content
+    const frag = JSDOM.fragment(`<span>${m[1]}</span>`);
+    results.push((frag.textContent || "").trim());
   }
   return results;
 }

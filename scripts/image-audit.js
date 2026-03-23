@@ -54,6 +54,10 @@ function getBudget(filename) {
 // ── Collect all image files ──────────────────────────────────────────────────
 
 function collectImages(dir) {
+  // Image formats tracked for audit purposes.
+  // GIF and SVG are excluded from WebP conversion requirements:
+  // - SVG is already vector-based and doesn't benefit from WebP conversion
+  // - GIF files are rare and typically used for animated content (use video instead)
   const IMAGE_EXTS = new Set([".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg", ".avif"]);
   const images = [];
 
@@ -95,8 +99,8 @@ function checkWebpCoverage(images) {
     if (webpSet.has(base)) {
       covered++;
     } else {
-      // Skip .lnk shortcut files and hidden files
-      if (png.includes(" - Shortcut") || basename(png).startsWith(".")) continue;
+      // Skip hidden files and Windows shortcut files (.lnk files which may appear as "name - Shortcut")
+      if (basename(png).startsWith(".") || extname(png).toLowerCase() === ".lnk") continue;
       // Logo files are design assets; WebP is nice-to-have but not critical
       if (png.includes("/logo/")) {
         warn(`No WebP for logo asset (optional): ${png.replace(ROOT + "/", "")}`);
