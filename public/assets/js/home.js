@@ -333,9 +333,6 @@
         dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> สถานที่ท่องเที่ยวใกล้เคียง',
         dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> การเดินทาง',
 
-        trust_rating: "4.8",
-        trust_meta: "อ้างอิงจากรีวิว Google Maps",
-        btn_view_maps_short: 'ดูบน Google Maps<span class="sr-only"> (เปิดในแท็บใหม่)</span>',
         btn_call_now: "โทรเลย",
         btn_email: "อีเมล",
         loc_hours: "บริการทุกวัน: 06:00–22:00",
@@ -610,9 +607,6 @@
         loc_plus: "Plus Code:",
         loc_notes: "Notes: Policies may vary by season. For the latest info, contact the hotel directly.",
 
-        trust_rating: "4.8",
-        trust_meta: "Based on Google Maps reviews",
-        btn_view_maps_short: 'View on Google Maps<span class="sr-only"> (opens in new tab)</span>',
         btn_call_now: "Call Now",
         btn_email: "Email",
         loc_hours: "Daily support: 06:00–22:00",
@@ -887,9 +881,6 @@
         loc_plus: "Plus Code：",
         loc_notes: "提示：政策可能随季节调整，最新信息请直接联系酒店。",
 
-        trust_rating: "4.8",
-        trust_meta: "基于 Google Maps 评价",
-        btn_view_maps_short: '在 Google Maps 查看<span class="sr-only">（在新标签页中打开）</span>',
         btn_call_now: "立即致电",
         btn_email: "邮筱",
         loc_hours: "每日服务：06:00–22:00",
