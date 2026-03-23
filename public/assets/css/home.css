@@ -1403,9 +1403,6 @@
       object-fit:cover;
     }
     @media (max-width:640px){
-      :root{
-      }
-    }
     .galHint{text-align:center; margin-top:6px}
     @media (max-width:640px){
       .galNavBtn{width:42px; height:42px; border-radius: var(--radius-md)}
