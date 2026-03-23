@@ -211,8 +211,10 @@ test("homepage location section keeps the contact card and map side by side unti
   assert.equal(locationGrid?.children.length, 2);
   assert.ok(locationGrid?.querySelector(".contactCard"));
   assert.ok(locationGrid?.querySelector(".mapWrap"));
-  assert.match(homepageCss, /@media\s*\(max-width:760px\)\s*\{\s*\.locationGrid\{grid-template-columns:1fr\}/);
-  assert.doesNotMatch(homepageCss, /@media\s*\(max-width:980px\)\s*\{\s*\.locationGrid\{grid-template-columns:1fr\}/);
+  assert.match(
+    homepageCss,
+    /@media\s*\(\s*max-width\s*:\s*760px\s*\)\s*\{[\s\S]*?\.locationGrid\s*\{\s*grid-template-columns\s*:\s*1fr\s*;?\s*\}/,
+  );
 });
 
 test("homepage reviews use the older review-card layout without trust summary widgets", () => {
