@@ -201,35 +201,33 @@ test("homepage lower sections stay as standalone premium blocks instead of one s
   assert.ok(document.querySelector("#faq .faqSectionCard"));
   assert.ok(document.querySelector("#destination .destinationSectionCard"));
   assert.ok(document.querySelector("#location .locationSectionCard"));
-  // FAQ CTA removed in premium redesign - now integrated in help panel
-  assert.equal(document.querySelector("#faq .faqCTA"), null);
+  assert.ok(document.querySelector("#faq .faqCTAActions"));
 });
 
-test("homepage location section keeps the contact panel and map side by side until phone widths", () => {
+test("homepage location section keeps the contact card and map side by side until phone widths", () => {
   const dom = new JSDOM(homepageHtml);
   const locationGrid = dom.window.document.querySelector("#location .locationGrid");
 
   assert.equal(locationGrid?.children.length, 2);
-  assert.ok(locationGrid?.querySelector(".contactPanel"));
-  assert.ok(locationGrid?.querySelector(".mapCard"));
+  assert.ok(locationGrid?.querySelector(".contactCard"));
+  assert.ok(locationGrid?.querySelector(".mapWrap"));
   assert.match(
     homepageCss,
-    /@media\s*\(\s*max-width\s*:\s*860px\s*\)\s*\{[\s\S]*?\.locationGrid[\s\S]*?grid-template-columns\s*:\s*1fr/,
+    /@media\s*\(\s*max-width\s*:\s*760px\s*\)\s*\{[\s\S]*?\.locationGrid\s*\{\s*grid-template-columns\s*:\s*1fr\s*;?\s*\}/,
   );
 });
 
-test("homepage reviews use premium layout with trust panel integration", () => {
+test("homepage reviews use the older review-card layout without trust summary widgets", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
 
-  // Check for new premium layout structure
-  assert.ok(document.querySelector("#reviews .reviewsLayout"));
-  assert.ok(document.querySelector("#reviews .reviewsTrustPanel"));
-  assert.ok(document.querySelector("#reviews .trustRating"));
+  assert.equal(document.querySelector("#reviews .reviewTrust"), null);
+  assert.equal(document.querySelector("#reviews .reviewSource"), null);
   assert.equal(document.querySelectorAll("#reviews .review").length, 5);
-  // Trust panel includes rating and actions
-  assert.ok(document.querySelector("#reviews .trustScore"));
-  assert.ok(document.querySelector("#reviews .trustActions"));
+  assert.equal(document.querySelectorAll("#reviews .reviewsSide .review").length, 2);
+  assert.equal(homepageJs.includes("trust_rating"), false);
+  assert.equal(homepageJs.includes("trust_meta"), false);
+  assert.equal(homepageJs.includes("btn_view_maps_short"), false);
 });
 
 test("homepage gallery uses the patch 1 image set with responsive sources", () => {
