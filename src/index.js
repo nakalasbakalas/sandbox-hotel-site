@@ -84,7 +84,7 @@ class HttpError extends Error {
 async function fetchAsset(request, env, baseUrl) {
   try {
     const assetResponse = await env.ASSETS.fetch(request);
-    return addSecurityHeaders(assetResponse);
+    return addSecurityHeaders(setCacheHeaders(assetResponse, request.url));
   } catch {
     const notFoundUrl = new URL("/404", baseUrl);
     try {
@@ -97,6 +97,33 @@ async function fetchAsset(request, env, baseUrl) {
       return new Response("Not found", { status: 404 });
     }
   }
+}
+
+function setCacheHeaders(response, url) {
+  const { pathname } = new URL(url);
+  const headers = new Headers(response.headers);
+
+  // Versioned/fingerprinted static assets: 1-year immutable cache
+  if (
+    pathname.startsWith("/assets/css/") ||
+    pathname.startsWith("/assets/js/") ||
+    pathname.startsWith("/assets/images/") ||
+    pathname.startsWith("/images/")
+  ) {
+    headers.set("cache-control", "public, max-age=31536000, immutable");
+  } else if (pathname.endsWith(".html") || pathname === "/" || pathname === "/admin") {
+    // HTML pages: validate on every request
+    headers.set("cache-control", "public, max-age=0, must-revalidate");
+  } else if (
+    pathname.endsWith(".ico") ||
+    pathname.endsWith(".webmanifest") ||
+    pathname.endsWith(".xml")
+  ) {
+    // Icons, manifests, sitemaps: cache for 1 day
+    headers.set("cache-control", "public, max-age=86400");
+  }
+
+  return new Response(response.body, { status: response.status, headers });
 }
 
 async function routeRequest(request, env, ctx) {

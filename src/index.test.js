@@ -1,7 +1,12 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
+import { JSDOM } from "jsdom";
 
 import worker, { handleInboundEmail } from "./index.js";
+
+const homepageHtml = fs.readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
+const homepageJs = fs.readFileSync(new URL("../public/assets/js/home.js", import.meta.url), "utf8");
 
 function createFakeDb({ duplicateLead = false } = {}) {
   let lastLeadId = 0;
@@ -160,4 +165,65 @@ test("booking ingest skips the acknowledgement when contact details do not conta
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("homepage locale packs include translated location title and footer language buttons render flags only", () => {
+  assert.match(homepageJs, /en:\s*\{[\s\S]*?loc_title:\s*"Location & Contact"/);
+  assert.match(homepageJs, /zh:\s*\{[\s\S]*?loc_title:\s*"位置与联系"/);
+
+  const dom = new JSDOM(homepageHtml);
+  const footerButtons = [...dom.window.document.querySelectorAll(".footerLang .langBtn")];
+
+  assert.equal(footerButtons.length, 3);
+  assert.deepEqual(
+    footerButtons.map((button) => ({
+      lang: button.getAttribute("data-lang"),
+      label: button.getAttribute("aria-label"),
+      flag: button.querySelector('[aria-hidden="true"]')?.textContent,
+      srOnly: button.querySelector(".sr-only")?.textContent,
+      visibleText: button.textContent?.trim(),
+    })),
+    [
+      { lang: "th", label: "ภาษาไทย", flag: "🇹🇭", srOnly: "Thai", visibleText: "🇹🇭Thai" },
+      { lang: "en", label: "English", flag: "🇬🇧", srOnly: "English", visibleText: "🇬🇧English" },
+      { lang: "zh", label: "中文（简体）", flag: "🇨🇳", srOnly: "Chinese (Simplified)", visibleText: "🇨🇳Chinese (Simplified)" },
+    ],
+  );
+});
+
+test("homepage lower sections stay as standalone premium blocks instead of one shared grid", () => {
+  const dom = new JSDOM(homepageHtml);
+  const { document } = dom.window;
+
+  assert.equal(document.querySelector(".sectionsGrid"), null);
+  assert.ok(document.querySelector("#reviews .reviewSectionCard"));
+  assert.ok(document.querySelector("#faq .faqSectionCard"));
+  assert.ok(document.querySelector("#destination .destinationSectionCard"));
+  assert.ok(document.querySelector("#location .locationSectionCard"));
+  assert.ok(document.querySelector("#faq .faqCTAActions"));
+});
+
+test("homepage gallery uses the patch 1 image set with responsive sources", () => {
+  const dom = new JSDOM(homepageHtml);
+  const gallerySlides = [...dom.window.document.querySelectorAll("#gallery .galSlide")];
+  const galleryImages = gallerySlides.map((slide) => slide.querySelector("img"));
+
+  assert.equal(gallerySlides.length, 6);
+  assert.deepEqual(
+    galleryImages.map((img) => img?.getAttribute("src")),
+    [
+      "images/Sandbox-Hotel-Hero-Banner.png",
+      "assets/images/gallery/entrance.png",
+      "assets/images/gallery/lobby.png",
+      "assets/images/gallery/evening-view.png",
+      "assets/images/gallery/flower-view.png",
+      "assets/images/gallery/staircase.png",
+    ],
+  );
+
+  assert.match(galleryImages[3]?.getAttribute("srcset") ?? "", /evening-view-400\.png 400w, assets\/images\/gallery\/evening-view\.png 1536w/);
+  assert.match(galleryImages[4]?.getAttribute("srcset") ?? "", /flower-view-400\.png 400w, assets\/images\/gallery\/flower-view\.png 1536w/);
+  assert.match(galleryImages[5]?.getAttribute("srcset") ?? "", /staircase-400\.png 400w, assets\/images\/gallery\/staircase\.png 1536w/);
+  assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_evening_view_title']")?.textContent, "Evening Exterior");
+  assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_staircase_title']")?.textContent, "Staircase & Mural");
 });
