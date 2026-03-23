@@ -22,19 +22,24 @@
       <image:caption>Hotel entrance and arrival area at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
     </image:image>
     <image:image>
-      <image:loc>https://www.sandboxhotel.com/assets/images/rooms/double-room-sandboxhotel-1.png</image:loc>
-      <image:title>Standard Double Room – Sandbox Hotel Nakhon Si Thammarat</image:title>
-      <image:caption>Spacious standard double room at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
-    </image:image>
-    <image:image>
-      <image:loc>https://www.sandboxhotel.com/assets/images/rooms/twin-room-sandbox-1.png</image:loc>
-      <image:title>Standard Twin Room – Sandbox Hotel Nakhon Si Thammarat</image:title>
-      <image:caption>Standard twin room with two single beds at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
-    </image:image>
-    <image:image>
       <image:loc>https://www.sandboxhotel.com/assets/images/gallery/lobby.png</image:loc>
       <image:title>Sandbox Hotel Lobby – Nakhon Si Thammarat</image:title>
       <image:caption>Lobby seating and reception area at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sandboxhotel.com/assets/images/gallery/evening-view.png</image:loc>
+      <image:title>Sandbox Hotel Evening Exterior – Nakhon Si Thammarat</image:title>
+      <image:caption>Evening exterior view of Sandbox Hotel frontage and parking area in Nakhon Si Thammarat</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sandboxhotel.com/assets/images/gallery/flower-view.png</image:loc>
+      <image:title>Sandbox Hotel Garden Approach – Nakhon Si Thammarat</image:title>
+      <image:caption>Flower-lined frontage and welcoming entry details at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.sandboxhotel.com/assets/images/gallery/staircase.png</image:loc>
+      <image:title>Sandbox Hotel Staircase and Mural – Nakhon Si Thammarat</image:title>
+      <image:caption>Interior staircase and mural details at Sandbox Hotel, Nakhon Si Thammarat</image:caption>
     </image:image>
   </url>
   <url>

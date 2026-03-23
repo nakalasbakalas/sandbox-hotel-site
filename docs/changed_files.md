@@ -26,7 +26,7 @@
 | `public/privacy.html` | Added Open Graph image metadata and alt text for social sharing consistency |
 | `public/hotels/*/index.html` | Added `og:image:alt` metadata to hotel landing pages |
 | `public/guides/*/index.html` | Added `og:image:alt` metadata to guide pages |
-| `public/index.html` | Updated Open Graph alternate locale from `zh_CN` to `zh_Hans` for metadata consistency |
+| `public/index.html` | Updated Chinese `<link rel="alternate" hreflang>` from `zh-CN` to `zh-Hans` for metadata consistency |
 | `public/index.html` | Tightened homepage Hotel/WebSite JSON-LD to factual fields only; removed unverifiable rating/payment/audience claims and added IDs, map, expanded image set, and contact metadata |
 | `public/privacy.html` | Added `hreflang` alternates and locale metadata for TH/EN/ZH variants |
 | `public/hotels/*/index.html` | Added TH and `zh-Hans` hreflang alternates to hotel landing pages |
