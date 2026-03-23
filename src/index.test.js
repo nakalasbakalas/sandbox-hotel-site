@@ -1,7 +1,10 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 
 import worker, { handleInboundEmail } from "./index.js";
+
+const homepageHtml = fs.readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
 
 function createFakeDb({ duplicateLead = false } = {}) {
   let lastLeadId = 0;
@@ -160,4 +163,12 @@ test("booking ingest skips the acknowledgement when contact details do not conta
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("homepage locale packs include translated location title and footer language buttons render flags only", () => {
+  assert.match(homepageHtml, /en:\s*\{[\s\S]*?loc_title:\s*"Location & Contact"/);
+  assert.match(homepageHtml, /zh:\s*\{[\s\S]*?loc_title:\s*"位置与联系"/);
+  assert.match(homepageHtml, /data-lang="th"[^>]*aria-label="ภาษาไทย"[^>]*><span aria-hidden="true">🇹🇭<\/span><span class="sr-only">Thai<\/span><\/button>/);
+  assert.match(homepageHtml, /data-lang="en"[^>]*aria-label="English"[^>]*><span aria-hidden="true">🇬🇧<\/span><span class="sr-only">English<\/span><\/button>/);
+  assert.match(homepageHtml, /data-lang="zh"[^>]*aria-label="中文（简体）"[^>]*><span aria-hidden="true">🇨🇳<\/span><span class="sr-only">Chinese \(Simplified\)<\/span><\/button>/);
 });
