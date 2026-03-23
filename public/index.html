@@ -18,7 +18,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <title>โรงแรมในนครศรีธรรมราช | Sandbox Hotel จองตรงราคาดีที่สุด</title>
   <meta name="description" id="metaDescription" content="Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักกว้างขวาง สงบ สะดวก จองตรงกับโรงแรมผ่านโทรหรือ LINE รับประกันราคาดีที่สุด">
   <meta name="robots" content="index,follow">
-  <meta name="keywords" content="hotel in nakhon si thammarat, hotels in nakhon si thammarat, nakhon si thammarat hotel, accommodation nakhon si thammarat, hotels southern thailand, boutique hotel nakhon si thammarat, where to stay nakhon si thammarat, sandbox hotel, direct booking hotel thailand">
+  <meta name="keywords" content="hotel in nakhon si thammarat, hotels in nakhon si thammarat, nakhon si thammarat hotel, accommodation nakhon si thammarat, hotels southern thailand, boutique hotel nakhon si thammarat, where to stay nakhon si thammarat, sandbox hotel, direct booking hotel thailand, โรงแรมนครศรีธรรมราช, ที่พักนครศรีธรรมราช, โรงแรมภาคใต้ไทย, จองตรงโรงแรม, โรงแรมบูติกนครศรี, sandbox hotel นครศรีธรรมราช">
   <link rel="canonical" href="https://www.sandboxhotel.com/">
   <link rel="alternate" hreflang="th" href="https://www.sandboxhotel.com/?lang=th">
   <link rel="alternate" hreflang="en" href="https://www.sandboxhotel.com/?lang=en">
@@ -33,8 +33,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Sandbox Hotel">
   <meta property="og:url" content="https://www.sandboxhotel.com/">
-  <meta property="og:locale" content="th_TH">
-    <meta property="og:locale:alternate" content="en_US">
+  <meta property="og:locale" id="ogLocale" content="th_TH">
+  <meta property="og:locale:alternate" content="en_US">
   <meta property="og:locale:alternate" content="zh_CN">
 <meta property="og:title" id="ogTitle" content="โรงแรมในนครศรีธรรมราช | Sandbox Hotel">
   <meta property="og:description" id="ogDescription" content="จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ห้องพักสงบ Wi-Fi ที่จอดรถ ยืนยันรวดเร็วผ่านโทรหรือ LINE">
@@ -3547,10 +3547,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         line_opened_hint: "LINE opened. Paste message: "
       },
       zh: {
-        meta_title: "洛坤府酒店｜Sandbox Hotel 直订",
-        meta_desc: "Sandbox Hotel 洛坤府市中心舒适酒店，28-32㎡宽敞客房，免费高速Wi-Fi，停车位，电话或LINE直接预订。",
-        og_title: "洛坤府酒店｜Sandbox Hotel 直订",
-        og_desc: "洛坤市中心舒适酒店，宽敞客房，便利位置。电话或LINE直订，价格优惠。",
+        meta_title: "洛坤府酒店｜Sandbox Hotel 泰南直订住宿",
+        meta_desc: "Sandbox Hotel 位于泰国洛坤府市中心。宽敞安静客房（28–32㎡），免费Wi-Fi、停车位、快速确认。支持电话、LINE、WhatsApp预订，直订优惠无手续费。",
+        og_title: "洛坤府酒店｜Sandbox Hotel 泰南直订住宿",
+        og_desc: "洛坤府市中心 Sandbox Hotel — 宽敞安静客房 • 免费Wi-Fi • 停车位。支持电话/LINE/WhatsApp快速确认，直订优惠无手续费。",
         brand_location: "泰国 洛坤府（Nakhon Si Thammarat）",
         nav_support: "直订优惠",
         nav_line_cta: "LINE",
@@ -3858,6 +3858,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       if(twt && t("og_title")) twt.setAttribute("content", t("og_title"));
       const twd = document.getElementById("twitterDescription");
       if(twd && t("og_desc")) twd.setAttribute("content", t("og_desc"));
+      const ogLocale = document.getElementById("ogLocale");
+      if(ogLocale){
+        const localeMap = {th: "th_TH", en: "en_US", zh: "zh_CN"};
+        ogLocale.setAttribute("content", localeMap[CURRENT_LANG] || "th_TH");
+      }
     }
     function initLang(){
       const langBtn = document.getElementById("langBtn");
