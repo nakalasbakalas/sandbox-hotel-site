@@ -2015,6 +2015,307 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
       box-shadow: 0 0 0 2px var(--paper), 0 0 0 4px color-mix(in oklab, var(--copper) 55%, transparent);
     }
 
+    /* ========================================================
+       2026-03 Design Refinement Pass
+       – Hierarchy, rhythm, conversion, premium feel
+       ======================================================== */
+
+    /* --- 1. Section Hierarchy & Spacing --- */
+    .section{ margin: clamp(48px, 5.5vw, 72px) 0; }
+
+    /* Conversion-primary sections get accent glow */
+    #book > .card{
+      border-color: color-mix(in oklab, var(--copper) 18%, var(--line));
+      box-shadow: 0 8px 32px rgba(168,101,42,.10), var(--shadow-card-light);
+    }
+    #reviews > .card{
+      border-color: color-mix(in oklab, var(--copper) 10%, var(--line));
+    }
+
+    /* Informational sections: tighter / calmer */
+    #destination{ margin-top: clamp(36px, 4vw, 56px); margin-bottom: clamp(36px, 4vw, 56px); }
+
+    /* --- 2. Typography Refinement --- */
+    .head h2{
+      font-size: clamp(28px, 3vw, 42px);
+      letter-spacing: -.03em;
+      line-height: 1.08;
+    }
+    .head p{
+      font-size: 14px;
+      line-height: 1.55;
+      margin-top: 8px;
+      max-width: 52ch;
+    }
+    /* Subtitle intro text on primary sections */
+    #rooms .head p, #book .head p{ color: var(--ink); }
+
+    /* --- 3. Button Polish --- */
+    .btn{
+      border-radius: var(--radius-sm);
+      font-weight: 800;
+      letter-spacing: .01em;
+      transition: transform .14s ease, box-shadow .14s ease, background .14s ease, border-color .14s ease;
+    }
+    .btn.primary{
+      border-radius: var(--radius-md);
+      padding: 0 clamp(18px, 2vw, 24px);
+      min-height: 48px;
+      font-size: 15.5px;
+    }
+    .btn.secondary{
+      min-height: 44px;
+    }
+
+    /* --- 4. Offer Cards Refinement --- */
+    .offers{ gap: clamp(14px, 1.8vw, 20px); margin-top: 16px; }
+    .offer{
+      padding: 22px 20px;
+      border-radius: var(--radius-md);
+      display: flex;
+      flex-direction: column;
+    }
+    .offer .offerIcon{
+      width: 52px; height: 52px;
+      border-radius: var(--radius-md);
+      font-size: 24px;
+      margin-bottom: 16px;
+      background: linear-gradient(135deg, rgba(168,101,42,.14), rgba(196,136,78,.08));
+      border: 1px solid rgba(168,101,42,.16);
+    }
+    .offer b{ font-size: 15.5px; margin-bottom: 8px; }
+    .offer p{ font-size: 13.5px; line-height: 1.6; }
+    /* Featured first card */
+    .offer:first-child{
+      border-color: color-mix(in oklab, var(--copper) 22%, var(--line));
+      background: linear-gradient(180deg, rgba(168,101,42,.06) 0%, var(--surfaceA) 100%);
+    }
+    .offer:first-child .offerIcon{
+      background: linear-gradient(135deg, rgba(168,101,42,.22), rgba(196,136,78,.12));
+      border-color: rgba(168,101,42,.28);
+    }
+
+    /* --- 5. Reviews Enhancement --- */
+    .reviews{ gap: 16px; margin-top: 14px; }
+    .reviewsLead, .reviewsSide{ gap: 14px; }
+    .review{
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      position: relative;
+    }
+    .reviewSource{
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: .02em;
+      margin-top: 10px;
+    }
+    .reviewSource svg{ width: 14px; height: 14px; flex-shrink: 0; }
+    .reviewFeatured{
+      padding: 24px;
+      border-radius: var(--radius-lg);
+    }
+    .reviewFeatured p{
+      font-size: 15px;
+      -webkit-line-clamp: 5;
+      max-height: 8.2em;
+    }
+    /* Trust summary panel */
+    .reviewTrust{
+      padding: 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid color-mix(in oklab, var(--copper) 14%, var(--line));
+      background: linear-gradient(180deg, rgba(168,101,42,.05) 0%, var(--surfaceA) 100%);
+      text-align: center;
+      display: grid;
+      gap: 12px;
+      align-content: center;
+    }
+    .reviewTrust .trustScore{
+      font-family: var(--display);
+      font-size: clamp(28px, 3vw, 36px);
+      font-weight: 700;
+      color: var(--ink2);
+      line-height: 1;
+    }
+    .reviewTrust .stars{ font-size: 18px; letter-spacing: .12em; }
+    .reviewTrust .trustMeta{
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+    .reviewTrust .btn{ width: 100%; justify-content: center; }
+
+    /* --- 6. FAQ Split Layout --- */
+    .faqLayout{
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: var(--gridGap);
+      align-items: start;
+      margin-top: 12px;
+    }
+    @media(max-width:860px){
+      .faqLayout{ grid-template-columns: 1fr; }
+    }
+    .faqHelpPanel{
+      padding: 20px;
+      border-radius: var(--radius-md);
+      border: 1px solid color-mix(in oklab, var(--copper) 14%, var(--line));
+      background: linear-gradient(180deg, rgba(168,101,42,.05) 0%, var(--surfaceA) 100%);
+      display: grid;
+      gap: 14px;
+      position: sticky;
+      top: calc(var(--nav-h) + 16px);
+    }
+    .faqHelpPanel h3{
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--ink2);
+      margin: 0;
+    }
+    .faqHelpPanel p{
+      font-size: 13px;
+      color: var(--muted);
+      margin: 0;
+      line-height: 1.55;
+    }
+    .faqHelpPanel .btn{ width: 100%; justify-content: center; }
+    .faqHelpPanel .helpMethods{
+      display: grid;
+      gap: 8px;
+    }
+    .faqHelpPanel .helpMethod{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13.5px;
+      color: var(--ink2);
+      font-weight: 600;
+    }
+    .faqHelpPanel .helpMethod span:first-child{
+      width: 32px; height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-sm);
+      background: rgba(168,101,42,.10);
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    #faq details{
+      padding: 16px 20px;
+      border-radius: var(--radius-md);
+    }
+    #faq summary{
+      font-size: 15px;
+      min-height: 34px;
+    }
+
+    /* --- 7. Destination Section Enhancement --- */
+    .destGrid{ gap: clamp(14px, 2vw, 22px); margin-top: 16px; }
+    .destBlock{
+      padding: 18px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--line);
+      background: var(--surfaceA);
+    }
+    .destBlock h3{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: clamp(15px, 1.4vw, 18px);
+    }
+    .destBlock h3 .destIcon{
+      width: 28px; height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-xs);
+      background: rgba(168,101,42,.10);
+      font-size: 15px;
+      flex-shrink: 0;
+    }
+
+    /* --- 8. Location / Contact Enhancement --- */
+    .locationGrid{
+      grid-template-columns: minmax(280px, .82fr) minmax(0, 1.18fr);
+    }
+    .contactCard{
+      gap: 14px;
+      padding: 20px;
+    }
+    .contactActions{
+      gap: 8px;
+    }
+    .contactActions .btn{
+      flex: 1;
+      justify-content: center;
+      min-height: 46px;
+      font-size: 15px;
+    }
+    .mapWrap iframe{
+      height: clamp(280px, 34vw, 400px);
+    }
+    .contactHours{
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 12px 14px;
+      border-radius: var(--radius-sm);
+      background: rgba(168,101,42,.05);
+      border: 1px solid rgba(168,101,42,.10);
+      font-size: 13px;
+      color: var(--ink2);
+    }
+
+    /* --- 9. Mobile Sticky Bottom Bar --- */
+    .stickyBottom{
+      display: none;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 90;
+      background: var(--uiGlass2, rgba(255,252,247,.96));
+      border-top: 1px solid var(--line);
+      padding: 10px var(--gutter) calc(10px + env(safe-area-inset-bottom));
+      -webkit-backdrop-filter: blur(16px) saturate(130%);
+      backdrop-filter: blur(16px) saturate(130%);
+    }
+    .stickyBottomInner{
+      max-width: var(--max);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1.4fr;
+      gap: 8px;
+      align-items: center;
+    }
+    .stickyBottom .btn{
+      width: 100%;
+      justify-content: center;
+      min-height: 44px;
+      font-size: 14px;
+    }
+    html[data-device="phone"] .stickyBottom{ display: block; }
+    html[data-device="phone"] main{ padding-bottom: 72px; }
+    html[data-device="phone"] footer{ padding-bottom: calc(72px + env(safe-area-inset-bottom)); }
+
+    /* --- 10. Section Intro Pattern --- */
+    .sectionIntro{
+      font-size: 14px;
+      color: var(--muted);
+      max-width: 48ch;
+      line-height: 1.55;
+      margin: -6px 0 0;
+    }
+
+    /* --- Compact density adjustments --- */
+    html[data-density="compact"] .section{ margin: clamp(36px, 4.5vw, 56px) 0; }
+    html[data-density="ultra-compact"] .section{ margin: clamp(28px, 3.5vw, 44px) 0; }
+
   </style>
 
   <script type="application/ld+json">
@@ -2498,33 +2799,33 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="offers">
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">⚡</div>
-            <b data-i18n="offer1_title">Fast Direct Booking</b>
-            <p data-i18n="offer1_desc">Message your dates — get confirmed quickly via LINE or phone call.</p>
+            <b data-i18n="offer1_title">Book Direct, Save More</b>
+            <p data-i18n="offer1_desc">Message your dates — get confirmed quickly via LINE or phone. No platform fees.</p>
           </div>
           <div class="offer">
-            <div class="offerIcon" aria-hidden="true">🤫</div>
-            <b data-i18n="offer2_title">Quiet Comfortable Rooms</b>
-            <p data-i18n="offer2_desc">Spacious 28–32 m² rooms. Quiet-side allocation on request.</p>
+            <div class="offerIcon" aria-hidden="true">🛏</div>
+            <b data-i18n="offer2_title">Comfortable Rooms for Work or Rest</b>
+            <p data-i18n="offer2_desc">Spacious 28–32 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">📶</div>
-            <b data-i18n="offer3_title">Fast Wi-Fi</b>
-            <p data-i18n="offer3_desc">Reliable internet for work, streaming, and daily use.</p>
+            <b data-i18n="offer3_title">Reliable Wi-Fi</b>
+            <p data-i18n="offer3_desc">Fast internet for work, streaming, and daily use throughout your stay.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">🅿</div>
-            <b data-i18n="offer4_title">Parking Available</b>
-            <p data-i18n="offer4_desc">On-site guest parking (subject to availability).</p>
+            <b data-i18n="offer4_title">Parking & Easy Access</b>
+            <p data-i18n="offer4_desc">On-site guest parking. Central location with easy access to the city.</p>
           </div>
           <div class="offer">
-            <div class="offerIcon" aria-hidden="true">🛎</div>
-            <b data-i18n="offer5_title">Friendly Service</b>
-            <p data-i18n="offer5_desc">Local staff available to assist during your stay.</p>
+            <div class="offerIcon" aria-hidden="true">🙋</div>
+            <b data-i18n="offer5_title">Helpful Local Support</b>
+            <p data-i18n="offer5_desc">Friendly staff available daily. Local tips and assistance throughout your stay.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">📅</div>
-            <b data-i18n="offer6_title">Flexible Stays</b>
-            <p data-i18n="offer6_desc">From one night to extended stays — ask about special rates.</p>
+            <b data-i18n="offer6_title">Weekly & Monthly Rates</b>
+            <p data-i18n="offer6_desc">Extended stay? Ask about special weekly and monthly pricing.</p>
           </div>
         </div>
       </div>
@@ -2767,25 +3068,37 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="review reviewFeatured">
               <b data-i18n-html="review1_title">Business Traveler <span class="stars">★★★★★</span></b>
               <p data-i18n="review1_text">Fast check-in, stable Wi-Fi, and a big room to work in. Great value.</p>
+              <span class="reviewSource"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</span>
             </div>
             <div class="review reviewMini">
               <b data-i18n-html="review2_title">Couple Weekend <span class="stars">★★★★★</span></b>
               <p data-i18n="review2_text">Clean and comfortable. Easy to message for confirmation. Smooth stay.</p>
+              <span class="reviewSource"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</span>
             </div>
             <div class="review reviewMini">
               <b data-i18n-html="review3_title">Family Stopover <span class="stars">★★★★☆</span></b>
               <p data-i18n="review3_text">Spacious room and helpful staff. Parking was convenient.</p>
+              <span class="reviewSource"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</span>
             </div>
           </div>
 
           <div class="reviewsSide">
+            <div class="reviewTrust">
+              <div class="trustScore" data-i18n-html="trust_rating">4.8</div>
+              <div class="stars">★★★★★</div>
+              <p class="trustMeta" data-i18n="trust_meta">Based on Google Maps reviews</p>
+              <a class="btn primary" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="btn_view_maps_short" data-analytics="map">View on Google Maps<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
+            </div>
             <div class="review reviewMini">
               <b data-i18n-html="review4_title">Long Stay Guest <span class="stars">★★★★★</span></b>
               <p data-i18n="review4_text">Quiet, comfortable, and practical amenities. Would stay again.</p>
+              <span class="reviewSource"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</span>
             </div>
             <div class="review reviewMini">
               <b data-i18n-html="review5_title">Great Location <span class="stars">★★★★★</span></b>
               <p data-i18n="review5_text">Big room, clean, and convenient location. Easy check-in and friendly staff.</p>
+              <span class="reviewSource"><svg viewBox="0 0 24 24" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18A10.96 10.96 0 0 0 1 12c0 1.77.42 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg> Google</span>
             </div>
           </div>
         </div>
@@ -2798,60 +3111,77 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="head">
           <div>
             <h2 data-i18n="faq_title">FAQ</h2>
-            <p data-i18n="faq_sub">Common questions before booking.</p>
+            <p data-i18n="faq_sub">Quick answers before you book.</p>
           </div>
         <a class="textLink" href="#book" data-i18n="faq_btn" data-analytics="book-now">Send Request</a>
         </div>
 
-        <div class="faqGrid" id="faqGrid" aria-live="polite">
-          <details data-faq-item>
-            <summary data-i18n="faq_q1">How do I book the fastest?</summary>
-            <p data-i18n="faq_a1">Call or message us on LINE with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q4">Can rates change by date?</summary>
-            <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
-            <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q2">What time is check-in and check-out?</summary>
-            <p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q3">What do I need at check-in?</summary>
-            <p data-i18n="faq_a3">A government-issued ID or passport is required for registration.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q5">Do you have parking?</summary>
-            <p data-i18n="faq_a5">Yes, guest parking is available (subject to availability).</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
-            <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q7">Is smoking allowed?</summary>
-            <p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q9">Where is Sandbox Hotel located in Nakhon Si Thammarat?</summary>
-            <p data-i18n="faq_a9">Sandbox Hotel is located at 626/1 Karom Road, Pho Sadet, Mueang District, Nakhon Si Thammarat 80000, Thailand. The hotel is centrally situated in Nakhon Si Thammarat city, with easy access to local markets, temples, and the historic old city area.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q10">What attractions are near the hotel in Nakhon Si Thammarat?</summary>
-            <p data-i18n="faq_a10">Sandbox Hotel is close to key Nakhon Si Thammarat landmarks including Wat Phra Mahathat Woramahawihan — one of Southern Thailand's most revered Buddhist temples — as well as the city's walking street markets, the Nakhon Si Thammarat National Museum, and a wide range of local restaurants serving Southern Thai cuisine.</p>
-          </details>
-          <details data-faq-item>
-            <summary data-i18n="faq_q11">Is Sandbox Hotel a good base for exploring Southern Thailand?</summary>
-            <p data-i18n="faq_a11">Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.</p>
-          </details>
-        </div>
+        <div class="faqLayout">
+          <div>
+            <div class="faqGrid" id="faqGrid" aria-live="polite">
+              <details data-faq-item>
+                <summary data-i18n="faq_q1">How do I book the fastest?</summary>
+                <p data-i18n="faq_a1">Call or message us on LINE with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q4">Can rates change by date?</summary>
+                <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
+                <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q2">What time is check-in and check-out?</summary>
+                <p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q3">What do I need at check-in?</summary>
+                <p data-i18n="faq_a3">A government-issued ID or passport is required for registration.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q5">Do you have parking?</summary>
+                <p data-i18n="faq_a5">Yes, guest parking is available (subject to availability).</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
+                <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q7">Is smoking allowed?</summary>
+                <p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q9">Where is Sandbox Hotel located in Nakhon Si Thammarat?</summary>
+                <p data-i18n="faq_a9">Sandbox Hotel is located at 626/1 Karom Road, Pho Sadet, Mueang District, Nakhon Si Thammarat 80000, Thailand. The hotel is centrally situated in Nakhon Si Thammarat city, with easy access to local markets, temples, and the historic old city area.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q10">What attractions are near the hotel in Nakhon Si Thammarat?</summary>
+                <p data-i18n="faq_a10">Sandbox Hotel is close to key Nakhon Si Thammarat landmarks including Wat Phra Mahathat Woramahawihan — one of Southern Thailand's most revered Buddhist temples — as well as the city's walking street markets, the Nakhon Si Thammarat National Museum, and a wide range of local restaurants serving Southern Thai cuisine.</p>
+              </details>
+              <details data-faq-item>
+                <summary data-i18n="faq_q11">Is Sandbox Hotel a good base for exploring Southern Thailand?</summary>
+                <p data-i18n="faq_a11">Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.</p>
+              </details>
+            </div>
 
-        <div class="faqMoreWrap" id="faqMoreWrap">
-          <button class="btn" type="button" id="faqMoreBtn" aria-controls="faqGrid" data-i18n="faq_show_more">Show more questions</button>
+            <div class="faqMoreWrap" id="faqMoreWrap">
+              <button class="btn" type="button" id="faqMoreBtn" aria-controls="faqGrid" data-i18n="faq_show_more">Show more questions</button>
+            </div>
+          </div>
+
+          <aside class="faqHelpPanel">
+            <h3 data-i18n="faq_help_title">Need help?</h3>
+            <p data-i18n="faq_help_sub">We typically reply within 15 minutes during support hours.</p>
+            <div class="helpMethods">
+              <div class="helpMethod"><span aria-hidden="true">📞</span> <span data-i18n="faq_help_call">Call: 088-578-3478</span></div>
+              <div class="helpMethod"><span aria-hidden="true">💬</span> <span data-i18n="faq_help_line">LINE: sandbox.hotel</span></div>
+              <div class="helpMethod"><span aria-hidden="true">✉️</span> <span data-i18n="faq_help_email">booking@sandboxhotel.com</span></div>
+              <div class="helpMethod"><span aria-hidden="true">🕐</span> <span data-i18n="faq_help_hours">Daily 06:00–22:00</span></div>
+            </div>
+            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
+            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+          </aside>
         </div>
 
         <div class="faqCTA">
@@ -2867,24 +3197,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="card pad">
         <div class="head">
           <div>
-            <h2 data-i18n="dest_title">Staying in Nakhon Si Thammarat</h2>
-            <p data-i18n="dest_sub">Southern Thailand's historic Gulf Coast city—a quieter destination with deep cultural roots.</p>
+            <h2 data-i18n="dest_title">Explore the Area Around Sandbox Hotel</h2>
+            <p data-i18n="dest_sub">Southern Thailand's historic Gulf Coast city — a quieter destination with deep cultural roots.</p>
           </div>
         </div>
 
         <article class="destGrid">
           <div class="destBlock">
-            <h3 data-i18n="dest_where_title">Where We Are</h3>
+            <h3 data-i18n="dest_where_title"><span class="destIcon" aria-hidden="true">📍</span> Where We Are</h3>
             <p data-i18n="dest_where_body_short">Nakhon Si Thammarat is a historic city in <strong>Southern Thailand</strong> on the Gulf coast, 780 km south of Bangkok. One of the oldest cities in the country, it sits distinct from crowded Andaman beach resorts.</p>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_why_title">Why Visit</h3>
-            <p data-i18n="dest_why_body_short">Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan—one of Thailand's most significant temples.</p>
+            <h3 data-i18n="dest_why_title"><span class="destIcon" aria-hidden="true">✨</span> Why Visit</h3>
+            <p data-i18n="dest_why_body_short">Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan — one of Thailand's most significant temples.</p>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_attractions_title">Nearby Attractions</h3>
+            <h3 data-i18n="dest_attractions_title"><span class="destIcon" aria-hidden="true">🛕</span> Nearby Attractions</h3>
             <ul class="destList">
               <li><strong>Wat Phra Mahathat</strong> — 1,000-year-old temple complex</li>
               <li><strong>Bovorn Bazaar &amp; Night Market</strong> — local food and evening browsing</li>
@@ -2894,13 +3224,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="destBlock">
-            <h3 data-i18n="dest_howtoget_title">Getting Here</h3>
+            <h3 data-i18n="dest_howtoget_title"><span class="destIcon" aria-hidden="true">✈️</span> Getting Here</h3>
             <ul class="destList">
               <li><strong>By Air</strong> — NST Airport, ~1.5 hours from Bangkok</li>
               <li><strong>By Train</strong> — Overnight sleeper, ~12–14 hours</li>
               <li><strong>By Bus</strong> — Southern Bus Terminal, ~10–12 hours</li>
             </ul>
-            <p class="fine" data-i18n="dest_howtoget_note">Sandbox Hotel is a short drive from city centre. Airport transfers available—ask when you book.</p>
+            <p class="fine" data-i18n="dest_howtoget_note">Sandbox Hotel is a short drive from city centre. Airport transfers available — ask when you book.</p>
           </div>
         </article>
 
@@ -2930,21 +3260,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="fine"><span data-i18n="loc_plus">Plus Code:</span> CWMG+QJ</span>
             </p>
 
-            <div class="contactActions">
-              <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-              <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+            <div class="contactHours">
+              <span aria-hidden="true">🕐</span>
+              <span data-i18n="loc_hours">Daily support: 06:00–22:00</span>
             </div>
 
-            <p class="fine contactSecondary">
-              <a href="mailto:booking@sandboxhotel.com" data-i18n="cta_email" data-analytics="email">Email</a> •
-              <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map">Map<span class="sr-only"> (opens in new tab)</span></a> •
-              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
-            </p>
+            <div class="contactActions">
+              <a class="btn primary" href="tel:+66885783478" data-i18n="btn_call_now" data-analytics="call">Call Now</a>
+              <a class="btn" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" style="border-color:rgba(0,195,91,.35); background:rgba(0,195,91,.08)">LINE<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn" href="mailto:booking@sandboxhotel.com" data-i18n="btn_email" data-analytics="email">Email</a>
+            </div>
 
             <p class="fine contactMeta">
-              Daily support: 06:00-22:00<br>
-              Phone: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a> • LINE: sandbox.hotel<br>
+              Phone: <a href="tel:+66885783478" data-analytics="call">088-578-3478</a> · LINE: sandbox.hotel<br>
               Email: <a href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
+            </p>
+
+            <p class="fine contactSecondary">
+              <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map">Open in Google Maps<span class="sr-only"> (opens in new tab)</span></a> ·
+              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
             </p>
 
             <div class="fine">
@@ -3129,14 +3463,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offers_title: "สิ่งที่ทำให้ Sandbox พิเศษ",
         offers_sub: "ที่พักที่ออกแบบมาเพื่อความสงบ ส่วนตัว และใส่ใจทุกรายละเอียด",
         offers_btn: "เช็คห้องว่าง",
-        offer1_title: 'จองตรง ราคาพิเศษ บริการส่วนตัว',
-        offer1_desc: "ติดต่อโดยตรง ไร้นายหน้า รับราคาพิเศษและบริการส่วนตัวจากทีมงาน — ยืนยันรวดเร็วผ่าน LINE หรือโทร",
-        offer2_title: 'ห้องพักส่วนตัว กว้างขวาง',
-        offer2_desc: "ห้องพัก 28–32 ตร.ม. ออกแบบเพื่อความสงบและความเป็นส่วนตัว พร้อมโต๊ะทำงาน แอร์ ฝักบัวน้ำอุ่น และ Wi-Fi ความเร็วสูง",
-        offer3_title: 'บรรยากาศเงียบสงบ เป็นส่วนตัว',
-        offer3_desc: "จัดห้องฝั่งเงียบได้ตามต้องการ พร้อมที่จอดรถ บริการซักรีด และทีมงานใส่ใจช่วยเหลือตลอดการเข้าพัก",
-        offer4_title: 'ยืดหยุ่นทุกระยะเวลาพัก',
-        offer4_desc: "พัก 1 คืนหรือระยะยาว พร้อมเรทพิเศษสำหรับการพักรายสัปดาห์และรายเดือน",
+        offer1_title: 'จองตรง ประหยัดกว่า',
+        offer1_desc: "ติดต่อโดยตรง ไร้นายหน้า รับราคาพิเศษ — ยืนยันรวดเร็วผ่าน LINE หรือโทร",
+        offer2_title: 'ห้องพักสบาย ทำงานหรือพักผ่อนได้',
+        offer2_desc: "ห้องพัก 28–32 ตร.ม. พร้อมโต๊ะทำงาน แอร์ ฝักบัวน้ำอุ่น ขอฝั่งเงียบได้ตามต้องการ",
+        offer3_title: 'Wi-Fi เร็วและเสถียร',
+        offer3_desc: "อินเทอร์เน็ตความเร็วดีสำหรับทำงาน ดูสตรีม และใช้งานตลอดการเข้าพัก",
+        offer4_title: 'ที่จอดรถ & เข้าถึงง่าย',
+        offer4_desc: "มีที่จอดรถในที่พัก ทำเลใจกลางเมือง เดินทางสะดวก",
+        offer5_title: 'บริการช่วยเหลือจากท้องถิ่น',
+        offer5_desc: "พนักงานยินดีช่วยเหลือทุกวัน พร้อมแนะนำสถานที่ท้องถิ่น",
+        offer6_title: 'ราคาพิเศษรายสัปดาห์ & รายเดือน',
+        offer6_desc: "พักยาว? สอบถามราคาพิเศษสำหรับการพักรายสัปดาห์และรายเดือน",
         faq_cta_text: "ยังมีคำถาม? เรายินดีช่วยเหลือค่ะ",
 
         book_title: "จองห้องพัก",
@@ -3284,7 +3622,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         review5_text: "ห้องใหญ่ สะอาด ทำเลสะดวก เช็คอินง่าย พนักงานเป็นกันเอง",
 
         faq_title: "คำถามที่พบบ่อย",
-        faq_sub: "คำถามยอดนิยมก่อนจอง",
+        faq_sub: "คำตอบเร็ว ๆ ก่อนจอง",
         faq_btn: "ส่งคำขอ",
         faq_show_more: "ดูคำถามเพิ่มเติม",
         faq_q1: "จองให้เร็วที่สุดทำอย่างไร?",
@@ -3307,6 +3645,26 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         loc_notes: "หมายเหตุ: นโยบายอาจเปลี่ยนตามฤดูกาล หากต้องการข้อมูลล่าสุด โปรดติดต่อโรงแรมโดยตรง",
         back_to_top: "กลับขึ้นด้านบน",
         footer_lang: "ภาษา:",
+
+        dest_title: "สำรวจพื้นที่รอบ Sandbox Hotel",
+        dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> ที่ตั้งของเรา',
+        dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> ทำไมต้องมาเยือน',
+        dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> สถานที่ท่องเที่ยวใกล้เคียง',
+        dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> การเดินทาง',
+
+        trust_rating: "4.8",
+        trust_meta: "อ้างอิงจากรีวิว Google Maps",
+        btn_view_maps_short: 'ดูบน Google Maps<span class="sr-only"> (เปิดในแท็บใหม่)</span>',
+        btn_call_now: "โทรเลย",
+        btn_email: "อีเมล",
+        loc_hours: "บริการทุกวัน: 06:00–22:00",
+
+        faq_help_title: "ต้องการความช่วยเหลือ?",
+        faq_help_sub: "เราตอบกลับภายใน 15 นาทีในช่วงเวลาให้บริการ",
+        faq_help_call: "โทร: 088-578-3478",
+        faq_help_line: "LINE: sandbox.hotel",
+        faq_help_email: "booking@sandboxhotel.com",
+        faq_help_hours: "ทุกวัน 06:00–22:00",
 
         msg_title: "คำขอจอง – Sandbox Hotel",
         msg_checkin: "เช็คอิน",
@@ -3362,13 +3720,17 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offers_sub: "A well-located, comfortable hotel with everything you need for a good stay.",
         offers_btn: "Check Availability",
         offer1_title: "Book Direct, Save More",
-        offer1_desc: "Contact us directly — no booking fees, best available rate, and fast confirmation via LINE or phone call.",
-        offer2_title: "Spacious, Comfortable Rooms",
-        offer2_desc: "28–32 m² rooms with work desk, air conditioning, hot shower, and free Wi-Fi in every room.",
-        offer3_title: "Quiet & Convenient",
-        offer3_desc: "Quiet room allocation available on request. Parking, laundry service, and a helpful local team.",
-        offer4_title: "Flexible Stays",
-        offer4_desc: "From single nights to longer stays — ask about our weekly and monthly rates.",
+        offer1_desc: "Message your dates — get confirmed quickly via LINE or phone. No platform fees.",
+        offer2_title: "Comfortable Rooms for Work or Rest",
+        offer2_desc: "Spacious 28–32 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.",
+        offer3_title: "Reliable Wi-Fi",
+        offer3_desc: "Fast internet for work, streaming, and daily use throughout your stay.",
+        offer4_title: "Parking & Easy Access",
+        offer4_desc: "On-site guest parking. Central location with easy access to the city.",
+        offer5_title: "Helpful Local Support",
+        offer5_desc: "Friendly staff available daily. Local tips and assistance throughout your stay.",
+        offer6_title: "Weekly & Monthly Rates",
+        offer6_desc: "Extended stay? Ask about special weekly and monthly pricing.",
         faq_cta_text: "Still have questions? We’re happy to help.",
 
         book_title: "Reserve Your Room",
@@ -3516,7 +3878,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         review5_text: "Big room, clean, and convenient location. Easy check-in and friendly staff.",
 
         faq_title: "FAQ",
-        faq_sub: "Common questions before booking.",
+        faq_sub: "Quick answers before you book.",
         faq_btn: "Send Request",
         faq_show_more: "Show more questions",
         faq_q1: "How do I book the fastest?",
@@ -3538,14 +3900,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_q11: "What are the main attractions near the hotel?",
         faq_a11: "Nearby highlights include Wat Phra Mahathat Woramahawihan (one of Southern Thailand's most revered Buddhist temples), Nakhon Si Thammarat National Museum, the Bovorn Bazaar night market, and the old city walking street. The city is also famous for Nang Talung shadow puppet theatre, traditional nielloware crafts, and authentic Southern Thai cuisine.",
 
-        dest_title: "About Nakhon Si Thammarat",
+        dest_title: "Explore the Area Around Sandbox Hotel",
         dest_sub: "Southern Thailand's historic Gulf Coast city — a less-travelled destination with deep roots.",
-        dest_where_title: "Where is Nakhon Si Thammarat?",
+        dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> Where is Nakhon Si Thammarat?',
         dest_where_body: "Nakhon Si Thammarat is a city in <strong>Southern Thailand</strong>, located on the Gulf of Thailand coast approximately 780 km south of Bangkok. It is the capital of Nakhon Si Thammarat Province and one of the oldest continuously inhabited cities in the country, with a recorded history spanning more than 1,000 years. The city sits on the Gulf Coast side of the Thai-Malay Peninsula, distinct from the Andaman Sea resorts of Phuket and Krabi.",
-        dest_why_title: "Why Visit Nakhon Si Thammarat?",
+        dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> Why Visit Nakhon Si Thammarat?',
         dest_why_body: "Unlike the crowded beach resorts of Southern Thailand, Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Travellers come for Wat Phra Mahathat Woramahawihan — one of the most significant temples in all of Thailand — as well as the unique local art forms of Nang Talung shadow puppetry and traditional nielloware silver crafts. The city is also a gateway for exploring the lesser-known national parks and coastlines of Nakhon Si Thammarat Province.",
-        dest_attractions_title: "Key Attractions Near Sandbox Hotel",
-        dest_howtoget_title: "How to Get to Nakhon Si Thammarat",
+        dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> Key Attractions Near Sandbox Hotel',
+        dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> How to Get to Nakhon Si Thammarat',
         dest_howtoget_note: "Sandbox Hotel is a short drive or taxi ride from Nakhon Si Thammarat city centre. Airport transfers can be arranged — ask us when you book.",
         dest_region_title: "Nakhon Si Thammarat in Southern Thailand",
         dest_region_body: "Southern Thailand stretches from Chumphon in the north to the Malaysian border in the south. The region splits into two coastlines: the Gulf of Thailand coast (including Koh Samui, Koh Phangan, and Nakhon Si Thammarat) and the Andaman Sea coast (Phuket, Krabi, Koh Lanta). Nakhon Si Thammarat is one of the region's most historic inland and coastal cities — larger and more culturally rich than most visitors expect. It serves as an excellent base for exploring lesser-known Gulf Coast beaches, national parks, and authentic Southern Thai food culture.",
@@ -3558,6 +3920,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         loc_notes: "Notes: Policies may vary by season. For the latest info, contact the hotel directly.",
         back_to_top: "Back to top",
         footer_lang: "Language:",
+
+        trust_rating: "4.8",
+        trust_meta: "Based on Google Maps reviews",
+        btn_view_maps_short: 'View on Google Maps<span class="sr-only"> (opens in new tab)</span>',
+        btn_call_now: "Call Now",
+        btn_email: "Email",
+        loc_hours: "Daily support: 06:00–22:00",
+
+        faq_help_title: "Need help?",
+        faq_help_sub: "We typically reply within 15 minutes during support hours.",
+        faq_help_call: "Call: 088-578-3478",
+        faq_help_line: "LINE: sandbox.hotel",
+        faq_help_email: "booking@sandboxhotel.com",
+        faq_help_hours: "Daily 06:00–22:00",
 
         msg_title: "Booking request – Sandbox Hotel",
         msg_checkin: "Check-in",
@@ -3612,14 +3988,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         offers_title: "为什么选择 Sandbox",
         offers_sub: "位置便利、舒适实用的酒店，满足您的住宿需求",
         offers_btn: "查询空房",
-        offer1_title: '直订专享 贴心服务',
-        offer1_desc: "直接与我们团队联系，无中介，专享优惠价格与贴心服务 — LINE或电话快速确认。",
-        offer2_title: '宽敞舒适客房',
-        offer2_desc: "28–32㎡雅致客房，专为静谧而设计。配办公区、独立空调、雨淋花洒与高速Wi-Fi。",
-        offer3_title: '安静便利',
-        offer3_desc: "可按需安排安静朝向客房。安全停车、洗衣服务与细致周到的本地团队全程陪伴。",
-        offer4_title: "灵活住宿 专享优惠",
-        offer4_desc: "一晚起住或长期入住，长住可享周租/月租专属优惠价。",
+        offer1_title: '直订更省 价格无忧',
+        offer1_desc: "发送日期即可快速确认 — 通过LINE或电话预订，无平台手续费。",
+        offer2_title: '舒适客房 工作休息皆宜',
+        offer2_desc: "28–32㎡宽敞客房，配书桌、空调和热水淋浴。可按需安排安静朝向。",
+        offer3_title: '稳定高速 Wi-Fi',
+        offer3_desc: "快速网络，适合工作、流媒体和日常使用。",
+        offer4_title: '免费停车 交通便利',
+        offer4_desc: "提供住客停车位，市中心位置，出行方便。",
+        offer5_title: '友好本地支持',
+        offer5_desc: "友好员工每日服务，提供本地推荐和全程协助。",
+        offer6_title: '周租月租专属优惠',
+        offer6_desc: "长住？欢迎咨询周租和月租特惠价格。",
         faq_cta_text: "还有问题？我们乐意为您解答。",
 
         book_title: "预订房间",
@@ -3767,7 +4147,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         review5_text: "房间大且干净，位置便利，入住简单，员工友善。",
 
         faq_title: "常见问题",
-        faq_sub: "预订前的常见疑问，快速解答。",
+        faq_sub: "预订前的快速解答。",
         faq_btn: "发送请求",
         faq_show_more: "查看更多问题",
         faq_q1: "怎样预订最快？",
@@ -3789,14 +4169,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         faq_q11: "酒店附近有哪些景点？",
         faq_a11: "附近亮点包括：帕玛哈塔沃拉玛哈维汉寺（泰国南部最重要的佛教寺庙之一）、洛坤府国家博物馆、博问夜市，以及老城步行街。洛坤府也是纳泰隆皮影戏和传统银器工艺的故乡。",
 
-        dest_title: "关于洛坤府（Nakhon Si Thammarat）",
+        dest_title: "探索 Sandbox Hotel 周边",
         dest_sub: "泰国湾沿岸的千年古城，体验地道南泰文化",
-        dest_where_title: "洛坤府在哪里？",
+        dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> 洛坤府在哪里？',
         dest_where_body: "洛坤府是泰国南部的一座城市，位于泰国湾沿岸，距曼谷约780公里。它是洛坤府府的首府，也是泰国有记录历史超过1000年的最古老城市之一。",
-        dest_why_title: "为何值得前往洛坤府？",
+        dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> 为何值得前往洛坤府？',
         dest_why_body: "不同于泰南热门海滩度假区，洛坤府拥有地道的泰国文化、千年佛教遗产和轻松的本地生活气息。来这里可以参观帕玛哈塔寺、欣赏纳泰隆皮影戏，还能体验传统银器工艺。",
-        dest_attractions_title: "Sandbox Hotel 附近主要景点",
-        dest_howtoget_title: "如何前往洛坤府",
+        dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> Sandbox Hotel 附近主要景点',
+        dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> 如何前往洛坤府',
         dest_howtoget_note: "Sandbox Hotel 距洛坤府市中心仅需短程出租车。如需接送服务，欢迎在预订时告知。",
         dest_region_title: "洛坤府在泰国南部的位置",
         dest_region_body: "泰国南部从春蓬延伸至马来西亚边境，分为泰国湾海岸（苏梅岛、帕岸岛、洛坤府）和安达曼海海岸（普吉岛、甲米、兰塔岛）两侧。洛坤府是南部最具历史文化价值的城市之一，也是探索鲜为人知的泰国湾海滩和国家公园的绝佳基地。",
@@ -3809,6 +4189,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         loc_notes: "提示：政策可能随季节调整，最新信息请直接联系酒店。",
         back_to_top: "返回顶部",
         footer_lang: "语言:",
+
+        trust_rating: "4.8",
+        trust_meta: "基于 Google Maps 评价",
+        btn_view_maps_short: '在 Google Maps 查看<span class="sr-only">（在新标签页中打开）</span>',
+        btn_call_now: "立即致电",
+        btn_email: "邮箱",
+        loc_hours: "每日服务：06:00–22:00",
+
+        faq_help_title: "需要帮助？",
+        faq_help_sub: "服务时间内通常15分钟内回复。",
+        faq_help_call: "电话：088-578-3478",
+        faq_help_line: "LINE：sandbox.hotel",
+        faq_help_email: "booking@sandboxhotel.com",
+        faq_help_hours: "每日 06:00–22:00",
 
         msg_title: "预订请求 – Sandbox Hotel",
         msg_checkin: "入住",
@@ -4454,5 +4848,15 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       });
     }
   </script>
+
+  <!-- Mobile Sticky Bottom Bar -->
+  <div class="stickyBottom" id="stickyBottom" aria-label="Quick booking actions">
+    <div class="stickyBottomInner">
+      <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
+      <a class="btn" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" id="stickyLine" data-analytics="line" style="border-color:rgba(0,195,91,.35); background:rgba(0,195,91,.08)">LINE<span class="sr-only"> (opens in new tab)</span></a>
+      <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
+    </div>
+  </div>
+
 </body>
 </html>

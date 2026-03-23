@@ -128,8 +128,25 @@ Secrets are stored in Cloudflare Workers Secrets (not in `.env`). Set via:
 npx wrangler secret put SECRET_NAME
 ```
 
-Key secrets expected by `src/index.js`:
-- Review `src/index.js` for all `env.VARNAME` references to get the full list
+Non-secret configuration is in `wrangler.jsonc` under `vars`.
+
+**Secrets (must be set with `wrangler secret put`):**
+
+| Secret | Description |
+|--------|-------------|
+| `POSTMARK_SERVER_TOKEN` | Postmark server API token for outbound email |
+| `BOOKING_EMAIL_FORWARD_TO` | Destination address for forwarded inbound booking emails |
+
+**Vars (configured in `wrangler.jsonc`):**
+
+| Var | Default | Description |
+|-----|---------|-------------|
+| `BOOKING_FROM_EMAIL` | `booking@sandboxhotel.com` | From address on outbound booking acknowledgements |
+| `BOOKING_REPLY_TO_EMAIL` | `booking@sandboxhotel.com` | Reply-To address on acknowledgements |
+| `BOOKING_ACK_SUBJECT` | `Sandbox Hotel booking request received` | Subject line for booking acknowledgement emails |
+| `POSTMARK_MESSAGE_STREAM` | `outbound` | Postmark message stream |
+| `POSTMARK_API_BASE` | `https://api.postmarkapp.com` | Postmark API base URL |
+| `EMAIL_ROUTING_ALLOWED_LOCAL_PARTS` | `booking,reservations` | Comma-separated inbound email local parts to accept |
 
 ### Python PMS (Render)
 

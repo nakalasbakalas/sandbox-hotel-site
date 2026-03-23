@@ -19,5 +19,15 @@
   ],
   "compatibility_flags": [
     "nodejs_compat"
-  ]
+  ],
+  // Non-secret email configuration. Set POSTMARK_SERVER_TOKEN and
+  // BOOKING_EMAIL_FORWARD_TO via: npx wrangler secret put <NAME>
+  "vars": {
+    "BOOKING_FROM_EMAIL": "booking@sandboxhotel.com",
+    "BOOKING_REPLY_TO_EMAIL": "booking@sandboxhotel.com",
+    "BOOKING_ACK_SUBJECT": "Sandbox Hotel booking request received",
+    "POSTMARK_MESSAGE_STREAM": "outbound",
+    "POSTMARK_API_BASE": "https://api.postmarkapp.com",
+    "EMAIL_ROUTING_ALLOWED_LOCAL_PARTS": "booking,reservations"
+  }
 }
