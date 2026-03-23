@@ -7,6 +7,7 @@ import worker, { handleInboundEmail } from "./index.js";
 
 const homepageHtml = fs.readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
 const homepageJs = fs.readFileSync(new URL("../public/assets/js/home.js", import.meta.url), "utf8");
+const homepageCss = fs.readFileSync(new URL("../public/assets/css/home.css", import.meta.url), "utf8");
 
 function createFakeDb({ duplicateLead = false } = {}) {
   let lastLeadId = 0;
@@ -201,6 +202,17 @@ test("homepage lower sections stay as standalone premium blocks instead of one s
   assert.ok(document.querySelector("#destination .destinationSectionCard"));
   assert.ok(document.querySelector("#location .locationSectionCard"));
   assert.ok(document.querySelector("#faq .faqCTAActions"));
+});
+
+test("homepage location section keeps the contact card and map side by side until phone widths", () => {
+  const dom = new JSDOM(homepageHtml);
+  const locationGrid = dom.window.document.querySelector("#location .locationGrid");
+
+  assert.equal(locationGrid?.children.length, 2);
+  assert.ok(locationGrid?.querySelector(".contactCard"));
+  assert.ok(locationGrid?.querySelector(".mapWrap"));
+  assert.match(homepageCss, /@media\s*\(max-width:760px\)\s*\{\s*\.locationGrid\{grid-template-columns:1fr\}/);
+  assert.doesNotMatch(homepageCss, /@media\s*\(max-width:980px\)\s*\{\s*\.locationGrid\{grid-template-columns:1fr\}/);
 });
 
 test("homepage reviews use the older review-card layout without trust summary widgets", () => {
