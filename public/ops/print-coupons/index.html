@@ -1,512 +1,743 @@
 <!doctype html>
-<html lang="en">
+<html lang="th">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
-  <title>Offer Strip Builder — Internal</title>
-  <meta name="description" content="Internal booking offer strip builder.">
+  <title>Coupon Builder — Internal</title>
+  <meta name="description" content="Internal coupon builder with multiple layouts, presets, and drag-and-drop ordering.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;600;700;900&family=Manrope:wght@400;600;700;800;900&family=Noto+Sans+Thai:wght@300;400;600;700;900&family=Prompt:wght@300;400;600;700;900&family=Sarabun:wght@300;400;600;700;800&display=swap" rel="stylesheet">
   <style>
-    :root{
-      --bg:#f7f5f2;
-      --panel:#ffffff;
-      --panel-2:#faf8f5;
-      --text:#2d2921;
-      --muted:#7a6e5f;
-      --accent:#A8652A;
-      --accent-2:#C4884E;
-      --border:rgba(168,101,42,.18);
-      --shadow:0 24px 60px rgba(0,0,0,.08);
-      --radius:18px;
-      --paper:#ffffff;
-      --ink:#161616;
-      --paper-border:#d7d1c7;
-      --stripe-height:51mm;
-      --stripe-gap:4mm;
-      --page-padding:10mm;
-      --ui-font:"Manrope",Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+    /* ── CSS Custom Properties ──────────────────────────────── */
+    :root {
+      --bg: #f7f5f2;
+      --panel: #ffffff;
+      --panel-2: #faf8f5;
+      --text: #2d2921;
+      --muted: #7a6e5f;
+      --accent: #A8652A;
+      --accent-2: #C4884E;
+      --border: rgba(168,101,42,.18);
+      --shadow: 0 24px 60px rgba(0,0,0,.08);
+      --radius: 18px;
+      --ui-font: "Sarabun", "Manrope", system-ui, sans-serif;
+      /* Coupon colors — updated by color pickers */
+      --c-accent: #A8652A;
+      --c-bg: #faf8f4;
+      --c-text: #1a1a1a;
+      --c-cta: #A8652A;
+      --c-font: "Sarabun", sans-serif;
+      /* Print metrics */
+      --page-padding: 10mm;
     }
 
-    *{box-sizing:border-box}
-    html,body{margin:0;padding:0}
-    body{
-      font-family:var(--ui-font);
-      color:var(--text);
-      background:var(--bg);
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: var(--ui-font);
+      color: var(--text);
+      background: var(--bg);
     }
-    button,input,textarea,select{font:inherit}
-    a{text-decoration:none;color:inherit}
+    button, input, textarea, select { font: inherit; }
+    a { text-decoration: none; color: inherit; }
+    h1, h2, h3, p { margin: 0; }
 
-    /* ── Builder shell ─────────────────────────────────────── */
-
-    .shell{
-      max-width:1440px;
-      margin:0 auto;
-      padding:24px;
-      display:grid;
-      grid-template-columns:360px minmax(0,1fr);
-      gap:20px;
-      min-height:100vh;
-    }
-
-    .panel{
-      background:var(--panel);
-      border:1px solid var(--border);
-      border-radius:22px;
-      box-shadow:var(--shadow);
-      overflow:hidden;
+    /* ── Shell Layout ──────────────────────────────────────── */
+    .shell {
+      max-width: 1480px;
+      margin: 0 auto;
+      padding: 24px;
+      display: grid;
+      grid-template-columns: 400px minmax(0, 1fr);
+      gap: 20px;
+      min-height: 100vh;
     }
 
-    .controls .head,
-    .stage .head{
-      padding:18px 20px;
-      border-bottom:1px solid var(--border);
-      background:linear-gradient(180deg,rgba(168,101,42,.04),rgba(168,101,42,0));
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:8px;
-      font-size:11px;
-      line-height:1;
-      text-transform:uppercase;
-      letter-spacing:.14em;
-      padding:8px 10px;
-      border-radius:999px;
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#fff;
-      font-weight:800;
+    .controls { overflow-y: auto; max-height: 100vh; position: sticky; top: 24px; }
+
+    .controls .head, .stage .head {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(168,101,42,.04), rgba(168,101,42,0));
     }
 
-    h1,h2,p{margin:0}
-    h1{font-size:28px;line-height:1.05;margin-top:10px;color:var(--text)}
-    .sub{margin-top:8px;color:var(--muted);line-height:1.45;font-size:14px}
-
-    .form{padding:18px 20px;display:grid;gap:14px}
-    .group{display:grid;gap:8px}
-    .grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-    label{font-size:13px;font-weight:700;color:var(--muted);display:grid;gap:6px}
-    input,textarea,select{
-      width:100%;
-      border:1px solid var(--border);
-      background:var(--panel-2);
-      color:var(--text);
-      border-radius:12px;
-      padding:11px 12px;
-      min-height:44px;
-    }
-    input:focus,textarea:focus,select:focus{
-      outline:none;
-      border-color:var(--accent);
-      box-shadow:0 0 0 3px rgba(168,101,42,.15);
-    }
-    textarea{min-height:72px;resize:vertical}
-    .hint{font-size:12px;color:var(--muted);line-height:1.45}
-
-    .actions{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:10px;
-      padding:0 20px 20px;
-    }
-    .btn{
-      border:1px solid var(--border);
-      background:var(--panel);
-      color:var(--text);
-      min-height:46px;
-      border-radius:12px;
-      font-weight:800;
-      cursor:pointer;
-      transition:transform .15s ease,border-color .15s ease,background .15s ease;
-    }
-    .btn:hover{transform:translateY(-1px);border-color:var(--accent)}
-    .btn.primary{
-      background:linear-gradient(135deg,var(--accent),var(--accent-2));
-      color:#fff;
-      border-color:transparent;
-    }
-    .btn.full{grid-column:1/-1}
-
-    .stageBody{padding:20px}
-    .paperWrap{
-      display:flex;
-      justify-content:center;
-      overflow:auto;
-      padding:10px;
-      background:
-        linear-gradient(180deg,rgba(168,101,42,.03),rgba(168,101,42,0)),
-        rgba(0,0,0,.02);
-      border-top:1px solid var(--border);
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: .14em;
+      padding: 8px 10px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      font-weight: 800;
     }
 
-    .footerNote{
-      margin-top:12px;
-      font-size:12px;
-      color:var(--muted);
-      line-height:1.45;
+    h1 { font-size: 24px; line-height: 1.15; margin-top: 10px; color: var(--text); }
+    .sub { margin-top: 6px; color: var(--muted); line-height: 1.45; font-size: 13px; }
+
+    /* ── Form Controls ─────────────────────────────────────── */
+    .form { padding: 16px 20px; display: grid; gap: 12px; }
+    .section-title {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: var(--accent);
+      padding: 8px 0 2px;
+      border-bottom: 1px solid var(--border);
+    }
+    .group { display: grid; gap: 6px; }
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; }
+    .grid4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 8px; }
+    label { font-size: 12px; font-weight: 700; color: var(--muted); display: grid; gap: 4px; }
+    input, textarea, select {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      color: var(--text);
+      border-radius: 10px;
+      padding: 9px 10px;
+      min-height: 40px;
+      font-size: 13px;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(168,101,42,.15);
+    }
+    textarea { min-height: 60px; resize: vertical; }
+    .hint { font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+    /* Color picker row */
+    .color-row { display: flex; align-items: center; gap: 8px; }
+    .color-row input[type="color"] {
+      width: 36px; height: 36px; min-height: 36px;
+      padding: 2px; border-radius: 8px; cursor: pointer;
+      border: 1px solid var(--border);
+    }
+    .color-row span { font-size: 12px; font-weight: 700; color: var(--muted); }
+
+    /* ── Layout Selector ───────────────────────────────────── */
+    .layout-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 8px;
+    }
+    .layout-thumb {
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 6px 8px;
+      cursor: pointer;
+      background: var(--panel-2);
+      text-align: center;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+      display: grid;
+      gap: 4px;
+      justify-items: center;
+    }
+    .layout-thumb:hover { border-color: var(--accent-2); transform: translateY(-1px); }
+    .layout-thumb.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(168,101,42,.2);
+      background: rgba(168,101,42,.04);
+    }
+    .layout-thumb svg { width: 40px; height: 40px; }
+    .layout-thumb .lt-label { font-size: 10px; font-weight: 800; color: var(--text); line-height: 1.1; }
+
+    /* ── Preset Buttons ────────────────────────────────────── */
+    .preset-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .preset-btn {
+      border: 1px solid var(--border);
+      background: var(--panel-2);
+      border-radius: 10px;
+      padding: 10px 8px;
+      cursor: pointer;
+      text-align: center;
+      transition: border-color .15s, background .15s, transform .15s;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .preset-btn:hover { border-color: var(--accent-2); transform: translateY(-1px); }
+    .preset-btn.active {
+      border-color: var(--accent);
+      background: rgba(168,101,42,.06);
+    }
+    .preset-btn .preset-icon { font-size: 22px; display: block; margin-bottom: 2px; }
+
+    /* ── Drag & Drop Section Ordering ──────────────────────── */
+    .drag-list { display: grid; gap: 6px; }
+    .drag-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: var(--panel-2);
+      cursor: grab;
+      user-select: none;
+      transition: opacity .2s, transform .15s, box-shadow .15s;
+    }
+    .drag-item:active { cursor: grabbing; }
+    .drag-item.dragging { opacity: 0.4; transform: scale(0.97); }
+    .drag-item.drag-over {
+      box-shadow: 0 0 0 2px var(--accent);
+      transform: translateY(-2px);
+    }
+    .drag-handle {
+      font-size: 16px;
+      color: var(--muted);
+      flex-shrink: 0;
+      line-height: 1;
+      letter-spacing: 2px;
+    }
+    .drag-label { font-size: 12px; font-weight: 700; color: var(--text); }
+
+    /* ── Action Buttons ────────────────────────────────────── */
+    .actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      padding: 0 20px 20px;
+    }
+    .btn {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      min-height: 44px;
+      border-radius: 12px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: transform .15s, border-color .15s, background .15s;
+    }
+    .btn:hover { transform: translateY(-1px); border-color: var(--accent); }
+    .btn.primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      color: #fff;
+      border-color: transparent;
+    }
+    .btn.full { grid-column: 1 / -1; }
+
+    /* ── Image Controls ────────────────────────────────────── */
+    .imageToggle { display: flex; align-items: center; gap: 10px; }
+    .imageToggle input[type="checkbox"] {
+      width: 18px; height: 18px;
+      accent-color: var(--accent);
+      min-height: auto;
+      cursor: pointer;
+    }
+    .imageToggle span { font-size: 12px; font-weight: 700; color: var(--muted); }
+    .imageGrid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 5px;
+    }
+    .imageGrid button {
+      border: 2px solid transparent;
+      border-radius: 8px;
+      padding: 0;
+      cursor: pointer;
+      overflow: hidden;
+      background: none;
+      aspect-ratio: 4/3;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .imageGrid button:hover { border-color: var(--accent-2); }
+    .imageGrid button.selected {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(168,101,42,.25);
+    }
+    .imageGrid button img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .uploadRow { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+    .uploadBtn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      background: rgba(168,101,42,.06);
+      border: 1px solid rgba(168,101,42,.22);
+      border-radius: 8px;
+      padding: 6px 10px;
+      cursor: pointer;
+      transition: background .15s;
+    }
+    .uploadBtn:hover { background: rgba(168,101,42,.12); }
+    .uploadBtn svg { width: 14px; height: 14px; fill: currentColor; }
+    .uploadName {
+      font-size: 11px; color: var(--muted);
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 120px;
+    }
+    .removeUpload {
+      font-size: 11px; color: #a55; background: none; border: none;
+      cursor: pointer; padding: 2px 6px; border-radius: 4px; font-weight: 700;
+    }
+    .removeUpload:hover { background: rgba(170,85,85,.08); }
+
+    .sep { border: none; border-top: 1px solid var(--border); margin: 2px 0; }
+
+    /* ── Stage & Preview ───────────────────────────────────── */
+    .stageBody { padding: 20px; }
+    .paperWrap {
+      display: flex;
+      justify-content: center;
+      overflow: auto;
+      padding: 10px;
+      background: linear-gradient(180deg, rgba(168,101,42,.03), rgba(168,101,42,0)), rgba(0,0,0,.02);
+      border-top: 1px solid var(--border);
+      border-radius: 0 0 22px 22px;
+    }
+    .footerNote { margin-top: 10px; font-size: 11px; color: var(--muted); line-height: 1.4; }
+
+    /* ══════════════════════════════════════════════════════════
+       A4 PAGE & COUPON LAYOUTS
+       ══════════════════════════════════════════════════════════ */
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      background: #fff;
+      padding: var(--page-padding);
+      box-shadow: 0 18px 60px rgba(0,0,0,.10);
+      display: flex;
+      flex-direction: column;
+      gap: 3mm;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
     }
 
-    /* ── Image controls ────────────────────────────────────── */
-
-    .imageGroup{display:grid;gap:8px}
-    .imageGroup .imageToggle{
-      display:flex;
-      align-items:center;
-      gap:10px;
+    /* ── STRIP layout ──────────────────────────────────────── */
+    .coupon-strip {
+      position: relative;
+      display: grid;
+      align-items: stretch;
+      border: 1px solid #d1c8bb;
+      border-radius: 10px;
+      overflow: hidden;
+      background: var(--c-bg);
+      flex: 1;
+      min-height: 0;
+      font-family: var(--c-font);
     }
-    .imageGroup .imageToggle input[type="checkbox"]{
-      width:18px;height:18px;
-      accent-color:var(--accent);
-      min-height:auto;
-      cursor:pointer;
+    .coupon-strip .c-brand {
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      align-content: end;
+      padding: 10px 12px;
+      background: linear-gradient(160deg, #f5ede2, #ede0cf);
     }
-    .imageGroup .imageToggle span{
-      font-size:13px;font-weight:700;color:var(--muted);
+    .coupon-strip .c-brand .brandImage { position: absolute; inset: 0; z-index: 0; }
+    .coupon-strip .c-brand .brandImage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .coupon-strip .c-brand .brandImage::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(250,246,240,.2), rgba(237,224,207,.55) 35%, rgba(220,197,168,.78));
     }
-    .imageGrid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:6px;
+    .coupon-strip .c-brand.no-image .brandImage { display: none; }
+    .coupon-strip .brandInner { position: relative; z-index: 1; display: grid; gap: 4px; }
+    .coupon-strip .brandName {
+      font-size: 16px; font-weight: 900; line-height: 1.1;
+      letter-spacing: .03em; color: #2a1e10;
+      text-shadow: 0 0 12px rgba(255,255,255,.5);
     }
-    .imageGrid button{
-      border:2px solid transparent;
-      border-radius:8px;
-      padding:0;
-      cursor:pointer;
-      overflow:hidden;
-      background:none;
-      aspect-ratio:4/3;
-      transition:border-color .15s ease,box-shadow .15s ease;
+    .coupon-strip .brandContact { display: flex; align-items: center; gap: 5px; }
+    .coupon-strip .brandPhone {
+      font-size: 11px; font-weight: 800; color: #3a2c1c;
+      letter-spacing: .03em; line-height: 1; white-space: nowrap;
     }
-    .imageGrid button:hover{border-color:var(--accent-2)}
-    .imageGrid button.selected{
-      border-color:var(--accent);
-      box-shadow:0 0 0 2px rgba(168,101,42,.25);
+    .coupon-strip .brandQr {
+      width: 28px; height: 28px; border-radius: 3px;
+      overflow: hidden; flex-shrink: 0; background: #fff;
     }
-    .imageGrid button img{
-      width:100%;height:100%;object-fit:cover;display:block;
+    .coupon-strip .brandQr img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .coupon-strip .brandQr.hidden { display: none; }
+    .coupon-strip .c-offer {
+      padding: 8px 14px;
+      display: grid; align-content: center; gap: 3px;
+      border-left: 1px solid #d1c8bb; border-right: 1px solid #d1c8bb;
+      background: linear-gradient(180deg, #fffdfb, #f9f5ef);
     }
-
-    .uploadRow{
-      display:flex;
-      gap:8px;
-      align-items:center;
+    .coupon-strip .offerHeadline {
+      font-size: 17px; line-height: 1.1; font-weight: 900;
+      color: var(--c-text);
     }
-    .uploadBtn{
-      display:inline-flex;
-      align-items:center;
-      gap:6px;
-      font-size:12px;
-      font-weight:700;
-      color:var(--accent);
-      background:rgba(168,101,42,.06);
-      border:1px solid rgba(168,101,42,.22);
-      border-radius:8px;
-      padding:7px 12px;
-      cursor:pointer;
-      transition:background .15s ease;
+    .coupon-strip .offerBody {
+      font-size: 9.5px; line-height: 1.3; color: #4a4038; font-weight: 600;
     }
-    .uploadBtn:hover{background:rgba(168,101,42,.12)}
-    .uploadBtn svg{width:14px;height:14px;fill:currentColor}
-    .uploadName{
-      font-size:12px;
-      color:var(--muted);
-      white-space:nowrap;
-      overflow:hidden;
-      text-overflow:ellipsis;
-      max-width:140px;
+    .coupon-strip .offerTerms {
+      font-size: 7px; line-height: 1.25; color: #7a7068; margin-top: 1px;
     }
-    .removeUpload{
-      font-size:11px;
-      color:#a55;
-      background:none;
-      border:none;
-      cursor:pointer;
-      padding:2px 6px;
-      border-radius:4px;
-      font-weight:700;
+    .coupon-strip .c-action {
+      padding: 8px 10px;
+      display: grid; align-content: center; justify-items: center; gap: 5px;
+      background: linear-gradient(180deg, #faf5ed, #f0e3d2);
     }
-    .removeUpload:hover{background:rgba(170,85,85,.08)}
-
-    .sep{
-      border:none;
-      border-top:1px solid var(--border);
-      margin:4px 0;
+    .coupon-strip .codeLabel {
+      font-size: 7px; text-transform: uppercase; letter-spacing: .18em;
+      color: #7a6650; font-weight: 800; line-height: 1;
     }
-
-    /* ── A4 page ───────────────────────────────────────────── */
-
-    .page{
-      width:210mm;
-      min-height:297mm;
-      background:var(--paper);
-      color:var(--ink);
-      padding:var(--page-padding);
-      box-shadow:0 18px 60px rgba(0,0,0,.10);
-      display:grid;
-      grid-template-rows:repeat(5,var(--stripe-height));
-      gap:var(--stripe-gap);
+    .coupon-strip .code {
+      width: 100%; text-align: center;
+      font-size: 14px; font-weight: 900; letter-spacing: .08em;
+      border: 1.5px solid rgba(168,101,42,.35); border-radius: 5px;
+      padding: 7px 4px; color: #7a4518; background: rgba(255,255,255,.8);
+      text-transform: uppercase; line-height: 1;
+    }
+    .coupon-strip .cta-btn {
+      width: 100%; text-align: center;
+      font-size: 9.5px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .08em; color: #fff; border-radius: 5px;
+      padding: 7px 6px; line-height: 1;
+      background: linear-gradient(135deg, var(--c-cta), var(--accent-2));
+    }
+    .coupon-strip .actionUrl {
+      text-align: center; font-size: 7px; line-height: 1.2;
+      color: #7a6e5f; word-break: break-word;
     }
 
-    /* ── Offer strip ───────────────────────────────────────── */
+    /* ── CARD layout ───────────────────────────────────────── */
+    .coupon-card {
+      border: 1px solid #d1c8bb;
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--c-bg);
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
+      font-family: var(--c-font);
+    }
+    .coupon-card .c-brand {
+      position: relative; overflow: hidden;
+      height: 38%; min-height: 60px;
+      display: grid; align-content: end; padding: 10px 14px;
+      background: linear-gradient(160deg, #f5ede2, #ede0cf);
+    }
+    .coupon-card .c-brand .brandImage { position: absolute; inset: 0; z-index: 0; }
+    .coupon-card .c-brand .brandImage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .coupon-card .c-brand .brandImage::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(250,246,240,.1), rgba(220,197,168,.8));
+    }
+    .coupon-card .c-brand.no-image .brandImage { display: none; }
+    .coupon-card .brandInner { position: relative; z-index: 1; display: grid; gap: 3px; }
+    .coupon-card .brandName {
+      font-size: 15px; font-weight: 900; line-height: 1.1; color: #2a1e10;
+      text-shadow: 0 0 12px rgba(255,255,255,.5);
+    }
+    .coupon-card .brandContact { display: flex; align-items: center; gap: 5px; }
+    .coupon-card .brandPhone { font-size: 10px; font-weight: 800; color: #3a2c1c; line-height: 1; }
+    .coupon-card .brandQr { width: 26px; height: 26px; border-radius: 3px; overflow: hidden; background: #fff; flex-shrink: 0; }
+    .coupon-card .brandQr img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .coupon-card .brandQr.hidden { display: none; }
+    .coupon-card .c-offer {
+      padding: 10px 14px; flex: 1;
+      display: grid; align-content: center; gap: 4px;
+      background: linear-gradient(180deg, #fffdfb, #f9f5ef);
+    }
+    .coupon-card .offerHeadline {
+      font-size: 16px; font-weight: 900; line-height: 1.1; color: var(--c-text);
+    }
+    .coupon-card .offerBody { font-size: 9px; line-height: 1.3; color: #4a4038; font-weight: 600; }
+    .coupon-card .offerTerms { font-size: 7px; line-height: 1.2; color: #7a7068; }
+    .coupon-card .c-action {
+      padding: 10px 14px;
+      display: grid; gap: 5px; justify-items: center;
+      background: linear-gradient(180deg, #faf5ed, #f0e3d2);
+      border-top: 1px solid #d1c8bb;
+    }
+    .coupon-card .codeLabel { font-size: 7px; text-transform: uppercase; letter-spacing: .18em; color: #7a6650; font-weight: 800; }
+    .coupon-card .code {
+      width: 100%; text-align: center;
+      font-size: 14px; font-weight: 900; letter-spacing: .08em;
+      border: 1.5px solid rgba(168,101,42,.35); border-radius: 5px;
+      padding: 6px 4px; color: #7a4518; background: rgba(255,255,255,.8);
+      text-transform: uppercase; line-height: 1;
+    }
+    .coupon-card .cta-btn {
+      width: 100%; text-align: center;
+      font-size: 10px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .08em; color: #fff; border-radius: 5px;
+      padding: 8px 6px; line-height: 1;
+      background: linear-gradient(135deg, var(--c-cta), var(--accent-2));
+    }
+    .coupon-card .actionUrl { text-align: center; font-size: 7px; line-height: 1.2; color: #7a6e5f; word-break: break-word; }
 
-    .strip{
-      position:relative;
-      display:grid;
-      grid-template-columns:minmax(0,1.3fr) minmax(0,1.6fr) 52mm;
-      align-items:stretch;
-      border:1px solid #d1c8bb;
-      border-radius:10px;
-      overflow:hidden;
-      background:#faf8f4;
-      -webkit-print-color-adjust:exact;
-      print-color-adjust:exact;
+    /* ── VOUCHER layout ────────────────────────────────────── */
+    .coupon-voucher {
+      border: 1.5px solid #d1c8bb;
+      border-radius: 14px;
+      overflow: hidden;
+      background: var(--c-bg);
+      display: grid;
+      grid-template-columns: 1fr 1.4fr 0.8fr;
+      flex: 1;
+      min-height: 0;
+      font-family: var(--c-font);
+    }
+    .coupon-voucher .c-brand {
+      position: relative; overflow: hidden;
+      display: grid; align-content: end; padding: 16px 18px;
+      background: linear-gradient(160deg, #f5ede2, #ede0cf);
+    }
+    .coupon-voucher .c-brand .brandImage { position: absolute; inset: 0; z-index: 0; }
+    .coupon-voucher .c-brand .brandImage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .coupon-voucher .c-brand .brandImage::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(250,246,240,.15), rgba(220,197,168,.8));
+    }
+    .coupon-voucher .c-brand.no-image .brandImage { display: none; }
+    .coupon-voucher .brandInner { position: relative; z-index: 1; display: grid; gap: 6px; }
+    .coupon-voucher .brandName {
+      font-size: 22px; font-weight: 900; line-height: 1.05; color: #2a1e10;
+      text-shadow: 0 0 14px rgba(255,255,255,.5);
+    }
+    .coupon-voucher .brandContact { display: flex; align-items: center; gap: 8px; }
+    .coupon-voucher .brandPhone { font-size: 13px; font-weight: 800; color: #3a2c1c; line-height: 1; }
+    .coupon-voucher .brandQr { width: 38px; height: 38px; border-radius: 4px; overflow: hidden; background: #fff; flex-shrink: 0; }
+    .coupon-voucher .brandQr img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .coupon-voucher .brandQr.hidden { display: none; }
+    .coupon-voucher .c-offer {
+      padding: 16px 20px;
+      display: grid; align-content: center; gap: 6px;
+      border-left: 1px solid #d1c8bb; border-right: 1px solid #d1c8bb;
+      background: linear-gradient(180deg, #fffdfb, #f9f5ef);
+    }
+    .coupon-voucher .offerHeadline {
+      font-size: 26px; font-weight: 900; line-height: 1.1; color: var(--c-text);
+    }
+    .coupon-voucher .offerBody { font-size: 12px; line-height: 1.35; color: #4a4038; font-weight: 600; }
+    .coupon-voucher .offerTerms { font-size: 9px; line-height: 1.3; color: #7a7068; }
+    .coupon-voucher .c-action {
+      padding: 16px 14px;
+      display: grid; align-content: center; justify-items: center; gap: 8px;
+      background: linear-gradient(180deg, #faf5ed, #f0e3d2);
+    }
+    .coupon-voucher .codeLabel { font-size: 9px; text-transform: uppercase; letter-spacing: .18em; color: #7a6650; font-weight: 800; }
+    .coupon-voucher .code {
+      width: 100%; text-align: center;
+      font-size: 20px; font-weight: 900; letter-spacing: .1em;
+      border: 2px solid rgba(168,101,42,.35); border-radius: 6px;
+      padding: 10px 6px; color: #7a4518; background: rgba(255,255,255,.8);
+      text-transform: uppercase; line-height: 1;
+    }
+    .coupon-voucher .cta-btn {
+      width: 100%; text-align: center;
+      font-size: 13px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .08em; color: #fff; border-radius: 6px;
+      padding: 11px 8px; line-height: 1;
+      background: linear-gradient(135deg, var(--c-cta), var(--accent-2));
+    }
+    .coupon-voucher .actionUrl { text-align: center; font-size: 9px; line-height: 1.2; color: #7a6e5f; word-break: break-word; }
+
+    /* ── GIFT CERTIFICATE layout ───────────────────────────── */
+    .coupon-gift {
+      border: 2px solid var(--c-accent);
+      border-radius: 18px;
+      overflow: hidden;
+      background: var(--c-bg);
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      flex: 1;
+      min-height: 0;
+      font-family: var(--c-font);
+    }
+    .coupon-gift .c-brand {
+      position: relative; overflow: hidden;
+      height: 40%; min-height: 100px;
+      display: grid; align-content: end; padding: 24px 30px;
+      background: linear-gradient(160deg, #f5ede2, #ede0cf);
+    }
+    .coupon-gift .c-brand .brandImage { position: absolute; inset: 0; z-index: 0; }
+    .coupon-gift .c-brand .brandImage img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .coupon-gift .c-brand .brandImage::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(250,246,240,.05), rgba(220,197,168,.85));
+    }
+    .coupon-gift .c-brand.no-image .brandImage { display: none; }
+    .coupon-gift .brandInner { position: relative; z-index: 1; display: grid; gap: 8px; }
+    .coupon-gift .brandName {
+      font-size: 36px; font-weight: 900; line-height: 1; color: #2a1e10;
+      text-shadow: 0 0 20px rgba(255,255,255,.5);
+    }
+    .coupon-gift .brandContact { display: flex; align-items: center; gap: 10px; }
+    .coupon-gift .brandPhone { font-size: 16px; font-weight: 800; color: #3a2c1c; line-height: 1; }
+    .coupon-gift .brandQr { width: 52px; height: 52px; border-radius: 6px; overflow: hidden; background: #fff; flex-shrink: 0; }
+    .coupon-gift .brandQr img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .coupon-gift .brandQr.hidden { display: none; }
+    .coupon-gift .c-offer {
+      padding: 28px 30px;
+      display: grid; align-content: center; gap: 10px;
+      background: linear-gradient(180deg, #fffdfb, #f9f5ef);
+    }
+    .coupon-gift .offerHeadline {
+      font-size: 40px; font-weight: 900; line-height: 1.1; color: var(--c-text);
+    }
+    .coupon-gift .offerBody { font-size: 16px; line-height: 1.4; color: #4a4038; font-weight: 600; }
+    .coupon-gift .offerTerms { font-size: 11px; line-height: 1.3; color: #7a7068; margin-top: 4px; }
+    .coupon-gift .c-action {
+      padding: 20px 30px;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 16px;
+      background: linear-gradient(180deg, #faf5ed, #f0e3d2);
+      border-top: 1px solid #d1c8bb;
+    }
+    .coupon-gift .c-action-left { display: grid; gap: 4px; }
+    .coupon-gift .codeLabel { font-size: 10px; text-transform: uppercase; letter-spacing: .18em; color: #7a6650; font-weight: 800; }
+    .coupon-gift .code {
+      display: inline-block; text-align: center;
+      font-size: 28px; font-weight: 900; letter-spacing: .1em;
+      border: 2px solid rgba(168,101,42,.35); border-radius: 8px;
+      padding: 12px 20px; color: #7a4518; background: rgba(255,255,255,.8);
+      text-transform: uppercase; line-height: 1;
+    }
+    .coupon-gift .c-action-right { display: grid; gap: 6px; justify-items: center; }
+    .coupon-gift .cta-btn {
+      text-align: center;
+      font-size: 16px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .08em; color: #fff; border-radius: 8px;
+      padding: 14px 28px; line-height: 1;
+      background: linear-gradient(135deg, var(--c-cta), var(--accent-2));
+    }
+    .coupon-gift .actionUrl { text-align: center; font-size: 10px; line-height: 1.2; color: #7a6e5f; word-break: break-word; }
+
+    /* Strip grid modes */
+    .page.layout-strip { flex-direction: column; }
+    .page.layout-strip .coupon-strip { grid-template-columns: minmax(0,1.3fr) minmax(0,1.6fr) 48mm; }
+
+    /* Card grid modes */
+    .page.layout-card {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr;
+      gap: 3mm;
     }
 
-    /* ── Left: brand panel ─────────────────────────────────── */
+    /* Voucher stacking */
+    .page.layout-voucher { flex-direction: column; }
 
-    .brand{
-      position:relative;
-      overflow:hidden;
-      display:grid;
-      align-content:end;
-      padding:12px 14px;
-      background:
-        linear-gradient(160deg,#f5ede2 0%,#ede0cf 100%);
+    /* Gift certificate */
+    .page.layout-gift { flex-direction: column; }
+
+    /* ── Responsive ────────────────────────────────────────── */
+    @media (max-width: 1200px) {
+      .shell { grid-template-columns: 1fr; }
+      .controls { max-height: none; position: static; }
     }
-
-    .brand .brandImage{
-      position:absolute;
-      inset:0;
-      z-index:0;
-    }
-    .brand .brandImage img{
-      width:100%;height:100%;object-fit:cover;display:block;
-    }
-    .brand .brandImage::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background:linear-gradient(180deg,
-        rgba(250,246,240,.2) 0%,
-        rgba(237,224,207,.55) 35%,
-        rgba(220,197,168,.78) 100%
-      );
-    }
-
-    .brand.no-image .brandImage{display:none}
-
-    .brandInner{
-      position:relative;
-      z-index:1;
-      display:grid;
-      gap:6px;
-    }
-
-    .brandName{
-      font-size:20px;
-      font-weight:950;
-      line-height:1;
-      letter-spacing:.05em;
-      text-transform:uppercase;
-      color:#2a1e10;
-      text-shadow:0 0 12px rgba(255,255,255,.5);
-    }
-
-    .brandContact{
-      display:flex;
-      align-items:center;
-      gap:6px;
-    }
-
-    .brandPhone{
-      font-size:12px;
-      font-weight:800;
-      color:#3a2c1c;
-      letter-spacing:.03em;
-      line-height:1;
-      white-space:nowrap;
-    }
-
-    .brandQr{
-      width:32px;
-      height:32px;
-      border-radius:3px;
-      overflow:hidden;
-      flex-shrink:0;
-      background:#fff;
-    }
-    .brandQr img{
-      width:100%;height:100%;object-fit:contain;display:block;
-    }
-    .brandQr.hidden{display:none}
-
-    /* ── Middle: offer details ─────────────────────────────── */
-
-    .offer{
-      padding:10px 16px;
-      display:grid;
-      align-content:center;
-      gap:4px;
-      border-left:1px solid #d1c8bb;
-      border-right:1px solid #d1c8bb;
-      background:linear-gradient(180deg,#fffdfb 0%,#f9f5ef 100%);
-    }
-
-    .offerHeadline{
-      font-size:21px;
-      line-height:1;
-      font-weight:950;
-      letter-spacing:-.02em;
-      color:#1a1a1a;
-      text-transform:uppercase;
-    }
-
-    .offerBody{
-      font-size:10.5px;
-      line-height:1.3;
-      color:#4a4038;
-      font-weight:600;
-    }
-
-    .offerMeta{
-      display:flex;
-      flex-wrap:wrap;
-      gap:5px;
-      margin-top:3px;
-    }
-
-    .chip{
-      display:inline-flex;
-      align-items:center;
-      min-height:20px;
-      padding:3px 8px;
-      border-radius:4px;
-      font-size:8.5px;
-      line-height:1;
-      font-weight:800;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      background:#efe8dd;
-      color:#54473b;
-      border:1px solid #ddd3c5;
-    }
-
-    .offerTerms{
-      font-size:8px;
-      line-height:1.3;
-      color:#7a7068;
-      margin-top:1px;
-    }
-
-    /* ── Right: action panel ───────────────────────────────── */
-
-    .action{
-      padding:10px 12px;
-      display:grid;
-      align-content:center;
-      justify-items:center;
-      gap:7px;
-      background:linear-gradient(180deg,#faf5ed 0%,#f0e3d2 100%);
-    }
-
-    .codeLabel{
-      font-size:7.5px;
-      line-height:1;
-      text-transform:uppercase;
-      letter-spacing:.2em;
-      color:#7a6650;
-      font-weight:800;
-    }
-
-    .code{
-      width:100%;
-      text-align:center;
-      font-size:17px;
-      line-height:1;
-      font-weight:950;
-      letter-spacing:.1em;
-      border:1.5px solid rgba(168,101,42,.35);
-      border-radius:6px;
-      padding:10px 6px;
-      color:#7a4518;
-      background:rgba(255,255,255,.8);
-      text-transform:uppercase;
-    }
-
-    .cta{
-      width:100%;
-      text-align:center;
-      font-size:10.5px;
-      line-height:1;
-      font-weight:900;
-      text-transform:uppercase;
-      letter-spacing:.1em;
-      color:#fff;
-      border-radius:6px;
-      padding:10px 8px;
-      background:linear-gradient(135deg,#A8652A,#C4884E);
-    }
-
-    .actionUrl{
-      text-align:center;
-      font-size:7.5px;
-      line-height:1.2;
-      color:#7a6e5f;
-      word-break:break-word;
-    }
-
-    /* ── Builder responsive ────────────────────────────────── */
-
-    @media (max-width:1100px){
-      .shell{grid-template-columns:1fr}
-    }
-
-    @media (max-width:720px){
-      .shell{padding:14px;gap:14px}
-      .grid2,.actions{grid-template-columns:1fr}
-      .paperWrap{padding:0;background:none;border-top:none}
-      .page{transform-origin:top center;transform:scale(.58);margin:-60px auto -60px}
+    @media (max-width: 720px) {
+      .shell { padding: 14px; gap: 14px; }
+      .grid2, .grid3, .grid4, .actions { grid-template-columns: 1fr; }
+      .layout-grid { grid-template-columns: repeat(2, 1fr); }
+      .paperWrap { padding: 0; background: none; border-top: none; }
+      .page { transform-origin: top center; transform: scale(.45); margin: -80px auto -80px; }
     }
 
     /* ── Print ─────────────────────────────────────────────── */
-
-    @page{
-      size:A4 portrait;
-      margin:0;
-    }
-
-    @media print{
-      body{background:#fff}
-      .controls,.stage .head,.footerNote{display:none !important}
-      .shell{display:block;max-width:none;margin:0;padding:0}
-      .stage{border:none;box-shadow:none;background:none}
-      .stageBody{padding:0}
-      .paperWrap{padding:0;background:none;border:none}
-      .page{box-shadow:none;margin:0;width:210mm;min-height:297mm}
+    @page { size: A4 portrait; margin: 0; }
+    @media print {
+      body { background: #fff; }
+      .controls, .stage .head, .footerNote { display: none !important; }
+      .shell { display: block; max-width: none; margin: 0; padding: 0; }
+      .stage { border: none; box-shadow: none; background: none; }
+      .stageBody { padding: 0; }
+      .paperWrap { padding: 0; background: none; border: none; }
+      .page { box-shadow: none; margin: 0; width: 210mm; min-height: 297mm; }
     }
   </style>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 </head>
 <body>
   <div class="shell">
+    <!-- ── CONTROLS PANEL ─────────────────────────────────── -->
     <aside class="controls panel">
       <div class="head">
-        <span class="eyebrow">สร้างคูปอง</span>
-        <h1>แถบข้อเสนอ A4</h1>
-        <p class="sub">ห้าแถบข้อเสนอต่อหน้า A4 แก้ไข ดูตัวอย่าง แล้วพิมพ์หรือบันทึกเป็น PDF</p>
+        <span class="eyebrow">Coupon Builder</span>
+        <h1>ตัวสร้างคูปอง — Coupon Builder</h1>
+        <p class="sub">สร้างคูปองหลายรูปแบบสำหรับพิมพ์ A4 แก้ไข ดูตัวอย่าง แล้วพิมพ์หรือบันทึก PDF</p>
       </div>
 
       <div class="form">
-        <div class="group">
-          <label>ชื่อโรงแรม
-            <input id="hotelName" type="text" value="Sandbox Hotel">
+        <!-- Layout Selector -->
+        <div class="section-title">เลย์เอาต์ (Layout)</div>
+        <div class="layout-grid" id="layoutGrid">
+          <button type="button" class="layout-thumb active" data-layout="strip">
+            <svg viewBox="0 0 60 60"><rect x="4" y="8" width="52" height="8" rx="2" fill="#A8652A" opacity=".8"/><rect x="4" y="20" width="52" height="8" rx="2" fill="#A8652A" opacity=".6"/><rect x="4" y="32" width="52" height="8" rx="2" fill="#A8652A" opacity=".4"/><rect x="4" y="44" width="52" height="8" rx="2" fill="#A8652A" opacity=".3"/></svg>
+            <span class="lt-label">แถบ (Strip)</span>
+          </button>
+          <button type="button" class="layout-thumb" data-layout="card">
+            <svg viewBox="0 0 60 60"><rect x="4" y="4" width="24" height="24" rx="3" fill="#A8652A" opacity=".7"/><rect x="32" y="4" width="24" height="24" rx="3" fill="#A8652A" opacity=".5"/><rect x="4" y="32" width="24" height="24" rx="3" fill="#A8652A" opacity=".5"/><rect x="32" y="32" width="24" height="24" rx="3" fill="#A8652A" opacity=".3"/></svg>
+            <span class="lt-label">การ์ด (Card)</span>
+          </button>
+          <button type="button" class="layout-thumb" data-layout="voucher">
+            <svg viewBox="0 0 60 60"><rect x="4" y="6" width="52" height="20" rx="3" fill="#A8652A" opacity=".7"/><rect x="4" y="34" width="52" height="20" rx="3" fill="#A8652A" opacity=".4"/></svg>
+            <span class="lt-label">บัตรกำนัล (Voucher)</span>
+          </button>
+          <button type="button" class="layout-thumb" data-layout="gift">
+            <svg viewBox="0 0 60 60"><rect x="6" y="4" width="48" height="52" rx="4" fill="#A8652A" opacity=".6"/><rect x="14" y="20" width="32" height="6" rx="2" fill="#fff" opacity=".6"/><rect x="20" y="32" width="20" height="6" rx="2" fill="#fff" opacity=".6"/></svg>
+            <span class="lt-label">ใบรับรอง (Gift)</span>
+          </button>
+        </div>
+
+        <!-- Quantity -->
+        <div class="grid2">
+          <label>จำนวนต่อหน้า (Qty/Page)
+            <select id="quantity"></select>
           </label>
-          <label>เบอร์โทรศัพท์
-            <input id="phone" type="text" value="066 111 7070">
+          <label>ฟอนต์ (Font)
+            <select id="fontSelect">
+              <option value="Sarabun" selected>Sarabun</option>
+              <option value="Prompt">Prompt</option>
+              <option value="Kanit">Kanit</option>
+              <option value="Manrope">Manrope</option>
+              <option value="Noto Sans Thai">Noto Sans Thai</option>
+            </select>
+          </label>
+        </div>
+
+        <hr class="sep">
+
+        <!-- Presets -->
+        <div class="section-title">ธุรกิจตั้งต้น (Presets)</div>
+        <div class="preset-grid" id="presetGrid">
+          <button type="button" class="preset-btn active" data-preset="hotel">
+            <span class="preset-icon">🏨</span>
+            โรงแรม (Hotel)
+          </button>
+          <button type="button" class="preset-btn" data-preset="cafe">
+            <span class="preset-icon">☕</span>
+            คาเฟ่ (Café)
+          </button>
+          <button type="button" class="preset-btn" data-preset="massage">
+            <span class="preset-icon">💆</span>
+            นวด (Massage)
+          </button>
+        </div>
+
+        <hr class="sep">
+
+        <!-- Business Fields -->
+        <div class="section-title">ข้อมูลธุรกิจ (Business)</div>
+        <div class="group">
+          <label>ชื่อธุรกิจ (Business Name)
+            <input id="businessName" type="text">
+          </label>
+          <label>โทรศัพท์ (Phone)
+            <input id="phone" type="text">
           </label>
         </div>
 
@@ -522,124 +753,134 @@
           </div>
         </div>
 
+        <hr class="sep">
+
+        <!-- Offer Fields -->
+        <div class="section-title">ข้อเสนอ (Offer)</div>
         <div class="group">
-          <label>หัวข้อหลัก
-            <input id="headline" type="text" value="ลด 10% เมื่อจองตรง">
+          <label>หัวข้อ (Headline)
+            <input id="headline" type="text">
           </label>
-          <label>ข้อความสนับสนุน
-            <textarea id="subline">จองตรงกับแซนด์บ็อกซ์ โฮเทล รับราคาดีที่สุด ยืนยันรวดเร็ว พร้อมบริการส่วนตัว</textarea>
+          <label>รายละเอียด (Subline)
+            <textarea id="subline"></textarea>
           </label>
         </div>
 
         <div class="grid2">
-          <label>รหัสโปรโมชั่น
-            <input id="code" type="text" value="SANDBOX10">
+          <label>รหัสโปรโมชั่น (Code)
+            <input id="code" type="text">
           </label>
-          <label>ข้อความปุ่ม CTA
-            <input id="cta" type="text" value="จองตรง">
-          </label>
-        </div>
-
-        <div class="grid2">
-          <label>จองภายใน
-            <input id="validity" type="text" value="จองภายใน 30 เม.ย. 2026">
-          </label>
-          <label>เข้าพักถึง
-            <input id="stay" type="text" value="เข้าพักถึง 31 พ.ค. 2026">
+          <label>ปุ่มกดดำเนินการ (CTA)
+            <input id="cta" type="text">
           </label>
         </div>
 
         <div class="group">
-          <label>เงื่อนไข
-            <textarea id="terms">เฉพาะการจองตรงเท่านั้น ขึ้นอยู่กับห้องว่าง ใช้ได้ 1 สิทธิ์ต่อการเข้าพัก ไม่สามารถใช้ร่วมกับโปรโมชั่นอื่นได้</textarea>
+          <label>เงื่อนไข (Terms)
+            <textarea id="terms"></textarea>
           </label>
         </div>
 
         <div class="group">
-          <label>เว็บไซต์
+          <label>เว็บไซต์ (Website)
             <input id="url" type="text" value="www.sandboxhotel.com">
           </label>
         </div>
 
         <hr class="sep">
 
-        <div class="imageGroup">
+        <!-- Section Order -->
+        <div class="section-title">ลำดับส่วน — ลากเพื่อจัดเรียง (Section Order)</div>
+        <div class="drag-list" id="dragList">
+          <div class="drag-item" draggable="true" data-section="brand">
+            <span class="drag-handle">⋮⋮</span>
+            <span class="drag-label">🏢 แบรนด์ (Brand) — โลโก้ / ชื่อ / โทร</span>
+          </div>
+          <div class="drag-item" draggable="true" data-section="offer">
+            <span class="drag-handle">⋮⋮</span>
+            <span class="drag-label">🎫 ข้อเสนอ (Offer) — หัวข้อ / รายละเอียด / เงื่อนไข</span>
+          </div>
+          <div class="drag-item" draggable="true" data-section="action">
+            <span class="drag-handle">⋮⋮</span>
+            <span class="drag-label">🎯 ดำเนินการ (Action) — รหัส / CTA / URL</span>
+          </div>
+        </div>
+
+        <hr class="sep">
+
+        <!-- Colors -->
+        <div class="section-title">สี (Colors)</div>
+        <div class="grid2">
+          <div class="color-row">
+            <input type="color" id="colorAccent" value="#A8652A">
+            <span>สีเน้น (Accent)</span>
+          </div>
+          <div class="color-row">
+            <input type="color" id="colorBg" value="#faf8f4">
+            <span>พื้นหลัง (BG)</span>
+          </div>
+          <div class="color-row">
+            <input type="color" id="colorText" value="#1a1a1a">
+            <span>ตัวอักษร (Text)</span>
+          </div>
+          <div class="color-row">
+            <input type="color" id="colorCta" value="#A8652A">
+            <span>ปุ่ม CTA</span>
+          </div>
+        </div>
+
+        <hr class="sep">
+
+        <!-- Image Controls -->
+        <div class="section-title">รูปภาพ (Image)</div>
+        <div class="group">
           <div class="imageToggle">
             <input type="checkbox" id="showImage" checked>
-            <span>แสดงรูปภาพในแผงแบรนด์</span>
+            <span>แสดงรูปภาพในส่วนแบรนด์ (Show image)</span>
           </div>
           <div class="imageGrid" id="imageGrid"></div>
           <div class="uploadRow">
             <label class="uploadBtn" for="uploadInput">
               <svg viewBox="0 0 16 16"><path d="M8 1a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 1z"/></svg>
-              อัปโหลดรูปภาพ
+              อัปโหลดรูปภาพ (Upload)
             </label>
             <input type="file" id="uploadInput" accept="image/*" style="display:none">
             <span class="uploadName" id="uploadName"></span>
             <button class="removeUpload" id="removeUpload" type="button" style="display:none">ลบ</button>
           </div>
         </div>
-
-        <p class="hint">5 แถบต่อ A4 หนึ่งแผ่น ควรใช้หัวข้อสั้นกระชับเพื่อผลลัพธ์การพิมพ์ที่ดีที่สุด</p>
       </div>
 
       <div class="actions">
-        <button class="btn primary" id="printBtn" type="button">พิมพ์ / บันทึก PDF</button>
-        <button class="btn" id="resetBtn" type="button">รีเซ็ต</button>
-        <button class="btn full" id="saveBtn" type="button">บันทึกค่าปัจจุบันในอุปกรณ์นี้</button>
+        <button class="btn primary" id="printBtn" type="button">🖨️ พิมพ์ / PDF</button>
+        <button class="btn" id="resetBtn" type="button">🔄 รีเซ็ต</button>
+        <button class="btn full" id="saveBtn" type="button">💾 บันทึกข้อมูลบนเครื่องนี้ (Save)</button>
       </div>
     </aside>
 
+    <!-- ── PREVIEW PANEL ──────────────────────────────────── -->
     <section class="stage panel">
       <div class="head">
-        <span class="eyebrow">ตัวอย่าง</span>
-        <h2>แผ่นพิมพ์ 5 แถบ</h2>
+        <span class="eyebrow">ตัวอย่าง (Preview)</span>
+        <h2 id="previewTitle">คูปองพิมพ์ได้</h2>
       </div>
       <div class="stageBody">
         <div class="paperWrap">
-          <div class="page" id="page"></div>
+          <div class="page layout-strip" id="page"></div>
         </div>
-        <p class="footerNote">ขนาดสำหรับแถบข้อเสนอ 5 แถบแนวนอนบนกระดาษ A4 แนวตั้งหนึ่งแผ่น</p>
+        <p class="footerNote">ขนาดสำหรับพิมพ์หน้า A4 แนวตั้ง (Layout sized for A4 portrait page with print-safe margins)</p>
       </div>
     </section>
   </div>
 
-  <template id="stripTemplate">
-    <article class="strip">
-      <div class="brand no-image">
-        <div class="brandImage">
-          <img src="" alt="">
-        </div>
-        <div class="brandInner">
-          <div class="brandName js-hotel"></div>
-          <div class="brandContact">
-            <div class="brandPhone js-phone"></div>
-            <div class="brandQr hidden js-qr"><img src="" alt="LINE QR"></div>
-          </div>
-        </div>
-      </div>
-      <div class="offer">
-        <div class="offerHeadline js-headline"></div>
-        <div class="offerBody js-subline"></div>
-        <div class="offerMeta">
-          <span class="chip js-validity"></span>
-          <span class="chip js-stay"></span>
-        </div>
-        <div class="offerTerms js-terms"></div>
-      </div>
-      <div class="action">
-        <div class="codeLabel">รหัสส่วนลด</div>
-        <div class="code js-code"></div>
-        <div class="cta js-cta"></div>
-        <div class="actionUrl js-url"></div>
-      </div>
-    </article>
-  </template>
-
   <script>
-    const STORAGE_KEY = 'sandbox_coupon_strip_a4_v1';
+    /* ══════════════════════════════════════════════════════════
+       COUPON BUILDER v2 — Pure Vanilla JS
+       ══════════════════════════════════════════════════════════ */
+    const STORAGE_KEY = 'sandbox_coupon_builder_v2';
+    const DEFAULT_CODE = 'CODE';
+    const DRAG_MIME = 'application/x-section-order';
 
-    /* Gallery images sourced from the site's existing asset directories */
     const GALLERY_IMAGES = [
       { src: '/images/Sandbox-Hotel-Hero-Banner-720.webp', label: 'Hero Banner' },
       { src: '/assets/images/gallery/entrance-400.webp', label: 'Entrance' },
@@ -654,62 +895,244 @@
       { src: '/assets/images/rooms/bathroom-400.webp', label: 'Bathroom' },
     ];
 
-    const defaults = {
-      hotelName: 'Sandbox Hotel',
-      phone: '066 111 7070',
-      headline: 'ลด 10% เมื่อจองตรง',
-      subline: 'จองตรงกับแซนด์บ็อกซ์ โฮเทล รับราคาดีที่สุด ยืนยันรวดเร็ว พร้อมบริการส่วนตัว',
-      code: 'SANDBOX10',
-      cta: 'จองตรง',
-      validity: 'จองภายใน 30 เม.ย. 2026',
-      stay: 'เข้าพักถึง 31 พ.ค. 2026',
-      terms: 'เฉพาะการจองตรงเท่านั้น ขึ้นอยู่กับห้องว่าง ใช้ได้ 1 สิทธิ์ต่อการเข้าพัก ไม่สามารถใช้ร่วมกับโปรโมชั่นอื่นได้',
-      url: 'www.sandboxhotel.com',
-      showImage: true,
-      selectedImage: 0,
-      uploadedImage: null
+    /* ── Preset Definitions ───────────────────────────────── */
+    const PRESETS = {
+      hotel: {
+        businessName: 'Sandbox Hotel (แซนด์บ็อกซ์โฮเทล)',
+        phone: '066 111 7070',
+        headline: 'ส่วนลด 10% จองตรง',
+        subline: 'จองตรงกับ Sandbox Hotel เพื่อราคาที่ดีกว่า ยืนยันเร็ว และบริการส่วนตัว',
+        code: 'SANDBOX10',
+        cta: 'จองเลย',
+        terms: 'สำหรับการจองตรงเท่านั้น ขึ้นอยู่กับห้องว่าง ใช้ได้ 1 ครั้งต่อการเข้าพัก ไม่สามารถใช้ร่วมกับโปรโมชั่นอื่นได้',
+        url: 'www.sandboxhotel.com',
+      },
+      cafe: {
+        businessName: 'Sandbox Café (แซนด์บ็อกซ์คาเฟ่)',
+        phone: '066 111 7070',
+        headline: 'ฟรีเครื่องดื่ม 1 แก้ว',
+        subline: 'รับเครื่องดื่มฟรี 1 แก้ว เมื่อสั่งอาหาร 200 บาทขึ้นไป',
+        code: 'CAFEFREE',
+        cta: 'ใช้คูปอง',
+        terms: 'ใช้ได้ที่ Sandbox Café เท่านั้น ไม่สามารถแลกเป็นเงินสดได้',
+        url: 'www.sandboxhotel.com',
+      },
+      massage: {
+        businessName: 'Sandbox Spa & Massage (แซนด์บ็อกซ์สปา)',
+        phone: '066 111 7070',
+        headline: 'ลด 20% นวดแผนไทย',
+        subline: 'ผ่อนคลายด้วยนวดแผนไทยแท้ จากช่างนวดผู้ชำนาญ',
+        code: 'SPA20',
+        cta: 'จองนัดหมาย',
+        terms: 'สำหรับนวดแผนไทย 60 นาทีขึ้นไป ใช้ได้ถึง 31 พ.ค. 2569',
+        url: 'www.sandboxhotel.com',
+      },
     };
 
-    const ids = ['hotelName','phone','headline','subline','code','cta','validity','stay','terms','url'];
-    const page = document.getElementById('page');
-    const template = document.getElementById('stripTemplate');
-    const showImageCheckbox = document.getElementById('showImage');
-    const imageGrid = document.getElementById('imageGrid');
-    const uploadInput = document.getElementById('uploadInput');
-    const uploadNameEl = document.getElementById('uploadName');
-    const removeUploadBtn = document.getElementById('removeUpload');
-    const qrInput = document.getElementById('qrInput');
-    const qrNameEl = document.getElementById('qrName');
-    const removeQrBtn = document.getElementById('removeQr');
+    /* Quantity options per layout */
+    const QTY_OPTIONS = {
+      strip:   [3, 4, 5],
+      card:    [2, 4, 6],
+      voucher: [1, 2],
+      gift:    [1],
+    };
 
-    let selectedImageIndex = defaults.selectedImage;
+    /* ── State ────────────────────────────────────────────── */
+    let state = {
+      layout: 'strip',
+      preset: 'hotel',
+      quantity: 5,
+      font: 'Sarabun',
+      sectionOrder: ['brand', 'offer', 'action'],
+      colors: { accent: '#A8652A', bg: '#faf8f4', text: '#1a1a1a', cta: '#A8652A' },
+      selectedImage: 0,
+      showImage: true,
+      useUploadedImage: false,
+    };
+
     let uploadedDataUrl = null;
-    let useUploadedImage = false;
     let qrDataUrl = null;
 
-    /* Build image picker grid */
+    /* ── DOM References ───────────────────────────────────── */
+    const $ = (sel) => document.querySelector(sel);
+    const $$ = (sel) => document.querySelectorAll(sel);
+    const page = $('#page');
+    const imageGrid = $('#imageGrid');
+    const dragList = $('#dragList');
+    const quantitySelect = $('#quantity');
+    const fontSelect = $('#fontSelect');
+
+    const FIELD_IDS = ['businessName', 'phone', 'headline', 'subline', 'code', 'cta', 'terms', 'url'];
+
+    /* ── Layout Selector ──────────────────────────────────── */
+    $$('#layoutGrid .layout-thumb').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.layout = btn.dataset.layout;
+        $$('#layoutGrid .layout-thumb').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateQuantityOptions();
+        render();
+      });
+    });
+
+    /* ── Quantity Options ─────────────────────────────────── */
+    function updateQuantityOptions() {
+      const opts = QTY_OPTIONS[state.layout];
+      quantitySelect.innerHTML = '';
+      opts.forEach(n => {
+        const o = document.createElement('option');
+        o.value = n;
+        o.textContent = n;
+        quantitySelect.appendChild(o);
+      });
+      if (!opts.includes(state.quantity)) {
+        state.quantity = opts[opts.length - 1];
+      }
+      quantitySelect.value = state.quantity;
+    }
+    quantitySelect.addEventListener('change', () => {
+      state.quantity = parseInt(quantitySelect.value, 10);
+      render();
+    });
+
+    /* ── Font Selector ────────────────────────────────────── */
+    fontSelect.addEventListener('change', () => {
+      state.font = fontSelect.value;
+      render();
+    });
+
+    /* ── Preset Buttons ───────────────────────────────────── */
+    $$('#presetGrid .preset-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.preset = btn.dataset.preset;
+        $$('#presetGrid .preset-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        applyPreset(state.preset);
+        render();
+      });
+    });
+
+    function applyPreset(key) {
+      const p = PRESETS[key];
+      if (!p) return;
+      FIELD_IDS.forEach(id => {
+        const el = document.getElementById(id);
+        if (el && p[id] !== undefined) el.value = p[id];
+      });
+    }
+
+    /* ── Color Pickers ────────────────────────────────────── */
+    const colorMap = {
+      colorAccent: 'accent',
+      colorBg: 'bg',
+      colorText: 'text',
+      colorCta: 'cta',
+    };
+    Object.entries(colorMap).forEach(([elId, key]) => {
+      const el = document.getElementById(elId);
+      el.addEventListener('input', () => {
+        state.colors[key] = el.value;
+        applyCSSColors();
+        render();
+      });
+    });
+    function applyCSSColors() {
+      const r = document.documentElement.style;
+      r.setProperty('--c-accent', state.colors.accent);
+      r.setProperty('--c-bg', state.colors.bg);
+      r.setProperty('--c-text', state.colors.text);
+      r.setProperty('--c-cta', state.colors.cta);
+    }
+
+    /* ── Drag & Drop Section Ordering ─────────────────────── */
+    let dragSrcEl = null;
+    function initDragDrop() {
+      dragList.querySelectorAll('.drag-item').forEach(item => {
+        item.addEventListener('dragstart', handleDragStart);
+        item.addEventListener('dragover', handleDragOver);
+        item.addEventListener('dragenter', handleDragEnter);
+        item.addEventListener('dragleave', handleDragLeave);
+        item.addEventListener('drop', handleDrop);
+        item.addEventListener('dragend', handleDragEnd);
+      });
+    }
+    function handleDragStart(e) {
+      dragSrcEl = this;
+      this.classList.add('dragging');
+      e.dataTransfer.effectAllowed = 'move';
+      e.dataTransfer.setData(DRAG_MIME, this.dataset.section);
+    }
+    function handleDragOver(e) {
+      e.preventDefault();
+      e.dataTransfer.dropEffect = 'move';
+    }
+    function handleDragEnter(e) {
+      e.preventDefault();
+      this.classList.add('drag-over');
+    }
+    function handleDragLeave() {
+      this.classList.remove('drag-over');
+    }
+    function handleDrop(e) {
+      e.stopPropagation();
+      e.preventDefault();
+      if (dragSrcEl !== this) {
+        const parent = dragList;
+        const items = Array.from(parent.children);
+        const fromIdx = items.indexOf(dragSrcEl);
+        const toIdx = items.indexOf(this);
+        if (fromIdx < toIdx) {
+          parent.insertBefore(dragSrcEl, this.nextSibling);
+        } else {
+          parent.insertBefore(dragSrcEl, this);
+        }
+        updateSectionOrder();
+        render();
+      }
+      this.classList.remove('drag-over');
+    }
+    function handleDragEnd() {
+      dragList.querySelectorAll('.drag-item').forEach(item => {
+        item.classList.remove('dragging', 'drag-over');
+      });
+    }
+    function updateSectionOrder() {
+      state.sectionOrder = Array.from(dragList.children).map(el => el.dataset.section);
+    }
+    initDragDrop();
+
+    /* ── Image Picker ─────────────────────────────────────── */
     GALLERY_IMAGES.forEach((img, i) => {
       const btn = document.createElement('button');
       btn.type = 'button';
       btn.title = img.label;
-      btn.innerHTML = '<img src="'+img.src+'" alt="'+img.label+'" loading="lazy">';
+      btn.innerHTML = '<img src="' + img.src + '" alt="' + img.label + '" loading="lazy">';
       btn.addEventListener('click', () => {
-        selectedImageIndex = i;
-        useUploadedImage = false;
+        state.selectedImage = i;
+        state.useUploadedImage = false;
         updateImageSelection();
         render();
       });
       imageGrid.appendChild(btn);
     });
 
-    /* Upload handling */
+    function updateImageSelection() {
+      imageGrid.querySelectorAll('button').forEach((b, i) =>
+        b.classList.toggle('selected', !state.useUploadedImage && i === state.selectedImage)
+      );
+    }
+
+    /* Image upload */
+    const uploadInput = $('#uploadInput');
+    const uploadNameEl = $('#uploadName');
+    const removeUploadBtn = $('#removeUpload');
     uploadInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if(!file) return;
+      if (!file) return;
       const reader = new FileReader();
       reader.onload = (ev) => {
         uploadedDataUrl = ev.target.result;
-        useUploadedImage = true;
+        state.useUploadedImage = true;
         uploadNameEl.textContent = file.name;
         removeUploadBtn.style.display = '';
         updateImageSelection();
@@ -717,10 +1140,9 @@
       };
       reader.readAsDataURL(file);
     });
-
     removeUploadBtn.addEventListener('click', () => {
       uploadedDataUrl = null;
-      useUploadedImage = false;
+      state.useUploadedImage = false;
       uploadInput.value = '';
       uploadNameEl.textContent = '';
       removeUploadBtn.style.display = 'none';
@@ -728,10 +1150,13 @@
       render();
     });
 
-    /* QR code upload handling */
+    /* QR upload */
+    const qrInput = $('#qrInput');
+    const qrNameEl = $('#qrName');
+    const removeQrBtn = $('#removeQr');
     qrInput.addEventListener('change', (e) => {
       const file = e.target.files[0];
-      if(!file) return;
+      if (!file) return;
       const reader = new FileReader();
       reader.onload = (ev) => {
         qrDataUrl = ev.target.result;
@@ -741,7 +1166,6 @@
       };
       reader.readAsDataURL(file);
     });
-
     removeQrBtn.addEventListener('click', () => {
       qrDataUrl = null;
       qrInput.value = '';
@@ -750,105 +1174,215 @@
       render();
     });
 
-    function updateImageSelection(){
-      const btns = imageGrid.querySelectorAll('button');
-      btns.forEach((b, i) => b.classList.toggle('selected', !useUploadedImage && i === selectedImageIndex));
-    }
+    /* Show image toggle */
+    const showImageCheckbox = $('#showImage');
+    showImageCheckbox.addEventListener('change', () => {
+      state.showImage = showImageCheckbox.checked;
+      render();
+    });
 
-    function getImageSrc(){
-      if(useUploadedImage && uploadedDataUrl) return uploadedDataUrl;
-      const img = GALLERY_IMAGES[selectedImageIndex];
+    /* ── Helpers ───────────────────────────────────────────── */
+    function getImageSrc() {
+      if (state.useUploadedImage && uploadedDataUrl) return uploadedDataUrl;
+      const img = GALLERY_IMAGES[state.selectedImage];
       return img ? img.src : null;
     }
-
-    function getImageAlt(){
-      if(useUploadedImage) return 'Custom upload';
-      const img = GALLERY_IMAGES[selectedImageIndex];
+    function getImageAlt() {
+      if (state.useUploadedImage) return 'Custom upload';
+      const img = GALLERY_IMAGES[state.selectedImage];
       return img ? img.label : '';
     }
-
-    function getValues(){
-      const values = {};
-      ids.forEach(id => values[id] = document.getElementById(id).value.trim());
-      values.showImage = showImageCheckbox.checked;
-      values.selectedImage = selectedImageIndex;
-      values.useUploadedImage = useUploadedImage;
-      return values;
+    function getFieldValues() {
+      const v = {};
+      FIELD_IDS.forEach(id => { v[id] = document.getElementById(id).value.trim(); });
+      return v;
+    }
+    function fontFamily(name) {
+      return '"' + name + '", sans-serif';
     }
 
-    function setValues(values){
-      ids.forEach(id => {
-        document.getElementById(id).value = values[id] ?? defaults[id];
-      });
-      showImageCheckbox.checked = values.showImage ?? defaults.showImage;
-      selectedImageIndex = values.selectedImage ?? defaults.selectedImage;
-      updateImageSelection();
+    /* ── Build Sections HTML ──────────────────────────────── */
+
+    const _escEl = document.createElement('div');
+    function escHTML(str) {
+      if (str == null) return '';
+      _escEl.textContent = str;
+      return _escEl.innerHTML;
     }
 
-    function render(){
-      const v = getValues();
+    function buildBrandHTML(v, layout) {
       const imgSrc = getImageSrc();
       const imgAlt = getImageAlt();
+      const noImg = (!state.showImage || !imgSrc) ? ' no-image' : '';
+      const imgTag = (state.showImage && imgSrc)
+        ? '<div class="brandImage"><img src="' + imgSrc + '" alt="' + imgAlt + '"></div>'
+        : '<div class="brandImage"><img src="" alt=""></div>';
+      const qrHTML = qrDataUrl
+        ? '<div class="brandQr"><img src="' + qrDataUrl + '" alt="LINE QR"></div>'
+        : '<div class="brandQr hidden"><img src="" alt="LINE QR"></div>';
+      return '<div class="c-brand' + noImg + '">'
+        + imgTag
+        + '<div class="brandInner">'
+        + '<div class="brandName">' + escHTML(v.businessName || 'Sandbox Hotel') + '</div>'
+        + '<div class="brandContact">'
+        + '<div class="brandPhone">' + escHTML(v.phone || '') + '</div>'
+        + qrHTML
+        + '</div></div></div>';
+    }
+    function buildOfferHTML(v, layout) {
+      return '<div class="c-offer">'
+        + '<div class="offerHeadline">' + escHTML(v.headline || '') + '</div>'
+        + '<div class="offerBody">' + escHTML(v.subline || '') + '</div>'
+        + '<div class="offerTerms">' + escHTML(v.terms || '') + '</div>'
+        + '</div>';
+    }
+    function buildActionHTML(v, layout) {
+      if (layout === 'gift') {
+        return '<div class="c-action">'
+          + '<div class="c-action-left">'
+          + '<div class="codeLabel">รหัสโปรโมชั่น</div>'
+          + '<div class="code">' + escHTML((v.code || DEFAULT_CODE).toUpperCase()) + '</div>'
+          + '</div>'
+          + '<div class="c-action-right">'
+          + '<div class="cta-btn">' + escHTML(v.cta || 'จองเลย') + '</div>'
+          + '<div class="actionUrl">' + escHTML(v.url || '') + '</div>'
+          + '</div></div>';
+      }
+      return '<div class="c-action">'
+        + '<div class="codeLabel">รหัสโปรโมชั่น</div>'
+        + '<div class="code">' + escHTML((v.code || DEFAULT_CODE).toUpperCase()) + '</div>'
+        + '<div class="cta-btn">' + escHTML(v.cta || 'จองเลย') + '</div>'
+        + '<div class="actionUrl">' + escHTML(v.url || '') + '</div>'
+        + '</div>';
+    }
+
+    /* ── Render ────────────────────────────────────────────── */
+    function render() {
+      const v = getFieldValues();
+      const layout = state.layout;
+      const qty = state.quantity;
+      const font = fontFamily(state.font);
+      document.documentElement.style.setProperty('--c-font', font);
+
+      page.className = 'page layout-' + layout;
       page.innerHTML = '';
-      for(let i = 0; i < 5; i += 1){
-        const node = template.content.firstElementChild.cloneNode(true);
-        node.querySelector('.js-hotel').textContent = v.hotelName || 'Sandbox Hotel';
-        node.querySelector('.js-phone').textContent = v.phone || '';
-        node.querySelector('.js-headline').textContent = v.headline || 'ลด 10% เมื่อจองตรง';
-        node.querySelector('.js-subline').textContent = v.subline || '';
-        node.querySelector('.js-validity').textContent = v.validity || 'จำกัดเวลา';
-        node.querySelector('.js-stay').textContent = v.stay || 'ตามเงื่อนไข';
-        node.querySelector('.js-terms').textContent = v.terms || '';
-        node.querySelector('.js-code').textContent = (v.code || 'OFFER').toUpperCase();
-        node.querySelector('.js-cta').textContent = v.cta || 'จองตรง';
-        node.querySelector('.js-url').textContent = v.url || '';
 
-        /* Image handling */
-        const brandPanel = node.querySelector('.brand');
-        if(v.showImage && imgSrc){
-          brandPanel.classList.remove('no-image');
-          const img = brandPanel.querySelector('.brandImage img');
-          img.src = imgSrc;
-          img.alt = imgAlt;
-        } else {
-          brandPanel.classList.add('no-image');
+      const sectionBuilders = {
+        brand: buildBrandHTML,
+        offer: buildOfferHTML,
+        action: buildActionHTML,
+      };
+
+      for (let i = 0; i < qty; i++) {
+        const coupon = document.createElement('article');
+        const className = 'coupon-' + layout;
+        coupon.className = className;
+
+        let html = '';
+        state.sectionOrder.forEach(sec => {
+          html += sectionBuilders[sec](v, layout);
+        });
+        coupon.innerHTML = html;
+
+        /* For strip layout: set grid columns based on section order */
+        if (layout === 'strip') {
+          const colMap = { brand: 'minmax(0,1.3fr)', offer: 'minmax(0,1.6fr)', action: '48mm' };
+          coupon.style.gridTemplateColumns = state.sectionOrder.map(s => colMap[s]).join(' ');
         }
 
-        /* QR code handling */
-        const qrEl = node.querySelector('.js-qr');
-        if(qrDataUrl){
-          qrEl.classList.remove('hidden');
-          qrEl.querySelector('img').src = qrDataUrl;
-        } else {
-          qrEl.classList.add('hidden');
-        }
-
-        page.appendChild(node);
+        page.appendChild(coupon);
       }
+
+      /* Update preview title */
+      const titles = {
+        strip: qty + ' แถบต่อหน้า (strips/page)',
+        card: qty + ' การ์ดต่อหน้า (cards/page)',
+        voucher: qty + ' บัตรกำนัลต่อหน้า (vouchers/page)',
+        gift: 'ใบรับรองของขวัญ (gift certificate)',
+      };
+      $('#previewTitle').textContent = titles[layout] || '';
     }
 
-    function save(){
-      const v = getValues();
-      /* Do not persist the full data URL to localStorage — too large.
-         Instead persist a flag so user knows they had an upload active. */
-      v.uploadedImage = null;
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(v));
-    }
+    /* ── Field Input Listeners ─────────────────────────────── */
+    FIELD_IDS.forEach(id => {
+      document.getElementById(id).addEventListener('input', render);
+    });
 
-    function load(){
-      try{
+    /* ── Save / Load / Reset ──────────────────────────────── */
+    function collectState() {
+      return {
+        layout: state.layout,
+        preset: state.preset,
+        quantity: state.quantity,
+        font: state.font,
+        sectionOrder: state.sectionOrder,
+        colors: { ...state.colors },
+        selectedImage: state.selectedImage,
+        showImage: state.showImage,
+        useUploadedImage: false,
+        fields: getFieldValues(),
+      };
+    }
+    function save() {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(collectState()));
+    }
+    function load() {
+      try {
         const raw = localStorage.getItem(STORAGE_KEY);
-        if(!raw) return defaults;
-        return {...defaults, ...JSON.parse(raw)};
-      }catch{
-        return defaults;
+        if (!raw) return null;
+        return JSON.parse(raw);
+      } catch (err) {
+        console.warn('Coupon Builder: failed to parse saved state from localStorage', err);
+        return null;
       }
     }
+    function applyLoaded(data) {
+      if (!data) return;
+      state.layout = data.layout || 'strip';
+      state.preset = data.preset || 'hotel';
+      state.quantity = data.quantity || 5;
+      state.font = data.font || 'Sarabun';
+      state.sectionOrder = data.sectionOrder || ['brand', 'offer', 'action'];
+      state.colors = data.colors || { accent: '#A8652A', bg: '#faf8f4', text: '#1a1a1a', cta: '#A8652A' };
+      state.selectedImage = data.selectedImage || 0;
+      state.showImage = data.showImage !== false;
+      state.useUploadedImage = false;
 
-    function reset(){
+      /* Apply to UI */
+      $$('#layoutGrid .layout-thumb').forEach(b => b.classList.toggle('active', b.dataset.layout === state.layout));
+      $$('#presetGrid .preset-btn').forEach(b => b.classList.toggle('active', b.dataset.preset === state.preset));
+      fontSelect.value = state.font;
+      showImageCheckbox.checked = state.showImage;
+
+      /* Colors */
+      document.getElementById('colorAccent').value = state.colors.accent;
+      document.getElementById('colorBg').value = state.colors.bg;
+      document.getElementById('colorText').value = state.colors.text;
+      document.getElementById('colorCta').value = state.colors.cta;
+      applyCSSColors();
+
+      /* Fields */
+      if (data.fields) {
+        FIELD_IDS.forEach(id => {
+          const el = document.getElementById(id);
+          if (el && data.fields[id] !== undefined) el.value = data.fields[id];
+        });
+      }
+
+      /* Section order in drag list */
+      const items = Array.from(dragList.children);
+      state.sectionOrder.forEach(sec => {
+        const item = items.find(el => el.dataset.section === sec);
+        if (item) dragList.appendChild(item);
+      });
+
+      updateQuantityOptions();
+      updateImageSelection();
+    }
+    function reset() {
       localStorage.removeItem(STORAGE_KEY);
       uploadedDataUrl = null;
-      useUploadedImage = false;
+      state.useUploadedImage = false;
       uploadInput.value = '';
       uploadNameEl.textContent = '';
       removeUploadBtn.style.display = 'none';
@@ -856,28 +1390,62 @@
       qrInput.value = '';
       qrNameEl.textContent = '';
       removeQrBtn.style.display = 'none';
-      setValues(defaults);
+
+      state.layout = 'strip';
+      state.preset = 'hotel';
+      state.quantity = 5;
+      state.font = 'Sarabun';
+      state.sectionOrder = ['brand', 'offer', 'action'];
+      state.colors = { accent: '#A8652A', bg: '#faf8f4', text: '#1a1a1a', cta: '#A8652A' };
+      state.selectedImage = 0;
+      state.showImage = true;
+
+      $$('#layoutGrid .layout-thumb').forEach(b => b.classList.toggle('active', b.dataset.layout === 'strip'));
+      $$('#presetGrid .preset-btn').forEach(b => b.classList.toggle('active', b.dataset.preset === 'hotel'));
+      fontSelect.value = 'Sarabun';
+      showImageCheckbox.checked = true;
+      document.getElementById('colorAccent').value = '#A8652A';
+      document.getElementById('colorBg').value = '#faf8f4';
+      document.getElementById('colorText').value = '#1a1a1a';
+      document.getElementById('colorCta').value = '#A8652A';
+      applyCSSColors();
+
+      /* Reset drag order */
+      const order = ['brand', 'offer', 'action'];
+      order.forEach(sec => {
+        const item = dragList.querySelector('[data-section="' + sec + '"]');
+        if (item) dragList.appendChild(item);
+      });
+
+      applyPreset('hotel');
+      document.getElementById('url').value = 'www.sandboxhotel.com';
+      updateQuantityOptions();
+      updateImageSelection();
       render();
     }
 
-    ids.forEach(id => {
-      document.getElementById(id).addEventListener('input', render);
-    });
-    showImageCheckbox.addEventListener('change', render);
-
-    document.getElementById('saveBtn').addEventListener('click', () => {
+    /* ── Button Handlers ──────────────────────────────────── */
+    $('#saveBtn').addEventListener('click', () => {
       save();
-      const btn = document.getElementById('saveBtn');
+      const btn = $('#saveBtn');
       const original = btn.textContent;
-      btn.textContent = 'บันทึกแล้ว';
+      btn.textContent = '✅ บันทึกแล้ว!';
       setTimeout(() => btn.textContent = original, 1200);
     });
+    $('#resetBtn').addEventListener('click', reset);
+    $('#printBtn').addEventListener('click', () => window.print());
 
-    document.getElementById('resetBtn').addEventListener('click', reset);
-    document.getElementById('printBtn').addEventListener('click', () => window.print());
-
-    setValues(load());
+    /* ── Initialize ───────────────────────────────────────── */
+    const saved = load();
+    if (saved) {
+      applyLoaded(saved);
+    } else {
+      applyPreset('hotel');
+      document.getElementById('url').value = 'www.sandboxhotel.com';
+    }
+    updateQuantityOptions();
     updateImageSelection();
+    applyCSSColors();
     render();
   </script>
 </body>
