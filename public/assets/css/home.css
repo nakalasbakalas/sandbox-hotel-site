@@ -584,7 +584,7 @@
       .navPanel{position:static; min-width:0; margin-top:8px}
     }
     .hideMobile{display:inline-flex}
-    @media (max-width:980px){ .hideMobile{display:none} }
+    @media (max-width:980px){ .hideMobile{display:none !important} }
     @media (max-width:640px){
       .logo{
         width:48px;
@@ -1907,6 +1907,301 @@
 
     /* Head sub-line — readable width on narrow phone */
     html[data-device="phone"] .head p{ max-width: 100%; }
+
+    /* ================================================================
+       PHASE 8 — Mobile Nav + Location/Contact refinements (phone only)
+       Targets: 320–430 px real-world phone widths
+       ================================================================ */
+
+    /* -------- A. NAV BAR — compact, clean, premium -------- */
+
+    /* 1. Tighter header on phone — reduce min-height and vertical padding */
+    html[data-device="phone"] .nav{
+      min-height: 52px;
+      padding: 6px 12px;
+      padding-top: calc(6px + env(safe-area-inset-top));
+      padding-left: max(12px, calc(12px + env(safe-area-inset-left)));
+      padding-right: max(12px, calc(12px + env(safe-area-inset-right)));
+      gap: 8px;
+    }
+
+    /* 2. Smaller logo on phone to save header real-estate */
+    html[data-device="phone"] .logo{
+      width: 38px;
+      height: 38px;
+    }
+
+    /* 3. Brand text — tighter, readable at a glance */
+    html[data-device="phone"] .brand{
+      gap: 10px;
+      min-width: 0;
+    }
+    html[data-device="phone"] .brandName{
+      font-size: 12px;
+      letter-spacing: .10em;
+    }
+
+    /* 4. Primary CTA chip in header — compact but tappable */
+    html[data-device="phone"] .navPrimaryCta{
+      min-height: 36px;
+      padding: 0 12px;
+      font-size: 12px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* 5. Hamburger button — slightly smaller but still 44px touch target */
+    html[data-device="phone"] .navHamburger{
+      width: 40px;
+      height: 40px;
+    }
+
+    /* 6. Nav links row — tighter gap */
+    html[data-device="phone"] .navLinks{
+      gap: 6px;
+    }
+
+    /* 6b. Hide LINE button on phone — redundant with the fixed .hideMobile rule */
+    html[data-device="phone"] .navLineBtn{
+      display: none;
+    }
+
+    /* 7. Scrolled header — compact shadow, no excessive height */
+    html[data-device="phone"] header.scrolled .nav{
+      min-height: 48px;
+    }
+
+    /* -------- A2. MOBILE MENU PANEL — intentional, polished -------- */
+
+    /* 8. Nav panel — full-width on phone, starts below header */
+    html[data-device="phone"] .navPanel{
+      position: fixed;
+      top: calc(52px + env(safe-area-inset-top));
+      left: 0;
+      right: 0;
+      bottom: 0;
+      min-width: 0;
+      border-radius: 0;
+      border: none;
+      border-top: 1px solid var(--line);
+      padding: 16px 20px calc(16px + env(safe-area-inset-bottom)) 20px;
+      gap: 6px;
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      z-index: 90;
+      background: var(--uiGlass2, rgba(255,252,247,.97));
+      -webkit-backdrop-filter: blur(24px) saturate(140%);
+      backdrop-filter: blur(24px) saturate(140%);
+    }
+
+    /* Ensure header stays above the panel overlay */
+    html[data-device="phone"] header{
+      z-index: 100;
+    }
+    /* Give header a solid background when menu is open */
+    html[data-device="phone"] .navGroup[open] ~ *,
+    html[data-device="phone"] header:has(.navGroup[open]){
+      background: var(--uiGlass2, rgba(255,252,247,.97));
+      -webkit-backdrop-filter: blur(16px) saturate(130%);
+      backdrop-filter: blur(16px) saturate(130%);
+    }
+
+    /* 9. Panel brand block — clean spacing */
+    html[data-device="phone"] .navPanelBrand{
+      padding-bottom: 6px;
+      gap: 10px;
+    }
+    html[data-device="phone"] .navPanelBrand .logo{
+      width: 36px;
+      height: 36px;
+    }
+    html[data-device="phone"] .navPanelBrandTitle{
+      font-size: 12px;
+    }
+    html[data-device="phone"] .navPanelBrandCopy{
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    /* 10. Panel dividers — subtle, less vertical waste */
+    html[data-device="phone"] .navPanelDivider{
+      margin: 4px 0;
+    }
+
+    /* 11. Panel chips — consistent, finger-friendly, balanced */
+    html[data-device="phone"] .navPanel .chip{
+      min-height: 44px;
+      font-size: 14px;
+      padding: 0 14px;
+      border-radius: var(--radius-sm);
+      justify-content: flex-start;
+    }
+    html[data-device="phone"] .navPanel .chip.primary{
+      justify-content: center;
+      min-height: 46px;
+      font-size: 14px;
+      border-radius: var(--radius-pill);
+    }
+
+    /* 12. Panel language block — tighter */
+    html[data-device="phone"] .navPanelLangBlock{
+      gap: 6px;
+    }
+    html[data-device="phone"] .navPanelLang{
+      gap: 8px;
+    }
+    html[data-device="phone"] .navPanelLang .flagItem{
+      width: 44px;
+      height: 44px;
+      font-size: 22px;
+      border-radius: var(--radius-pill);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* 13. Theme toggle in panel — compact */
+    html[data-device="phone"] .navPanel #themeToggle{
+      min-height: 40px;
+      font-size: 13px;
+    }
+
+    /* -------- B. LOCATION & CONTACT SECTION — mobile conversion -------- */
+
+    /* 14. Contact card — better padding and gap rhythm on phone */
+    html[data-device="phone"] .contactCard{
+      padding: 16px;
+      gap: 12px;
+    }
+
+    /* 15. Section heading — tighter on phone */
+    html[data-device="phone"] #location .head{
+      margin-bottom: 10px;
+    }
+    html[data-device="phone"] #location .head h2{
+      font-size: clamp(20px, 5.5vw, 24px);
+    }
+    html[data-device="phone"] #location .head p{
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    /* 16. Address — clean, readable */
+    html[data-device="phone"] .contactAddress{
+      font-size: 13.5px;
+      line-height: 1.55;
+    }
+    html[data-device="phone"] .contactAddress .fine{
+      display: block;
+      margin-top: 2px;
+    }
+
+    /* 17. Operating hours — compact pill */
+    html[data-device="phone"] .contactHours{
+      padding: 10px 12px;
+      font-size: 12.5px;
+      gap: 6px;
+    }
+
+    /* 18. Contact action buttons — full-width stack for thumb reach */
+    html[data-device="phone"] .contactActions{
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+    }
+    html[data-device="phone"] .contactActions .btn{
+      width: 100%;
+      min-height: 46px;
+      font-size: 15px;
+      font-weight: 800;
+      justify-content: center;
+    }
+    html[data-device="phone"] .contactActions .btn.primary{
+      min-height: 48px;
+      font-size: 15px;
+    }
+
+    /* 19. Contact meta rows — better alignment and tap targets */
+    html[data-device="phone"] .contactMeta{
+      padding-top: 10px;
+      margin-top: 4px;
+    }
+    html[data-device="phone"] .contactMetaRow{
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-height: 36px;
+      font-size: 13px;
+    }
+    html[data-device="phone"] .contactMetaRow a{
+      text-decoration: underline;
+      text-decoration-color: rgba(168,101,42,.35);
+      text-underline-offset: 2px;
+    }
+    html[data-device="phone"] .contactMetaIcon{
+      flex-shrink: 0;
+      width: 20px;
+      text-align: center;
+    }
+
+    /* 20. Secondary links (Maps/Facebook) — prominent on phone */
+    html[data-device="phone"] .contactSecondary{
+      margin-top: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      align-items: center;
+      font-size: 13px;
+    }
+    html[data-device="phone"] .contactSecondary a{
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      min-height: 32px;
+      font-weight: 700;
+    }
+
+    /* 21. Map embed — controlled height on phone, not dominating */
+    html[data-device="phone"] .mapWrap{
+      margin-top: 4px;
+      border-radius: var(--radius-sm);
+    }
+    html[data-device="phone"] .mapWrap iframe{
+      height: clamp(200px, 48vw, 260px);
+    }
+
+    /* 22. Location card overall — tighter padding on phone */
+    html[data-device="phone"] .locationSectionCard{
+      padding: 14px;
+    }
+
+    /* 23. Location grid — less gap on phone */
+    html[data-device="phone"] .locationGrid{
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    /* 24. Notes disclaimer — compact */
+    html[data-device="phone"] .contactCard > .fine:last-child{
+      font-size: 11px;
+      line-height: 1.5;
+      opacity: 0.75;
+    }
+
+    /* -------- Extra-small phone (≤359px) — prevent overflow -------- */
+    @media (max-width: 359px){
+      html[data-device="phone"] .navPrimaryCta{
+        padding: 0 10px;
+        font-size: 11px;
+      }
+      html[data-device="phone"] .brandName{
+        font-size: 11px;
+        letter-spacing: .08em;
+      }
+      html[data-device="phone"] .contactActions .btn{
+        font-size: 14px;
+        min-height: 44px;
+      }
+    }
 
     /* Tablet: reduce some noise but keep context */
     html[data-device="tablet"] .hero{
