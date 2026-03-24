@@ -1,6 +1,6 @@
 // Service Worker — Sandbox Hotel
 // Bump CACHE_VERSION to invalidate all caches on next deploy.
-const CACHE_VERSION = 'v1';
+const CACHE_VERSION = 'v2';
 const STATIC_CACHE  = `sandbox-hotel-static-${CACHE_VERSION}`;
 const IMAGE_CACHE   = `sandbox-hotel-images-${CACHE_VERSION}`;
 
@@ -10,6 +10,14 @@ const PRECACHE_URLS = [
   '/',
   '/404.html',
   '/site.webmanifest',
+  '/assets/css/design-tokens.css',
+  '/assets/css/home.css',
+  '/assets/css/components/booking-form.css',
+  '/assets/js/home.js',
+  '/assets/js/analytics.js',
+  '/assets/js/components/device-detect.js',
+  '/assets/js/components/gallery-carousel.js',
+  '/assets/js/components/header-scroll.js',
   '/images/Sandbox-Hotel-Hero-Banner.webp',
   '/images/Sandbox-Hotel-Hero-Banner-720.webp',
 ];
