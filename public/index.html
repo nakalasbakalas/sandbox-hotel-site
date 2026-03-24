@@ -305,16 +305,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <nav class="navLinks" aria-label="Primary">
         <span class="navSupport hideMobile" data-i18n="nav_support">Best Rate Direct</span>
-        <div class="navLangCluster hideMobile" role="group" aria-label="Language switcher">
-          <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
-            <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+        <div class="navLangCluster hideMobile">
+          <button type="button" class="navLangToggle" id="langBtn" aria-haspopup="true" aria-expanded="false">
+            <span id="currentFlag" aria-hidden="true">🇹🇭</span>
+            <span class="sr-only" data-i18n="nav_language">Language</span>
+            <span class="navLangChevron" aria-hidden="true">▾</span>
           </button>
-          <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
-            <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
-          </button>
-          <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
-            <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
-          </button>
+          <div class="langMenu" id="langMenu" hidden>
+            <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
+              <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+            </button>
+            <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
+              <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
+            </button>
+            <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
+              <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
+            </button>
+          </div>
         </div>
         <a class="navLineBtn hideMobile" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Message Sandbox Hotel on LINE (opens in new tab)" data-analytics="line" data-cta-location="header-line">
           <span class="navLineIcon" aria-hidden="true">💬</span><span data-i18n="nav_line_cta">LINE</span>
@@ -347,7 +354,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a class="chip" href="#offers" data-i18n="nav_offers">Offers</a>
             <a class="chip" href="#amenities" data-i18n="nav_amenities">Amenities</a>
             <a class="chip" href="#gallery" data-i18n="nav_gallery">Gallery</a>
-            <a class="chip" href="#reviews" data-i18n="nav_reviews">Reviews</a>
             <a class="chip" href="#faq" data-i18n="nav_faq">FAQ</a>
             <a class="chip" href="#location" data-i18n="nav_location">Location</a>
 
@@ -409,19 +415,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">View Rooms →</a>
             </div>
             <p class="heroDirectNote" data-i18n="hero_direct_booking_benefit">Best rate when you book direct, with fast confirmation by phone or LINE.</p>
-            <div class="heroTrustRow">
-              <a class="heroReviewBadge" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-analytics="map">
-                <span class="heroReviewScore" data-i18n-html="trust_rating">4.8</span>
-                <span class="heroReviewStars" aria-hidden="true">★★★★★</span>
-                <span class="heroReviewLabel" data-i18n="trust_meta">Based on Google Maps reviews</span>
-              </a>
-              <p class="heroContactHint" data-i18n="hero_contact_hint">Book direct by phone or LINE for the fastest confirmation.</p>
-            </div>
-            <div class="heroProofList" aria-label="Stay highlights">
-              <span class="heroProofItem" data-i18n="hero_proof_rooms">Spacious 28–32 m² rooms</span>
-              <span class="heroProofItem" data-i18n="hero_proof_parking">Parking + fast Wi‑Fi</span>
-              <span class="heroProofItem" data-i18n="hero_proof_location">Quiet comfort with easy city access</span>
-            </div>
           </div>
         </div>
       </div>
@@ -490,7 +483,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <ul class="roomMeta">
                   <li class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</li>
-                  <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                  <li class="tag" data-i18n="tag_28_32_m">28 m²</li>
                   <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
 
@@ -549,7 +542,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <ul class="roomMeta">
                   <li class="tag" data-i18n="tag_1_double_bed">1 Double Bed</li>
-                  <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                  <li class="tag" data-i18n="tag_28_32_m">28 m²</li>
                   <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
 
@@ -602,7 +595,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">🛏</div>
             <b data-i18n="offer2_title">Comfortable Rooms for Work or Rest</b>
-            <p data-i18n="offer2_desc">Spacious 28–32 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.</p>
+            <p data-i18n="offer2_desc">Spacious 28 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">📶</div>
@@ -657,11 +650,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="bookingSupportRow">
               <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-support-call">Call Hotel</a>
               <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" data-cta-location="booking-support-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-            </div>
-            <div class="bookingTrustBar">
-              <span class="bookingTrustValue" data-i18n-html="trust_rating">4.8</span>
-              <span class="stars" aria-hidden="true">★★★★★</span>
-              <span class="bookingTrustMeta" data-i18n="trust_meta">Based on Google Maps reviews</span>
             </div>
             <ul class="bookingBenefitList">
               <li data-i18n="book_benefit_1">Direct reply from the hotel team.</li>
@@ -862,50 +850,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="galThumbs" id="galThumbs" aria-label="Gallery thumbnails"></div>
 
           <div class="galHint fine" data-i18n="gal_swipe_hint">Swipe for more photos or use the arrows</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- REVIEWS -->
-    <section class="section" id="reviews">
-      <div class="card altB pad reviewSectionCard">
-        <div class="head">
-          <div>
-            <h2 data-i18n="reviews_title">Guest Reviews</h2>
-            <p data-i18n="reviews_sub">Check location and the latest guest feedback on Google Maps before you book.</p>
-          </div>
-          <div class="reviewActionRow">
-          <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="btn_view_maps" data-analytics="map">View on Google Maps<span class="sr-only"> (opens in new tab)</span></a>
-            <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n-html="btn_view_facebook" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
-          </div>
-        </div>
-
-        <div class="reviews">
-          <div class="reviewsLead">
-            <div class="review reviewFeatured">
-              <b data-i18n-html="review1_title">Business Traveler <span class="stars">★★★★★</span></b>
-              <p data-i18n="review1_text">Fast check-in, stable Wi-Fi, and a big room to work in. Great value.</p>
-            </div>
-            <div class="review reviewMini">
-              <b data-i18n-html="review2_title">Couple Weekend <span class="stars">★★★★★</span></b>
-              <p data-i18n="review2_text">Clean and comfortable. Easy to message for confirmation. Smooth stay.</p>
-            </div>
-            <div class="review reviewMini">
-              <b data-i18n-html="review3_title">Family Stopover <span class="stars">★★★★☆</span></b>
-              <p data-i18n="review3_text">Spacious room and helpful staff. Parking was convenient.</p>
-            </div>
-          </div>
-
-          <div class="reviewsSide">
-            <div class="review reviewMini">
-              <b data-i18n-html="review4_title">Long Stay Guest <span class="stars">★★★★★</span></b>
-              <p data-i18n="review4_text">Quiet, comfortable, and practical amenities. Would stay again.</p>
-            </div>
-            <div class="review reviewMini">
-              <b data-i18n-html="review5_title">Great Location <span class="stars">★★★★★</span></b>
-              <p data-i18n="review5_text">Big room, clean, and convenient location. Easy check-in and friendly staff.</p>
-            </div>
-          </div>
         </div>
       </div>
     </section>
