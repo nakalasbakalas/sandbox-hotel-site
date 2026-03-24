@@ -742,6 +742,84 @@
     /* Overlay stacking */
     .page.layout-overlay { flex-direction: column; }
 
+    /* ── Premium Options ───────────────────────────────────── */
+
+    /* Expiry line */
+    .expiry-line {
+      font-size: inherit; line-height: 1.3; color: #7a7068;
+      margin-top: 2px; font-style: italic;
+    }
+    .coupon-overlay .expiry-line { color: rgba(255,255,255,.6); }
+
+    /* Border styles */
+    .page[data-border="dashed"]  .coupon-strip,
+    .page[data-border="dashed"]  .coupon-card,
+    .page[data-border="dashed"]  .coupon-voucher,
+    .page[data-border="dashed"]  .coupon-gift,
+    .page[data-border="dashed"]  .coupon-overlay  { border-style: dashed; }
+    .page[data-border="double"]  .coupon-strip,
+    .page[data-border="double"]  .coupon-card,
+    .page[data-border="double"]  .coupon-voucher,
+    .page[data-border="double"]  .coupon-gift,
+    .page[data-border="double"]  .coupon-overlay  { border: 3px double #d1c8bb; }
+    .page[data-border="double"]  .coupon-gift     { border-color: var(--c-accent); }
+    .page[data-border="elegant"] .coupon-strip,
+    .page[data-border="elegant"] .coupon-card,
+    .page[data-border="elegant"] .coupon-voucher,
+    .page[data-border="elegant"] .coupon-gift,
+    .page[data-border="elegant"] .coupon-overlay  { border: 3px double #d1c8bb; box-shadow: inset 0 0 0 3px rgba(191,163,80,.25); }
+    .page[data-border="elegant"] .coupon-gift     { border-color: var(--c-accent); }
+
+    /* Corner styles */
+    .page[data-corners="sharp"]   .coupon-strip,
+    .page[data-corners="sharp"]   .coupon-card,
+    .page[data-corners="sharp"]   .coupon-voucher,
+    .page[data-corners="sharp"]   .coupon-gift,
+    .page[data-corners="sharp"]   .coupon-overlay  { border-radius: 0; }
+    .page[data-corners="pill"]    .coupon-strip,
+    .page[data-corners="pill"]    .coupon-card,
+    .page[data-corners="pill"]    .coupon-voucher,
+    .page[data-corners="pill"]    .coupon-gift,
+    .page[data-corners="pill"]    .coupon-overlay  { border-radius: 24px; }
+
+    /* CTA button styles */
+    .page[data-cta-style="outline"] .cta-btn,
+    .page[data-cta-style="outline"] .overlay-cta-btn {
+      background: transparent !important;
+      border: 2px solid var(--c-cta);
+      color: var(--c-cta) !important;
+      box-shadow: none;
+    }
+    .page[data-cta-style="pill"] .cta-btn,
+    .page[data-cta-style="pill"] .overlay-cta-btn {
+      border-radius: 999px !important;
+    }
+
+    /* Image overlay opacity — uses CSS custom property */
+    .page .coupon-strip  .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.2*var(--img-overlay-opacity,1))), rgba(237,224,207,calc(.55*var(--img-overlay-opacity,1))) 35%, rgba(220,197,168,calc(.78*var(--img-overlay-opacity,1)))); }
+    .page .coupon-card   .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.25*var(--img-overlay-opacity,1))), rgba(237,224,207,calc(.6*var(--img-overlay-opacity,1))) 35%, rgba(220,197,168,calc(.85*var(--img-overlay-opacity,1)))); }
+    .page .coupon-voucher .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.15*var(--img-overlay-opacity,1))), rgba(220,197,168,calc(.8*var(--img-overlay-opacity,1)))); }
+    .page .coupon-gift   .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.05*var(--img-overlay-opacity,1))), rgba(220,197,168,calc(.85*var(--img-overlay-opacity,1)))); }
+    .page .coupon-overlay .overlay-image::after { background: linear-gradient(180deg, rgba(0,0,0,calc(.10*var(--img-overlay-opacity,1))) 0%, rgba(0,0,0,calc(.25*var(--img-overlay-opacity,1))) 40%, rgba(0,0,0,calc(.65*var(--img-overlay-opacity,1))) 100%); }
+
+    /* Watermark pattern */
+    .page[data-watermark="true"] .coupon-strip::before,
+    .page[data-watermark="true"] .coupon-card::before,
+    .page[data-watermark="true"] .coupon-voucher::before,
+    .page[data-watermark="true"] .coupon-gift::before,
+    .page[data-watermark="true"] .coupon-overlay::before {
+      content: "";
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%23000'/%3E%3Cpath d='M10 4l2 6-2 6-2-6z' fill='none' stroke='%23000' stroke-width='.5'/%3E%3C/svg%3E");
+      background-size: 20px 20px;
+    }
+    .page[data-watermark="true"] .coupon-strip,
+    .page[data-watermark="true"] .coupon-card,
+    .page[data-watermark="true"] .coupon-voucher,
+    .page[data-watermark="true"] .coupon-gift,
+    .page[data-watermark="true"] .coupon-overlay { position: relative; }
+
     /* ── Responsive ────────────────────────────────────────── */
     @media (max-width: 1200px) {
       .shell { grid-template-columns: 1fr; }
@@ -982,6 +1060,55 @@
 
         <hr class="sep">
 
+        <!-- Premium Options -->
+        <div class="section-title">ตัวเลือกพรีเมียม (Premium Options)</div>
+        <div class="group">
+          <label>วันหมดอายุ (Expiry Date)
+            <input type="date" id="expiryDate">
+          </label>
+        </div>
+        <div class="group">
+          <label style="margin-bottom:2px">กรอบ (Border Style)</label>
+          <div class="align-row" id="borderStyleRow">
+            <button type="button" class="align-btn active" data-border="default">ปกติ</button>
+            <button type="button" class="align-btn" data-border="dashed">เส้นประ</button>
+            <button type="button" class="align-btn" data-border="double">คู่</button>
+            <button type="button" class="align-btn" data-border="elegant">หรูหรา</button>
+          </div>
+        </div>
+        <div class="group">
+          <label style="margin-bottom:2px">มุม (Corner Style)</label>
+          <div class="align-row" id="cornerStyleRow">
+            <button type="button" class="align-btn" data-corner="sharp">▢ คม</button>
+            <button type="button" class="align-btn active" data-corner="rounded">▣ โค้ง</button>
+            <button type="button" class="align-btn" data-corner="pill">⬭ เม็ดยา</button>
+          </div>
+        </div>
+        <div class="group">
+          <label style="margin-bottom:2px">สไตล์ปุ่ม CTA (CTA Button Style)</label>
+          <div class="align-row" id="ctaStyleRow">
+            <button type="button" class="align-btn active" data-ctastyle="filled">■ เต็ม</button>
+            <button type="button" class="align-btn" data-ctastyle="outline">□ เส้นขอบ</button>
+            <button type="button" class="align-btn" data-ctastyle="pill">● เม็ดยา</button>
+          </div>
+        </div>
+        <div class="group">
+          <div class="size-row">
+            <label>ภาพซ้อนทับ (Image Overlay)
+              <input type="range" id="overlayOpacity" min="0" max="100" value="50">
+            </label>
+            <span class="size-val" id="overlayOpacityVal">50%</span>
+          </div>
+        </div>
+        <div class="group">
+          <label class="imageToggle" for="watermarkToggle">
+            <input type="checkbox" id="watermarkToggle">
+            <span>ลายน้ำตกแต่ง (Decorative Watermark)</span>
+          </label>
+        </div>
+
+        <hr class="sep">
+
         <!-- Image Controls -->
         <div class="section-title">รูปภาพ (Image)</div>
         <div class="group">
@@ -1102,6 +1229,12 @@
       useUploadedImage: false,
       textSizes: { headline: 0, body: 0, code: 0, cta: 0 },
       textAlign: 'auto',
+      expiryDate: '',
+      borderStyle: 'default',
+      cornerStyle: 'rounded',
+      ctaStyle: 'filled',
+      overlayOpacity: 50,
+      watermark: false,
     };
 
     let uploadedDataUrl = null;
@@ -1232,6 +1365,51 @@
         $$('#alignRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.align === state.textAlign));
         render();
       });
+    });
+
+    /* ── Premium Option Controls ──────────────────────────── */
+    document.getElementById('expiryDate').addEventListener('change', function () {
+      state.expiryDate = this.value;
+      render();
+    });
+
+    $$('#borderStyleRow .align-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.borderStyle = btn.dataset.border;
+        $$('#borderStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.border === state.borderStyle));
+        render();
+      });
+    });
+
+    $$('#cornerStyleRow .align-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.cornerStyle = btn.dataset.corner;
+        $$('#cornerStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.corner === state.cornerStyle));
+        render();
+      });
+    });
+
+    $$('#ctaStyleRow .align-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.ctaStyle = btn.dataset.ctastyle;
+        $$('#ctaStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.ctastyle === state.ctaStyle));
+        render();
+      });
+    });
+
+    const overlaySlider = document.getElementById('overlayOpacity');
+    const overlaySliderVal = document.getElementById('overlayOpacityVal');
+    overlaySlider.addEventListener('input', () => {
+      const v = parseInt(overlaySlider.value, 10);
+      state.overlayOpacity = v;
+      overlaySliderVal.textContent = v + '%';
+      render();
+    });
+
+    const watermarkToggle = document.getElementById('watermarkToggle');
+    watermarkToggle.addEventListener('change', () => {
+      state.watermark = watermarkToggle.checked;
+      render();
     });
 
     /* ── Drag & Drop Section Ordering ─────────────────────── */
@@ -1400,6 +1578,22 @@
       return _escEl.innerHTML;
     }
 
+    function formatExpiryDate(dateStr) {
+      if (!dateStr) return '';
+      var parts = dateStr.split('-');
+      var y = parseInt(parts[0], 10);
+      var m = parseInt(parts[1], 10) - 1;
+      var d = parseInt(parts[2], 10);
+      var thaiMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+      var buddhistYear = y + 543; /* Gregorian → Buddhist Era offset */
+      return d + ' ' + thaiMonths[m] + ' ' + buddhistYear;
+    }
+
+    function buildExpiryHTML() {
+      if (!state.expiryDate) return '';
+      return '<div class="expiry-line">ใช้ได้ถึง (Valid until) ' + escHTML(formatExpiryDate(state.expiryDate)) + '</div>';
+    }
+
     function buildBrandHTML(v, layout) {
       const imgSrc = getImageSrc();
       const imgAlt = getImageAlt();
@@ -1424,6 +1618,7 @@
         + '<div class="offerHeadline">' + escHTML(v.headline || '') + '</div>'
         + '<div class="offerBody">' + escHTML(v.subline || '') + '</div>'
         + '<div class="offerTerms">' + escHTML(v.terms || '') + '</div>'
+        + buildExpiryHTML()
         + '</div>';
     }
     function buildActionHTML(v, layout) {
@@ -1462,6 +1657,7 @@
         + (v.code ? '<div class="overlay-code">' + escHTML((v.code || '').toUpperCase()) + '</div>' : '')
         + '</div>'
         + (v.terms ? '<div class="overlay-terms">' + escHTML(v.terms) + '</div>' : '')
+        + buildExpiryHTML()
         + (v.url ? '<div class="overlay-url">' + escHTML(v.url) + '</div>' : '')
         + '</div>';
     }
@@ -1483,6 +1679,30 @@
       } else {
         page.removeAttribute('data-align');
       }
+
+      /* Premium options — data attributes */
+      if (state.borderStyle && state.borderStyle !== 'default') {
+        page.setAttribute('data-border', state.borderStyle);
+      } else {
+        page.removeAttribute('data-border');
+      }
+      if (state.cornerStyle && state.cornerStyle !== 'rounded') {
+        page.setAttribute('data-corners', state.cornerStyle);
+      } else {
+        page.removeAttribute('data-corners');
+      }
+      if (state.ctaStyle && state.ctaStyle !== 'filled') {
+        page.setAttribute('data-cta-style', state.ctaStyle);
+      } else {
+        page.removeAttribute('data-cta-style');
+      }
+      if (state.watermark) {
+        page.setAttribute('data-watermark', 'true');
+      } else {
+        page.removeAttribute('data-watermark');
+      }
+      /* Overlay opacity: 50/50=1.0 preserves original look at default midpoint */
+      page.style.setProperty('--img-overlay-opacity', state.overlayOpacity / 50);
 
       if (layout === 'overlay') {
         /* Overlay uses its own builder — no section ordering */
@@ -1567,6 +1787,12 @@
         useUploadedImage: false,
         textSizes: { ...state.textSizes },
         textAlign: state.textAlign,
+        expiryDate: state.expiryDate,
+        borderStyle: state.borderStyle,
+        cornerStyle: state.cornerStyle,
+        ctaStyle: state.ctaStyle,
+        overlayOpacity: state.overlayOpacity,
+        watermark: state.watermark,
         fields: getFieldValues(),
       };
     }
@@ -1596,6 +1822,12 @@
       state.useUploadedImage = false;
       state.textSizes = data.textSizes || { headline: 0, body: 0, code: 0, cta: 0 };
       state.textAlign = data.textAlign || 'auto';
+      state.expiryDate = data.expiryDate || '';
+      state.borderStyle = data.borderStyle || 'default';
+      state.cornerStyle = data.cornerStyle || 'rounded';
+      state.ctaStyle = data.ctaStyle || 'filled';
+      state.overlayOpacity = data.overlayOpacity != null ? data.overlayOpacity : 50;
+      state.watermark = !!data.watermark;
 
       /* Apply to UI */
       $$('#layoutGrid .layout-thumb').forEach(b => b.classList.toggle('active', b.dataset.layout === state.layout));
@@ -1613,6 +1845,15 @@
       /* Text sizes & alignment */
       applyTextSizeUI();
       $$('#alignRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.align === state.textAlign));
+
+      /* Premium options UI */
+      document.getElementById('expiryDate').value = state.expiryDate;
+      $$('#borderStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.border === state.borderStyle));
+      $$('#cornerStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.corner === state.cornerStyle));
+      $$('#ctaStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.ctastyle === state.ctaStyle));
+      overlaySlider.value = state.overlayOpacity;
+      overlaySliderVal.textContent = state.overlayOpacity + '%';
+      watermarkToggle.checked = state.watermark;
 
       /* Fields */
       if (data.fields) {
@@ -1654,6 +1895,12 @@
       state.showImage = true;
       state.textSizes = { headline: 0, body: 0, code: 0, cta: 0 };
       state.textAlign = 'auto';
+      state.expiryDate = '';
+      state.borderStyle = 'default';
+      state.cornerStyle = 'rounded';
+      state.ctaStyle = 'filled';
+      state.overlayOpacity = 50;
+      state.watermark = false;
 
       $$('#layoutGrid .layout-thumb').forEach(b => b.classList.toggle('active', b.dataset.layout === 'strip'));
       $$('#presetGrid .preset-btn').forEach(b => b.classList.toggle('active', b.dataset.preset === 'hotel'));
@@ -1666,6 +1913,15 @@
       applyCSSColors();
       applyTextSizeUI();
       $$('#alignRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.align === 'auto'));
+
+      /* Reset premium options UI */
+      document.getElementById('expiryDate').value = '';
+      $$('#borderStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.border === 'default'));
+      $$('#cornerStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.corner === 'rounded'));
+      $$('#ctaStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.ctastyle === 'filled'));
+      overlaySlider.value = 50;
+      overlaySliderVal.textContent = '50%';
+      watermarkToggle.checked = false;
 
       /* Reset drag order */
       const order = ['brand', 'offer', 'action'];
