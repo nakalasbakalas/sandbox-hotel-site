@@ -2274,6 +2274,18 @@
       max-width: var(--max);
       margin: 0 auto;
       display: grid;
+      gap: 8px;
+      align-items: center;
+    }
+    .stickyBottomNote{
+      margin: 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--ink2);
+      font-weight: 700;
+    }
+    .stickyBottomActions{
+      display: grid;
       grid-template-columns: 1fr 1fr 1.4fr;
       gap: 8px;
       align-items: center;

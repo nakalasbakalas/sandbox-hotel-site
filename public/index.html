@@ -317,10 +317,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
           </button>
         </div>
-        <a class="navLineBtn hideMobile" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Message Sandbox Hotel on LINE (opens in new tab)" data-analytics="line">
+        <a class="navLineBtn hideMobile" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Message Sandbox Hotel on LINE (opens in new tab)" data-analytics="line" data-cta-location="header-line">
           <span class="navLineIcon" aria-hidden="true">💬</span><span data-i18n="nav_line_cta">LINE</span>
         </a>
-        <a class="chip primary navPrimaryCta" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Direct</a>
+        <a class="chip primary navPrimaryCta" href="#book" data-i18n="nav_book" data-analytics="book-now" data-cta-location="header-primary">Check Availability</a>
 
         <details class="navGroup">
           <summary aria-label="Open site navigation menu">
@@ -339,9 +339,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </div>
             <div class="navPanelDivider"></div>
-            <a class="chip primary" href="#book" data-i18n="nav_book">Book Direct</a>
-            <a class="chip" href="tel:+66885783478" data-i18n="nav_call_hotel" data-analytics="call">Call Hotel</a>
-            <a class="chip" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-i18n="nav_line_chat" data-analytics="line">Message on LINE</a>
+            <a class="chip primary" href="#book" data-i18n="nav_book" data-analytics="book-now" data-cta-location="header-menu-primary">Check Availability</a>
+            <a class="chip" href="tel:+66885783478" data-i18n="nav_call_hotel" data-analytics="call" data-cta-location="header-menu-call">Call Hotel</a>
+            <a class="chip" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-i18n="nav_line_chat" data-analytics="line" data-cta-location="header-menu-line">Message on LINE</a>
 
             <div class="navPanelDivider"></div>
             <a class="chip" href="#rooms" data-i18n="nav_rooms">Rooms</a>
@@ -405,8 +405,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="heroSub" data-i18n="hero_sub_short">A quiet boutique hotel with roomy comfort, easy direct booking, and convenient city access.</p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="#book" data-i18n="cta_check_direct_rate" data-analytics="book-now">Check Direct Rate</a>
-              <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_hotel" data-analytics="call">Call Hotel</a>
+              <a class="btn primary" href="#book" data-i18n="cta_check_direct_rate" data-analytics="book-now" data-cta-location="hero-primary">Check Availability &amp; Rate</a>
+              <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_hotel" data-analytics="call" data-cta-location="hero-call">Call Hotel</a>
               <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">View Rooms →</a>
             </div>
             <p class="heroDirectNote" data-i18n="hero_direct_booking_benefit">Best rate when you book direct, with fast confirmation by phone or LINE.</p>
@@ -511,7 +511,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
                 <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now">Book Twin Room</a>
+                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now" data-cta-location="room-twin-primary">Check Twin Availability</a>
                 </div>
               </div>
             </div>
@@ -570,7 +570,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
                 <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now">Book Double Room</a>
+                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now" data-cta-location="room-double-primary">Check Double Availability</a>
                 </div>
               </div>
             </div>
@@ -637,7 +637,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2 data-i18n="book_title">Reserve Your Room</h2>
             <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll reply with availability and your rate.</p>
           </div>
-          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
+          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-header-call">Call Hotel</a>
         </div>
 
         <div class="bookingShell">
@@ -646,15 +646,29 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="badge hot" data-i18n="trust_direct">Direct Booking</span>
               <p class="bookingMetaLead" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today's exact rate.</p>
             </div>
+            <div class="bookingJourney" aria-label="How direct booking works">
+              <p class="bookingJourneyLabel" data-i18n="book_process_label">How direct booking works</p>
+              <ol class="bookingJourneyList">
+                <li data-i18n="book_process_step_1">Choose your stay dates and room type.</li>
+                <li data-i18n="book_process_step_2">Send the inquiry by LINE, WhatsApp, or email.</li>
+                <li data-i18n="book_process_step_3">We reply with availability, direct rate, and next steps.</li>
+              </ol>
+              <p class="bookingResponseNote" data-i18n="book_channel_hint">Fastest response: call or LINE. Email is best for detailed requests.</p>
+            </div>
             <div class="bookingSupportRow">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
-              <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-support-call">Call Hotel</a>
+              <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" data-cta-location="booking-support-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
             </div>
             <div class="bookingTrustBar">
               <span class="bookingTrustValue" data-i18n-html="trust_rating">4.8</span>
               <span class="stars" aria-hidden="true">★★★★★</span>
               <span class="bookingTrustMeta" data-i18n="trust_meta">Based on Google Maps reviews</span>
             </div>
+            <ul class="bookingBenefitList">
+              <li data-i18n="book_benefit_1">Direct reply from the hotel team.</li>
+              <li data-i18n="book_benefit_2">Today’s direct rate with no platform mark-up.</li>
+              <li data-i18n="book_benefit_3">Flexible help before you confirm.</li>
+            </ul>
             <div class="bookingFacts fine">
               <p data-i18n="book_tip"><strong>Tip:</strong> Add your estimated arrival time in Notes if arriving late.</p>
               <p data-i18n="book_checkin_info"><strong>Check-in:</strong> From 14:00 • <strong>Check-out:</strong> By 11:00</p>
@@ -666,53 +680,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="fieldGroup fieldGroupCols2 wide">
               <div class="field">
                 <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
-                <input id="checkin" name="checkin" type="date" required>
+                <input id="checkin" name="checkin" type="date" required aria-describedby="checkinHint checkinError">
+                <span class="fieldHint" id="checkinHint" data-i18n="field_hint_checkin">Choose your arrival date.</span>
+                <span class="fieldError" id="checkinError" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
-                <input id="checkout" name="checkout" type="date" required>
+                <input id="checkout" name="checkout" type="date" required aria-describedby="checkoutHint checkoutError">
+                <span class="fieldHint" id="checkoutHint" data-i18n="field_hint_checkout">Choose your departure date.</span>
+                <span class="fieldError" id="checkoutError" aria-live="polite"></span>
               </div>
             </div>
             <div class="fieldGroup fieldGroupCols2 wide">
               <div class="field">
                 <label for="guests" data-i18n="lbl_guests">Guests</label>
-                <select id="guests" name="guests">
+                <select id="guests" name="guests" aria-describedby="guestsHint guestsError">
                   <option value="1">1</option>
                   <option value="2" selected>2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
                 </select>
+                <span class="fieldHint" id="guestsHint" data-i18n="field_hint_guests">Tell us how many guests are staying.</span>
+                <span class="fieldError" id="guestsError" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="room" data-i18n="lbl_room">Room</label>
-                <select id="room" name="room">
+                <select id="room" name="room" aria-describedby="roomHint roomError">
                   <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
                   <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
                 </select>
+                <span class="fieldHint" id="roomHint" data-i18n="field_hint_room">Pick the room you want us to quote first.</span>
+                <span class="fieldError" id="roomError" aria-live="polite"></span>
               </div>
             </div>
             <div class="fieldGroup fieldGroupCols2 wide">
               <div class="field">
                 <label for="name" data-i18n="lbl_name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
+                <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name" autocomplete="name" aria-describedby="nameHint nameError">
+                <span class="fieldHint" id="nameHint" data-i18n="field_hint_name">Optional, but helpful for a personal reply.</span>
+                <span class="fieldError" id="nameError" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
-                <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
+                <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="contactHint contactError">
+                <span class="fieldHint" id="contactHint" data-i18n="field_hint_contact">Phone or email so we can reply directly.</span>
+                <span class="fieldError" id="contactError" aria-live="polite"></span>
               </div>
             </div>
             <div class="fieldGroup wide">
               <div class="field">
                 <label for="notes" data-i18n="lbl_notes">Notes</label>
-                <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+                <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes" aria-describedby="notesHint notesError"></textarea>
+                <span class="fieldHint" id="notesHint" data-i18n="field_hint_notes">Optional: arrival time, bed preference, or special requests.</span>
+                <span class="fieldError" id="notesError" aria-live="polite"></span>
               </div>
             </div>
 
             <div class="wide ctaRow">
-              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
-              <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
-              <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible.</span>
+              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line" data-cta-location="booking-form-line">Send via LINE</button>
+              <button class="btn secondary" type="button" id="sendWhatsApp" data-i18n="btn_send_wa" data-analytics="whatsapp" data-cta-location="booking-form-whatsapp">Send via WhatsApp</button>
+              <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email" data-cta-location="booking-form-email">Send via Email</button>
+              <span class="fine" id="formHint" data-i18n="form_hint_extended" role="status" aria-live="polite">Choose your preferred contact channel. We’ll reply with availability, direct rate, and the next step as soon as possible.</span>
             </div>
             <div class="wide bookGuarantee">
               <i class="checkIcon" aria-hidden="true">✓</i>
@@ -890,7 +919,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2 data-i18n="faq_title">FAQ</h2>
             <p data-i18n="faq_sub">Quick answers before you book.</p>
           </div>
-        <a class="textLink" href="#book" data-i18n="faq_btn" data-analytics="book-now">Send Request</a>
+        <a class="textLink" href="#book" data-i18n="faq_btn" data-analytics="book-now" data-cta-location="faq-link">Send Inquiry</a>
         </div>
 
         <div class="faqLayout">
@@ -956,16 +985,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="helpMethod"><span aria-hidden="true">✉️</span> <span data-i18n="faq_help_email">booking@sandboxhotel.com</span></div>
               <div class="helpMethod"><span aria-hidden="true">🕐</span> <span data-i18n="faq_help_hours">Daily 06:00–22:00</span></div>
             </div>
-            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
-            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now" data-cta-location="faq-help-primary">Check Availability</a>
+            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call" data-cta-location="faq-help-call">Call: 088-578-3478</a>
           </aside>
         </div>
 
         <div class="faqCTA">
           <p data-i18n="faq_cta_text">Still have questions? We're happy to help.</p>
           <div class="faqCTAActions">
-            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
-            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now" data-cta-location="faq-footer-primary">Check Availability</a>
+            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call" data-cta-location="faq-footer-call">Call: 088-578-3478</a>
           </div>
         </div>
       </div>
@@ -1045,9 +1074,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="contactActions">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="btn_call_now" data-analytics="call">Call Now</a>
-              <a class="btn lineAction" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-              <a class="btn" href="mailto:booking@sandboxhotel.com" data-i18n="btn_email" data-analytics="email">Email</a>
+              <a class="btn primary" href="tel:+66885783478" data-i18n="btn_call_now" data-analytics="call" data-cta-location="contact-card-call">Call Hotel</a>
+              <a class="btn lineAction" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" data-cta-location="contact-card-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn" href="mailto:booking@sandboxhotel.com" data-i18n="btn_email" data-analytics="email" data-cta-location="contact-card-email">Email</a>
             </div>
 
             <div class="contactMeta fine">
@@ -1127,11 +1156,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 
   <!-- Mobile Sticky Bottom Bar -->
-  <div class="stickyBottom" id="stickyBottom" aria-label="Quick booking actions">
+  <div class="stickyBottom" id="stickyBottom" aria-label="Quick booking actions" data-analytics-section="sticky-bottom">
     <div class="stickyBottomInner">
-      <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-      <a class="btn lineAction" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" id="stickyLine" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-      <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
+      <p class="stickyBottomNote" data-i18n="sticky_note">Need a quick answer? Call, chat, or check availability.</p>
+      <div class="stickyBottomActions">
+        <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call" data-cta-location="sticky-call">Call</a>
+        <a class="btn lineAction" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" id="stickyLine" data-analytics="line" data-cta-location="sticky-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+        <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now" data-cta-location="sticky-primary">Check Availability</a>
+      </div>
     </div>
   </div>
 
