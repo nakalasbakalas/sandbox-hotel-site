@@ -799,7 +799,7 @@
             <span class="lt-label">ใบรับรอง (Gift)</span>
           </button>
           <button type="button" class="layout-thumb" data-layout="overlay">
-            <svg viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" rx="4" fill="#A8652A" opacity=".35"/><rect x="4" y="4" width="52" height="52" rx="4" fill="url(#ovGrad)" opacity=".6"/><rect x="10" y="30" width="30" height="5" rx="2" fill="#fff" opacity=".9"/><rect x="10" y="38" width="20" height="4" rx="1.5" fill="#fff" opacity=".6"/><rect x="10" y="46" width="16" height="6" rx="3" fill="#A8652A" opacity=".9"/><defs><linearGradient id="ovGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity=".7"/></linearGradient></defs></svg>
+            <svg viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" rx="4" fill="#A8652A" opacity=".35"/><rect x="4" y="4" width="52" height="52" rx="4" fill="url(#overlayThumbGrad)" opacity=".6"/><rect x="10" y="30" width="30" height="5" rx="2" fill="#fff" opacity=".9"/><rect x="10" y="38" width="20" height="4" rx="1.5" fill="#fff" opacity=".6"/><rect x="10" y="46" width="16" height="6" rx="3" fill="#A8652A" opacity=".9"/><defs><linearGradient id="overlayThumbGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity=".7"/></linearGradient></defs></svg>
             <span class="lt-label">โอเวอร์เลย์ (Overlay)</span>
           </button>
         </div>
@@ -1459,7 +1459,7 @@
         + '<div class="overlay-body">' + escHTML(v.subline || '') + '</div>'
         + '<div class="overlay-cta-banner">'
         + '<div class="overlay-cta-btn">' + escHTML(v.cta || 'จองเลย') + '</div>'
-        + (v.code ? '<div class="overlay-code">' + escHTML(v.code.toUpperCase()) + '</div>' : '')
+        + (v.code ? '<div class="overlay-code">' + escHTML((v.code || '').toUpperCase()) + '</div>' : '')
         + '</div>'
         + (v.terms ? '<div class="overlay-terms">' + escHTML(v.terms) + '</div>' : '')
         + (v.url ? '<div class="overlay-url">' + escHTML(v.url) + '</div>' : '')
