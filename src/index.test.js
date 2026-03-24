@@ -254,6 +254,9 @@ test("homepage lower sections stay as standalone premium blocks instead of one s
 test("homepage stay-selling sections add room comparison, grouped amenities, and action-led offers", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
+  const style = document.createElement("style");
+  style.textContent = homepageCss;
+  document.head.append(style);
 
   assert.equal(document.querySelectorAll("#rooms .roomsCompare .compareCue").length, 3);
   assert.equal(document.querySelectorAll("#rooms .roomCard").length, 2);
@@ -262,6 +265,8 @@ test("homepage stay-selling sections add room comparison, grouped amenities, and
   assert.equal(document.querySelectorAll("#amenities .amenityGroup:first-of-type .amenity-card").length, 4);
   assert.equal(document.querySelectorAll("#amenities .amenityGroup:last-of-type .amenity-card").length, 3);
   assert.ok(document.querySelector("#offers .offerActionPanel .btn.primary[href='#book']"));
+  assert.equal(dom.window.getComputedStyle(document.querySelector("#offers .offers")).display, "grid");
+  assert.equal(dom.window.getComputedStyle(document.querySelector("#offers .offers")).gridTemplateColumns, "repeat(2, minmax(0, 1fr))");
 });
 
 test("homepage main stay-selling flow sequences rooms through booking in the intended order", () => {

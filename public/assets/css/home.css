@@ -983,7 +983,7 @@
       .navSupport{display:none}
     }
 
-    /* ---------- Why Stay / Offers ---------- */
+    /* ---------- Direct-booking benefits ---------- */
     .offers{display:grid; grid-template-columns:repeat(2, minmax(0, 1fr)); gap:16px; margin-top:12px}
     .offer{
       padding:20px;
@@ -1047,7 +1047,7 @@
       font-size:13.5px;
       line-height:1.58;
     }
-    @media (max-width:980px){
+    @media (max-width:640px){
       .offerActionPanel{flex-direction:column; align-items:flex-start}
     }
     @media (max-width:640px){ .offers{grid-template-columns:1fr} }
@@ -1170,9 +1170,9 @@
       justify-self:start;
     }
     .amenityBadgeSecondary{
-      border-color:rgba(92,107,85,.18);
-      background:rgba(92,107,85,.08);
-      color:color-mix(in oklab, var(--olive) 82%, var(--ink2));
+      border-color:rgba(92,107,85,.26);
+      background:rgba(92,107,85,.16);
+      color:var(--ink2);
     }
     .amenity-card::before, .amenity-card::after{display:none}
     @media (hover:hover){
@@ -1261,7 +1261,6 @@
     .compareCue{
       display:flex;
       align-items:flex-start;
-      gap:10px;
       padding:12px 14px;
       border-radius:var(--radius2);
       border:1px solid var(--line);
@@ -1269,17 +1268,6 @@
       color:var(--muted);
       font-size:13px;
       line-height:1.5;
-    }
-    .compareCueIcon{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      min-width:30px;
-      height:30px;
-      border-radius:var(--radius-pill);
-      background:rgba(168,101,42,.08);
-      color:var(--ink2);
-      font-size:14px;
     }
     @media (max-width:980px){ .roomsCompare{grid-template-columns:1fr} }
     #rooms .stack{

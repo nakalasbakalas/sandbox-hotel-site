@@ -567,7 +567,7 @@
         amen_service_desc: "Direct support for directions, arrival questions, and stay requests.",
 
         rooms_title: "Rooms",
-        rooms_sub: "Compare layouts, bed setup, and stay style before you send your dates.",
+        rooms_sub: "Compare layouts, bed setup, and stay style before sending your dates.",
         rooms_btn: "Check Availability",
         rooms_fine: "Rates may vary by date and season. Message your dates for the exact price.",
         rooms_compare_same: "Both room types include 28–32 m² of space, fast Wi‑Fi, A/C, hot shower, and guest parking.",
