@@ -225,8 +225,8 @@ test("homepage reviews use the older review-card layout without trust summary wi
   assert.equal(document.querySelector("#reviews .reviewSource"), null);
   assert.equal(document.querySelectorAll("#reviews .review").length, 5);
   assert.equal(document.querySelectorAll("#reviews .reviewsSide .review").length, 2);
-  assert.equal(homepageJs.includes("trust_rating"), false);
-  assert.equal(homepageJs.includes("trust_meta"), false);
+  assert.equal(homepageJs.includes('trust_rating: "4.8"'), true);
+  assert.equal(homepageJs.includes("trust_meta"), true);
   assert.equal(homepageJs.includes("btn_view_maps_short"), false);
 });
 
@@ -253,4 +253,21 @@ test("homepage gallery uses the patch 1 image set with responsive sources", () =
   assert.match(galleryImages[5]?.getAttribute("srcset") ?? "", /staircase-400\.png 400w, assets\/images\/gallery\/staircase\.png 1536w/);
   assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_evening_view_title']")?.textContent, "Evening Exterior");
   assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_staircase_title']")?.textContent, "Staircase & Mural");
+});
+
+test("homepage runtime locale keys cover every i18n hook used in the HTML", () => {
+  const htmlKeys = [...homepageHtml.matchAll(/data-i18n(?:-html|-ph)?="([^"]+)"/g)].map((match) => match[1]);
+  const uniqueKeys = [...new Set(htmlKeys)];
+  const missingKeys = uniqueKeys.filter((key) => {
+    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return !new RegExp(`[\\{,\\s]${escapedKey}\\s*:`, "m").test(homepageJs);
+  });
+
+  assert.deepEqual(missingKeys, []);
+});
+
+test("homepage booking actions validate the form before triggering outbound contact flows", () => {
+  assert.match(homepageJs, /function validateBookingForm\(form\)/);
+  assert.match(homepageJs, /form\?\.addEventListener\("submit", async \(e\)=>\{[\s\S]*?if\(!validateBookingForm\(form\)\) return;/);
+  assert.match(homepageJs, /document\.getElementById\("sendEmail"\)\?\.addEventListener\("click", async \(\)=>\{[\s\S]*?if\(!validateBookingForm\(form\)\) return;/);
 });

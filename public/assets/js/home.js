@@ -124,12 +124,14 @@
         hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
 
         cta_request: "เช็คห้องว่าง",
-        cta_call_line: "โทรหรือ LINE",
+        cta_call_line: "โทรเลย",
         cta_call_number: "โทร: 088-578-3478",
         cta_email: "อีเมล",
         cta_open_map: "เปิดแผนที่",
         hero_view_rooms: "ดูห้องพัก →",
-        hero_review_count: "· 120 รีวิวบน Google", // TODO: verify review count monthly
+        hero_review_count: "· รีวิวบน Google",
+        trust_rating: "4.8",
+        trust_meta: "อ้างอิงจากรีวิวบน Google Maps",
         hero_best_rate: "รับประกันราคาพิเศษเมื่อจองตรง — ไร้นายหน้า บริการใส่ใจ",
         trust_direct: "จองตรงราคาพิเศษ",
         trust_quiet: "ห้องพักสงบส่วนตัว",
@@ -176,6 +178,8 @@
         book_checkin_info: "เช็คอิน: ตั้งแต่ 14:00 · เช็คเอาท์: ก่อน 11:00",
         book_id_note: "ต้องแสดงบัตรประชาชนหรือพาสปอร์ตเมื่อเช็คอิน",
         form_hint: "เราจะตอบกลับพร้อมห้องว่างและราคารวม",
+        form_hint_extended: "เราจะตอบกลับพร้อมห้องว่างและราคารวมโดยเร็วที่สุด",
+        validation_checkout_after_checkin: "วันเช็คเอาต์ต้องหลังวันเช็คอิน",
 
         quick_label: "เลือกวันอย่างรวดเร็ว",
         quick_tonight: "คืนนี้",
@@ -237,6 +241,7 @@
         price_from: "เริ่มต้น",
         price_ask: "สอบถาม",
         price_today: "ราคาวันนี้",
+        price_rates_on_request: "รับราคาวันนี้ →",
         btn_call: "โทร",
         btn_see_photos: "ดูรูป",
 
@@ -272,6 +277,7 @@
         gal_exterior_desc: "ภาพรวมโรงแรม—หาง่าย เห็นชัด และเข้าพักได้สบายใจ",
         gal_entrance_title: "ทางเข้า & การมาถึง",
         gal_entrance_desc: "เข้าพักสะดวก เดินทางง่าย ทั้งกลางวันและกลางคืน",
+        gal_lobby_desc: "ความประทับใจแรกที่ดี — สะอาด เป็นมิตร และต้อนรับอย่างมีประสิทธิภาพ",
         gal_evening_view_title: "บรรยากาศภายนอกยามเย็น",
         gal_evening_view_desc: "มุมหน้าโรงแรมช่วงค่ำ ให้บรรยากาศสงบและเข้าถึงสะดวก",
         gal_flower_view_title: "มุมสวนหน้าโรงแรม",
@@ -329,7 +335,9 @@
 
         dest_title: "สำรวจพื้นที่รอบ Sandbox Hotel",
         dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> ที่ตั้งของเรา',
+        dest_where_body_short: "นครศรีธรรมราชเป็นเมืองประวัติศาสตร์ใน<strong>ภาคใต้ของไทย</strong>ริมอ่าวไทย อยู่ห่างจากกรุงเทพฯ ประมาณ 780 กม. เป็นหนึ่งในเมืองที่เก่าแก่ที่สุดของประเทศ และให้บรรยากาศที่ต่างจากเมืองชายหาดฝั่งอันดามันที่คึกคัก",
         dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> ทำไมต้องมาเยือน',
+        dest_why_body_short: "นครศรีธรรมราชมีเสน่ห์แบบไทยแท้ มรดกพุทธศาสนาที่โดดเด่น และบรรยากาศท้องถิ่นที่ผ่อนคลาย เป็นที่ตั้งของวัดพระมหาธาตุวรมหาวิหาร — หนึ่งในวัดสำคัญที่สุดของประเทศไทย",
         dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> สถานที่ท่องเที่ยวใกล้เคียง',
         dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> การเดินทาง',
 
@@ -384,12 +392,14 @@
         hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Valid ID required',
 
         cta_request: "Check Availability",
-        cta_call_line: "Call or LINE",
+        cta_call_line: "Call Now",
         cta_call_number: "Call: 088-578-3478",
         cta_email: "Email",
         cta_open_map: 'Open Map<span class="sr-only"> (opens in new tab)</span>',
         hero_view_rooms: "Explore Rooms →",
-        hero_review_count: "· 120 reviews on Google", // TODO: verify review count monthly
+        hero_review_count: "· Google reviews",
+        trust_rating: "4.8",
+        trust_meta: "Based on Google Maps reviews",
         hero_best_rate: "Best rate when you book direct — no middleman, no mark-up",
         trust_direct: "Direct Booking",
         trust_quiet: "Quiet Rooms",
@@ -436,6 +446,8 @@
         book_checkin_info: "Check-in: From 14:00 · Check-out: By 11:00",
         book_id_note: "Government-issued ID or passport required at check-in.",
         form_hint: "We’ll reply with availability and total price.",
+        form_hint_extended: "We’ll reply with room availability and total price as soon as possible.",
+        validation_checkout_after_checkin: "Check-out must be after check-in.",
 
         quick_label: "Quick dates",
         quick_tonight: "Tonight",
@@ -497,6 +509,7 @@
         price_from: "From",
         price_ask: "Ask",
         price_today: "today’s rate",
+        price_rates_on_request: "Get today's exact rate →",
         btn_call: "Call",
         btn_see_photos: "See photos",
 
@@ -532,6 +545,7 @@
         gal_exterior_desc: "Easy to find with convenient access.",
         gal_entrance_title: "Entrance & Arrival",
         gal_entrance_desc: "A welcoming arrival, day or night.",
+        gal_lobby_desc: "First impression matters—clean, friendly, efficient.",
         gal_evening_view_title: "Evening Exterior",
         gal_evening_view_desc: "A calm evening view of the hotel frontage and parking area.",
         gal_flower_view_title: "Garden Approach",
@@ -590,8 +604,10 @@
         dest_title: "Explore the Area Around Sandbox Hotel",
         dest_sub: "Southern Thailand's historic Gulf Coast city — a less-travelled destination with deep roots.",
         dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> Where is Nakhon Si Thammarat?',
+        dest_where_body_short: "Nakhon Si Thammarat is a historic city in <strong>Southern Thailand</strong> on the Gulf coast, 780 km south of Bangkok. One of the oldest cities in the country, it sits apart from crowded Andaman beach resorts.",
         dest_where_body: "Nakhon Si Thammarat is a city in <strong>Southern Thailand</strong>, located on the Gulf of Thailand coast approximately 780 km south of Bangkok. It is the capital of Nakhon Si Thammarat Province and one of the oldest continuously inhabited cities in the country, with a recorded history spanning more than 1,000 years. The city sits on the Gulf Coast side of the Thai-Malay Peninsula, distinct from the Andaman Sea resorts of Phuket and Krabi.",
         dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> Why Visit Nakhon Si Thammarat?',
+        dest_why_body_short: "Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan — one of Thailand's most significant temples.",
         dest_why_body: "Unlike the crowded beach resorts of Southern Thailand, Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Travellers come for Wat Phra Mahathat Woramahawihan — one of the most significant temples in all of Thailand — as well as the unique local art forms of Nang Talung shadow puppetry and traditional nielloware silver crafts. The city is also a gateway for exploring the lesser-known national parks and coastlines of Nakhon Si Thammarat Province.",
         dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> Key Attractions Near Sandbox Hotel',
         dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> How to Get to Nakhon Si Thammarat',
@@ -658,12 +674,14 @@
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示有效证件 • 静谧环境',
 
         cta_request: "查看空房",
-        cta_call_line: "电话或 LINE",
+        cta_call_line: "立即致电",
         cta_call_number: "致电：088-578-3478",
         cta_email: "邮箱",
         cta_open_map: '打开地图<span class="sr-only">（在新标签页中打开）</span>',
         hero_view_rooms: "查看房型",
-        hero_review_count: "· 120条 Google 评价", // TODO: verify review count monthly
+        hero_review_count: "· Google 评价",
+        trust_rating: "4.8",
+        trust_meta: "基于 Google 地图评价",
         hero_best_rate: "直订专享优惠价 — 无中介 专属服务",
         trust_direct: "直订专享优惠",
         trust_quiet: "静谧私密空间",
@@ -710,6 +728,8 @@
         book_checkin_info: "入住：14:00起 · 退房：11:00前",
         book_id_note: "入住时需出示护照或身份证。",
         form_hint: "我们会回复空房与总价。",
+        form_hint_extended: "我们会尽快回复空房情况与总价。",
+        validation_checkout_after_checkin: "退房日期必须晚于入住日期。",
 
         quick_label: "快捷日期",
         quick_tonight: "今晚",
@@ -771,6 +791,7 @@
         price_from: "起价",
         price_ask: "咨询",
         price_today: "今日房价",
+        price_rates_on_request: "获取今日准确房价 →",
         btn_call: "致电",
         btn_see_photos: "查看照片",
 
@@ -806,6 +827,7 @@
         gal_exterior_desc: "交通便利，容易找到。",
         gal_entrance_title: "入口与到店",
         gal_entrance_desc: "友好迎宾，日夜皆宜。",
+        gal_lobby_desc: "第一印象很重要——整洁、友好、高效。",
         gal_evening_view_title: "夜间酒店外观",
         gal_evening_view_desc: "傍晚时分的酒店门前与停车区域，氛围安静从容。",
         gal_flower_view_title: "花园迎宾一角",
@@ -864,8 +886,10 @@
         dest_title: "探索 Sandbox Hotel 周边",
         dest_sub: "泰国湾沿岸的千年古城，体验地道南泰文化",
         dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> 洛坤府在哪里？',
+        dest_where_body_short: "洛坤府是位于<strong>泰国南部</strong>泰国湾沿岸的历史名城，距离曼谷约 780 公里。它是泰国最古老的城市之一，氛围与拥挤的安达曼海海滨度假区截然不同。",
         dest_where_body: "洛坤府是泰国南部的一座城市，位于泰国湾沿岸，距曼谷约780公里。它是洛坤府府的首府，也是泰国有记录历史超过1000年的最古老城市之一。",
         dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> 为何值得前往洛坤府？',
+        dest_why_body_short: "洛坤府拥有真实的泰式文化、深厚的佛教遗产和轻松的本地氛围。这里坐落着瓦拍玛哈泰寺——泰国最重要的寺庙之一。",
         dest_why_body: "不同于泰南热门海滩度假区，洛坤府拥有地道的泰国文化、千年佛教遗产和轻松的本地生活气息。来这里可以参观帕玛哈塔寺、欣赏纳泰隆皮影戏，还能体验传统银器工艺。",
         dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> Sandbox Hotel 附近主要景点',
         dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> 如何前往洛坤府',
@@ -1037,6 +1061,35 @@
         notes: f.notes.value || ""
       };
     }
+    function validateBookingForm(form){
+      if(!form) return false;
+      const checkin = form.checkin;
+      const checkout = form.checkout;
+      const toDate = (value)=>{
+        const [y,m,d] = String(value || "").split("-").map(Number);
+        if(!y || !m || !d) return null;
+        return new Date(y, m - 1, d);
+      };
+      if(checkout){
+        checkout.setCustomValidity("");
+      }
+      const checkinDate = checkin ? toDate(checkin.value) : null;
+      const checkoutDate = checkout ? toDate(checkout.value) : null;
+      if(checkinDate && checkoutDate && checkoutDate <= checkinDate){
+        checkout.setCustomValidity(t("validation_checkout_after_checkin") || "Check-out must be after check-in.");
+      }
+      if(typeof form.reportValidity === "function"){
+        return form.reportValidity();
+      }
+      if(typeof form.checkValidity === "function"){
+        const valid = form.checkValidity();
+        if(!valid){
+          form.querySelector(":invalid")?.focus();
+        }
+        return valid;
+      }
+      return true;
+    }
     function buildMessage(d){
       const lines = [
         t("msg_title") || "Booking request – Sandbox Hotel",
@@ -1169,13 +1222,15 @@
       });
 
       const form = document.getElementById("bookingForm");
-      form.addEventListener("submit", async (e)=>{
+      form?.addEventListener("submit", async (e)=>{
         e.preventDefault();
+        if(!validateBookingForm(form)) return;
         const data = getFormData();
         await persistBookingLead(data);
         openLine(buildMessage(data), data, form);
       });
       document.getElementById("sendEmail")?.addEventListener("click", async ()=>{
+        if(!validateBookingForm(form)) return;
         const data = getFormData();
         await persistBookingLead(data);
         openEmail(buildMessage(data), data, document.getElementById("sendEmail"));
