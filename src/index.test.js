@@ -232,7 +232,7 @@ test("homepage above-the-fold promotes direct booking with clear CTAs, trust pro
   assert.ok(hero);
   assert.ok(hero?.querySelector(".heroCTA .btn.primary[href='#book'][data-i18n='cta_check_direct_rate']"));
   assert.ok(hero?.querySelector(".heroCTA .btn.secondary[href='tel:+66885783478'][data-i18n='cta_call_hotel']"));
-  assert.ok(hero?.querySelector(".heroDirectNote[data-i18n='hero_best_rate']"));
+  assert.ok(hero?.querySelector(".heroDirectNote[data-i18n='hero_direct_booking_benefit']"));
   assert.ok(hero?.querySelector(".heroReviewBadge[data-analytics='map']"));
   assert.equal(hero?.querySelectorAll(".heroProofList .heroProofItem").length, 3);
   assert.ok(document.querySelector(".trustStrip [data-i18n='trust_rooms']"));

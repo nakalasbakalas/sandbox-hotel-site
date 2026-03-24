@@ -23,6 +23,8 @@
       --radius-md:10px;
       --radius-lg:14px;
       --radius-xl:18px;
+      --radius-xxl:20px;
+      --radius-pill:999px;
       --radius:var(--radius-md);
       --radius2:var(--radius-md);
       --max:1200px;
@@ -42,7 +44,18 @@
       --surfacePad: clamp(18px, 2vw, 22px);
       --surfacePadSm: clamp(16px, 1.8vw, 18px);
       --heroMinHeight: min(62vh, 520px);
-      --heroPanelPad: clamp(16px, 1.8vw, 20px);
+      --heroNavOffset: 10px;
+      --heroMinHeightPhone: clamp(480px, 78vh, 620px);
+      --heroImgPositionDesktop: center 38%;
+      --navPrimaryCtaMinWidth: 136px;
+      --heroPrimaryCtaMinWidth: 190px;
+      --heroImgPositionPhone: 68% center;
+      --heroPanelMaxWidth: 560px;
+      --heroPanelWidth: 92vw;
+      --heroInnerPadBottom: clamp(24px, 3vw, 40px);
+      --heroOverlayPrimary: linear-gradient(90deg, rgba(10,11,14,.72) 0%, rgba(10,11,14,.48) 34%, rgba(10,11,14,.18) 58%, rgba(10,11,14,.06) 78%);
+      --heroOverlaySecondary: linear-gradient(to top, rgba(10,11,14,.58) 0%, rgba(10,11,14,.22) 36%, rgba(10,11,14,0) 76%);
+      --heroPanelPad: clamp(20px, 2vw, 26px);
       --heroInnerPad: clamp(18px, 2.4vw, 28px);
       --contentTightGap: 8px;
       --contentStackGap: 12px;
@@ -288,7 +301,7 @@
     *::-webkit-scrollbar-track{background: rgba(0,0,0,.08)}
     *::-webkit-scrollbar-thumb{
       background: linear-gradient(180deg, rgba(209,139,80,.80), rgba(183,106,43,.80));
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       border: 2px solid rgba(0,0,0,.08);
     }
 
@@ -423,17 +436,17 @@
       align-items:center;
       gap:6px;
       padding:4px 6px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       border:1px solid var(--controlBorder);
       background:var(--surfaceA);
     }
     .navLangCluster .flagItem{
       width:34px;
       height:34px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
     }
     .navPrimaryCta{
-      min-width:136px;
+      min-width:var(--navPrimaryCtaMinWidth);
       white-space:nowrap;
     }
     .navHamburger{
@@ -588,7 +601,7 @@
     .chip.primary{
       border:none;
       color:white;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       background: linear-gradient(135deg, rgba(183,106,43,.98), rgba(209,139,80,.92));
       box-shadow: var(--shadow-brand-md);
     }
@@ -729,7 +742,7 @@
     .badge{
       display:inline-flex; align-items:center; justify-content:center;
       padding:6px 10px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       border:1px solid var(--controlBorder);
       background: var(--surfaceB);
       color:var(--ink2);
@@ -747,7 +760,7 @@
       font-weight:900;
       color:var(--ink2);
       padding:0 6px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       background: var(--surfaceC);
       border:1px solid var(--controlBorder);
       white-space:nowrap;
@@ -783,14 +796,12 @@
       color:#fff;
       box-shadow: 0 28px 68px rgba(0,0,0,.18);
       overflow:hidden;
-      margin-top: calc(var(--nav-h) + 10px);
+      margin-top: calc(var(--nav-h) + var(--heroNavOffset));
     }
     .hero:before{
       content:"";
       position:absolute; inset:0; z-index:1;
-      background:
-        linear-gradient(90deg, rgba(10,11,14,.72) 0%, rgba(10,11,14,.48) 34%, rgba(10,11,14,.18) 58%, rgba(10,11,14,.06) 78%),
-        linear-gradient(to top, rgba(10,11,14,.58) 0%, rgba(10,11,14,.22) 36%, rgba(10,11,14,0) 76%);
+      background: var(--heroOverlayPrimary), var(--heroOverlaySecondary);
       pointer-events:none;
     }
     .heroBgPicture{
@@ -799,7 +810,7 @@
     }
     .heroBgImg{
       width:100%; height:100%;
-      object-fit:cover; object-position:center 38%;
+      object-fit:cover; object-position:var(--heroImgPositionDesktop);
       display:block;
     }
     .heroInner{
@@ -813,19 +824,19 @@
       justify-content:flex-end;
       align-items:flex-start;
       padding: var(--heroInnerPad);
-      padding-bottom: clamp(24px, 3vw, 40px);
+      padding-bottom: var(--heroInnerPadBottom);
       text-align:left;
     }
     .heroPanel{
-      width:min(560px, 92vw);
+      width:min(var(--heroPanelMaxWidth), var(--heroPanelWidth));
       margin:0;
-      border-radius: 20px;
+      border-radius: var(--radius-xxl);
       border:1px solid rgba(255,255,255,.12);
       background: linear-gradient(180deg, rgba(13,14,18,.68), rgba(13,14,18,.48));
       box-shadow: 0 20px 48px rgba(0,0,0,.26);
       -webkit-backdrop-filter: blur(16px) saturate(125%);
       backdrop-filter: blur(16px) saturate(125%);
-      padding: clamp(20px, 2vw, 26px);
+      padding: var(--heroPanelPad);
     }
     .heroKicker{
       display:inline-flex;
@@ -833,7 +844,7 @@
       margin:0 0 8px;
       padding:5px 10px;
       border:1px solid rgba(255,255,255,.12);
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       background: rgba(255,255,255,.05);
       color:rgba(255,255,255,.9);
       font-size:12px;
@@ -861,7 +872,7 @@
     }
     .heroCTA{margin-top:2px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:10px 12px}
     .heroCTA .btn{min-height:48px; padding:0 20px; font-size:14.5px; font-weight:800; letter-spacing:.01em}
-    .heroCTA .btn.primary{min-width:190px; box-shadow: var(--shadow-brand-xl)}
+    .heroCTA .btn.primary{min-width:var(--heroPrimaryCtaMinWidth); box-shadow: var(--shadow-brand-xl)}
     .heroCTA .btn.secondary{
       background: rgba(255,255,255,.10);
       border-color: rgba(255,255,255,.20);
@@ -909,7 +920,7 @@
       align-items:center;
       gap:8px;
       padding:8px 12px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.08);
       color:#fff;
@@ -921,7 +932,7 @@
       content:"";
       width:6px;
       height:6px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       flex:0 0 auto;
       background: color-mix(in oklab, var(--champagne2) 88%, white);
       box-shadow: 0 0 0 4px rgba(232,201,160,.12);
@@ -946,7 +957,7 @@
       align-items:center;
       gap:6px;
       padding:5px 10px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       border:1px solid var(--controlBorder);
       background:var(--surfaceA);
       white-space:nowrap;
@@ -1242,7 +1253,7 @@
       display:inline-flex; align-items:center; justify-content:center;
       min-height:32px;
       padding:6px 14px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       border:1px solid rgba(168,101,42,.15);
       background: rgba(168,101,42,.05);
       color: var(--ink2);
@@ -1351,7 +1362,7 @@
     }
     .galNavBtn{
       width:38px; height:38px;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
       border:1px solid var(--controlBorder);
       background: var(--surfaceB);
       color: var(--ink2);
@@ -1372,7 +1383,7 @@
     .galDots{display:flex; align-items:center; justify-content:center; gap:6px; flex-wrap:wrap}
     .galDot{
       width:8px; height:8px;
-      border-radius:999px;
+      border-radius:var(--radius-pill);
       border:1px solid var(--controlBorder);
       background: var(--surfaceD);
       cursor:pointer;
@@ -1680,7 +1691,7 @@
     html[data-compact="true"] .navLinks .chip.primary{
       min-height:40px;
       padding:10px 12px;
-      border-radius: 999px;
+      border-radius: var(--radius-pill);
     }
 /* Phone layout (compact + conversion-focused) */
     html[data-device="phone"] .nav{
@@ -1699,11 +1710,11 @@
     }
 
     html[data-device="phone"] .hero{
-      min-height: clamp(480px, 78vh, 620px);
+      min-height: var(--heroMinHeightPhone);
       border-radius: var(--radius-xl);
     }
     html[data-device="phone"] .heroBgImg{
-      object-position: 68% center;
+      object-position: var(--heroImgPositionPhone);
     }
     html[data-device="phone"] .heroInner{
       padding: clamp(14px, 4vw, 22px) 14px;
