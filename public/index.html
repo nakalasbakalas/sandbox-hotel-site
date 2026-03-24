@@ -306,10 +306,21 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <nav class="navLinks" aria-label="Primary">
         <span class="navSupport hideMobile" data-i18n="nav_support">Best Rate Direct</span>
-        <a class="navLineBtn" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Contact us on LINE (opens in new tab)" data-analytics="line">
+        <div class="navLangCluster hideMobile" role="group" aria-label="Language switcher">
+          <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
+            <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+          </button>
+          <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
+            <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
+          </button>
+          <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
+            <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
+          </button>
+        </div>
+        <a class="navLineBtn hideMobile" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Message Sandbox Hotel on LINE (opens in new tab)" data-analytics="line">
           <span class="navLineIcon" aria-hidden="true">💬</span><span data-i18n="nav_line_cta">LINE</span>
         </a>
-        <a class="chip primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
+        <a class="chip primary navPrimaryCta" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Direct</a>
 
         <details class="navGroup">
           <summary aria-label="Open site navigation menu">
@@ -328,6 +339,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </div>
             <div class="navPanelDivider"></div>
+            <a class="chip primary" href="#book" data-i18n="nav_book">Book Direct</a>
+            <a class="chip" href="tel:+66885783478" data-i18n="nav_call_hotel" data-analytics="call">Call Hotel</a>
+            <a class="chip" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-i18n="nav_line_chat" data-analytics="line">Message on LINE</a>
+
+            <div class="navPanelDivider"></div>
             <a class="chip" href="#rooms" data-i18n="nav_rooms">Rooms</a>
             <a class="chip" href="#offers" data-i18n="nav_offers">Offers</a>
             <a class="chip" href="#amenities" data-i18n="nav_amenities">Amenities</a>
@@ -338,16 +354,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
             <div class="navPanelDivider"></div>
 
-            <div class="navPanelLang">
-              <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
-                <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
-              </button>
-              <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
-                <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
-              </button>
-              <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
-                <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
-              </button>
+            <div class="navPanelLangBlock">
+              <span class="navPanelLabel" data-i18n="nav_language">Language</span>
+              <div class="navPanelLang">
+                <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
+                  <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+                </button>
+                <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
+                  <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
+                </button>
+                <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
+                  <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
+                </button>
+              </div>
             </div>
 
             <!-- Theme toggle -->
@@ -381,27 +400,38 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </picture>
         <div class="heroInner">
           <div class="heroPanel">
-            <p class="heroKicker" data-i18n="hero_kicker_short">Sandbox Hotel • Direct Booking</p>
-            <h1 class="heroTitle" data-i18n-html="hero_title">Your comfortable base<br>in Nakhon Si Thammarat</h1>
-            <p class="heroSub" data-i18n="hero_sub_short">Spacious rooms, easy direct booking, and friendly service for every kind of stay.</p>
+            <p class="heroKicker" data-i18n="hero_kicker_short">Sandbox Hotel • Boutique stay in Nakhon Si Thammarat</p>
+            <h1 class="heroTitle" data-i18n-html="hero_title">Calm, spacious stays<br>in Nakhon Si Thammarat</h1>
+            <p class="heroSub" data-i18n="hero_sub_short">A quiet boutique hotel with roomy comfort, easy direct booking, and convenient city access.</p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call Now</a>
-              <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">Explore Rooms →</a>
+              <a class="btn primary" href="#book" data-i18n="cta_check_direct_rate" data-analytics="book-now">Check Direct Rate</a>
+              <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_hotel" data-analytics="call">Call Hotel</a>
+              <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">View Rooms →</a>
             </div>
-            <a class="heroReviewBadge" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-analytics="map">
-              <span class="heroReviewScore" data-i18n-html="trust_rating">4.8</span>
-              <span class="heroReviewStars" aria-hidden="true">★★★★★</span>
-              <span class="heroReviewLabel" data-i18n="trust_meta">Based on Google Maps reviews</span>
-            </a>
+            <p class="heroDirectNote" data-i18n="hero_best_rate">Best rate when you book direct — no middleman, no mark-up.</p>
+            <div class="heroTrustRow">
+              <a class="heroReviewBadge" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-analytics="map">
+                <span class="heroReviewScore" data-i18n-html="trust_rating">4.8</span>
+                <span class="heroReviewStars" aria-hidden="true">★★★★★</span>
+                <span class="heroReviewLabel" data-i18n="trust_meta">Based on Google Maps reviews</span>
+              </a>
+              <p class="heroContactHint" data-i18n="hero_contact_hint">Book direct by phone or LINE for the fastest confirmation.</p>
+            </div>
+            <div class="heroProofList" aria-label="Stay highlights">
+              <span class="heroProofItem" data-i18n="hero_proof_rooms">Spacious 28–32 m² rooms</span>
+              <span class="heroProofItem" data-i18n="hero_proof_parking">Parking + fast Wi‑Fi</span>
+              <span class="heroProofItem" data-i18n="hero_proof_location">Quiet comfort with easy city access</span>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="trustStrip" aria-label="Hotel highlights">
-        <span class="trustItem"><span class="trustIcon" aria-hidden="true">✓</span> <span data-i18n="trust_direct">Direct Booking</span></span>
-        <span class="trustItem"><span class="trustIcon" aria-hidden="true">🤫</span> <span data-i18n="trust_quiet">Quiet Rooms</span></span>
-        <span class="trustItem"><span class="trustIcon" aria-hidden="true">📶</span> <span data-i18n="trust_wifi">Free Wi‑Fi</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">✓</span> <span data-i18n="trust_direct">Best rate when you book direct</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">▢</span> <span data-i18n="trust_rooms">Spacious rooms</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">🤫</span> <span data-i18n="trust_quiet">Quiet rooms for restful stays</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">📶</span> <span data-i18n="trust_wifi">Fast Wi‑Fi</span></span>
         <span class="trustItem"><span class="trustIcon" aria-hidden="true">🅿</span> <span data-i18n="trust_parking">Parking</span></span>
       </div>
     </section>

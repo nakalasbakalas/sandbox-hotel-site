@@ -402,7 +402,7 @@
       color:var(--ink2);
     }
     .brand small{display:block; margin-top:0; font-size:12px; color:color-mix(in oklab, var(--muted) 88%, white); opacity:.9}
-    .navLinks{display:flex; gap:10px; flex-wrap:wrap; align-items:center; justify-content:flex-end}
+    .navLinks{display:flex; gap:8px; flex-wrap:nowrap; align-items:center; justify-content:flex-end; min-width:0}
     .navSupport{
       font-size:11px;
       font-weight:800;
@@ -417,6 +417,24 @@
     html[data-theme="light"] .navPanelBrandCopy{
       color:var(--muted);
       opacity:1;
+    }
+    .navLangCluster{
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      padding:4px 6px;
+      border-radius:999px;
+      border:1px solid var(--controlBorder);
+      background:var(--surfaceA);
+    }
+    .navLangCluster .flagItem{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+    }
+    .navPrimaryCta{
+      min-width:136px;
+      white-space:nowrap;
     }
     .navHamburger{
       display:inline-flex; align-items:center; justify-content:center;
@@ -449,6 +467,17 @@
       gap:6px;
       padding:4px 0;
     }
+    .navPanelLangBlock{
+      display:grid;
+      gap:8px;
+    }
+    .navPanelLabel{
+      font-size:11px;
+      font-weight:800;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
     .navGroup{
       position:relative;
     }
@@ -459,6 +488,10 @@
     }
     .navGroup summary::-webkit-details-marker{display:none}
     .navGroup summary .navHamburger{pointer-events:none}
+    .navGroup[open] .navHamburger{
+      background: var(--surfaceC);
+      border-color: var(--controlBorderStrong);
+    }
     /* Reset details styling for nav */
     .navGroup{border:none; background:none; padding:0; margin:0; border-radius:0}
     .navPanel{
@@ -750,14 +783,14 @@
       color:#fff;
       box-shadow: 0 28px 68px rgba(0,0,0,.18);
       overflow:hidden;
-      margin-top: var(--nav-h);
+      margin-top: calc(var(--nav-h) + 10px);
     }
     .hero:before{
       content:"";
       position:absolute; inset:0; z-index:1;
       background:
-        linear-gradient(90deg, rgba(10,11,14,.52) 0%, rgba(10,11,14,.20) 45%, rgba(10,11,14,.04) 75%),
-        linear-gradient(to top, rgba(10,11,14,.50) 0%, rgba(10,11,14,.14) 40%, rgba(10,11,14,0) 75%);
+        linear-gradient(90deg, rgba(10,11,14,.72) 0%, rgba(10,11,14,.48) 34%, rgba(10,11,14,.18) 58%, rgba(10,11,14,.06) 78%),
+        linear-gradient(to top, rgba(10,11,14,.58) 0%, rgba(10,11,14,.22) 36%, rgba(10,11,14,0) 76%);
       pointer-events:none;
     }
     .heroBgPicture{
@@ -766,11 +799,12 @@
     }
     .heroBgImg{
       width:100%; height:100%;
-      object-fit:cover; object-position:center 35%;
+      object-fit:cover; object-position:center 38%;
       display:block;
     }
     .heroInner{
       position:relative; z-index:2;
+      width:100%;
       max-width:var(--max);
       margin:0;
       min-height:100%;
@@ -779,19 +813,19 @@
       justify-content:flex-end;
       align-items:flex-start;
       padding: var(--heroInnerPad);
-      padding-bottom: clamp(18px, 2.4vw, 32px);
+      padding-bottom: clamp(24px, 3vw, 40px);
       text-align:left;
     }
     .heroPanel{
-      width:min(460px, 88vw);
-      margin:0 0 6px 0;
-      border-radius: var(--radius-lg);
+      width:min(560px, 92vw);
+      margin:0;
+      border-radius: 20px;
       border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(13,14,18,.58), rgba(13,14,18,.40));
-      box-shadow: 0 18px 42px rgba(0,0,0,.22);
+      background: linear-gradient(180deg, rgba(13,14,18,.68), rgba(13,14,18,.48));
+      box-shadow: 0 20px 48px rgba(0,0,0,.26);
       -webkit-backdrop-filter: blur(16px) saturate(125%);
       backdrop-filter: blur(16px) saturate(125%);
-      padding: var(--heroPanelPad);
+      padding: clamp(20px, 2vw, 26px);
     }
     .heroKicker{
       display:inline-flex;
@@ -818,16 +852,16 @@
       text-wrap:balance;
     }
     .heroSub{
-      margin:0 0 14px;
-      max-width:36ch;
+      margin:0 0 18px;
+      max-width:40ch;
       color:rgba(255,255,255,.90);
-      font-size:15px;
-      line-height:1.56;
+      font-size:15.5px;
+      line-height:1.6;
       font-weight:500;
     }
-    .heroCTA{margin-top:2px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:10px}
+    .heroCTA{margin-top:2px; display:flex; align-items:center; justify-content:flex-start; flex-wrap:wrap; gap:10px 12px}
     .heroCTA .btn{min-height:48px; padding:0 20px; font-size:14.5px; font-weight:800; letter-spacing:.01em}
-    .heroCTA .btn.primary{min-width:170px; box-shadow: var(--shadow-brand-xl)}
+    .heroCTA .btn.primary{min-width:190px; box-shadow: var(--shadow-brand-xl)}
     .heroCTA .btn.secondary{
       background: rgba(255,255,255,.10);
       border-color: rgba(255,255,255,.20);
@@ -842,6 +876,56 @@
       padding:6px 0;
       color:rgba(255,255,255,.9);
     }
+    .heroDirectNote{
+      margin:14px 0 0;
+      color: color-mix(in oklab, var(--champagne2) 90%, white);
+      font-size:13px;
+      line-height:1.55;
+      font-weight:700;
+    }
+    .heroTrustRow{
+      display:flex;
+      align-items:center;
+      gap:10px 14px;
+      flex-wrap:wrap;
+      margin-top:14px;
+    }
+    .heroContactHint{
+      margin:0;
+      max-width:28ch;
+      color:rgba(255,255,255,.82);
+      font-size:12.5px;
+      line-height:1.55;
+      font-weight:600;
+    }
+    .heroProofList{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-top:14px;
+    }
+    .heroProofItem{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.08);
+      color:#fff;
+      font-size:12.5px;
+      line-height:1.35;
+      font-weight:700;
+    }
+    .heroProofItem::before{
+      content:"";
+      width:6px;
+      height:6px;
+      border-radius:999px;
+      flex:0 0 auto;
+      background: color-mix(in oklab, var(--champagne2) 88%, white);
+      box-shadow: 0 0 0 4px rgba(232,201,160,.12);
+    }
 
     /* Trust strip below hero */
     .trustStrip{
@@ -850,8 +934,8 @@
       justify-content:center;
       flex-wrap:wrap;
       max-width:100%;
-      gap:6px 10px;
-      padding:14px 4px 2px;
+      gap:10px;
+      padding:16px 4px 2px;
       color:var(--muted);
       font-size:12.5px;
       font-weight:600;
@@ -1604,12 +1688,22 @@
       min-height:56px;
       padding-top: calc(8px + env(safe-area-inset-top));
     }
+    html[data-device="phone"] .navLinks{
+      gap:6px;
+    }
     html[data-device="phone"] .logo{ width:44px; height:44px; }
     html[data-device="phone"] .brand small{ display:none; }
+    html[data-device="phone"] .navPrimaryCta{
+      min-width:auto;
+      padding:0 14px;
+    }
 
     html[data-device="phone"] .hero{
-      min-height: clamp(400px, 70vh, 560px);
+      min-height: clamp(480px, 78vh, 620px);
       border-radius: var(--radius-xl);
+    }
+    html[data-device="phone"] .heroBgImg{
+      object-position: 68% center;
     }
     html[data-device="phone"] .heroInner{
       padding: clamp(14px, 4vw, 22px) 14px;
@@ -1640,6 +1734,28 @@
       width:100%;
       justify-content:flex-start;
       padding-top:2px;
+    }
+    html[data-device="phone"] .heroDirectNote{
+      font-size:12.5px;
+    }
+    html[data-device="phone"] .heroTrustRow{
+      display:grid;
+      gap:10px;
+      align-items:start;
+    }
+    html[data-device="phone"] .heroContactHint{
+      max-width:none;
+    }
+    html[data-device="phone"] .heroProofList{
+      display:grid;
+      grid-template-columns:1fr;
+    }
+    html[data-device="phone"] .heroProofItem{
+      width:100%;
+      justify-content:flex-start;
+    }
+    html[data-device="phone"] .trustStrip{
+      justify-content:flex-start;
     }
 
     html[data-device="phone"] .btn{
@@ -1834,7 +1950,6 @@
     /* ---------- Hero social proof / review badge ---------- */
     .heroReviewBadge{
       display:inline-flex; align-items:center; gap:8px;
-      margin-top:14px;
       padding:8px 14px;
       border-radius:var(--radius-sm);
       background: rgba(255,255,255,.10);

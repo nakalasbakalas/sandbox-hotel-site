@@ -217,6 +217,27 @@ test("homepage locale packs include translated location title and footer languag
   );
 });
 
+test("homepage above-the-fold promotes direct booking with clear CTAs, trust proof, and desktop language controls", () => {
+  const dom = new JSDOM(homepageHtml);
+  const { document } = dom.window;
+
+  const navLangButtons = document.querySelectorAll(".navLangCluster .langBtn");
+  assert.equal(navLangButtons.length, 3);
+  assert.ok(document.querySelector(".navPrimaryCta[href='#book']"));
+  assert.ok(document.querySelector(".navPanelLabel[data-i18n='nav_language']"));
+  assert.ok(document.querySelector(".navPanel a[data-i18n='nav_call_hotel'][href='tel:+66885783478']"));
+  assert.ok(document.querySelector(".navPanel a[data-i18n='nav_line_chat']"));
+
+  const hero = document.querySelector(".hero");
+  assert.ok(hero);
+  assert.ok(hero?.querySelector(".heroCTA .btn.primary[href='#book'][data-i18n='cta_check_direct_rate']"));
+  assert.ok(hero?.querySelector(".heroCTA .btn.secondary[href='tel:+66885783478'][data-i18n='cta_call_hotel']"));
+  assert.ok(hero?.querySelector(".heroDirectNote[data-i18n='hero_best_rate']"));
+  assert.ok(hero?.querySelector(".heroReviewBadge[data-analytics='map']"));
+  assert.equal(hero?.querySelectorAll(".heroProofList .heroProofItem").length, 3);
+  assert.ok(document.querySelector(".trustStrip [data-i18n='trust_rooms']"));
+});
+
 test("homepage lower sections stay as standalone premium blocks instead of one shared grid", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
