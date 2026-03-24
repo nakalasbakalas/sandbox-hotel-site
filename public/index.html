@@ -49,18 +49,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:description" id="twitterDescription" content="จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ยืนยันรวดเร็วผ่านโทรหรือ LINE">
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
-  <!-- Preload hero -->
-    <link rel="preload" as="image"
-      href="assets/images/logo/logo-128.png"
-      imagesrcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w"
-      imagesizes="56px"
-      fetchpriority="high">
+  <!-- Preload: hero banner first (LCP element) at high priority; logo at auto -->
   <link rel="preload" as="image"
         href="images/Sandbox-Hotel-Hero-Banner.webp"
         imagesrcset="images/Sandbox-Hotel-Hero-Banner-720.webp 720w, images/Sandbox-Hotel-Hero-Banner.webp 1600w"
         imagesizes="100vw"
         type="image/webp"
         fetchpriority="high">
+  <link rel="preload" as="image"
+      href="assets/images/logo/logo-128.png"
+      imagesrcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w"
+      imagesizes="56px">
   <!-- DNS prefetch for third-party origins -->
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -296,7 +295,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Sandbox Hotel home">
         <div class="logo">
-          <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="56px" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" fetchpriority="high" decoding="async">
+          <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="56px" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" decoding="async">
         </div>
         <div class="brandText">
           <span class="brandName">Sandbox Hotel</span>
