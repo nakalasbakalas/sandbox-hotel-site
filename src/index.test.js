@@ -6,8 +6,16 @@ import { JSDOM } from "jsdom";
 import worker, { handleInboundEmail } from "./index.js";
 
 const homepageHtml = fs.readFileSync(new URL("../public/index.html", import.meta.url), "utf8");
-const homepageJs = fs.readFileSync(new URL("../public/assets/js/home.js", import.meta.url), "utf8");
-const homepageCss = fs.readFileSync(new URL("../public/assets/css/home.css", import.meta.url), "utf8");
+const homepageJs = [
+  "../public/assets/js/components/device-detect.js",
+  "../public/assets/js/components/gallery-carousel.js",
+  "../public/assets/js/components/header-scroll.js",
+  "../public/assets/js/home.js",
+].map((path) => fs.readFileSync(new URL(path, import.meta.url), "utf8")).join("\n");
+const homepageCss = [
+  "../public/assets/css/home.css",
+  "../public/assets/css/components/booking-form.css",
+].map((path) => fs.readFileSync(new URL(path, import.meta.url), "utf8")).join("\n");
 
 function createFakeDb({ duplicateLead = false } = {}) {
   let lastLeadId = 0;
@@ -166,6 +174,23 @@ test("booking ingest skips the acknowledgement when contact details do not conta
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("homepage loads extracted homepage component assets before the core boot script", () => {
+  const dom = new JSDOM(homepageHtml);
+  const styles = [...dom.window.document.querySelectorAll('link[rel="stylesheet"]')].map((link) => link.getAttribute("href"));
+  const scripts = [...dom.window.document.querySelectorAll('script[defer][src]')].map((script) => script.getAttribute("src"));
+
+  assert.ok(styles.includes("assets/css/home.css"));
+  assert.ok(styles.includes("assets/css/components/booking-form.css"));
+  assert.ok(styles.indexOf("assets/css/home.css") < styles.indexOf("assets/css/components/booking-form.css"));
+
+  assert.ok(scripts.includes("assets/js/components/device-detect.js"));
+  assert.ok(scripts.includes("assets/js/components/gallery-carousel.js"));
+  assert.ok(scripts.includes("assets/js/components/header-scroll.js"));
+  assert.ok(scripts.indexOf("assets/js/components/device-detect.js") < scripts.indexOf("assets/js/home.js"));
+  assert.ok(scripts.indexOf("assets/js/components/gallery-carousel.js") < scripts.indexOf("assets/js/home.js"));
+  assert.ok(scripts.indexOf("assets/js/components/header-scroll.js") < scripts.indexOf("assets/js/home.js"));
 });
 
 test("homepage locale packs include translated location title and footer language buttons render flags only", () => {
