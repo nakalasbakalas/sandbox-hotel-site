@@ -1960,7 +1960,7 @@
       gap: 6px;
     }
 
-    /* 6b. Hide LINE button on phone — .navLineBtn overrides .hideMobile due to source order */
+    /* 6b. Hide LINE button on phone — redundant with the fixed .hideMobile rule */
     html[data-device="phone"] .navLineBtn{
       display: none;
     }
@@ -2187,7 +2187,7 @@
       opacity: 0.75;
     }
 
-    /* -------- Extra-small phone (320px) — prevent overflow -------- */
+    /* -------- Extra-small phone (≤359px) — prevent overflow -------- */
     @media (max-width: 359px){
       html[data-device="phone"] .navPrimaryCta{
         padding: 0 10px;
