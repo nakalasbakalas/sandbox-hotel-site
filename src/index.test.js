@@ -258,7 +258,10 @@ test("homepage gallery uses the patch 1 image set with responsive sources", () =
 test("homepage runtime locale keys cover every i18n hook used in the HTML", () => {
   const htmlKeys = [...homepageHtml.matchAll(/data-i18n(?:-html|-ph)?="([^"]+)"/g)].map((match) => match[1]);
   const uniqueKeys = [...new Set(htmlKeys)];
-  const missingKeys = uniqueKeys.filter((key) => !new RegExp(`\\b${key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s*:`).test(homepageJs));
+  const missingKeys = uniqueKeys.filter((key) => {
+    const escapedKey = key.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    return !new RegExp(`[\\{,\\s]${escapedKey}\\s*:`, "m").test(homepageJs);
+  });
 
   assert.deepEqual(missingKeys, []);
 });

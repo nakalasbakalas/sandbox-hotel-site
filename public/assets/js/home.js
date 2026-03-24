@@ -1065,17 +1065,28 @@
       if(!form) return false;
       const checkin = form.checkin;
       const checkout = form.checkout;
+      const toDate = (value)=>{
+        const [y,m,d] = String(value || "").split("-").map(Number);
+        if(!y || !m || !d) return null;
+        return new Date(y, m - 1, d);
+      };
       if(checkout){
         checkout.setCustomValidity("");
       }
-      if(checkin && checkout && checkin.value && checkout.value && checkout.value <= checkin.value){
+      const checkinDate = checkin ? toDate(checkin.value) : null;
+      const checkoutDate = checkout ? toDate(checkout.value) : null;
+      if(checkinDate && checkoutDate && checkoutDate <= checkinDate){
         checkout.setCustomValidity(t("validation_checkout_after_checkin") || "Check-out must be after check-in.");
       }
       if(typeof form.reportValidity === "function"){
         return form.reportValidity();
       }
       if(typeof form.checkValidity === "function"){
-        return form.checkValidity();
+        const valid = form.checkValidity();
+        if(!valid){
+          form.querySelector(":invalid")?.focus();
+        }
+        return valid;
       }
       return true;
     }
