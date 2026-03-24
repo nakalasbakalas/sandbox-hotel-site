@@ -251,6 +251,32 @@ test("homepage lower sections stay as standalone premium blocks instead of one s
   assert.ok(document.querySelector("#faq .faqCTAActions"));
 });
 
+test("homepage stay-selling sections add room comparison, grouped amenities, and action-led offers", () => {
+  const dom = new JSDOM(homepageHtml);
+  const { document } = dom.window;
+
+  assert.equal(document.querySelectorAll("#rooms .roomsCompare .compareCue").length, 3);
+  assert.equal(document.querySelectorAll("#rooms .roomCard").length, 2);
+  assert.equal(document.querySelectorAll("#rooms .roomCard .roomDetail").length, 6);
+  assert.equal(document.querySelectorAll("#amenities .amenityGroup").length, 2);
+  assert.equal(document.querySelectorAll("#amenities .amenityGroup:first-of-type .amenity-card").length, 4);
+  assert.equal(document.querySelectorAll("#amenities .amenityGroup:last-of-type .amenity-card").length, 3);
+  assert.ok(document.querySelector("#offers .offerActionPanel .btn.primary[href='#book']"));
+});
+
+test("homepage main stay-selling flow sequences rooms through booking in the intended order", () => {
+  const dom = new JSDOM(homepageHtml);
+  const orderedIds = [...dom.window.document.querySelectorAll("main > section[id]")].map((section) => section.id);
+
+  const expectedSequence = ["rooms", "amenities", "offers", "gallery", "reviews", "faq", "book"];
+  const sequenceIndexes = expectedSequence.map((id) => orderedIds.indexOf(id));
+
+  sequenceIndexes.forEach((index) => assert.notEqual(index, -1));
+  for (let i = 1; i < sequenceIndexes.length; i += 1) {
+    assert.ok(sequenceIndexes[i - 1] < sequenceIndexes[i], `${expectedSequence[i - 1]} should come before ${expectedSequence[i]}`);
+  }
+});
+
 test("homepage location section keeps the contact card and map side by side until phone widths", () => {
   const dom = new JSDOM(homepageHtml);
   const locationGrid = dom.window.document.querySelector("#location .locationGrid");

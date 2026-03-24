@@ -442,7 +442,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="head">
           <div>
             <h2 data-i18n="rooms_title">Rooms</h2>
-            <p data-i18n-html="rooms_sub">Compare our room types and select the best fit for your stay.</p>
+            <p data-i18n-html="rooms_sub">Compare layouts, bed setup, and stay style before you send your dates.</p>
+          </div>
+        </div>
+
+        <div class="roomsCompare" aria-label="Room comparison cues">
+          <div class="compareCue">
+            <span class="compareCueIcon" aria-hidden="true">↔</span>
+            <span data-i18n="rooms_compare_same">Both room types include 28–32 m² of space, fast Wi‑Fi, A/C, hot shower, and guest parking.</span>
+          </div>
+          <div class="compareCue">
+            <span class="compareCueIcon" aria-hidden="true">🛏️</span>
+            <span data-i18n="rooms_compare_twin">Choose Twin for two separate beds and an easier shared stay.</span>
+          </div>
+          <div class="compareCue">
+            <span class="compareCueIcon" aria-hidden="true">♥</span>
+            <span data-i18n="rooms_compare_double">Choose Double for one large bed and a calmer couple-friendly setup.</span>
           </div>
         </div>
 
@@ -453,6 +468,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="roomHeroWrap">
+                  <div class="roomHeroBadge" data-i18n="room_twin_image_badge">Best for sharing</div>
                   <div class="mediaWrap">
                     <picture>
                       <source type="image/webp"
@@ -488,6 +504,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div>
                   <span class="roomType" data-i18n="room_type_label">Room Type</span>
                   <h3 data-i18n="room_standard_twin_title">Standard Twin</h3>
+                  <p class="roomLead" data-i18n="room_twin_intro">Two separate beds, a practical desk setup, and easy comfort for short city stays.</p>
                 </div>
                 <ul class="roomMeta">
                   <li class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</li>
@@ -495,16 +512,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
 
-                <hr class="roomDivider">
+                <div class="roomDetailsGrid">
+                  <div class="roomDetail">
+                    <span class="roomDetailLabel" data-i18n="room_suits_label">Who it suits</span>
+                    <strong data-i18n="room_twin_suits">Friends, colleagues, and solo travellers</strong>
+                  </div>
+                  <div class="roomDetail">
+                    <span class="roomDetailLabel" data-i18n="room_layout_label">Layout</span>
+                    <strong data-i18n="room_twin_layout">Two twin beds, work desk, private bathroom</strong>
+                  </div>
+                  <div class="roomDetail">
+                    <span class="roomDetailLabel" data-i18n="room_best_use_label">Best use</span>
+                    <strong data-i18n="room_twin_use">Easy to share without giving up personal space</strong>
+                  </div>
+                </div>
 
-                <p class="roomBestFor" data-i18n-html="room_twin_best_for"><strong>Best for:</strong> Solo guests, friends, or short business stays</p>
-
-                <ul class="roomAmenities" role="list">
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg> <span data-i18n="bullet_desk">Work desk + chair</span></li>
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> <span data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</span></li>
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
-                </ul>
+                <div class="roomAmenityBlock">
+                  <p class="roomAmenityLabel" data-i18n="room_includes_label">Key in-room amenities</p>
+                  <ul class="roomAmenities" role="list">
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/></svg> <span data-i18n="bullet_desk">Work desk + chair</span></li>
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> <span data-i18n="bullet_quiet_side">Quiet-side allocation (on request)</span></li>
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
+                  </ul>
+                </div>
 
                 <div class="priceBox">
                   <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
@@ -522,6 +553,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="roomCardInner">
               <div class="roomMedia">
                 <div class="roomHeroWrap">
+                  <div class="roomHeroBadge" data-i18n="room_double_image_badge">Best for one-bed stays</div>
                   <div class="mediaWrap">
                     <picture>
                       <img class="mediaImg roomHeroImg" id="doubleHero" src="assets/images/rooms/sandbox-hotel-nakhon-si-thammarat-Double-bed.png" srcset="assets/images/rooms/sandbox-hotel-nakhon-si-thammarat-Double-bed.png 1536w" sizes="(max-width:980px) 100vw, 50vw" alt="Standard Double bedroom with a large bed and soft lighting" loading="lazy" decoding="async" width="1536" height="1024">
@@ -547,6 +579,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <div>
                   <span class="roomType" data-i18n="room_type_label">Room Type</span>
                   <h3 data-i18n="room_standard_double_title">Standard Double</h3>
+                  <p class="roomLead" data-i18n="room_double_intro">A roomy one-bed layout for couples or solo guests who want a more relaxed setup.</p>
                 </div>
                 <ul class="roomMeta">
                   <li class="tag" data-i18n="tag_1_double_bed">1 Double Bed</li>
@@ -554,16 +587,30 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                   <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
 
-                <hr class="roomDivider">
+                <div class="roomDetailsGrid">
+                  <div class="roomDetail">
+                    <span class="roomDetailLabel" data-i18n="room_suits_label">Who it suits</span>
+                    <strong data-i18n="room_double_suits">Couples and solo guests who prefer one bed</strong>
+                  </div>
+                  <div class="roomDetail">
+                    <span class="roomDetailLabel" data-i18n="room_layout_label">Layout</span>
+                    <strong data-i18n="room_double_layout">One double bed, work desk, private bathroom</strong>
+                  </div>
+                  <div class="roomDetail">
+                    <span class="roomDetailLabel" data-i18n="room_best_use_label">Best use</span>
+                    <strong data-i18n="room_double_use">Simple, comfortable rest after a day in town</strong>
+                  </div>
+                </div>
 
-                <p class="roomBestFor" data-i18n-html="room_double_best_for"><strong>Best for:</strong> Couples or comfortable two-person stays</p>
-
-                <ul class="roomAmenities" role="list">
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg> <span data-i18n="bullet_comfort_double_bed">Comfortable double bed</span></li>
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span data-i18n="bullet_great_for_couples">Great for couples</span></li>
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
-                  <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
-                </ul>
+                <div class="roomAmenityBlock">
+                  <p class="roomAmenityLabel" data-i18n="room_includes_label">Key in-room amenities</p>
+                  <ul class="roomAmenities" role="list">
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 4v16"/><path d="M2 8h18a2 2 0 0 1 2 2v10"/><path d="M2 17h20"/><path d="M6 8v9"/></svg> <span data-i18n="bullet_comfort_double_bed">Comfortable double bed</span></li>
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg> <span data-i18n="bullet_great_for_couples">Great for couples</span></li>
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v1m0 16v1m8.66-13.66l-.71.71M4.05 19.95l-.71.71M21 12h-1M4 12H3m16.66 7.66l-.71-.71M4.05 4.05l-.71-.71"/><circle cx="12" cy="12" r="4"/></svg> <span data-i18n="bullet_ac_hot_shower">AC + hot shower</span></li>
+                    <li class="roomAmenity"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0M1.42 9a16 16 0 0 1 21.16 0M8.53 16.11a6 6 0 0 1 6.95 0M12 20h.01"/></svg> <span data-i18n="bullet_fast_wifi">Fast Wi-Fi</span></li>
+                  </ul>
+                </div>
 
                 <div class="priceBox">
                   <span class="fine" data-i18n="price_rates_on_request">Get today's exact rate →</span>
@@ -584,175 +631,124 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
+    <!-- AMENITIES -->
+    <section class="section" id="amenities">
+      <div class="card altHot pad amenitiesSectionCard">
+        <div class="head">
+          <div>
+            <h2 data-i18n="amen_title">Amenities that make the stay easy</h2>
+            <p data-i18n="amen_sub">Practical essentials first, then the extras guests appreciate most.</p>
+          </div>
+        </div>
+
+        <div class="amenityGroups">
+          <article class="amenityGroup">
+            <div class="amenityGroupHeader">
+              <span class="amenityGroupEyebrow" data-i18n="amen_group_essentials_eyebrow">Most-used essentials</span>
+              <h3 data-i18n="amen_group_essentials_title">What most guests ask about first</h3>
+              <p data-i18n="amen_group_essentials_desc">Clear, reliable basics for arrival, work, and rest.</p>
+            </div>
+            <div class="amenities-grid" aria-label="Essential amenities">
+              <article class="amenity-card">
+                <div class="amenity-icon" aria-hidden="true"><span class="glyph">Wi‑Fi</span></div>
+                <span class="amenityBadge" data-i18n="amen_badge_must_have">Must-have</span>
+                <h3 data-i18n="amen_wifi_title">Fast Wi‑Fi</h3>
+                <p data-i18n="amen_wifi_desc">Reliable enough for work, streaming, and everyday use across the hotel.</p>
+              </article>
+              <article class="amenity-card">
+                <div class="amenity-icon" aria-hidden="true"><span class="glyph">P</span></div>
+                <span class="amenityBadge" data-i18n="amen_badge_must_have">Must-have</span>
+                <h3 data-i18n="amen_parking_title">Guest parking</h3>
+                <p data-i18n="amen_parking_desc">On-site parking for guests, subject to availability.</p>
+              </article>
+              <article class="amenity-card">
+                <div class="amenity-icon" aria-hidden="true"><span class="glyph">A/C</span></div>
+                <span class="amenityBadge" data-i18n="amen_badge_must_have">Must-have</span>
+                <h3 data-i18n="amen_ac_title">Air conditioning</h3>
+                <p data-i18n="amen_ac_desc">Each room has its own A/C for steady comfort.</p>
+              </article>
+              <article class="amenity-card">
+                <div class="amenity-icon" aria-hidden="true"><span class="glyph">HOT</span></div>
+                <span class="amenityBadge" data-i18n="amen_badge_must_have">Must-have</span>
+                <h3 data-i18n="amen_hot_shower_title">Hot shower</h3>
+                <p data-i18n="amen_hot_shower_desc">Private bathrooms with a dependable hot shower after travel.</p>
+              </article>
+            </div>
+          </article>
+
+          <article class="amenityGroup">
+            <div class="amenityGroupHeader">
+              <span class="amenityGroupEyebrow" data-i18n="amen_group_extras_eyebrow">Helpful extras</span>
+              <h3 data-i18n="amen_group_extras_title">Comfort and local support</h3>
+              <p data-i18n="amen_group_extras_desc">Useful touches for smoother short stays or longer visits.</p>
+            </div>
+            <div class="amenities-grid amenities-grid-secondary" aria-label="Comfort extras">
+              <article class="amenity-card">
+                <div class="amenity-icon" aria-hidden="true"><span class="glyph">WASH</span></div>
+                <span class="amenityBadge amenityBadgeSecondary" data-i18n="amen_badge_extra">Good extra</span>
+                <h3 data-i18n="amen_laundry_title">Laundry service</h3>
+                <p data-i18n="amen_laundry_desc">Useful for longer stays or anyone travelling light.</p>
+              </article>
+              <article class="amenity-card">
+                <div class="amenity-icon" aria-hidden="true"><span class="glyph">☕</span></div>
+                <span class="amenityBadge amenityBadgeSecondary" data-i18n="amen_badge_extra">Good extra</span>
+                <h3 data-i18n="amen_coffee_title">Coffee &amp; snacks</h3>
+                <p data-i18n="amen_coffee_desc">Easy drinks and light refreshments on-site.</p>
+              </article>
+              <article class="amenity-card">
+                <div class="amenity-icon" aria-hidden="true"><span class="glyph">HELP</span></div>
+                <span class="amenityBadge amenityBadgeSecondary" data-i18n="amen_badge_extra">Good extra</span>
+                <h3 data-i18n="amen_service_title">Local help from staff</h3>
+                <p data-i18n="amen_service_desc">Direct support for directions, arrival questions, and stay requests.</p>
+              </article>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <!-- WHY STAY -->
     <section class="section" id="offers">
       <div class="card pad">
         <div class="head">
           <div>
-            <h2 data-i18n="offers_title">Why Stay at Sandbox Hotel</h2>
-            <p data-i18n="offers_sub">Everything you need for a comfortable, hassle-free stay.</p>
+            <h2 data-i18n="offers_title">Direct-booking benefits</h2>
+            <p data-i18n="offers_sub">Clear reasons to book with the hotel, not just browse room names.</p>
           </div>
         </div>
 
         <div class="offers">
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">⚡</div>
-            <b data-i18n="offer1_title">Book Direct, Save More</b>
-            <p data-i18n="offer1_desc">Message your dates — get confirmed quickly via LINE or phone. No platform fees.</p>
+            <b data-i18n="offer1_title">Get today’s direct rate</b>
+            <p data-i18n="offer1_desc">Send your dates and preferred room type. We’ll reply with current availability and the hotel’s direct rate.</p>
           </div>
           <div class="offer">
-            <div class="offerIcon" aria-hidden="true">🛏</div>
-            <b data-i18n="offer2_title">Comfortable Rooms for Work or Rest</b>
-            <p data-i18n="offer2_desc">Spacious 28–32 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.</p>
-          </div>
-          <div class="offer">
-            <div class="offerIcon" aria-hidden="true">📶</div>
-            <b data-i18n="offer3_title">Reliable Wi-Fi</b>
-            <p data-i18n="offer3_desc">Fast internet for work, streaming, and daily use throughout your stay.</p>
-          </div>
-          <div class="offer">
-            <div class="offerIcon" aria-hidden="true">🅿</div>
-            <b data-i18n="offer4_title">Parking & Easy Access</b>
-            <p data-i18n="offer4_desc">On-site guest parking. Central location with easy access to the city.</p>
-          </div>
-          <div class="offer">
-            <div class="offerIcon" aria-hidden="true">🙋</div>
-            <b data-i18n="offer5_title">Helpful Local Support</b>
-            <p data-i18n="offer5_desc">Friendly staff available daily. Local tips and assistance throughout your stay.</p>
+            <div class="offerIcon" aria-hidden="true">💬</div>
+            <b data-i18n="offer2_title">Fast confirmation by phone or LINE</b>
+            <p data-i18n="offer2_desc">Best for same-day plans, short-notice trips, or guests who want a quick answer.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">📅</div>
-            <b data-i18n="offer6_title">Weekly & Monthly Rates</b>
-            <p data-i18n="offer6_desc">Extended stay? Ask about special weekly and monthly pricing.</p>
+            <b data-i18n="offer3_title">Ask for weekly or monthly pricing</b>
+            <p data-i18n="offer3_desc">If you need a longer stay, message us for extended-stay rates and the best room fit.</p>
+          </div>
+          <div class="offer">
+            <div class="offerIcon" aria-hidden="true">🛏</div>
+            <b data-i18n="offer4_title">Tell us how you want to stay</b>
+            <p data-i18n="offer4_desc">Need separate beds, one large bed, or a quieter room side? Ask when you send your dates.</p>
           </div>
         </div>
-      </div>
-    </section>
 
-    <!-- BOOK -->
-    <section class="section" id="book">
-      <div class="card altA pad">
-        <div class="head">
+        <div class="offerActionPanel">
           <div>
-            <h2 data-i18n="book_title">Reserve Your Room</h2>
-            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll reply with availability and your rate.</p>
+            <span class="offerActionEyebrow" data-i18n="offers_cta_eyebrow">Ready to check your dates?</span>
+            <p class="offerActionText" data-i18n="offers_cta_text">Share your stay dates now for availability, today’s direct rate, and the quickest next step.</p>
           </div>
-          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-header-call">Call Hotel</a>
-        </div>
-
-        <div class="bookingShell">
-          <div class="bookingMetaCard">
-            <div class="bookingMetaIntro">
-              <span class="badge hot" data-i18n="trust_direct">Direct Booking</span>
-              <p class="bookingMetaLead" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today's exact rate.</p>
-            </div>
-            <div class="bookingJourney" aria-label="How direct booking works">
-              <p class="bookingJourneyLabel" data-i18n="book_process_label">How direct booking works</p>
-              <ol class="bookingJourneyList">
-                <li data-i18n="book_process_step_1">Choose your stay dates and room type.</li>
-                <li data-i18n="book_process_step_2">Send the inquiry by LINE, WhatsApp, or email.</li>
-                <li data-i18n="book_process_step_3">We reply with availability, direct rate, and next steps.</li>
-              </ol>
-              <p class="bookingResponseNote" data-i18n="book_channel_hint">Fastest response: call or LINE. Email is best for detailed requests.</p>
-            </div>
-            <div class="bookingSupportRow">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-support-call">Call Hotel</a>
-              <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" data-cta-location="booking-support-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-            </div>
-            <div class="bookingTrustBar">
-              <span class="bookingTrustValue" data-i18n-html="trust_rating">4.8</span>
-              <span class="stars" aria-hidden="true">★★★★★</span>
-              <span class="bookingTrustMeta" data-i18n="trust_meta">Based on Google Maps reviews</span>
-            </div>
-            <ul class="bookingBenefitList">
-              <li data-i18n="book_benefit_1">Direct reply from the hotel team.</li>
-              <li data-i18n="book_benefit_2">Today’s direct rate with no platform mark-up.</li>
-              <li data-i18n="book_benefit_3">Flexible help before you confirm.</li>
-            </ul>
-            <div class="bookingFacts fine">
-              <p data-i18n="book_tip"><strong>Tip:</strong> Add your estimated arrival time in Notes if arriving late.</p>
-              <p data-i18n="book_checkin_info"><strong>Check-in:</strong> From 14:00 • <strong>Check-out:</strong> By 11:00</p>
-              <p data-i18n="book_id_note"><strong>ID required:</strong> Government-issued ID or passport needed at check-in.</p>
-            </div>
-          </div>
-
-          <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
-            <div class="fieldGroup fieldGroupCols2 wide">
-              <div class="field">
-                <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
-                <input id="checkin" name="checkin" type="date" required aria-describedby="checkinHint checkinError">
-                <span class="fieldHint" id="checkinHint" data-i18n="field_hint_checkin">Choose your arrival date.</span>
-                <span class="fieldError" id="checkinError" aria-live="polite"></span>
-              </div>
-              <div class="field">
-                <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
-                <input id="checkout" name="checkout" type="date" required aria-describedby="checkoutHint checkoutError">
-                <span class="fieldHint" id="checkoutHint" data-i18n="field_hint_checkout">Choose your departure date.</span>
-                <span class="fieldError" id="checkoutError" aria-live="polite"></span>
-              </div>
-            </div>
-            <div class="fieldGroup fieldGroupCols2 wide">
-              <div class="field">
-                <label for="guests" data-i18n="lbl_guests">Guests</label>
-                <select id="guests" name="guests" aria-describedby="guestsHint guestsError">
-                  <option value="1">1</option>
-                  <option value="2" selected>2</option>
-                  <option value="3">3</option>
-                  <option value="4">4</option>
-                  <option value="5">5</option>
-                </select>
-                <span class="fieldHint" id="guestsHint" data-i18n="field_hint_guests">Tell us how many guests are staying.</span>
-                <span class="fieldError" id="guestsError" aria-live="polite"></span>
-              </div>
-              <div class="field">
-                <label for="room" data-i18n="lbl_room">Room</label>
-                <select id="room" name="room" aria-describedby="roomHint roomError">
-                  <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
-                  <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
-                </select>
-                <span class="fieldHint" id="roomHint" data-i18n="field_hint_room">Pick the room you want us to quote first.</span>
-                <span class="fieldError" id="roomError" aria-live="polite"></span>
-              </div>
-            </div>
-            <div class="fieldGroup fieldGroupCols2 wide">
-              <div class="field">
-                <label for="name" data-i18n="lbl_name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name" autocomplete="name" aria-describedby="nameHint nameError">
-                <span class="fieldHint" id="nameHint" data-i18n="field_hint_name">Optional, but helpful for a personal reply.</span>
-                <span class="fieldError" id="nameError" aria-live="polite"></span>
-              </div>
-              <div class="field">
-                <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
-                <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="contactHint contactError">
-                <span class="fieldHint" id="contactHint" data-i18n="field_hint_contact">Phone or email so we can reply directly.</span>
-                <span class="fieldError" id="contactError" aria-live="polite"></span>
-              </div>
-            </div>
-            <div class="fieldGroup wide">
-              <div class="field">
-                <label for="notes" data-i18n="lbl_notes">Notes</label>
-                <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes" aria-describedby="notesHint notesError"></textarea>
-                <span class="fieldHint" id="notesHint" data-i18n="field_hint_notes">Optional: arrival time, bed preference, or special requests.</span>
-                <span class="fieldError" id="notesError" aria-live="polite"></span>
-              </div>
-            </div>
-
-            <div class="wide ctaRow">
-              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line" data-cta-location="booking-form-line">Send via LINE</button>
-              <button class="btn secondary" type="button" id="sendWhatsApp" data-i18n="btn_send_wa" data-analytics="whatsapp" data-cta-location="booking-form-whatsapp">Send via WhatsApp</button>
-              <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email" data-cta-location="booking-form-email">Send via Email</button>
-              <span class="fine" id="formHint" data-i18n="form_hint_extended" role="status" aria-live="polite">Choose your preferred contact channel. We’ll reply with availability, direct rate, and the next step as soon as possible.</span>
-            </div>
-            <div class="wide bookGuarantee">
-              <i class="checkIcon" aria-hidden="true">✓</i>
-              <span data-i18n="book_guarantee">Best Rate Guaranteed when booking direct — no booking fees, no mark-up.</span>
-            </div>
-          </form>
+          <a class="btn primary" href="#book" data-i18n="offers_btn" data-analytics="book-now" data-cta-location="offers-primary">Check Availability</a>
         </div>
       </div>
     </section>
-
-
 <!-- GALLERY -->
     <section class="section" id="gallery">
       <div class="card pad">
@@ -996,6 +992,129 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now" data-cta-location="faq-footer-primary">Check Availability</a>
             <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call" data-cta-location="faq-footer-call">Call: 088-578-3478</a>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOOK -->
+    <section class="section" id="book">
+      <div class="card altA pad">
+        <div class="head">
+          <div>
+            <h2 data-i18n="book_title">Reserve Your Room</h2>
+            <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll reply with availability and your rate.</p>
+          </div>
+          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-header-call">Call Hotel</a>
+        </div>
+
+        <div class="bookingShell">
+          <div class="bookingMetaCard">
+            <div class="bookingMetaIntro">
+              <span class="badge hot" data-i18n="trust_direct">Direct Booking</span>
+              <p class="bookingMetaLead" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today's exact rate.</p>
+            </div>
+            <div class="bookingJourney" aria-label="How direct booking works">
+              <p class="bookingJourneyLabel" data-i18n="book_process_label">How direct booking works</p>
+              <ol class="bookingJourneyList">
+                <li data-i18n="book_process_step_1">Choose your stay dates and room type.</li>
+                <li data-i18n="book_process_step_2">Send the inquiry by LINE, WhatsApp, or email.</li>
+                <li data-i18n="book_process_step_3">We reply with availability, direct rate, and next steps.</li>
+              </ol>
+              <p class="bookingResponseNote" data-i18n="book_channel_hint">Fastest response: call or LINE. Email is best for detailed requests.</p>
+            </div>
+            <div class="bookingSupportRow">
+              <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-support-call">Call Hotel</a>
+              <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" data-cta-location="booking-support-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+            </div>
+            <div class="bookingTrustBar">
+              <span class="bookingTrustValue" data-i18n-html="trust_rating">4.8</span>
+              <span class="stars" aria-hidden="true">★★★★★</span>
+              <span class="bookingTrustMeta" data-i18n="trust_meta">Based on Google Maps reviews</span>
+            </div>
+            <ul class="bookingBenefitList">
+              <li data-i18n="book_benefit_1">Direct reply from the hotel team.</li>
+              <li data-i18n="book_benefit_2">Today’s direct rate with no platform mark-up.</li>
+              <li data-i18n="book_benefit_3">Flexible help before you confirm.</li>
+            </ul>
+            <div class="bookingFacts fine">
+              <p data-i18n="book_tip"><strong>Tip:</strong> Add your estimated arrival time in Notes if arriving late.</p>
+              <p data-i18n="book_checkin_info"><strong>Check-in:</strong> From 14:00 • <strong>Check-out:</strong> By 11:00</p>
+              <p data-i18n="book_id_note"><strong>ID required:</strong> Government-issued ID or passport needed at check-in.</p>
+            </div>
+          </div>
+
+          <form id="bookingForm" class="formGrid" autocomplete="on" data-analytics-submit="line">
+            <div class="fieldGroup fieldGroupCols2 wide">
+              <div class="field">
+                <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
+                <input id="checkin" name="checkin" type="date" required aria-describedby="checkinHint checkinError">
+                <span class="fieldHint" id="checkinHint" data-i18n="field_hint_checkin">Choose your arrival date.</span>
+                <span class="fieldError" id="checkinError" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
+                <input id="checkout" name="checkout" type="date" required aria-describedby="checkoutHint checkoutError">
+                <span class="fieldHint" id="checkoutHint" data-i18n="field_hint_checkout">Choose your departure date.</span>
+                <span class="fieldError" id="checkoutError" aria-live="polite"></span>
+              </div>
+            </div>
+            <div class="fieldGroup fieldGroupCols2 wide">
+              <div class="field">
+                <label for="guests" data-i18n="lbl_guests">Guests</label>
+                <select id="guests" name="guests" aria-describedby="guestsHint guestsError">
+                  <option value="1">1</option>
+                  <option value="2" selected>2</option>
+                  <option value="3">3</option>
+                  <option value="4">4</option>
+                  <option value="5">5</option>
+                </select>
+                <span class="fieldHint" id="guestsHint" data-i18n="field_hint_guests">Tell us how many guests are staying.</span>
+                <span class="fieldError" id="guestsError" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="room" data-i18n="lbl_room">Room</label>
+                <select id="room" name="room" aria-describedby="roomHint roomError">
+                  <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
+                  <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
+                </select>
+                <span class="fieldHint" id="roomHint" data-i18n="field_hint_room">Pick the room you want us to quote first.</span>
+                <span class="fieldError" id="roomError" aria-live="polite"></span>
+              </div>
+            </div>
+            <div class="fieldGroup fieldGroupCols2 wide">
+              <div class="field">
+                <label for="name" data-i18n="lbl_name">Name</label>
+                <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name" autocomplete="name" aria-describedby="nameHint nameError">
+                <span class="fieldHint" id="nameHint" data-i18n="field_hint_name">Optional, but helpful for a personal reply.</span>
+                <span class="fieldError" id="nameError" aria-live="polite"></span>
+              </div>
+              <div class="field">
+                <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
+                <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="contactHint contactError">
+                <span class="fieldHint" id="contactHint" data-i18n="field_hint_contact">Phone or email so we can reply directly.</span>
+                <span class="fieldError" id="contactError" aria-live="polite"></span>
+              </div>
+            </div>
+            <div class="fieldGroup wide">
+              <div class="field">
+                <label for="notes" data-i18n="lbl_notes">Notes</label>
+                <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes" aria-describedby="notesHint notesError"></textarea>
+                <span class="fieldHint" id="notesHint" data-i18n="field_hint_notes">Optional: arrival time, bed preference, or special requests.</span>
+                <span class="fieldError" id="notesError" aria-live="polite"></span>
+              </div>
+            </div>
+
+            <div class="wide ctaRow">
+              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line" data-cta-location="booking-form-line">Send via LINE</button>
+              <button class="btn secondary" type="button" id="sendWhatsApp" data-i18n="btn_send_wa" data-analytics="whatsapp" data-cta-location="booking-form-whatsapp">Send via WhatsApp</button>
+              <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email" data-cta-location="booking-form-email">Send via Email</button>
+              <span class="fine" id="formHint" data-i18n="form_hint_extended" role="status" aria-live="polite">Choose your preferred contact channel. We’ll reply with availability, direct rate, and the next step as soon as possible.</span>
+            </div>
+            <div class="wide bookGuarantee">
+              <i class="checkIcon" aria-hidden="true">✓</i>
+              <span data-i18n="book_guarantee">Best Rate Guaranteed when booking direct — no booking fees, no mark-up.</span>
+            </div>
+          </form>
         </div>
       </div>
     </section>
