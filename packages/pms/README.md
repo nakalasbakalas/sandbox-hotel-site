@@ -783,6 +783,60 @@ $env:SMTP_USE_SSL = "1"
 $env:MAIL_FROM = "reservations@example.com"
 ```
 
+### Using your own domain for in-house email
+
+Yes — you can configure any SMTP server (including one you self-host on your
+own domain) by setting the variables above.  Common options are:
+
+**Third-party relay with a custom `From` address** (easiest)
+
+Services such as SendGrid, Mailgun, Amazon SES, Brevo, and Postmark all
+provide an authenticated SMTP endpoint.  Point `SMTP_HOST` at their relay,
+authenticate with your API key as the password, and set `MAIL_FROM` to an
+address on your domain (e.g. `reservations@myhotel.com`).  You will also need
+to add the SPF, DKIM, and DMARC DNS records that the provider gives you so
+that mail is not rejected or marked as spam.
+
+```bash
+# Example: SendGrid custom-domain relay (Linux / macOS)
+export SMTP_HOST=smtp.sendgrid.net
+export SMTP_PORT=587
+export SMTP_USERNAME=apikey
+export SMTP_PASSWORD=SG.replace-me
+export SMTP_USE_TLS=1
+export SMTP_USE_SSL=0
+export MAIL_FROM=reservations@myhotel.com
+```
+
+**Self-hosted relay (Postfix / Exim / other MTA)**
+
+If you run your own mail server on your domain you can point `SMTP_HOST` at it
+directly.  Use `localhost` (or `127.0.0.1`) when the relay is on the same
+machine.  Local relays typically do not require authentication.
+
+```bash
+# Example: local Postfix relay, no auth (Linux)
+export SMTP_HOST=localhost
+export SMTP_PORT=25
+export SMTP_USERNAME=
+export SMTP_PASSWORD=
+export SMTP_USE_TLS=0
+export SMTP_USE_SSL=0
+export MAIL_FROM=reservations@myhotel.com
+```
+
+Ensure your MTA is configured to accept connections from the PMS process and
+that outbound port 25 is open on the server.  Set up reverse-DNS (PTR) records
+and publish SPF/DKIM/DMARC records for your domain to maximise deliverability.
+
+**Verify your settings from the admin UI**
+
+Once the environment variables are set, go to
+**Admin → Communications** in the PMS.  The *Email delivery status* panel
+shows the currently configured host and sender address.  Use the
+**Send test** button to send a test message and confirm end-to-end delivery
+before going live.
+
 ## Setup
 
 ```powershell

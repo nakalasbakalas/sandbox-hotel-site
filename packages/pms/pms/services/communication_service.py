@@ -1177,6 +1177,7 @@ def send_due_failed_payment_reminders(*, actor_user_id: uuid.UUID | None = None)
 
 
 def communication_settings_context() -> dict[str, object]:
+    smtp_host = current_app.config.get("SMTP_HOST", "")
     return {
         "sender_name": _string_setting("notifications.sender_name", "Sandbox Hotel"),
         "pre_arrival_enabled": _bool_setting("notifications.pre_arrival_enabled", True),
@@ -1189,6 +1190,9 @@ def communication_settings_context() -> dict[str, object]:
         "whatsapp_staff_alert_enabled": _bool_setting("notifications.whatsapp_staff_alert_enabled", False),
         "line_staff_alert_configured": bool(current_app.config.get("LINE_STAFF_ALERT_WEBHOOK_URL")),
         "whatsapp_staff_alert_configured": bool(current_app.config.get("WHATSAPP_STAFF_ALERT_WEBHOOK_URL")),
+        "smtp_configured": bool(smtp_host),
+        "smtp_host": smtp_host,
+        "mail_from": current_app.config.get("MAIL_FROM", "reservations@sandbox-hotel.local"),
         "pending_count": NotificationDelivery.query.filter(NotificationDelivery.status.in_(["pending", "queued"])).count(),
         "failed_count": NotificationDelivery.query.filter_by(status="failed").count(),
     }

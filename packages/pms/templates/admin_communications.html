@@ -13,6 +13,39 @@
   <article class="card">
     <div class="card-head">
       <div>
+        <p class="eyebrow">SMTP email</p>
+        <h2>Email delivery status</h2>
+      </div>
+    </div>
+    <div class="list-stack compact">
+      <div class="card inset">
+        {% if communication_settings.smtp_configured %}
+          <p><strong class="status delivered">SMTP configured</strong></p>
+          <p class="muted">Host: <code>{{ communication_settings.smtp_host }}</code></p>
+          <p class="muted">Sender address: <code>{{ communication_settings.mail_from }}</code></p>
+        {% else %}
+          <p><strong class="status failed">SMTP not configured</strong></p>
+          <p class="muted">Set <code>SMTP_HOST</code>, <code>SMTP_PORT</code>, <code>SMTP_USERNAME</code>, <code>SMTP_PASSWORD</code>, and <code>MAIL_FROM</code> in your environment to enable email delivery. See the PMS README for examples including custom-domain and in-house relay setups.</p>
+        {% endif %}
+      </div>
+      {% if communication_settings.smtp_configured and can('settings.edit') %}
+      <form class="card inset inline-form" method="post">
+        {{ csrf_input() }}
+        <input type="hidden" name="action" value="send_test_email">
+        <div class="grow">
+          <strong>Send test email</strong>
+          <p class="muted">Verify your SMTP settings by sending a test message.</p>
+          <label><span>Recipient address</span><input type="email" name="test_recipient" placeholder="you@example.com" required></label>
+        </div>
+        <button class="button secondary" type="submit">Send test</button>
+      </form>
+      {% endif %}
+    </div>
+  </article>
+
+  <article class="card">
+    <div class="card-head">
+      <div>
         <p class="eyebrow">Communication settings</p>
         <h2>Delivery behavior</h2>
       </div>
@@ -38,50 +71,47 @@
       {% if can('settings.edit') %}<button class="button" type="submit">Save communication settings</button>{% endif %}
     </form>
   </article>
-
-  <article class="card">
-    <div class="card-head">
-      <div>
-        <p class="eyebrow">Operations</p>
-        <h2>Queue and reminder runs</h2>
-      </div>
-    </div>
-    <div class="list-stack compact">
-      <form class="card inset inline-form" method="post">
-        {{ csrf_input() }}
-        <input type="hidden" name="action" value="dispatch_queue">
-        <div class="grow">
-          <strong>Dispatch pending deliveries</strong>
-          <p class="muted">Retries queued and failed notification records through the configured channels.</p>
-        </div>
-        {% if can('settings.edit') %}<button class="button secondary" type="submit">Run dispatcher</button>{% endif %}
-      </form>
-      <form class="card inset inline-form" method="post">
-        {{ csrf_input() }}
-        <input type="hidden" name="action" value="run_pre_arrival">
-        <div class="grow">
-          <strong>Send due pre-arrival reminders</strong>
-          <p class="muted">Uses the current pre-arrival timing and eligible reservation statuses.</p>
-        </div>
-        {% if can('settings.edit') %}<button class="button secondary" type="submit">Run reminders</button>{% endif %}
-      </form>
-      <form class="card inset inline-form" method="post">
-        {{ csrf_input() }}
-        <input type="hidden" name="action" value="run_failed_payment">
-        <div class="grow">
-          <strong>Send due failed payment reminders</strong>
-          <p class="muted">Refreshes expired hosted links when needed, then sends follow-up communication.</p>
-        </div>
-        {% if can('settings.edit') %}<button class="button secondary" type="submit">Run payment follow-up</button>{% endif %}
-      </form>
-    </div>
-  </article>
 </section>
 
 <section class="card">
   <div class="card-head">
     <div>
-      <p class="eyebrow">Delivery history</p>
+      <p class="eyebrow">Operations</p>
+      <h2>Queue and reminder runs</h2>
+    </div>
+  </div>
+  <div class="list-stack compact">
+    <form class="card inset inline-form" method="post">
+      {{ csrf_input() }}
+      <input type="hidden" name="action" value="dispatch_queue">
+      <div class="grow">
+        <strong>Dispatch pending deliveries</strong>
+        <p class="muted">Retries queued and failed notification records through the configured channels.</p>
+      </div>
+      {% if can('settings.edit') %}<button class="button secondary" type="submit">Run dispatcher</button>{% endif %}
+    </form>
+    <form class="card inset inline-form" method="post">
+      {{ csrf_input() }}
+      <input type="hidden" name="action" value="run_pre_arrival">
+      <div class="grow">
+        <strong>Send due pre-arrival reminders</strong>
+        <p class="muted">Uses the current pre-arrival timing and eligible reservation statuses.</p>
+      </div>
+      {% if can('settings.edit') %}<button class="button secondary" type="submit">Run reminders</button>{% endif %}
+    </form>
+    <form class="card inset inline-form" method="post">
+      {{ csrf_input() }}
+      <input type="hidden" name="action" value="run_failed_payment">
+      <div class="grow">
+        <strong>Send due failed payment reminders</strong>
+        <p class="muted">Refreshes expired hosted links when needed, then sends follow-up communication.</p>
+      </div>
+      {% if can('settings.edit') %}<button class="button secondary" type="submit">Run payment follow-up</button>{% endif %}
+    </form>
+  </div>
+</section>
+
+<section class="card">
       <h2>Notification log</h2>
     </div>
   </div>
