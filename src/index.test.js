@@ -228,8 +228,9 @@ test("homepage above-the-fold keeps direct booking CTAs and a desktop flag dropd
   assert.ok(document.querySelector(".navLangCluster #currentFlag"));
   assert.ok(document.querySelector(".navPrimaryCta[href='#book']"));
   assert.ok(document.querySelector(".navPanelLabel[data-i18n='nav_language']"));
-  assert.ok(document.querySelector(".navPanel a[data-i18n='nav_call_hotel'][href='tel:+66885783478']"));
-  assert.ok(document.querySelector(".navPanel a[data-i18n='nav_line_chat']"));
+  assert.equal(document.querySelector(".navPanel a[data-cta-location='header-menu-primary']"), null);
+  assert.equal(document.querySelector(".navPanel a[data-i18n='nav_call_hotel']"), null);
+  assert.equal(document.querySelector(".navPanel a[data-i18n='nav_line_chat']"), null);
   assert.equal(document.querySelector(".navPanel a[data-i18n='nav_reviews']"), null);
 
   const hero = document.querySelector(".hero");
