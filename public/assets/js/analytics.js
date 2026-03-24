@@ -32,6 +32,8 @@
     book_cta_click: "booking",
     booking_submit_attempt: "booking",
     booking_send_success: "booking",
+    sticky_cta_click: "booking",
+    language_switch: "navigation",
     contact_call_click: "contact",
     contact_line_click: "contact",
     contact_whatsapp_click: "contact",
@@ -348,6 +350,11 @@
     }
 
     trackStructuredEvent(eventName, element, element);
+    if (element.closest("#stickyBottom") && shouldTrack(element, "sticky_cta_click")) {
+      trackStructuredEvent("sticky_cta_click", element.closest("#stickyBottom"), element, {
+        sticky_action: trackingKey || "unknown"
+      });
+    }
   }
 
   function handleTrackedSubmit(event) {

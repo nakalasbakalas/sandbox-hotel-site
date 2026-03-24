@@ -12,6 +12,7 @@ const homepageJs = [
   "../public/assets/js/components/header-scroll.js",
   "../public/assets/js/home.js",
 ].map((path) => fs.readFileSync(new URL(path, import.meta.url), "utf8")).join("\n");
+const analyticsJs = fs.readFileSync(new URL("../public/assets/js/analytics.js", import.meta.url), "utf8");
 const homepageCss = [
   "../public/assets/css/home.css",
   "../public/assets/css/components/booking-form.css",
@@ -315,5 +316,29 @@ test("homepage runtime locale keys cover every i18n hook used in the HTML", () =
 test("homepage booking actions validate the form before triggering outbound contact flows", () => {
   assert.match(homepageJs, /function validateBookingForm\(form\)/);
   assert.match(homepageJs, /form\?\.addEventListener\("submit", async \(e\)=>\{[\s\S]*?if\(!validateBookingForm\(form\)\) return;/);
+  assert.match(homepageJs, /document\.getElementById\("sendWhatsApp"\)\?\.addEventListener\("click", async \(\)=>\{[\s\S]*?if\(!validateBookingForm\(form\)\) return;/);
   assert.match(homepageJs, /document\.getElementById\("sendEmail"\)\?\.addEventListener\("click", async \(\)=>\{[\s\S]*?if\(!validateBookingForm\(form\)\) return;/);
+});
+
+test("homepage booking section clearly explains the inquiry flow and offers multi-channel contact", () => {
+  const dom = new JSDOM(homepageHtml);
+  const { document } = dom.window;
+  const bookingSection = document.querySelector("#book");
+
+  assert.ok(bookingSection?.querySelector(".bookingJourneyList"));
+  assert.equal(bookingSection?.querySelectorAll(".bookingJourneyList li").length, 3);
+  assert.ok(bookingSection?.querySelector(".bookingBenefitList"));
+  assert.ok(bookingSection?.querySelector("#sendWhatsApp[data-analytics='whatsapp']"));
+  assert.ok(bookingSection?.querySelector("#formHint[role='status'][aria-live='polite']"));
+  assert.ok(bookingSection?.querySelector("#contact[autocomplete='email'][aria-describedby*='contactHint']"));
+  assert.ok(bookingSection?.querySelector("#checkin[aria-describedby*='checkinHint']"));
+  assert.ok(bookingSection?.querySelector("#checkout[aria-describedby*='checkoutHint']"));
+  assert.ok(document.querySelector("#stickyBottom .stickyBottomNote"));
+});
+
+test("homepage analytics includes dedicated sticky CTA and language switch tracking hooks", () => {
+  assert.match(analyticsJs, /sticky_cta_click/);
+  assert.match(analyticsJs, /language_switch/);
+  assert.match(analyticsJs, /element\.closest\("#stickyBottom"\)/);
+  assert.match(homepageJs, /window\.SandboxAnalytics\?\.trackEvent\("language_switch"/);
 });
