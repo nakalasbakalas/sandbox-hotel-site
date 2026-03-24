@@ -12,6 +12,37 @@
       background:var(--surfaceB);
       padding:18px;
     }
+    .bookingMetaIntro{
+      display:grid;
+      gap:8px;
+      margin-bottom:2px;
+    }
+    .bookingSupportRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .bookingSupportRow .btn{
+      flex:1 1 auto;
+      justify-content:center;
+      min-height:44px;
+    }
+    .bookingTrustBar{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      font-size:13px;
+    }
+    .bookingTrustValue{
+      font-weight:800;
+      color:var(--ink2);
+      font-size:15px;
+    }
+    .bookingTrustMeta{
+      color:var(--muted);
+      font-size:12px;
+    }
     .bookingJourney{
       display:grid;
       gap:10px;
