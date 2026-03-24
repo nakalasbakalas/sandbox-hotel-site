@@ -218,33 +218,36 @@ test("homepage locale packs include translated location title and footer languag
   );
 });
 
-test("homepage above-the-fold promotes direct booking with clear CTAs, trust proof, and desktop language controls", () => {
+test("homepage above-the-fold keeps direct booking CTAs and a desktop flag dropdown", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
 
-  const navLangButtons = document.querySelectorAll(".navLangCluster .langBtn");
+  const navLangButtons = document.querySelectorAll(".navLangCluster #langMenu .langBtn");
   assert.equal(navLangButtons.length, 3);
+  assert.ok(document.querySelector(".navLangCluster #langBtn[aria-haspopup='true'][aria-expanded='false']"));
+  assert.ok(document.querySelector(".navLangCluster #currentFlag"));
   assert.ok(document.querySelector(".navPrimaryCta[href='#book']"));
   assert.ok(document.querySelector(".navPanelLabel[data-i18n='nav_language']"));
   assert.ok(document.querySelector(".navPanel a[data-i18n='nav_call_hotel'][href='tel:+66885783478']"));
   assert.ok(document.querySelector(".navPanel a[data-i18n='nav_line_chat']"));
+  assert.equal(document.querySelector(".navPanel a[data-i18n='nav_reviews']"), null);
 
   const hero = document.querySelector(".hero");
   assert.ok(hero);
   assert.ok(hero?.querySelector(".heroCTA .btn.primary[href='#book'][data-i18n='cta_check_direct_rate']"));
   assert.ok(hero?.querySelector(".heroCTA .btn.secondary[href='tel:+66885783478'][data-i18n='cta_call_hotel']"));
   assert.ok(hero?.querySelector(".heroDirectNote[data-i18n='hero_direct_booking_benefit']"));
-  assert.ok(hero?.querySelector(".heroReviewBadge[data-analytics='map']"));
-  assert.equal(hero?.querySelectorAll(".heroProofList .heroProofItem").length, 3);
+  assert.equal(hero?.querySelector(".heroReviewBadge"), null);
+  assert.equal(hero?.querySelector(".heroProofList"), null);
   assert.ok(document.querySelector(".trustStrip [data-i18n='trust_rooms']"));
 });
 
-test("homepage lower sections stay as standalone premium blocks instead of one shared grid", () => {
+test("homepage lower sections stay as standalone premium blocks without a reviews section", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
 
   assert.equal(document.querySelector(".sectionsGrid"), null);
-  assert.ok(document.querySelector("#reviews .reviewSectionCard"));
+  assert.equal(document.querySelector("#reviews"), null);
   assert.ok(document.querySelector("#faq .faqSectionCard"));
   assert.ok(document.querySelector("#destination .destinationSectionCard"));
   assert.ok(document.querySelector("#location .locationSectionCard"));
@@ -264,14 +267,12 @@ test("homepage location section keeps the contact card and map side by side unti
   );
 });
 
-test("homepage reviews use the older review-card layout without trust summary widgets", () => {
+test("homepage removes guest review widgets and booking trust badge", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
 
-  assert.equal(document.querySelector("#reviews .reviewTrust"), null);
-  assert.equal(document.querySelector("#reviews .reviewSource"), null);
-  assert.equal(document.querySelectorAll("#reviews .review").length, 5);
-  assert.equal(document.querySelectorAll("#reviews .reviewsSide .review").length, 2);
+  assert.equal(document.querySelector("#reviews"), null);
+  assert.equal(document.querySelector(".bookingTrustBar"), null);
   assert.equal(homepageJs.includes('trust_rating: "4.8"'), true);
   assert.equal(homepageJs.includes("trust_meta"), true);
   assert.equal(homepageJs.includes("btn_view_maps_short"), false);
@@ -300,6 +301,16 @@ test("homepage gallery uses the patch 1 image set with responsive sources", () =
   assert.match(galleryImages[5]?.getAttribute("srcset") ?? "", /staircase-400\.png 400w, assets\/images\/gallery\/staircase\.png 1536w/);
   assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_evening_view_title']")?.textContent, "Evening Exterior");
   assert.equal(dom.window.document.querySelector("#gallery [data-i18n='gal_staircase_title']")?.textContent, "Staircase & Mural");
+});
+
+test("homepage room sizing now consistently shows 28 square meters", () => {
+  const dom = new JSDOM(homepageHtml);
+  const roomSizeTags = [...dom.window.document.querySelectorAll(".roomMeta [data-i18n='tag_28_32_m']")];
+
+  assert.equal(roomSizeTags.length, 2);
+  assert.deepEqual(roomSizeTags.map((tag) => tag.textContent?.trim()), ["28 m²", "28 m²"]);
+  assert.match(homepageJs, /tag_28_32_m:\s*"28 m²"/);
+  assert.match(homepageJs, /offer2_desc:\s*"Spacious 28 m² rooms with desk, A\/C, and hot shower\. Quiet-side allocation on request\."/,);
 });
 
 test("homepage runtime locale keys cover every i18n hook used in the HTML", () => {

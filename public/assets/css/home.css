@@ -432,18 +432,47 @@
       opacity:1;
     }
     .navLangCluster{
+      position:relative;
       display:inline-flex;
       align-items:center;
-      gap:6px;
-      padding:4px 6px;
-      border-radius:var(--radius-pill);
-      border:1px solid var(--controlBorder);
-      background:var(--surfaceA);
+      gap:8px;
     }
     .navLangCluster .flagItem{
       width:34px;
       height:34px;
       border-radius:var(--radius-pill);
+    }
+    .navLangToggle{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      min-height:40px;
+      padding:0 12px;
+      border-radius:var(--radius-pill);
+      border:1px solid var(--controlBorder);
+      background:var(--surfaceA);
+      color:var(--ink2);
+      box-shadow: var(--shadow-xs);
+      cursor:pointer;
+      transition: background .14s ease, border-color .14s ease, transform .14s ease;
+    }
+    .navLangToggle:hover{
+      transform: translateY(-1px);
+      background:var(--surfaceC);
+      border-color:var(--controlBorderStrong);
+    }
+    .navLangToggle[aria-expanded="true"]{
+      background:var(--surfaceC);
+      border-color:var(--controlBorderStrong);
+    }
+    #currentFlag{
+      font-size:18px;
+      line-height:1;
+    }
+    .navLangChevron{
+      font-size:11px;
+      line-height:1;
+      opacity:.72;
     }
     .navPrimaryCta{
       min-width:var(--navPrimaryCtaMinWidth);
