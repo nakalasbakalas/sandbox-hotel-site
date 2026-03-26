@@ -2253,3 +2253,551 @@
     /* --- Compact density adjustments --- */
     html[data-density="compact"] .section{ margin: clamp(36px, 4.5vw, 56px) 0; }
     html[data-density="ultra-compact"] .section{ margin: clamp(28px, 3.5vw, 44px) 0; }
+
+    /* ========================================================
+       2026-03 Front-Page Section Refresh
+       Reviews, FAQ, destination, location/contact
+       ======================================================== */
+
+    .reviewHead,
+    #faq .head,
+    #destination .head,
+    #location .head{
+      align-items:flex-start;
+      margin-bottom:18px;
+    }
+    .reviewHead p,
+    #faq .head p,
+    #destination .head p,
+    #location .head p{
+      max-width:52ch;
+      font-size:15px;
+      line-height:1.65;
+    }
+
+    .reviewsGrid{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(320px, 360px);
+      gap:20px;
+      margin-top:18px;
+      align-items:start;
+    }
+    .reviewsColumn,
+    .reviewsStack{
+      display:grid;
+      gap:16px;
+    }
+    .review{
+      padding:20px;
+      border-color:color-mix(in oklab, var(--line) 82%, rgba(168,101,42,.18));
+      background:linear-gradient(180deg, color-mix(in oklab, var(--surfaceA) 76%, var(--card)) 0%, var(--card) 100%);
+      box-shadow:0 12px 24px rgba(59,43,22,.06);
+    }
+    html[data-theme="dark"] .review{
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));
+      box-shadow:0 12px 24px rgba(0,0,0,.18);
+    }
+    .review b{
+      display:grid;
+      gap:6px;
+      color:var(--ink2);
+      font-size:16px;
+      line-height:1.35;
+    }
+    .stars{
+      display:inline-flex;
+      align-items:center;
+      letter-spacing:.08em;
+    }
+    .review p{
+      margin:0;
+      font-size:15px;
+      line-height:1.7;
+      color:var(--muted);
+      max-height:none;
+      display:block;
+      overflow:visible;
+      -webkit-line-clamp:unset;
+      padding-left:0;
+    }
+    .reviewFeatured{
+      background:
+        radial-gradient(560px 220px at 0% 0%, rgba(168,101,42,.12), transparent 72%),
+        linear-gradient(180deg, color-mix(in oklab, var(--card) 96%, rgba(168,101,42,.05)) 0%, var(--card) 100%);
+      border-color:color-mix(in oklab, var(--copper) 18%, var(--line));
+      box-shadow:0 18px 34px rgba(59,43,22,.10);
+    }
+    .reviewFeatured p{
+      position:relative;
+      padding-left:24px;
+    }
+    .reviewFeatured p::before{
+      content:"\201C";
+      position:absolute;
+      left:0;
+      top:-2px;
+      font-size:30px;
+      line-height:1;
+      color:var(--copper);
+      opacity:.8;
+    }
+    .reviewTrustPanel{
+      display:grid;
+      gap:14px;
+      align-content:start;
+      padding:22px;
+      border-radius:var(--radius-md);
+      border:1px solid color-mix(in oklab, var(--copper) 18%, var(--line));
+      background:linear-gradient(180deg, rgba(168,101,42,.08) 0%, color-mix(in oklab, var(--surfaceA) 88%, var(--card)) 100%);
+      box-shadow:0 18px 34px rgba(59,43,22,.08);
+    }
+    .reviewSourceBadge{
+      justify-self:start;
+      min-height:34px;
+      padding:0 12px;
+    }
+    .reviewTrustPanel h3{
+      margin:0;
+      font-size:22px;
+      line-height:1.2;
+      color:var(--ink2);
+      font-family:var(--display);
+    }
+    .reviewTrustPanel p{
+      margin:0;
+      font-size:15px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+    .reviewActionCard{
+      display:grid;
+      gap:10px;
+    }
+    .reviewActionCard .btn{
+      width:100%;
+      justify-content:center;
+      min-height:48px;
+    }
+    @media (max-width:940px){
+      .reviewsGrid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    .faqMain{
+      min-width:0;
+    }
+    .faqLayout{
+      display:grid;
+      grid-template-columns:minmax(0, 1fr) minmax(300px, 340px);
+      gap:20px;
+      margin-top:18px;
+      align-items:start;
+    }
+    .faqGrid{
+      display:grid;
+      grid-template-columns:1fr;
+      gap:12px;
+      margin-top:0;
+    }
+    #faq details{
+      position:relative;
+      overflow:hidden;
+      padding:0;
+      border-radius:var(--radius-md);
+      border:1px solid color-mix(in oklab, var(--line) 82%, rgba(168,101,42,.22));
+      background:linear-gradient(180deg, color-mix(in oklab, var(--surfaceA) 84%, var(--card)) 0%, var(--card) 100%);
+      box-shadow:0 8px 18px rgba(59,43,22,.04);
+      transition:border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    #faq details::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:0;
+      bottom:0;
+      width:4px;
+      border-radius:999px;
+      background:linear-gradient(180deg, rgba(168,101,42,.78), rgba(232,201,160,.34));
+      opacity:.42;
+      transition:opacity .18s ease;
+    }
+    #faq details[open]{
+      border-color:color-mix(in oklab, var(--copper) 20%, var(--line));
+      box-shadow:0 12px 22px rgba(59,43,22,.08);
+    }
+    #faq details[open]::before{
+      opacity:1;
+    }
+    #faq summary{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      min-height:72px;
+      padding:18px 20px 18px 24px;
+      cursor:pointer;
+      list-style:none;
+      color:var(--ink2);
+      font-size:16px;
+      font-weight:800;
+      line-height:1.45;
+    }
+    #faq summary::-webkit-details-marker{display:none}
+    #faq summary::after{
+      content:"";
+      width:10px;
+      height:10px;
+      border-right:2px solid currentColor;
+      border-bottom:2px solid currentColor;
+      transform:rotate(45deg);
+      transition:transform .2s ease;
+      flex:0 0 auto;
+      margin-right:4px;
+      color:var(--muted2);
+    }
+    #faq details[open] summary::after{
+      transform:rotate(225deg);
+    }
+    .faqAnswer{
+      display:grid;
+      grid-template-rows:0fr;
+      transition:grid-template-rows .22s ease;
+    }
+    #faq details[open] .faqAnswer{
+      grid-template-rows:1fr;
+    }
+    .faqAnswer p,
+    #faq details > p{
+      margin:0;
+      overflow:hidden;
+      padding:0 20px 18px 24px;
+      color:var(--muted);
+      font-size:15px;
+      line-height:1.65;
+    }
+    .faqMoreWrap{
+      display:flex;
+      justify-content:flex-start;
+      margin-top:14px;
+    }
+    .faqMoreWrap .btn{
+      min-height:46px;
+      border-radius:999px;
+    }
+    .faqHelpPanel{
+      display:grid;
+      gap:16px;
+      padding:22px;
+      border-radius:var(--radius-md);
+      border:1px solid color-mix(in oklab, var(--copper) 18%, var(--line));
+      background:linear-gradient(180deg, rgba(168,101,42,.08) 0%, color-mix(in oklab, var(--surfaceA) 92%, var(--card)) 100%);
+      box-shadow:0 18px 34px rgba(59,43,22,.08);
+      position:sticky;
+      top:calc(var(--nav-h) + 20px);
+    }
+    .faqHelpPanel h3{
+      margin:0;
+      font-size:20px;
+      line-height:1.2;
+      color:var(--ink2);
+    }
+    .faqHelpPanel p{
+      margin:0;
+      font-size:15px;
+      line-height:1.65;
+      color:var(--muted);
+    }
+    .faqHelpPanel .helpMethods{
+      display:grid;
+      gap:10px;
+    }
+    .faqHelpPanel .helpMethod{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-height:48px;
+      padding:10px 12px;
+      border-radius:var(--radius-sm);
+      background:rgba(255,255,255,.03);
+      font-size:15px;
+      color:var(--ink2);
+      font-weight:600;
+    }
+    .faqHelpPanel .helpMethod span:first-child{
+      width:34px;
+      height:34px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background:rgba(168,101,42,.12);
+      flex:0 0 auto;
+    }
+    .faqHelpPanel .btn{
+      width:100%;
+      justify-content:center;
+      min-height:48px;
+    }
+    @media (max-width:860px){
+      .faqLayout{
+        grid-template-columns:1fr;
+      }
+      .faqHelpPanel{
+        position:static;
+      }
+      #faq summary{
+        min-height:64px;
+      }
+    }
+
+    .destGrid{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0, 1fr));
+      gap:18px;
+      margin-top:18px;
+    }
+    .destBlock{
+      position:relative;
+      overflow:hidden;
+      display:grid;
+      gap:12px;
+      min-height:220px;
+      padding:22px;
+      border-radius:var(--radius-md);
+      border:1px solid color-mix(in oklab, var(--line) 82%, rgba(168,101,42,.22));
+      background:linear-gradient(180deg, color-mix(in oklab, var(--surfaceA) 88%, var(--card)) 0%, var(--card) 100%);
+      box-shadow:0 12px 24px rgba(59,43,22,.06);
+    }
+    .destBlock::after{
+      content:"";
+      position:absolute;
+      inset:auto -48px -56px auto;
+      width:140px;
+      height:140px;
+      border-radius:50%;
+      background:radial-gradient(circle, rgba(168,101,42,.12) 0%, rgba(168,101,42,0) 72%);
+      pointer-events:none;
+    }
+    .destBlock h3{
+      margin:0;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      font-size:18px;
+      line-height:1.3;
+      color:var(--ink2);
+    }
+    .destBlock p{
+      margin:0;
+      font-size:15px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+    .destList{
+      padding-left:0;
+      list-style:none;
+      display:grid;
+      gap:10px;
+      margin:0;
+    }
+    .destList li{
+      display:grid;
+      gap:4px;
+      margin:0;
+      padding:14px 16px;
+      border:1px solid color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.16));
+      border-radius:var(--radius-sm);
+      background:rgba(255,255,255,.03);
+    }
+    html[data-theme="light"] .destList li{
+      background:rgba(255,255,255,.56);
+    }
+    .destList strong{
+      font-size:15px;
+      color:var(--ink2);
+    }
+    .destList span{
+      font-size:14px;
+      line-height:1.55;
+      color:var(--muted);
+    }
+    @media (max-width:900px){
+      .destGrid{
+        grid-template-columns:1fr;
+      }
+      .destBlock{
+        min-height:auto;
+      }
+    }
+
+    .locationGrid{
+      display:grid;
+      grid-template-columns:minmax(320px, .82fr) minmax(0, 1.18fr);
+      gap:20px;
+      align-items:start;
+      margin-top:18px;
+    }
+    .contactCard{
+      display:grid;
+      gap:16px;
+      padding:22px;
+      border-radius:var(--radius-md);
+      border:1px solid color-mix(in oklab, var(--line) 82%, rgba(168,101,42,.20));
+      background:linear-gradient(180deg, rgba(168,101,42,.07) 0%, color-mix(in oklab, var(--surfaceB) 84%, var(--card)) 100%);
+      box-shadow:0 18px 34px rgba(59,43,22,.08);
+    }
+    .contactIntro{
+      display:grid;
+      gap:12px;
+    }
+    .contactPrimaryNumber{
+      font-size:clamp(30px, 3vw, 42px);
+      line-height:1;
+      font-weight:900;
+      color:var(--ink2);
+      text-decoration:none;
+      letter-spacing:-.03em;
+    }
+    .contactPrimaryEmail{
+      font-size:16px;
+      line-height:1.4;
+      font-weight:700;
+      color:var(--ink2);
+      text-decoration:none;
+      word-break:break-word;
+    }
+    .contactAddress{
+      margin:0;
+      font-size:15px;
+      line-height:1.7;
+    }
+    .contactHours{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      padding:12px 14px;
+      border-radius:var(--radius-sm);
+      background:rgba(168,101,42,.05);
+      border:1px solid rgba(168,101,42,.10);
+      font-size:14px;
+      color:var(--ink2);
+    }
+    .contactActions{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:10px;
+    }
+    .contactActions .btn{
+      min-width:0;
+      min-height:48px;
+      width:100%;
+      justify-content:center;
+    }
+    .contactMetaGrid{
+      display:grid;
+      grid-template-columns:repeat(3, minmax(0, 1fr));
+      gap:10px;
+      margin:0;
+      padding-top:0;
+      border-top:none;
+    }
+    .contactMetaRow{
+      display:flex;
+      flex-direction:column;
+      align-items:flex-start;
+      gap:8px;
+      min-height:108px;
+      padding:14px;
+      border:1px solid color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.16));
+      border-radius:var(--radius-sm);
+      background:color-mix(in oklab, var(--surfaceA) 82%, var(--card));
+    }
+    .contactMetaRow a,
+    .contactMetaRow span:last-child{
+      font-size:15px;
+      line-height:1.55;
+      font-weight:700;
+      color:var(--ink2);
+      text-decoration:none;
+      word-break:break-word;
+    }
+    .contactMetaIcon{
+      width:36px;
+      height:36px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:12px;
+      background:rgba(168,101,42,.12);
+      color:var(--ink2);
+      font-size:16px;
+      flex:0 0 auto;
+    }
+    .contactNote{
+      padding:14px 16px;
+      border-radius:var(--radius-sm);
+      border:1px solid color-mix(in oklab, var(--line) 80%, rgba(168,101,42,.16));
+      background:rgba(168,101,42,.05);
+      font-size:13px;
+      line-height:1.6;
+      color:var(--muted);
+    }
+    .locationMapPanel{
+      display:grid;
+      gap:12px;
+      min-width:0;
+    }
+    .mapWrap{
+      box-shadow:0 18px 34px rgba(59,43,22,.08);
+    }
+    .mapWrap iframe{
+      height:clamp(360px, 40vw, 500px);
+    }
+    .locationInfoStrip{
+      padding:14px 16px;
+      border-radius:var(--radius-md);
+      border:1px solid color-mix(in oklab, var(--line) 82%, rgba(168,101,42,.18));
+      background:linear-gradient(180deg, color-mix(in oklab, var(--surfaceA) 88%, var(--card)) 0%, var(--card) 100%);
+      box-shadow:var(--shadow-xs);
+    }
+    .locationInfoStrip .btn{
+      width:100%;
+      min-height:48px;
+      justify-content:center;
+    }
+    @media (max-width:980px){
+      .locationGrid{
+        grid-template-columns:1fr;
+      }
+      .contactActions{
+        grid-template-columns:1fr;
+      }
+      .contactMetaGrid{
+        grid-template-columns:repeat(2, minmax(0, 1fr));
+      }
+    }
+    @media (max-width:640px){
+      .contactCard{
+        padding:18px;
+      }
+      .contactPrimaryNumber{
+        font-size:30px;
+      }
+      .contactMetaGrid{
+        grid-template-columns:1fr;
+      }
+      .locationInfoStrip{
+        padding:12px 14px;
+      }
+      .mapWrap iframe{
+        height:320px;
+      }
+    }
+
+    .siteFooter{
+      margin-top:clamp(28px, 4vw, 44px);
+      padding-top:18px;
+      padding-bottom:calc(8px + env(safe-area-inset-bottom));
+      border-top:1px solid var(--line);
+    }

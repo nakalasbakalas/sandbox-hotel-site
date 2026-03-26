@@ -810,43 +810,40 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- REVIEWS -->
     <section class="section" id="reviews">
       <div class="card altB pad reviewSectionCard">
-        <div class="head">
+        <div class="head reviewHead">
           <div>
             <h2 data-i18n="reviews_title">Guest Reviews</h2>
             <p data-i18n="reviews_sub">Check location and the latest guest feedback on Google Maps before you book.</p>
           </div>
-          <div class="reviewActionRow">
-          <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="btn_view_maps" data-analytics="map">View on Google Maps<span class="sr-only"> (opens in new tab)</span></a>
-            <a class="btn" href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-i18n-html="btn_view_facebook" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
-          </div>
         </div>
 
-        <div class="reviews">
-          <div class="reviewsLead">
+        <div class="reviews reviewsGrid">
+          <div class="reviewsColumn">
             <div class="review reviewFeatured">
               <b data-i18n-html="review1_title">Business Traveler <span class="stars">★★★★★</span></b>
               <p data-i18n="review1_text">Fast check-in, stable Wi-Fi, and a big room to work in. Great value.</p>
             </div>
-            <div class="review reviewMini">
-              <b data-i18n-html="review2_title">Couple Weekend <span class="stars">★★★★★</span></b>
-              <p data-i18n="review2_text">Clean and comfortable. Easy to message for confirmation. Smooth stay.</p>
-            </div>
-            <div class="review reviewMini">
-              <b data-i18n-html="review3_title">Family Stopover <span class="stars">★★★★☆</span></b>
-              <p data-i18n="review3_text">Spacious room and helpful staff. Parking was convenient.</p>
+            <div class="reviewsStack">
+              <div class="review reviewMini">
+                <b data-i18n-html="review2_title">Couple Weekend <span class="stars">★★★★★</span></b>
+                <p data-i18n="review2_text">Clean and comfortable. Easy to message for confirmation. Smooth stay.</p>
+              </div>
+              <div class="review reviewMini">
+                <b data-i18n-html="review3_title">Family Stopover <span class="stars">★★★★☆</span></b>
+                <p data-i18n="review3_text">Spacious room and helpful staff. Parking was convenient.</p>
+              </div>
             </div>
           </div>
 
-          <div class="reviewsSide">
-            <div class="review reviewMini">
-              <b data-i18n-html="review4_title">Long Stay Guest <span class="stars">★★★★★</span></b>
-              <p data-i18n="review4_text">Quiet, comfortable, and practical amenities. Would stay again.</p>
+          <aside class="reviewTrustPanel" aria-label="Guest review summary">
+            <span class="badge reviewSourceBadge">Google Maps</span>
+            <h3 data-i18n="reviews_panel_title">See the latest guest feedback before you book</h3>
+            <p data-i18n="reviews_panel_copy">Check recent comments, location details, and guest photos on Google Maps for the most current view of the hotel.</p>
+            <div class="reviewActionCard">
+              <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="btn_view_maps" data-analytics="map">View on Google Maps<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn secondary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
             </div>
-            <div class="review reviewMini">
-              <b data-i18n-html="review5_title">Great Location <span class="stars">★★★★★</span></b>
-              <p data-i18n="review5_text">Big room, clean, and convenient location. Easy check-in and friendly staff.</p>
-            </div>
-          </div>
+          </aside>
         </div>
       </div>
     </section>
@@ -859,47 +856,46 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2 data-i18n="faq_title">FAQ</h2>
             <p data-i18n="faq_sub">Quick answers before you book.</p>
           </div>
-        <a class="textLink" href="#book" data-i18n="faq_btn" data-analytics="book-now">Send Request</a>
         </div>
 
         <div class="faqLayout">
-          <div>
+          <div class="faqMain">
             <div class="faqGrid" id="faqGrid" aria-live="polite">
               <details data-faq-item>
                 <summary data-i18n="faq_q1">How do I book the fastest?</summary>
-                <p data-i18n="faq_a1">Call or message us on LINE with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a1">Call or message us on LINE with check-in, check-out, guests, and preferred room type. We'll confirm availability and total price.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q2">What time is check-in and check-out?</summary>
-                <p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a2">Check-in from 14:00 and check-out by 11:00.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q4">Can rates change by date?</summary>
-                <p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a4">Yes. Rates vary by date and season. Send your dates for an exact quote.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q3">What do I need at check-in?</summary>
-                <p data-i18n="faq_a3">A government-issued ID or passport is required for registration.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a3">A government-issued ID or passport is required for registration.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q5">Do you have parking?</summary>
-                <p data-i18n="faq_a5">Yes, guest parking is available (subject to availability).</p>
+                <div class="faqAnswer"><p data-i18n="faq_a5">Yes, guest parking is available (subject to availability).</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q6">Is the hotel suitable for quiet rest?</summary>
-                <p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a6">We aim for quiet rooms; quiet-side allocation is available upon request when possible.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q8">What is the cancellation policy?</summary>
-                <p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a8">Cancellation rules can vary by date/season. Confirm your dates with the hotel for the latest policy.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q7">Is smoking allowed?</summary>
-                <p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a7">For guest comfort, please ask reception about the current smoking policy and designated areas.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q9">Where is Sandbox Hotel located in Nakhon Si Thammarat?</summary>
-                <p data-i18n="faq_a9">Sandbox Hotel is located at 626/1 Karom Road, Pho Sadet, Mueang District, Nakhon Si Thammarat 80000, Thailand. The hotel is centrally situated in Nakhon Si Thammarat city, with easy access to local markets, temples, and the historic old city area.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a9">Sandbox Hotel is located at 626/1 Karom Road, Pho Sadet, Mueang District, Nakhon Si Thammarat 80000, Thailand. The hotel is centrally situated in Nakhon Si Thammarat city, with easy access to local markets, temples, and the historic old city area.</p></div>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q10">What attractions are near the hotel in Nakhon Si Thammarat?</summary>
@@ -907,7 +903,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </details>
               <details data-faq-item>
                 <summary data-i18n="faq_q11">Is Sandbox Hotel a good base for exploring Southern Thailand?</summary>
-                <p data-i18n="faq_a11">Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.</p>
+                <div class="faqAnswer"><p data-i18n="faq_a11">Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.</p></div>
               </details>
             </div>
 
@@ -929,14 +925,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
           </aside>
         </div>
-
-        <div class="faqCTA">
-          <p data-i18n="faq_cta_text">Still have questions? We're happy to help.</p>
-          <div class="faqCTAActions">
-            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
-            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
-          </div>
-        </div>
       </div>
     </section>
 
@@ -953,40 +941,34 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <article class="destGrid">
           <div class="destBlock">
             <h3 data-i18n-html="dest_where_title"><span class="destIcon" aria-hidden="true">📍</span> Where We Are</h3>
-            <p data-i18n="dest_where_body_short">Nakhon Si Thammarat is a historic city in <strong>Southern Thailand</strong> on the Gulf coast, 780 km south of Bangkok. One of the oldest cities in the country, it sits distinct from crowded Andaman beach resorts.</p>
+            <p>Nakhon Si Thammarat is a historic Gulf-coast city in Southern Thailand, around 780 km south of Bangkok and well connected for city stays and regional trips.</p>
           </div>
 
           <div class="destBlock">
             <h3 data-i18n-html="dest_why_title"><span class="destIcon" aria-hidden="true">✨</span> Why Visit</h3>
-            <p data-i18n="dest_why_body_short">Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan — one of Thailand's most significant temples.</p>
+            <p>A quieter base with strong local character, temple heritage, local food, and an easier pace than Thailand’s busier resort hubs.</p>
           </div>
 
           <div class="destBlock">
             <h3 data-i18n-html="dest_attractions_title"><span class="destIcon" aria-hidden="true">🛕</span> Nearby Attractions</h3>
             <ul class="destList">
-              <li><strong>Wat Phra Mahathat</strong> — 1,000-year-old temple complex</li>
-              <li><strong>Bovorn Bazaar &amp; Night Market</strong> — local food and evening browsing</li>
-              <li><strong>Old City Walking Street</strong> — heritage shops and artisan stalls</li>
-              <li><strong>Khanom &amp; Sichon Beaches</strong> — quiet Gulf beaches 60–80 km away</li>
+              <li><strong>Wat Phra Mahathat</strong><span>Historic temple complex and one of the city’s best-known landmarks.</span></li>
+              <li><strong>Bovorn Bazaar</strong><span>Night-market browsing, local snacks, and casual evening atmosphere.</span></li>
+              <li><strong>Old City Walking Street</strong><span>Traditional shops, crafts, and a slower heritage district feel.</span></li>
+              <li><strong>Khanom &amp; Sichon</strong><span>Quiet Gulf beaches for day trips outside the city.</span></li>
             </ul>
           </div>
 
           <div class="destBlock">
             <h3 data-i18n-html="dest_howtoget_title"><span class="destIcon" aria-hidden="true">✈️</span> Getting Here</h3>
             <ul class="destList">
-              <li><strong>By Air</strong> — NST Airport, ~1.5 hours from Bangkok</li>
-              <li><strong>By Train</strong> — Overnight sleeper, ~12–14 hours</li>
-              <li><strong>By Bus</strong> — Southern Bus Terminal, ~10–12 hours</li>
+              <li><strong>By Air</strong><span>NST Airport, about 1.5 hours from Bangkok.</span></li>
+              <li><strong>By Train</strong><span>Overnight routes from Bangkok, around 12–14 hours.</span></li>
+              <li><strong>By Bus</strong><span>Southern Bus Terminal services, roughly 10–12 hours.</span></li>
             </ul>
             <p class="fine" data-i18n="dest_howtoget_note">Sandbox Hotel is a short drive from city centre. Airport transfers available — ask when you book.</p>
           </div>
         </article>
-
-        <div class="destCTA">
-          <p class="fine" data-i18n="dest_cta_text">Learn more about hotels and stays in the region:</p>
-          <a class="textLink" href="/hotels/nakhon-si-thammarat/" data-i18n="dest_link_city">Hotels in Nakhon Si Thammarat →</a>
-          <a class="textLink" href="/hotels/southern-thailand/" data-i18n="dest_link_south">Hotels in Southern Thailand →</a>
-        </div>
       </div>
     </section>
 
@@ -1002,15 +984,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
         <div class="locationGrid">
           <div class="contactCard">
-            <p class="muted contactAddress">
-              <b data-i18n="loc_address">Address:</b>
-              626/1, Karom Road, Pho Sadet, Mueang, Nakhon Si Thammarat, 80000<br>
-              <span class="fine"><span data-i18n="loc_plus">Plus Code:</span> CWMG+QJ</span>
-            </p>
+            <div class="contactIntro">
+              <a class="contactPrimaryNumber" href="tel:+66885783478" data-analytics="call">088-578-3478</a>
+              <a class="contactPrimaryEmail" href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
+              <p class="muted contactAddress">
+                <b data-i18n="loc_address">Address:</b>
+                626/1, Karom Road, Pho Sadet, Mueang, Nakhon Si Thammarat, 80000<br>
+                <span class="fine"><span data-i18n="loc_plus">Plus Code:</span> CWMG+QJ</span>
+              </p>
 
-            <div class="contactHours">
-              <span aria-hidden="true">🕐</span>
-              <span data-i18n="loc_hours">Daily support: 06:00–22:00</span>
+              <div class="contactHours">
+                <span aria-hidden="true">🕐</span>
+                <span data-i18n="loc_hours">Daily support: 06:00–22:00</span>
+              </div>
             </div>
 
             <div class="contactActions">
@@ -1019,7 +1005,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a class="btn" href="mailto:booking@sandboxhotel.com" data-i18n="btn_email" data-analytics="email">Email</a>
             </div>
 
-            <div class="contactMeta fine">
+            <div class="contactMeta contactMetaGrid fine">
               <div class="contactMetaRow">
                 <span class="contactMetaIcon" aria-hidden="true">📞</span>
                 <a href="tel:+66885783478" data-analytics="call">088-578-3478</a>
@@ -1034,52 +1020,53 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
             </div>
 
-            <p class="fine contactSecondary">
-              <a href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map">Open in Google Maps<span class="sr-only"> (opens in new tab)</span></a> ·
-              <a href="https://web.facebook.com/sandboxhotel" target="_blank" rel="noopener" data-analytics="social">Facebook<span class="sr-only"> (opens in new tab)</span></a>
-            </p>
-
-            <div class="fine">
+            <div class="contactNote fine">
               <span data-i18n="loc_notes">Notes: Policies may vary by season. For the latest info, contact the hotel directly.</span>
             </div>
           </div>
 
-          <div class="mapWrap" aria-label="Google Map">
-            <iframe
-              title="Sandbox Hotel location map"
-              loading="lazy"
-              referrerpolicy="strict-origin"
-              sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
-              src="https://www.google.com/maps?q=CWMG%2BQJ%20Nakhon%20Si%20Thammarat%2C%20Thailand&output=embed">
-            </iframe>
+          <div class="locationMapPanel">
+            <div class="mapWrap" aria-label="Google Map">
+              <iframe
+                title="Sandbox Hotel location map"
+                loading="lazy"
+                referrerpolicy="strict-origin"
+                sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+                src="https://www.google.com/maps?q=CWMG%2BQJ%20Nakhon%20Si%20Thammarat%2C%20Thailand&output=embed">
+              </iframe>
+            </div>
+
+            <div class="locationInfoStrip">
+              <a class="btn secondary" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map">Open in Google Maps<span class="sr-only"> (opens in new tab)</span></a>
+            </div>
           </div>
         </div>
-
-        <footer>
-          <div class="footerBrand">
-            <div class="logo footerLogo">
-              <img src="assets/images/logo/logo-64.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w" sizes="44px" alt="Sandbox Hotel logo" width="44" height="44" loading="lazy" decoding="async">
-            </div>
-            <div class="footerBrandText">
-              <span class="footerBrandName">Sandbox Hotel</span>
-              <span class="footerBrandCopy">© <span id="y"></span> Nakhon Si Thammarat, Thailand</span>
-            </div>
-          </div>
-
-          <div class="footerMeta">
-            <div class="footerLang" aria-label="Language">
-              <span class="fine" data-i18n="footer_lang">Language:</span>
-              <button class="chip langBtn" type="button" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span></button>
-              <button class="chip langBtn" type="button" data-lang="en" aria-label="English" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span></button>
-              <button class="chip langBtn" type="button" data-lang="zh" aria-label="中文（简体）" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span></button>
-            </div>
-
-            <div><a href="#top" data-i18n="back_to_top">Back to top</a></div>
-          </div>
-        </footer>
       </div>
     </section>
   </main>
+
+  <footer class="wrap siteFooter">
+    <div class="footerBrand">
+      <div class="logo footerLogo">
+        <img src="assets/images/logo/logo-64.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w" sizes="44px" alt="Sandbox Hotel logo" width="44" height="44" loading="lazy" decoding="async">
+      </div>
+      <div class="footerBrandText">
+        <span class="footerBrandName">Sandbox Hotel</span>
+        <span class="footerBrandCopy">© <span id="y"></span> Nakhon Si Thammarat, Thailand</span>
+      </div>
+    </div>
+
+    <div class="footerMeta">
+      <div class="footerLang" aria-label="Language">
+        <span class="fine" data-i18n="footer_lang">Language:</span>
+        <button class="chip langBtn" type="button" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true"><span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span></button>
+        <button class="chip langBtn" type="button" data-lang="en" aria-label="English" aria-pressed="false"><span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span></button>
+        <button class="chip langBtn" type="button" data-lang="zh" aria-label="中文（简体）" aria-pressed="false"><span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span></button>
+      </div>
+
+      <div><a href="#top" data-i18n="back_to_top">Back to top</a></div>
+    </div>
+  </footer>
 
   <script defer src="assets/js/home.js"></script>
 
