@@ -569,3 +569,111 @@ def test_housekeeping_cannot_trigger_restricted_resend_actions(app_factory):
         data={"language": "en"},
     )
     assert response.status_code == 403
+
+
+def test_send_smtp_test_email_raises_when_smtp_not_configured(app_factory):
+    app = app_factory(config={"SMTP_HOST": ""})
+    from pms.services.notification_service import send_smtp_test_email
+
+    with app.app_context():
+        try:
+            send_smtp_test_email("tester@example.com")
+            assert False, "Expected ValueError when SMTP_HOST is empty"
+        except ValueError as exc:
+            assert "SMTP is not configured" in str(exc)
+
+
+def test_send_smtp_test_email_sends_via_starttls(app_factory):
+    app = app_factory(
+        config={
+            "SMTP_HOST": "smtp.example.com",
+            "SMTP_PORT": 587,
+            "SMTP_USERNAME": "mailer@example.com",
+            "SMTP_PASSWORD": "top-secret",
+            "SMTP_USE_TLS": True,
+            "SMTP_USE_SSL": False,
+            "MAIL_FROM": "reservations@example.com",
+        }
+    )
+    captured: dict[str, FakeSMTPClient] = {}
+
+    def fake_smtp(host: str, port: int, *, timeout: int | None = None):
+        client = FakeSMTPClient(host, port, timeout=timeout)
+        captured["client"] = client
+        return client
+
+    from pms.services.notification_service import send_smtp_test_email
+
+    with app.app_context():
+        with patch("pms.services.notification_service.smtplib.SMTP", side_effect=fake_smtp):
+            send_smtp_test_email("admin@example.com")
+
+    assert captured["client"].host == "smtp.example.com"
+    assert captured["client"].port == 587
+    assert captured["client"].starttls_context is not None
+    assert captured["client"].logged_in == ("mailer@example.com", "top-secret")
+    assert captured["client"].message["To"] == "admin@example.com"
+    assert captured["client"].message["From"] == "reservations@example.com"
+    assert "SMTP test" in captured["client"].message["Subject"]
+
+
+def test_admin_communications_page_shows_smtp_status(app_factory):
+    app = app_factory(
+        seed=True,
+        config={
+            "SMTP_HOST": "smtp.myhotel.com",
+            "SMTP_PORT": 587,
+            "SMTP_USE_TLS": True,
+            "SMTP_USE_SSL": False,
+            "MAIL_FROM": "reservations@myhotel.com",
+        },
+    )
+    client = app.test_client()
+    with app.app_context():
+        admin = db.session.scalar(db.select(User).where(User.email == "admin@sandbox.local"))
+
+    login_as(client, admin)
+    response = client.get("/staff/admin/communications")
+    assert response.status_code == 200
+    body = response.get_data(as_text=True)
+    assert "smtp.myhotel.com" in body
+    assert "reservations@myhotel.com" in body
+    assert "SMTP configured" in body
+
+
+def test_admin_communications_send_test_email_action(app_factory):
+    app = app_factory(
+        seed=True,
+        config={
+            "SMTP_HOST": "smtp.example.com",
+            "SMTP_PORT": 587,
+            "SMTP_USERNAME": "mailer@example.com",
+            "SMTP_PASSWORD": "pw",
+            "SMTP_USE_TLS": True,
+            "SMTP_USE_SSL": False,
+            "MAIL_FROM": "reservations@example.com",
+        },
+    )
+    client = app.test_client()
+    with app.app_context():
+        admin = db.session.scalar(db.select(User).where(User.email == "admin@sandbox.local"))
+
+    login_as(client, admin)
+
+    captured: dict[str, FakeSMTPClient] = {}
+
+    def fake_smtp(host: str, port: int, *, timeout: int | None = None):
+        c = FakeSMTPClient(host, port, timeout=timeout)
+        captured["client"] = c
+        return c
+
+    with patch("pms.services.notification_service.smtplib.SMTP", side_effect=fake_smtp):
+        response = post_form(
+            client,
+            "/staff/admin/communications",
+            data={"action": "send_test_email", "test_recipient": "admin@example.com"},
+        )
+
+    assert response.status_code == 302
+    assert "client" in captured
+    assert captured["client"].message["To"] == "admin@example.com"

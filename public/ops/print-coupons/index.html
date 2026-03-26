@@ -136,7 +136,7 @@
     /* ── Layout Selector ───────────────────────────────────── */
     .layout-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 8px;
     }
     .layout-thumb {
@@ -618,6 +618,110 @@
     }
     .coupon-gift .actionUrl { text-align: center; font-size: 10px; line-height: 1.2; color: #7a6e5f; word-break: break-word; }
 
+    /* ── OVERLAY layout (booking-site banner) ────────────── */
+    .coupon-overlay {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      flex: 1;
+      min-height: 0;
+      font-family: var(--c-font);
+      display: flex;
+      flex-direction: column;
+    }
+    .coupon-overlay .overlay-image {
+      position: absolute; inset: 0; z-index: 0;
+    }
+    .coupon-overlay .overlay-image img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+    }
+    .coupon-overlay .overlay-image::after {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(0,0,0,.10) 0%, rgba(0,0,0,.25) 40%, rgba(0,0,0,.65) 100%);
+    }
+    .coupon-overlay .overlay-content {
+      position: relative; z-index: 1;
+      flex: 1;
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: 28px 32px;
+      gap: 8px;
+    }
+    .coupon-overlay .overlay-brand {
+      font-size: 14px; font-weight: 800; color: rgba(255,255,255,.85);
+      letter-spacing: .06em; text-transform: uppercase;
+      text-shadow: 0 1px 6px rgba(0,0,0,.4);
+    }
+    .coupon-overlay .overlay-headline {
+      font-size: 32px; font-weight: 900; line-height: 1.1; color: #fff;
+      text-shadow: 0 2px 12px rgba(0,0,0,.5);
+    }
+    .coupon-overlay .overlay-body {
+      font-size: 14px; line-height: 1.4; color: rgba(255,255,255,.9);
+      font-weight: 600;
+      text-shadow: 0 1px 4px rgba(0,0,0,.35);
+    }
+    .coupon-overlay .overlay-cta-banner {
+      margin-top: 8px;
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+    }
+    .coupon-overlay .overlay-cta-btn {
+      display: inline-block;
+      font-size: 15px; font-weight: 900; text-transform: uppercase;
+      letter-spacing: .08em; color: #fff;
+      background: linear-gradient(135deg, var(--c-cta), var(--accent-2));
+      border-radius: 8px;
+      padding: 14px 32px; line-height: 1;
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+    }
+    .coupon-overlay .overlay-code {
+      font-size: 16px; font-weight: 900; letter-spacing: .1em;
+      color: #fff; text-transform: uppercase;
+      background: rgba(255,255,255,.18);
+      border: 1.5px solid rgba(255,255,255,.35);
+      border-radius: 6px;
+      padding: 10px 18px; line-height: 1;
+      backdrop-filter: blur(4px);
+    }
+    .coupon-overlay .overlay-terms {
+      font-size: 9px; line-height: 1.3; color: rgba(255,255,255,.6);
+      margin-top: 2px;
+    }
+    .coupon-overlay .overlay-url {
+      font-size: 11px; color: rgba(255,255,255,.55);
+      word-break: break-word;
+    }
+
+    /* ── Text size custom overrides ───────────────────────── */
+    .page[data-align="left"]  .offerHeadline, .page[data-align="left"]  .offerBody,
+    .page[data-align="left"]  .offerTerms, .page[data-align="left"]  .overlay-headline,
+    .page[data-align="left"]  .overlay-body, .page[data-align="left"]  .overlay-terms { text-align: left; }
+    .page[data-align="center"] .offerHeadline, .page[data-align="center"] .offerBody,
+    .page[data-align="center"] .offerTerms, .page[data-align="center"] .overlay-headline,
+    .page[data-align="center"] .overlay-body, .page[data-align="center"] .overlay-terms { text-align: center; }
+    .page[data-align="right"]  .offerHeadline, .page[data-align="right"]  .offerBody,
+    .page[data-align="right"]  .offerTerms, .page[data-align="right"]  .overlay-headline,
+    .page[data-align="right"]  .overlay-body, .page[data-align="right"]  .overlay-terms { text-align: right; }
+
+    /* Text size & alignment controls UI */
+    .size-row { display: flex; align-items: center; gap: 8px; }
+    .size-row label { display: flex; align-items: center; gap: 6px; flex: 1; min-width: 0; font-size: 11px; }
+    .size-row input[type="range"] {
+      flex: 1; min-width: 60px; height: 6px; accent-color: var(--accent);
+      border: none; padding: 0; min-height: auto; background: transparent;
+    }
+    .size-row .size-val { font-size: 11px; font-weight: 800; color: var(--accent); min-width: 30px; text-align: right; }
+    .align-row { display: flex; gap: 4px; }
+    .align-btn {
+      flex: 1; min-height: 34px; border: 1px solid var(--border);
+      background: var(--panel-2); border-radius: 8px; cursor: pointer;
+      font-size: 11px; font-weight: 700; color: var(--text);
+      transition: border-color .15s, background .15s;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .align-btn:hover { border-color: var(--accent-2); }
+    .align-btn.active { border-color: var(--accent); background: rgba(168,101,42,.08); color: var(--accent); }
+
     /* Strip grid modes */
     .page.layout-strip { flex-direction: column; }
     .page.layout-strip .coupon-strip { grid-template-columns: minmax(0,1.3fr) minmax(0,1.6fr) 48mm; }
@@ -635,6 +739,89 @@
     /* Gift certificate */
     .page.layout-gift { flex-direction: column; }
 
+    /* Overlay stacking */
+    .page.layout-overlay { flex-direction: column; }
+
+    /* ── Premium Options ───────────────────────────────────── */
+
+    /* Expiry line */
+    .expiry-line {
+      font-size: 7px; line-height: 1.3; color: #7a7068;
+      margin-top: 2px; font-style: italic;
+    }
+    .coupon-voucher .expiry-line { font-size: 9px; }
+    .coupon-gift    .expiry-line { font-size: 11px; }
+    .coupon-overlay .expiry-line { font-size: 10px; color: rgba(255,255,255,.6); }
+
+    /* Border styles */
+    .page[data-border="dashed"]  .coupon-strip,
+    .page[data-border="dashed"]  .coupon-card,
+    .page[data-border="dashed"]  .coupon-voucher,
+    .page[data-border="dashed"]  .coupon-gift,
+    .page[data-border="dashed"]  .coupon-overlay  { border-style: dashed; }
+    .page[data-border="double"]  .coupon-strip,
+    .page[data-border="double"]  .coupon-card,
+    .page[data-border="double"]  .coupon-voucher,
+    .page[data-border="double"]  .coupon-gift,
+    .page[data-border="double"]  .coupon-overlay  { border: 3px double #d1c8bb; }
+    .page[data-border="double"]  .coupon-gift     { border-color: var(--c-accent); }
+    .page[data-border="elegant"] .coupon-strip,
+    .page[data-border="elegant"] .coupon-card,
+    .page[data-border="elegant"] .coupon-voucher,
+    .page[data-border="elegant"] .coupon-gift,
+    .page[data-border="elegant"] .coupon-overlay  { border: 3px double #d1c8bb; box-shadow: inset 0 0 0 3px rgba(191,163,80,.25); }
+    .page[data-border="elegant"] .coupon-gift     { border-color: var(--c-accent); }
+
+    /* Corner styles */
+    .page[data-corners="sharp"]   .coupon-strip,
+    .page[data-corners="sharp"]   .coupon-card,
+    .page[data-corners="sharp"]   .coupon-voucher,
+    .page[data-corners="sharp"]   .coupon-gift,
+    .page[data-corners="sharp"]   .coupon-overlay  { border-radius: 0; }
+    .page[data-corners="pill"]    .coupon-strip,
+    .page[data-corners="pill"]    .coupon-card,
+    .page[data-corners="pill"]    .coupon-voucher,
+    .page[data-corners="pill"]    .coupon-gift,
+    .page[data-corners="pill"]    .coupon-overlay  { border-radius: 24px; }
+
+    /* CTA button styles */
+    .page[data-cta-style="outline"] .cta-btn,
+    .page[data-cta-style="outline"] .overlay-cta-btn {
+      background: transparent !important;
+      border: 2px solid var(--c-cta);
+      color: var(--c-cta) !important;
+      box-shadow: none;
+    }
+    .page[data-cta-style="pill"] .cta-btn,
+    .page[data-cta-style="pill"] .overlay-cta-btn {
+      border-radius: 999px !important;
+    }
+
+    /* Image overlay opacity — uses CSS custom property */
+    .page .coupon-strip  .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.2*var(--img-overlay-opacity,1))), rgba(237,224,207,calc(.55*var(--img-overlay-opacity,1))) 35%, rgba(220,197,168,calc(.78*var(--img-overlay-opacity,1)))); }
+    .page .coupon-card   .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.25*var(--img-overlay-opacity,1))), rgba(237,224,207,calc(.6*var(--img-overlay-opacity,1))) 35%, rgba(220,197,168,calc(.85*var(--img-overlay-opacity,1)))); }
+    .page .coupon-voucher .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.15*var(--img-overlay-opacity,1))), rgba(220,197,168,calc(.8*var(--img-overlay-opacity,1)))); }
+    .page .coupon-gift   .brandImage::after { background: linear-gradient(180deg, rgba(250,246,240,calc(.05*var(--img-overlay-opacity,1))), rgba(220,197,168,calc(.85*var(--img-overlay-opacity,1)))); }
+    .page .coupon-overlay .overlay-image::after { background: linear-gradient(180deg, rgba(0,0,0,calc(.10*var(--img-overlay-opacity,1))) 0%, rgba(0,0,0,calc(.25*var(--img-overlay-opacity,1))) 40%, rgba(0,0,0,calc(.65*var(--img-overlay-opacity,1))) 100%); }
+
+    /* Watermark pattern */
+    .page[data-watermark="true"] .coupon-strip::before,
+    .page[data-watermark="true"] .coupon-card::before,
+    .page[data-watermark="true"] .coupon-voucher::before,
+    .page[data-watermark="true"] .coupon-gift::before,
+    .page[data-watermark="true"] .coupon-overlay::before {
+      content: "";
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      opacity: 0.035;
+      background-image: url("data:image/svg+xml,%3Csvg width='20' height='20' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='10' cy='10' r='1.5' fill='%23000'/%3E%3Cpath d='M10 4l2 6-2 6-2-6z' fill='none' stroke='%23000' stroke-width='.5'/%3E%3C/svg%3E");
+      background-size: 20px 20px;
+    }
+    .page[data-watermark="true"] .coupon-strip,
+    .page[data-watermark="true"] .coupon-card,
+    .page[data-watermark="true"] .coupon-voucher,
+    .page[data-watermark="true"] .coupon-gift,
+    .page[data-watermark="true"] .coupon-overlay { position: relative; }
+
     /* ── Responsive ────────────────────────────────────────── */
     @media (max-width: 1200px) {
       .shell { grid-template-columns: 1fr; }
@@ -645,7 +832,7 @@
       .grid2, .grid3, .grid4, .actions { grid-template-columns: 1fr; }
       .layout-grid { grid-template-columns: repeat(2, 1fr); }
       .paperWrap { padding: 0; background: none; border-top: none; }
-      .page { transform-origin: top center; transform: scale(.45); margin: -80px auto -80px; }
+      .page { transform-origin: top center; transform: scale(.45); margin: 0 auto calc(297mm * 0.45 - 297mm); }
     }
 
     /* ── Print ─────────────────────────────────────────────── */
@@ -690,6 +877,10 @@
           <button type="button" class="layout-thumb" data-layout="gift">
             <svg viewBox="0 0 60 60"><rect x="6" y="4" width="48" height="52" rx="4" fill="#A8652A" opacity=".6"/><rect x="14" y="20" width="32" height="6" rx="2" fill="#fff" opacity=".6"/><rect x="20" y="32" width="20" height="6" rx="2" fill="#fff" opacity=".6"/></svg>
             <span class="lt-label">ใบรับรอง (Gift)</span>
+          </button>
+          <button type="button" class="layout-thumb" data-layout="overlay">
+            <svg viewBox="0 0 60 60"><rect x="4" y="4" width="52" height="52" rx="4" fill="#A8652A" opacity=".35"/><rect x="4" y="4" width="52" height="52" rx="4" fill="url(#overlayThumbGrad)" opacity=".6"/><rect x="10" y="30" width="30" height="5" rx="2" fill="#fff" opacity=".9"/><rect x="10" y="38" width="20" height="4" rx="1.5" fill="#fff" opacity=".6"/><rect x="10" y="46" width="16" height="6" rx="3" fill="#A8652A" opacity=".9"/><defs><linearGradient id="overlayThumbGrad" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#000" stop-opacity="0"/><stop offset="100%" stop-color="#000" stop-opacity=".7"/></linearGradient></defs></svg>
+            <span class="lt-label">โอเวอร์เลย์ (Overlay)</span>
           </button>
         </div>
 
@@ -831,6 +1022,95 @@
 
         <hr class="sep">
 
+        <!-- Text Size & Placement -->
+        <div class="section-title">ขนาดตัวอักษร & ตำแหน่ง (Text Size & Placement)</div>
+        <div class="group">
+          <div class="size-row">
+            <label>หัวข้อ (Headline)
+              <input type="range" id="sizeHeadline" min="0" max="60" value="0">
+            </label>
+            <span class="size-val" id="sizeHeadlineVal">auto</span>
+          </div>
+          <div class="size-row">
+            <label>รายละเอียด (Body)
+              <input type="range" id="sizeBody" min="0" max="30" value="0">
+            </label>
+            <span class="size-val" id="sizeBodyVal">auto</span>
+          </div>
+          <div class="size-row">
+            <label>โค้ด (Code)
+              <input type="range" id="sizeCode" min="0" max="40" value="0">
+            </label>
+            <span class="size-val" id="sizeCodeVal">auto</span>
+          </div>
+          <div class="size-row">
+            <label>ปุ่ม CTA
+              <input type="range" id="sizeCta" min="0" max="30" value="0">
+            </label>
+            <span class="size-val" id="sizeCtaVal">auto</span>
+          </div>
+        </div>
+        <div class="group">
+          <label style="margin-bottom:2px">จัดแนวข้อความ (Text Align)</label>
+          <div class="align-row" id="alignRow">
+            <button type="button" class="align-btn" data-align="left">◧ ซ้าย</button>
+            <button type="button" class="align-btn active" data-align="auto">⊡ อัตโนมัติ</button>
+            <button type="button" class="align-btn" data-align="center">◫ กลาง</button>
+            <button type="button" class="align-btn" data-align="right">◨ ขวา</button>
+          </div>
+        </div>
+
+        <hr class="sep">
+
+        <!-- Premium Options -->
+        <div class="section-title">ตัวเลือกพรีเมียม (Premium Options)</div>
+        <div class="group">
+          <label>วันหมดอายุ (Expiry Date)
+            <input type="date" id="expiryDate">
+          </label>
+        </div>
+        <div class="group">
+          <label style="margin-bottom:2px">กรอบ (Border Style)</label>
+          <div class="align-row" id="borderStyleRow">
+            <button type="button" class="align-btn active" data-border="default">ปกติ</button>
+            <button type="button" class="align-btn" data-border="dashed">เส้นประ</button>
+            <button type="button" class="align-btn" data-border="double">คู่</button>
+            <button type="button" class="align-btn" data-border="elegant">หรูหรา</button>
+          </div>
+        </div>
+        <div class="group">
+          <label style="margin-bottom:2px">มุม (Corner Style)</label>
+          <div class="align-row" id="cornerStyleRow">
+            <button type="button" class="align-btn" data-corner="sharp">▢ คม</button>
+            <button type="button" class="align-btn active" data-corner="rounded">▣ โค้ง</button>
+            <button type="button" class="align-btn" data-corner="pill">⬭ เม็ดยา</button>
+          </div>
+        </div>
+        <div class="group">
+          <label style="margin-bottom:2px">สไตล์ปุ่ม CTA (CTA Button Style)</label>
+          <div class="align-row" id="ctaStyleRow">
+            <button type="button" class="align-btn active" data-ctastyle="filled">■ เต็ม</button>
+            <button type="button" class="align-btn" data-ctastyle="outline">□ เส้นขอบ</button>
+            <button type="button" class="align-btn" data-ctastyle="pill">● เม็ดยา</button>
+          </div>
+        </div>
+        <div class="group">
+          <div class="size-row">
+            <label>ภาพซ้อนทับ (Image Overlay)
+              <input type="range" id="overlayOpacity" min="0" max="100" value="50">
+            </label>
+            <span class="size-val" id="overlayOpacityVal">50%</span>
+          </div>
+        </div>
+        <div class="group">
+          <label class="imageToggle" for="watermarkToggle">
+            <input type="checkbox" id="watermarkToggle">
+            <span>ลายน้ำตกแต่ง (Decorative Watermark)</span>
+          </label>
+        </div>
+
+        <hr class="sep">
+
         <!-- Image Controls -->
         <div class="section-title">รูปภาพ (Image)</div>
         <div class="group">
@@ -935,6 +1215,7 @@
       card:    [2, 4, 6],
       voucher: [1, 2],
       gift:    [1],
+      overlay: [1, 2],
     };
 
     /* ── State ────────────────────────────────────────────── */
@@ -948,6 +1229,14 @@
       selectedImage: 0,
       showImage: true,
       useUploadedImage: false,
+      textSizes: { headline: 0, body: 0, code: 0, cta: 0 },
+      textAlign: 'auto',
+      expiryDate: '',
+      borderStyle: 'default',
+      cornerStyle: 'rounded',
+      ctaStyle: 'filled',
+      overlayOpacity: 50,
+      watermark: false,
     };
 
     let uploadedDataUrl = null;
@@ -986,7 +1275,7 @@
         quantitySelect.appendChild(o);
       });
       if (!opts.includes(state.quantity)) {
-        state.quantity = opts[opts.length - 1];
+        state.quantity = opts[0];
       }
       quantitySelect.value = state.quantity;
     }
@@ -1043,6 +1332,87 @@
       r.setProperty('--c-text', state.colors.text);
       r.setProperty('--c-cta', state.colors.cta);
     }
+
+    /* ── Text Size Sliders ────────────────────────────────── */
+    const SIZE_SLIDER_MAP = {
+      sizeHeadline: 'headline',
+      sizeBody: 'body',
+      sizeCode: 'code',
+      sizeCta: 'cta',
+    };
+    Object.entries(SIZE_SLIDER_MAP).forEach(([elId, key]) => {
+      const slider = document.getElementById(elId);
+      const valEl = document.getElementById(elId + 'Val');
+      slider.addEventListener('input', () => {
+        const v = parseInt(slider.value, 10);
+        state.textSizes[key] = v;
+        valEl.textContent = v === 0 ? 'auto' : v + 'px';
+        render();
+      });
+    });
+    function applyTextSizeUI() {
+      Object.entries(SIZE_SLIDER_MAP).forEach(([elId, key]) => {
+        const slider = document.getElementById(elId);
+        const valEl = document.getElementById(elId + 'Val');
+        const v = state.textSizes[key] || 0;
+        slider.value = v;
+        valEl.textContent = v === 0 ? 'auto' : v + 'px';
+      });
+    }
+
+    /* ── Text Alignment Buttons ───────────────────────────── */
+    $$('#alignRow .align-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.textAlign = btn.dataset.align;
+        $$('#alignRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.align === state.textAlign));
+        render();
+      });
+    });
+
+    /* ── Premium Option Controls ──────────────────────────── */
+    document.getElementById('expiryDate').addEventListener('change', function () {
+      state.expiryDate = this.value;
+      render();
+    });
+
+    $$('#borderStyleRow .align-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.borderStyle = btn.dataset.border;
+        $$('#borderStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.border === state.borderStyle));
+        render();
+      });
+    });
+
+    $$('#cornerStyleRow .align-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.cornerStyle = btn.dataset.corner;
+        $$('#cornerStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.corner === state.cornerStyle));
+        render();
+      });
+    });
+
+    $$('#ctaStyleRow .align-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        state.ctaStyle = btn.dataset.ctastyle;
+        $$('#ctaStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.ctastyle === state.ctaStyle));
+        render();
+      });
+    });
+
+    const overlaySlider = document.getElementById('overlayOpacity');
+    const overlaySliderVal = document.getElementById('overlayOpacityVal');
+    overlaySlider.addEventListener('input', () => {
+      const v = parseInt(overlaySlider.value, 10);
+      state.overlayOpacity = v;
+      overlaySliderVal.textContent = v + '%';
+      render();
+    });
+
+    const watermarkToggle = document.getElementById('watermarkToggle');
+    watermarkToggle.addEventListener('change', () => {
+      state.watermark = watermarkToggle.checked;
+      render();
+    });
 
     /* ── Drag & Drop Section Ordering ─────────────────────── */
     let dragSrcEl = null;
@@ -1210,16 +1580,32 @@
       return _escEl.innerHTML;
     }
 
+    function formatExpiryDate(dateStr) {
+      if (!dateStr) return '';
+      var parts = dateStr.split('-');
+      var y = parseInt(parts[0], 10);
+      var m = parseInt(parts[1], 10) - 1;
+      var d = parseInt(parts[2], 10);
+      var thaiMonths = ['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
+      var buddhistYear = y + 543; /* Gregorian → Buddhist Era offset */
+      return d + ' ' + thaiMonths[m] + ' ' + buddhistYear;
+    }
+
+    function buildExpiryHTML() {
+      if (!state.expiryDate) return '';
+      return '<div class="expiry-line">ใช้ได้ถึง (Valid until) ' + escHTML(formatExpiryDate(state.expiryDate)) + '</div>';
+    }
+
     function buildBrandHTML(v, layout) {
       const imgSrc = getImageSrc();
       const imgAlt = getImageAlt();
       const noImg = (!state.showImage || !imgSrc) ? ' no-image' : '';
       const imgTag = (state.showImage && imgSrc)
-        ? '<div class="brandImage"><img src="' + imgSrc + '" alt="' + imgAlt + '"></div>'
-        : '<div class="brandImage"><img src="" alt=""></div>';
+        ? '<div class="brandImage"><img src="' + imgSrc + '" alt="' + escHTML(imgAlt) + '"></div>'
+        : '<div class="brandImage"></div>';
       const qrHTML = qrDataUrl
         ? '<div class="brandQr"><img src="' + qrDataUrl + '" alt="LINE QR"></div>'
-        : '<div class="brandQr hidden"><img src="" alt="LINE QR"></div>';
+        : '<div class="brandQr hidden"></div>';
       return '<div class="c-brand' + noImg + '">'
         + imgTag
         + '<div class="brandInner">'
@@ -1234,6 +1620,7 @@
         + '<div class="offerHeadline">' + escHTML(v.headline || '') + '</div>'
         + '<div class="offerBody">' + escHTML(v.subline || '') + '</div>'
         + '<div class="offerTerms">' + escHTML(v.terms || '') + '</div>'
+        + buildExpiryHTML()
         + '</div>';
     }
     function buildActionHTML(v, layout) {
@@ -1256,6 +1643,27 @@
         + '</div>';
     }
 
+    function buildOverlayHTML(v) {
+      const imgSrc = getImageSrc();
+      const imgAlt = getImageAlt();
+      const imgTag = imgSrc
+        ? '<div class="overlay-image"><img src="' + imgSrc + '" alt="' + escHTML(imgAlt) + '"></div>'
+        : '<div class="overlay-image" style="background:#3a2c1c"></div>';
+      return imgTag
+        + '<div class="overlay-content">'
+        + '<div class="overlay-brand">' + escHTML(v.businessName || 'Sandbox Hotel') + '</div>'
+        + '<div class="overlay-headline">' + escHTML(v.headline || '') + '</div>'
+        + '<div class="overlay-body">' + escHTML(v.subline || '') + '</div>'
+        + '<div class="overlay-cta-banner">'
+        + '<div class="overlay-cta-btn">' + escHTML(v.cta || 'จองเลย') + '</div>'
+        + (v.code ? '<div class="overlay-code">' + escHTML((v.code || '').toUpperCase()) + '</div>' : '')
+        + '</div>'
+        + (v.terms ? '<div class="overlay-terms">' + escHTML(v.terms) + '</div>' : '')
+        + buildExpiryHTML()
+        + (v.url ? '<div class="overlay-url">' + escHTML(v.url) + '</div>' : '')
+        + '</div>';
+    }
+
     /* ── Render ────────────────────────────────────────────── */
     function render() {
       const v = getFieldValues();
@@ -1267,30 +1675,73 @@
       page.className = 'page layout-' + layout;
       page.innerHTML = '';
 
-      const sectionBuilders = {
-        brand: buildBrandHTML,
-        offer: buildOfferHTML,
-        action: buildActionHTML,
-      };
+      /* Text alignment */
+      if (state.textAlign && state.textAlign !== 'auto') {
+        page.setAttribute('data-align', state.textAlign);
+      } else {
+        page.removeAttribute('data-align');
+      }
 
-      for (let i = 0; i < qty; i++) {
-        const coupon = document.createElement('article');
-        const className = 'coupon-' + layout;
-        coupon.className = className;
+      /* Premium options — data attributes */
+      if (state.borderStyle && state.borderStyle !== 'default') {
+        page.setAttribute('data-border', state.borderStyle);
+      } else {
+        page.removeAttribute('data-border');
+      }
+      if (state.cornerStyle && state.cornerStyle !== 'rounded') {
+        page.setAttribute('data-corners', state.cornerStyle);
+      } else {
+        page.removeAttribute('data-corners');
+      }
+      if (state.ctaStyle && state.ctaStyle !== 'filled') {
+        page.setAttribute('data-cta-style', state.ctaStyle);
+      } else {
+        page.removeAttribute('data-cta-style');
+      }
+      if (state.watermark) {
+        page.setAttribute('data-watermark', 'true');
+      } else {
+        page.removeAttribute('data-watermark');
+      }
+      /* Overlay opacity: 50/50=1.0 preserves original look at default midpoint */
+      page.style.setProperty('--img-overlay-opacity', state.overlayOpacity / 50);
 
-        let html = '';
-        state.sectionOrder.forEach(sec => {
-          html += sectionBuilders[sec](v, layout);
-        });
-        coupon.innerHTML = html;
-
-        /* For strip layout: set grid columns based on section order */
-        if (layout === 'strip') {
-          const colMap = { brand: 'minmax(0,1.3fr)', offer: 'minmax(0,1.6fr)', action: '48mm' };
-          coupon.style.gridTemplateColumns = state.sectionOrder.map(s => colMap[s]).join(' ');
+      if (layout === 'overlay') {
+        /* Overlay uses its own builder — no section ordering */
+        for (let i = 0; i < qty; i++) {
+          const coupon = document.createElement('article');
+          coupon.className = 'coupon-overlay';
+          coupon.innerHTML = buildOverlayHTML(v);
+          applyTextSizeOverrides(coupon, layout);
+          page.appendChild(coupon);
         }
+      } else {
+        const sectionBuilders = {
+          brand: buildBrandHTML,
+          offer: buildOfferHTML,
+          action: buildActionHTML,
+        };
 
-        page.appendChild(coupon);
+        for (let i = 0; i < qty; i++) {
+          const coupon = document.createElement('article');
+          const className = 'coupon-' + layout;
+          coupon.className = className;
+
+          let html = '';
+          state.sectionOrder.forEach(sec => {
+            html += sectionBuilders[sec](v, layout);
+          });
+          coupon.innerHTML = html;
+
+          /* For strip layout: set grid columns based on section order */
+          if (layout === 'strip') {
+            const colMap = { brand: 'minmax(0,1.3fr)', offer: 'minmax(0,1.6fr)', action: '48mm' };
+            coupon.style.gridTemplateColumns = state.sectionOrder.map(s => colMap[s]).join(' ');
+          }
+
+          applyTextSizeOverrides(coupon, layout);
+          page.appendChild(coupon);
+        }
       }
 
       /* Update preview title */
@@ -1299,8 +1750,24 @@
         card: qty + ' การ์ดต่อหน้า (cards/page)',
         voucher: qty + ' บัตรกำนัลต่อหน้า (vouchers/page)',
         gift: 'ใบรับรองของขวัญ (gift certificate)',
+        overlay: qty + ' แบนเนอร์โอเวอร์เลย์ (overlay banners)',
       };
       $('#previewTitle').textContent = titles[layout] || '';
+    }
+
+    /* Apply user-defined text size overrides to a coupon element */
+    function applyTextSizeOverrides(el, layout) {
+      const sz = state.textSizes;
+      const isOverlay = layout === 'overlay';
+      const headlineSel = isOverlay ? '.overlay-headline' : '.offerHeadline';
+      const bodySel     = isOverlay ? '.overlay-body'     : '.offerBody';
+      const codeSel     = isOverlay ? '.overlay-code'     : '.code';
+      const ctaSel      = isOverlay ? '.overlay-cta-btn'  : '.cta-btn';
+
+      if (sz.headline) { const e = el.querySelector(headlineSel); if (e) e.style.fontSize = sz.headline + 'px'; }
+      if (sz.body)     { const e = el.querySelector(bodySel);     if (e) e.style.fontSize = sz.body + 'px'; }
+      if (sz.code)     { const e = el.querySelector(codeSel);     if (e) e.style.fontSize = sz.code + 'px'; }
+      if (sz.cta)      { const e = el.querySelector(ctaSel);      if (e) e.style.fontSize = sz.cta + 'px'; }
     }
 
     /* ── Field Input Listeners ─────────────────────────────── */
@@ -1320,6 +1787,14 @@
         selectedImage: state.selectedImage,
         showImage: state.showImage,
         useUploadedImage: false,
+        textSizes: { ...state.textSizes },
+        textAlign: state.textAlign,
+        expiryDate: state.expiryDate,
+        borderStyle: state.borderStyle,
+        cornerStyle: state.cornerStyle,
+        ctaStyle: state.ctaStyle,
+        overlayOpacity: state.overlayOpacity,
+        watermark: state.watermark,
         fields: getFieldValues(),
       };
     }
@@ -1347,6 +1822,14 @@
       state.selectedImage = data.selectedImage || 0;
       state.showImage = data.showImage !== false;
       state.useUploadedImage = false;
+      state.textSizes = data.textSizes || { headline: 0, body: 0, code: 0, cta: 0 };
+      state.textAlign = data.textAlign || 'auto';
+      state.expiryDate = data.expiryDate || '';
+      state.borderStyle = data.borderStyle || 'default';
+      state.cornerStyle = data.cornerStyle || 'rounded';
+      state.ctaStyle = data.ctaStyle || 'filled';
+      state.overlayOpacity = data.overlayOpacity != null ? data.overlayOpacity : 50;
+      state.watermark = !!data.watermark;
 
       /* Apply to UI */
       $$('#layoutGrid .layout-thumb').forEach(b => b.classList.toggle('active', b.dataset.layout === state.layout));
@@ -1360,6 +1843,19 @@
       document.getElementById('colorText').value = state.colors.text;
       document.getElementById('colorCta').value = state.colors.cta;
       applyCSSColors();
+
+      /* Text sizes & alignment */
+      applyTextSizeUI();
+      $$('#alignRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.align === state.textAlign));
+
+      /* Premium options UI */
+      document.getElementById('expiryDate').value = state.expiryDate;
+      $$('#borderStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.border === state.borderStyle));
+      $$('#cornerStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.corner === state.cornerStyle));
+      $$('#ctaStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.ctastyle === state.ctaStyle));
+      overlaySlider.value = state.overlayOpacity;
+      overlaySliderVal.textContent = state.overlayOpacity + '%';
+      watermarkToggle.checked = state.watermark;
 
       /* Fields */
       if (data.fields) {
@@ -1399,6 +1895,14 @@
       state.colors = { accent: '#A8652A', bg: '#faf8f4', text: '#1a1a1a', cta: '#A8652A' };
       state.selectedImage = 0;
       state.showImage = true;
+      state.textSizes = { headline: 0, body: 0, code: 0, cta: 0 };
+      state.textAlign = 'auto';
+      state.expiryDate = '';
+      state.borderStyle = 'default';
+      state.cornerStyle = 'rounded';
+      state.ctaStyle = 'filled';
+      state.overlayOpacity = 50;
+      state.watermark = false;
 
       $$('#layoutGrid .layout-thumb').forEach(b => b.classList.toggle('active', b.dataset.layout === 'strip'));
       $$('#presetGrid .preset-btn').forEach(b => b.classList.toggle('active', b.dataset.preset === 'hotel'));
@@ -1409,6 +1913,17 @@
       document.getElementById('colorText').value = '#1a1a1a';
       document.getElementById('colorCta').value = '#A8652A';
       applyCSSColors();
+      applyTextSizeUI();
+      $$('#alignRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.align === 'auto'));
+
+      /* Reset premium options UI */
+      document.getElementById('expiryDate').value = '';
+      $$('#borderStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.border === 'default'));
+      $$('#cornerStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.corner === 'rounded'));
+      $$('#ctaStyleRow .align-btn').forEach(b => b.classList.toggle('active', b.dataset.ctastyle === 'filled'));
+      overlaySlider.value = 50;
+      overlaySliderVal.textContent = '50%';
+      watermarkToggle.checked = false;
 
       /* Reset drag order */
       const order = ['brand', 'offer', 'action'];

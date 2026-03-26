@@ -10,36 +10,7 @@
     // =========================
 
     
-    // ---------- Device display tuning (phone/tablet) ----------
-    (function(){
-      const root = document.documentElement;
-      let resizeT;
-
-      function detectDevice(){
-        const w = window.innerWidth || 0;
-        const h = window.innerHeight || 0;
-        const minSide = Math.min(w || 9999, h || 9999);
-        const isTouch = (window.matchMedia && window.matchMedia("(pointer: coarse)").matches) ||
-                        ("ontouchstart" in window) ||
-                        (navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-
-        let device = "desktop";
-        if(isTouch){
-          device = (minSide <= 680) ? "phone" : "tablet";
-        }
-        root.setAttribute("data-device", device);
-        root.setAttribute("data-compact", device === "desktop" ? "false" : "true");
-        root.setAttribute("data-density", device === "desktop" ? "comfortable" : "compact");
-      }
-
-      detectDevice();
-      window.addEventListener("resize", ()=>{
-        clearTimeout(resizeT);
-        resizeT = setTimeout(detectDevice, 150);
-      }, { passive:true });
-    })();
-
-// ---------- Theme (System default; user override saved) ----------
+    // ---------- Theme (System default; user override saved) ----------
     const THEME_KEY = "sbx_theme"; // "system" | "dark" | "light"
     const metaTheme = document.getElementById("metaThemeColor");
     const themeToggle = document.getElementById("themeToggle");
@@ -106,8 +77,10 @@
         brand_location: "นครศรีธรรมราช ประเทศไทย",
         nav_support: "ราคาดีเมื่อจองตรง",
         nav_line_cta: "LINE",
-
-        nav_book: "จองเลย",
+        nav_book: "เช็คห้องว่าง",
+        nav_call_hotel: "โทรหาโรงแรม",
+        nav_line_chat: "แชตผ่าน LINE",
+        nav_language: "ภาษา",
         nav_rooms: "ห้องพัก",
         nav_offers: "ข้อเสนอ",
         nav_amenities: "สิ่งอำนวยความสะดวก",
@@ -117,24 +90,33 @@
         nav_location: "ที่ตั้ง",
 
         hero_kicker: '<span class="kw a">จองตรงราคาพิเศษ</span> <span class="sep-dot">•</span> <span class="kw">บริการส่วนตัว</span> <span class="sep-dot">•</span> <span class="kw hot">คลิกเพื่อจอง</span>',
-        hero_kicker_short: "Sandbox Hotel • ที่พักบูติกนครศรี",
-        hero_title: "ที่พักส่วนตัว สงบเงียบ<br>ใจกลางนครศรีธรรมราช",
+        hero_kicker_short: "Sandbox Hotel • ที่พักบูติกสงบใจกลางนครศรี",
+        hero_title: "ที่พักสงบ ห้องกว้าง<br>ในนครศรีธรรมราช",
         hero_sub: 'ห้องกว้างส่วนตัว • Wi-Fi เร็ว • ที่จอดรถ • ซักรีด • แอร์<br>บริการใส่ใจ: โทรหรือ LINE ได้ตลอด',
-        hero_sub_short: "ห้องกว้างส่วนตัว บริการใส่ใจรายละเอียด สำหรับผู้เดินทางที่ชื่นชอบความสงบ",
+        hero_sub_short: "โรงแรมบูติกที่ให้ความสบายแบบเป็นส่วนตัว จองตรงง่าย และเดินทางในเมืองสะดวก",
         hero_fine: 'เช็คอิน <b>14:00</b> • เช็คเอาต์ <b>11:00</b> • กรุณาแสดงพาสปอร์ต/บัตรประชาชน • ห้องเงียบ',
 
         cta_request: "เช็คห้องว่าง",
-        cta_call_line: "โทรหรือ LINE",
+        cta_check_direct_rate: "เช็คห้องว่างและราคา",
+        cta_call_hotel: "โทรหาโรงแรม",
+        cta_call_line: "โทรเลย",
         cta_call_number: "โทร: 088-578-3478",
         cta_email: "อีเมล",
         cta_open_map: "เปิดแผนที่",
         hero_view_rooms: "ดูห้องพัก →",
-        hero_review_count: "· 120 รีวิวบน Google", // TODO: verify review count monthly
-        hero_best_rate: "รับประกันราคาพิเศษเมื่อจองตรง — ไร้นายหน้า บริการใส่ใจ",
-        trust_direct: "จองตรงราคาพิเศษ",
-        trust_quiet: "ห้องพักสงบส่วนตัว",
+        hero_review_count: "· รีวิวบน Google",
+        trust_rating: "4.8",
+        trust_meta: "อ้างอิงจากรีวิวบน Google Maps",
+        hero_direct_booking_benefit: "จองตรงกับโรงแรมเพื่อรับราคาที่ดีที่สุดและการยืนยันที่รวดเร็ว",
+        hero_contact_hint: "โทรหรือ LINE หาเราได้โดยตรงเพื่อยืนยันห้องว่างได้เร็วที่สุด",
+        hero_proof_rooms: "ห้องพักขนาด 28 ตร.ม.",
+        hero_proof_parking: "ที่จอดรถ + Wi‑Fi เร็ว",
+        hero_proof_location: "พักสงบ เดินทางในเมืองสะดวก",
+        trust_direct: "จองตรงราคาดีที่สุด",
+        trust_rooms: "ห้องพักกว้าง",
+        trust_quiet: "ห้องเงียบพักผ่อนได้จริง",
         trust_wifi: "Wi‑Fi ความเร็วสูง",
-        trust_parking: "ที่จอดรถส่วนตัว",
+        trust_parking: "ที่จอดรถในที่พัก",
         trust_support: "บริการส่วนตัว",
 
         offers_title: "สิ่งที่ทำให้ Sandbox พิเศษ",
@@ -143,7 +125,7 @@
         offer1_title: 'จองตรง ประหยัดกว่า',
         offer1_desc: "ติดต่อโดยตรง ไร้นายหน้า รับราคาพิเศษ — ยืนยันรวดเร็วผ่าน LINE หรือโทร",
         offer2_title: 'ห้องพักสบาย ทำงานหรือพักผ่อนได้',
-        offer2_desc: "ห้องพัก 28–32 ตร.ม. พร้อมโต๊ะทำงาน แอร์ ฝักบัวน้ำอุ่น ขอฝั่งเงียบได้ตามต้องการ",
+        offer2_desc: "ห้องพักขนาด 28 ตร.ม. พร้อมโต๊ะทำงาน แอร์ ฝักบัวน้ำอุ่น ขอฝั่งเงียบได้ตามต้องการ",
         offer3_title: 'Wi-Fi เร็วและเสถียร',
         offer3_desc: "อินเทอร์เน็ตความเร็วดีสำหรับทำงาน ดูสตรีม และใช้งานตลอดการเข้าพัก",
         offer4_title: 'ที่จอดรถ & เข้าถึงง่าย',
@@ -154,9 +136,14 @@
         offer6_desc: "พักยาว? สอบถามราคาพิเศษสำหรับการพักรายสัปดาห์และรายเดือน",
         faq_cta_text: "ยังมีคำถาม? เรายินดีช่วยเหลือค่ะ",
 
-        book_title: "จองห้องพัก",
-        book_sub: 'ส่ง <span class="kw a">วันเข้าพัก</span> + <span class="kw">ประเภทห้อง</span> แล้วเราจะตอบกลับเร็วที่สุด',
-        book_callnow: "โทรเลย",
+        book_title: "เช็คห้องว่างโดยตรงกับโรงแรม",
+        book_sub: 'แจ้ง<span class="kw a">วันเข้าพัก</span>และ<span class="kw">ประเภทห้อง</span> จากนั้นเลือกช่องทางติดต่อที่สะดวก แล้วเราจะตอบกลับพร้อมห้องว่าง ราคา และขั้นตอนถัดไป',
+        book_callnow: "โทรหาโรงแรม",
+        book_process_label: "ขั้นตอนการจองตรง",
+        book_process_step_1: "เลือกวันเข้าพักและประเภทห้องที่ต้องการ",
+        book_process_step_2: "ส่งคำถามผ่าน LINE, WhatsApp หรืออีเมล",
+        book_process_step_3: "เราตอบกลับพร้อมห้องว่าง ราคาจองตรง และขั้นตอนถัดไป",
+        book_channel_hint: "ต้องการคำตอบเร็วที่สุด แนะนำโทรหรือ LINE ส่วนอีเมลเหมาะกับคำขอละเอียด",
 
         lbl_checkin: "เช็คอิน",
         lbl_checkout: "เช็คเอาต์",
@@ -168,14 +155,28 @@
         ph_name: "ชื่อของคุณ",
         ph_contact: "+66 … หรืออีเมล",
         ph_notes: "เวลาเข้าถึง, คำขอพิเศษ ฯลฯ",
-        btn_send_line: "จองผ่าน LINE",
-        btn_send_wa: "จองผ่าน WhatsApp",
-        btn_send_email: "จองทางอีเมล",
+        btn_send_line: "ส่งผ่าน LINE",
+        btn_send_wa: "ส่งผ่าน WhatsApp",
+        btn_send_email: "ส่งผ่านอีเมล",
         btn_send_line_short: "LINE",
         btn_send_wa_short: "WhatsApp",
         book_checkin_info: "เช็คอิน: ตั้งแต่ 14:00 · เช็คเอาท์: ก่อน 11:00",
         book_id_note: "ต้องแสดงบัตรประชาชนหรือพาสปอร์ตเมื่อเช็คอิน",
-        form_hint: "เราจะตอบกลับพร้อมห้องว่างและราคารวม",
+        form_hint: "เราจะตอบกลับพร้อมห้องว่าง ราคา และขั้นตอนถัดไป",
+        form_hint_extended: "เลือกช่องทางติดต่อที่สะดวก แล้วเราจะตอบกลับพร้อมห้องว่าง ราคาจองตรง และขั้นตอนถัดไปโดยเร็วที่สุด",
+        form_validation_summary: "กรุณาตรวจสอบช่องที่ไฮไลต์ไว้ เพื่อให้เราจัดเตรียมคำขอของคุณได้ถูกต้อง",
+        form_status_line: "เปิด LINE พร้อมข้อความแล้ว ส่งต่อในแชตได้เลย แล้วเราจะตอบกลับพร้อมห้องว่างและราคา",
+        form_status_whatsapp: "เปิด WhatsApp พร้อมข้อความแล้ว ส่งต่อได้เลย แล้วเราจะตอบกลับพร้อมห้องว่างและราคา",
+        form_status_email: "เปิดอีเมลพร้อมข้อความแล้ว กดส่งเมื่อพร้อม แล้วเราจะตอบกลับพร้อมห้องว่างและราคา",
+        field_hint_checkin: "เลือกวันเช็คอิน",
+        field_hint_checkout: "เลือกวันเช็คเอาต์",
+        field_hint_guests: "แจ้งจำนวนผู้เข้าพัก",
+        field_hint_room: "เลือกประเภทห้องที่อยากให้เราเช็กก่อน",
+        field_hint_name: "ไม่จำเป็น แต่ช่วยให้เราตอบกลับได้เป็นกันเองขึ้น",
+        field_hint_contact: "กรอกเบอร์โทรหรืออีเมลเพื่อให้เราติดต่อกลับได้โดยตรง",
+        field_hint_notes: "ถ้ามีเวลาเดินทาง ความต้องการพิเศษ หรือคำถามเพิ่มเติม ใส่ได้ที่นี่",
+        validation_required_prefix: "กรุณากรอก",
+        validation_checkout_after_checkin: "วันเช็คเอาต์ต้องหลังวันเช็คอิน",
 
         quick_label: "เลือกวันอย่างรวดเร็ว",
         quick_tonight: "คืนนี้",
@@ -187,11 +188,12 @@
         stay_nights: "คืน",
         stay_guests: "ท่าน",
         stay_room: "ห้อง",
-        best_rate_note: "จองตรง = ยืนยันไวที่สุด • ส่งวันเข้าพักเพื่อรับราคาที่ถูกต้องของวันนี้",
+        best_rate_note: "จองตรง = ยืนยันไวที่สุด • ส่งวันเข้าพักเพื่อรับราคาจองตรงของวันนี้",
         msg_nights: "จำนวนคืน",
         line_opened_hint: "เปิด LINE แล้ว",
         line_clipboard_hint: "คัดลอกข้อความไว้แล้ว (วางได้ทันที)",
         line_clipboard_fail: "แนะนำ: คัดลอกข้อความหากต้องการวางในแชต",
+        msg_intro: "สวัสดีค่ะ/ครับ อยากเช็กห้องว่างและราคาจองตรง",
         why_title: "ทำไมแขกถึงเลือก Sandbox",
         why_sub: "เรียบง่าย น่าเชื่อถือ และจองตรงได้สะดวก",
         why_1_t: "ห้องกว้าง",
@@ -211,8 +213,11 @@
         faq_a10: "Sandbox Hotel อยู่ใกล้สถานที่สำคัญในนครศรีธรรมราช ได้แก่ วัดพระมหาธาตุวรมหาวิหาร ซึ่งเป็นหนึ่งในวัดที่สำคัญที่สุดในภาคใต้ของไทย ถนนคนเดิน ตลาดท้องถิ่น พิพิธภัณฑสถานแห่งชาติ และร้านอาหารอาหารใต้ต้นตำรับ",
         faq_q11: "Sandbox Hotel เหมาะสำหรับการสำรวจภาคใต้ของไทยไหม?",
         faq_a11: "เหมาะมาก นครศรีธรรมราชเป็นศูนย์กลางของภาคใต้ที่มีเส้นทางคมนาคมสะดวก เชื่อมต่อจังหวัดใกล้เคียง ชายหาด และแหล่งวัฒนธรรม Sandbox Hotel เป็นที่พักที่เหมาะสำหรับทั้งการพักสั้นในเมืองและการเดินทางสำรวจภูมิภาคภาคใต้ของไทย",
-        book_tip: "ทิป: หากมาถึงดึก โปรดระบุเวลาโดยประมาณในหมายเหตุ เพื่อให้เราช่วยเหลือได้รวดเร็ว",
+        book_tip: "ทิป: หากมาถึงดึก โปรดระบุเวลาโดยประมาณในหมายเหตุ เพื่อให้เราช่วยเหลือได้เร็วขึ้น",
         book_guarantee: "รับประกันราคาดีที่สุดเมื่อจองตรง — ไม่มีค่าธรรมเนียม ไม่บวกราคา",
+        book_benefit_1: "ตอบกลับโดยตรงจากทีมโรงแรม",
+        book_benefit_2: "ราคาจองตรงของวันนั้นแบบไม่มีค่าธรรมเนียมแพลตฟอร์ม",
+        book_benefit_3: "ช่วยเหลือเรื่องวันเข้าพักและคำขอก่อนตัดสินใจได้ยืดหยุ่น",
 
         amen_title: "สิ่งอำนวยความสะดวกสำหรับผู้เข้าพัก",
         amen_sub: "สิ่งจำเป็นที่ออกแบบมาเพื่อการเข้าพักที่สบายและสะดวกยิ่งขึ้น",
@@ -237,22 +242,24 @@
         price_from: "เริ่มต้น",
         price_ask: "สอบถาม",
         price_today: "ราคาวันนี้",
+        price_rates_on_request: "รับราคาวันนี้ →",
         btn_call: "โทร",
         btn_see_photos: "ดูรูป",
+        sticky_note: "อยากได้คำตอบเร็ว? โทร แชต หรือเช็กห้องว่างได้ทันที",
 
         room_standard_twin_title: "Standard Twin (2 เตียงเดี่ยว)",
         room_standard_double_title: "Standard Double (เตียงใหญ่)",
-        room_standard_twin_btn: "จอง Twin",
-        room_standard_double_btn: "จอง Double",
-        room_standard_twin_meta: '<span class="kw a">คุ้มสุด</span> • 2 เตียงเดี่ยว • 28–32 ม² • ผู้เข้าพัก 1–2',
-        room_standard_double_meta: '<span class="kw a">ยอดนิยม</span> • 1 เตียงใหญ่ • 28–32 ม² • ผู้เข้าพัก 1–2',
+        room_standard_twin_btn: "เช็กห้องว่าง Twin",
+        room_standard_double_btn: "เช็กห้องว่าง Double",
+        room_standard_twin_meta: '<span class="kw a">คุ้มสุด</span> • 2 เตียงเดี่ยว • 28 ม² • ผู้เข้าพัก 1–2',
+        room_standard_double_meta: '<span class="kw a">ยอดนิยม</span> • 1 เตียงใหญ่ • 28 ม² • ผู้เข้าพัก 1–2',
 
         opt_standard_twin: "Standard Twin (2 เตียงเดี่ยว)",
         opt_standard_double: "Standard Double (เตียงใหญ่)",
 
         tag_2_twin_beds: "2 เตียงเดี่ยว",
         tag_1_double_bed: "1 เตียงใหญ่",
-        tag_28_32_m: "28–32 ม²",
+        tag_28_32_m: "28 ม²",
         tag_guests_1_2: "ผู้เข้าพัก 1–2",
 
         bullet_large_room: "ห้องกว้าง",
@@ -272,6 +279,7 @@
         gal_exterior_desc: "ภาพรวมโรงแรม—หาง่าย เห็นชัด และเข้าพักได้สบายใจ",
         gal_entrance_title: "ทางเข้า & การมาถึง",
         gal_entrance_desc: "เข้าพักสะดวก เดินทางง่าย ทั้งกลางวันและกลางคืน",
+        gal_lobby_desc: "ความประทับใจแรกที่ดี — สะอาด เป็นมิตร และต้อนรับอย่างมีประสิทธิภาพ",
         gal_evening_view_title: "บรรยากาศภายนอกยามเย็น",
         gal_evening_view_desc: "มุมหน้าโรงแรมช่วงค่ำ ให้บรรยากาศสงบและเข้าถึงสะดวก",
         gal_flower_view_title: "มุมสวนหน้าโรงแรม",
@@ -308,7 +316,7 @@
 
         faq_title: "คำถามที่พบบ่อย",
         faq_sub: "คำตอบเร็ว ๆ ก่อนจอง",
-        faq_btn: "ส่งคำขอ",
+        faq_btn: "ส่งคำถามเข้าพัก",
         faq_show_more: "ดูคำถามเพิ่มเติม",
         faq_q1: "จองให้เร็วที่สุดทำอย่างไร?",
         faq_a1: "โทรหรือ LINE แจ้งเช็คอิน เช็คเอาต์ จำนวนผู้เข้าพัก และประเภทห้องที่ต้องการ เราจะยืนยันห้องว่างและราคารวมให้",
@@ -331,11 +339,13 @@
 
         dest_title: "สำรวจพื้นที่รอบ Sandbox Hotel",
         dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> ที่ตั้งของเรา',
+        dest_where_body_short: "นครศรีธรรมราชเป็นเมืองประวัติศาสตร์ใน<strong>ภาคใต้ของไทย</strong>ริมอ่าวไทย อยู่ห่างจากกรุงเทพฯ ประมาณ 780 กม. เป็นหนึ่งในเมืองที่เก่าแก่ที่สุดของประเทศ และให้บรรยากาศที่ต่างจากเมืองชายหาดฝั่งอันดามันที่คึกคัก",
         dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> ทำไมต้องมาเยือน',
+        dest_why_body_short: "นครศรีธรรมราชมีเสน่ห์แบบไทยแท้ มรดกพุทธศาสนาที่โดดเด่น และบรรยากาศท้องถิ่นที่ผ่อนคลาย เป็นที่ตั้งของวัดพระมหาธาตุวรมหาวิหาร — หนึ่งในวัดสำคัญที่สุดของประเทศไทย",
         dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> สถานที่ท่องเที่ยวใกล้เคียง',
         dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> การเดินทาง',
 
-        btn_call_now: "โทรเลย",
+        btn_call_now: "โทรหาโรงแรม",
         btn_email: "อีเมล",
         loc_hours: "บริการทุกวัน: 06:00–22:00",
 
@@ -368,8 +378,10 @@
         brand_location: "Nakhon Si Thammarat, Thailand",
         nav_support: "Best Rate Direct",
         nav_line_cta: "LINE",
-
-        nav_book: "Book Now",
+        nav_book: "Check Availability",
+        nav_call_hotel: "Call Hotel",
+        nav_line_chat: "Message on LINE",
+        nav_language: "Language",
         nav_rooms: "Rooms",
         nav_offers: "Offers",
         nav_amenities: "Amenities",
@@ -379,24 +391,33 @@
         nav_location: "Location",
 
         hero_kicker: '<span class="kw a">Direct booking</span> <span class="sep-dot">•</span> <span class="kw">Friendly service</span> <span class="sep-dot">•</span> <span class="kw hot">Book now</span>',
-        hero_kicker_short: "Sandbox Hotel • Nakhon Si Thammarat",
-        hero_title: "Your comfortable base<br>in Nakhon Si Thammarat",
+        hero_kicker_short: "Sandbox Hotel • Calm boutique stay",
+        hero_title: "Calm, spacious stays<br>in Nakhon Si Thammarat",
         hero_sub: 'Spacious rooms • Free Wi‑Fi • Parking • Laundry • Air conditioning<br>Friendly service: call or LINE us directly',
-        hero_sub_short: "Spacious rooms with friendly service for every kind of traveller — easy direct booking by phone or LINE.",
+        hero_sub_short: "A quiet boutique hotel with roomy comfort, easy direct booking, and convenient city access.",
         hero_fine: 'Check-in <b>14:00</b> • Check-out <b>11:00</b> • Valid ID required',
 
         cta_request: "Check Availability",
-        cta_call_line: "Call or LINE",
+        cta_check_direct_rate: "Check Availability & Rate",
+        cta_call_hotel: "Call Hotel",
+        cta_call_line: "Call Now",
         cta_call_number: "Call: 088-578-3478",
         cta_email: "Email",
         cta_open_map: 'Open Map<span class="sr-only"> (opens in new tab)</span>',
-        hero_view_rooms: "Explore Rooms →",
-        hero_review_count: "· 120 reviews on Google", // TODO: verify review count monthly
-        hero_best_rate: "Best rate when you book direct — no middleman, no mark-up",
-        trust_direct: "Direct Booking",
+        hero_view_rooms: "View Rooms →",
+        hero_review_count: "· Google reviews",
+        trust_rating: "4.8",
+        trust_meta: "Based on Google Maps reviews",
+        hero_direct_booking_benefit: "Best rate when you book direct, with fast confirmation by phone or LINE.",
+        hero_contact_hint: "Book direct by phone or LINE for the fastest confirmation.",
+        hero_proof_rooms: "Spacious 28 m² rooms",
+        hero_proof_parking: "Parking + fast Wi‑Fi",
+        hero_proof_location: "Quiet comfort with easy city access",
+        trust_direct: "Best Rate Direct",
+        trust_rooms: "Spacious Rooms",
         trust_quiet: "Quiet Rooms",
-        trust_wifi: "Free Wi‑Fi",
-        trust_parking: "Parking",
+        trust_wifi: "Fast Wi‑Fi",
+        trust_parking: "Parking On-site",
         trust_support: "Friendly Service",
 
         offers_title: "Why Book Sandbox",
@@ -405,7 +426,7 @@
         offer1_title: "Book Direct, Save More",
         offer1_desc: "Message your dates — get confirmed quickly via LINE or phone. No platform fees.",
         offer2_title: "Comfortable Rooms for Work or Rest",
-        offer2_desc: "Spacious 28–32 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.",
+        offer2_desc: "Spacious 28 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.",
         offer3_title: "Reliable Wi-Fi",
         offer3_desc: "Fast internet for work, streaming, and daily use throughout your stay.",
         offer4_title: "Parking & Easy Access",
@@ -416,9 +437,14 @@
         offer6_desc: "Extended stay? Ask about special weekly and monthly pricing.",
         faq_cta_text: "Still have questions? We’re happy to help.",
 
-        book_title: "Reserve Your Room",
-        book_sub: "Share your <span class=\"kw a\">dates</span> and <span class=\"kw\">room preference</span> — we'll reply with availability and your rate.",
-        book_callnow: "Call Now",
+        book_title: "Check Availability Direct with the Hotel",
+        book_sub: "Share your <span class=\"kw a\">dates</span> and <span class=\"kw\">room preference</span>, then choose your preferred contact channel. We'll reply with availability, your direct rate, and the next step.",
+        book_callnow: "Call Hotel",
+        book_process_label: "How direct booking works",
+        book_process_step_1: "Choose your stay dates and room type.",
+        book_process_step_2: "Send the inquiry by LINE, WhatsApp, or email.",
+        book_process_step_3: "We reply with availability, your direct rate, and next steps.",
+        book_channel_hint: "Fastest response: call or LINE. Email is best for detailed requests.",
 
         lbl_checkin: "Check-in",
         lbl_checkout: "Check-out",
@@ -430,14 +456,28 @@
         ph_name: "Your name",
         ph_contact: "+66 … or email",
         ph_notes: "Arrival time, special requests, etc.",
-        btn_send_line: "Book via LINE",
-        btn_send_wa: "Book via WhatsApp",
-        btn_send_email: "Book via Email",
+        btn_send_line: "Send via LINE",
+        btn_send_wa: "Send via WhatsApp",
+        btn_send_email: "Send via Email",
         btn_send_line_short: "LINE",
         btn_send_wa_short: "WhatsApp",
         book_checkin_info: "Check-in: From 14:00 · Check-out: By 11:00",
         book_id_note: "Government-issued ID or passport required at check-in.",
-        form_hint: "We’ll reply with availability and total price.",
+        form_hint: "We’ll reply with availability, your direct rate, and the next step.",
+        form_hint_extended: "Choose your preferred contact channel. We’ll reply with availability, your direct rate, and the next step as soon as possible.",
+        form_validation_summary: "Please review the highlighted fields so we can prepare your inquiry correctly.",
+        form_status_line: "LINE is ready with your inquiry. Send it there and we’ll reply with availability and your direct rate.",
+        form_status_whatsapp: "WhatsApp is ready with your inquiry. Send it there and we’ll reply with availability and your direct rate.",
+        form_status_email: "Your email app opened with your inquiry. Send it when ready and we’ll reply with availability and your direct rate.",
+        field_hint_checkin: "Choose your arrival date.",
+        field_hint_checkout: "Choose your departure date.",
+        field_hint_guests: "Tell us how many guests are staying.",
+        field_hint_room: "Pick the room type you want us to quote first.",
+        field_hint_name: "Optional, but helpful for a personal reply.",
+        field_hint_contact: "Phone or email so we can reply directly.",
+        field_hint_notes: "Optional: arrival time, bed preference, or special requests.",
+        validation_required_prefix: "Please add",
+        validation_checkout_after_checkin: "Check-out must be after check-in.",
 
         quick_label: "Quick dates",
         quick_tonight: "Tonight",
@@ -449,11 +489,12 @@
         stay_nights: "nights",
         stay_guests: "guests",
         stay_room: "Room",
-        best_rate_note: "Direct booking = fastest confirmation • Send your dates for today’s rate.",
+        best_rate_note: "Direct booking = fastest confirmation • Send your dates for today’s direct rate.",
         msg_nights: "Nights",
         line_opened_hint: "LINE opened.",
         line_clipboard_hint: "Message copied to clipboard.",
         line_clipboard_fail: "Tip: copy your message if needed.",
+        msg_intro: "Hello, I'd like to check availability and the direct rate.",
         why_title: "Why Discerning Travelers Choose Sandbox",
         why_sub: "Thoughtful design, authentic hospitality, and the ease of direct booking.",
         why_1_t: "Generous private spaces",
@@ -473,8 +514,11 @@
         faq_a10: "Sandbox Hotel is close to key Nakhon Si Thammarat landmarks including Wat Phra Mahathat Woramahawihan — one of Southern Thailand's most revered Buddhist temples — as well as the city's walking street markets, the Nakhon Si Thammarat National Museum, and a wide range of local restaurants serving Southern Thai cuisine.",
         faq_q11: "Is Sandbox Hotel a good base for exploring Southern Thailand?",
         faq_a11: "Yes. Nakhon Si Thammarat is a central hub in Southern Thailand with good transport links to nearby provinces, beaches, and cultural sites. Sandbox Hotel is well-placed for both short city stays and multi-day trips exploring the Southern Thailand region.",
-        book_tip: "Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist efficiently.",
+        book_tip: "Tip: If you are arriving late, add your estimated arrival time in Notes so we can assist faster.",
         book_guarantee: "Best Rate Guaranteed when booking direct — no booking fees, no mark-up.",
+        book_benefit_1: "Direct reply from the hotel team.",
+        book_benefit_2: "Today’s direct rate with no platform mark-up.",
+        book_benefit_3: "Flexible help before you confirm.",
 
         amen_title: "Guest Amenities",
         amen_sub: "Everything you need for a comfortable stay.",
@@ -499,22 +543,24 @@
         price_from: "From",
         price_ask: "Ask",
         price_today: "today’s rate",
+        price_rates_on_request: "Get today's exact rate →",
         btn_call: "Call",
         btn_see_photos: "See photos",
+        sticky_note: "Need a quick answer? Call, chat, or check availability.",
 
         room_standard_twin_title: "Standard Twin",
         room_standard_double_title: "Standard Double",
-        room_standard_twin_btn: "Book Twin Room",
-        room_standard_double_btn: "Book Double Room",
-        room_standard_twin_meta: '<span class="kw a">Good Value</span> • 2 Twin Beds • 28–32 m² • Guests 1–2',
-        room_standard_double_meta: '<span class="kw a">Popular Choice</span> • 1 Double Bed • 28–32 m² • Guests 1–2',
+        room_standard_twin_btn: "Check Twin Availability",
+        room_standard_double_btn: "Check Double Availability",
+        room_standard_twin_meta: '<span class="kw a">Good Value</span> • 2 Twin Beds • 28 m² • Guests 1–2',
+        room_standard_double_meta: '<span class="kw a">Popular Choice</span> • 1 Double Bed • 28 m² • Guests 1–2',
 
         opt_standard_twin: "Standard Twin",
         opt_standard_double: "Standard Double",
 
         tag_2_twin_beds: "2 Twin Beds",
         tag_1_double_bed: "1 Double Bed",
-        tag_28_32_m: "28–32 m²",
+        tag_28_32_m: "28 m²",
         tag_guests_1_2: "Guests 1–2",
 
         bullet_large_room: "Spacious room layout",
@@ -534,6 +580,7 @@
         gal_exterior_desc: "Easy to find with convenient access.",
         gal_entrance_title: "Entrance & Arrival",
         gal_entrance_desc: "A welcoming arrival, day or night.",
+        gal_lobby_desc: "First impression matters—clean, friendly, efficient.",
         gal_evening_view_title: "Evening Exterior",
         gal_evening_view_desc: "A calm evening view of the hotel frontage and parking area.",
         gal_flower_view_title: "Garden Approach",
@@ -570,7 +617,7 @@
 
         faq_title: "FAQ",
         faq_sub: "Quick answers before you book.",
-        faq_btn: "Send Request",
+        faq_btn: "Send Inquiry",
         faq_show_more: "Show more questions",
         faq_q1: "How do I book the fastest?",
         faq_a1: "Call or message us on LINE with check-in, check-out, guests, and preferred room type. We’ll confirm availability and total price.",
@@ -594,8 +641,10 @@
         dest_title: "Explore the Area Around Sandbox Hotel",
         dest_sub: "Southern Thailand's historic Gulf Coast city — a less-travelled destination with deep roots.",
         dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> Where is Nakhon Si Thammarat?',
+        dest_where_body_short: "Nakhon Si Thammarat is a historic city in <strong>Southern Thailand</strong> on the Gulf coast, 780 km south of Bangkok. One of the oldest cities in the country, it sits apart from crowded Andaman beach resorts.",
         dest_where_body: "Nakhon Si Thammarat is a city in <strong>Southern Thailand</strong>, located on the Gulf of Thailand coast approximately 780 km south of Bangkok. It is the capital of Nakhon Si Thammarat Province and one of the oldest continuously inhabited cities in the country, with a recorded history spanning more than 1,000 years. The city sits on the Gulf Coast side of the Thai-Malay Peninsula, distinct from the Andaman Sea resorts of Phuket and Krabi.",
         dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> Why Visit Nakhon Si Thammarat?',
+        dest_why_body_short: "Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan — one of Thailand's most significant temples.",
         dest_why_body: "Unlike the crowded beach resorts of Southern Thailand, Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Travellers come for Wat Phra Mahathat Woramahawihan — one of the most significant temples in all of Thailand — as well as the unique local art forms of Nang Talung shadow puppetry and traditional nielloware silver crafts. The city is also a gateway for exploring the lesser-known national parks and coastlines of Nakhon Si Thammarat Province.",
         dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> Key Attractions Near Sandbox Hotel',
         dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> How to Get to Nakhon Si Thammarat',
@@ -611,7 +660,7 @@
         loc_plus: "Plus Code:",
         loc_notes: "Notes: Policies may vary by season. For the latest info, contact the hotel directly.",
 
-        btn_call_now: "Call Now",
+        btn_call_now: "Call Hotel",
         btn_email: "Email",
         loc_hours: "Daily support: 06:00–22:00",
 
@@ -638,14 +687,16 @@
       },
       zh: {
         meta_title: "洛坤府酒店｜Sandbox Hotel 泰南直订住宿",
-        meta_desc: "Sandbox Hotel 位于泰国洛坤府市中心。宽敞安静客房（28–32㎡），免费Wi-Fi、停车位、快速确认。支持电话、LINE、WhatsApp预订，直订优惠无手续费。",
+        meta_desc: "Sandbox Hotel 位于泰国洛坤府市中心。宽敞安静客房（28㎡），免费Wi-Fi、停车位、快速确认。支持电话、LINE、WhatsApp预订，直订优惠无手续费。",
         og_title: "洛坤府酒店｜Sandbox Hotel 泰南直订住宿",
         og_desc: "洛坤府市中心 Sandbox Hotel — 宽敞安静客房 • 免费Wi-Fi • 停车位。支持电话/LINE/WhatsApp快速确认，直订优惠无手续费。",
         brand_location: "泰国 洛坤府（Nakhon Si Thammarat）",
         nav_support: "直订优惠",
         nav_line_cta: "LINE",
-
-        nav_book: "立即预订",
+        nav_book: "查看空房",
+        nav_call_hotel: "致电酒店",
+        nav_line_chat: "LINE 咨询",
+        nav_language: "语言",
         nav_rooms: "房型",
         nav_offers: "优惠",
         nav_amenities: "设施",
@@ -655,24 +706,33 @@
         nav_location: "位置",
 
         hero_kicker: '<span class="kw a">直订</span> <span class="sep-dot">•</span> <span class="kw">友好服务</span> <span class="sep-dot">•</span> <span class="kw hot">立即预订</span>',
-        hero_kicker_short: "Sandbox Hotel • 洛坤府",
-        hero_title: "洛坤府的<br>舒适住处",
+        hero_kicker_short: "Sandbox Hotel • 洛坤府静享精品酒店",
+        hero_title: "洛坤府的<br>静谧宽敞住宿",
         hero_sub: '雅致私密空间 • 高速 Wi‑Fi • 安全停车 • 洗衣服务 • 空调<br>专属服务：电话或 LINE 直接联系',
-        hero_sub_short: "宽敞客房 • 便利位置 • 友好服务，适合各类旅客",
+        hero_sub_short: "安静的精品酒店，客房宽敞舒适，支持直订，市内出行也很方便",
         hero_fine: '入住 <b>14:00</b> • 退房 <b>11:00</b> • 需出示有效证件 • 静谧环境',
 
         cta_request: "查看空房",
-        cta_call_line: "电话或 LINE",
+        cta_check_direct_rate: "查看空房与价格",
+        cta_call_hotel: "致电酒店",
+        cta_call_line: "立即致电",
         cta_call_number: "致电：088-578-3478",
         cta_email: "邮箱",
         cta_open_map: '打开地图<span class="sr-only">（在新标签页中打开）</span>',
-        hero_view_rooms: "查看房型",
-        hero_review_count: "· 120条 Google 评价", // TODO: verify review count monthly
-        hero_best_rate: "直订专享优惠价 — 无中介 专属服务",
+        hero_view_rooms: "查看房型 →",
+        hero_review_count: "· Google 评价",
+        trust_rating: "4.8",
+        trust_meta: "基于 Google 地图评价",
+        hero_direct_booking_benefit: "直接向酒店预订，可获更优价格与更快确认",
+        hero_contact_hint: "电话或 LINE 直联酒店，最快确认空房",
+        hero_proof_rooms: "28㎡ 宽敞客房",
+        hero_proof_parking: "停车位 + 高速 Wi‑Fi",
+        hero_proof_location: "安静舒适，进出市区方便",
         trust_direct: "直订专享优惠",
-        trust_quiet: "静谧私密空间",
-        trust_wifi: "高速优质 Wi‑Fi",
-        trust_parking: "安全停车位",
+        trust_rooms: "宽敞客房",
+        trust_quiet: "安静好眠",
+        trust_wifi: "高速 Wi‑Fi",
+        trust_parking: "住客停车",
         trust_support: "贴心专属服务",
 
         offers_title: "为什么选择 Sandbox",
@@ -681,7 +741,7 @@
         offer1_title: '直订更省 价格无忧',
         offer1_desc: "发送日期即可快速确认 — 通过LINE或电话预订，无平台手续费。",
         offer2_title: '舒适客房 工作休息皆宜',
-        offer2_desc: "28–32㎡宽敞客房，配书桌、空调和热水淋浴。可按需安排安静朝向。",
+        offer2_desc: "28㎡宽敞客房，配书桌、空调和热水淋浴。可按需安排安静朝向。",
         offer3_title: '稳定高速 Wi-Fi',
         offer3_desc: "快速网络，适合工作、流媒体和日常使用。",
         offer4_title: '免费停车 交通便利',
@@ -692,9 +752,14 @@
         offer6_desc: "长住？欢迎和询周租和月租特惠价格。",
         faq_cta_text: "还有问题？我们乐意为您解答。",
 
-        book_title: "预订房间",
-        book_sub: '告知您的<span class="kw a">日期</span>与<span class="kw">房型需求</span>，我们会贴心回复专享优惠。',
-        book_callnow: "立即致电",
+        book_title: "直接向酒店查询空房",
+        book_sub: '告知您的<span class="kw a">日期</span>与<span class="kw">房型需求</span>，再选择方便的联系渠道。我们会回复空房、直订价格与下一步。',
+        book_callnow: "致电酒店",
+        book_process_label: "直订流程",
+        book_process_step_1: "选择入住日期与房型",
+        book_process_step_2: "通过 LINE、WhatsApp 或邮箱发送咨询",
+        book_process_step_3: "我们回复空房、直订价格与下一步",
+        book_channel_hint: "想要更快回复，建议电话或 LINE；如需详细说明，邮箱更合适",
 
         lbl_checkin: "入住",
         lbl_checkout: "退房",
@@ -706,14 +771,28 @@
         ph_name: "你的姓名",
         ph_contact: "+66… 或邮箱",
         ph_notes: "到达时间、特殊需求等",
-        btn_send_line: "通过LINE预订",
-        btn_send_wa: "通过WhatsApp预订",
-        btn_send_email: "通过邮箱预订",
+        btn_send_line: "通过 LINE 发送",
+        btn_send_wa: "通过 WhatsApp 发送",
+        btn_send_email: "通过邮箱发送",
         btn_send_line_short: "LINE",
         btn_send_wa_short: "WhatsApp",
         book_checkin_info: "入住：14:00起 · 退房：11:00前",
         book_id_note: "入住时需出示护照或身份证。",
-        form_hint: "我们会回复空房与总价。",
+        form_hint: "我们会回复空房、直订价格与下一步。",
+        form_hint_extended: "选择您方便的联系渠道。我们会尽快回复空房、直订价格与下一步。",
+        form_validation_summary: "请检查高亮字段，方便我们准确准备您的咨询。",
+        form_status_line: "LINE 已准备好咨询内容。发送后，我们会回复空房与直订价格。",
+        form_status_whatsapp: "WhatsApp 已准备好咨询内容。发送后，我们会回复空房与直订价格。",
+        form_status_email: "邮箱已打开并填好咨询内容。发送后，我们会回复空房与直订价格。",
+        field_hint_checkin: "请选择入住日期。",
+        field_hint_checkout: "请选择退房日期。",
+        field_hint_guests: "请告诉我们入住人数。",
+        field_hint_room: "请选择想先查询的房型。",
+        field_hint_name: "选填，但有助于我们更自然地回复您。",
+        field_hint_contact: "请填写电话或邮箱，方便我们直接回复。",
+        field_hint_notes: "选填：到店时间、床型偏好或特殊需求。",
+        validation_required_prefix: "请填写",
+        validation_checkout_after_checkin: "退房日期必须晚于入住日期。",
 
         quick_label: "快捷日期",
         quick_tonight: "今晚",
@@ -725,11 +804,12 @@
         stay_nights: "晚",
         stay_guests: "位",
         stay_room: "房型",
-        best_rate_note: "直接预订 = 最快确认 • 发送日期以获取今日准确价格。",
+        best_rate_note: "直接预订 = 最快确认 • 发送日期即可获取今日直订价格。",
         msg_nights: "晚数",
         line_opened_hint: "已打开LINE。",
         line_clipboard_hint: "消息已复制到剪贴板。",
         line_clipboard_fail: "提示：如需粘贴，可先复制消息。",
+        msg_intro: "您好，我想咨询空房和直订价格。",
         why_title: "客人选择 Sandbox 的原因",
         why_sub: "舒适客房，友好服务，直订方便。",
         why_1_t: "宽敞客房",
@@ -749,8 +829,11 @@
         faq_a10: "Sandbox Hotel 附近有洛坤府著名的Wat Phra Mahathat Woramahawihan（泰国南部最受尊崇的佛教寺庙之一）、步行街市集、洛坤府国家博物馆及正宗南泰餐厅，是探索城市及周边地区的理想据点。",
         faq_q11: "Sandbox Hotel 适合探索泰国南部吗？",
         faq_a11: "非常适合。洛坤府是泰国南部的重要交通枢纽，可便捷前往周边省份、海滩和文化景点。Sandbox Hotel 非常适合短期城市停留或多日游览泰国南部地区。",
-        book_tip: "提示：如晚到，请在备注中写预计到达时间，方便我们协助。",
+        book_tip: "提示：如晚到，请在备注中写预计到达时间，方便我们更快协助。",
         book_guarantee: "直订专享优惠价格保证 — 无中介费，无加价。",
+        book_benefit_1: "由酒店团队直接回复。",
+        book_benefit_2: "当日直订价格，无平台加价。",
+        book_benefit_3: "确认前也能获得灵活协助。",
 
         amen_title: "住客设施",
         amen_sub: "舒适住宿所需的一切。",
@@ -775,22 +858,24 @@
         price_from: "起价",
         price_ask: "咨询",
         price_today: "今日房价",
+        price_rates_on_request: "获取今日准确房价 →",
         btn_call: "致电",
         btn_see_photos: "查看照片",
+        sticky_note: "想快速得到回复？可直接致电、聊天或查看空房。",
 
         room_standard_twin_title: "标准双床房",
         room_standard_double_title: "标准大床房",
-        room_standard_twin_btn: "预订双床房",
-        room_standard_double_btn: "预订大床房",
-        room_standard_twin_meta: '<span class="kw a">实惠之选</span> • 2 张单人床 • 28–32 ㎡ • 1–2 人',
-        room_standard_double_meta: '<span class="kw a">热门之选</span> • 1 张大床 • 28–32 ㎡ • 1–2 人',
+        room_standard_twin_btn: "查看双床房空房",
+        room_standard_double_btn: "查看大床房空房",
+        room_standard_twin_meta: '<span class="kw a">实惠之选</span> • 2 张单人床 • 28 ㎡ • 1–2 人',
+        room_standard_double_meta: '<span class="kw a">热门之选</span> • 1 张大床 • 28 ㎡ • 1–2 人',
 
         opt_standard_twin: "标准双床房",
         opt_standard_double: "标准大床房",
 
         tag_2_twin_beds: "2 张单人床",
         tag_1_double_bed: "1 张大床",
-        tag_28_32_m: "28–32 ㎡",
+        tag_28_32_m: "28 ㎡",
         tag_guests_1_2: "1–2 人",
 
         bullet_large_room: "宽敞房间布局",
@@ -810,6 +895,7 @@
         gal_exterior_desc: "交通便利，容易找到。",
         gal_entrance_title: "入口与到店",
         gal_entrance_desc: "友好迎宾，日夜皆宜。",
+        gal_lobby_desc: "第一印象很重要——整洁、友好、高效。",
         gal_evening_view_title: "夜间酒店外观",
         gal_evening_view_desc: "傍晚时分的酒店门前与停车区域，氛围安静从容。",
         gal_flower_view_title: "花园迎宾一角",
@@ -846,7 +932,7 @@
 
         faq_title: "常见问题",
         faq_sub: "预订前的快速解答。",
-        faq_btn: "发送请求",
+        faq_btn: "发送入住咨询",
         faq_show_more: "查看更多问题",
         faq_q1: "怎样预订最快？",
         faq_a1: "通过电话或LINE告知入住/退房日期、人数和房型，我们会确认空房与总价。",
@@ -870,8 +956,10 @@
         dest_title: "探索 Sandbox Hotel 周边",
         dest_sub: "泰国湾沿岸的千年古城，体验地道南泰文化",
         dest_where_title: '<span class="destIcon" aria-hidden="true">📍</span> 洛坤府在哪里？',
+        dest_where_body_short: "洛坤府是位于<strong>泰国南部</strong>泰国湾沿岸的历史名城，距离曼谷约 780 公里。它是泰国最古老的城市之一，氛围与拥挤的安达曼海海滨度假区截然不同。",
         dest_where_body: "洛坤府是泰国南部的一座城市，位于泰国湾沿岸，距曼谷约780公里。它是洛坤府府的首府，也是泰国有记录历史超过1000年的最古老城市之一。",
         dest_why_title: '<span class="destIcon" aria-hidden="true">✨</span> 为何值得前往洛坤府？',
+        dest_why_body_short: "洛坤府拥有真实的泰式文化、深厚的佛教遗产和轻松的本地氛围。这里坐落着瓦拍玛哈泰寺——泰国最重要的寺庙之一。",
         dest_why_body: "不同于泰南热门海滩度假区，洛坤府拥有地道的泰国文化、千年佛教遗产和轻松的本地生活气息。来这里可以参观帕玛哈塔寺、欣赏纳泰隆皮影戏，还能体验传统银器工艺。",
         dest_attractions_title: '<span class="destIcon" aria-hidden="true">🛕</span> Sandbox Hotel 附近主要景点',
         dest_howtoget_title: '<span class="destIcon" aria-hidden="true">✈️</span> 如何前往洛坤府',
@@ -1015,8 +1103,20 @@
       document.querySelectorAll(".langBtn").forEach(btn=>{
         btn.addEventListener("click", ()=>{
           const lang = btn.getAttribute("data-lang");
+          const previousLang = CURRENT_LANG;
           try{ localStorage.setItem("sbx_lang", lang); } catch(_e){}
           applyLang(lang);
+          try{
+            if(lang && lang !== previousLang){
+              window.SandboxAnalytics?.trackEvent("language_switch", {
+                event_category: "navigation",
+                event_label: `${previousLang || "unknown"}->${lang}`,
+                previous_language: previousLang || "",
+                selected_language: lang,
+                cta_location: "language_switcher"
+              });
+            }
+          }catch(_e){}
           try{
             const nextUrl = new URL(window.location.href);
             nextUrl.searchParams.set("lang", lang);
@@ -1043,18 +1143,97 @@
         notes: f.notes.value || ""
       };
     }
+    function setFormStatus(message, tone){
+      const hint = document.getElementById("formHint");
+      if(!hint) return;
+      hint.textContent = message || (t("form_hint_extended") || "");
+      hint.dataset.state = tone || "info";
+    }
+    function getBookingFields(form){
+      if(!form || !form.elements) return [];
+      return Array.from(form.elements).filter((field)=> field && field.matches && field.matches("input, select, textarea"));
+    }
+    function getFieldLabel(field){
+      return field?.closest(".field")?.querySelector("label")?.textContent?.trim() || field?.name || "this field";
+    }
+    function applyDateConstraint(form){
+      if(!form) return;
+      const checkin = form.checkin;
+      const checkout = form.checkout;
+      const toDate = (value)=>{
+        const [y,m,d] = String(value || "").split("-").map(Number);
+        if(!y || !m || !d) return null;
+        return new Date(y, m - 1, d);
+      };
+      if(checkout){
+        checkout.setCustomValidity("");
+      }
+      const checkinDate = checkin ? toDate(checkin.value) : null;
+      const checkoutDate = checkout ? toDate(checkout.value) : null;
+      if(checkinDate && checkoutDate && checkoutDate <= checkinDate){
+        checkout.setCustomValidity(t("validation_checkout_after_checkin") || "Check-out must be after check-in.");
+      }
+    }
+    function getFieldValidationMessage(field){
+      if(!field) return "";
+      if(field.validity?.valueMissing){
+        return `${t("validation_required_prefix") || "Please add"} ${getFieldLabel(field).toLowerCase()}.`;
+      }
+      return field.validationMessage || "";
+    }
+    function updateFieldState(field){
+      if(!field?.closest) return true;
+      const wrapper = field.closest(".field");
+      if(!wrapper) return true;
+      const error = wrapper.querySelector(".fieldError");
+      const hasValue = String(field.value || "").trim() !== "";
+      const touched = wrapper.classList.contains("is-touched");
+      const message = touched ? getFieldValidationMessage(field) : "";
+      wrapper.classList.toggle("is-invalid", Boolean(message));
+      wrapper.classList.toggle("is-valid", Boolean(hasValue) && !message);
+      field.setAttribute("aria-invalid", message ? "true" : "false");
+      if(error) error.textContent = message;
+      return !message;
+    }
+    function validateBookingForm(form){
+      if(!form) return false;
+      applyDateConstraint(form);
+      let firstInvalid = null;
+      let valid = true;
+      getBookingFields(form).forEach((field)=>{
+        field.closest(".field")?.classList.add("is-touched");
+        const fieldValid = updateFieldState(field);
+        if(!fieldValid && !firstInvalid){
+          firstInvalid = field;
+        }
+        if(!fieldValid){
+          valid = false;
+        }
+      });
+      if(!valid){
+        setFormStatus(t("form_validation_summary") || "Please review the highlighted fields so we can prepare your inquiry correctly.", "error");
+        firstInvalid?.focus();
+        return false;
+      }
+      setFormStatus(t("form_hint") || "We’ll reply with availability, your direct rate, and the next step.", "info");
+      return true;
+    }
     function buildMessage(d){
+      const details = [
+        d.checkin ? `${t("msg_checkin") || "Check-in"}: ${d.checkin}` : null,
+        d.checkout ? `${t("msg_checkout") || "Check-out"}: ${d.checkout}` : null,
+        (d.checkin && d.checkout && calcNights(d.checkin, d.checkout)) ? `${t("msg_nights") || "Nights"}: ${calcNights(d.checkin, d.checkout)}` : null,
+        d.guests ? `${t("msg_guests") || "Guests"}: ${d.guests}` : null,
+        d.room ? `${t("msg_room") || "Room"}: ${d.room}` : null,
+        d.name ? `${t("msg_name") || "Name"}: ${d.name}` : null,
+        d.contact ? `${t("msg_contact") || "Contact"}: ${d.contact}` : null,
+        d.notes ? `${t("msg_notes") || "Notes"}: ${d.notes}` : null
+      ].filter(Boolean);
       const lines = [
         t("msg_title") || "Booking request – Sandbox Hotel",
         "",
-        `${t("msg_checkin") || "Check-in"}: ${d.checkin}`,
-        `${t("msg_checkout") || "Check-out"}: ${d.checkout}`,
-        (calcNights(d.checkin, d.checkout) ? `${t("msg_nights") || "Nights"}: ${calcNights(d.checkin, d.checkout)}` : null),
-        `${t("msg_guests") || "Guests"}: ${d.guests}`,
-        `${t("msg_room") || "Room"}: ${d.room}`,
-        d.name ? `${t("msg_name") || "Name"}: ${d.name}` : null,
-        d.contact ? `${t("msg_contact") || "Contact"}: ${d.contact}` : null,
-        d.notes ? `${t("msg_notes") || "Notes"}: ${d.notes}` : null,
+        t("msg_intro") || "Hello, I'd like to check availability and the direct rate.",
+        ...details,
         "",
         t("msg_closing") || "Please confirm availability and total price. Thank you."
       ].filter(Boolean);
@@ -1133,35 +1312,59 @@
     function openWhatsApp(msg, data, contextElement){
       const url = `https://wa.me/${WHATSAPP_NUMBER_E164}?text=${encodeURIComponent(msg)}`;
       trackBookingSend("whatsapp", data || getFormData(), contextElement);
+      setFormStatus(t("form_status_whatsapp") || "WhatsApp is ready with your inquiry. Send it there and we’ll reply with availability and your direct rate.", "success");
       window.open(url, "_blank", "noopener");
     }
-        async function openLine(msg, data, contextElement){
+    async function openLine(msg, data, contextElement){
       const url = lineMessageUrl(msg);
       const copied = await copyToClipboard(msg);
       trackBookingSend("line", data || getFormData(), contextElement);
       window.open(url, "_blank", "noopener");
 
-      const hint = document.getElementById("formHint");
-      if(hint){
-        const base = t("line_opened_hint") || "LINE opened.";
-        const clip = copied ? (t("line_clipboard_hint") || "Message copied to clipboard.") : (t("line_clipboard_fail") || "Tip: copy your message if needed.");
-        hint.textContent = `${base} ${clip}`;
-        hint.style.color = "#D18B50";
-        setTimeout(()=>{
-          hint.style.color = "";
-          hint.textContent = t("form_hint") || "We’ll reply with availability and total price.";
-        }, 4200);
-      }
+      const clip = copied ? (t("line_clipboard_hint") || "Message copied to clipboard.") : (t("line_clipboard_fail") || "Tip: copy your message if needed.");
+      setFormStatus(`${t("form_status_line") || "LINE is ready with your inquiry. Send it there and we’ll reply with availability and your direct rate."} ${clip}`.trim(), "success");
     }
     function openEmail(msg, data, contextElement){
       const subject = t("msg_title") || "Booking request – Sandbox Hotel";
       trackBookingSend("email", data || getFormData(), contextElement);
+      setFormStatus(t("form_status_email") || "Your email app opened with your inquiry. Send it when ready and we’ll reply with availability and your direct rate.", "success");
       window.location.href = `mailto:${encodeURIComponent(EMAIL_TO)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(msg)}`;
+    }
+    function initBookingFormState(form){
+      if(!form) return;
+      form.setAttribute("novalidate", "novalidate");
+      setFormStatus(t("form_hint_extended") || "Choose your preferred contact channel. We’ll reply with availability, your direct rate, and the next step as soon as possible.", "info");
+      form.addEventListener("invalid", (event)=>{
+        const field = event.target;
+        if(field?.closest){
+          field.closest(".field")?.classList.add("is-touched");
+          applyDateConstraint(form);
+          updateFieldState(field);
+          setFormStatus(t("form_validation_summary") || "Please review the highlighted fields so we can prepare your inquiry correctly.", "error");
+        }
+      }, true);
+      getBookingFields(form).forEach((field)=>{
+        const sync = ()=>{
+          applyDateConstraint(form);
+          updateFieldState(field);
+          if(field.closest(".field")?.classList.contains("is-invalid")){
+            setFormStatus(t("form_validation_summary") || "Please review the highlighted fields so we can prepare your inquiry correctly.", "error");
+          } else if(!form.querySelector(".field.is-invalid")){
+            setFormStatus(t("form_hint") || "We’ll reply with availability, your direct rate, and the next step.", "info");
+          }
+        };
+        field.addEventListener("blur", ()=>{
+          field.closest(".field")?.classList.add("is-touched");
+          sync();
+        });
+        field.addEventListener("input", sync);
+        field.addEventListener("change", sync);
+      });
     }
 
     function wireContactButtons(){
       // Non-JS fallbacks: real links
-      ["contactLine"].forEach(id=>{
+      ["contactLine", "bookingLineQuick", "stickyLine"].forEach(id=>{
         const el = document.getElementById(id);
         if(!el) return;
         el.setAttribute("href", lineMessageUrl(t("msg_title") || "Booking request – Sandbox Hotel"));
@@ -1175,13 +1378,22 @@
       });
 
       const form = document.getElementById("bookingForm");
-      form.addEventListener("submit", async (e)=>{
+      initBookingFormState(form);
+      form?.addEventListener("submit", async (e)=>{
         e.preventDefault();
+        if(!validateBookingForm(form)) return;
         const data = getFormData();
         await persistBookingLead(data);
         openLine(buildMessage(data), data, form);
       });
+      document.getElementById("sendWhatsApp")?.addEventListener("click", async ()=>{
+        if(!validateBookingForm(form)) return;
+        const data = getFormData();
+        await persistBookingLead(data);
+        openWhatsApp(buildMessage(data), data, document.getElementById("sendWhatsApp"));
+      });
       document.getElementById("sendEmail")?.addEventListener("click", async ()=>{
+        if(!validateBookingForm(form)) return;
         const data = getFormData();
         await persistBookingLead(data);
         openEmail(buildMessage(data), data, document.getElementById("sendEmail"));
@@ -1194,127 +1406,6 @@
           if(select) select.value = room;
         });
       });
-    }
-
-    // ---------- Carousel (gallery only) ----------
-    function initGalleryCarousel(){
-      const carousel = document.getElementById("galCarousel");
-      const viewport = document.getElementById("galViewport");
-      const track = document.getElementById("galTrack");
-      const dotsWrap = document.getElementById("galDots");
-      const thumbsWrap = document.getElementById("galThumbs");
-      const prevBtn = document.getElementById("galPrev");
-      const nextBtn = document.getElementById("galNext");
-      if(!carousel || !viewport || !track || !dotsWrap || !prevBtn || !nextBtn) return;
-
-      const slides = Array.from(track.querySelectorAll(".galSlide"));
-      if(slides.length <= 1){
-        dotsWrap.style.display = "none";
-        prevBtn.style.display = "none";
-        nextBtn.style.display = "none";
-        return;
-      }
-
-      const prefersReduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-      let idx = 0;
-      let timer = null;
-
-      function setIndex(i){
-        idx = (i + slides.length) % slides.length;
-        track.style.transform = `translateX(${-idx * 100}%)`;
-        dotsWrap.querySelectorAll(".galDot").forEach((b,bi)=>{
-          b.setAttribute("aria-current", bi === idx ? "true" : "false");
-        });
-        thumbsWrap?.querySelectorAll(".galThumb").forEach((b,bi)=>{
-          b.setAttribute("aria-current", bi === idx ? "true" : "false");
-        });
-        const statusEl = document.getElementById("galStatus");
-        if (statusEl) statusEl.textContent = `Slide ${idx + 1} of ${slides.length}`;
-      }
-
-      function buildDots(){
-        dotsWrap.innerHTML = "";
-        slides.forEach((_,i)=>{
-          const b = document.createElement("button");
-          b.type = "button";
-          b.className = "galDot";
-          b.setAttribute("aria-label", `Photo ${i+1}`);
-          b.setAttribute("aria-current", i === 0 ? "true" : "false");
-          b.addEventListener("click", ()=>{ stop(); setIndex(i); start(); });
-          dotsWrap.appendChild(b);
-        });
-      }
-
-      function buildThumbs(){
-        if(!thumbsWrap) return;
-        thumbsWrap.innerHTML = "";
-        slides.forEach((slide,i)=>{
-          const img = slide.querySelector(".mediaImg");
-          if(!img) return;
-          const b = document.createElement("button");
-          const thumbImg = document.createElement("img");
-          b.type = "button";
-          b.className = "galThumb";
-          b.setAttribute("aria-label", img.alt || `Photo ${i+1}`);
-          b.setAttribute("aria-current", i === 0 ? "true" : "false");
-          thumbImg.src = img.getAttribute("src") || "";
-          thumbImg.srcset = img.getAttribute("srcset") || "";
-          thumbImg.sizes = "160px";
-          thumbImg.alt = "";
-          thumbImg.loading = "lazy";
-          thumbImg.decoding = "async";
-          thumbImg.width = 160;
-          thumbImg.height = 120;
-          b.appendChild(thumbImg);
-          b.addEventListener("click", ()=>{ stop(); setIndex(i); start(); });
-          thumbsWrap.appendChild(b);
-        });
-      }
-
-      function start(){
-        if(prefersReduce) return;
-        stop();
-        timer = setInterval(()=> setIndex(idx + 1), 6500);
-      }
-      function stop(){
-        if(timer){ clearInterval(timer); timer = null; }
-      }
-
-      prevBtn.addEventListener("click", ()=>{ stop(); setIndex(idx - 1); start(); });
-      nextBtn.addEventListener("click", ()=>{ stop(); setIndex(idx + 1); start(); });
-
-      carousel.addEventListener("pointerenter", stop, {passive:true});
-      carousel.addEventListener("pointerleave", start, {passive:true});
-      carousel.addEventListener("focusin", stop);
-      carousel.addEventListener("focusout", start);
-
-      // Swipe / drag
-      let sx = null;
-      viewport.addEventListener("pointerdown", (e)=>{
-        sx = e.clientX;
-        try{ viewport.setPointerCapture(e.pointerId); } catch(_e){}
-      }, {passive:true});
-      viewport.addEventListener("pointerup", (e)=>{
-        if(sx === null) return;
-        const dx = e.clientX - sx;
-        sx = null;
-        if(Math.abs(dx) < 40) return;
-        stop();
-        if(dx < 0) setIndex(idx + 1); else setIndex(idx - 1);
-        start();
-      }, {passive:true});
-
-      // Keyboard
-      viewport.addEventListener("keydown", (e)=>{
-        if(e.key === "ArrowLeft"){ e.preventDefault(); stop(); setIndex(idx - 1); start(); }
-        else if(e.key === "ArrowRight"){ e.preventDefault(); stop(); setIndex(idx + 1); start(); }
-      });
-
-      buildDots();
-      buildThumbs();
-      setIndex(0);
-      start();
     }
 
     // ---------- Room thumbnail mini-gallery ----------
@@ -1522,21 +1613,6 @@
       updateStaySummary();
     }
 
-    // ---------- Header scroll effect ----------
-    function initHeaderScroll(){
-      const header = document.querySelector("header");
-      if(!header) return;
-      function checkScroll(){
-        if(window.scrollY > 60){
-          header.classList.add("scrolled");
-        } else {
-          header.classList.remove("scrolled");
-        }
-      }
-      window.addEventListener("scroll", checkScroll, {passive:true});
-      checkScroll();
-    }
-
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
@@ -1545,7 +1621,7 @@
       initFAQ();
       initDates();
       wireContactButtons();
-      initGalleryCarousel();
+      window.SandboxHotelHome?.initGalleryCarousel?.();
       initRoomThumbs();
-      initHeaderScroll();
+      window.SandboxHotelHome?.initHeaderScroll?.();
     })();

@@ -49,18 +49,17 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <meta name="twitter:description" id="twitterDescription" content="จองตรงกับ Sandbox Hotel โรงแรมในนครศรีธรรมราช ภาคใต้ของไทย ยืนยันรวดเร็วผ่านโทรหรือ LINE">
   <meta name="twitter:image" content="https://www.sandboxhotel.com/images/Sandbox-Hotel-Hero-Banner.png">
 
-  <!-- Preload hero -->
-    <link rel="preload" as="image"
-      href="assets/images/logo/logo-128.png"
-      imagesrcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w"
-      imagesizes="56px"
-      fetchpriority="high">
+  <!-- Preload: hero banner first (LCP element) at high priority; logo at auto -->
   <link rel="preload" as="image"
         href="images/Sandbox-Hotel-Hero-Banner.webp"
         imagesrcset="images/Sandbox-Hotel-Hero-Banner-720.webp 720w, images/Sandbox-Hotel-Hero-Banner.webp 1600w"
         imagesizes="100vw"
         type="image/webp"
         fetchpriority="high">
+  <link rel="preload" as="image"
+      href="assets/images/logo/logo-128.png"
+      imagesrcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w"
+      imagesizes="56px">
   <!-- DNS prefetch for third-party origins -->
   <link rel="dns-prefetch" href="https://www.google-analytics.com">
   <link rel="dns-prefetch" href="https://www.googletagmanager.com">
@@ -77,6 +76,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   <script defer src="assets/js/analytics.js"></script>
 
   <link rel="stylesheet" href="assets/css/home.css">
+  <link rel="stylesheet" href="assets/css/components/booking-form.css">
 
   <script type="application/ld+json">
   {
@@ -295,7 +295,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <div class="nav">
       <a class="brand" href="#top" aria-label="Sandbox Hotel home">
         <div class="logo">
-          <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="56px" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" fetchpriority="high" decoding="async">
+          <img src="assets/images/logo/logo-128.png" srcset="assets/images/logo/logo-64.png 64w, assets/images/logo/logo-128.png 128w, assets/images/logo/logo-256.png 256w" sizes="56px" alt="Sandbox Hotel logo" width="56" height="56" loading="eager" decoding="async">
         </div>
         <div class="brandText">
           <span class="brandName">Sandbox Hotel</span>
@@ -305,10 +305,28 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <nav class="navLinks" aria-label="Primary">
         <span class="navSupport hideMobile" data-i18n="nav_support">Best Rate Direct</span>
-        <a class="navLineBtn" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Contact us on LINE (opens in new tab)" data-analytics="line">
+        <div class="navLangCluster hideMobile">
+          <button type="button" class="navLangToggle" id="langBtn" aria-haspopup="true" aria-expanded="false">
+            <span id="currentFlag" aria-hidden="true">🇹🇭</span>
+            <span class="sr-only" data-i18n="nav_language">Language</span>
+            <span class="navLangChevron" aria-hidden="true">▾</span>
+          </button>
+          <div class="langMenu" id="langMenu" hidden>
+            <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
+              <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+            </button>
+            <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
+              <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
+            </button>
+            <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
+              <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
+            </button>
+          </div>
+        </div>
+        <a class="navLineBtn hideMobile" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" aria-label="Message Sandbox Hotel on LINE (opens in new tab)" data-analytics="line" data-cta-location="header-line">
           <span class="navLineIcon" aria-hidden="true">💬</span><span data-i18n="nav_line_cta">LINE</span>
         </a>
-        <a class="chip primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
+        <a class="chip primary navPrimaryCta" href="#book" data-i18n="nav_book" data-analytics="book-now" data-cta-location="header-primary">Check Availability</a>
 
         <details class="navGroup">
           <summary aria-label="Open site navigation menu">
@@ -331,22 +349,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <a class="chip" href="#offers" data-i18n="nav_offers">Offers</a>
             <a class="chip" href="#amenities" data-i18n="nav_amenities">Amenities</a>
             <a class="chip" href="#gallery" data-i18n="nav_gallery">Gallery</a>
-            <a class="chip" href="#reviews" data-i18n="nav_reviews">Reviews</a>
             <a class="chip" href="#faq" data-i18n="nav_faq">FAQ</a>
             <a class="chip" href="#location" data-i18n="nav_location">Location</a>
 
             <div class="navPanelDivider"></div>
 
-            <div class="navPanelLang">
-              <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
-                <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
-              </button>
-              <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
-                <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
-              </button>
-              <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
-                <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
-              </button>
+            <div class="navPanelLangBlock">
+              <span class="navPanelLabel" data-i18n="nav_language">Language</span>
+              <div class="navPanelLang">
+                <button type="button" class="flagItem langBtn" data-lang="th" aria-label="ภาษาไทย" aria-pressed="true">
+                  <span aria-hidden="true">🇹🇭</span><span class="sr-only">Thai</span>
+                </button>
+                <button type="button" class="flagItem langBtn" data-lang="en" aria-label="English" aria-pressed="false">
+                  <span aria-hidden="true">🇬🇧</span><span class="sr-only">English</span>
+                </button>
+                <button type="button" class="flagItem langBtn" data-lang="zh" aria-label="中文（简体）" aria-pressed="false">
+                  <span aria-hidden="true">🇨🇳</span><span class="sr-only">Chinese (Simplified)</span>
+                </button>
+              </div>
             </div>
 
             <!-- Theme toggle -->
@@ -380,27 +400,25 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </picture>
         <div class="heroInner">
           <div class="heroPanel">
-            <p class="heroKicker" data-i18n="hero_kicker_short">Sandbox Hotel • Direct Booking</p>
-            <h1 class="heroTitle" data-i18n-html="hero_title">Your comfortable base<br>in Nakhon Si Thammarat</h1>
-            <p class="heroSub" data-i18n="hero_sub_short">Spacious rooms, easy direct booking, and friendly service for every kind of stay.</p>
+            <p class="heroKicker" data-i18n="hero_kicker_short">Sandbox Hotel • Calm boutique stay</p>
+            <h1 class="heroTitle" data-i18n-html="hero_title">Calm, spacious stays<br>in Nakhon Si Thammarat</h1>
+            <p class="heroSub" data-i18n="hero_sub_short">A quiet boutique hotel with roomy comfort, easy direct booking, and convenient city access.</p>
 
             <div class="heroCTA">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="cta_call_line" data-analytics="call">Call or LINE</a>
-              <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">Explore Rooms →</a>
+              <a class="btn primary" href="#book" data-i18n="cta_check_direct_rate" data-analytics="book-now" data-cta-location="hero-primary">Check Availability &amp; Rate</a>
+              <a class="btn secondary" href="tel:+66885783478" data-i18n="cta_call_hotel" data-analytics="call" data-cta-location="hero-call">Call Hotel</a>
+              <a class="textLink" href="#rooms" data-i18n="hero_view_rooms">View Rooms →</a>
             </div>
-            <a class="heroReviewBadge" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-analytics="map">
-              <span class="heroReviewScore" data-i18n-html="trust_rating">4.8</span>
-              <span class="heroReviewStars" aria-hidden="true">★★★★★</span>
-              <span class="heroReviewLabel" data-i18n="trust_meta">Based on Google Maps reviews</span>
-            </a>
+            <p class="heroDirectNote" data-i18n="hero_direct_booking_benefit">Best rate when you book direct, with fast confirmation by phone or LINE.</p>
           </div>
         </div>
       </div>
 
       <div class="trustStrip" aria-label="Hotel highlights">
-        <span class="trustItem"><span class="trustIcon" aria-hidden="true">✓</span> <span data-i18n="trust_direct">Direct Booking</span></span>
-        <span class="trustItem"><span class="trustIcon" aria-hidden="true">🤫</span> <span data-i18n="trust_quiet">Quiet Rooms</span></span>
-        <span class="trustItem"><span class="trustIcon" aria-hidden="true">📶</span> <span data-i18n="trust_wifi">Free Wi‑Fi</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">✓</span> <span data-i18n="trust_direct">Best rate when you book direct</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">▢</span> <span data-i18n="trust_rooms">Spacious rooms</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">🤫</span> <span data-i18n="trust_quiet">Quiet rooms for restful stays</span></span>
+        <span class="trustItem"><span class="trustIcon" aria-hidden="true">📶</span> <span data-i18n="trust_wifi">Fast Wi‑Fi</span></span>
         <span class="trustItem"><span class="trustIcon" aria-hidden="true">🅿</span> <span data-i18n="trust_parking">Parking</span></span>
       </div>
     </section>
@@ -460,7 +478,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <ul class="roomMeta">
                   <li class="tag" data-i18n="tag_2_twin_beds">2 Twin Beds</li>
-                  <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                  <li class="tag" data-i18n="tag_28_32_m">28 m²</li>
                   <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
 
@@ -480,7 +498,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
                 <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now">Book Twin Room</a>
+                  <a class="btn primary" href="#book" data-room="Standard Twin" data-i18n="room_standard_twin_btn" data-analytics="book-now" data-cta-location="room-twin-primary">Check Twin Availability</a>
                 </div>
               </div>
             </div>
@@ -519,7 +537,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
                 <ul class="roomMeta">
                   <li class="tag" data-i18n="tag_1_double_bed">1 Double Bed</li>
-                  <li class="tag" data-i18n="tag_28_32_m">28–32 m²</li>
+                  <li class="tag" data-i18n="tag_28_32_m">28 m²</li>
                   <li class="tag" data-i18n="tag_guests_1_2">Guests 1–2</li>
                 </ul>
 
@@ -539,7 +557,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 </div>
 
                 <div class="roomActions">
-                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now">Book Double Room</a>
+                  <a class="btn primary" href="#book" data-room="Standard Double" data-i18n="room_standard_double_btn" data-analytics="book-now" data-cta-location="room-double-primary">Check Double Availability</a>
                 </div>
               </div>
             </div>
@@ -572,7 +590,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">🛏</div>
             <b data-i18n="offer2_title">Comfortable Rooms for Work or Rest</b>
-            <p data-i18n="offer2_desc">Spacious 28–32 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.</p>
+            <p data-i18n="offer2_desc">Spacious 28 m² rooms with desk, A/C, and hot shower. Quiet-side allocation on request.</p>
           </div>
           <div class="offer">
             <div class="offerIcon" aria-hidden="true">📶</div>
@@ -606,7 +624,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h2 data-i18n="book_title">Reserve Your Room</h2>
             <p data-i18n-html="book_sub">Send your <span class="kw a">dates</span> and <span class="kw">room preference</span> — we’ll reply with availability and your rate.</p>
           </div>
-          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
+          <a class="btn" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-header-call">Call Hotel</a>
         </div>
 
         <div class="bookingShell">
@@ -615,15 +633,24 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <span class="badge hot" data-i18n="trust_direct">Direct Booking</span>
               <p class="bookingMetaLead" data-i18n="best_rate_note">Direct booking = fastest confirmation • Message your dates for today's exact rate.</p>
             </div>
+            <div class="bookingJourney" aria-label="How direct booking works">
+              <p class="bookingJourneyLabel" data-i18n="book_process_label">How direct booking works</p>
+              <ol class="bookingJourneyList">
+                <li data-i18n="book_process_step_1">Choose your stay dates and room type.</li>
+                <li data-i18n="book_process_step_2">Send the inquiry by LINE, WhatsApp, or email.</li>
+                <li data-i18n="book_process_step_3">We reply with availability, direct rate, and next steps.</li>
+              </ol>
+              <p class="bookingResponseNote" data-i18n="book_channel_hint">Fastest response: call or LINE. Email is best for detailed requests.</p>
+            </div>
             <div class="bookingSupportRow">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call">Call Now</a>
-              <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn primary" href="tel:+66885783478" data-i18n="book_callnow" data-analytics="call" data-cta-location="booking-support-call">Call Hotel</a>
+              <a class="btn secondary lineAction" id="bookingLineQuick" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" data-cta-location="booking-support-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
             </div>
-            <div class="bookingTrustBar">
-              <span class="bookingTrustValue" data-i18n-html="trust_rating">4.8</span>
-              <span class="stars" aria-hidden="true">★★★★★</span>
-              <span class="bookingTrustMeta" data-i18n="trust_meta">Based on Google Maps reviews</span>
-            </div>
+            <ul class="bookingBenefitList">
+              <li data-i18n="book_benefit_1">Direct reply from the hotel team.</li>
+              <li data-i18n="book_benefit_2">Today’s direct rate with no platform mark-up.</li>
+              <li data-i18n="book_benefit_3">Flexible help before you confirm.</li>
+            </ul>
             <div class="bookingFacts fine">
               <p data-i18n="book_tip"><strong>Tip:</strong> Add your estimated arrival time in Notes if arriving late.</p>
               <p data-i18n="book_checkin_info"><strong>Check-in:</strong> From 14:00 • <strong>Check-out:</strong> By 11:00</p>
@@ -635,53 +662,68 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="fieldGroup fieldGroupCols2 wide">
               <div class="field">
                 <label for="checkin" data-i18n="lbl_checkin">Check-in</label>
-                <input id="checkin" name="checkin" type="date" required>
+                <input id="checkin" name="checkin" type="date" required aria-describedby="checkinHint checkinError">
+                <span class="fieldHint" id="checkinHint" data-i18n="field_hint_checkin">Choose your arrival date.</span>
+                <span class="fieldError" id="checkinError" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="checkout" data-i18n="lbl_checkout">Check-out</label>
-                <input id="checkout" name="checkout" type="date" required>
+                <input id="checkout" name="checkout" type="date" required aria-describedby="checkoutHint checkoutError">
+                <span class="fieldHint" id="checkoutHint" data-i18n="field_hint_checkout">Choose your departure date.</span>
+                <span class="fieldError" id="checkoutError" aria-live="polite"></span>
               </div>
             </div>
             <div class="fieldGroup fieldGroupCols2 wide">
               <div class="field">
                 <label for="guests" data-i18n="lbl_guests">Guests</label>
-                <select id="guests" name="guests">
+                <select id="guests" name="guests" aria-describedby="guestsHint guestsError">
                   <option value="1">1</option>
                   <option value="2" selected>2</option>
                   <option value="3">3</option>
                   <option value="4">4</option>
                   <option value="5">5</option>
                 </select>
+                <span class="fieldHint" id="guestsHint" data-i18n="field_hint_guests">Tell us how many guests are staying.</span>
+                <span class="fieldError" id="guestsError" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="room" data-i18n="lbl_room">Room</label>
-                <select id="room" name="room">
+                <select id="room" name="room" aria-describedby="roomHint roomError">
                   <option value="Standard Twin" data-i18n="opt_standard_twin" selected>Standard Twin</option>
                   <option value="Standard Double" data-i18n="opt_standard_double">Standard Double</option>
                 </select>
+                <span class="fieldHint" id="roomHint" data-i18n="field_hint_room">Pick the room you want us to quote first.</span>
+                <span class="fieldError" id="roomError" aria-live="polite"></span>
               </div>
             </div>
             <div class="fieldGroup fieldGroupCols2 wide">
               <div class="field">
                 <label for="name" data-i18n="lbl_name">Name</label>
-                <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name">
+                <input id="name" name="name" type="text" placeholder="Your name" data-i18n-ph="ph_name" autocomplete="name" aria-describedby="nameHint nameError">
+                <span class="fieldHint" id="nameHint" data-i18n="field_hint_name">Optional, but helpful for a personal reply.</span>
+                <span class="fieldError" id="nameError" aria-live="polite"></span>
               </div>
               <div class="field">
                 <label for="contact" data-i18n="lbl_contact">Contact (phone / email)</label>
-                <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" required>
+                <input id="contact" name="contact" type="text" placeholder="+66 … or email" data-i18n-ph="ph_contact" autocomplete="email" autocapitalize="off" spellcheck="false" required aria-describedby="contactHint contactError">
+                <span class="fieldHint" id="contactHint" data-i18n="field_hint_contact">Phone or email so we can reply directly.</span>
+                <span class="fieldError" id="contactError" aria-live="polite"></span>
               </div>
             </div>
             <div class="fieldGroup wide">
               <div class="field">
                 <label for="notes" data-i18n="lbl_notes">Notes</label>
-                <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes"></textarea>
+                <textarea id="notes" name="notes" rows="3" placeholder="Arrival time, special requests, etc." data-i18n-ph="ph_notes" aria-describedby="notesHint notesError"></textarea>
+                <span class="fieldHint" id="notesHint" data-i18n="field_hint_notes">Optional: arrival time, bed preference, or special requests.</span>
+                <span class="fieldError" id="notesError" aria-live="polite"></span>
               </div>
             </div>
 
             <div class="wide ctaRow">
-              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line">Book via LINE</button>
-              <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email">Book via Email</button>
-              <span class="fine" id="formHint" data-i18n="form_hint_extended">We reply with room availability and total price as soon as possible.</span>
+              <button class="btn primary" type="submit" data-i18n="btn_send_line" data-analytics="line" data-cta-location="booking-form-line">Send via LINE</button>
+              <button class="btn secondary" type="button" id="sendWhatsApp" data-i18n="btn_send_wa" data-analytics="whatsapp" data-cta-location="booking-form-whatsapp">Send via WhatsApp</button>
+              <button class="btn secondary" type="button" id="sendEmail" data-i18n="btn_send_email" data-analytics="email" data-cta-location="booking-form-email">Send via Email</button>
+              <span class="fine" id="formHint" data-i18n="form_hint_extended" role="status" aria-live="polite">Choose your preferred contact channel. We’ll reply with availability, direct rate, and the next step as soon as possible.</span>
             </div>
             <div class="wide bookGuarantee">
               <i class="checkIcon" aria-hidden="true">✓</i>
@@ -848,6 +890,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </div>
     </section>
 
+
         <!-- FAQ -->
     <section class="section" id="faq">
       <div class="card altHot pad faqSectionCard">
@@ -921,9 +964,10 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <div class="helpMethod"><span aria-hidden="true">✉️</span> <span data-i18n="faq_help_email">booking@sandboxhotel.com</span></div>
               <div class="helpMethod"><span aria-hidden="true">🕐</span> <span data-i18n="faq_help_hours">Daily 06:00–22:00</span></div>
             </div>
-            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
-            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call">Call: 088-578-3478</a>
+            <a class="btn primary" href="#book" data-i18n="cta_request" data-analytics="book-now" data-cta-location="faq-help-primary">Check Availability</a>
+            <a class="btn" href="tel:+66885783478" data-i18n="cta_call_number" data-analytics="call" data-cta-location="faq-help-call">Call: 088-578-3478</a>
           </aside>
+        </div>
         </div>
       </div>
     </section>
@@ -941,12 +985,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <article class="destGrid">
           <div class="destBlock">
             <h3 data-i18n-html="dest_where_title"><span class="destIcon" aria-hidden="true">📍</span> Where We Are</h3>
-            <p>Nakhon Si Thammarat is a historic Gulf-coast city in Southern Thailand, around 780 km south of Bangkok and well connected for city stays and regional trips.</p>
+            <p data-i18n-html="dest_where_body_short">Nakhon Si Thammarat is a historic city in <strong>Southern Thailand</strong> on the Gulf coast, 780 km south of Bangkok. One of the oldest cities in the country, it sits distinct from crowded Andaman beach resorts.</p>
           </div>
 
           <div class="destBlock">
             <h3 data-i18n-html="dest_why_title"><span class="destIcon" aria-hidden="true">✨</span> Why Visit</h3>
-            <p>A quieter base with strong local character, temple heritage, local food, and an easier pace than Thailand’s busier resort hubs.</p>
+            <p data-i18n-html="dest_why_body_short">Nakhon Si Thammarat offers authentic Thai culture, impressive Buddhist heritage, and a relaxed local atmosphere. Home to Wat Phra Mahathat Woramahawihan — one of Thailand's most significant temples.</p>
           </div>
 
           <div class="destBlock">
@@ -1000,9 +1044,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="contactActions">
-              <a class="btn primary" href="tel:+66885783478" data-i18n="btn_call_now" data-analytics="call">Call Now</a>
-              <a class="btn lineAction" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-              <a class="btn" href="mailto:booking@sandboxhotel.com" data-i18n="btn_email" data-analytics="email">Email</a>
+              <a class="btn primary" href="tel:+66885783478" data-i18n="btn_call_now" data-analytics="call" data-cta-location="contact-card-call">Call Hotel</a>
+              <a class="btn lineAction" id="contactLine" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" data-analytics="line" data-cta-location="contact-card-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn" href="mailto:booking@sandboxhotel.com" data-i18n="btn_email" data-analytics="email" data-cta-location="contact-card-email">Email</a>
             </div>
 
             <div class="contactMeta contactMetaGrid fine">
@@ -1068,6 +1112,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
   </footer>
 
+  <script defer src="assets/js/components/device-detect.js"></script>
+  <script defer src="assets/js/components/gallery-carousel.js"></script>
+  <script defer src="assets/js/components/header-scroll.js"></script>
   <script defer src="assets/js/home.js"></script>
 
   <!-- Service Worker registration -->
@@ -1080,11 +1127,14 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </script>
 
   <!-- Mobile Sticky Bottom Bar -->
-  <div class="stickyBottom" id="stickyBottom" aria-label="Quick booking actions">
+  <div class="stickyBottom" id="stickyBottom" aria-label="Quick booking actions" data-analytics-section="sticky-bottom">
     <div class="stickyBottomInner">
-      <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call">Call</a>
-      <a class="btn lineAction" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" id="stickyLine" data-analytics="line">LINE<span class="sr-only"> (opens in new tab)</span></a>
-      <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now">Book Now</a>
+      <p class="stickyBottomNote" data-i18n="sticky_note">Need a quick answer? Call, chat, or check availability.</p>
+      <div class="stickyBottomActions">
+        <a class="btn" href="tel:+66885783478" data-i18n="btn_call" data-analytics="call" data-cta-location="sticky-call">Call</a>
+        <a class="btn lineAction" href="https://line.me/ti/p/uc4BCpHCQ4" target="_blank" rel="noopener nofollow" id="stickyLine" data-analytics="line" data-cta-location="sticky-line">LINE<span class="sr-only"> (opens in new tab)</span></a>
+        <a class="btn primary" href="#book" data-i18n="nav_book" data-analytics="book-now" data-cta-location="sticky-primary">Check Availability</a>
+      </div>
     </div>
   </div>
 

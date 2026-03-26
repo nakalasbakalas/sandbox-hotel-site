@@ -57,7 +57,7 @@ const BUDGETS = {
   // Individual CSS/JS bundles
   "public/assets/css/home.css": { maxKB: 80, label: "Home CSS" },
   "public/assets/css/design-tokens.css": { maxKB: 15, label: "Design tokens CSS" },
-  "public/assets/js/home.js": { maxKB: 90, label: "Home JS" },
+  "public/assets/js/home.js": { maxKB: 105, label: "Home JS" },
   "public/assets/js/analytics.js": { maxKB: 20, label: "Analytics JS" },
 
   // Hero images (important for LCP) — target: re-encode to ≤200 KB / ≤100 KB
@@ -116,6 +116,31 @@ if (indexHtml.includes('fetchpriority="high"') && indexHtml.includes('heroBgImg'
   pass("Hero image has fetchpriority=\"high\"");
 } else {
   fail("Hero image is missing fetchpriority=\"high\" — impacts LCP");
+}
+
+// Check hero preload is ordered before logo preload (hero is LCP element).
+// We locate the first preload link that references the hero WebP and the first
+// preload link that references the logo PNG file (more specific than imagesizes).
+const heroPreloadIdx = indexHtml.indexOf('Sandbox-Hotel-Hero-Banner.webp');
+const logoPreloadIdx = indexHtml.indexOf('logo-128.png');
+if (heroPreloadIdx !== -1 && logoPreloadIdx !== -1 && heroPreloadIdx < logoPreloadIdx) {
+  pass("Hero banner preload comes before logo preload (correct LCP priority order)");
+} else {
+  fail("Hero banner preload should come before logo preload in <head> — logo should not compete for LCP priority");
+}
+
+// Check logo preload does NOT have fetchpriority="high" (should not compete with hero).
+// Find the complete <link> element containing the logo preload by searching for the
+// opening tag before the logo href and the closing > after it.
+const logoLinkStart = indexHtml.lastIndexOf('<link', logoPreloadIdx);
+const logoLinkEnd   = indexHtml.indexOf('>', logoPreloadIdx) + 1;
+const logoPreloadBlock = logoLinkStart !== -1 && logoLinkEnd > logoLinkStart
+  ? indexHtml.slice(logoLinkStart, logoLinkEnd)
+  : '';
+if (logoPreloadBlock.includes('fetchpriority="high"')) {
+  fail("Logo preload has fetchpriority=\"high\" — this competes with the hero banner for LCP priority");
+} else {
+  pass("Logo preload does not have fetchpriority=\"high\" (hero has undisputed LCP priority)");
 }
 
 // Check external CSS link

@@ -1,0 +1,187 @@
+/* ---------- Booking form ---------- */
+    .bookingShell{
+      display:grid;
+      grid-template-columns:minmax(240px, .7fr) minmax(0, 1.3fr);
+      gap:var(--gridGap);
+      align-items:start;
+      margin-top:12px;
+    }
+    .bookingMetaCard{
+      border:1px solid var(--line);
+      border-radius:var(--radius2);
+      background:var(--surfaceB);
+      padding:18px;
+    }
+    .bookingMetaIntro{
+      display:grid;
+      gap:8px;
+      margin-bottom:2px;
+    }
+    .bookingSupportRow{
+      display:flex;
+      gap:8px;
+      flex-wrap:wrap;
+    }
+    .bookingSupportRow .btn{
+      flex:1 1 auto;
+      justify-content:center;
+      min-height:44px;
+    }
+    .bookingTrustBar{
+      display:flex;
+      align-items:center;
+      gap:6px;
+      flex-wrap:wrap;
+      font-size:13px;
+    }
+    .bookingTrustValue{
+      font-weight:800;
+      color:var(--ink2);
+      font-size:15px;
+    }
+    .bookingTrustMeta{
+      color:var(--muted);
+      font-size:12px;
+    }
+    .bookingJourney{
+      display:grid;
+      gap:10px;
+      margin:14px 0 16px;
+      padding:14px;
+      border-radius:var(--radius-sm);
+      border:1px solid color-mix(in oklab, var(--copper) 16%, var(--line));
+      background: color-mix(in oklab, var(--copper) 5%, var(--surfaceA));
+    }
+    .bookingJourneyLabel{
+      margin:0;
+      font-size:12px;
+      font-weight:900;
+      letter-spacing:.12em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+    .bookingJourneyList{
+      margin:0;
+      padding-left:18px;
+      display:grid;
+      gap:6px;
+      color:var(--ink2);
+      font-size:13.5px;
+      line-height:1.55;
+      font-weight:600;
+    }
+    .bookingResponseNote{
+      margin:0;
+      font-size:12.5px;
+      line-height:1.5;
+      color:var(--muted);
+    }
+    .bookingBenefitList{
+      margin:14px 0 0;
+      padding:0;
+      list-style:none;
+      display:grid;
+      gap:8px;
+    }
+    .bookingBenefitList li{
+      position:relative;
+      padding-left:18px;
+      color:var(--ink2);
+      font-size:13px;
+      line-height:1.5;
+      font-weight:600;
+    }
+    .bookingBenefitList li::before{
+      content:"•";
+      position:absolute;
+      left:0;
+      top:0;
+      color:var(--copper2);
+      font-size:16px;
+      line-height:1;
+    }
+    .formGrid{display:grid; grid-template-columns:1fr 1fr; gap:14px 16px; margin-top:0}
+    .field{display:flex; flex-direction:column; gap:6px}
+    .field label{font-size:12.5px; color:var(--muted); font-weight:800; letter-spacing:.01em}
+    .field input,.field select,.field textarea{
+      width:100%;
+      padding:var(--fieldPadY) var(--fieldPadX);
+      border-radius:var(--radius-sm);
+      border:1px solid var(--controlBorder);
+      background: var(--fieldBg);
+      color: var(--ink);
+      outline:none;
+      font-size:14px;
+      transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
+    }
+    .field input::placeholder,.field textarea::placeholder{color: var(--placeholderInk)}
+    .field input:focus,.field select:focus,.field textarea:focus{
+      border-color: var(--controlBorderStrong);
+      box-shadow: var(--focus);
+      background: var(--fieldBgFocus);
+    }
+    .fieldHint{
+      min-height:18px;
+      font-size:12px;
+      line-height:1.45;
+      color:var(--muted);
+    }
+    .fieldError{
+      min-height:18px;
+      font-size:12px;
+      line-height:1.45;
+      color:#B64B3A;
+      font-weight:700;
+    }
+    .field.is-invalid input,
+    .field.is-invalid select,
+    .field.is-invalid textarea{
+      border-color:#B64B3A;
+      box-shadow:0 0 0 4px rgba(182,75,58,.12);
+      background: color-mix(in oklab, #B64B3A 4%, var(--fieldBg));
+    }
+    .field.is-valid input,
+    .field.is-valid select,
+    .field.is-valid textarea{
+      border-color:#3A8A63;
+      background: color-mix(in oklab, #3A8A63 4%, var(--fieldBg));
+    }
+    .wide{grid-column:1/-1}
+    .ctaRow{display:flex; gap:10px; flex-wrap:wrap; align-items:center; margin-top:4px}
+    .ctaRow .btn.primary{min-height:48px; font-size:15px; font-weight:800}
+    .ctaRow .fine{flex:1 1 100%}
+    #formHint[data-state="error"]{ color:#B64B3A; font-weight:700 }
+    #formHint[data-state="success"]{ color:#3A8A63; font-weight:700 }
+    @media (max-width:980px){ .bookingShell{grid-template-columns:1fr} .formGrid{grid-template-columns:1fr} }
+
+        /* ---------- Quick date presets ---------- */
+    .quickDates{margin-top:4px; display:grid; gap:8px}
+    .quickTop{display:flex; align-items:center; justify-content:space-between; gap:8px; flex-wrap:wrap}
+    .quickLabel{
+      font-size:12px; color:var(--muted); font-weight:900;
+      letter-spacing:.14em; text-transform:uppercase;
+    }
+    .quickChips{display:flex; gap:6px; flex-wrap:wrap; align-items:center}
+    .quickChips .chip{min-height:32px; padding:6px 9px; font-size:12px}
+    .quickDates .fine{margin:0}
+    #staySummary{
+      display:flex; align-items:center; justify-content:flex-start; gap:6px; flex-wrap:wrap;
+    }
+    .stayPill{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:5px 9px; border-radius:999px;
+      border:1px solid var(--controlBorder);
+      background: var(--surfaceB);
+      color: var(--ink2);
+      font-weight:900;
+      font-size:11.5px;
+    }
+    .bestRateNote{color: var(--muted); font-size:12px; line-height:1.45}
+    html[data-device="phone"] .quickChips{
+      flex-wrap:nowrap;
+      overflow-x:auto;
+      -webkit-overflow-scrolling:touch;
+      padding-bottom:4px;
+      scroll-snap-type:x mandatory;
+    }
+    html[data-device="phone"] .quickChips .chip{scroll-snap-align:start; white-space:nowrap}

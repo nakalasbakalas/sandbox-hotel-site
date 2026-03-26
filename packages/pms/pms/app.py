@@ -123,6 +123,7 @@ from .services.communication_service import (
     send_due_failed_payment_reminders,
     send_due_pre_arrival_reminders,
 )
+from .services.notification_service import send_smtp_test_email
 from .services.front_desk_service import (
     CheckInPayload,
     CheckoutPayload,
@@ -1185,6 +1186,12 @@ def register_routes(app: Flask) -> None:
                 elif action == "run_failed_payment":
                     result = send_due_failed_payment_reminders(actor_user_id=actor.id)
                     flash(f"Failed payment reminders queued: {result['queued']}, sent: {result['sent']}.", "success")
+                elif action == "send_test_email":
+                    recipient = (request.form.get("test_recipient") or "").strip()
+                    if not recipient:
+                        raise ValueError("A recipient email address is required to send a test email.")
+                    send_smtp_test_email(recipient)
+                    flash(f"Test email sent to {recipient}.", "success")
                 else:
                     abort(400)
             except Exception as exc:  # noqa: BLE001
