@@ -527,6 +527,10 @@
       list-style:none;
       cursor:pointer;
       border-radius:var(--btn-radius);
+      -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .navGroup summary::-webkit-details-marker{display:none}
     .navGroup summary .navHamburger{pointer-events:none}
@@ -2003,6 +2007,10 @@
     /* Ensure header stays above the panel overlay */
     html[data-device="phone"] header{
       z-index: 100;
+    }
+    /* Lock body scroll when mobile menu is open */
+    html[data-device="phone"] body.nav-open{
+      overflow: hidden;
     }
     /* Give header a solid background when menu is open */
     html[data-device="phone"] .navGroup[open] ~ *,

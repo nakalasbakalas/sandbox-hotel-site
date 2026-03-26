@@ -1613,11 +1613,54 @@
       updateStaySummary();
     }
 
+    // ---------- Nav menu (mobile dropdown) ----------
+    function initNavMenu(){
+      const navGroup = document.querySelector(".navGroup");
+      if(!navGroup) return;
+
+      const isPhone = ()=> document.documentElement.getAttribute("data-device") === "phone";
+
+      function closeNav(){
+        navGroup.removeAttribute("open");
+        document.body.classList.remove("nav-open");
+      }
+
+      // Lock/unlock body scroll on phone when panel opens or closes
+      navGroup.addEventListener("toggle", ()=>{
+        if(navGroup.open && isPhone()){
+          document.body.classList.add("nav-open");
+        } else {
+          document.body.classList.remove("nav-open");
+        }
+      });
+
+      // Close panel when any link inside it is clicked
+      navGroup.querySelector(".navPanel")?.querySelectorAll("a[href]").forEach(link=>{
+        link.addEventListener("click", ()=>{ closeNav(); });
+      });
+
+      // Close panel on outside click / tap
+      document.addEventListener("click", (e)=>{
+        if(navGroup.open && !navGroup.contains(e.target)){
+          closeNav();
+        }
+      });
+
+      // Close panel on Escape key
+      document.addEventListener("keydown", (e)=>{
+        if(e.key === "Escape" && navGroup.open){
+          closeNav();
+          navGroup.querySelector("summary")?.focus();
+        }
+      });
+    }
+
     // ---------- Boot ----------
     (function boot(){
       document.getElementById("y").textContent = new Date().getFullYear();
       initTheme();
       initLang();
+      initNavMenu();
       initFAQ();
       initDates();
       wireContactButtons();
