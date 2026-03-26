@@ -300,6 +300,8 @@
 
         reviews_title: "รีวิวจากผู้เข้าพัก",
         reviews_sub: "ดูทำเลและรีวิวล่าสุดบน Google Maps เพื่อความมั่นใจก่อนจอง",
+        reviews_panel_title: "ดูเสียงตอบรับล่าสุดก่อนตัดสินใจจอง",
+        reviews_panel_copy: "เปิด Google Maps เพื่อดูรีวิวล่าสุด รูปภาพ และรายละเอียดทำเลก่อนจอง",
         btn_view_maps: 'ดูบน Google Maps<span class="sr-only"> (เปิดในแท็บใหม่)</span>',
         review1_title: 'นักธุรกิจ <span class="stars">★★★★★</span>',
         review1_text: "เช็คอินไว Wi-Fi เสถียร ห้องใหญ่ทำงานได้สบาย คุ้มค่า",
@@ -599,6 +601,8 @@
 
         reviews_title: "Guest Reviews",
         reviews_sub: "Check location and the latest guest feedback on Google Maps before you book.",
+        reviews_panel_title: "See the latest guest feedback before you book",
+        reviews_panel_copy: "Check recent comments, location details, and guest photos on Google Maps for the most current view of the hotel.",
         btn_view_maps: 'View on Google Maps<span class="sr-only"> (opens in new tab)</span>',
         review1_title: 'Business Traveler <span class="stars">★★★★★</span>',
         review1_text: "Fast check-in, stable Wi-Fi, and a big room to work in. Great value.",
@@ -912,6 +916,8 @@
 
         reviews_title: "住客评价",
         reviews_sub: "查看 Google Maps 上的位置与真实评价，预订更放心。",
+        reviews_panel_title: "预订前先看看最新住客反馈",
+        reviews_panel_copy: "打开 Google Maps 查看最新评论、位置细节与住客照片，再决定是否预订。",
         btn_view_maps: '在Google Maps查看<span class="sr-only">（在新标签页中打开）</span>',
         review1_title: '商务出行 <span class="stars">★★★★★</span>',
         review1_text: "办理入住很快，Wi-Fi稳定，房间大，办公方便，性价比高。",
@@ -969,12 +975,12 @@
         loc_plus: "Plus Code：",
         loc_notes: "提示：政策可能随季节调整，最新信息请直接联系酒店。",
 
-        btn_call_now: "致电酒店",
+        btn_call_now: "立即致电",
         btn_email: "邮箱",
         loc_hours: "每日服务：06:00–22:00",
 
         faq_help_title: "需要帮助？",
-        faq_help_sub: "服务时间内通幸15分钟内回复。",
+        faq_help_sub: "服务时间内通常 15 分钟内回复。",
         faq_help_call: "电话：088-578-3478",
         faq_help_line: "LINE：sandbox.hotel",
         faq_help_email: "booking@sandboxhotel.com",
@@ -1436,7 +1442,7 @@
       let visibleCount = 0;
       let resizeT;
       const mobileFaqQuery = window.matchMedia("(max-width: 760px)");
-      const MOBILE_FAQ_BATCH = 4;
+      const MOBILE_FAQ_BATCH = 5;
       const DESKTOP_FAQ_BATCH = 6;
       const batchSize = () => mobileFaqQuery.matches ? MOBILE_FAQ_BATCH : DESKTOP_FAQ_BATCH;
 
@@ -1455,6 +1461,15 @@
         render();
         const firstNewItem = items[previousVisibleCount];
         firstNewItem?.querySelector("summary")?.focus();
+      });
+
+      items.forEach((item) => {
+        item.addEventListener("toggle", () => {
+          if(!item.open || !mobileFaqQuery.matches) return;
+          items.forEach((otherItem) => {
+            if(otherItem !== item) otherItem.open = false;
+          });
+        });
       });
 
       window.addEventListener("resize", ()=>{

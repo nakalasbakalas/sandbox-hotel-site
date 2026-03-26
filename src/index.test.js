@@ -243,16 +243,15 @@ test("homepage above-the-fold keeps direct booking CTAs and a desktop flag dropd
   assert.ok(document.querySelector(".trustStrip [data-i18n='trust_rooms']"));
 });
 
-test("homepage lower sections stay as standalone premium blocks without a reviews section", () => {
+test("homepage lower sections include reviews, faq, destination, and location as standalone blocks", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
 
   assert.equal(document.querySelector(".sectionsGrid"), null);
-  assert.equal(document.querySelector("#reviews"), null);
+  assert.ok(document.querySelector("#reviews"));
   assert.ok(document.querySelector("#faq .faqSectionCard"));
   assert.ok(document.querySelector("#destination .destinationSectionCard"));
   assert.ok(document.querySelector("#location .locationSectionCard"));
-  assert.ok(document.querySelector("#faq .faqCTAActions"));
 });
 
 test("homepage location section keeps the contact card and map side by side until phone widths", () => {
@@ -268,11 +267,11 @@ test("homepage location section keeps the contact card and map side by side unti
   );
 });
 
-test("homepage removes guest review widgets and booking trust badge", () => {
+test("homepage reviews section uses Google Maps trust panel without booking widgets", () => {
   const dom = new JSDOM(homepageHtml);
   const { document } = dom.window;
 
-  assert.equal(document.querySelector("#reviews"), null);
+  assert.ok(document.querySelector("#reviews"));
   assert.equal(document.querySelector(".bookingTrustBar"), null);
   assert.equal(homepageJs.includes('trust_rating: "4.8"'), true);
   assert.equal(homepageJs.includes("trust_meta"), true);
