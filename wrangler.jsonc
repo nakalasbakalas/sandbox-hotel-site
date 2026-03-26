@@ -9,6 +9,16 @@
   "assets": {
     "directory": "public"
   },
+  "routes": [
+    {
+      "pattern": "sandboxhotel.com",
+      "custom_domain": true
+    },
+    {
+      "pattern": "www.sandboxhotel.com",
+      "custom_domain": true
+    }
+  ],
   "d1_databases": [
     {
       "binding": "DB",
