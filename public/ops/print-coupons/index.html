@@ -746,10 +746,12 @@
 
     /* Expiry line */
     .expiry-line {
-      font-size: inherit; line-height: 1.3; color: #7a7068;
+      font-size: 7px; line-height: 1.3; color: #7a7068;
       margin-top: 2px; font-style: italic;
     }
-    .coupon-overlay .expiry-line { color: rgba(255,255,255,.6); }
+    .coupon-voucher .expiry-line { font-size: 9px; }
+    .coupon-gift    .expiry-line { font-size: 11px; }
+    .coupon-overlay .expiry-line { font-size: 10px; color: rgba(255,255,255,.6); }
 
     /* Border styles */
     .page[data-border="dashed"]  .coupon-strip,
@@ -830,7 +832,7 @@
       .grid2, .grid3, .grid4, .actions { grid-template-columns: 1fr; }
       .layout-grid { grid-template-columns: repeat(2, 1fr); }
       .paperWrap { padding: 0; background: none; border-top: none; }
-      .page { transform-origin: top center; transform: scale(.45); margin: -80px auto -80px; }
+      .page { transform-origin: top center; transform: scale(.45); margin: 0 auto calc(297mm * 0.45 - 297mm); }
     }
 
     /* ── Print ─────────────────────────────────────────────── */
@@ -1273,7 +1275,7 @@
         quantitySelect.appendChild(o);
       });
       if (!opts.includes(state.quantity)) {
-        state.quantity = opts[opts.length - 1];
+        state.quantity = opts[0];
       }
       quantitySelect.value = state.quantity;
     }
@@ -1599,11 +1601,11 @@
       const imgAlt = getImageAlt();
       const noImg = (!state.showImage || !imgSrc) ? ' no-image' : '';
       const imgTag = (state.showImage && imgSrc)
-        ? '<div class="brandImage"><img src="' + imgSrc + '" alt="' + imgAlt + '"></div>'
-        : '<div class="brandImage"><img src="" alt=""></div>';
+        ? '<div class="brandImage"><img src="' + imgSrc + '" alt="' + escHTML(imgAlt) + '"></div>'
+        : '<div class="brandImage"></div>';
       const qrHTML = qrDataUrl
         ? '<div class="brandQr"><img src="' + qrDataUrl + '" alt="LINE QR"></div>'
-        : '<div class="brandQr hidden"><img src="" alt="LINE QR"></div>';
+        : '<div class="brandQr hidden"></div>';
       return '<div class="c-brand' + noImg + '">'
         + imgTag
         + '<div class="brandInner">'
