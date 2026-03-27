@@ -361,20 +361,36 @@
     header{
       position:fixed; top:0; left:0; right:0; z-index:80;
       border-bottom:1px solid transparent;
-      background: transparent;
-      transition: background .3s ease, border-color .3s ease, box-shadow .3s ease;
+      transition: border-color .3s ease, box-shadow .3s ease;
+    }
+    /* Use ::before for the frosted-glass effect so the header element itself never
+       acquires backdrop-filter — which would create a new containing block and
+       collapse the position:fixed navPanel to zero height on mobile. */
+    header::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      z-index:-1;
+      pointer-events:none;
+      opacity:0;
+      -webkit-backdrop-filter: blur(16px) saturate(130%);
+      backdrop-filter: blur(16px) saturate(130%);
+      transition: opacity .3s ease, background .3s ease;
     }
     header.scrolled{
       border-bottom:1px solid rgba(255,255,255,.08);
-      background: rgba(10,11,14,.82);
       box-shadow: var(--shadow-header-scrolled);
-      -webkit-backdrop-filter: blur(16px) saturate(130%);
-      backdrop-filter: blur(16px) saturate(130%);
+    }
+    header.scrolled::before{
+      opacity:1;
+      background: rgba(10,11,14,.82);
     }
     html[data-theme="light"] header.scrolled{
-      background: rgba(255,253,248,.88);
       border-bottom-color: rgba(45,36,24,.08);
       box-shadow: var(--shadow-header-scrolled-light);
+    }
+    html[data-theme="light"] header.scrolled::before{
+      background: rgba(255,253,248,.88);
     }
     .nav{
       max-width:var(--max); margin:0 auto;
@@ -2012,12 +2028,15 @@
     html[data-device="phone"] body.nav-open{
       overflow: hidden;
     }
-    /* Give header a solid background when menu is open */
-    html[data-device="phone"] .navGroup[open] ~ *,
-    html[data-device="phone"] header:has(.navGroup[open]){
+    /* Give header a solid frosted-glass background when menu is open.
+       backdrop-filter goes on ::before (not the header itself) so it never
+       creates a new containing block that would collapse the fixed navPanel. */
+    html[data-device="phone"] .navGroup[open] ~ *{
       background: var(--uiGlass2, rgba(255,252,247,.97));
-      -webkit-backdrop-filter: blur(16px) saturate(130%);
-      backdrop-filter: blur(16px) saturate(130%);
+    }
+    html[data-device="phone"] header:has(.navGroup[open])::before{
+      opacity:1;
+      background: var(--uiGlass2, rgba(255,252,247,.97));
     }
 
     /* 9. Panel brand block — clean spacing */
