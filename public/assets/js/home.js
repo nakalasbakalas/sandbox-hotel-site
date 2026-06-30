@@ -1291,11 +1291,23 @@
 
     async function persistBookingLead(data){
       try{
+        const attribution = window.SandboxAnalytics?.getAttribution?.() || {};
         await fetch("/api/booking-ingest", {
           method:"POST",
           headers:{"content-type":"application/json"},
-          body: JSON.stringify({ ...data, source: "website" })
+          body: JSON.stringify({ ...data, source: "website", attribution })
         });
+      }catch(_e){}
+    }
+
+    function trackBookingAttempt(channel, data, contextElement){
+      try{
+        window.SandboxAnalytics?.trackBookingAttempt(channel, {
+          room_type: data.room || "",
+          guests: data.guests || "",
+          checkin: data.checkin || "",
+          checkout: data.checkout || ""
+        }, contextElement || document.getElementById("bookingForm"));
       }catch(_e){}
     }
 
@@ -1387,12 +1399,14 @@
         openLine(buildMessage(data), data, form);
       });
       document.getElementById("sendWhatsApp")?.addEventListener("click", async ()=>{
+        trackBookingAttempt("whatsapp", getFormData(), document.getElementById("sendWhatsApp"));
         if(!validateBookingForm(form)) return;
         const data = getFormData();
         await persistBookingLead(data);
         openWhatsApp(buildMessage(data), data, document.getElementById("sendWhatsApp"));
       });
       document.getElementById("sendEmail")?.addEventListener("click", async ()=>{
+        trackBookingAttempt("email", getFormData(), document.getElementById("sendEmail"));
         if(!validateBookingForm(form)) return;
         const data = getFormData();
         await persistBookingLead(data);

@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <!-- Google Tag Manager (GTM fires GA4 tags — standalone gtag.js snippet removed to avoid duplicate tracking) -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w.SBX_GA_CONFIGURED=true;w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -882,8 +882,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <h3 data-i18n="reviews_panel_title">See the latest guest feedback before you book</h3>
             <p data-i18n="reviews_panel_copy">Check recent comments, location details, and guest photos on Google Maps for the most current view of the hotel.</p>
             <div class="reviewActionCard">
-              <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="btn_view_maps" data-analytics="map">View on Google Maps<span class="sr-only"> (opens in new tab)</span></a>
-              <a class="btn secondary" href="#book" data-i18n="cta_request" data-analytics="book-now">Check Availability</a>
+              <a class="btn" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="btn_view_maps" data-analytics="map" data-cta-location="reviews-map">View on Google Maps<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn secondary" href="#book" data-i18n="cta_request" data-analytics="book-now" data-cta-location="reviews-primary">Check Availability</a>
             </div>
           </aside>
         </div>
@@ -1029,8 +1029,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="locationGrid">
           <div class="contactCard">
             <div class="contactIntro">
-              <a class="contactPrimaryNumber" href="tel:+66885783478" data-analytics="call">088-578-3478</a>
-              <a class="contactPrimaryEmail" href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
+              <a class="contactPrimaryNumber" href="tel:+66885783478" data-analytics="call" data-cta-location="contact-primary-call">088-578-3478</a>
+              <a class="contactPrimaryEmail" href="mailto:booking@sandboxhotel.com" data-analytics="email" data-cta-location="contact-primary-email">booking@sandboxhotel.com</a>
               <p class="muted contactAddress">
                 <b data-i18n="loc_address">Address:</b>
                 626/1, Karom Road, Pho Sadet, Mueang, Nakhon Si Thammarat, 80000<br>
@@ -1052,7 +1052,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <div class="contactMeta contactMetaGrid fine">
               <div class="contactMetaRow">
                 <span class="contactMetaIcon" aria-hidden="true">📞</span>
-                <a href="tel:+66885783478" data-analytics="call">088-578-3478</a>
+                <a href="tel:+66885783478" data-analytics="call" data-cta-location="contact-meta-call">088-578-3478</a>
               </div>
               <div class="contactMetaRow">
                 <span class="contactMetaIcon" aria-hidden="true">💬</span>
@@ -1060,7 +1060,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               </div>
               <div class="contactMetaRow">
                 <span class="contactMetaIcon" aria-hidden="true">✉️</span>
-                <a href="mailto:booking@sandboxhotel.com" data-analytics="email">booking@sandboxhotel.com</a>
+                <a href="mailto:booking@sandboxhotel.com" data-analytics="email" data-cta-location="contact-meta-email">booking@sandboxhotel.com</a>
               </div>
             </div>
 
@@ -1081,7 +1081,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             </div>
 
             <div class="locationInfoStrip">
-              <a class="btn secondary" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map">Open in Google Maps<span class="sr-only"> (opens in new tab)</span></a>
+              <a class="btn secondary" href="https://maps.app.goo.gl/11TQ3x4Qqt5s6YMd7" target="_blank" rel="noopener" data-i18n-html="cta_open_map" data-analytics="map" data-cta-location="location-map">Open in Google Maps<span class="sr-only"> (opens in new tab)</span></a>
             </div>
           </div>
         </div>
