@@ -23,6 +23,17 @@ const DEFAULT_POSTMARK_API_BASE = "https://api.postmarkapp.com";
 const DEFAULT_POSTMARK_MESSAGE_STREAM = "outbound";
 const DEFAULT_BOOKING_ACK_SUBJECT = "Sandbox Hotel booking request received";
 const BOOKING_EMAIL_DEDUPE_WINDOW_MS = 10 * 60 * 1000;
+const LEAD_ATTRIBUTION_MAX_VALUE_LENGTH = 180;
+const LEAD_ATTRIBUTION_KEYS = [
+  "gclid",
+  "gbraid",
+  "wbraid",
+  "utm_source",
+  "utm_medium",
+  "utm_campaign",
+  "utm_term",
+  "utm_content",
+];
 
 export default {
   async fetch(request, env, ctx) {
@@ -401,12 +412,18 @@ async function ingestBookingLead(request, env, session, ctx) {
   const payload = await parseJson(request);
   requireFields(payload, ["checkin", "checkout", "guests"]);
   const now = isoNow();
+  const source = sanitizeLeadSource(payload.source);
+  const rawPayload = JSON.stringify({
+    ...payload,
+    source,
+    attribution: sanitizeLeadAttribution(payload.attribution),
+  });
   await db.prepare(`INSERT INTO booking_leads (property_id, source, status, guest_name, guest_contact, guest_notes, requested_room_type, guests, checkin_date, checkout_date, raw_payload, created_at, updated_at) VALUES (1, ?, 'new', ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`)
-    .bind(payload.source || "website", payload.name || "", payload.contact || "", payload.notes || "", payload.room || "", Number(payload.guests || 1), payload.checkin, payload.checkout, JSON.stringify(payload), now, now).run();
+    .bind(source, payload.name || "", payload.contact || "", payload.notes || "", payload.room || "", Number(payload.guests || 1), payload.checkin, payload.checkout, rawPayload, now, now).run();
   const leadId = Number((await first(db, "SELECT last_insert_rowid() AS id")).id);
   const lead = {
     id: leadId,
-    source: payload.source || "website",
+    source,
     guestName: payload.name || "",
     guestContact: payload.contact || "",
     guestNotes: payload.notes || "",
@@ -421,6 +438,42 @@ async function ingestBookingLead(request, env, session, ctx) {
     await insertAudit(db, session.propertyId, session.userId, "booking_lead_created", "booking_lead", leadId, "Lead created");
   }
   return json({ ok: true, leadId, emailStatus }, 201);
+}
+
+function sanitizeLeadSource(value) {
+  return sanitizeLeadAttributionString(value, 60) || "website";
+}
+
+function sanitizeLeadAttributionString(value, maxLength = LEAD_ATTRIBUTION_MAX_VALUE_LENGTH) {
+  return String(value || "")
+    .replace(/[\u0000-\u001f\u007f]/g, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .slice(0, maxLength);
+}
+
+function sanitizeLeadAttribution(value) {
+  const source = value && typeof value === "object" ? value : {};
+  const attribution = {};
+
+  for (const key of LEAD_ATTRIBUTION_KEYS) {
+    const cleanValue = sanitizeLeadAttributionString(source[key]);
+    if (cleanValue) {
+      attribution[key] = cleanValue;
+    }
+  }
+
+  const capturedAt = sanitizeLeadAttributionString(source.captured_at);
+  if (capturedAt && !Number.isNaN(Date.parse(capturedAt))) {
+    attribution.captured_at = capturedAt;
+  }
+
+  const landingPagePath = sanitizeLeadAttributionString(source.landing_page_path);
+  if (landingPagePath && landingPagePath.startsWith("/")) {
+    attribution.landing_page_path = landingPagePath;
+  }
+
+  return attribution;
 }
 
 export async function handleInboundEmail(message, env) {

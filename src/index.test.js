@@ -20,8 +20,10 @@ const homepageCss = [
 
 function createFakeDb({ duplicateLead = false } = {}) {
   let lastLeadId = 0;
+  const insertedBookingLeadParams = [];
 
   return {
+    insertedBookingLeadParams,
     prepare(sql) {
       return {
         bind(...params) {
@@ -29,6 +31,7 @@ function createFakeDb({ duplicateLead = false } = {}) {
             async run() {
               if (sql.startsWith("INSERT INTO booking_leads")) {
                 lastLeadId += 1;
+                insertedBookingLeadParams.push(params);
                 return { success: true, meta: { last_row_id: lastLeadId, params } };
               }
               throw new Error(`Unexpected run SQL: ${sql}`);
@@ -72,6 +75,25 @@ test("handleInboundEmail forwards configured booking inbox messages", async () =
     forwardTo: "desk@example.com",
   });
   assert.deepEqual(calls, ["desk@example.com"]);
+});
+
+test("root domain redirect preserves click IDs and UTM query parameters", async () => {
+  const response = await worker.fetch(
+    new Request("https://sandboxhotel.com/?gclid=test-gclid&gbraid=test-gbraid&wbraid=test-wbraid&utm_source=google&utm_medium=cpc&utm_campaign=brand"),
+    {
+      ASSETS: {
+        fetch() {
+          throw new Error("Redirect should happen before asset fetch.");
+        },
+      },
+    },
+  );
+
+  assert.equal(response.status, 308);
+  assert.equal(
+    response.headers.get("location"),
+    "https://www.sandboxhotel.com/?gclid=test-gclid&gbraid=test-gbraid&wbraid=test-wbraid&utm_source=google&utm_medium=cpc&utm_campaign=brand",
+  );
 });
 
 test("booking ingest queues a Postmark acknowledgement when guest contact contains an email address", async () => {
@@ -135,6 +157,61 @@ test("booking ingest queues a Postmark acknowledgement when guest contact contai
   } finally {
     globalThis.fetch = originalFetch;
   }
+});
+
+test("booking ingest keeps lead attribution to whitelisted non-PII fields", async () => {
+  const db = createFakeDb();
+  const response = await worker.fetch(
+    new Request("https://www.sandboxhotel.com/api/booking-ingest", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        checkin: "2026-04-01",
+        checkout: "2026-04-03",
+        guests: "2",
+        room: "Standard Twin",
+        name: "Jamie Guest",
+        contact: "jamie@example.com",
+        notes: "Late arrival",
+        attribution: {
+          gclid: "test-gclid",
+          gbraid: "test-gbraid",
+          wbraid: "test-wbraid",
+          utm_source: "google",
+          utm_medium: "cpc",
+          utm_campaign: "brand",
+          utm_term: "hotel nakhon",
+          utm_content: "rsa1",
+          captured_at: "2026-06-30T00:00:00.000Z",
+          landing_page_path: "/",
+          email: "should-not-persist-as-attribution@example.com",
+          raw_message_body: "do not trust this",
+        },
+      }),
+    }),
+    {
+      DB: db,
+      POSTMARK_SERVER_TOKEN: "",
+    },
+  );
+
+  const payload = await response.json();
+  const rawPayload = JSON.parse(db.insertedBookingLeadParams[0][8]);
+
+  assert.equal(response.status, 201);
+  assert.equal(payload.ok, true);
+  assert.deepEqual(rawPayload.attribution, {
+    gclid: "test-gclid",
+    gbraid: "test-gbraid",
+    wbraid: "test-wbraid",
+    utm_source: "google",
+    utm_medium: "cpc",
+    utm_campaign: "brand",
+    utm_term: "hotel nakhon",
+    utm_content: "rsa1",
+    captured_at: "2026-06-30T00:00:00.000Z",
+    landing_page_path: "/",
+  });
 });
 
 test("booking ingest skips the acknowledgement when contact details do not contain an email address", async () => {
@@ -347,9 +424,42 @@ test("homepage booking section clearly explains the inquiry flow and offers mult
   assert.ok(document.querySelector("#stickyBottom .stickyBottomNote"));
 });
 
+test("homepage tracked CTAs use stable analytics locations", () => {
+  const dom = new JSDOM(homepageHtml);
+  const missingLocations = [...dom.window.document.querySelectorAll("[data-analytics]")]
+    .filter((element) => !element.hasAttribute("data-cta-location"))
+    .map((element) => element.outerHTML);
+
+  assert.deepEqual(missingLocations, []);
+});
+
 test("homepage analytics includes dedicated sticky CTA and language switch tracking hooks", () => {
   assert.match(analyticsJs, /sticky_cta_click/);
   assert.match(analyticsJs, /language_switch/);
-  assert.match(analyticsJs, /element\.closest\("#stickyBottom"\)/);
+  assert.match(analyticsJs, /#stickyBottom, \[data-analytics-section='sticky-bottom'\]/);
   assert.match(homepageJs, /window\.SandboxAnalytics\?\.trackEvent\("language_switch"/);
+});
+
+test("homepage analytics captures attribution without adding standalone GA4 pageviews", () => {
+  assert.match(homepageHtml, /GTM-MPNHZC8S/);
+  assert.match(homepageHtml, /SBX_GA_CONFIGURED=true/);
+  assert.equal(/gtag\/js\?id=/.test(homepageHtml), false);
+  assert.match(analyticsJs, /ATTRIBUTION_KEYS = \[/);
+  assert.match(analyticsJs, /"gclid"/);
+  assert.match(analyticsJs, /"gbraid"/);
+  assert.match(analyticsJs, /"wbraid"/);
+  assert.match(analyticsJs, /"utm_source"/);
+  assert.match(analyticsJs, /getAttribution: getAttribution/);
+  assert.match(analyticsJs, /send_page_view: false/);
+  assert.match(analyticsJs, /!window\.SBX_GA_CONFIGURED && ensureAnalyticsConfigured\(\)/);
+});
+
+test("homepage booking buttons track all channel send attempts and successes", () => {
+  assert.match(homepageJs, /function trackBookingAttempt\(channel, data, contextElement\)/);
+  assert.match(homepageJs, /window\.SandboxAnalytics\?\.trackBookingAttempt/);
+  assert.match(homepageJs, /trackBookingAttempt\("whatsapp", getFormData\(\), document\.getElementById\("sendWhatsApp"\)\)/);
+  assert.match(homepageJs, /trackBookingAttempt\("email", getFormData\(\), document\.getElementById\("sendEmail"\)\)/);
+  assert.match(homepageJs, /trackBookingSend\("whatsapp"/);
+  assert.match(homepageJs, /trackBookingSend\("line"/);
+  assert.match(homepageJs, /trackBookingSend\("email"/);
 });

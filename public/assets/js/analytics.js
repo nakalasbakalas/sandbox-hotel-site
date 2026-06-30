@@ -6,6 +6,19 @@
 
   const GA4_MEASUREMENT_ID = "G-2B2SGREN1Z";
   const MEASUREMENT_ID = String(window.SBX_GA_MEASUREMENT_ID ?? GA4_MEASUREMENT_ID).trim();
+  const ATTRIBUTION_STORAGE_KEY = "sbx_attribution";
+  const ATTRIBUTION_MAX_AGE_MS = 90 * 24 * 60 * 60 * 1000;
+  const ATTRIBUTION_MAX_VALUE_LENGTH = 180;
+  const ATTRIBUTION_KEYS = [
+    "gclid",
+    "gbraid",
+    "wbraid",
+    "utm_source",
+    "utm_medium",
+    "utm_campaign",
+    "utm_term",
+    "utm_content"
+  ];
   const CLICK_SELECTOR = [
     "[data-analytics]",
     "a[href^='tel:']",
@@ -44,6 +57,7 @@
   const recentInteractions = new WeakMap();
   let analyticsConfigured = Boolean(window.SBX_GA_CONFIGURED);
   let googleTagInjected = false;
+  let cachedAttribution = null;
 
   window.dataLayer = window.dataLayer || [];
   window.gtag =
@@ -100,7 +114,7 @@
     injectGoogleTag();
     window.gtag("js", new Date());
     window.gtag("config", MEASUREMENT_ID, {
-      send_page_view: true,
+      send_page_view: false,
       page_path: getPagePath(),
       page_title: document.title
     });
@@ -150,6 +164,143 @@
 
   function getBookingForm() {
     return document.getElementById("bookingForm");
+  }
+
+  function getStorage() {
+    try {
+      return window.localStorage || window.sessionStorage || null;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function sanitizeAttributionValue(value) {
+    return String(value || "")
+      .replace(/[\u0000-\u001f\u007f]/g, "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, ATTRIBUTION_MAX_VALUE_LENGTH);
+  }
+
+  function sanitizeAttributionPayload(value) {
+    const source = value && typeof value === "object" ? value : {};
+    const attribution = {};
+
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      const cleanValue = sanitizeAttributionValue(source[key]);
+      if (cleanValue) {
+        attribution[key] = cleanValue;
+      }
+    });
+
+    const capturedAt = sanitizeAttributionValue(source.captured_at);
+    if (capturedAt && !Number.isNaN(Date.parse(capturedAt))) {
+      attribution.captured_at = capturedAt;
+    }
+
+    const landingPagePath = sanitizeAttributionValue(source.landing_page_path);
+    if (landingPagePath && landingPagePath.charAt(0) === "/") {
+      attribution.landing_page_path = landingPagePath;
+    }
+
+    return attribution;
+  }
+
+  function hasAttributionParams(value) {
+    return ATTRIBUTION_KEYS.some(function (key) {
+      return Boolean(value && value[key]);
+    });
+  }
+
+  function readAttributionFromUrl() {
+    const searchParams = new URLSearchParams(window.location.search);
+    const attribution = {};
+
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      const cleanValue = sanitizeAttributionValue(searchParams.get(key));
+      if (cleanValue) {
+        attribution[key] = cleanValue;
+      }
+    });
+
+    if (!hasAttributionParams(attribution)) {
+      return {};
+    }
+
+    attribution.captured_at = new Date().toISOString();
+    attribution.landing_page_path = window.location.pathname || "/";
+    return attribution;
+  }
+
+  function readStoredAttribution() {
+    const storage = getStorage();
+    if (!storage) {
+      return {};
+    }
+
+    try {
+      const parsed = JSON.parse(storage.getItem(ATTRIBUTION_STORAGE_KEY) || "{}");
+      const attribution = sanitizeAttributionPayload(parsed);
+      const capturedAtMs = Date.parse(attribution.captured_at || "");
+      if (!Number.isFinite(capturedAtMs) || Date.now() - capturedAtMs > ATTRIBUTION_MAX_AGE_MS) {
+        storage.removeItem(ATTRIBUTION_STORAGE_KEY);
+        return {};
+      }
+      return attribution;
+    } catch (_error) {
+      storage.removeItem(ATTRIBUTION_STORAGE_KEY);
+      return {};
+    }
+  }
+
+  function writeStoredAttribution(attribution) {
+    const storage = getStorage();
+    if (!storage || !hasAttributionParams(attribution)) {
+      return;
+    }
+
+    try {
+      storage.setItem(ATTRIBUTION_STORAGE_KEY, JSON.stringify(attribution));
+    } catch (_error) {}
+  }
+
+  function initAttribution() {
+    const urlAttribution = readAttributionFromUrl();
+    if (hasAttributionParams(urlAttribution)) {
+      cachedAttribution = urlAttribution;
+      writeStoredAttribution(urlAttribution);
+      return cachedAttribution;
+    }
+
+    cachedAttribution = readStoredAttribution();
+    return cachedAttribution;
+  }
+
+  function getAttribution() {
+    if (cachedAttribution === null) {
+      initAttribution();
+    }
+    return sanitizeAttributionPayload(cachedAttribution || {});
+  }
+
+  function getAttributionEventParams() {
+    const attribution = getAttribution();
+    const params = {};
+
+    ATTRIBUTION_KEYS.forEach(function (key) {
+      if (attribution[key]) {
+        params[key] = attribution[key];
+      }
+    });
+
+    if (attribution.captured_at) {
+      params.attribution_captured_at = attribution.captured_at;
+    }
+    if (attribution.landing_page_path) {
+      params.attribution_landing_page_path = attribution.landing_page_path;
+    }
+
+    return params;
   }
 
   function getFieldValue(id) {
@@ -295,6 +446,7 @@
         page_title: document.title
       },
       getBookingContext(action),
+      getAttributionEventParams(),
       extraParams || {}
     );
 
@@ -326,7 +478,7 @@
     const params = buildEventParams(eventName, contextElement, actionElement, extraParams);
     pushToDataLayer(eventName, params);
 
-    if (ensureAnalyticsConfigured()) {
+    if (!window.SBX_GA_CONFIGURED && ensureAnalyticsConfigured()) {
       window.gtag("event", eventName, params);
     }
 
@@ -350,8 +502,9 @@
     }
 
     trackStructuredEvent(eventName, element, element);
-    if (element.closest("#stickyBottom") && shouldTrack(element, "sticky_cta_click")) {
-      trackStructuredEvent("sticky_cta_click", element.closest("#stickyBottom"), element, {
+    const stickyContainer = element.closest("#stickyBottom, [data-analytics-section='sticky-bottom']");
+    if (stickyContainer && shouldTrack(element, "sticky_cta_click")) {
+      trackStructuredEvent("sticky_cta_click", stickyContainer, element, {
         sticky_action: trackingKey || "unknown"
       });
     }
@@ -374,13 +527,19 @@
   }
 
   function pushPageContext() {
-    pushToDataLayer("page_context", {
-      page_type: "hotel_landing_page",
-      language: getLanguage(),
-      page_title: document.title,
-      page_path: getPagePath(),
-      canonical_url: getCanonicalUrl()
-    });
+    pushToDataLayer(
+      "page_context",
+      Object.assign(
+        {
+          page_type: "hotel_landing_page",
+          language: getLanguage(),
+          page_title: document.title,
+          page_path: getPagePath(),
+          canonical_url: getCanonicalUrl()
+        },
+        getAttributionEventParams()
+      )
+    );
   }
 
   function updateConsent(granted) {
@@ -390,24 +549,54 @@
     }
   }
 
+  function getSafeBookingEventData(bookingData) {
+    const source = bookingData && typeof bookingData === "object" ? bookingData : {};
+    return {
+      room_type: collapseWhitespace(source.room_type || source.room),
+      guests: collapseWhitespace(source.guests),
+      checkin: collapseWhitespace(source.checkin),
+      checkout: collapseWhitespace(source.checkout)
+    };
+  }
+
+  function getBookingChannelParams(channel, bookingData) {
+    const channelKey = collapseWhitespace(channel).toLowerCase() || "booking_send";
+    return Object.assign(getSafeBookingEventData(bookingData), {
+      event_label: channelKey,
+      send_channel: channelKey
+    });
+  }
+
   window.SandboxAnalytics = Object.assign(window.SandboxAnalytics || {}, {
     measurementId: MEASUREMENT_ID,
+    attributionKeys: ATTRIBUTION_KEYS.slice(),
+    getAttribution: getAttribution,
     pushEvent: function (eventName, params) {
       return pushToDataLayer(eventName, params || {});
     },
     trackEvent: function (eventName, params) {
       return trackStructuredEvent(eventName, null, null, params || {});
     },
+    trackBookingAttempt: function (channel, bookingData, contextElement) {
+      return trackStructuredEvent(
+        "booking_submit_attempt",
+        contextElement || getBookingForm() || document.body,
+        contextElement || getBookingForm(),
+        getBookingChannelParams(channel, bookingData)
+      );
+    },
     trackBookingSuccess: function (channel, bookingData, contextElement) {
-      const extraParams = Object.assign({}, bookingData || {}, {
-        event_label: String(channel || "booking_send").toLowerCase(),
-        send_channel: String(channel || "").toLowerCase()
-      });
-      return trackStructuredEvent("booking_send_success", contextElement || getBookingForm() || document.body, contextElement || getBookingForm(), extraParams);
+      return trackStructuredEvent(
+        "booking_send_success",
+        contextElement || getBookingForm() || document.body,
+        contextElement || getBookingForm(),
+        getBookingChannelParams(channel, bookingData)
+      );
     },
     updateConsent: updateConsent
   });
 
+  initAttribution();
   pushPageContext();
   document.addEventListener("click", handleTrackedClick, true);
   document.addEventListener("submit", handleTrackedSubmit, true);
